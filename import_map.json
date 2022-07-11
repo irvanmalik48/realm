@@ -1,0 +1,24 @@
+{
+  "imports": {
+    "$fresh/": "https://deno.land/x/fresh@1.0.1/",
+    "preact": "https://esm.sh/preact@10.9.0",
+    "preact/": "https://esm.sh/preact@10.9.0/",
+    "preact-render-to-string": "https://esm.sh/preact-render-to-string@5.2.0?deps=preact@10.9.0",
+    "@twind": "./utils/twind.ts",
+    "relative": "https://deno.land/std@0.147.0/path/win32.ts",
+    "remark": "https://esm.sh/remark@14.0.2",
+    "remark-parse": "https://esm.sh/remark-parse@10.0.1",
+    "remark-rehype": "https://esm.sh/remark-rehype@10.1.0",
+    "rehype": "https://esm.sh/rehype@12.0.1",
+    "rehype-raw": "https://esm.sh/rehype-raw@6.1.1",
+    "rehype-slug": "https://esm.sh/rehype-slug@5.0.1",
+    "rehype-stringify": "https://esm.sh/rehype-stringify@9.0.3",
+    "rehype-toc": "https://esm.sh/rehype-toc@3.0.2",
+    "rehype-prism-plus": "https://esm.sh/rehype-prism-plus@1.4.2",
+    "frontmatter": "https://deno.land/x/frontmatter@v0.1.5/mod.ts",
+    "twind": "https://esm.sh/twind@0.16.17",
+    "twind/": "https://esm.sh/twind@0.16.17/",
+    "unified": "https://esm.sh/unified@10.1.2",
+    "walk": "https://deno.land/std@0.147.0/fs/walk.ts"
+  }
+}
