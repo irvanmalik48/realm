@@ -16,6 +16,7 @@ export const config: Configuration = {
             quartertrans: "#88C0D020",
           },
           text: "#D8DEE9",
+          footertext: "#D8DEE9AA",
         },
       },
       gridTemplateColumns: {
