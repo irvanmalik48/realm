@@ -141,7 +141,7 @@ export default function Home() {
           chaos!
         </p>
       </section>
-      <section class={tw`w-full bg-dark-nav py-4 px-5 rounded-xl mb-24`}>
+      <section class={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-24`}>
         <p class={tw`text-2xl font-semibold text-dark-text mb-3`}>
           Recent Posts
         </p>
@@ -166,6 +166,11 @@ export default function Home() {
             );
           })}
         </div>
+        <p class={tw`p-0 m-0 mt-2 text-center w-full`}>
+          <a class={tw`bg-transparent px-4 py-2 inline-block text-sm text-uppercase text-dark-text rounded-3xl transition-all duration-200 ease-linear hover:bg-dark-accent-semitrans hover:text-dark-accent-solid ring ring-dark-accent-quartertrans hover:ring-dark-accent-solid font-bold w-[fit-content] mt-5`} href="/blog">
+            More Posts
+          </a>
+        </p>
       </section>
     </DefaultLayout>
   );
