@@ -18,7 +18,7 @@ export default function PostCard(props: any) {
         {props.tag.map((el: string, index: any) => (
           <p
             key={index}
-            class={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-4 py-1 mt-1 mb-1 rounded-3xl mr-2`}
+            class={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
           >
             #{el}
           </p>
