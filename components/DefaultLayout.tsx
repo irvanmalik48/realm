@@ -70,7 +70,11 @@ export default function DefaultLayout(props: {
           type="image/png"
           sizes="96x96"
         />
-        <link rel="icon" type="image/x-icon" href={asset("/icons/favicon.ico")} />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href={asset("/icons/favicon.ico")}
+        />
         <link rel="apple-touch-icon" href={asset("/icons/ios/192.png")} />
       </Head>
       <Nav />
