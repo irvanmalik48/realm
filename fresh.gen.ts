@@ -4,7 +4,7 @@
 
 import * as $0 from "./routes/api/joke.ts";
 import * as $1 from "./routes/index.tsx";
-import * as $2 from "./routes/pages/[slug].tsx";
+import * as $2 from "./routes/posts/[slug].tsx";
 import * as $$0 from "./islands/Footer.tsx";
 import * as $$1 from "./islands/Nav.tsx";
 import * as $$2 from "./islands/PostCard.tsx";
@@ -14,7 +14,7 @@ const manifest = {
   routes: {
     "./routes/api/joke.ts": $0,
     "./routes/index.tsx": $1,
-    "./routes/pages/[slug].tsx": $2,
+    "./routes/posts/[slug].tsx": $2,
   },
   islands: {
     "./islands/Footer.tsx": $$0,
