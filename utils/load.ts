@@ -24,7 +24,8 @@ export function loadPost(postsDirectory: string, path: string): [string, Post] {
     desc: data.desc,
     tag: data.tag,
     path: data.path ?? pathname,
-    md: content,
+    md: content
+    ,
   };
   return [pathname, post];
 }
