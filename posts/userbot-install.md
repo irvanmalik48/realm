@@ -15,13 +15,14 @@ A Telegram userbot is basically something that can help you manage stuffs here a
 
 # Setting Up
 
-1. API Hash and API ID
+1. API Hash and API ID.
 
    - Login to [my.telegram.org](https://my.telegram.org) with your Telegram account.
    - Go to **API Development Tools**, fill out the form for creating an app. You'll get the required API Hash and API ID there.
      > Note: Nothing really matters, fill in anything that you want.
 
-2. Generate a session string
+
+2. Generate a session string.
 
    - Go to [here](http://sessiongen.irvanmalik48.repl.run/) and click on run button on top.
    - Enter the API Hash and API ID you've got from the previous step.
@@ -29,16 +30,20 @@ A Telegram userbot is basically something that can help you manage stuffs here a
    - Follow further instructions then check your **Saved Messages** in Telegram, there will be your session string.
      > Note: Don't share your session string to anyone, anywhere, anytime. Imagine a key to your house, then imagine if it's in someone's hand.
 
-3. Get BOTLOG_CHATID (Optional but recommended)
+
+3. Get BOTLOG_CHATID (Optional but recommended).
 
    - Create a group with you and add @MissRose_bot to your group.
    - Type `/id` and send it to the group. Rose will give you the group chat ID.
      > Note: Don't leave out the - in there. It is essential.
 
-4. Get Heroku API key (if you use Heroku)
+
+4. Get Heroku API key (if you use Heroku).
+
    - Make a Heroku account [here](https://signup.heroku.com).
    - Head [here](https://dashboard.heroku.com/account) and get your Heroku API key.
      > Note: Heroku gives you free 550 hours of usage. Enter in your billing info to receive another free 450 hours.
+
 
 # Deploying
 
