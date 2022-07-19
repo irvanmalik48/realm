@@ -159,7 +159,7 @@ export default function Home() {
             return (
               <PostCard
                 key={key}
-                path={"posts" + data.path}
+                path={"/posts" + data.path}
                 title={data.title}
                 date={data.date}
                 desc={data.desc}
