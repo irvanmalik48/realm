@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 /** @jsx h */
 import { h } from "preact";
-import { tw } from "@twind";
+import { apply, tw } from "@twind";
 import { css } from "twind/css";
 import { walkSync } from "walk";
 import { Post } from "../types.d.tsx";
@@ -47,11 +47,8 @@ export default function Sidebar() {
     <aside
       class={tw`sticky top-0 z-0 h-screen w-[28rem] items-center justify-start overflow-y-auto bg-dark-side md:flex md:flex-col gap-5 pb-4 pt-0 text-dark-text ${css(
         {
-          "-ms-overflow-style": "none",
-          "scrollbar-width": "none",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
+          "&::-webkit-scrollbar": apply`bg-dark-accent-quartertrans w-5`,
+          "&::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
         }
       )}`}
     >
@@ -83,7 +80,7 @@ export default function Sidebar() {
           return (
             <PostCard
               key={key}
-              path={"posts" + data.path}
+              path={"/posts" + data.path}
               title={data.title}
               date={data.date}
               desc={data.desc}
