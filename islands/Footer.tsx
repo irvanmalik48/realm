@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-import { GitHubIcon } from "./Nav.tsx";
+import { GitHubIcon } from "../islands/Nav.tsx";
 
 function FacebookIcon() {
   return (
