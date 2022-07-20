@@ -6,7 +6,7 @@ import DefaultLayout from "../components/DefaultLayout.tsx";
 import { Post } from "../types.d.tsx";
 import { walk } from "https://deno.land/std@0.147.0/fs/walk.ts";
 import { loadPost } from "../utils/load.ts";
-import PostCard from "../islands/PostCard.tsx";
+import PostCard from "../components/PostCard.tsx";
 
 const posts = new Map<string, Post>();
 
@@ -27,7 +27,7 @@ function ChaosLogo(props: { class: string }) {
       viewBox="0 0 500 500"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      class={props.class}
+      className={props.class}
     >
       <circle cx="250" cy="250" r="194" stroke="#2E3440" stroke-width="12" />
       <rect x="243" y="100" width="15" height="300" fill="#88C0D0" />
@@ -107,30 +107,30 @@ export default function Home() {
       desc="Do what you want and do it well."
     >
       <header
-        class={tw`px-2 xl:px-48 py-24 w-full flex flex-row justify-center items-center gap-5`}
+        className={tw`px-2 xl:px-48 py-24 w-full flex flex-row justify-center items-center gap-5`}
       >
         <ChaosLogo
           class={tw`bg-dark-side rounded-full w-[100px] h-[fit-content]`}
         />
-        <div class={tw`flex flex-col justify-start items-center`}>
-          <p class={tw`text-dark-text font-bold text-3xl`}>
+        <div className={tw`flex flex-col justify-start items-center`}>
+          <p className={tw`text-dark-text font-bold text-3xl`}>
             Irvan Malik Azantha
           </p>
-          <p class={tw`w-full text-dark-accent-solid text-lg`}>
+          <p className={tw`w-full text-dark-accent-solid text-lg`}>
             Do what you want and do it well.
           </p>
         </div>
       </header>
-      <section class={tw`mb-10 w-full bg-dark-nav py-4 px-5 rounded-xl`}>
-        <p class={tw`text-2xl font-semibold text-dark-text mb-3`}>
+      <section className={tw`mb-10 w-full bg-dark-nav py-4 px-5 rounded-xl`}>
+        <p className={tw`text-2xl font-semibold text-dark-text mb-3`}>
           Description
         </p>
         <p
-          class={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
+          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
           Keep it simple, stupid.
         </p>
-        <p class={tw`text-dark-text mt-3`}>
+        <p className={tw`text-dark-text mt-3`}>
           Hello, my name's Irvan Malik Azantha. I'm a 19 y'o boy currently
           studying on Universitas Sriwijaya. I live in Palembang, Indonesia. I'm
           a highly enthusiastic person with subtle interest in open source
@@ -140,18 +140,18 @@ export default function Home() {
         </p>
       </section>
       <section
-        class={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
+        className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
       >
-        <p class={tw`text-2xl font-semibold text-dark-text mb-3`}>
+        <p className={tw`text-2xl font-semibold text-dark-text mb-3`}>
           Recent Posts
         </p>
         <p
-          class={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
+          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
           Recent 4 posts that I have written currently.
         </p>
         <div
-          class={tw`grid grid-cols-1 xl:grid-cols-2 mt-5 gap-5 items-between`}
+          className={tw`grid grid-cols-1 xl:grid-cols-2 mt-5 gap-5 items-between`}
         >
           {postProps.slice(0, 4).map((data: any, key: any) => {
             return (
@@ -166,9 +166,9 @@ export default function Home() {
             );
           })}
         </div>
-        <p class={tw`p-0 m-0 mt-2 text-center w-full`}>
+        <p className={tw`p-0 m-0 mt-2 text-center w-full`}>
           <a
-            class={tw`bg-transparent px-4 py-2 inline-block text-sm text-uppercase text-dark-text rounded-3xl transition-all duration-200 ease-linear hover:bg-dark-accent-semitrans hover:text-dark-accent-solid ring ring-dark-accent-quartertrans hover:ring-dark-accent-solid font-bold w-[fit-content] mt-5`}
+            className={tw`bg-transparent px-4 py-2 inline-block text-sm text-uppercase text-dark-text rounded-3xl transition-all duration-200 ease-linear hover:bg-dark-accent-semitrans hover:text-dark-accent-solid ring ring-dark-accent-quartertrans hover:ring-dark-accent-solid font-bold w-[fit-content] mt-5`}
             href="/blog"
           >
             More Posts

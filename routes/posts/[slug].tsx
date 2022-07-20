@@ -52,13 +52,13 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     return (
       <DefaultLayout title="Page not found" desc="The page you're looking for is not found.">
         <header
-          class={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
+          className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
         >
-          <div class={tw`flex flex-col justify-center items-center`}>
-            <p class={tw`text-dark-text text-center font-bold text-3xl`}>
+          <div className={tw`flex flex-col justify-center items-center`}>
+            <p className={tw`text-dark-text text-center font-bold text-3xl`}>
               404
             </p>
-            <p class={tw`w-full text-center text-dark-accent-solid text-lg`}>
+            <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
               Page <strong>{data?.path?.replace(".md", "")}</strong> not found.
             </p>
           </div>
@@ -70,20 +70,20 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
   return (
     <DefaultLayout title={data.title} date={data.date} desc={data.desc} tag={data.tag}>
       <header
-        class={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
+        className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
       >
-        <div class={tw`flex flex-col justify-center items-center`}>
-          <p class={tw`text-dark-text text-center font-bold text-3xl`}>
+        <div className={tw`flex flex-col justify-center items-center`}>
+          <p className={tw`text-dark-text text-center font-bold text-3xl`}>
             {data.title}
           </p>
-          <p class={tw`w-full text-center text-dark-accent-solid text-lg`}>
+          <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
             {data.date}
           </p>
-          <div class={tw`w-full flex flex-row justify-center items-center`}>
+          <div className={tw`w-full flex flex-row justify-center items-center`}>
             {data.tag?.map((el: string, index: number) => (
               <p
                 key={index}
-                class={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
+                className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
               >
                 {el}
               </p>

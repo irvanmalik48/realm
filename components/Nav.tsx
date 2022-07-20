@@ -60,68 +60,68 @@ export function GitHubIcon() {
 export default function Nav() {
   return (
     <nav
-      class={tw`bg-dark-nav h-screen text-dark-text sticky top-0 shadow z-50 m-0 overflow-y-clip flex flex-col justify-between w-[fit-content] p-4`}
+      className={tw`bg-dark-nav h-screen text-dark-text sticky top-0 shadow z-50 m-0 overflow-y-clip flex flex-col justify-between w-[fit-content] p-4`}
     >
-      <div class={tw`flex flex-col gap-5`}>
-        <a href="/" class={tw`flex flex-row justify-start items-center gap-4`}>
+      <div className={tw`flex flex-col gap-5`}>
+        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
           <div
-            class={tw`group flex justify-center items-center bg-dark-accent-semitrans text-dark-accent-solid w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`group flex justify-center items-center bg-dark-accent-semitrans text-dark-accent-solid w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <HomeIcon />
             <span
-              class={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+              className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
             >
               Homepage
             </span>
           </div>
         </a>
-        <a href="/" class={tw`flex flex-row justify-start items-center gap-4`}>
+        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
           <div
-            class={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <RepoIcon />
             <span
-              class={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+              className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
             >
               Blog Repository
             </span>
           </div>
         </a>
-        <a href="/" class={tw`flex flex-row justify-start items-center gap-4`}>
+        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
           <div
-            class={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <BlogIcon />
             <span
-              class={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+              className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
             >
               Blog Posts
             </span>
           </div>
         </a>
-        <a href="/" class={tw`flex flex-row justify-start items-center gap-4`}>
+        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
           <div
-            class={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <AboutIcon />
             <span
-              class={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+              className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
             >
               About Me
             </span>
           </div>
         </a>
       </div>
-      <a href="/" class={tw`flex flex-row justify-start items-center gap-4`}>
+      <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
         <div
-          class={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+          className={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
         >
           <GitHubIcon />
           <span
-            class={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+            className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
           >
             Jump to my{" "}
-            <span class={tw`text-dark-accent-solid`}>GitHub Profile</span>
+            <span className={tw`text-dark-accent-solid`}>GitHub Profile</span>
           </span>
         </div>
       </a>

@@ -2,12 +2,12 @@
 import { h } from "preact";
 import { apply, tw } from "@twind";
 import Sidebar from "./Sidebar.tsx";
-import Nav from "../islands/Nav.tsx";
+import Nav from "./Nav.tsx";
 import { css } from "twind/css";
 import { Head, asset } from "$fresh/runtime.ts";
 import Thumbnail from "../utils/thumb.ts";
-import Footer from "../islands/Footer.tsx";
-import DonateCard from "../islands/Donate.tsx";
+import Footer from "./Footer.tsx";
+import DonateCard from "./Donate.tsx";
 
 export default function DefaultLayout(props: {
   title?: string;
@@ -17,7 +17,7 @@ export default function DefaultLayout(props: {
   children: h.JSX.Element | h.JSX.Element[];
 }) {
   return (
-    <main class={tw`bg-dark-bg w-screen gap-0 md:grid md:grid-cols-root`}>
+    <main className={tw`bg-dark-bg w-screen gap-0 md:grid md:grid-cols-root`}>
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -81,7 +81,7 @@ export default function DefaultLayout(props: {
       <Nav />
       <Sidebar />
       <section
-        class={tw`sticky top-0 w-full px-4 md:px-6 lg:px-12 xl:px-24 py-4 text-dark-text h-screen overflow-y-auto ${css(
+        className={tw`sticky top-0 w-full px-4 md:px-6 lg:px-12 xl:px-24 py-4 text-dark-text h-screen overflow-y-auto ${css(
           {
             "&::-webkit-scrollbar": apply`bg-dark-accent-quartertrans w-5`,
             "&::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,

@@ -8,13 +8,13 @@ export default function NotFoundPage({ url }: UnknownPageProps) {
   return (
     <DefaultLayout title="Page not found" desc="The page you're looking for is not found.">
     <header
-      class={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
+      className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
     >
-      <div class={tw`flex flex-col justify-center items-center`}>
-        <p class={tw`text-dark-text text-center font-bold text-3xl`}>
+      <div className={tw`flex flex-col justify-center items-center`}>
+        <p className={tw`text-dark-text text-center font-bold text-3xl`}>
           404
         </p>
-        <p class={tw`w-full text-center text-dark-accent-solid text-lg`}>
+        <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
           Page <strong>{url.pathname}</strong> not found.
         </p>
       </div>

@@ -6,7 +6,7 @@ import { css } from "twind/css";
 import { walk } from "walk";
 import { Post } from "../types.d.tsx";
 import { loadPost } from "../utils/load.ts";
-import PostCard from "../islands/PostCard.tsx";
+import PostCard from "./PostCard.tsx";
 
 const posts = new Map<string, Post>();
 
@@ -45,7 +45,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      class={tw`sticky top-0 z-0 h-screen w-[28rem] items-center justify-start overflow-y-auto bg-dark-side md:flex md:flex-col gap-5 pb-4 pt-0 text-dark-text ${css(
+      className={tw`sticky top-0 z-0 h-screen w-[28rem] items-center justify-start overflow-y-auto bg-dark-side md:flex md:flex-col gap-5 pb-4 pt-0 text-dark-text ${css(
         {
           "&::-webkit-scrollbar": apply`bg-dark-accent-quartertrans w-5`,
           "&::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
@@ -53,29 +53,29 @@ export default function Sidebar() {
       )}`}
     >
       <div
-        class={tw`flex flex-row w-full gap-4 sticky top-0 pt-4 bg-gradient-to-b from-dark-side via-dark-side to-transparent px-4`}
+        className={tw`flex flex-row w-full gap-4 sticky top-0 pt-4 bg-gradient-to-b from-dark-side via-dark-side to-transparent px-4`}
       >
         <div
-          class={tw`w-full px-5 py-3 font-semibold bg-dark-bg rounded-xl text-sm uppercase shadow-xl`}
+          className={tw`w-full px-5 py-3 font-semibold bg-dark-bg rounded-xl text-sm uppercase shadow-xl`}
         >
           <p>All Posts</p>
         </div>
         <button
-          class={tw`flex flex-row items-center w-[fit-content] bg-dark-nav rounded-xl hover:rounded-3xl transition-all duration-200 ease-linear group shadow-xl`}
+          className={tw`flex flex-row items-center w-[fit-content] bg-dark-nav rounded-xl hover:rounded-3xl transition-all duration-200 ease-linear group shadow-xl`}
         >
           <div
-            class={tw`w-[fit-content] bg-dark-accent-semitrans p-3 rounded-xl text-dark-accent-solid hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-200 ease-linear`}
+            className={tw`w-[fit-content] bg-dark-accent-semitrans p-3 rounded-xl text-dark-accent-solid hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-200 ease-linear`}
           >
             <SearchIcon />
           </div>
           <span
-            class={tw`fixed group-hover:scale-100 bg-dark-nav absolute left-[34rem] z-0 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+            className={tw`fixed group-hover:scale-100 bg-dark-nav absolute left-[34rem] z-0 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
           >
             Search Post
           </span>
         </button>
       </div>
-      <div class={tw`mx-4 flex flex-col justify-center items-center gap-5`}>
+      <div className={tw`mx-4 flex flex-col justify-center items-center gap-5`}>
         {postProps.map((data: any, key: any) => {
           return (
             <PostCard
