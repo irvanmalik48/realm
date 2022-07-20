@@ -8,8 +8,16 @@ export function loadPost(postsDirectory: string, path: string): [string, Post] {
   try {
     contents = Deno.readTextFileSync(path);
   } catch (_e) {
-    // ...
+    return [path, {
+      title: "Undefined",
+      date: "Undefined",
+      desc: "Undefined",
+      tag: ["Undefined"],
+      path: path,
+      md: "Undefined",
+    }];
   }
+  
   let pathname = "/" + relative(postsDirectory, path);
   pathname = pathname.slice(0, -3);
 
@@ -19,13 +27,13 @@ export function loadPost(postsDirectory: string, path: string): [string, Post] {
   };
 
   const post: Post = {
-    title: data.title ?? "Untitled",
+    title: data.title,
     date: data.date,
     desc: data.desc,
     tag: data.tag,
     path: data.path ?? pathname,
-    md: content
-    ,
+    md: content,
   };
+
   return [pathname, post];
 }
