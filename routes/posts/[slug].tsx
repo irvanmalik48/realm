@@ -70,7 +70,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
                 key={index}
                 class={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
               >
-                #{el}
+                {el}
               </p>
             ))}
           </div>
