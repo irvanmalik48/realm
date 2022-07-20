@@ -7,6 +7,7 @@ import { css } from "twind/css";
 import { Head, asset } from "$fresh/runtime.ts";
 import Thumbnail from "../utils/thumb.ts";
 import Footer from "../islands/Footer.tsx";
+import DonateCard from "../islands/Donate.tsx";
 
 export default function DefaultLayout(props: {
   title: string;
@@ -88,6 +89,7 @@ export default function DefaultLayout(props: {
         )}`}
       >
         {props.children}
+        <DonateCard />
         <Footer />
       </section>
     </main>
