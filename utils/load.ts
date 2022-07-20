@@ -3,10 +3,10 @@ import { parse } from "frontmatter";
 import { relative } from "relative";
 import { Post } from "../types.d.tsx";
 
-export function loadPost(postsDirectory: string, path: string): [string, Post] {
+export async function loadPost(postsDirectory: string, path: string): Promise<[string,Post]> {
   let contents = "";
   try {
-    contents = Deno.readTextFileSync(path);
+    contents = await Deno.readTextFile(path);
   } catch (_e) {
     return [path, {
       title: "Undefined",
