@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from "preact";
 import { apply, tw } from "@twind";
-import Sidebar from "../islands/Sidebar.tsx";
+import Sidebar from "./Sidebar.tsx";
 import Nav from "../islands/Nav.tsx";
 import { css } from "twind/css";
 import { Head, asset } from "$fresh/runtime.ts";
