@@ -142,7 +142,7 @@ export default function Home() {
         </p>
       </section>
       <section
-        class={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-24`}
+        class={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
       >
         <p class={tw`text-2xl font-semibold text-dark-text mb-3`}>
           Recent Posts
