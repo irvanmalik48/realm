@@ -13,7 +13,7 @@ function CoffeeIcon() {
 export default function DonateCard() {
   return (
     <div
-      class={tw`flex flex-row justify-between items-center block w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border mb-10`}
+      class={tw`flex flex-row justify-between items-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border mb-10`}
     >
       <div>
         <div>
