@@ -5,10 +5,11 @@
 import * as $0 from "./routes/api/joke.ts";
 import * as $1 from "./routes/index.tsx";
 import * as $2 from "./routes/posts/[slug].tsx";
-import * as $$0 from "./islands/Footer.tsx";
-import * as $$1 from "./islands/Nav.tsx";
-import * as $$2 from "./islands/PostCard.tsx";
-import * as $$3 from "./islands/Sidebar.tsx";
+import * as $$0 from "./islands/Donate.tsx";
+import * as $$1 from "./islands/Footer.tsx";
+import * as $$2 from "./islands/Nav.tsx";
+import * as $$3 from "./islands/PostCard.tsx";
+import * as $$4 from "./islands/Sidebar.tsx";
 
 const manifest = {
   routes: {
@@ -17,10 +18,11 @@ const manifest = {
     "./routes/posts/[slug].tsx": $2,
   },
   islands: {
-    "./islands/Footer.tsx": $$0,
-    "./islands/Nav.tsx": $$1,
-    "./islands/PostCard.tsx": $$2,
-    "./islands/Sidebar.tsx": $$3,
+    "./islands/Donate.tsx": $$0,
+    "./islands/Footer.tsx": $$1,
+    "./islands/Nav.tsx": $$2,
+    "./islands/PostCard.tsx": $$3,
+    "./islands/Sidebar.tsx": $$4,
   },
   baseUrl: import.meta.url,
 };
