@@ -10,7 +10,9 @@ export default function PostCard(props: any) {
       className={tw`ring ring-transparent flex flex-col justify-between block w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
     >
       <div>
-        <p className={tw`text-dark-accent-solid font-semibold`}>{props.title}</p>
+        <p className={tw`text-dark-accent-solid font-semibold`}>
+          {props.title}
+        </p>
         <p className={tw`text-dark-text text-xs mb-2`}>{props.date}</p>
         <p className={tw`text-dark-text text-sm mb-1`}>{props.desc}</p>
       </div>

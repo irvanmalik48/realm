@@ -13,7 +13,10 @@ const posts = new Map<string, Post>();
 async function loadContent(postsDirectory: string) {
   for await (const entry of walk(postsDirectory)) {
     if (entry.isFile && entry.path.endsWith(".md")) {
-      const [key, post]: [string, Post] = await loadPost(postsDirectory, entry.path);
+      const [key, post]: [string, Post] = await loadPost(
+        postsDirectory,
+        entry.path
+      );
       posts.set(key, post);
     }
   }

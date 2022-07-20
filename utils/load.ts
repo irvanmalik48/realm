@@ -3,21 +3,27 @@ import { parse } from "frontmatter";
 import { relative } from "relative";
 import { Post } from "../types.d.tsx";
 
-export async function loadPost(postsDirectory: string, path: string): Promise<[string,Post]> {
+export async function loadPost(
+  postsDirectory: string,
+  path: string
+): Promise<[string, Post]> {
   let contents = "";
   try {
     contents = await Deno.readTextFile(path);
   } catch (_e) {
-    return [path, {
-      title: "Undefined",
-      date: "Undefined",
-      desc: "Undefined",
-      tag: ["Undefined"],
-      path: path,
-      md: "Undefined",
-    }];
+    return [
+      path,
+      {
+        title: "Undefined",
+        date: "Undefined",
+        desc: "Undefined",
+        tag: ["Undefined"],
+        path: path,
+        md: "Undefined",
+      },
+    ];
   }
-  
+
   let pathname = "/" + relative(postsDirectory, path);
   pathname = pathname.slice(0, -3);
 

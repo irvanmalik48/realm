@@ -75,49 +75,70 @@ export default function Footer() {
       className={tw`flex flex-col gap-0 mt-4 mb-8 justify-center items-center`}
     >
       <div className={tw`mb-5 flex flex-row gap-5 justify-center items-center`}>
-        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
+        <a
+          href="/"
+          className={tw`flex flex-row justify-start items-center gap-4`}
+        >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <GitHubIcon />
           </div>
         </a>
-        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
+        <a
+          href="/"
+          className={tw`flex flex-row justify-start items-center gap-4`}
+        >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <FacebookIcon />
           </div>
         </a>
-        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
+        <a
+          href="/"
+          className={tw`flex flex-row justify-start items-center gap-4`}
+        >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <InstagramIcon />
           </div>
         </a>
-        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
+        <a
+          href="/"
+          className={tw`flex flex-row justify-start items-center gap-4`}
+        >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <TwitterIcon />
           </div>
         </a>
-        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
+        <a
+          href="/"
+          className={tw`flex flex-row justify-start items-center gap-4`}
+        >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <TelegramIcon />
           </div>
         </a>
-        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
+        <a
+          href="/"
+          className={tw`flex flex-row justify-start items-center gap-4`}
+        >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <LinkedInIcon />
           </div>
         </a>
-        <a href="/" className={tw`flex flex-row justify-start items-center gap-4`}>
+        <a
+          href="/"
+          className={tw`flex flex-row justify-start items-center gap-4`}
+        >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >

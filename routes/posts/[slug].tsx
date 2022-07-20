@@ -14,10 +14,7 @@ export const handler: Handlers<Post | null> = {
   async GET(_, ctx) {
     const { slug } = ctx.params;
 
-    const [, check] = await loadPost(
-      postDir,
-      `${postDir}${slug}.md`
-    );
+    const [, check] = await loadPost(postDir, `${postDir}${slug}.md`);
 
     if (check == null) {
       return ctx.render(null);
@@ -50,7 +47,10 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
 
   if (!data || data?.title === "Undefined") {
     return (
-      <DefaultLayout title="Page not found" desc="The page you're looking for is not found.">
+      <DefaultLayout
+        title="Page not found"
+        desc="The page you're looking for is not found."
+      >
         <header
           className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
         >
@@ -58,7 +58,9 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             <p className={tw`text-dark-text text-center font-bold text-3xl`}>
               404
             </p>
-            <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
+            <p
+              className={tw`w-full text-center text-dark-accent-solid text-lg`}
+            >
               Page <strong>{data?.path?.replace(".md", "")}</strong> not found.
             </p>
           </div>
@@ -66,9 +68,14 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       </DefaultLayout>
     );
   }
-  
+
   return (
-    <DefaultLayout title={data.title} date={data.date} desc={data.desc} tag={data.tag}>
+    <DefaultLayout
+      title={data.title}
+      date={data.date}
+      desc={data.desc}
+      tag={data.tag}
+    >
       <header
         className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
       >
@@ -91,7 +98,11 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
           </div>
         </div>
       </header>
-      <Markdown class={tw`${tw(styles)} mb-5 w-full bg-dark-nav py-4 px-5 rounded-xl`}>{data.md !== undefined ? data.md : ""}</Markdown>
+      <Markdown
+        class={tw`${tw(styles)} mb-5 w-full bg-dark-nav py-4 px-5 rounded-xl`}
+      >
+        {data.md !== undefined ? data.md : ""}
+      </Markdown>
     </DefaultLayout>
-  )
+  );
 }
