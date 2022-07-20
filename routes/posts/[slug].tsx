@@ -76,7 +76,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
           </div>
         </div>
       </header>
-      <Markdown class={tw`${tw(styles)} mb-10 w-full bg-dark-nav py-4 px-5 rounded-xl`}>{data.md}</Markdown>
+      <Markdown class={tw`${tw(styles)} mb-5 w-full bg-dark-nav py-4 px-5 rounded-xl`}>{data.md}</Markdown>
     </DefaultLayout>
   )
 }
