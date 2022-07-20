@@ -48,8 +48,23 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     a: apply``,
   });
 
-  if (!data) {
-    return <div>Post doesn't exist</div>;
+  if (!data || data?.title === "Undefined") {
+    return (
+      <DefaultLayout title="Page not found" date={undefined} desc="The page you're looking for is not found." tag={undefined}>
+        <header
+          class={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
+        >
+          <div class={tw`flex flex-col justify-center items-center`}>
+            <p class={tw`text-dark-text text-center font-bold text-3xl`}>
+              404
+            </p>
+            <p class={tw`w-full text-center text-dark-accent-solid text-lg`}>
+              Page <strong>{data?.path?.replace(".md", "")}</strong> not found.
+            </p>
+          </div>
+        </header>
+      </DefaultLayout>
+    );
   }
   
   return (
@@ -65,7 +80,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             {data.date}
           </p>
           <div class={tw`w-full flex flex-row justify-center items-center`}>
-            {data.tag.map((el: string, index: number) => (
+            {data.tag?.map((el: string, index: number) => (
               <p
                 key={index}
                 class={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
@@ -76,7 +91,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
           </div>
         </div>
       </header>
-      <Markdown class={tw`${tw(styles)} mb-5 w-full bg-dark-nav py-4 px-5 rounded-xl`}>{data.md}</Markdown>
+      <Markdown class={tw`${tw(styles)} mb-5 w-full bg-dark-nav py-4 px-5 rounded-xl`}>{data.md !== undefined ? data.md : ""}</Markdown>
     </DefaultLayout>
   )
 }
