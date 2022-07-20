@@ -3,17 +3,17 @@
 import { h } from "preact";
 import { apply, tw } from "@twind";
 import { css } from "twind/css";
-import { walkSync } from "walk";
+import { walk } from "walk";
 import { Post } from "../types.d.tsx";
 import { loadPost } from "../utils/load.ts";
-import PostCard from "./PostCard.tsx";
+import PostCard from "../islands/PostCard.tsx";
 
 const posts = new Map<string, Post>();
 
-function loadContent(postsDirectory: string) {
-  for (const entry of walkSync(postsDirectory)) {
+async function loadContent(postsDirectory: string) {
+  for await (const entry of walk(postsDirectory)) {
     if (entry.isFile && entry.path.endsWith(".md")) {
-      const [key, post]: [string, Post] = loadPost(postsDirectory, entry.path);
+      const [key, post]: [string, Post] = await loadPost(postsDirectory, entry.path);
       posts.set(key, post);
     }
   }
