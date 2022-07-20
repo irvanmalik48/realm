@@ -50,7 +50,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
 
   if (!data || data?.title === "Undefined") {
     return (
-      <DefaultLayout title="Page not found" date={undefined} desc="The page you're looking for is not found." tag={undefined}>
+      <DefaultLayout title="Page not found" desc="The page you're looking for is not found.">
         <header
           class={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
         >

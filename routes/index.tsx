@@ -105,8 +105,6 @@ export default function Home() {
     <DefaultLayout
       title="IrvanMA's Lair"
       desc="Do what you want and do it well."
-      tag={undefined}
-      date={undefined}
     >
       <header
         class={tw`px-2 xl:px-48 py-24 w-full flex flex-row justify-center items-center gap-5`}
