@@ -10,10 +10,10 @@ import Footer from "../islands/Footer.tsx";
 import DonateCard from "../islands/Donate.tsx";
 
 export default function DefaultLayout(props: {
-  title: string;
-  desc: string;
-  date: string | undefined;
-  tag: string[] | undefined;
+  title?: string;
+  desc?: string;
+  date?: string;
+  tag?: string[];
   children: h.JSX.Element | h.JSX.Element[];
 }) {
   return (
