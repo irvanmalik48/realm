@@ -48,7 +48,7 @@ export default function DonateCard() {
         </div>
       </div>
       <div
-        className={tw`flex justify-center items-center w-[fit-content] h-full p-3 rounded-xl bg-dark-accent-semitrans text-dark-accent-solid`}
+        className={tw`hidden lg:flex justify-center items-center w-[fit-content] h-full p-3 rounded-xl bg-dark-accent-semitrans text-dark-accent-solid`}
       >
         <CoffeeIcon />
       </div>
