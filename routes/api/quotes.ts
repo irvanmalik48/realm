@@ -14,5 +14,5 @@ const quotes = [
 export const handler = (_req: Request, _ctx: HandlerContext): Response => {
   const randomIndex = Math.floor(Math.random() * 10);
   const body = quotes[randomIndex];
-  return new Response(JSON.parse(body));
+  return new Response(JSON.stringify(body));
 };
