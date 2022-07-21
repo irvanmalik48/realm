@@ -11,10 +11,10 @@ import DefaultLayout from "../../components/DefaultLayout.tsx";
 const postDir = "posts/";
 
 export const handler: Handlers<Post | null> = {
-  async GET(_, ctx) {
+  GET(_, ctx) {
     const { slug } = ctx.params;
 
-    const [, check] = await loadPost(postDir, `${postDir}${slug}.md`);
+    const [, check] = loadPost(postDir, `${postDir}${slug}.md`);
 
     if (check == null) {
       return ctx.render(null);

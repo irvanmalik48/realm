@@ -3,13 +3,13 @@ import { parse } from "frontmatter";
 import { relative } from "relative";
 import { Post } from "../types.d.tsx";
 
-export async function loadPost(
+export function loadPost(
   postsDirectory: string,
   path: string
-): Promise<[string, Post]> {
+): [string, Post] {
   let contents = "";
   try {
-    contents = await Deno.readTextFile(path);
+    contents = Deno.readTextFileSync(path);
   } catch (_e) {
     return [
       path,

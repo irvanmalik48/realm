@@ -4,16 +4,16 @@ import { h } from "preact";
 import { tw } from "@twind";
 import DefaultLayout from "../components/DefaultLayout.tsx";
 import { Post } from "../types.d.tsx";
-import { walk } from "https://deno.land/std@0.147.0/fs/walk.ts";
+import { walkSync } from "walk";
 import { loadPost } from "../utils/load.ts";
 import PostCard from "../components/PostCard.tsx";
 
 const posts = new Map<string, Post>();
 
-async function loadContent(postsDirectory: string) {
-  for await (const entry of walk(postsDirectory)) {
+function loadContent(postsDirectory: string) {
+  for (const entry of walkSync(postsDirectory)) {
     if (entry.isFile && entry.path.endsWith(".md")) {
-      const [key, post]: [string, Post] = await loadPost(
+      const [key, post]: [string, Post] = loadPost(
         postsDirectory,
         entry.path
       );
