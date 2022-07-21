@@ -18,7 +18,7 @@ export default function Nav() {
           >
             <HomeIcon />
             <span
-              className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+              className={tw`md:block hidden group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
             >
               Homepage
             </span>
@@ -33,7 +33,7 @@ export default function Nav() {
           >
             <RepoIcon />
             <span
-              className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+              className={tw`md:block hidden group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
             >
               Blog Repository
             </span>
@@ -48,7 +48,7 @@ export default function Nav() {
           >
             <BlogIcon />
             <span
-              className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+              className={tw`md:block hidden group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
             >
               Blog Posts
             </span>
@@ -63,7 +63,7 @@ export default function Nav() {
           >
             <AboutIcon />
             <span
-              className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+              className={tw`md:block hidden group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
             >
               About Me
             </span>
@@ -79,7 +79,7 @@ export default function Nav() {
         >
           <GitHubIcon />
           <span
-            className={tw`group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+            className={tw`md:block hidden group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
           >
             Jump to my{" "}
             <span className={tw`text-dark-accent-solid`}>GitHub Profile</span>
