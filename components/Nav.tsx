@@ -6,9 +6,9 @@ import { HomeIcon, RepoIcon, BlogIcon, AboutIcon, GitHubIcon } from "./Icons.tsx
 export default function Nav() {
   return (
     <nav
-      className={tw`bg-dark-nav h-screen text-dark-text sticky top-0 shadow z-50 m-0 overflow-y-clip flex flex-col justify-between w-[fit-content] p-4`}
+      className={tw`bg-dark-nav h-auto md:h-screen w-screen md:w-auto text-dark-text sticky md:top-0 bottom-0 shadow z-50 m-0 overflow-y-clip flex flex-row md:flex-col justify-evenly md:justify-between w-[fit-content] p-4`}
     >
-      <div className={tw`flex flex-col gap-5`}>
+      <div className={tw`flex md:flex-col w-full md:w-auto justify-evenly items-center flex-row gap-5`}>
         <a
           href="/"
           className={tw`flex flex-row justify-start items-center gap-4`}
@@ -72,7 +72,7 @@ export default function Nav() {
       </div>
       <a
         href="/"
-        className={tw`flex flex-row justify-start items-center gap-4`}
+        className={tw`md:flex flex-row justify-start items-center gap-4 hidden`}
       >
         <div
           className={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
