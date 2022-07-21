@@ -2,6 +2,7 @@
 import { parse } from "frontmatter";
 import { relative } from "relative";
 import { Post } from "../types.d.tsx";
+import { walk } from "walk";
 
 export function loadPost(
   postsDirectory: string,
@@ -42,4 +43,18 @@ export function loadPost(
   };
 
   return [pathname, post];
+}
+
+export async function loadContent(postsDirectory: string) {
+  const posts = new Map<string, Post>();
+  for await (const entry of walk(postsDirectory)) {
+    if (entry.isFile && entry.path.endsWith(".md")) {
+      const [key, post]: [string, Post] = await loadPost(
+        postsDirectory,
+        entry.path
+      );
+      posts.set(key, post);
+    }
+  }
+  return posts;
 }

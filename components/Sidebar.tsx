@@ -3,24 +3,10 @@
 import { h } from "preact";
 import { apply, tw } from "@twind";
 import { css } from "twind/css";
-import { walkSync } from "walk";
-import { Post } from "../types.d.tsx";
-import { loadPost } from "../utils/load.ts";
+import { loadContent } from "../utils/load.ts";
 import PostCard from "./PostCard.tsx";
 
-const posts = new Map<string, Post>();
-
-function loadContent(postsDirectory: string) {
-  for (const entry of walkSync(postsDirectory)) {
-    if (entry.isFile && entry.path.endsWith(".md")) {
-      const [key, post]: [string, Post] = loadPost(
-        postsDirectory,
-        entry.path
-      );
-      posts.set(key, post);
-    }
-  }
-}
+const posts = await loadContent("posts/");
 
 function SearchIcon() {
   return (
@@ -35,8 +21,6 @@ function SearchIcon() {
 
 export default function Sidebar() {
   const postProps: any[] = [];
-
-  loadContent("posts/");
 
   for (const [_key, post] of posts.entries()) {
     postProps.push(post);

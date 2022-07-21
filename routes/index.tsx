@@ -3,24 +3,10 @@
 import { h } from "preact";
 import { tw } from "@twind";
 import DefaultLayout from "../components/DefaultLayout.tsx";
-import { Post } from "../types.d.tsx";
-import { walkSync } from "walk";
-import { loadPost } from "../utils/load.ts";
+import { loadContent } from "../utils/load.ts";
 import PostCard from "../components/PostCard.tsx";
 
-const posts = new Map<string, Post>();
-
-function loadContent(postsDirectory: string) {
-  for (const entry of walkSync(postsDirectory)) {
-    if (entry.isFile && entry.path.endsWith(".md")) {
-      const [key, post]: [string, Post] = loadPost(
-        postsDirectory,
-        entry.path
-      );
-      posts.set(key, post);
-    }
-  }
-}
+const posts = await loadContent("posts/");
 
 function ChaosLogo(props: { class: string }) {
   return (
@@ -93,8 +79,6 @@ function ChaosLogo(props: { class: string }) {
 
 export default function Home() {
   const postProps: any[] = [];
-
-  loadContent("posts/");
 
   for (const [_key, post] of posts.entries()) {
     postProps.push(post);
