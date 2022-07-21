@@ -10,8 +10,9 @@ export default function Footer() {
     >
       <div className={tw`mb-5 flex flex-row gap-5 justify-center items-center`}>
         <a
-          href="/"
+          href="https://github.com/irvanmalik48"
           className={tw`flex flex-row justify-start items-center gap-4`}
+          aria-label="GitHub"
         >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
@@ -20,8 +21,9 @@ export default function Footer() {
           </div>
         </a>
         <a
-          href="/"
+          href="https://facebook.com/irvanmalik48"
           className={tw`flex flex-row justify-start items-center gap-4`}
+          aria-label="Facebook"
         >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
@@ -30,8 +32,9 @@ export default function Footer() {
           </div>
         </a>
         <a
-          href="/"
+          href="https://instagram.com/irvann48_"
           className={tw`flex flex-row justify-start items-center gap-4`}
+          aria-label="Instagram"
         >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
@@ -40,8 +43,9 @@ export default function Footer() {
           </div>
         </a>
         <a
-          href="/"
+          href="https://twitter.com/irvanmalik48"
           className={tw`flex flex-row justify-start items-center gap-4`}
+          aria-label="Twitter"
         >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
@@ -50,8 +54,9 @@ export default function Footer() {
           </div>
         </a>
         <a
-          href="/"
+          href="https://t.me/lapprealm"
           className={tw`flex flex-row justify-start items-center gap-4`}
+          aria-label="Telegram"
         >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
@@ -60,8 +65,9 @@ export default function Footer() {
           </div>
         </a>
         <a
-          href="/"
+          href="https://linkedin.com/in/irvanmalik48"
           className={tw`flex flex-row justify-start items-center gap-4`}
+          aria-label="LinkedIn"
         >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
@@ -70,8 +76,9 @@ export default function Footer() {
           </div>
         </a>
         <a
-          href="/"
+          href="mailto:irvanma@gnuweeb.org"
           className={tw`flex flex-row justify-start items-center gap-4`}
+          aria-label="Email"
         >
           <div
             className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
