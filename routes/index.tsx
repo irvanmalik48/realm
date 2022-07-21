@@ -94,7 +94,7 @@ export default function Home() {
       desc="Do what you want and do it well."
     >
       <header
-        className={tw`px-2 xl:px-48 py-24 w-full flex flex-row justify-center items-center gap-5`}
+        className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
       >
         <ChaosLogo
           class={tw`bg-dark-side rounded-full w-[100px] h-[fit-content]`}
