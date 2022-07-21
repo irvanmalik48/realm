@@ -8,6 +8,9 @@ import PostCard from "../components/PostCard.tsx";
 
 const posts = await loadContent("posts/");
 
+const quotes = await fetch("https://new.irvanma.me/api/quotes");
+const quote = await quotes.json();
+
 function ChaosLogo(props: { class: string }) {
   return (
     <svg
@@ -115,7 +118,7 @@ export default function Home() {
         <p
           className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
-          Keep it simple, stupid.
+          {quote}
         </p>
         <p className={tw`text-dark-text mt-3`}>
           Hello, my name's Irvan Malik Azantha. I'm a 19 y'o boy currently
