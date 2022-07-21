@@ -94,10 +94,10 @@ export default function Home() {
       desc="Do what you want and do it well."
     >
       <header
-        className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
+        className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >
         <ChaosLogo
-          class={tw`bg-dark-side rounded-full w-[100px] h-[fit-content]`}
+          class={tw`bg-dark-side rounded-full w-[200px] md:w-[100px] h-[fit-content]`}
         />
         <div className={tw`flex flex-col justify-start items-center`}>
           <p className={tw`text-dark-text font-bold text-3xl`}>
