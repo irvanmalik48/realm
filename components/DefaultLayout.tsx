@@ -17,7 +17,7 @@ export default function DefaultLayout(props: {
   children: h.JSX.Element | h.JSX.Element[];
 }) {
   return (
-    <main className={tw`bg-dark-bg w-screen gap-0 flex flex-row md:grid md:grid-cols-root `}>
+    <main className={tw`bg-dark-bg w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-root `}>
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
