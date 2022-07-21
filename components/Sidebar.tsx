@@ -22,7 +22,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={tw`sticky top-0 z-0 h-screen w-[28rem] items-center justify-start overflow-y-auto bg-dark-side md:flex md:flex-col gap-5 pb-4 pt-0 text-dark-text ${css(
+      className={tw`sticky hidden top-0 z-0 h-screen w-[28rem] items-center justify-start overflow-y-auto bg-dark-side md:flex md:flex-col gap-5 pb-4 pt-0 text-dark-text ${css(
         {
           "&::-webkit-scrollbar": apply`bg-dark-accent-quartertrans w-5`,
           "&::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
