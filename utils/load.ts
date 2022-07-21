@@ -4,13 +4,13 @@ import { relative } from "relative";
 import { Post } from "../types.d.tsx";
 import { walk } from "walk";
 
-export function loadPost(
+export async function loadPost(
   postsDirectory: string,
   path: string
-): [string, Post] {
+): Promise<[string, Post]> {
   let contents = "";
   try {
-    contents = Deno.readTextFileSync(path);
+    contents = await Deno.readTextFile(path);
   } catch (_e) {
     return [
       path,
