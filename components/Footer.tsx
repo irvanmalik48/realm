@@ -6,9 +6,9 @@ import { FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon, MailIcon, Telegr
 export default function Footer() {
   return (
     <footer
-      className={tw`flex flex-col gap-0 mt-4 mb-8 justify-center items-center`}
+      className={tw`flex flex-col gap-0 mt-4 mb-24 md:mb-8 justify-center items-center`}
     >
-      <div className={tw`mb-5 flex flex-row gap-5 justify-center items-center`}>
+      <div className={tw`mb-5 flex flex-row gap-2 justify-center items-center`}>
         <a
           href="https://github.com/irvanmalik48"
           className={tw`flex flex-row justify-start items-center gap-4`}
