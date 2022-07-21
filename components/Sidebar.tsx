@@ -37,20 +37,6 @@ export default function Sidebar() {
         >
           <p>All Posts</p>
         </div>
-        <button
-          className={tw`flex flex-row items-center w-[fit-content] bg-dark-nav rounded-xl hover:rounded-3xl transition-all duration-200 ease-linear group shadow-xl`}
-        >
-          <div
-            className={tw`w-[fit-content] bg-dark-accent-semitrans p-3 rounded-xl text-dark-accent-solid hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-200 ease-linear`}
-          >
-            <SearchIcon />
-          </div>
-          <span
-            className={tw`fixed group-hover:scale-100 bg-dark-nav absolute left-[34rem] z-0 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
-          >
-            Search Post
-          </span>
-        </button>
       </div>
       <div className={tw`mx-4 flex flex-col justify-center items-center gap-5`}>
         {postProps.map((data: any, key: any) => {
