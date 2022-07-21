@@ -6,7 +6,7 @@ import { HomeIcon, RepoIcon, BlogIcon, AboutIcon, GitHubIcon } from "./Icons.tsx
 export default function Nav() {
   return (
     <nav
-      className={tw`bg-dark-nav h-auto md:h-screen w-screen md:w-auto text-dark-text sticky md:top-0 bottom-0 shadow z-50 m-0 overflow-y-clip flex flex-row md:flex-col justify-evenly md:justify-between w-[fit-content] p-4`}
+      className={tw`bg-dark-nav h-auto md:h-screen w-full text-dark-text sticky md:top-0 bottom-0 shadow z-50 m-0 overflow-y-clip flex flex-row md:flex-col justify-evenly md:justify-between md:w-[fit-content] p-4`}
     >
       <div className={tw`flex md:flex-col w-full md:w-auto justify-evenly items-center flex-row gap-5`}>
         <a
