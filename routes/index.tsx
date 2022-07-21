@@ -8,8 +8,21 @@ import PostCard from "../components/PostCard.tsx";
 
 const posts = await loadContent("posts/");
 
-const quotes = await fetch("https://new.irvanma.me/api/quotes");
-const quote = await quotes.json();
+const quotes = [
+  "Balanced. As all things should be.",
+  "Inner peace is what you should always consider seeking.",
+  "Do what you want and do it well.",
+  "Keep it simple, stupid.",
+  "Hail to the chaos banner!",
+  "Change is about acceptance, not ignorance towards past.",
+  "We all commit crimes. It's the intention that differs.",
+  "This is why we can't have nice things.",
+  "PSD is not my favorite file format.",
+  "I'm not a web developer. I'm a retard."
+];
+
+const randomIndex = Math.floor(Math.random() * 10);
+const body = quotes[randomIndex];
 
 function ChaosLogo(props: { class: string }) {
   return (
@@ -118,7 +131,7 @@ export default function Home() {
         <p
           className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
-          {quote}
+          {body}
         </p>
         <p className={tw`text-dark-text mt-3`}>
           Hello, my name's Irvan Malik Azantha. I'm a 19 y'o boy currently
