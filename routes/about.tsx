@@ -20,12 +20,8 @@ const randomIndex = Math.floor(Math.random() * 10);
 const body = quotes[randomIndex];
 
 export default function Posts() {
-
   return (
-    <DefaultLayout
-      title="About Me"
-      desc="A brief description of me."
-    >
+    <DefaultLayout title="About Me" desc="A brief description of me.">
       <header
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >
@@ -67,7 +63,9 @@ export default function Posts() {
         >
           Bunch of things I like to do or see.
         </p>
-        <ul className={tw`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 list-disc list-inside my-3`}>
+        <ul
+          className={tw`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 list-disc list-inside my-3`}
+        >
           <li>Watching Anime</li>
           <li>Coding</li>
           <li>Blogging</li>
@@ -91,7 +89,9 @@ export default function Posts() {
         >
           Organizations and/or communities that I participate in.
         </p>
-        <ul className={tw`grid grid-cols-1 xl:grid-cols-2 list-disc list-inside my-3`}>
+        <ul
+          className={tw`grid grid-cols-1 xl:grid-cols-2 list-disc list-inside my-3`}
+        >
           <li>CompSci Student at Universitas Sriwijaya</li>
           <li>Contributor and Moderator at GNU/Weeb</li>
           <li>Contributor and Moderator at Wibutech</li>
@@ -109,7 +109,9 @@ export default function Posts() {
         >
           Tools/Languages that I use.
         </p>
-        <ul className={tw`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 list-disc list-inside my-3`}>
+        <ul
+          className={tw`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 list-disc list-inside my-3`}
+        >
           <li>GNU/Linux</li>
           <li>Java</li>
           <li>Javascript</li>
