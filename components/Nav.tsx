@@ -14,7 +14,7 @@ export default function Nav() {
           className={tw`flex flex-row justify-start items-center gap-4`}
         >
           <div
-            className={tw`group flex justify-center items-center bg-dark-accent-semitrans text-dark-accent-solid w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`group flex justify-center items-center bg-transparent text-dark-text md:bg-dark-accent-semitrans md:text-dark-accent-solid w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <HomeIcon />
             <span
