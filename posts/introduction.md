@@ -11,6 +11,10 @@ tag:
 
 Seems like blogging been a nice activity since past, eh? This blog actually has changed and hopped from over 69420 frameworks before I decide to just use Next.js with Jekyll-inspired stuffs. It turns out well above my expectations tho and the blog went smooth and fluid.
 
+## Update: July 2022
+
+So I hopped to a new framework called Fresh. It's a Javascript framework made in Deno. You can check the link <https://fresh.deno.dev> for more information.
+
 # About Me
 
 My name's Irvan Malik Azantha. I'm currently studying on Universitas Sriwijaya (English: University of Sriwijaya). I live in Palembang, Indonesia. I'm a highly enthusiastic person with subtle interest in open source projects and keen on learning new things. Also likes to watch anime, play games, and have hugs and cuddles (lmao).
