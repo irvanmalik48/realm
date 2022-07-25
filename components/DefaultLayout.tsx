@@ -81,7 +81,7 @@ export default function DefaultLayout(props: {
       <Nav />
       <Sidebar />
       <section
-        className={tw`sticky top-0 w-full px-4 md:px-6 lg:px-12 xl:px-24 py-4 text-dark-text h-screen overflow-y-auto ${css(
+        className={tw`sticky top-0 w-full px-4 md:px-6 lg:px-12 xl:px-24 py-4 text-dark-text h-screen overflow-y-auto md:${css(
           {
             "&::-webkit-scrollbar": apply`bg-dark-accent-quartertrans w-5`,
             "&::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
