@@ -18,7 +18,7 @@ const quotes = [
   "We all commit crimes. It's the intention that differs.",
   "This is why we can't have nice things.",
   "PSD is not my favorite file format.",
-  "I'm not a web developer. I'm a retard."
+  "I'm not a web developer. I'm a retard.",
 ];
 
 const randomIndex = Math.floor(Math.random() * 10);
