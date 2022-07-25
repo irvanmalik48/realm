@@ -42,7 +42,10 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       li: apply`my-0`,
       "li:first-child": apply`mt-3`,
     })}`,
-    a: apply``,
+    a: apply`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`,
+    ul: apply`list-disc list-inside my-3 ${css({
+      ul: apply`list-none mt-0`,
+    })}`,
   });
 
   if (!data || data?.title === "Undefined") {
