@@ -5,7 +5,6 @@ import { apply, tw } from "@twind";
 import { css } from "twind/css";
 import { loadContent } from "../utils/load.ts";
 import PostCard from "./PostCard.tsx";
-import { SearchIcon } from "./Icons.tsx";
 
 const posts = await loadContent("posts/");
 
