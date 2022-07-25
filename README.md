@@ -1,4 +1,4 @@
-# fresh project
+# A new, `fresh` blog I somewhat call my 'realm'
 
 ### Usage
 
