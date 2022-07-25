@@ -21,8 +21,8 @@ export default function Posts() {
 
   return (
     <DefaultLayout
-      title="IrvanMA's Lair"
-      desc="Do what you want and do it well."
+      title="Blog Posts"
+      desc="All that I have written currently."
     >
       <header
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
