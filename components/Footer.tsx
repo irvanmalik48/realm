@@ -1,7 +1,15 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-import { FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon, MailIcon, TelegramIcon, TwitterIcon } from "./Icons.tsx";
+import {
+  FacebookIcon,
+  GitHubIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  MailIcon,
+  TelegramIcon,
+  TwitterIcon,
+} from "./Icons.tsx";
 
 export default function Footer() {
   return (

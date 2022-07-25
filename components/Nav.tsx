@@ -1,14 +1,22 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-import { HomeIcon, RepoIcon, BlogIcon, AboutIcon, GitHubIcon } from "./Icons.tsx";
+import {
+  HomeIcon,
+  RepoIcon,
+  BlogIcon,
+  AboutIcon,
+  GitHubIcon,
+} from "./Icons.tsx";
 
 export default function Nav() {
   return (
     <nav
       className={tw`bg-dark-nav h-auto md:h-screen w-full text-dark-text sticky md:top-0 bottom-0 shadow z-50 m-0 overflow-y-clip flex flex-row md:flex-col justify-evenly md:justify-between md:w-[fit-content] py-4 md:p-4`}
     >
-      <div className={tw`flex md:flex-col box-border w-full md:w-auto justify-evenly items-center flex-row gap-2 md:gap-5`}>
+      <div
+        className={tw`flex md:flex-col box-border w-full md:w-auto justify-evenly items-center flex-row gap-2 md:gap-5`}
+      >
         <a
           href="/"
           className={tw`flex flex-row md:flex-col justify-start items-center gap-4`}
