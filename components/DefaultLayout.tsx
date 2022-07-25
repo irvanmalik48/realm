@@ -18,7 +18,11 @@ export default function DefaultLayout(props: {
 }) {
   return (
     <main
-      className={tw`bg-dark-bg w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-root `}
+      className={tw`${css({
+        background: "linear-gradient(45deg, rgba(0, 0, 0, 0) 50%, #242933 50%, #88C0D010 60%, rgba(0, 0, 0, 0) 50%)",
+        "background-size": "2rem 2rem",
+        "background-color": "#242933",
+      })} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-root`}
     >
       <Head>
         <meta charSet="utf-8" />
