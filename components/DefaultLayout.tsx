@@ -17,7 +17,9 @@ export default function DefaultLayout(props: {
   children: h.JSX.Element | h.JSX.Element[];
 }) {
   return (
-    <main className={tw`bg-dark-bg w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-root `}>
+    <main
+      className={tw`bg-dark-bg w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-root `}
+    >
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -81,12 +83,18 @@ export default function DefaultLayout(props: {
       <Nav />
       <Sidebar />
       <section
-        className={tw`sticky top-0 w-full px-4 md:px-6 lg:px-12 xl:px-24 py-4 text-dark-text h-screen overflow-y-auto md:${css(
+        className={tw`sticky top-0 w-full px-4 md:px-6 lg:px-12 xl:px-24 py-4 text-dark-text h-screen overflow-y-auto ${css(
           {
-            "&::-webkit-scrollbar": apply`bg-dark-accent-quartertrans w-5`,
-            "&::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
+            "-ms-overflow-style": "none",
+            "scrollbar-width": "none",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
           }
-        )}`}
+        )} md:${css({
+          "&::-webkit-scrollbar": apply`bg-dark-accent-quartertrans w-5`,
+          "&::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
+        })}`}
       >
         {props.children}
         <DonateCard />
