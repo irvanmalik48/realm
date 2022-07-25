@@ -15,14 +15,14 @@ export default function Nav() {
       className={tw`bg-dark-nav h-auto md:h-screen w-full text-dark-text sticky md:top-0 bottom-0 shadow z-50 m-0 overflow-y-clip flex flex-row md:flex-col justify-evenly md:justify-between md:w-[fit-content] py-4 md:p-4`}
     >
       <div
-        className={tw`flex md:flex-col box-border w-full md:w-auto justify-evenly items-center flex-row gap-2 md:gap-5`}
+        className={tw`grid grid-cols-4 md:flex md:flex-col w-full md:w-auto justify-center items-center gap-2 md:gap-5`}
       >
         <a
           href="/"
-          className={tw`flex flex-row md:flex-col justify-start items-center gap-4`}
+          className={tw`flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`w-[80px] md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text md:bg-dark-accent-semitrans md:text-dark-accent-solid w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text md:bg-dark-accent-semitrans md:text-dark-accent-solid w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <HomeIcon />
             <span
@@ -34,10 +34,10 @@ export default function Nav() {
         </a>
         <a
           href="https://github.com/irvanmalik48/realm"
-          className={tw`flex flex-row md:flex-col justify-start items-center gap-4`}
+          className={tw`flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`w-[80px] md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <RepoIcon />
             <span
@@ -49,10 +49,10 @@ export default function Nav() {
         </a>
         <a
           href="/posts"
-          className={tw`flex flex-row justify-start items-center gap-4`}
+          className={tw`flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`w-[80px] md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <BlogIcon />
             <span
@@ -64,10 +64,10 @@ export default function Nav() {
         </a>
         <a
           href="/about"
-          className={tw`flex flex-row justify-start items-center gap-4`}
+          className={tw`flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`w-[80px] md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <AboutIcon />
             <span
@@ -80,7 +80,7 @@ export default function Nav() {
       </div>
       <a
         href="https://github.com/irvanmalik48"
-        className={tw`md:flex flex-row justify-start items-center gap-4 hidden`}
+        className={tw`md:flex flex-row justify-center md:justify-start items-center gap-4 hidden`}
       >
         <div
           className={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
