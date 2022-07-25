@@ -19,10 +19,10 @@ export default function Nav() {
       >
         <a
           href="/"
-          className={tw`flex flex-row justify-center md:justify-start items-center gap-4`}
+          className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text md:bg-dark-accent-semitrans md:text-dark-accent-solid w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text md:bg-dark-accent-semitrans md:text-dark-accent-solid w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <HomeIcon />
             <span
@@ -34,10 +34,10 @@ export default function Nav() {
         </a>
         <a
           href="https://github.com/irvanmalik48/realm"
-          className={tw`flex flex-row justify-center md:justify-start items-center gap-4`}
+          className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <RepoIcon />
             <span
@@ -49,10 +49,10 @@ export default function Nav() {
         </a>
         <a
           href="/posts"
-          className={tw`flex flex-row justify-center md:justify-start items-center gap-4`}
+          className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <BlogIcon />
             <span
@@ -64,10 +64,10 @@ export default function Nav() {
         </a>
         <a
           href="/about"
-          className={tw`flex flex-row justify-center md:justify-start items-center gap-4`}
+          className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] py-3 md:p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <AboutIcon />
             <span
