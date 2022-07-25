@@ -10,6 +10,7 @@
     "frontmatter": "https://deno.land/x/frontmatter@v0.1.5/mod.ts",
     "twind": "https://esm.sh/twind@0.16.17",
     "twind/": "https://esm.sh/twind@0.16.17/",
-    "walk": "https://deno.land/std@0.147.0/fs/walk.ts"
+    "walk": "https://deno.land/std@0.147.0/fs/walk.ts",
+    "fuse": "https://deno.land/x/fuse@v6.4.1"
   }
 }
