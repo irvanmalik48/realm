@@ -25,7 +25,7 @@ export default function Nav() {
           </div>
         </a>
         <a
-          href="/"
+          href="https://github.com/irvanmalik48/realm"
           className={tw`flex flex-row md:flex-col justify-start items-center gap-4`}
         >
           <div
@@ -40,7 +40,7 @@ export default function Nav() {
           </div>
         </a>
         <a
-          href="/"
+          href="/posts"
           className={tw`flex flex-row justify-start items-center gap-4`}
         >
           <div
@@ -55,7 +55,7 @@ export default function Nav() {
           </div>
         </a>
         <a
-          href="/"
+          href="/about"
           className={tw`flex flex-row justify-start items-center gap-4`}
         >
           <div
@@ -71,7 +71,7 @@ export default function Nav() {
         </a>
       </div>
       <a
-        href="/"
+        href="https://github.com/irvanmalik48"
         className={tw`md:flex flex-row justify-start items-center gap-4 hidden`}
       >
         <div
