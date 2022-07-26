@@ -14,7 +14,7 @@ import {
 export default function Footer() {
   return (
     <footer
-      className={tw`flex flex-col gap-0 mt-4 mb-24 md:mb-8 justify-center items-center`}
+      className={tw`flex flex-col gap-0 mt-4 justify-center items-center`}
     >
       <div className={tw`mb-5 flex flex-row gap-2 justify-center items-center`}>
         <a
@@ -95,11 +95,8 @@ export default function Footer() {
           </div>
         </a>
       </div>
-      <p className={tw`text-dark-footertext text-sm m-0 p-0`}>
-        Powered by Fresh and Deno Deploy
-      </p>
-      <p className={tw`text-dark-footertext text-sm m-0 p-0`}>
-        Copyright © 2021 Irvan Malik Azantha
+      <p className={tw`text-dark-footertext text-sm m-0 p-0 mb-5`}>
+        This website is deployed in Deno Deploy and made with...
       </p>
     </footer>
   );
