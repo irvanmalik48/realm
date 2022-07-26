@@ -33,7 +33,9 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     "* + h2": apply`my-3`,
     h3: apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid`,
     "* + h3": apply`my-3`,
-    pre: apply`text-dark-text bg-dark-bg text-sm overflow-x-auto px-5 my-3 py-4 rounded-xl`,
+    pre: apply`text-dark-text bg-dark-bg text-sm overflow-x-auto px-5 my-3 py-4 rounded-xl ${css({
+      code: apply`bg-transparent text-dark-text p-0 m-0 font-normal`,
+    })}`,
     "pre::-webkit-scrollbar": apply`bg-transparent rounded-xl h-5`,
     "pre::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[8px] border-solid bg-clip-content rounded-xl`,
     ol: apply`list-decimal list-inside my-3  ${css({
@@ -47,7 +49,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       ul: apply`list-none mt-0`,
     })}`,
     img: apply`w-full h-auto transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
-    code: apply`bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl`,
+    code: apply`bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
   });
 
   if (!data || data?.title === "Undefined") {
