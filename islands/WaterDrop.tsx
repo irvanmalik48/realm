@@ -142,7 +142,7 @@ export default function WaterDrop() {
         ></polygon>
       </svg>
       <div
-        className={tw`bg-dark-accent-solid w-full h-[fit-content] pt-5 pb-36 md:pb-8`}
+        className={tw`bg-gradient-to-b from-dark-accent-solid to-transparent w-full h-[fit-content] pt-5 pb-36 md:pb-8`}
       >
         <p className={tw`mb-2 w-full text-center`}>
           <span
