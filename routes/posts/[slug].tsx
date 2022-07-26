@@ -46,6 +46,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     ul: apply`list-disc list-inside my-3 ${css({
       ul: apply`list-none mt-0`,
     })}`,
+    img: apply`w-full h-auto transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
   });
 
   if (!data || data?.title === "Undefined") {
