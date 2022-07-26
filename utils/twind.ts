@@ -4,6 +4,10 @@ import { Configuration, setup, strict } from "twind";
 export * from "twind";
 export const config: Configuration = {
   theme: {
+    fontFamily: {
+      sans: ["Roboto", "sans-serif"],
+      mono: ["Source Code Pro", "ui-monospace"],
+    },
     extend: {
       colors: {
         dark: {
@@ -27,5 +31,11 @@ export const config: Configuration = {
   mode: strict,
   darkMode: "class",
   hash: true,
+  preflight: {
+    "@import": [
+      `url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap')`,
+      `url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap')`,
+    ],
+  },
 };
 if (IS_BROWSER) setup(config);
