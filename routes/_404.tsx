@@ -18,7 +18,7 @@ export default function NotFoundPage({ url }: UnknownPageProps) {
             404
           </p>
           <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
-            Page <strong>{url.pathname}</strong> not found.
+            Page <code><strong>{url.pathname}</strong></code> not found.
           </p>
         </div>
       </header>
