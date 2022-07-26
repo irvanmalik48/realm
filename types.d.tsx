@@ -6,3 +6,8 @@ export interface Post {
   desc?: string;
   tag?: string[];
 }
+
+export interface Spring {
+  p: number;
+  v: number;
+}
