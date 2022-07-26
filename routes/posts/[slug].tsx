@@ -47,6 +47,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       ul: apply`list-none mt-0`,
     })}`,
     img: apply`w-full h-auto transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
+    code: apply`bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl`,
   });
 
   if (!data || data?.title === "Undefined") {
