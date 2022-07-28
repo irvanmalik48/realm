@@ -5,7 +5,7 @@ export * from "twind";
 export const config: Configuration = {
   theme: {
     fontFamily: {
-      sans: ["Roboto", "sans-serif"],
+      sans: ["Roboto Flex", "sans-serif"],
       mono: ["Source Code Pro", "ui-monospace"],
     },
     extend: {
@@ -37,7 +37,7 @@ export const config: Configuration = {
   important: true,
   preflight: {
     "@import": [
-      `url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap')`,
+      `url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,600;8..144,700&display=swap')`,
       `url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap')`,
       `url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap')`
     ],
