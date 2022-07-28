@@ -27,7 +27,10 @@ export const handler: Handlers<Post | null> = {
   },
 };
 
-function CodeBlock(props: {className: string, children: h.JSX.Element | h.JSX.Element[] | string}) {
+function CodeBlock(props: {
+  className: string;
+  children: h.JSX.Element | h.JSX.Element[] | string;
+}) {
   let lang = "text";
   if (props.className && props.className.startsWith("lang-")) {
     lang = props.className.replace("lang-", "");
@@ -36,7 +39,7 @@ function CodeBlock(props: {className: string, children: h.JSX.Element | h.JSX.El
     <Prism language={lang} style={nord}>
       {props.children}
     </Prism>
-  )
+  );
 }
 
 // deno-lint-ignore no-explicit-any
@@ -44,9 +47,7 @@ function PreBlock(props: any) {
   if ("type" in props.children && props.children["type"] === "code") {
     return CodeBlock(props.children.props);
   }
-  return (
-    <pre {...props.rest}>{props.children}</pre>
-  )
+  return <pre {...props.rest}>{props.children}</pre>;
 }
 
 export default function PostPage({ data, ...props }: PageProps<Post | null>) {
@@ -58,9 +59,11 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     "* + h2": apply`my-3`,
     h3: apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid`,
     "* + h3": apply`my-3`,
-    pre: apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-3 py-4 rounded-xl ${css({
-      code: apply`bg-transparent font-mono text-dark-text p-0 m-0 font-normal`,
-    })}`,
+    pre: apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-3 py-4 rounded-xl ${css(
+      {
+        code: apply`bg-transparent font-mono text-dark-text p-0 m-0 font-normal`,
+      }
+    )}`,
     "pre::-webkit-scrollbar": apply`bg-transparent rounded-xl h-5`,
     "pre::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[8px] border-solid bg-clip-content rounded-xl`,
     ol: apply`list-decimal list-inside my-3  ${css({
@@ -135,7 +138,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         options={{
           overrides: {
             pre: PreBlock,
-          }
+          },
         }}
       >
         {data.md !== undefined ? data.md : ""}
