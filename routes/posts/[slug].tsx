@@ -53,11 +53,11 @@ function PreBlock(props: any) {
 export default function PostPage({ data, ...props }: PageProps<Post | null>) {
   const styles = css({
     blockquote: apply`bg-dark-accent-semitrans text-dark-text px-5 py-2 my-2 rounded-xl border-l-4 border-dark-accent-solid`,
-    h1: apply`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans`,
+    h1: apply`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans font-heading`,
     "* + h1": apply`my-3`,
-    h2: apply`text-xl rounded-xl font-semibold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-quartertrans`,
+    h2: apply`text-xl rounded-xl font-semibold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-quartertrans font-heading`,
     "* + h2": apply`my-3`,
-    h3: apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid`,
+    h3: apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid font-heading`,
     "* + h3": apply`my-3`,
     pre: apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-3 py-4 rounded-xl ${css(
       {
