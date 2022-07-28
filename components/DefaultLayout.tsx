@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from "preact";
-import { apply, tw } from "@twind";
+import { apply, tw } from "@utils/twind.ts";
 import Sidebar from "@components/Sidebar.tsx";
 import Nav from "@components/Nav.tsx";
 import { css } from "twind/css";
