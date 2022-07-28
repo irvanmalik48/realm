@@ -116,7 +116,7 @@ export default function Home() {
           class={tw`bg-dark-side rounded-full w-[200px] md:w-[100px] h-[fit-content]`}
         />
         <div className={tw`flex flex-col justify-start items-center`}>
-          <p className={tw`text-dark-text font-bold text-3xl`}>
+          <p className={tw`text-dark-text font-bold text-3xl font-heading`}>
             Irvan Malik Azantha
           </p>
           <p className={tw`w-full text-dark-accent-solid text-lg`}>
@@ -125,7 +125,7 @@ export default function Home() {
         </div>
       </header>
       <section className={tw`mb-10 w-full bg-dark-nav py-4 px-5 rounded-xl`}>
-        <p className={tw`text-2xl font-semibold text-dark-text mb-3`}>
+        <p className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}>
           Description
         </p>
         <p
@@ -145,7 +145,7 @@ export default function Home() {
       <section
         className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
       >
-        <p className={tw`text-2xl font-semibold text-dark-text mb-3`}>
+        <p className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}>
           Recent Posts
         </p>
         <p
