@@ -1,10 +1,10 @@
 // deno-lint-ignore-file no-explicit-any
 /** @jsx h */
 import { h } from "preact";
-import { apply, tw } from "@twind";
+import { apply, tw } from "@utils/twind.ts";
 import { css } from "twind/css";
-import { loadContent } from "../utils/load.ts";
-import PostCard from "./PostCard.tsx";
+import { loadContent } from "@utils/load.ts";
+import PostCard from "@components/PostCard.tsx";
 
 const posts = await loadContent("posts/");
 
