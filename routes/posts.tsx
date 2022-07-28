@@ -25,7 +25,9 @@ export default function Posts() {
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >
         <div className={tw`flex flex-col justify-center items-center`}>
-          <p className={tw`text-dark-text font-bold text-3xl font-heading`}>Blog Posts</p>
+          <p className={tw`text-dark-text font-bold text-3xl font-heading`}>
+            Blog Posts
+          </p>
           <p className={tw`w-full text-dark-accent-solid text-lg`}>
             All that I have written currently.
           </p>

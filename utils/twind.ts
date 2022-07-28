@@ -39,7 +39,7 @@ export const config: Configuration = {
     "@import": [
       `url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,600;8..144,700&display=swap')`,
       `url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap')`,
-      `url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap')`
+      `url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap')`,
     ],
   },
 };

@@ -125,7 +125,9 @@ export default function Home() {
         </div>
       </header>
       <section className={tw`mb-10 w-full bg-dark-nav py-4 px-5 rounded-xl`}>
-        <p className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}>
+        <p
+          className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}
+        >
           Description
         </p>
         <p
@@ -145,7 +147,9 @@ export default function Home() {
       <section
         className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
       >
-        <p className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}>
+        <p
+          className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}
+        >
           Recent Posts
         </p>
         <p
