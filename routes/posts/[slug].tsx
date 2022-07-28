@@ -5,8 +5,11 @@ import { PageProps, Handlers } from "$fresh/server.ts";
 import { tw } from "../../utils/twind.ts";
 import { css, apply } from "twind/css";
 import { loadPost } from "../../utils/load.ts";
+import { Prism } from "rsh";
+import { nord } from "rsh/dist/esm/styles/prism";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "../../components/DefaultLayout.tsx";
+import { startsWith } from "https://deno.land/std@0.134.0/bytes/mod.ts";
 
 const postDir = "posts/";
 
@@ -24,6 +27,28 @@ export const handler: Handlers<Post | null> = {
   },
 };
 
+function CodeBlock(props: {className: string, children: h.JSX.Element | h.JSX.Element[] | string}) {
+  let lang = "text";
+  if (props.className && props.className.startsWith("lang-")) {
+    lang = props.className.replace("lang-", "");
+  }
+  return (
+    <Prism language={lang} style={nord}>
+      {props.children}
+    </Prism>
+  )
+}
+
+// deno-lint-ignore no-explicit-any
+function PreBlock(props: any) {
+  if ("type" in props.children && props.children["type"] === "code") {
+    return CodeBlock(props.children.props);
+  }
+  return (
+    <pre {...props.rest}>{props.children}</pre>
+  )
+}
+
 export default function PostPage({ data, ...props }: PageProps<Post | null>) {
   const styles = css({
     blockquote: apply`bg-dark-accent-semitrans text-dark-text px-5 py-2 my-2 rounded-xl border-l-4 border-dark-accent-solid`,
@@ -33,8 +58,8 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     "* + h2": apply`my-3`,
     h3: apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid`,
     "* + h3": apply`my-3`,
-    pre: apply`text-dark-text bg-dark-bg text-sm overflow-x-auto px-5 my-3 py-4 rounded-xl ${css({
-      code: apply`bg-transparent text-dark-text p-0 m-0 font-normal`,
+    pre: apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-3 py-4 rounded-xl ${css({
+      code: apply`bg-transparent font-mono text-dark-text p-0 m-0 font-normal`,
     })}`,
     "pre::-webkit-scrollbar": apply`bg-transparent rounded-xl h-5`,
     "pre::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[8px] border-solid bg-clip-content rounded-xl`,
@@ -49,7 +74,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       ul: apply`list-none mt-0`,
     })}`,
     img: apply`w-full h-auto transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
-    code: apply`bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
+    code: apply`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
   });
 
   if (!data || data?.title === "Undefined") {
@@ -107,6 +132,11 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       </header>
       <Markdown
         class={tw`${tw(styles)} mb-5 w-full bg-dark-nav py-4 px-5 rounded-xl`}
+        options={{
+          overrides: {
+            pre: PreBlock,
+          }
+        }}
       >
         {data.md !== undefined ? data.md : ""}
       </Markdown>
