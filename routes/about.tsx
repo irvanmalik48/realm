@@ -26,7 +26,7 @@ export default function Posts() {
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >
         <div className={tw`flex flex-col justify-center items-center`}>
-          <p className={tw`text-dark-text font-bold text-3xl`}>About Me</p>
+          <p className={tw`text-dark-text font-bold text-3xl font-heading`}>About Me</p>
           <p className={tw`w-full text-dark-accent-solid text-lg`}>
             A brief description of me.
           </p>
@@ -36,7 +36,7 @@ export default function Posts() {
         className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
       >
         <p
-          className={tw`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans text-center`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Description
         </p>
@@ -54,7 +54,7 @@ export default function Posts() {
           chaos!
         </p>
         <p
-          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Stuffs I Like
         </p>
@@ -80,7 +80,7 @@ export default function Posts() {
           <li>Peace</li>
         </ul>
         <p
-          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Current Affiliation
         </p>
@@ -100,7 +100,7 @@ export default function Posts() {
           <li>Voluntary Member of HMIF Unsri (Srifoton)</li>
         </ul>
         <p
-          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Tools
         </p>
