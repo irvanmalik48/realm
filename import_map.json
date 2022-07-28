@@ -15,6 +15,7 @@
     "@components/": "./components/",
     "@islands/": "./islands/",
     "@utils/": "./utils/",
+    "@twind": "./utils/twind.ts",
     "@/": "./"
   }
 }
