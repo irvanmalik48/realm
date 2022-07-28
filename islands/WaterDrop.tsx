@@ -1,9 +1,9 @@
 /** @jsx h */
-import { Fragment, h } from "preact";
+import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { tw } from "@twind";
-import { WaveTank } from "../components/WaveTank.tsx";
-import { Spring } from "../types.d.tsx";
+import { tw } from "@utils/twind.ts";
+import { WaveTank } from "@components/WaveTank.tsx";
+import { Spring } from "@/types.d.tsx";
 
 function easeInCirc(x: number) {
   return 1 - Math.sqrt(1 - Math.pow(x, 2));
