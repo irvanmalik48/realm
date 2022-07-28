@@ -20,7 +20,7 @@ export default function DonateCard() {
     >
       <div>
         <div>
-          <p className={tw`text-dark-accent-solid font-semibold`}>
+          <p className={tw`text-dark-accent-solid font-semibold font-heading`}>
             So, a cup of coffee for me?
           </p>
           <p className={tw`text-dark-text text-sm`}>
