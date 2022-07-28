@@ -9,6 +9,9 @@ export const config: Configuration = {
       mono: ["Source Code Pro", "ui-monospace"],
     },
     extend: {
+      fontFamily: {
+        heading: ["Poppins", "sans-serif"],
+      },
       colors: {
         dark: {
           nav: "#2E3440",
@@ -36,6 +39,7 @@ export const config: Configuration = {
     "@import": [
       `url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap')`,
       `url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap')`,
+      `url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap')`
     ],
   },
 };
