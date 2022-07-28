@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from "preact";
-import { tw } from "@twind";
+import { tw } from "@utils/twind.ts";
 import {
   FacebookIcon,
   GitHubIcon,

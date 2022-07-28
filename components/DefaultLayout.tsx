@@ -1,14 +1,14 @@
 /** @jsx h */
 import { h } from "preact";
 import { apply, tw } from "@twind";
-import Sidebar from "./Sidebar.tsx";
-import Nav from "./Nav.tsx";
+import Sidebar from "@components/Sidebar.tsx";
+import Nav from "@components/Nav.tsx";
 import { css } from "twind/css";
 import { Head, asset } from "$fresh/runtime.ts";
-import Thumbnail from "../utils/thumb.ts";
-import Footer from "./Footer.tsx";
-import DonateCard from "./Donate.tsx";
-import WaterDrop from "../islands/WaterDrop.tsx";
+import Thumbnail from "@utils/thumb.ts";
+import Footer from "@components/Footer.tsx";
+import DonateCard from "@components/Donate.tsx";
+import WaterDrop from "@islands/WaterDrop.tsx";
 
 export default function DefaultLayout(props: {
   title?: string;
