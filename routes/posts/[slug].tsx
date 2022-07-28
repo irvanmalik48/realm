@@ -1,15 +1,14 @@
 /** @jsx h */
 import { h } from "preact";
-import { Post } from "../../types.d.tsx";
+import { Post } from "@/types.d.tsx";
 import { PageProps, Handlers } from "$fresh/server.ts";
-import { tw } from "../../utils/twind.ts";
+import { tw } from "@utils/twind.ts";
 import { css, apply } from "twind/css";
-import { loadPost } from "../../utils/load.ts";
+import { loadPost } from "@utils/load.ts";
 import { Prism } from "rsh";
 import { nord } from "rsh/dist/esm/styles/prism";
 import Markdown from "markdown-to-jsx";
-import DefaultLayout from "../../components/DefaultLayout.tsx";
-import { startsWith } from "https://deno.land/std@0.134.0/bytes/mod.ts";
+import DefaultLayout from "@components/DefaultLayout.tsx";
 
 const postDir = "posts/";
 
