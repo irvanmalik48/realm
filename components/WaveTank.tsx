@@ -1,4 +1,4 @@
-import { Spring } from "../types.d.tsx";
+import { Spring } from "@/types.d.tsx";
 
 export class WaveTank {
   springs = [] as Spring[];
