@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 import { parse } from "frontmatter";
 import { relative } from "relative";
-import { Post } from "../types.d.tsx";
+import { Post } from "@/types.d.tsx";
 import { walk } from "walk";
 
 export async function loadPost(
