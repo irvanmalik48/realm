@@ -1,8 +1,8 @@
 /** @jsx h */
 import { h } from "preact";
 import { UnknownPageProps } from "$fresh/server.ts";
-import DefaultLayout from "../components/DefaultLayout.tsx";
-import { tw } from "../utils/twind.ts";
+import DefaultLayout from "@components/DefaultLayout.tsx";
+import { tw } from "@utils/twind.ts";
 
 export default function NotFoundPage({ url }: UnknownPageProps) {
   return (

@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from "preact";
-import { tw } from "@twind";
-import DefaultLayout from "../components/DefaultLayout.tsx";
+import { tw } from "@utils/twind.ts";
+import DefaultLayout from "@components/DefaultLayout.tsx";
 
 const quotes = [
   "Balanced. As all things should be.",
