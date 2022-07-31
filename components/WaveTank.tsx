@@ -1,3 +1,6 @@
+//  SPDX-FileCopyrightText: 2021 Luca Casonato
+//  SPDX-License-Identifier: MIT
+
 import { Spring } from "@/types.d.tsx";
 
 export class WaveTank {
