@@ -15,7 +15,7 @@ export default function NotFoundPage({ url }: UnknownPageProps) {
       >
         <div className={tw`flex flex-col justify-center items-center`}>
           <p
-            className={tw`text-dark-text text-center font-bold text-3xl font-heading`}
+            className={tw`text-dark-text text-center font-bold text-4xl mb-2 font-heading`}
           >
             404
           </p>
