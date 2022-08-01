@@ -21,7 +21,9 @@ export default function NotFoundPage({ url }: UnknownPageProps) {
           </p>
           <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
             Page{" "}
-            <code className={tw`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`}>
+            <code
+              className={tw`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`}
+            >
               {url.pathname}
             </code>{" "}
             not found.
