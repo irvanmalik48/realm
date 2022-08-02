@@ -21,7 +21,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={tw`sticky hidden top-0 z-0 h-screen md:w-[22rem] lg:w-[25rem] xl:w-[28rem] items-center justify-start overflow-y-auto bg-dark-side md:flex md:flex-col gap-5 pb-4 pt-0 text-dark-text ${css(
+      className={tw`sticky hidden top-0 z-0 h-screen md:w-[22rem] lg:w-[25rem] xl:w-[28rem] items-center justify-start overflow-y-auto bg-dark-side lg:flex lg:flex-col gap-5 pb-4 pt-0 text-dark-text ${css(
         {
           "&::-webkit-scrollbar": apply`hidden`,
         }
