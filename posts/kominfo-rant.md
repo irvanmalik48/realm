@@ -14,7 +14,7 @@ I know I'm a bit of a cool headed guy when it comes down to politically bound de
 
 Fuck you. Just, fuck you.
 
-P.S. all of your websites are broken as hell. And I actually mean it. At least pay your devs proper salary.
+> P.S. all of your websites are broken as hell. And I actually mean it. At least pay your devs proper salary.
 
 # Verdict
 
