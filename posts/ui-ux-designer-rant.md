@@ -1,6 +1,6 @@
 ---
 title: "Rant: UI/UX Designers"
-date: "2022-08-2"
+date: "2022-08-02"
 desc: Let me rant about UI/UX Designers.
 tag:
   - webdev
