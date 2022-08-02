@@ -75,7 +75,7 @@ export default function WaterDrop() {
     const dropPosition = Math.round(
       ((widthRef.current / 2 - 30) / widthRef.current) * 100
     );
-    waveTank.springs[dropPosition].p = -60;
+    waveTank.springs[dropPosition].p = -50;
   }
 
   useEffect(() => {
