@@ -3,7 +3,7 @@ import { h } from "preact";
 import { UnknownPageProps } from "$fresh/server.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { tw } from "@utils/twind.ts";
-import NotFoundPageFound from "./blooper.tsx";
+import NotFoundPageFound from "@/routes/blooper.tsx";
 
 export default function NotFoundPage({ url }: UnknownPageProps) {
   if (url.pathname === "/404") return <NotFoundPageFound />;
