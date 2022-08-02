@@ -175,7 +175,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
               <p
                 className={tw`font-mono font-bold text-sm text-dark-nav w-full`}
               >
-                PREVIOUS POST
+                NEWER POST
               </p>
             </div>
             <div className={tw`px-5 pt-3`}>
@@ -209,7 +209,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
               <p
                 className={tw`font-mono font-bold text-sm text-dark-nav w-full`}
               >
-                NEXT POST
+                OLDER POST
               </p>
             </div>
             <div className={tw`px-5 pt-3`}>
