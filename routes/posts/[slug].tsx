@@ -169,7 +169,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         {before !== -1 && (
           <a
             href={"/posts" + prevPost.path}
-            className={tw`mr-4 md:mr-0 overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
+            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
           >
             <div className={tw`px-5 py-1 bg-dark-accent-solid`}>
               <p
