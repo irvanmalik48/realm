@@ -28,6 +28,7 @@ export const config: Configuration = {
       },
       gridTemplateColumns: {
         root: "min-content min-content auto",
+        tablet: "min-content auto",
       },
     },
   },
