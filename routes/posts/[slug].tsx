@@ -164,12 +164,12 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         {data.md !== undefined ? data.md : ""}
       </Markdown>
       <div
-        className={tw`grid grid-cols-2 w-full gap-5 mb-5 bg-dark-nav p-5 rounded-xl`}
+        className={tw`grid grid-cols-1 md:grid-cols-2 w-full gap-5 mb-5 bg-dark-nav p-5 rounded-xl`}
       >
         {before !== -1 && (
           <a
             href={"/posts" + prevPost.path}
-            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
+            className={tw`mr-4 md:mr-0 overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
           >
             <div className={tw`px-5 py-1 bg-dark-accent-solid`}>
               <p
