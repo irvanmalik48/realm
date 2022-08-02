@@ -1,16 +1,19 @@
+// deno-lint-ignore-file no-explicit-any
 /** @jsx h */
 import { h } from "preact";
 import { Post } from "@/types.d.tsx";
 import { PageProps, Handlers } from "$fresh/server.ts";
 import { tw } from "@utils/twind.ts";
 import { css, apply } from "twind/css";
-import { loadPost } from "@utils/load.ts";
+import { loadContent, loadPost } from "@utils/load.ts";
 import { Prism } from "rsh";
 import { nord } from "rsh/dist/esm/styles/prism";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 
 const postDir = "posts/";
+
+const posts = await loadContent(postDir);
 
 export const handler: Handlers<Post | null> = {
   async GET(_, ctx) {
@@ -41,7 +44,6 @@ function CodeBlock(props: {
   );
 }
 
-// deno-lint-ignore no-explicit-any
 function PreBlock(props: any) {
   if ("type" in props.children && props.children["type"] === "code") {
     return CodeBlock(props.children.props);
@@ -50,6 +52,25 @@ function PreBlock(props: any) {
 }
 
 export default function PostPage({ data, ...props }: PageProps<Post | null>) {
+  const postProps: any[] = [];
+
+  for (const [_key, post] of posts.entries()) {
+    postProps.push(post);
+  }
+
+  postProps.sort((a: any, b: any) => {
+    return a["date"] < b["date"] ? 1 : -1;
+  });
+
+  const position = postProps.findIndex((object) => {
+    return object.path === data?.path;
+  });
+  const after = position === postProps.length - 1 ? -1 : position + 1;
+  const before = position === 0 ? -1 : position - 1;
+
+  const prevPost = postProps[before];
+  const nextPost = postProps[after];
+
   const styles = css({
     blockquote: apply`bg-dark-accent-semitrans text-dark-text px-5 py-2 my-2 rounded-xl border-l-4 border-dark-accent-solid`,
     h1: apply`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans font-heading`,
@@ -142,6 +163,78 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       >
         {data.md !== undefined ? data.md : ""}
       </Markdown>
+      <div
+        className={tw`grid grid-cols-2 w-full gap-5 mb-5 bg-dark-nav p-5 rounded-xl`}
+      >
+        {before !== -1 && (
+          <a
+            href={"/posts" + prevPost.path}
+            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
+          >
+            <div className={tw`px-5 py-1 bg-dark-accent-solid`}>
+              <p
+                className={tw`font-mono font-bold text-sm text-dark-nav w-full`}
+              >
+                PREVIOUS POST
+              </p>
+            </div>
+            <div className={tw`px-5 pt-3`}>
+              <p
+                className={tw`text-dark-accent-solid font-semibold font-heading`}
+              >
+                {prevPost.title}
+              </p>
+              <p className={tw`text-dark-text text-xs mb-2`}>{prevPost.date}</p>
+              <p className={tw`text-dark-text text-sm mb-1`}>{prevPost.desc}</p>
+            </div>
+            <div className={tw`box-border px-5 pb-3 flex-wrap flex flex-row`}>
+              {prevPost.tag.map((el: string, index: any) => (
+                <p
+                  key={index}
+                  className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
+                >
+                  {el}
+                </p>
+              ))}
+            </div>
+          </a>
+        )}
+        {before === -1 && <div></div>}
+        {after !== -1 && (
+          <a
+            href={"/posts" + nextPost.path}
+            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
+          >
+            <div className={tw`px-5 py-1 bg-dark-accent-solid`}>
+              <p
+                className={tw`font-mono font-bold text-sm text-dark-nav w-full`}
+              >
+                NEXT POST
+              </p>
+            </div>
+            <div className={tw`px-5 pt-3`}>
+              <p
+                className={tw`text-dark-accent-solid font-semibold font-heading`}
+              >
+                {nextPost.title}
+              </p>
+              <p className={tw`text-dark-text text-xs mb-2`}>{nextPost.date}</p>
+              <p className={tw`text-dark-text text-sm mb-1`}>{nextPost.desc}</p>
+            </div>
+            <div className={tw`box-border px-5 pb-3 flex-wrap flex flex-row`}>
+              {nextPost.tag.map((el: string, index: any) => (
+                <p
+                  key={index}
+                  className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
+                >
+                  {el}
+                </p>
+              ))}
+            </div>
+          </a>
+        )}
+        {after === -1 && <div></div>}
+      </div>
     </DefaultLayout>
   );
 }
