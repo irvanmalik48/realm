@@ -1,6 +1,7 @@
 {
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.0.2/",
+    "fresh-seo": "https://deno.land/x/fresh_seo@0.1.0/mod.ts",
     "preact": "https://esm.sh/preact@10.10.0",
     "preact/": "https://esm.sh/preact@10.10.0/",
     "preact-render-to-string": "https://esm.sh/preact-render-to-string@5.2.1?external=preact",
