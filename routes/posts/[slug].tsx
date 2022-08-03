@@ -7,9 +7,11 @@ import { tw } from "@utils/twind.ts";
 import { css, apply } from "twind/css";
 import { loadContent, loadPost } from "@utils/load.ts";
 import { Prism } from "rsh";
-import { nord } from "rsh/dist/esm/styles/prism";
+import * as Themes from "rsh/dist/esm/styles/prism";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
+import { syntaxHighlighterTheme } from "@utils/colors.ts";
+import virtualizedRenderer from "rshvr";
 
 const postDir = "posts/";
 
@@ -38,7 +40,7 @@ function CodeBlock(props: {
     lang = props.className.replace("lang-", "");
   }
   return (
-    <Prism language={lang} style={nord}>
+    <Prism language={lang} style={Themes[syntaxHighlighterTheme]} showLineNumbers showInlineLineNumbers renderer={virtualizedRenderer}>
       {props.children}
     </Prism>
   );
