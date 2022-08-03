@@ -11,7 +11,6 @@ import * as Themes from "rsh/dist/esm/styles/prism";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { syntaxHighlighterTheme } from "@utils/colors.ts";
-import virtualizedRenderer from "rshvr";
 
 const postDir = "posts/";
 
@@ -40,7 +39,7 @@ function CodeBlock(props: {
     lang = props.className.replace("lang-", "");
   }
   return (
-    <Prism language={lang} style={Themes[syntaxHighlighterTheme]} showLineNumbers showInlineLineNumbers renderer={virtualizedRenderer}>
+    <Prism language={lang} style={Themes[syntaxHighlighterTheme]}>
       {props.children}
     </Prism>
   );
