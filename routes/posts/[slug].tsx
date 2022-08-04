@@ -39,7 +39,12 @@ function CodeBlock(props: {
     lang = props.className.replace("lang-", "");
   }
   return (
-    <Prism language={lang} style={Themes[syntaxHighlighterTheme]} showLineNumbers showInlineLineNumbers>
+    <Prism
+      language={lang}
+      style={Themes[syntaxHighlighterTheme]}
+      showLineNumbers
+      showInlineLineNumbers
+    >
       {props.children}
     </Prism>
   );

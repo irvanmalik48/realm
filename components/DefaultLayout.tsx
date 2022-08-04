@@ -21,8 +21,7 @@ export default function DefaultLayout(props: {
   return (
     <main
       className={tw`${css({
-        background:
-          `linear-gradient(45deg, rgba(0, 0, 0, 0) 50%, ${colorScheme.dark.bg} 50%, ${colorScheme.dark.accent.quitetrans} 60%, rgba(0, 0, 0, 0) 50%)`,
+        background: `linear-gradient(45deg, rgba(0, 0, 0, 0) 50%, ${colorScheme.dark.bg} 50%, ${colorScheme.dark.accent.quitetrans} 60%, rgba(0, 0, 0, 0) 50%)`,
         "background-size": "2rem 2rem",
         "background-color": `${colorScheme.dark.bg}`,
         "-webkit-tap-highlight-color": "transparent",

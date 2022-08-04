@@ -24,7 +24,7 @@ export const handler: Handlers = {
 
     postProps.map((el) => {
       sitemap.add(`/posts${el.path}`);
-    })
+    });
 
     return sitemap.render();
   },

@@ -13,6 +13,6 @@ export const colorScheme = {
     text: "#D8DEE9",
     footertext: "#D8DEE9AA",
   },
-}
+};
 
 export const syntaxHighlighterTheme = "nord";
