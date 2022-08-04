@@ -104,7 +104,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     })}`,
     img: apply`w-full h-auto transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
     code: apply`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
-    "span.linenumber": apply`inline-block min-w-[2.5rem] border-r-4 border-dark-accent-semitrans mr-4`,
+    "span.linenumber": apply`hidden md:inline-block min-w-[2.5rem] border-r-4 border-dark-accent-semitrans mr-4`,
   });
 
   if (!data || data?.title === "Undefined") {
