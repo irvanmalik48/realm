@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@utils/twind.ts";
+import { css } from "twind/css";
 
 function CoffeeIcon() {
   return (
@@ -16,7 +17,9 @@ function CoffeeIcon() {
 export default function DonateCard() {
   return (
     <div
-      className={tw`flex flex-row justify-between items-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border mb-10`}
+      className={tw`flex flex-row justify-between items-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border mb-10 ${css({
+        "backdrop-filter": "blur(.5rem)",
+      })}`}
     >
       <div>
         <div>
