@@ -2,7 +2,7 @@
 import { Handlers } from "$fresh/server.ts";
 import manifest from "@/fresh.gen.ts";
 import { SitemapContext } from "fresh-seo";
-import { loadContent } from "../utils/load.ts";
+import { loadContent } from "@utils/load.ts";
 
 const postDir = "posts/";
 
