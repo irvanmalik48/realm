@@ -8,6 +8,7 @@ import { css, apply } from "twind/css";
 import { loadContent, loadPost } from "@utils/load.ts";
 import { Prism } from "rsh";
 import * as Themes from "rsh/dist/esm/styles/prism";
+import { everblush } from "../../utils/everblush.ts";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { syntaxHighlighterTheme } from "@utils/colors.ts";
@@ -41,7 +42,7 @@ function CodeBlock(props: {
   return (
     <Prism
       language={lang}
-      style={Themes[syntaxHighlighterTheme]}
+      style={((syntaxHighlighterTheme as string) === "everblush")? everblush : Themes[syntaxHighlighterTheme]}
       showLineNumbers
       showInlineLineNumbers
     >
