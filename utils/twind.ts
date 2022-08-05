@@ -14,7 +14,7 @@ export const config: Configuration = {
         heading: ["Poppins", "sans-serif"],
       },
       colors: {
-        ...colorScheme,
+        ...colorScheme["everblush"],
       },
       gridTemplateColumns: {
         root: "min-content min-content auto",
