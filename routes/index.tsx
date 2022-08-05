@@ -5,6 +5,7 @@ import { tw } from "@utils/twind.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { loadContent } from "@utils/load.ts";
 import PostCard from "@components/PostCard.tsx";
+import { colorScheme } from "@utils/colors.ts";
 
 const posts = await loadContent("posts/");
 
@@ -34,35 +35,35 @@ function ChaosLogo(props: { class: string }) {
       xmlns="http://www.w3.org/2000/svg"
       className={props.class}
     >
-      <circle cx="250" cy="250" r="194" stroke="#2E3440" stroke-width="12" />
-      <rect x="243" y="100" width="15" height="300" fill="#88C0D0" />
-      <path d="M250 70L275.981 115H224.019L250 70Z" fill="#88C0D0" />
-      <path d="M250 430L224.019 385H275.981L250 430Z" fill="#88C0D0" />
+      <circle cx="250" cy="250" r="194" stroke={colorScheme["everblush"].dark.nav} stroke-width="12" />
+      <rect x="243" y="100" width="15" height="300" fill={colorScheme["everblush"].dark.accent.solid} />
+      <path d="M250 70L275.981 115H224.019L250 70Z" fill={colorScheme["everblush"].dark.accent.solid} />
+      <path d="M250 430L224.019 385H275.981L250 430Z" fill={colorScheme["everblush"].dark.accent.solid} />
       <rect
         x="100"
         y="257"
         width="15"
         height="300"
         transform="rotate(-90 100 257)"
-        fill="#88C0D0"
+        fill={colorScheme["everblush"].dark.accent.solid}
       />
-      <path d="M70 250L115 224.019V275.981L70 250Z" fill="#88C0D0" />
-      <path d="M430 250L385 275.981V224.019L430 250Z" fill="#88C0D0" />
+      <path d="M70 250L115 224.019V275.981L70 250Z" fill={colorScheme["everblush"].dark.accent.solid} />
+      <path d="M430 250L385 275.981V224.019L430 250Z" fill={colorScheme["everblush"].dark.accent.solid} />
       <rect
         x="139.477"
         y="148.95"
         width="15"
         height="300"
         transform="rotate(-45 139.477 148.95)"
-        fill="#88C0D0"
+        fill={colorScheme["everblush"].dark.accent.solid}
       />
       <path
         d="M123.213 122.787L173.404 136.235L136.662 172.978L123.213 122.787Z"
-        fill="#88C0D0"
+        fill={colorScheme["everblush"].dark.accent.solid}
       />
       <path
         d="M377.772 377.345L327.581 363.897L364.323 327.154L377.772 377.345Z"
-        fill="#88C0D0"
+        fill={colorScheme["everblush"].dark.accent.solid}
       />
       <rect
         x="148.95"
@@ -70,15 +71,15 @@ function ChaosLogo(props: { class: string }) {
         width="15"
         height="300"
         transform="rotate(-135 148.95 361.523)"
-        fill="#88C0D0"
+        fill={colorScheme["everblush"].dark.accent.solid}
       />
       <path
         d="M122.787 377.787L136.235 327.596L172.978 364.338L122.787 377.787Z"
-        fill="#88C0D0"
+        fill={colorScheme["everblush"].dark.accent.solid}
       />
       <path
         d="M377.345 123.228L363.897 173.419L327.154 136.677L377.345 123.228Z"
-        fill="#88C0D0"
+        fill={colorScheme["everblush"].dark.accent.solid}
       />
       <rect
         x="151.393"
@@ -86,7 +87,7 @@ function ChaosLogo(props: { class: string }) {
         width="140"
         height="140"
         transform="rotate(-45 151.393 250)"
-        stroke="#2E3440"
+        stroke={colorScheme["everblush"].dark.nav}
         stroke-width="15"
       />
     </svg>
