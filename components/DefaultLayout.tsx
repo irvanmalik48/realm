@@ -9,7 +9,7 @@ import Thumbnail from "@utils/thumb.ts";
 import Footer from "@components/Footer.tsx";
 import DonateCard from "@components/Donate.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
-import { colorScheme } from "@utils/colors.ts";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export default function DefaultLayout(props: {
   title?: string;
@@ -21,9 +21,9 @@ export default function DefaultLayout(props: {
   return (
     <main
       className={tw`${css({
-        background: `url(/others/bg-avaritia.svg)`,
+        background: `url(/others/bg-avaritia-${currentColorScheme}.svg)`,
         "background-size": "500px",
-        "background-color": `${colorScheme.dark.bg}`,
+        "background-color": `${colorScheme[currentColorScheme].dark.bg}`,
         "-webkit-tap-highlight-color": "transparent",
       })} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
     >
@@ -55,9 +55,9 @@ export default function DefaultLayout(props: {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="IrvanMA's Lair" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content={colorScheme.dark.nav} />
+        <meta name="msapplication-TileColor" content={colorScheme[currentColorScheme].dark.nav} />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content={colorScheme.dark.nav} />
+        <meta name="theme-color" content={colorScheme[currentColorScheme].dark.nav} />
         <meta name="format-detection" content="telephone=no" />
 
         <title>{props.title}</title>
