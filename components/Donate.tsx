@@ -17,9 +17,11 @@ function CoffeeIcon() {
 export default function DonateCard() {
   return (
     <div
-      className={tw`flex flex-row justify-between items-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border mb-10 ${css({
-        "backdrop-filter": "blur(.5rem)",
-      })}`}
+      className={tw`flex flex-row justify-between items-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border mb-10 ${css(
+        {
+          "backdrop-filter": "blur(.5rem)",
+        }
+      )}`}
     >
       <div>
         <div>
