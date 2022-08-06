@@ -1,6 +1,6 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Configuration, setup, strict } from "twind";
-import { colorScheme } from "@utils/colors.ts";
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export * from "twind";
 export const config: Configuration = {
@@ -14,7 +14,7 @@ export const config: Configuration = {
         heading: ["Poppins", "sans-serif"],
       },
       colors: {
-        ...colorScheme["everblush"],
+        ...colorScheme[currentColorScheme],
       },
       gridTemplateColumns: {
         root: "min-content min-content auto",
