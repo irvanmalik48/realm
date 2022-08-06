@@ -21,7 +21,7 @@ export default function DefaultLayout(props: {
   return (
     <main
       className={tw`${css({
-        background: `url(/others/bg-avaritia-${currentColorScheme}.svg)`,
+        background: `url(/bg.svg)`,
         "background-size": "500px",
         "background-color": `${colorScheme[currentColorScheme].dark.bg}`,
         "-webkit-tap-highlight-color": "transparent",
@@ -55,9 +55,15 @@ export default function DefaultLayout(props: {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="IrvanMA's Lair" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content={colorScheme[currentColorScheme].dark.nav} />
+        <meta
+          name="msapplication-TileColor"
+          content={colorScheme[currentColorScheme].dark.nav}
+        />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content={colorScheme[currentColorScheme].dark.nav} />
+        <meta
+          name="theme-color"
+          content={colorScheme[currentColorScheme].dark.nav}
+        />
         <meta name="format-detection" content="telephone=no" />
 
         <title>{props.title}</title>
