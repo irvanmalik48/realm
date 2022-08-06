@@ -42,7 +42,11 @@ function CodeBlock(props: {
   return (
     <Prism
       language={lang}
-      style={((syntaxHighlighterTheme as string) === "everblush")? everblush : Themes[syntaxHighlighterTheme]}
+      style={
+        (syntaxHighlighterTheme as string) === "everblush"
+          ? everblush
+          : Themes[syntaxHighlighterTheme]
+      }
       showLineNumbers
       showInlineLineNumbers
     >

@@ -35,10 +35,28 @@ function ChaosLogo(props: { class: string }) {
       xmlns="http://www.w3.org/2000/svg"
       className={props.class}
     >
-      <circle cx="250" cy="250" r="194" stroke={colorScheme["everblush"].dark.nav} stroke-width="12" />
-      <rect x="243" y="100" width="15" height="300" fill={colorScheme["everblush"].dark.accent.solid} />
-      <path d="M250 70L275.981 115H224.019L250 70Z" fill={colorScheme["everblush"].dark.accent.solid} />
-      <path d="M250 430L224.019 385H275.981L250 430Z" fill={colorScheme["everblush"].dark.accent.solid} />
+      <circle
+        cx="250"
+        cy="250"
+        r="194"
+        stroke={colorScheme["everblush"].dark.nav}
+        stroke-width="12"
+      />
+      <rect
+        x="243"
+        y="100"
+        width="15"
+        height="300"
+        fill={colorScheme["everblush"].dark.accent.solid}
+      />
+      <path
+        d="M250 70L275.981 115H224.019L250 70Z"
+        fill={colorScheme["everblush"].dark.accent.solid}
+      />
+      <path
+        d="M250 430L224.019 385H275.981L250 430Z"
+        fill={colorScheme["everblush"].dark.accent.solid}
+      />
       <rect
         x="100"
         y="257"
@@ -47,8 +65,14 @@ function ChaosLogo(props: { class: string }) {
         transform="rotate(-90 100 257)"
         fill={colorScheme["everblush"].dark.accent.solid}
       />
-      <path d="M70 250L115 224.019V275.981L70 250Z" fill={colorScheme["everblush"].dark.accent.solid} />
-      <path d="M430 250L385 275.981V224.019L430 250Z" fill={colorScheme["everblush"].dark.accent.solid} />
+      <path
+        d="M70 250L115 224.019V275.981L70 250Z"
+        fill={colorScheme["everblush"].dark.accent.solid}
+      />
+      <path
+        d="M430 250L385 275.981V224.019L430 250Z"
+        fill={colorScheme["everblush"].dark.accent.solid}
+      />
       <rect
         x="139.477"
         y="148.95"
