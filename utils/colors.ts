@@ -35,6 +35,6 @@ export const colorScheme = {
   },
 };
 
-export const currentColorScheme = "nord";
+export const currentColorScheme = "everblush";
 
 export const syntaxHighlighterTheme = "everblush";
