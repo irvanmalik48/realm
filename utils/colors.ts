@@ -3,6 +3,7 @@ export const colorScheme = {
     dark: {
       nav: "#2E3440",
       bg: "#242933",
+      superdark: "#21242F",
       side: "#292E39",
       accent: {
         solid: "#88C0D0",
@@ -19,6 +20,7 @@ export const colorScheme = {
     dark: {
       nav: "#282F32",
       bg: "#141B1E",
+      superdark: "#0D1417",
       side: "#232A2D",
       accent: {
         solid: "#5DB7CB",
@@ -30,9 +32,9 @@ export const colorScheme = {
       text: "#DADADA",
       footertext: "#DADADAAA",
     },
-  }
+  },
 };
 
-export const currentColorScheme = "everblush";
+export const currentColorScheme = "nord";
 
 export const syntaxHighlighterTheme = "everblush";
