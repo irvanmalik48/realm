@@ -13,6 +13,7 @@
     "walk": "https://deno.land/std@0.151.0/fs/walk.ts",
     "rsh": "https://esm.sh/react-syntax-highlighter@15.5.0",
     "rsh/": "https://esm.sh/react-syntax-highlighter@15.5.0/",
+    "any": "https://deno.land/std@0.151.0/encoding/_yaml/utils.ts",
     "@components/": "./components/",
     "@islands/": "./islands/",
     "@utils/": "./utils/",
