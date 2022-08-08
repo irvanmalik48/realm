@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-explicit-any
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@utils/twind.ts";
@@ -6,6 +5,7 @@ import DefaultLayout from "@components/DefaultLayout.tsx";
 import { loadContent } from "@utils/load.ts";
 import PostCard from "@components/PostCard.tsx";
 import { colorScheme } from "@utils/colors.ts";
+import { Post } from "@/types.d.tsx";
 
 const posts = await loadContent("posts/");
 
@@ -119,14 +119,14 @@ function ChaosLogo(props: { class: string }) {
 }
 
 export default function Home() {
-  const postProps: any[] = [];
+  const postProps: Post[] = [];
 
   for (const [_key, post] of posts.entries()) {
     postProps.push(post);
   }
 
-  postProps.sort((a: any, b: any) => {
-    return a["date"] < b["date"] ? 1 : -1;
+  postProps.sort((a, b) => {
+    return a.date && b.date && a.date < b.date ? 1 : -1;
   });
 
   return (
@@ -185,7 +185,7 @@ export default function Home() {
         <div
           className={tw`grid grid-cols-1 xl:grid-cols-2 mt-5 gap-5 items-between`}
         >
-          {postProps.slice(0, 4).map((data: any, key: any) => {
+          {postProps.slice(0, 4).map((data: Post, key: number) => {
             return (
               <PostCard
                 key={key}
