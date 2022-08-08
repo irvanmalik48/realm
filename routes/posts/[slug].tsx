@@ -8,6 +8,7 @@ import { loadContent, loadPost } from "@utils/load.ts";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PreBlock from "@components/PreBlock.tsx";
+import Comments from "@islands/Comments.tsx";
 
 const postDir = "posts/";
 
@@ -220,27 +221,8 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         )}
         {after === -1 && <div></div>}
       </div>
-      <div className={tw`mb-5 w-full p-5 bg-dark-side rounded-xl text-dark-text box-border ${css(
-        {
-          "backdrop-filter": "blur(.5rem)",
-        }
-      )}`}>
-        <script src="https://giscus.app/client.js"
-          data-repo="irvanmalik48/realm"
-          data-repo-id="R_kgDOHpHiPg"
-          data-category="Comments"
-          data-category-id="DIC_kwDOHpHiPs4CQsGa"
-          data-mapping="title"
-          data-strict="0"
-          data-reactions-enabled="0"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="transparent_dark"
-          data-lang="en"
-          data-loading="lazy"
-          crossOrigin="anonymous"
-          async>
-        </script>
+      <div className={tw`mb-5 w-full p-5 bg-dark-side rounded-xl text-dark-text box-border`}>
+        <Comments />
       </div>
     </DefaultLayout>
   );
