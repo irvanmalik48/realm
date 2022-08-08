@@ -1,9 +1,8 @@
-// deno-lint-ignore-file no-explicit-any
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@utils/twind.ts";
 
-export default function PostCard(props: any) {
+export default function PostCard(props: { path: string | undefined; title: string | undefined; date: string | undefined; desc: string | undefined; tag: string[] | undefined; }) {
   return (
     <a
       href={props.path}
@@ -17,7 +16,7 @@ export default function PostCard(props: any) {
         <p className={tw`text-dark-text text-sm mb-1`}>{props.desc}</p>
       </div>
       <div className={tw`box-border flex-wrap flex flex-row`}>
-        {props.tag.map((el: string, index: any) => (
+        {props?.tag?.map((el: string, index: number) => (
           <p
             key={index}
             className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
