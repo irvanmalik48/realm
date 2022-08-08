@@ -1,8 +1,8 @@
-// deno-lint-ignore-file no-explicit-any
 import { parse } from "frontmatter";
 import { relative } from "relative";
 import { Post } from "@/types.d.tsx";
 import { walk } from "walk";
+import { Any } from "any";
 
 export async function loadPost(
   postsDirectory: string,
@@ -29,7 +29,7 @@ export async function loadPost(
   pathname = pathname.slice(0, -3);
 
   const { content, data } = parse(contents) as {
-    data: Record<any, any>;
+    data: Any;
     content: string;
   };
 
