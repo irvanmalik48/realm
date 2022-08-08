@@ -1,9 +1,11 @@
+import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+
 export default function Thumbnail(
   titleP: string | undefined,
   dateP: string | undefined,
   tagsP: string | string[] | undefined
 ) {
-  // check if tags are string / string[] / undefined
+
   let processedTags = "";
   if (tagsP == undefined) {
     processedTags = "";
@@ -16,15 +18,13 @@ export default function Thumbnail(
     processedTags = processedTags.replace(/,/g, "");
   }
 
-  // encode special characters used in my post slug to HTML encoding UTF-8 format
   const processedTitle = titleP == undefined ? "" : encodeURIComponent(titleP);
   const nameText = encodeURIComponent("Irvan Malik Azantha");
   const emailText = encodeURIComponent("irvanmalik48@gmail.com");
   const dateText =
     dateP == undefined ? encodeURIComponent("-") : encodeURIComponent(dateP);
-  const colorHex = "88c0d0";
+  const colorHex = colorScheme[currentColorScheme].dark.accent.solid;
 
-  // process it
   const title = `title=${processedTitle}&`;
   const name = `name=${nameText}&`;
   const email = `email=${emailText}&`;
