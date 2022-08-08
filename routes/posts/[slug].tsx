@@ -59,7 +59,7 @@ function PreBlock(props: any) {
   if ("type" in props.children && props.children["type"] === "code") {
     return CodeBlock(props.children.props);
   }
-  return <pre {...props.rest}>{props.children}</pre>;
+  return <pre {...props.rest} translate="no">{props.children}</pre>;
 }
 
 export default function PostPage({ data, ...props }: PageProps<Post | null>) {
