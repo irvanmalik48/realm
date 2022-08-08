@@ -5,7 +5,6 @@ export default function Thumbnail(
   dateP: string | undefined,
   tagsP: string | string[] | undefined
 ) {
-
   let processedTags = "";
   if (tagsP == undefined) {
     processedTags = "";

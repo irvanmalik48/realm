@@ -2,7 +2,13 @@
 import { h } from "preact";
 import { tw } from "@utils/twind.ts";
 
-export default function PostCard(props: { path: string | undefined; title: string | undefined; date: string | undefined; desc: string | undefined; tag: string[] | undefined; }) {
+export default function PostCard(props: {
+  path: string | undefined;
+  title: string | undefined;
+  date: string | undefined;
+  desc: string | undefined;
+  tag: string[] | undefined;
+}) {
   return (
     <a
       href={props.path}

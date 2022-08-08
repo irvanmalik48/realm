@@ -8,7 +8,8 @@ import { loadContent, loadPost } from "@utils/load.ts";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PreBlock from "@components/PreBlock.tsx";
-import Comments from "@islands/Comments.tsx";
+import { useEffect, useRef } from "preact/hooks";
+import { HTMLAttributes } from "preact/compat";
 
 const postDir = "posts/";
 
@@ -220,9 +221,6 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
           </a>
         )}
         {after === -1 && <div></div>}
-      </div>
-      <div className={tw`mb-5 w-full p-5 bg-dark-side rounded-xl text-dark-text box-border`}>
-        <Comments />
       </div>
     </DefaultLayout>
   );
