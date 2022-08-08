@@ -1,22 +1,22 @@
-// deno-lint-ignore-file no-explicit-any
 /** @jsx h */
 import { h } from "preact";
 import { apply, tw } from "@utils/twind.ts";
 import { css } from "twind/css";
 import { loadContent } from "@utils/load.ts";
 import PostCard from "@components/PostCard.tsx";
+import { Post } from "@/types.d.tsx";
 
 const posts = await loadContent("posts/");
 
 export default function Sidebar() {
-  const postProps: any[] = [];
+  const postProps: Post[] = [];
 
   for (const [_key, post] of posts.entries()) {
     postProps.push(post);
   }
 
-  postProps.sort((a: any, b: any) => {
-    return a["date"] < b["date"] ? 1 : -1;
+  postProps.sort((a, b) => {
+    return a.date && b.date && a.date < b.date ? 1 : -1;
   });
 
   return (
@@ -40,7 +40,7 @@ export default function Sidebar() {
         </div>
       </div>
       <div className={tw`mx-4 flex flex-col justify-center items-center gap-5`}>
-        {postProps.map((data: any, key: any) => {
+        {postProps.map((data: Post, key: number) => {
           return (
             <PostCard
               key={key}
