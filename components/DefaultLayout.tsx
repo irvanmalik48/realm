@@ -24,6 +24,7 @@ export default function DefaultLayout(props: {
         background: `url(/bg.svg)`,
         "background-size": "500px",
         "background-color": `${colorScheme[currentColorScheme].dark.bg}`,
+        "background-position": "center",
         "-webkit-tap-highlight-color": "transparent",
       })} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
     >
