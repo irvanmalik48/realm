@@ -5,13 +5,9 @@ import { PageProps, Handlers } from "$fresh/server.ts";
 import { tw } from "@utils/twind.ts";
 import { css, apply } from "twind/css";
 import { loadContent, loadPost } from "@utils/load.ts";
-import { Prism } from "rsh";
-import * as Themes from "rsh/dist/esm/styles/prism";
-import { everblush } from "@utils/everblush.ts";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import { syntaxHighlighterTheme } from "@utils/colors.ts";
-import { Any } from "any";
+import PreBlock from "@components/PreBlock.tsx";
 
 const postDir = "posts/";
 
@@ -30,44 +26,6 @@ export const handler: Handlers<Post | null> = {
     return ctx.render(check);
   },
 };
-
-function CodeBlock(props: {
-  className: string;
-  children: h.JSX.Element | h.JSX.Element[] | string;
-}) {
-  let lang = "text";
-  if (props.className && props.className.startsWith("lang-")) {
-    lang = props.className.replace("lang-", "");
-  }
-  return (
-    <Prism
-      language={lang}
-      style={
-        (syntaxHighlighterTheme as string) === "everblush"
-          ? everblush
-          : Themes[syntaxHighlighterTheme]
-      }
-      showLineNumbers
-      showInlineLineNumbers
-    >
-      {props.children}
-    </Prism>
-  );
-}
-
-function PreBlock(props: {
-  children: Any;
-  rest: h.JSX.IntrinsicAttributes & h.JSX.HTMLAttributes<HTMLPreElement>;
-}) {
-  if ("type" in props.children && props.children["type"] === "code") {
-    return CodeBlock(props.children.props);
-  }
-  return (
-    <pre {...props.rest} className="notranslate" translate="no">
-      {props.children}
-    </pre>
-  );
-}
 
 export default function PostPage({ data, ...props }: PageProps<Post | null>) {
   const postProps: Post[] = [];
