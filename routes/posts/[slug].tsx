@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-explicit-any
 /** @jsx h */
 import { h } from "preact";
 import { Post } from "@/types.d.tsx";
@@ -12,6 +11,7 @@ import { everblush } from "../../utils/everblush.ts";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { syntaxHighlighterTheme } from "@utils/colors.ts";
+import { Any } from "any";
 
 const postDir = "posts/";
 
@@ -55,22 +55,29 @@ function CodeBlock(props: {
   );
 }
 
-function PreBlock(props: any) {
+function PreBlock(props: {
+  children: Any;
+  rest: h.JSX.IntrinsicAttributes & h.JSX.HTMLAttributes<HTMLPreElement>;
+}) {
   if ("type" in props.children && props.children["type"] === "code") {
     return CodeBlock(props.children.props);
   }
-  return <pre {...props.rest} className="notranslate" translate="no">{props.children}</pre>;
+  return (
+    <pre {...props.rest} className="notranslate" translate="no">
+      {props.children}
+    </pre>
+  );
 }
 
 export default function PostPage({ data, ...props }: PageProps<Post | null>) {
-  const postProps: any[] = [];
+  const postProps: Post[] = [];
 
   for (const [_key, post] of posts.entries()) {
     postProps.push(post);
   }
 
-  postProps.sort((a: any, b: any) => {
-    return a["date"] < b["date"] ? 1 : -1;
+  postProps.sort((a, b) => {
+    return a.date && b.date && a.date < b.date ? 1 : -1;
   });
 
   const position = postProps.findIndex((object) => {
@@ -208,7 +215,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
               <p className={tw`text-dark-text text-sm mb-1`}>{prevPost.desc}</p>
             </div>
             <div className={tw`box-border px-5 pb-3 flex-wrap flex flex-row`}>
-              {prevPost.tag.map((el: string, index: any) => (
+              {prevPost?.tag?.map((el: string, index: number) => (
                 <p
                   key={index}
                   className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
@@ -242,7 +249,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
               <p className={tw`text-dark-text text-sm mb-1`}>{nextPost.desc}</p>
             </div>
             <div className={tw`box-border px-5 pb-3 flex-wrap flex flex-row`}>
-              {nextPost.tag.map((el: string, index: any) => (
+              {nextPost?.tag?.map((el: string, index: number) => (
                 <p
                   key={index}
                   className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
