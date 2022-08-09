@@ -12,9 +12,19 @@ export interface Spring {
   v: number;
 }
 
-export interface JokesType {
+export interface JokesText {
   status: number;
   end_point: string;
   method: string;
   data: string;
+}
+
+export interface JokesImage {
+  status: number;
+  end_point: string;
+  method: string;
+  data: {
+    url: string;
+    source: string;
+  };
 }
