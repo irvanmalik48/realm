@@ -22,7 +22,7 @@ export default function Thumbnail(
   const emailText = encodeURIComponent("irvanmalik48@gmail.com");
   const dateText =
     dateP == undefined ? encodeURIComponent("-") : encodeURIComponent(dateP);
-  const colorHex = colorScheme[currentColorScheme].dark.accent.solid;
+  const colorHex = colorScheme[currentColorScheme].dark.accent.solid.replace("#", "");
 
   const title = `title=${processedTitle}&`;
   const name = `name=${nameText}&`;
