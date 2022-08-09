@@ -1,29 +1,15 @@
 /** @jsx h */
 import { h } from "preact";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { tw } from "@utils/twind.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { loadContent } from "@utils/load.ts";
 import PostCard from "@components/PostCard.tsx";
 import { colorScheme } from "@utils/colors.ts";
 import { Post } from "@/types.d.tsx";
+import { quotes } from "@utils/quotes.ts";
 
 const posts = await loadContent("posts/");
-
-const quotes = [
-  "Balanced. As all things should be.",
-  "Inner peace is what you should always consider seeking.",
-  "Do what you want and do it well.",
-  "Keep it simple, stupid.",
-  "Hail to the chaos banner!",
-  "Change is about acceptance, not ignorance towards past.",
-  "We all commit crimes. It's the intention that differs.",
-  "This is why we can't have nice things.",
-  "PSD is not my favorite file format.",
-  "I'm not a web developer. I'm a retard.",
-];
-
-const randomIndex = Math.floor(Math.random() * 10);
-const body = quotes[randomIndex];
 
 function ChaosLogo(props: { class: string }) {
   return (
@@ -118,7 +104,24 @@ function ChaosLogo(props: { class: string }) {
   );
 }
 
-export default function Home() {
+export const handler: Handlers<{
+  quote: string;
+}> = {
+  GET(_req, ctx) {
+    const randomIndex = Math.floor(Math.random() * 20);
+    const body = {
+      quote: quotes[randomIndex],
+    };
+
+    return ctx.render(body);
+  },
+};
+
+export default function Home(
+  props: PageProps<{
+    quote: string;
+  }>
+) {
   const postProps: Post[] = [];
 
   for (const [_key, post] of posts.entries()) {
@@ -158,7 +161,7 @@ export default function Home() {
         <p
           className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
-          {body}
+          {props.data.quote}
         </p>
         <p className={tw`text-dark-text mt-3`}>
           Hello, my name's Irvan Malik Azantha. I'm a 19 y'o boy currently
