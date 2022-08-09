@@ -11,3 +11,10 @@ export interface Spring {
   p: number;
   v: number;
 }
+
+export interface JokesType {
+  status: number;
+  end_point: string;
+  method: string;
+  data: string;
+}
