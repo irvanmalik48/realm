@@ -28,3 +28,10 @@ export interface JokesImage {
     source: string;
   };
 }
+
+export type JokesType =
+  | JokesText
+  | JokesImage
+  | { text?: JokesText; img?: JokesImage }
+  | (() => { text?: JokesText; img?: JokesImage })
+  | null;
