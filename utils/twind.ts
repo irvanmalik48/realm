@@ -1,5 +1,5 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { Configuration, setup, strict } from "twind";
+import { Configuration, cssomSheet, Sheet, setup, strict } from "twind";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export * from "twind";
@@ -34,4 +34,18 @@ export const config: Configuration = {
     ],
   },
 };
-if (IS_BROWSER) setup(config);
+if (IS_BROWSER) {
+  const el = document.getElementById("__FRSH_STYLE") as HTMLStyleElement;
+  const rules = el.innerText.split("\n");
+  const mappings = JSON.parse(rules.pop()!.slice(2, -2));
+  const precedences = JSON.parse(rules.pop()!.slice(2, -2));
+  const state = [precedences, new Set(rules), new Map(mappings), true];
+  const sheet: Sheet = {
+    ...cssomSheet({ target: el.sheet! }),
+    init(cb) {
+      return cb(state.shift());
+    },
+  };
+  config.sheet = sheet;
+  setup(config);
+}
