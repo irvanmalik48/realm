@@ -35,7 +35,7 @@ The way Utterances work is by injecting an iframe to your site through that scri
 
 So in React land (or so may I call it that way because I have no other fancy names to sell for), you need to reference a div tag for the script tag to actually inject its iframe. For that, I created a new Typescript file (I use Typescript for my blog) named `comments.tsx` inside the layouts folder of my blog. Here's how I configured the file:
 
-```ts
+```ts|components/comments.tsx
 import React, { Component } from "react";
 
 export default class Comments extends Component {
@@ -67,7 +67,7 @@ export default class Comments extends Component {
 So the explanation here is that this class creates a reference for how the Utterances script is injected. And yeah, that's it.  
 After that, I need to put this component in my post layout which is easy. The only thing I have to do is to import the component class and use it somewhere inside the layout. So here's my post layout file:
 
-```ts
+```ts|components/layouts/post.tsx
 import DefaultLayout from "./default";
 import Head from "next/head";
 import Comments from "../comments";

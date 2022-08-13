@@ -24,7 +24,7 @@ You can just go and follow [this tutorial](https://docs.github.com/en/discussion
 
 Well, since I already have the hacky `<div>` injection method around (refer to [this post](https://www.irvanma.live/posts/blog/nextjs-utterances)) to get Utterances working, I can just change some code into, well, something like this:
 
-```ts
+```ts|components/comments.tsx
 import { Component, createRef } from "react";
 
 export default class Comments extends Component {
@@ -74,7 +74,7 @@ npm i @giscus/react
 3. Watch anime.
 4. Go back to VSCode and do some changes to the post layout so that now it looks like this:
 
-```tsx
+```tsx|components/layout/post.tsx
 import DefaultLayout from "./default";
 import Head from "next/head";
 import { PostLayoutProps } from "../../interfaces/types";
