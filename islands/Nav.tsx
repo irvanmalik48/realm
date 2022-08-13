@@ -7,7 +7,7 @@ import {
   BlogIcon,
   AboutIcon,
   GitHubIcon,
-} from "./Icons.tsx";
+} from "@components/Icons.tsx";
 
 export default function Nav() {
   return (
