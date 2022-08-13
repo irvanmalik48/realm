@@ -21,15 +21,17 @@ export default function CodeBlock(props: {
     }
   }
   return (
-    <div className={tw`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto my-3 rounded-xl overflow-clip`}>
+    <div
+      className={tw`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto my-3 rounded-xl overflow-clip`}
+    >
       {fileName !== "none" && (
         <div className={tw`px-5 py-2 bg-dark-superdark`}>
-        <p
-          className={tw`font-mono bg-dark-accent-semitrans w-[fit-content] text-sm text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
-        >
-          {fileName}
-        </p>
-      </div>
+          <p
+            className={tw`font-mono bg-dark-accent-semitrans w-[fit-content] text-sm text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
+          >
+            {fileName}
+          </p>
+        </div>
       )}
       <Prism
         language={lang}
@@ -41,7 +43,6 @@ export default function CodeBlock(props: {
         showLineNumbers
         showInlineLineNumbers
       >
-        
         {props.children}
       </Prism>
     </div>
