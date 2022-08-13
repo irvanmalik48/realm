@@ -57,7 +57,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     "* + h2": apply`my-3`,
     h3: apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid font-heading`,
     "* + h3": apply`my-3`,
-    pre: apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-3 py-4 rounded-xl ${css(
+    pre: apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-0 py-4 rounded-xl ${css(
       {
         code: apply`bg-transparent font-mono text-dark-text p-0 m-0 font-normal`,
       }
