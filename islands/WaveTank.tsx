@@ -3,7 +3,7 @@
 
 import { Spring } from "@/types.d.tsx";
 
-export class WaveTank {
+export default class WaveTank {
   springs = [] as Spring[];
   waveLength = 100;
   k = 0.02;
