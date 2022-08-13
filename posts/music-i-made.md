@@ -9,6 +9,12 @@ tag:
 
 # Table of Contents
 
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [no title](#no-title)
+  - [Lyrics](#lyrics)
+- [Wrapping Up](#wrapping-up)
+
 # Abstract
 
 Well, who doesn't like music? I do, you do, everyone else do. You can't tell that I'm wrong lmao, it's just general truth that everyone likes music (or some form of it for some reason). The thing is, I _really really really_ like music I devoted to make some myself since I'm sometimes bored hearing stuffs made from everyone. If everyone can make it, so do I, and so be it. Without further shittalks, here's my take:
