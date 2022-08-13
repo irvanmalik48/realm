@@ -7,6 +7,17 @@ tag:
   - "music"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+  - [Audacious](#audacious)
+  - [cmus](#cmus)
+  - [Museeks](#museeks)
+  - [Musique](#musique)
+  - [QMMP](#qmmp)
+- [Wrapping Up](#wrapping-up)
+
 # Abstract
 
 Music is a thing we always hear to. It always accompanies us when we're happy, sad, angry, or just insert anything emotional here cause it's still makes sense. It also accompanies us when running our beloved Linux desktops, too. Okay so I want to share some music apps that I think is nice and excellent.

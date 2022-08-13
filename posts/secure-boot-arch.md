@@ -7,6 +7,25 @@ tag:
   - "linux"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [Implementing Secure Boot](#implementing-secure-boot)
+  - [Disclaimer](#disclaimer)
+  - [Before you do anything](#before-you-do-anything)
+    - [Backup all old stuffs](#backup-all-old-stuffs)
+    - [Create your own keys](#create-your-own-keys)
+    - [Optional: Adding Microsoft keys](#optional-adding-microsoft-keys)
+    - [Reinstalling GRUB](#reinstalling-grub)
+    - [Signing EFI binaries](#signing-efi-binaries)
+    - [Prepare pacman hook for automatic kernel signing](#prepare-pacman-hook-for-automatic-kernel-signing)
+    - [Put your firmware to "Setup Mode"](#put-your-firmware-to-setup-mode)
+    - [Enroll your keys](#enroll-your-keys)
+  - [Finishing Touch](#finishing-touch)
+- [Verdict](#verdict)
+- [References](#references)
+
 # Abstract
 
 Secure boot is a security standard developed by members of the PC industry to help make sure that a device boots using only software that is trusted by the Original Equipment Manufacturer (OEM). When the PC starts, the firmware checks the signature of each piece of boot software, including UEFI firmware drivers (also known as Option ROMs), EFI applications, and the operating system. If the signatures are valid, the PC boots, and the firmware gives control to the operating system.

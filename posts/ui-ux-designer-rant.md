@@ -8,6 +8,13 @@ tag:
   - rant
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [The Problem](#the-problem)
+  - [Recommendations](#recommendations)
+- [Verdict](#verdict)
+
 # The Problem
 
 I am fucking tired of UI/UX designers throwing bullshit at front end developers. I mean, damnit, can you guys just give us something simple to code yet attractive to look at and easy to use? Better yet, can you guys follow a set of an already functioning design language and philosophy rather than reinventing the wheel over and over again with your new cringe super edgy styles and fucking 'uniqueness' you guys always brag about? Like damn, all those things with those fancy looks and asymmetrical placings with borderline autistic shapes and useless ornaments are one of the main reasons why front end developers always end up with death by sleep deprivation. It would take days to actually do your prototype properly in code yes but it would take weeks or probably months to actually end up with an all responsive, not deceiving, highly functional results. It would take us an insurmountable time and energy (assuming you guys even care if we have any life at all) to properly implement all your bullshit too-overcomplicated prototype that is possibly a cheap copy of another website's front end devs blood, sweat, and tears are dedicated for.

@@ -8,6 +8,15 @@ tag:
   - "utterances"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [Implementation](#implementation)
+  - [Normal way](#normal-way)
+  - [Next.js way (and probably other React frameworks)](#nextjs-way-and-probably-other-react-frameworks)
+- [Wrapping Up](#wrapping-up)
+
 # Abstract
 
 I have always wanted to have a fully functional blog with comments. There was once upon a time when I still used Blogspot (which sucks actually) and then after _many years of unimaginable lazyness_ I finally make it out with GitHub and Jekyll. After some while, I'm quite bored on how Jekyll handles stuffs and decided to move into a Javascript framework (and just work on it lmao). Timeskip, I want to implement comments and quite confused on what stuffs I should pick that _just works_. Peeps hand me stuffs like Sanity.io but it's kinda meh and too complicated for my use case. I just want a comment section that _just works_. After some (actually, it took me 2 relentless days) time searching for anything that fits the criteria, I found Utterances. Utterances uses GitHub Issues to store comments for the blog I have, which is neat, but I'm not gonna look at the comments section frequently anyway so this one actually _just works_.

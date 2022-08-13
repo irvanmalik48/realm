@@ -7,6 +7,14 @@ tag:
   - intro
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+  - [Update: July 2022](#update-july-2022)
+- [About Me](#about-me)
+- [About This Blog](#about-this-blog)
+
 # Abstract
 
 Seems like blogging been a nice activity since past, eh? This blog actually has changed and hopped from over 69420 frameworks before I decide to just use Next.js with Jekyll-inspired stuffs. It turns out well above my expectations tho and the blog went smooth and fluid.

@@ -7,6 +7,19 @@ tag:
   - "userbot"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Setting Up](#setting-up)
+- [Deploying](#deploying)
+  - [Heroku way](#heroku-way)
+  - [Deploy Locally](#deploy-locally)
+    - [Systemd Service (Optional)](#systemd-service-optional)
+- [Updates](#updates)
+- [Wrapping up](#wrapping-up)
+- [References](#references)
+
 # Introduction
 
 A Telegram userbot is basically something that can help you manage stuffs here and there in Telegram such as groups etc. How it works is that you type the command, for example `.time`, then you send it anywhere in Telegram, the userbot will detect the command and edit your message to show you the output of current time in your local timezone in that message. Take some note that some commands do require specific conditions to be met in order to work properly. An userbot is not like usual Telegram bots which have their dedicated username on it but it acts as a session of your own account. An userbot is safe to use providing you don't use something that Telegram is probably having some sense of dislike to such as `.spam`. Heroku gives you 550 hours of free monthly usage as well as 450 more if you add your credit card as your billing info. Don't worry as it's completely free and you would not have to pay any cents at all.

@@ -7,6 +7,19 @@ tag:
   - "story"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Disclaimer](#disclaimer)
+- [Abstract](#abstract)
+- [To Forget a Legacy](#to-forget-a-legacy)
+  - [Where it all starts](#where-it-all-starts)
+  - [Where it all ends](#where-it-all-ends)
+  - [Where it goes to](#where-it-goes-to)
+- [Wrapping Up](#wrapping-up)
+  - [Moral](#moral)
+  - [References](#references)
+
 # Disclaimer
 
 > This article is not in any way related to real life events and similarities. All relations to real life events and similarities are to be considered as coincidental and shall not be brought in further talks. And Life section is meant for some stuffs I would just post without any reason whatsoever so enjoy every last bit of my mind's byproduct! And yeah, it is randomly written using random structures and forms and stuffs.

@@ -7,6 +7,21 @@ tag:
   - "web"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [GitHub Pages](#github-pages)
+  - [Introduction](#introduction)
+  - [Types of GitHub Pages Sites](#types-of-github-pages-sites)
+  - [Static Site Generators](#static-site-generators)
+  - [Guidelines](#guidelines)
+    - [GitHub Pages Site Usage Limits](#github-pages-site-usage-limits)
+    - [Prohibited uses of GitHub Pages](#prohibited-uses-of-github-pages)
+- [How to Host a Website in GitHub Pages](#how-to-host-a-website-in-github-pages)
+- [Wrapping Up](#wrapping-up)
+- [References](#references)
+
 # Abstract
 
 From Wikipedia (with slight changes):

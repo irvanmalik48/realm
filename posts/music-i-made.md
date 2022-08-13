@@ -7,6 +7,8 @@ tag:
   - "music"
 ---
 
+# Table of Contents
+
 # Abstract
 
 Well, who doesn't like music? I do, you do, everyone else do. You can't tell that I'm wrong lmao, it's just general truth that everyone likes music (or some form of it for some reason). The thing is, I _really really really_ like music I devoted to make some myself since I'm sometimes bored hearing stuffs made from everyone. If everyone can make it, so do I, and so be it. Without further shittalks, here's my take:
@@ -17,6 +19,7 @@ Well, pardon me for the name since I don't know what to name it, really. This so
 
 ## Lyrics
 
+<!-- prettier-ignore -->
 ```text|Untitled&nbsp;-&nbsp;IrvanMA
 Lost all hope on myself
 I just can't keep it intact

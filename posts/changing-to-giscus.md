@@ -8,6 +8,16 @@ tag:
   - "giscus"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [Migrating Utterances Comments](#migrating-utterances-comments)
+- [Implementation](#implementation)
+  - [Hacky Old-fashioned Way](#hacky-old-fashioned-way)
+  - [Component Library](#component-library)
+- [Wrapping Up](#wrapping-up)
+
 # Abstract
 
 It's been a while since I used Utterances for blog comment system. Using GitHub Issues seems to be a nice idea for blog posts comment (or rather weird, I must say). But things get real nice when I was looking for Utterances replacement. Yes, I found **Giscus**. So, the concept of both Utterances and Giscus are the same (since both behave the same way tbh) but what makes the difference is that Utterances uses GitHub Issues while Giscus, on the other hand, uses GitHub Discussions. Using GitHub Discussions feels more natural and I actually prefer it over issues tracker since, well, _comments are always a discussion_. Also Giscus has some nice component library for React, Vue, and Svelte, check them out [here](https://github.com/giscus/giscus-component).

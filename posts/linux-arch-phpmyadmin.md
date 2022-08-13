@@ -9,6 +9,18 @@ tag:
   - "php"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [Setting Up](#setting-up)
+  - [Configuring MariaDB](#configuring-mariadb)
+  - [Configuring PHP](#configuring-php)
+  - [Configuring Apache](#configuring-apache)
+  - [Configuring phpMyAdmin](#configuring-phpmyadmin)
+- [Finishing](#finishing)
+- [Sources](#sources)
+
 # Abstract
 
 This is just a tutorial on how to do a LAMP stack manually on Arch Linux. Without further talks, let's cut into this.

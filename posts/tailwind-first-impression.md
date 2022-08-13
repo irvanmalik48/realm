@@ -7,6 +7,13 @@ tag:
   - "css"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [First Impressions](#first-impressions)
+- [Verdict](#verdict)
+
 # Abstract
 
 So, about one or two weeks ago, I [redesigned my entire website](https://github.com/irvanmalik48/blog/commit/1559253fb4970a5de36d8bbc526712bc2cf544bf) with [Tailwind CSS](https://tailwindcss.com/).

@@ -7,6 +7,13 @@ tag:
   - "story"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Disclaimer](#disclaimer)
+- [6th of April](#6th-of-april)
+- [Verdict](#verdict)
+
 # Disclaimer
 
 > This article is not in any way related to real life events and similarities. All relations to real life events and similarities are to be considered as coincidental and shall not be brought in further talks. And Life section is meant for some stuffs I would just post without any reason whatsoever so enjoy every last bit of my mind's byproduct! And yeah, it is randomly written using random structures and forms and stuffs.
