@@ -64,7 +64,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     )}`,
     "pre::-webkit-scrollbar": apply`bg-transparent rounded-xl h-5`,
     "pre::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[8px] border-solid bg-clip-content rounded-xl`,
-    ol: apply`list-decimal list-inside my-3  ${css({
+    ol: apply`list-decimal list-inside my-3 ${css({
       p: apply`inline`,
       "::marker": apply`text-dark-accent-solid font-bold`,
       li: apply`my-0`,
