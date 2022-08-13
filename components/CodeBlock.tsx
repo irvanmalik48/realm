@@ -17,7 +17,7 @@ export default function CodeBlock(props: {
     if (lang.includes("|")) {
       const temp = lang.split("|");
       lang = temp[0];
-      fileName = temp[1];
+      fileName = temp[1].replaceAll("&nbsp;", " ");
     }
   }
   return (
