@@ -11,8 +11,9 @@ import * as $5 from "./routes/jokes.tsx";
 import * as $6 from "./routes/posts.tsx";
 import * as $7 from "./routes/posts/[slug].tsx";
 import * as $8 from "./routes/sitemap.xml.ts";
-import * as $$0 from "./islands/WaterDrop.tsx";
-import * as $$1 from "./islands/WaveTank.tsx";
+import * as $$0 from "./islands/CodeBlock.tsx";
+import * as $$1 from "./islands/WaterDrop.tsx";
+import * as $$2 from "./islands/WaveTank.tsx";
 
 const manifest = {
   routes: {
@@ -27,8 +28,9 @@ const manifest = {
     "./routes/sitemap.xml.ts": $8,
   },
   islands: {
-    "./islands/WaterDrop.tsx": $$0,
-    "./islands/WaveTank.tsx": $$1,
+    "./islands/CodeBlock.tsx": $$0,
+    "./islands/WaterDrop.tsx": $$1,
+    "./islands/WaveTank.tsx": $$2,
   },
   baseUrl: import.meta.url,
 };
