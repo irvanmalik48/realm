@@ -10,6 +10,7 @@ import Footer from "@components/Footer.tsx";
 import DonateCard from "@components/Donate.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import FAB from "@islands/FAB.tsx";
 
 export default function DefaultLayout(props: {
   title?: string;
@@ -19,7 +20,9 @@ export default function DefaultLayout(props: {
   children: h.JSX.Element | h.JSX.Element[];
 }) {
   const styles = css({
-    "*": apply`ring ring-transparent focus:outline-none focus-visible:ring-dark-accent-solid`,
+    "*": apply`ring ring-transparent focus:outline-none focus-visible:ring-dark-accent-solid ${css({
+      "scroll-behavior": "smooth",
+    })}`,
   });
   return (
     <main
@@ -110,10 +113,11 @@ export default function DefaultLayout(props: {
         })}`}
         id="main-sect"
       >
-        <div className={tw`p-4 md:px-6 lg:px-12 xl:px-24`}>
+        <div className={tw`p-4`}>
           {props.children}
           <DonateCard />
           <Footer />
+          <FAB />
         </div>
         <WaterDrop />
       </section>
