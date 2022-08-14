@@ -5,7 +5,7 @@
 import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { tw } from "@utils/twind.ts";
-import WaveTank from "@islands/WaveTank.tsx";
+import WaveTank from "@components/WaveTank.tsx";
 import { Spring } from "@/types.d.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
