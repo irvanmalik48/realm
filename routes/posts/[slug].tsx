@@ -8,8 +8,6 @@ import { loadContent, loadPost } from "@utils/load.ts";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PreBlock from "@components/PreBlock.tsx";
-import { useEffect, useRef } from "preact/hooks";
-import { HTMLAttributes } from "preact/compat";
 
 const postDir = "posts/";
 
