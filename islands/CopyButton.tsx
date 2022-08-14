@@ -47,5 +47,5 @@ export default function CopyButton(props: { text: string }) {
         <CopyIcon className={tw`w-[1rem]`} />
       )}
     </button>
-  )
+  );
 }
