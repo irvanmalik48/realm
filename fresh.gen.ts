@@ -12,7 +12,8 @@ import * as $6 from "./routes/posts.tsx";
 import * as $7 from "./routes/posts/[slug].tsx";
 import * as $8 from "./routes/sitemap.xml.ts";
 import * as $$0 from "./islands/CopyButton.tsx";
-import * as $$1 from "./islands/WaterDrop.tsx";
+import * as $$1 from "./islands/FAB.tsx";
+import * as $$2 from "./islands/WaterDrop.tsx";
 
 const manifest = {
   routes: {
@@ -28,7 +29,8 @@ const manifest = {
   },
   islands: {
     "./islands/CopyButton.tsx": $$0,
-    "./islands/WaterDrop.tsx": $$1,
+    "./islands/FAB.tsx": $$1,
+    "./islands/WaterDrop.tsx": $$2,
   },
   baseUrl: import.meta.url,
 };
