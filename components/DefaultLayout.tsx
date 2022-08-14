@@ -18,6 +18,9 @@ export default function DefaultLayout(props: {
   tag?: string[];
   children: h.JSX.Element | h.JSX.Element[];
 }) {
+  const styles = css({
+    "*": apply`ring ring-transparent focus:outline-none focus-visible:ring-dark-accent-solid`,
+  });
   return (
     <main
       className={tw`${css({
@@ -26,7 +29,7 @@ export default function DefaultLayout(props: {
         "background-color": `${colorScheme[currentColorScheme].dark.bg}`,
         "background-position": "center",
         "-webkit-tap-highlight-color": "transparent",
-      })} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
+      })} ${styles} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
     >
       <Head>
         <meta charSet="utf-8" />
