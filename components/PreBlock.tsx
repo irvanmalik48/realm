@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from "preact";
 import { Any } from "any";
-import CodeBlock from "@islands/CodeBlock.tsx";
+import CodeBlock from "@components/CodeBlock.tsx";
 
 export default function PreBlock(props: {
   children: Any;
