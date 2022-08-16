@@ -1,7 +1,7 @@
 {
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.0.2/",
-    "frontmatter": "https://deno.land/x/frontmatter@v0.1.5/mod.ts",
+    "frontmatter": "https://deno.land/std@0.152.0/encoding/front_matter.ts",
     "any": "https://deno.land/std@0.152.0/encoding/_yaml/utils.ts",
     "walk": "https://deno.land/std@0.152.0/fs/walk.ts",
     "relative": "https://deno.land/std@0.152.0/path/win32.ts",
