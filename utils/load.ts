@@ -1,4 +1,4 @@
-import { parse } from "frontmatter";
+import { extract as parse } from "frontmatter";
 import { relative } from "relative";
 import { Post } from "@/types.d.tsx";
 import { walk } from "walk";
@@ -28,18 +28,15 @@ export async function loadPost(
   let pathname = "/" + relative(postsDirectory, path);
   pathname = pathname.slice(0, -3);
 
-  const { content, data } = parse(contents) as {
-    data: Any;
-    content: string;
-  };
+  const { body, attrs } = parse<Record<string, Any>>(contents);
 
   const post: Post = {
-    title: data.title,
-    date: data.date,
-    desc: data.desc,
-    tag: data.tag,
-    path: data.path ?? pathname,
-    md: content,
+    title: attrs.title,
+    date: attrs.date,
+    desc: attrs.desc,
+    tag: attrs.tag,
+    path: attrs.path ?? pathname,
+    md: body,
   };
 
   return [pathname, post];
