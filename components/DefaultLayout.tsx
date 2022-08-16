@@ -20,9 +20,11 @@ export default function DefaultLayout(props: {
   children: h.JSX.Element | h.JSX.Element[];
 }) {
   const styles = css({
-    "*": apply`ring ring-transparent focus:outline-none focus-visible:ring-dark-accent-solid ${css({
-      "scroll-behavior": "smooth",
-    })}`,
+    "*": apply`ring ring-transparent focus:outline-none focus-visible:ring-dark-accent-solid ${css(
+      {
+        "scroll-behavior": "smooth",
+      }
+    )}`,
   });
   return (
     <main
