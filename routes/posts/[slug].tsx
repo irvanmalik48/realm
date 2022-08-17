@@ -47,6 +47,48 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
   const prevPost = postProps[before];
   const nextPost = postProps[after];
 
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const date = new Date(data?.date ?? "2022-01-01");
+  const fromDate = {
+    day: () => {
+      const dayToString = [
+        `${date.getDate().toString()}th`,
+        `${date.getDate().toString()}st`,
+        `${date.getDate().toString()}nd`,
+        `${date.getDate().toString()}rd`,
+        `${date.getDate().toString()}th`,
+      ];
+
+      for (let i = 0; i < 5; i++) {
+        dayToString.push(`${date.getDate().toString()}th`);
+      }
+
+      if (date.getDate() === 11 || date.getDate() === 12) {
+        return dayToString[4];
+      }
+
+      return dayToString[date.getDate() % 10];
+    },
+    month: month[date.getMonth()],
+    year: date.getFullYear(),
+  };
+
+  const dateString = `${fromDate.day()} of ${fromDate.month}, ${fromDate.year}`;
+
   const styles = css({
     blockquote: apply`bg-dark-accent-semitrans text-dark-text px-5 py-2 my-2 rounded-xl border-l-4 border-dark-accent-solid`,
     h1: apply`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans font-heading`,
@@ -129,7 +171,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             {data.title}
           </p>
           <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
-            {data.date}
+            {dateString}
           </p>
           <div className={tw`w-full flex flex-row justify-center items-center`}>
             {data.tag?.map((el: string, index: number) => (
