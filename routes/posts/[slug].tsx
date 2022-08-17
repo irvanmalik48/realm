@@ -47,6 +47,12 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
   const prevPost = postProps[before];
   const nextPost = postProps[after];
 
+  const readingTime = () => {
+    const wpm = 225;
+    const words = data?.md?.trim().split(/\s+/).length;
+    return words ? Math.ceil(words / wpm) : 0;
+  };
+
   const month = [
     "January",
     "February",
@@ -177,12 +183,21 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             {data.tag?.map((el: string, index: number) => (
               <p
                 key={index}
-                className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
+                className={tw`font-mono bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
               >
                 {el}
               </p>
             ))}
           </div>
+          <p
+            className={tw`w-[fit-content] text-center text-dark-text text-sm mt-2 px-5 py-1 bg-dark-accent-quartertrans rounded-3xl ${css(
+              {
+                "backdrop-filter": "blur(.5rem)",
+              }
+            )}`}
+          >
+            {readingTime()} minutes read
+          </p>
         </div>
       </header>
       <Markdown
