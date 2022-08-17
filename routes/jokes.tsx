@@ -3,6 +3,7 @@ import { h } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { tw } from "@utils/twind.ts";
+import ky from "ky";
 import { css } from "twind/css";
 import { JokesImage, JokesText, JokesType } from "@/types.d.tsx";
 
@@ -14,10 +15,10 @@ export const handler: Handlers<JokesType> = {
       img: JokesImage;
     } = {
       text: await (
-        await fetch("https://candaan-api.vercel.app/api/text/random")
+        await ky("https://candaan-api.vercel.app/api/text/random")
       ).json(),
       img: await (
-        await fetch("https://candaan-api.vercel.app/api/image/random")
+        await ky("https://candaan-api.vercel.app/api/image/random")
       ).json(),
     };
     const cases = {
