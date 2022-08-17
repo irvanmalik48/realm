@@ -25,7 +25,7 @@ export default function PostCard(props: {
         {props?.tag?.map((el: string, index: number) => (
           <p
             key={index}
-            className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
+            className={tw`font-mono bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
           >
             {el}
           </p>
