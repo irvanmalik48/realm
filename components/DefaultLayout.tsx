@@ -17,6 +17,7 @@ export default function DefaultLayout(props: {
   desc?: string;
   date?: string;
   tag?: string[];
+  active?: string;
   children: h.JSX.Element | h.JSX.Element[];
 }) {
   const styles = css({
@@ -102,7 +103,7 @@ export default function DefaultLayout(props: {
         />
         <link rel="apple-touch-icon" href={asset("/icons/ios/192.png")} />
       </Head>
-      <Nav />
+      <Nav active={props.active ?? "home"} />
       <Sidebar />
       <section
         className={tw`sticky top-0 w-full text-dark-text h-screen overflow-y-auto ${css(

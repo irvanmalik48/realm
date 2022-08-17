@@ -9,7 +9,7 @@ import {
   GitHubIcon,
 } from "@components/Icons.tsx";
 
-export default function Nav() {
+export default function Nav(props: { active: string }) {
   return (
     <nav
       className={tw`bg-dark-nav h-auto md:h-screen w-full text-dark-text sticky md:top-0 bottom-0 shadow z-50 m-0 overflow-y-clip flex flex-row md:flex-col justify-evenly md:justify-between md:w-[fit-content] py-4 md:p-4`}
@@ -22,7 +22,7 @@ export default function Nav() {
           className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text md:bg-dark-accent-semitrans md:text-dark-accent-solid w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`${(props.active === "home")? "md:bg-dark-accent-semitrans md:text-dark-accent-solid" : "" } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <HomeIcon />
             <span
@@ -52,7 +52,7 @@ export default function Nav() {
           className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`${(props.active === "posts")? "md:bg-dark-accent-semitrans md:text-dark-accent-solid" : "" } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <BlogIcon />
             <span
@@ -67,7 +67,7 @@ export default function Nav() {
           className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`${(props.active === "about")? "md:bg-dark-accent-semitrans md:text-dark-accent-solid" : "" } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <AboutIcon />
             <span
