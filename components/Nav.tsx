@@ -22,7 +22,11 @@ export default function Nav(props: { active: string }) {
           className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`${(props.active === "home")? "md:bg-dark-accent-semitrans md:text-dark-accent-solid" : "" } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`${
+              props.active === "home"
+                ? "md:bg-dark-accent-semitrans md:text-dark-accent-solid"
+                : ""
+            } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <HomeIcon />
             <span
@@ -52,7 +56,11 @@ export default function Nav(props: { active: string }) {
           className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`${(props.active === "posts")? "md:bg-dark-accent-semitrans md:text-dark-accent-solid" : "" } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`${
+              props.active === "posts"
+                ? "md:bg-dark-accent-semitrans md:text-dark-accent-solid"
+                : ""
+            } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <BlogIcon />
             <span
@@ -67,7 +75,11 @@ export default function Nav(props: { active: string }) {
           className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
           <div
-            className={tw`${(props.active === "about")? "md:bg-dark-accent-semitrans md:text-dark-accent-solid" : "" } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+            className={tw`${
+              props.active === "about"
+                ? "md:bg-dark-accent-semitrans md:text-dark-accent-solid"
+                : ""
+            } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <AboutIcon />
             <span

@@ -20,7 +20,11 @@ export default function Posts() {
   });
 
   return (
-    <DefaultLayout title="Blog Posts" desc="All that I have written currently." active="posts">
+    <DefaultLayout
+      title="Blog Posts"
+      desc="All that I have written currently."
+      active="posts"
+    >
       <header
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >

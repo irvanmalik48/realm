@@ -24,7 +24,11 @@ export default function Posts(
   }>
 ) {
   return (
-    <DefaultLayout title="About Me" desc="A brief description of me." active="about">
+    <DefaultLayout
+      title="About Me"
+      desc="A brief description of me."
+      active="about"
+    >
       <header
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >
