@@ -3,6 +3,8 @@ import { Configuration, setup, strict } from "twind";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export * from "twind";
+export { css } from "twind/css";
+
 export const config: Configuration = {
   theme: {
     fontFamily: {
