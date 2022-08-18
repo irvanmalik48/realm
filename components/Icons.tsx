@@ -1,5 +1,4 @@
 /** @jsx h */
-import { ComponentProps } from "preact";
 import { h } from "preact";
 
 export function HomeIcon() {
