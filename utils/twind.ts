@@ -1,11 +1,10 @@
-import { IS_BROWSER } from "$fresh/runtime.ts";
-import { Configuration, setup, strict } from "twind";
+import { Options } from "@utils/plugin-twind/mod.ts"
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export * from "twind";
 export { css } from "twind/css";
 
-export const config: Configuration = {
+export const config: Options = {
   theme: {
     fontFamily: {
       sans: ["Roboto Flex", "sans-serif"],
@@ -24,10 +23,8 @@ export const config: Configuration = {
       },
     },
   },
-  mode: strict,
   darkMode: "class",
   hash: true,
-  important: true,
   preflight: {
     "@import": [
       `url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,600;8..144,700&display=swap')`,
@@ -36,6 +33,3 @@ export const config: Configuration = {
     ],
   },
 };
-if (IS_BROWSER) {
-  setup(config);
-}
