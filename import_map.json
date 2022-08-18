@@ -1,6 +1,6 @@
 {
   "imports": {
-    "$fresh/": "https://deno.land/x/fresh@1.0.2/",
+    "$fresh/": "https://cdn.jsdelivr.net/gh/denoland/fresh@main/",
     "frontmatter": "https://deno.land/std@0.152.0/encoding/front_matter.ts",
     "any": "https://deno.land/std@0.152.0/encoding/_yaml/utils.ts",
     "walk": "https://deno.land/std@0.152.0/fs/walk.ts",
