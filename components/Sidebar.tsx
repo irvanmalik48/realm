@@ -1,7 +1,6 @@
 /** @jsx h */
 import { h } from "preact";
-import { apply, tw } from "@utils/twind.ts";
-import { css } from "twind/css";
+import { apply, tw, css } from "@utils/twind.ts";
 import { loadContent } from "@utils/load.ts";
 import PostCard from "@components/PostCard.tsx";
 import { Post } from "@/types.d.tsx";

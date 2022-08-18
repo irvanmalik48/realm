@@ -1,9 +1,8 @@
 /** @jsx h */
 import { h } from "preact";
-import { apply, tw } from "@utils/twind.ts";
+import { apply, tw, css } from "@utils/twind.ts";
 import Sidebar from "@components/Sidebar.tsx";
 import Nav from "@components/Nav.tsx";
-import { css } from "twind/css";
 import { Head, asset } from "$fresh/runtime.ts";
 import Thumbnail from "@utils/thumb.ts";
 import Footer from "@components/Footer.tsx";

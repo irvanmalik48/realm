@@ -2,8 +2,7 @@
 import { h } from "preact";
 import { Post } from "@/types.d.tsx";
 import { PageProps, Handlers } from "$fresh/server.ts";
-import { tw } from "@utils/twind.ts";
-import { css, apply } from "twind/css";
+import { tw, css, apply } from "@utils/twind.ts";
 import { loadContent, loadPost } from "@utils/load.ts";
 import Markdown from "markdown-to-jsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";

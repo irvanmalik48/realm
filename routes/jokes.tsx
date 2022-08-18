@@ -2,9 +2,8 @@
 import { h } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import { tw } from "@utils/twind.ts";
+import { tw, css } from "@utils/twind.ts";
 import ky from "ky";
-import { css } from "twind/css";
 import { JokesImage, JokesText, JokesType } from "@/types.d.tsx";
 
 export const handler: Handlers<JokesType> = {
