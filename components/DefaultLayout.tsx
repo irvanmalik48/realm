@@ -115,7 +115,7 @@ export default function DefaultLayout(props: {
         })}`}
         id="main-sect"
       >
-        <div className={tw`p-4`}>
+        <div className={tw`p-4 md:px-6 lg:px-12 xl:px-24`}>
           {props.children}
           <DonateCard />
           <Footer />
