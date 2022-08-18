@@ -1,4 +1,4 @@
-import { Options } from "@utils/plugin-twind/mod.ts"
+import { Options } from "@utils/plugin-twind/mod.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export * from "twind";

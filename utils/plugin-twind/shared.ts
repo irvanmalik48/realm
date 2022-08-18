@@ -1,3 +1,6 @@
+//  SPDX-FileCopyrightText: 2021 Luca Casonato
+//  SPDX-License-Identifier: MIT
+
 import { JSX, options as preactOptions, VNode } from "preact";
 import {
   Configuration,
@@ -8,7 +11,7 @@ import {
   ThemeConfiguration,
   tw,
   CSSRules,
-  strict
+  strict,
 } from "twind";
 import { Any } from "any";
 

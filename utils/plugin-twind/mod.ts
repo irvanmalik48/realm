@@ -1,7 +1,14 @@
+//  SPDX-FileCopyrightText: 2021 Luca Casonato
+//  SPDX-License-Identifier: MIT
+
 import { virtualSheet } from "twind/sheets";
 import { Plugin } from "$fresh/src/server/types.ts";
 
-import { Options, setup, STYLE_ELEMENT_ID } from "@utils/plugin-twind/shared.ts";
+import {
+  Options,
+  setup,
+  STYLE_ELEMENT_ID,
+} from "@utils/plugin-twind/shared.ts";
 export type { Options };
 
 export default function twind(options: Options): Plugin {
@@ -9,7 +16,7 @@ export default function twind(options: Options): Plugin {
   setup(options, sheet);
   return {
     name: "twind",
-    entrypoints: { "main": new URL("./main.ts", import.meta.url).href },
+    entrypoints: { main: new URL("./main.ts", import.meta.url).href },
     render(ctx) {
       sheet.reset(undefined);
       const res = ctx.render();
@@ -19,9 +26,9 @@ export default function twind(options: Options): Plugin {
       if (res.requiresHydration) {
         const precedences = snapshot[1];
         const mappings: (string | [string, string])[] = [];
-        for (
-          const [key, value] of (snapshot[3] as Map<string, string>).entries()
-        ) {
+        for (const [key, value] of (
+          snapshot[3] as Map<string, string>
+        ).entries()) {
           if (key === value) {
             mappings.push(key);
           } else {
