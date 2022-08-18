@@ -29,13 +29,22 @@ export default function CodeBlock(props: {
     >
       <div className={tw`px-5 py-2 bg-dark-superdark`}>
         <p className={tw`w-full flex flex-row justify-between items-center`}>
-          {fileName !== "none" && (
-            <span
+          <span className={tw`w-[fit-content] gap-2 flex flex-row justify-center items-center`}>
+            {fileName === "none" && (
+              <span
               className={tw`font-mono bg-dark-accent-semitrans w-[fit-content] text-sm text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
-            >
-              {fileName}
-            </span>
-          )}
+              >
+                {(lang === "text" ? "Plain" : lang.toUpperCase())}
+              </span>
+            )}
+            {fileName !== "none" && (
+              <span
+                className={tw`font-mono bg-dark-accent-semitrans w-[fit-content] text-sm text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
+              >
+                {fileName}
+              </span>
+            )}
+          </span>
           <span></span>
           <CopyButton
             text={typeof props.children === "string" ? props.children : ""}
