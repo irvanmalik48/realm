@@ -1,12 +1,12 @@
 /** @jsx h */
 import { h } from "preact";
-import { Post } from "@/types.d.tsx";
 import { PageProps, Handlers } from "$fresh/server.ts";
+import Markdown from "markdown-to-jsx";
+import { Post } from "@/types.d.tsx";
+import PreBlock from "@components/PreBlock.tsx";
+import DefaultLayout from "@components/DefaultLayout.tsx";
 import { tw, css, apply } from "@utils/twind.ts";
 import { loadContent, loadPost } from "@utils/load.ts";
-import Markdown from "markdown-to-jsx";
-import DefaultLayout from "@components/DefaultLayout.tsx";
-import PreBlock from "@components/PreBlock.tsx";
 
 const postDir = "posts/";
 

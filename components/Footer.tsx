@@ -1,6 +1,5 @@
 /** @jsx h */
 import { h } from "preact";
-import { tw } from "@utils/twind.ts";
 import {
   FacebookIcon,
   GitHubIcon,
@@ -9,7 +8,8 @@ import {
   MailIcon,
   TelegramIcon,
   TwitterIcon,
-} from "./Icons.tsx";
+} from "@components/Icons.tsx";
+import { tw } from "@utils/twind.ts";
 
 export default function Footer() {
   return (

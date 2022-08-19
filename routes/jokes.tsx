@@ -1,10 +1,10 @@
 /** @jsx h */
 import { h } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import DefaultLayout from "@components/DefaultLayout.tsx";
-import { tw, css } from "@utils/twind.ts";
 import ky from "ky";
 import { JokesImage, JokesText, JokesType } from "@/types.d.tsx";
+import DefaultLayout from "@components/DefaultLayout.tsx";
+import { tw, css } from "@utils/twind.ts";
 
 export const handler: Handlers<JokesType> = {
   async GET(req, ctx) {

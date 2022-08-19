@@ -2,8 +2,8 @@
 import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { tw } from "@utils/twind.ts";
 import { CopyIcon, CheckIcon } from "@components/Icons.tsx";
+import { tw } from "@utils/twind.ts";
 
 export default function CopyButton(props: { text: string }) {
   const [copied, setCopied] = useState(false);

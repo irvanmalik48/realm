@@ -4,10 +4,10 @@
 /** @jsx h */
 import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { tw } from "@utils/twind.ts";
-import WaveTank from "@components/WaveTank.tsx";
 import { Spring } from "@/types.d.tsx";
+import WaveTank from "@components/WaveTank.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
+import { tw } from "@utils/twind.ts";
 
 function easeInCirc(x: number) {
   return 1 - Math.sqrt(1 - Math.pow(x, 2));

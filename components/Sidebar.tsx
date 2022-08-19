@@ -1,9 +1,9 @@
 /** @jsx h */
 import { h } from "preact";
+import { Post } from "@/types.d.tsx";
+import PostCard from "@components/PostCard.tsx";
 import { apply, tw, css } from "@utils/twind.ts";
 import { loadContent } from "@utils/load.ts";
-import PostCard from "@components/PostCard.tsx";
-import { Post } from "@/types.d.tsx";
 
 const posts = await loadContent("posts/");
 

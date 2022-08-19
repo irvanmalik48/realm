@@ -1,8 +1,8 @@
 /** @jsx h */
 import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
-import { tw } from "@utils/twind.ts";
 import { ChevronUp } from "@components/Icons.tsx";
+import { tw } from "@utils/twind.ts";
 
 export default function FAB() {
   const [isVisible, setIsVisible] = useState(false);

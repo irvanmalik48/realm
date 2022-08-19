@@ -1,6 +1,5 @@
 /** @jsx h */
 import { h } from "preact";
-import { tw } from "@utils/twind.ts";
 import {
   HomeIcon,
   RepoIcon,
@@ -8,6 +7,7 @@ import {
   AboutIcon,
   GitHubIcon,
 } from "@components/Icons.tsx";
+import { tw } from "@utils/twind.ts";
 
 export default function Nav(props: { active: string }) {
   return (

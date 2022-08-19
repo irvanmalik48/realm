@@ -1,11 +1,11 @@
 /** @jsx h */
 import { h } from "preact";
-import { syntaxHighlighterTheme } from "@utils/colors.ts";
 import * as Themes from "rsh/dist/esm/styles/prism";
-import { everblush } from "@utils/everblush.ts";
 import { Prism } from "rsh";
-import { tw } from "@utils/twind.ts";
 import CopyButton from "@islands/CopyButton.tsx";
+import { syntaxHighlighterTheme } from "@utils/colors.ts";
+import { everblush } from "@utils/everblush.ts";
+import { tw } from "@utils/twind.ts";
 
 export default function CodeBlock(props: {
   className: string;

@@ -1,8 +1,8 @@
 /** @jsx h */
 import { h } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { tw } from "@utils/twind.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
+import { tw } from "@utils/twind.ts";
 import { quotes } from "@utils/quotes.ts";
 
 export const handler: Handlers<{
