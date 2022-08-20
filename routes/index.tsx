@@ -120,7 +120,7 @@ export const handler: Handlers<{
 export default function Home(
   props: PageProps<{
     quote: string;
-  }>
+  }>,
 ) {
   const postProps: Post[] = [];
 

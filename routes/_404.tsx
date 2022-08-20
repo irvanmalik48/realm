@@ -7,7 +7,7 @@ import { tw } from "@utils/twind.ts";
 
 export default function NotFoundPage({ url }: UnknownPageProps) {
   if (url.pathname === "/404") return <NotFoundPageFound />;
-  else
+  else {
     return (
       <DefaultLayout
         title="Page not found"
@@ -37,4 +37,5 @@ export default function NotFoundPage({ url }: UnknownPageProps) {
         </header>
       </DefaultLayout>
     );
+  }
 }

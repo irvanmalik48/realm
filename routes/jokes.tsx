@@ -4,7 +4,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import ky from "ky";
 import { JokesImage, JokesText, JokesType } from "@/types.d.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import { tw, css } from "@utils/twind.ts";
+import { css, tw } from "@utils/twind.ts";
 
 export const handler: Handlers<JokesType> = {
   async GET(req, ctx) {
@@ -30,10 +30,9 @@ export const handler: Handlers<JokesType> = {
       },
     };
 
-    const body: JokesType =
-      includeParams !== null && includeParams !== "all"
-        ? cases[includeParams as keyof typeof cases]
-        : cases["_default"];
+    const body: JokesType = includeParams !== null && includeParams !== "all"
+      ? cases[includeParams as keyof typeof cases]
+      : cases["_default"];
 
     if (res.text.status === 404 || res.img.status === 404) {
       return ctx.render(null);
@@ -44,7 +43,7 @@ export const handler: Handlers<JokesType> = {
 };
 
 export default function Jokes(
-  props: PageProps<{ text?: JokesText; img?: JokesImage }>
+  props: PageProps<{ text?: JokesText; img?: JokesImage }>,
 ) {
   return (
     <DefaultLayout
@@ -61,11 +60,13 @@ export default function Jokes(
             Generated Joke:
           </p>
           <div
-            className={tw`w-full text-center flex flex-col gap-5 text-xl p-5 pt-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border ${css(
-              {
-                "backdrop-filter": "blur(.5rem)",
-              }
-            )}`}
+            className={tw`w-full text-center flex flex-col gap-5 text-xl p-5 pt-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border ${
+              css(
+                {
+                  "backdrop-filter": "blur(.5rem)",
+                },
+              )
+            }`}
           >
             {props.data.text ? <TextJoke data={props.data.text} /> : ""}
             {props.data.img ? <ImageJoke data={props.data.img} /> : ""}

@@ -1,11 +1,11 @@
 /** @jsx h */
 import { h } from "preact";
-import { PageProps, Handlers } from "$fresh/server.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import Markdown from "markdown-to-jsx";
 import { Post } from "@/types.d.tsx";
 import PreBlock from "@components/PreBlock.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import { tw, css, apply } from "@utils/twind.ts";
+import { apply, css, tw } from "@utils/twind.ts";
 import { loadContent, loadPost } from "@utils/load.ts";
 
 const postDir = "posts/";
@@ -95,38 +95,55 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
   const dateString = `${fromDate.day()} of ${fromDate.month}, ${fromDate.year}`;
 
   const styles = css({
-    blockquote: apply`bg-dark-accent-semitrans text-dark-text px-5 py-2 my-2 rounded-xl border-l-4 border-dark-accent-solid`,
-    h1: apply`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans font-heading`,
+    blockquote:
+      apply`bg-dark-accent-semitrans text-dark-text px-5 py-2 my-2 rounded-xl border-l-4 border-dark-accent-solid`,
+    h1:
+      apply`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans font-heading`,
     "* + h1": apply`my-3`,
-    h2: apply`text-xl rounded-xl font-semibold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-quartertrans font-heading`,
+    h2:
+      apply`text-xl rounded-xl font-semibold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-quartertrans font-heading`,
     "* + h2": apply`my-3`,
-    h3: apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid font-heading`,
+    h3:
+      apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid font-heading`,
     "* + h3": apply`my-3`,
-    pre: apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-0 py-4 rounded-xl ${css(
-      {
-        code: apply`bg-transparent font-mono text-dark-text p-0 m-0 font-normal`,
-      }
-    )}`,
+    pre:
+      apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-0 py-4 rounded-xl ${
+        css(
+          {
+            code:
+              apply`bg-transparent font-mono text-dark-text p-0 m-0 font-normal`,
+          },
+        )
+      }`,
     "pre::-webkit-scrollbar": apply`bg-transparent rounded-xl h-5`,
-    "pre::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[8px] border-solid bg-clip-content rounded-xl`,
-    ol: apply`list-decimal list-inside my-3 ${css({
-      p: apply`inline`,
-      "::marker": apply`text-dark-accent-solid font-bold`,
-      li: apply`my-0`,
-      "li:first-child": apply`mt-0`,
-      ul: apply`ml-6`,
-      ol: apply`ml-6`,
-    })}`,
+    "pre::-webkit-scrollbar-thumb":
+      apply`bg-dark-accent-solid border-transparent border-[8px] border-solid bg-clip-content rounded-xl`,
+    ol: apply`list-decimal list-inside my-3 ${
+      css({
+        p: apply`inline`,
+        "::marker": apply`text-dark-accent-solid font-bold`,
+        li: apply`my-0`,
+        "li:first-child": apply`mt-0`,
+        ul: apply`ml-6`,
+        ol: apply`ml-6`,
+      })
+    }`,
     a: apply`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`,
-    ul: apply`list-disc list-inside my-0 ${css({
-      ul: apply`ml-6`,
-      ol: apply`ml-6`,
-      "li::marker": apply`text-dark-accent-semitrans transition-all duration-200 ease-linear`,
-      "li:hover::marker": apply`text-dark-accent-solid`,
-    })}`,
-    img: apply`w-full h-auto transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
-    code: apply`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
-    "span.linenumber": apply`hidden md:inline-block min-w-[2.5rem] border-r-4 border-dark-accent-semitrans mr-4`,
+    ul: apply`list-disc list-inside my-0 ${
+      css({
+        ul: apply`ml-6`,
+        ol: apply`ml-6`,
+        "li::marker":
+          apply`text-dark-accent-semitrans transition-all duration-200 ease-linear`,
+        "li:hover::marker": apply`text-dark-accent-solid`,
+      })
+    }`,
+    img:
+      apply`w-full h-auto transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
+    code:
+      apply`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
+    "span.linenumber":
+      apply`hidden md:inline-block min-w-[2.5rem] border-r-4 border-dark-accent-semitrans mr-4`,
   });
 
   if (!data || data?.title === "Undefined") {
@@ -189,11 +206,13 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             ))}
           </div>
           <p
-            className={tw`w-[fit-content] text-center text-dark-text text-sm mt-2 px-5 py-1 bg-dark-accent-quartertrans rounded-3xl ${css(
-              {
-                "backdrop-filter": "blur(.5rem)",
-              }
-            )}`}
+            className={tw`w-[fit-content] text-center text-dark-text text-sm mt-2 px-5 py-1 bg-dark-accent-quartertrans rounded-3xl ${
+              css(
+                {
+                  "backdrop-filter": "blur(.5rem)",
+                },
+              )
+            }`}
           >
             {readingTime()} minutes read
           </p>

@@ -21,7 +21,7 @@ export const handler: Handlers<{
 export default function Posts(
   props: PageProps<{
     quote: string;
-  }>
+  }>,
 ) {
   return (
     <DefaultLayout
@@ -86,14 +86,15 @@ export default function Posts(
           A brief description about this website I made.
         </p>
         <p className={tw`text-dark-text mt-3`}>
-          So yeah, this is my website. It's that simple. <strong>Oh,</strong>{" "}
-          you guys <em>want</em> to hear <strong>the story</strong> behind it!
-          To make it summed up and described real quick, this website is first
-          made out of pure curiosity. It was back at the days when I was still a
-          CS freshmen. At one day, in a specific web development course, I think
-          to myself, "It would be nice to have a website where I can do{" "}
-          <em>whatever the f*ck</em> I want". And yes, there you have it, a
-          blog.
+          So yeah, this is my website. It's that simple. <strong>Oh,</strong>
+          {" "}
+          you guys <em>want</em> to hear <strong>the story</strong>{" "}
+          behind it! To make it summed up and described real quick, this website
+          is first made out of pure curiosity. It was back at the days when I
+          was still a CS freshmen. At one day, in a specific web development
+          course, I think to myself, "It would be nice to have a website where I
+          can do <em>whatever the f*ck</em>{" "}
+          I want". And yes, there you have it, a blog.
         </p>
         <p className={tw`text-dark-text mt-3`}>
           This website is made with Deno's{" "}
@@ -124,7 +125,8 @@ export default function Posts(
           >
             Deno Deploy
           </a>
-          . And yes, I know my stack is pretty <em>edgy</em> (or should I say,{" "}
+          . And yes, I know my stack is pretty <em>edgy</em> (or should I say,
+          {" "}
           <em>bleeding edge</em>?) but this is my website. I can do whatever I
           want with it.
         </p>
