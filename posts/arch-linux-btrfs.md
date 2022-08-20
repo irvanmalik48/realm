@@ -45,9 +45,7 @@ tag:
 
 # Abstract
 
-So I want to show you how to install Arch Linux with btrfs dual booting with
-Windows. You can read about Arch here:
-[Arch Wiki - Arch Linux](https://wiki.archlinux.org/title/Arch_Linux).
+So I want to show you how to install Arch Linux with btrfs dual booting with Windows. You can read about Arch here: [Arch Wiki - Arch Linux](https://wiki.archlinux.org/title/Arch_Linux).
 
 # Prerequisite
 
@@ -61,20 +59,13 @@ Windows. You can read about Arch here:
 
 # Installation Process
 
-Even tho I'll show you how-to, Arch Wiki itself has substantial informations
-regarding the installation. Be sure to check out the official wiki for reference
-while also following this guide:
-[Arch Wiki - Installation Guide](https://wiki.archlinux.org/title/Installation_guide).
+Even tho I'll show you how-to, Arch Wiki itself has substantial informations regarding the installation. Be sure to check out the official wiki for reference while also following this guide: [Arch Wiki - Installation Guide](https://wiki.archlinux.org/title/Installation_guide).
 
 ## Preparing installation medium
 
-At this step, I assume you already have the Arch ISO and know how to burn ISO
-files to USB. Now, burn the ISO to your USB using Etcher, Rufus, or any tools
-that you like. I recommend Ventoy as you only need to copy the ISO to your
-flashdisk.
+At this step, I assume you already have the Arch ISO and know how to burn ISO files to USB. Now, burn the ISO to your USB using Etcher, Rufus, or any tools that you like. I recommend Ventoy as you only need to copy the ISO to your flashdisk.
 
-Make sure to shrink your Windows partition and then create 3 empty partitions
-from Windows Partition Manager (or something like that idk) consisting of:
+Make sure to shrink your Windows partition and then create 3 empty partitions from Windows Partition Manager (or something like that idk) consisting of:
 
 - 512 MB empty partition (EFI partition)
 - 20-30 GB or more empty partition (root partition)
@@ -98,8 +89,7 @@ loadkeys [your-keymap]
 
 ## Connecting to the internet
 
-Arch uses `iwctl` for connecting to the internet via Wifi. If you're using USB
-tethering or Ethernet, skip this step.\
+Arch uses `iwctl` for connecting to the internet via Wifi. If you're using USB tethering or Ethernet, skip this step.\
 Run `iwctl` by issuing:
 
 ```bash
@@ -146,9 +136,7 @@ timedatectl set-ntp true
 
 ## Partitioning
 
-Since we've already created 3 partitions in Windows, we can just jump on to
-formatting the partitions. But first, you must check which partitions are going
-to be used.\
+Since we've already created 3 partitions in Windows, we can just jump on to formatting the partitions. But first, you must check which partitions are going to be used.\
 The command is:
 
 ```bash
@@ -185,8 +173,7 @@ mkfs.btrfs /dev/nvme0n1p8
 
 ## Mounting the partitions
 
-Now that we have formatted the partitions, we need to mount it (exception for
-swap).
+Now that we have formatted the partitions, we need to mount it (exception for swap).
 
 ### Mounting the root partition
 
@@ -198,8 +185,7 @@ mount /dev/nvme0n1p8 /mnt
 
 ### Creating and mounting btrfs subvolumes
 
-Since we've mounted the root partition, we can proceed into creating btrfs
-subvolumes.\
+Since we've mounted the root partition, we can proceed into creating btrfs subvolumes.\
 We'll create 6 different subvolumes:
 
 - @ => root directory.
@@ -207,8 +193,7 @@ We'll create 6 different subvolumes:
 - @var => var directory. Contains logs, etc.
 - @opt => opt directory. Contains third party products.
 - @tmp => tmp directory. Contains temp files, etc.
-- @.snapshot => snapshot directory. Contains btrfs snapshots. (Can be excluded
-  if you want to use Timeshift)
+- @.snapshot => snapshot directory. Contains btrfs snapshots. (Can be excluded if you want to use Timeshift)
 
 Create the subvolumes:
 
@@ -236,18 +221,11 @@ mount -o discard=async,subvol=@var /dev/nvme0n1p8 /mnt/var
 
 A little review about the options:
 
-- noatime: No access time. Improves performance by not writing time when the
-  file was accessed.
-- commit: Perodic interval (in seconds) in which data is synchronized to
-  permanent storage.
-- compress-force: Activating forced compression and choosing the algorithm for
-  compression. (Believe me, this is good, no joke)
-- discard=async: Frees unused block from an SSD drive supporting the command.
-  With discard=async, freed extents are not discarded immediately, but grouped
-  together and trimmed later by a separate worker thread, improving commit
-  latency. You can opt out of this if you use HDD.
-- space_cache: Enables kernel to know where block of free space is on a disk to
-  enable it to write data immediately after file creation.
+- noatime: No access time. Improves performance by not writing time when the file was accessed.
+- commit: Perodic interval (in seconds) in which data is synchronized to permanent storage.
+- compress-force: Activating forced compression and choosing the algorithm for compression. (Believe me, this is good, no joke)
+- discard=async: Frees unused block from an SSD drive supporting the command. With discard=async, freed extents are not discarded immediately, but grouped together and trimmed later by a separate worker thread, improving commit latency. You can opt out of this if you use HDD.
+- space_cache: Enables kernel to know where block of free space is on a disk to enable it to write data immediately after file creation.
 - subvol: Choosing the subvolume to mount.
 
 ### Mounting the EFI (boot) partition
@@ -282,8 +260,7 @@ pacstrap /mnt base linux linux-firmware nano intel-ucode btrfs-progs
 
 ## Generating fstab
 
-After the base system installation is done, now we need to generate the fstab to
-define what and how partitions should be mounted.\
+After the base system installation is done, now we need to generate the fstab to define what and how partitions should be mounted.\
 Generate it by issuing:
 
 ```bash
@@ -306,8 +283,7 @@ arch-chroot /mnt
 
 ### Setting up timezone
 
-Before you set up timezone, you might want to check which timezones are
-available by issuing:
+Before you set up timezone, you might want to check which timezones are available by issuing:
 
 ```bash
 timedatectl list-timezones
@@ -337,8 +313,7 @@ Issue this command to edit the locale.gen:
 nano /etc/locale.gen
 ```
 
-Scroll and uncomment your language. Most people would prefer US English so
-scroll down and uncomment this line:
+Scroll and uncomment your language. Most people would prefer US English so scroll down and uncomment this line:
 
 ```bash
 en_US.UTF-8 UTF8
@@ -404,8 +379,7 @@ Set up password for the root user with:
 passwd
 ```
 
-> Note: Visual feedbacks are disabled by default in Linux because of security
-> reasons.
+> Note: Visual feedbacks are disabled by default in Linux because of security reasons.
 
 ### Installing remaining essentials
 
@@ -413,10 +387,7 @@ passwd
 pacman -S grub grub-btrfs efibootmgr base-devel linux-headers networkmanager network-manager-applet wpa_supplicant dialog os-prober mtools dosfstools reflector git
 ```
 
-These are some basic sets of packages you will need if you plan to use Arch in
-the long run. I would recommend that you google all packages to understand what
-they do. After entering the command, press Enter to select all of the base-devel
-packages to install. Then wait for the installation to finish.
+These are some basic sets of packages you will need if you plan to use Arch in the long run. I would recommend that you google all packages to understand what they do. After entering the command, press Enter to select all of the base-devel packages to install. Then wait for the installation to finish.
 
 ### Modifying mkinitcpio
 
@@ -451,9 +422,7 @@ Issue this command to create a new user:
 useradd -mG wheel example
 ```
 
-Above command creates a user with name `example` and adds the user to the
-`wheel` group (for sudo privileges). Replace `example` with whatever name you
-want.
+Above command creates a user with name `example` and adds the user to the `wheel` group (for sudo privileges). Replace `example` with whatever name you want.
 
 Then create the password for the user:
 
@@ -487,8 +456,7 @@ reboot
 
 # Post Installation
 
-Ah yes, the pain is gone ultimately. You've installed Arch Linux successfully!
-Go ahead and install some DE or WM on top.
+Ah yes, the pain is gone ultimately. You've installed Arch Linux successfully! Go ahead and install some DE or WM on top.
 
 For some post install recommendations:\
 [Arch Wiki - General Recommendations](https://wiki.archlinux.org/index.php/General_recommendations)
@@ -497,9 +465,7 @@ As always, thank you for your time!
 
 # References
 
-- <https://www.nishantnadkarni.tech/posts/arch_installation/> - Arch Linux with
-  BTRFS Installation (Base) - NishantN
-- <https://wiki.archlinux.org/title/Installation_guide> - Installation Guide -
-  Arch Wiki
+- <https://www.nishantnadkarni.tech/posts/arch_installation/> - Arch Linux with BTRFS Installation (Base) - NishantN
+- <https://wiki.archlinux.org/title/Installation_guide> - Installation Guide - Arch Wiki
 - <https://wiki.archlinux.org/title/btrfs> - Btrfs - Arch Wiki
 - <https://wiki.archlinux.org/title/Iwd#iwctl> - Iwd/iwctl - Arch Wiki

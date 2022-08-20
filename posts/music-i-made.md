@@ -17,18 +17,11 @@ tag:
 
 # Abstract
 
-Well, who doesn't like music? I do, you do, everyone else do. You can't tell
-that I'm wrong lmao, it's just general truth that everyone likes music (or some
-form of it for some reason). The thing is, I _really really really_ like music I
-devoted to make some myself since I'm sometimes bored hearing stuffs made from
-everyone. If everyone can make it, so do I, and so be it. Without further
-shittalks, here's my take:
+Well, who doesn't like music? I do, you do, everyone else do. You can't tell that I'm wrong lmao, it's just general truth that everyone likes music (or some form of it for some reason). The thing is, I _really really really_ like music I devoted to make some myself since I'm sometimes bored hearing stuffs made from everyone. If everyone can make it, so do I, and so be it. Without further shittalks, here's my take:
 
 # no title
 
-Well, pardon me for the name since I don't know what to name it, really. This
-song incorporates chill vibes and catchy tones. This song is about me (yes, me,
-you see it) and my current state of mind.
+Well, pardon me for the name since I don't know what to name it, really. This song incorporates chill vibes and catchy tones. This song is about me (yes, me, you see it) and my current state of mind.
 
 ## Lyrics
 
@@ -92,6 +85,4 @@ All of you come back
 
 # Wrapping Up
 
-For now, that's what I made. I will update with more soon lmao. (Actually, I
-have like 7 more but too lazy to like write it down here since I don't actually
-copy them digitally).
+For now, that's what I made. I will update with more soon lmao. (Actually, I have like 7 more but too lazy to like write it down here since I don't actually copy them digitally).

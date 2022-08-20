@@ -20,33 +20,19 @@ tag:
 
 # Abstract
 
-It's been a while since I used Utterances for blog comment system. Using GitHub
-Issues seems to be a nice idea for blog posts comment (or rather weird, I must
-say). But things get real nice when I was looking for Utterances replacement.
-Yes, I found **Giscus**. So, the concept of both Utterances and Giscus are the
-same (since both behave the same way tbh) but what makes the difference is that
-Utterances uses GitHub Issues while Giscus, on the other hand, uses GitHub
-Discussions. Using GitHub Discussions feels more natural and I actually prefer
-it over issues tracker since, well, _comments are always a discussion_. Also
-Giscus has some nice component library for React, Vue, and Svelte, check them
-out [here](https://github.com/giscus/giscus-component).
+It's been a while since I used Utterances for blog comment system. Using GitHub Issues seems to be a nice idea for blog posts comment (or rather weird, I must say). But things get real nice when I was looking for Utterances replacement. Yes, I found **Giscus**. So, the concept of both Utterances and Giscus are the same (since both behave the same way tbh) but what makes the difference is that Utterances uses GitHub Issues while Giscus, on the other hand, uses GitHub Discussions. Using GitHub Discussions feels more natural and I actually prefer it over issues tracker since, well, _comments are always a discussion_. Also Giscus has some nice component library for React, Vue, and Svelte, check them out [here](https://github.com/giscus/giscus-component).
 
 # Migrating Utterances Comments
 
-You can just go and follow
-[this tutorial](https://docs.github.com/en/discussions/managing-discussions-for-your-community/moderating-discussions#converting-an-issue-to-a-discussion).
-As long as you keep the namings right, Giscus will just pick it.
+You can just go and follow [this tutorial](https://docs.github.com/en/discussions/managing-discussions-for-your-community/moderating-discussions#converting-an-issue-to-a-discussion). As long as you keep the namings right, Giscus will just pick it.
 
 # Implementation
 
-> Be sure to get your needed values in <https://giscus.app> before proceeding.
-> Also read stuffs there for better understanding on how shit works.
+> Be sure to get your needed values in <https://giscus.app> before proceeding. Also read stuffs there for better understanding on how shit works.
 
 ## Hacky Old-fashioned Way
 
-Well, since I already have the hacky `<div>` injection method around (refer to
-[this post](https://www.irvanma.live/posts/blog/nextjs-utterances)) to get
-Utterances working, I can just change some code into, well, something like this:
+Well, since I already have the hacky `<div>` injection method around (refer to [this post](https://www.irvanma.live/posts/blog/nextjs-utterances)) to get Utterances working, I can just change some code into, well, something like this:
 
 ```ts|components/comments.tsx
 import { Component, createRef } from "react";
@@ -86,10 +72,7 @@ and it works. Yeah, just like that.
 
 ## Component Library
 
-But well, I don't like the idea of keeping that hacky way around so I opted in
-for the component library. I use Next.js so it's gonna be React. It's quite
-simple to implement, really, just need some little adjustments here and there.
-Here's what I do:
+But well, I don't like the idea of keeping that hacky way around so I opted in for the component library. I use Next.js so it's gonna be React. It's quite simple to implement, really, just need some little adjustments here and there. Here's what I do:
 
 1. Yeet out old comments component.
 2. Install `@giscus/react` from npm.
@@ -99,8 +82,7 @@ npm i @giscus/react
 ```
 
 3. Watch anime.
-4. Go back to VSCode and do some changes to the post layout so that now it looks
-   like this:
+4. Go back to VSCode and do some changes to the post layout so that now it looks like this:
 
 ```tsx|components/layout/post.tsx
 import DefaultLayout from "./default";
@@ -162,10 +144,8 @@ Ok so, notice this tag right here:
 />;
 ```
 
-That's the Giscus component. And yeah, just like that. It works really darn
-well.
+That's the Giscus component. And yeah, just like that. It works really darn well.
 
 # Wrapping Up
 
-Okay, see you all in the next post. I will come back with more disturbing
-stuffs. Also, I need sleep.
+Okay, see you all in the next post. I will come back with more disturbing stuffs. Also, I need sleep.
