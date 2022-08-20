@@ -55,12 +55,78 @@ export default function Posts(
           {props.data.quote}
         </p>
         <p className={tw`text-dark-text mt-3`}>
-          Hello, my name's Irvan Malik Azantha. I'm a 19 y'o boy currently
+          Hello, my name's Irvan Malik Azantha. I'm a 19 y'o man currently
           studying on Universitas Sriwijaya. I live in Palembang, Indonesia. I'm
           a highly enthusiastic person with subtle interest in open source
-          projects and keen on learning new things. Also likes to watch anime,
-          play games, and have hugs and cuddles (lmao). Give glory for the
-          chaos!
+          projects and keen on learning new things.
+        </p>
+        <p className={tw`text-dark-text mt-3`}>
+          I've started programming since 2020 (2018 actually but that's mostly
+          just buzzing around with stuffs) and I've been pretty much hooked up
+          with it until now. You might find me annoying sometimes (if you know
+          me or somehow make a contact with me in one of social media platforms
+          where I simply exist) but that's what I tend to always do to just have
+          fun. No offense given at all. And finally,{" "}
+          <a
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            href="https://t.me/gnuweeb"
+          >
+            GNU/Weeb
+          </a>{" "}
+          is my place where I moderate and also contribute to nowadays.
+        </p>
+        <p
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
+        >
+          About This Website
+        </p>
+        <p
+          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
+        >
+          A brief description about this website I made.
+        </p>
+        <p className={tw`text-dark-text mt-3`}>
+          So yeah, this is my website. It's that simple. <strong>Oh,</strong>{" "}
+          you guys <em>want</em> to hear <strong>the story</strong> behind it!
+          To make it summed up and described real quick, this website is first
+          made out of pure curiosity. It was back at the days when I was still a
+          CS freshmen. At one day, in a specific web development course, I think
+          to myself, "It would be nice to have a website where I can do{" "}
+          <em>whatever the f*ck</em> I want". And yes, there you have it, a
+          blog.
+        </p>
+        <p className={tw`text-dark-text mt-3`}>
+          This website is made with Deno's{" "}
+          <a
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            href="https://fresh.deno.dev/"
+          >
+            fresh
+          </a>{" "}
+          framework. The tools for stylings are provided by{" "}
+          <a
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            href="https://twind.dev/"
+          >
+            Twind
+          </a>{" "}
+          (it's essentially just{" "}
+          <a
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            href="https://tailwindcss.com/"
+          >
+            Tailwind
+          </a>{" "}
+          but the entire thing is CSS-in-JS). This website is hosted on{" "}
+          <a
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            href="https://deno.com/deploy"
+          >
+            Deno Deploy
+          </a>
+          . And yes, I know my stack is pretty <em>edgy</em> (or should I say,{" "}
+          <em>bleeding edge</em>?) but this is my website. I can do whatever I
+          want with it.
         </p>
         <p
           className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
