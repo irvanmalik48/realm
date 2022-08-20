@@ -1,11 +1,11 @@
 /** @jsx h */
 import { h } from "preact";
 import {
+  AboutIcon,
+  BlogIcon,
+  GitHubIcon,
   HomeIcon,
   RepoIcon,
-  BlogIcon,
-  AboutIcon,
-  GitHubIcon,
 } from "@components/Icons.tsx";
 import { tw } from "@utils/twind.ts";
 

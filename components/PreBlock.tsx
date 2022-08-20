@@ -10,9 +10,7 @@ export default function PreBlock(props: {
   if ("type" in props.children && props.children["type"] === "code") {
     return CodeBlock(props.children.props);
   }
-  return (
-    <pre {...props.rest} className="notranslate" translate="no">
+  return <pre {...props.rest} className="notranslate" translate="no">
       {props.children}
-    </pre>
-  );
+  </pre>;
 }

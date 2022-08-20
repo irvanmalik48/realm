@@ -1,13 +1,13 @@
 /** @jsx h */
 import { h } from "preact";
-import { Head, asset } from "$fresh/runtime.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 import Nav from "@components/Nav.tsx";
 import Sidebar from "@components/Sidebar.tsx";
 import DonateCard from "@components/Donate.tsx";
 import Footer from "@components/Footer.tsx";
 import WaterDrop from "@islands/WaterDrop.tsx";
 import FAB from "@islands/FAB.tsx";
-import { apply, tw, css } from "@utils/twind.ts";
+import { apply, css, tw } from "@utils/twind.ts";
 import Thumbnail from "@utils/thumb.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
@@ -20,21 +20,26 @@ export default function DefaultLayout(props: {
   children: h.JSX.Element | h.JSX.Element[];
 }) {
   const styles = css({
-    "*": apply`ring ring-transparent focus:outline-none focus-visible:ring-dark-accent-solid ${css(
-      {
-        "scroll-behavior": "smooth",
-      }
-    )}`,
+    "*":
+      apply`ring ring-transparent focus:outline-none focus-visible:ring-dark-accent-solid ${
+        css(
+          {
+            "scroll-behavior": "smooth",
+          },
+        )
+      }`,
   });
   return (
     <main
-      className={tw`${css({
-        background: `url(/bg.svg)`,
-        "background-size": "500px",
-        "background-color": `${colorScheme[currentColorScheme].dark.bg}`,
-        "background-position": "center",
-        "-webkit-tap-highlight-color": "transparent",
-      })} ${styles} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
+      className={tw`${
+        css({
+          background: `url(/bg.svg)`,
+          "background-size": "500px",
+          "background-color": `${colorScheme[currentColorScheme].dark.bg}`,
+          "background-position": "center",
+          "-webkit-tap-highlight-color": "transparent",
+        })
+      } ${styles} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
     >
       <Head>
         <meta charSet="utf-8" />
@@ -105,14 +110,20 @@ export default function DefaultLayout(props: {
       <Nav active={props.active ?? "home"} />
       <Sidebar />
       <section
-        className={tw`sticky top-0 w-full text-dark-text h-screen overflow-y-auto ${css(
-          {
-            "&::-webkit-scrollbar": apply`hidden`,
-          }
-        )} md:${css({
-          "&::-webkit-scrollbar": apply`block bg-dark-accent-quartertrans w-5`,
-          "&::-webkit-scrollbar-thumb": apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
-        })}`}
+        className={tw`sticky top-0 w-full text-dark-text h-screen overflow-y-auto ${
+          css(
+            {
+              "&::-webkit-scrollbar": apply`hidden`,
+            },
+          )
+        } md:${
+          css({
+            "&::-webkit-scrollbar":
+              apply`block bg-dark-accent-quartertrans w-5`,
+            "&::-webkit-scrollbar-thumb":
+              apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
+          })
+        }`}
         id="main-sect"
       >
         <div className={tw`p-4 md:px-6 lg:px-12 xl:px-24`}>
