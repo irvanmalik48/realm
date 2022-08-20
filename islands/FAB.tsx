@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from "preact";
-import { useState, useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { ChevronUp } from "@components/Icons.tsx";
 import { tw } from "@utils/twind.ts";
 
