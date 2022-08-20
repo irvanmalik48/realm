@@ -26,9 +26,11 @@ export default function twind(options: Options): Plugin {
       if (res.requiresHydration) {
         const precedences = snapshot[1];
         const mappings: (string | [string, string])[] = [];
-        for (const [key, value] of (
-          snapshot[3] as Map<string, string>
-        ).entries()) {
+        for (
+          const [key, value] of (
+            snapshot[3] as Map<string, string>
+          ).entries()
+        ) {
           if (key === value) {
             mappings.push(key);
           } else {

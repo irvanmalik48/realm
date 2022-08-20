@@ -16,7 +16,7 @@ export default function hydrate(state: State) {
   const rules = new Set(el.innerText.split("\n"));
   const precedences = state[1];
   const mappings = new Map(
-    state[2].map((v) => (typeof v === "string" ? [v, v] : v))
+    state[2].map((v) => (typeof v === "string" ? [v, v] : v)),
   );
   const sheetState: Any[] = [precedences, rules, mappings, true];
   const target = el.sheet!;

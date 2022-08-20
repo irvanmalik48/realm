@@ -4,14 +4,14 @@
 import { JSX, options as preactOptions, VNode } from "preact";
 import {
   Configuration,
+  CSSRules,
   DarkMode,
-  setup as twSetup,
   Preflight,
+  setup as twSetup,
   Sheet,
+  strict,
   ThemeConfiguration,
   tw,
-  CSSRules,
-  strict,
 } from "twind";
 import { Any } from "any";
 

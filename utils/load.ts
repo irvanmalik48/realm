@@ -6,7 +6,7 @@ import { Any } from "any";
 
 export async function loadPost(
   postsDirectory: string,
-  path: string
+  path: string,
 ): Promise<[string, Post]> {
   let contents = "";
   try {
@@ -48,7 +48,7 @@ export async function loadContent(postsDirectory: string) {
     if (entry.isFile && entry.path.endsWith(".md")) {
       const [key, post]: [string, Post] = await loadPost(
         postsDirectory,
-        entry.path
+        entry.path,
       );
       posts.set(key, post);
     }

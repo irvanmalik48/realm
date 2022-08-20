@@ -3,7 +3,7 @@ import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 export default function Thumbnail(
   titleP: string | undefined,
   dateP: string | undefined,
-  tagsP: string | string[] | undefined
+  tagsP: string | string[] | undefined,
 ) {
   let processedTags = "";
   if (tagsP == undefined) {
@@ -20,11 +20,12 @@ export default function Thumbnail(
   const processedTitle = titleP == undefined ? "" : encodeURIComponent(titleP);
   const nameText = encodeURIComponent("Irvan Malik Azantha");
   const emailText = encodeURIComponent("irvanmalik48@gmail.com");
-  const dateText =
-    dateP == undefined ? encodeURIComponent("-") : encodeURIComponent(dateP);
+  const dateText = dateP == undefined
+    ? encodeURIComponent("-")
+    : encodeURIComponent(dateP);
   const colorHex = colorScheme[currentColorScheme].dark.accent.solid.replace(
     "#",
-    ""
+    "",
   );
 
   const title = `title=${processedTitle}&`;
@@ -34,7 +35,8 @@ export default function Thumbnail(
   const color = `color=${colorHex}&`;
   const tags = `${processedTags}`;
 
-  const all = `https://api.irvanma.me/api/index?${title}${name}${email}${date}${color}${tags}`;
+  const all =
+    `https://api.irvanma.me/api/index?${title}${name}${email}${date}${color}${tags}`;
 
   return all;
 }
