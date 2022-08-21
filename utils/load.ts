@@ -26,7 +26,7 @@ export async function loadPost(
   }
 
   let pathname = "/" + relative(postsDirectory, path);
-  pathname = pathname.slice(0, -3);
+  pathname = pathname.split(".")[0];
 
   const { body, attrs } = parse<Record<string, Any>>(contents);
 
@@ -45,7 +45,7 @@ export async function loadPost(
 export async function loadContent(postsDirectory: string) {
   const posts = new Map<string, Post>();
   for await (const entry of walk(postsDirectory)) {
-    if (entry.isFile && entry.path.endsWith(".md")) {
+    if (entry.isFile && entry.path.endsWith(".mdx")) {
       const [key, post]: [string, Post] = await loadPost(
         postsDirectory,
         entry.path,
