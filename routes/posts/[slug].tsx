@@ -16,7 +16,7 @@ export const handler: Handlers<Post | null> = {
   async GET(_, ctx) {
     const { slug } = ctx.params;
 
-    const [, check] = await loadPost(postDir, `${postDir}${slug}.md`);
+    const [, check] = await loadPost(postDir, `${postDir}${slug}.mdx`);
 
     if (check == null) {
       return ctx.render(null);
