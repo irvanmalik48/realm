@@ -7,6 +7,7 @@ import PreBlock from "@components/PreBlock.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { apply, css, tw } from "@utils/twind.ts";
 import { loadContent, loadPost } from "@utils/load.ts";
+import Counter from "@components/Counter.tsx";
 
 const postDir = "posts/";
 
@@ -16,7 +17,7 @@ export const handler: Handlers<Post | null> = {
   async GET(_, ctx) {
     const { slug } = ctx.params;
 
-    const [, check] = await loadPost(postDir, `${postDir}${slug}.mdx`);
+    const [, check] = await loadPost(postDir, `${postDir}${slug}.md`);
 
     if (check == null) {
       return ctx.render(null);
@@ -223,6 +224,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         options={{
           overrides: {
             pre: PreBlock,
+            Counter: Counter,
           },
         }}
       >
