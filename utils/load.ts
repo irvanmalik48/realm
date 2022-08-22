@@ -45,7 +45,7 @@ export async function loadPost(
 export async function loadContent(postsDirectory: string) {
   const posts = new Map<string, Post>();
   for await (const entry of walk(postsDirectory)) {
-    if (entry.isFile && entry.path.endsWith(".mdx")) {
+    if (entry.isFile && entry.path.endsWith(".md")) {
       const [key, post]: [string, Post] = await loadPost(
         postsDirectory,
         entry.path,
