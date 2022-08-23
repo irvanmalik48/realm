@@ -6,7 +6,7 @@ import { Post } from "@/types.d.tsx";
 import PreBlock from "@components/PreBlock.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { apply, css, tw } from "@utils/twind.ts";
-import { loadContent, loadPost } from "@utils/load.ts";
+import { loadContent, loadPost, timeToRead } from "@utils/load.ts";
 import Counter from "@components/Counter.tsx";
 
 const postDir = "posts/";
@@ -47,11 +47,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
   const prevPost = postProps[before];
   const nextPost = postProps[after];
 
-  const readingTime = () => {
-    const wpm = 225;
-    const words = data?.md?.trim().split(/\s+/).length;
-    return words ? Math.ceil(words / wpm) : 0;
-  };
+  const readingTime = timeToRead((data) ?? {});
 
   const month = [
     "January",
@@ -215,7 +211,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
               )
             }`}
           >
-            {readingTime()} minutes read
+            {readingTime}
           </p>
         </div>
       </header>
