@@ -19,7 +19,10 @@ export default function PostCard(props: {
         <p className={tw`text-dark-accent-solid font-semibold font-heading`}>
           {props.title}
         </p>
-        <p className={tw`text-dark-text text-xs mb-2`}>{props.date}{(props.timeToRead) ? ` - ${props.timeToRead}` : ""}</p>
+        <p className={tw`text-dark-text text-xs mb-2`}>
+          {props.date}
+          {(props.timeToRead) ? ` - ${props.timeToRead}` : ""}
+        </p>
         <p className={tw`text-dark-text text-sm mb-1`}>{props.desc}</p>
       </div>
       <div className={tw`box-border flex-wrap flex flex-row`}>
