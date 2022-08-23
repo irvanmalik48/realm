@@ -55,3 +55,10 @@ export async function loadContent(postsDirectory: string) {
   }
   return posts;
 }
+
+export function timeToRead(data: Post) {
+  const wpm = 225;
+  const words = data?.md?.trim().split(/\s+/).length;
+  const res = words ? Math.ceil(words / wpm) : 0;
+  return `${res} minutes read`;
+}
