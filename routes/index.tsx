@@ -4,7 +4,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { Post } from "@/types.d.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PostCard from "@components/PostCard.tsx";
-import { loadContent } from "@utils/load.ts";
+import { loadContent, timeToRead } from "@utils/load.ts";
 import { colorScheme } from "@utils/colors.ts";
 import { quotes } from "@utils/quotes.ts";
 import { tw } from "@utils/twind.ts";
@@ -194,6 +194,7 @@ export default function Home(
                 date={data.date}
                 desc={data.desc}
                 tag={data.tag}
+                timeToRead={timeToRead(data)}
               />
             );
           })}
