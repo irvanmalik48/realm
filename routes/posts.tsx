@@ -3,7 +3,7 @@ import { h } from "preact";
 import { Post } from "@/types.d.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PostCard from "@components/PostCard.tsx";
-import { loadContent } from "@utils/load.ts";
+import { loadContent, timeToRead } from "@utils/load.ts";
 import { tw } from "@utils/twind.ts";
 
 const posts = await loadContent("posts/");
@@ -57,6 +57,7 @@ export default function Posts() {
                 date={data.date}
                 desc={data.desc}
                 tag={data.tag}
+                timeToRead={timeToRead(data)}
               />
             );
           })}
