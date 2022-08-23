@@ -120,7 +120,7 @@ export default function About(
         >
           Description
         </p>
-        <p className={tw`text-dark-text mt-3`}>
+        <p className={tw`text-dark-text`}>
           Hello, my name's Irvan Malik Azantha. I'm a 19 y'o man currently
           studying on Universitas Sriwijaya. I live in Palembang, Indonesia. I'm
           a self taught developer that loves to learn new things.
