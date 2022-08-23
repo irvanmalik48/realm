@@ -3,7 +3,7 @@ import { h } from "preact";
 import { Post } from "@/types.d.tsx";
 import PostCard from "@components/PostCard.tsx";
 import { apply, css, tw } from "@utils/twind.ts";
-import { loadContent } from "@utils/load.ts";
+import { loadContent, timeToRead } from "@utils/load.ts";
 
 const posts = await loadContent("posts/");
 
@@ -53,6 +53,7 @@ export default function Sidebar() {
               date={data.date}
               desc={data.desc}
               tag={data.tag}
+              timeToRead={timeToRead(data)}
             />
           );
         })}
