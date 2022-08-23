@@ -1,6 +1,7 @@
 import { extract as parse } from "$std/encoding/front_matter.ts";
 import { relative } from "$std/path/posix.ts";
 import { walk } from "$std/fs/walk.ts";
+import { config as envConfig } from "dotenv";
 import { Post } from "@/types.d.tsx";
 import { Any } from "any";
 
@@ -61,4 +62,8 @@ export function timeToRead(data: Post) {
   const words = data?.md?.trim().split(/\s+/).length;
   const res = words ? Math.ceil(words / wpm) : 0;
   return `${res} minutes read`;
+}
+
+export function loadEnv() {
+  envConfig({ export: true });
 }
