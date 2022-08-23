@@ -4,22 +4,35 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import { tw } from "@utils/twind.ts";
 import { quotes } from "@utils/quotes.ts";
+import { GitHubUser } from "@/types.d.tsx";
+import ky from "ky";
 
 export const handler: Handlers<{
   quote: string;
 }> = {
-  GET(_req, ctx) {
+  async GET(_req, ctx) {
+    const getUsernameInfo = async () => {
+      const res = await ky.get("https://api.github.com/users/irvanmalik48", {
+        headers: {
+          Authorization: "token " + Deno.env.get("GH_ACCESS_TOKEN")!,
+        },
+      });
+      return await res.json() as GitHubUser;
+    };
+    const usernameInfo: GitHubUser = await getUsernameInfo();
     const randomIndex = Math.floor(Math.random() * 20);
     const body = {
+      user: usernameInfo,
       quote: quotes[randomIndex],
     };
 
-    return ctx.render(body);
+    return await ctx.render(body);
   },
 };
 
-export default function Posts(
+export default function About(
   props: PageProps<{
+    user: GitHubUser;
     quote: string;
   }>,
 ) {
@@ -44,20 +57,73 @@ export default function Posts(
       <section
         className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
       >
+        <a href={props.data.user.html_url}>
+          <div
+            className={tw`flex flex-col justify-center items-center md:flex-row gap-5 pb-5`}
+          >
+            <img
+              className={tw`transition-all duration-200 ease-linear rounded-full w-[fit-content] h-[200px] md:h-[125px] lg:h-[150px] xl:h-[200px] border-[10px] border-dark-accent-quartertrans hover:border-dark-accent-semitrans`}
+              src={props.data.user.avatar_url}
+              alt="GitHub Avatar"
+            />
+            <div
+              className={tw`flex flex-col gap-3 bg-dark-side rounded-xl px-5 py-3 flex-grow w-full md:w-auto h-auto`}
+            >
+              <p
+                className={tw`text-dark-text font-bold text-2xl font-mono text-center w-full`}
+              >
+                {props.data.user.name}{" "}
+                (<span className={tw`text-dark-accent-solid`}>
+                  {props.data.user.login}
+                </span>)
+              </p>
+              <div className={tw`grid xl:grid-cols-2`}>
+                <div>
+                  <p className={tw`text-dark-text`}>
+                    <span className={tw`font-bold`}>Name:</span>{" "}
+                    {props.data.user.name}
+                  </p>
+                  <p className={tw`text-dark-text`}>
+                    <span className={tw`font-bold`}>Followers:</span>{" "}
+                    {props.data.user.followers}
+                  </p>
+                  <p className={tw`text-dark-text`}>
+                    <span className={tw`font-bold`}>Following</span>{" "}
+                    {props.data.user.following}
+                  </p>
+                </div>
+                <div>
+                  <p className={tw`text-dark-text`}>
+                    <span className={tw`font-bold`}>University:</span>{" "}
+                    {props.data.user.company}
+                  </p>
+                  <p className={tw`text-dark-text`}>
+                    <span className={tw`font-bold`}>Location:</span>{" "}
+                    {props.data.user.location}
+                  </p>
+                  <p className={tw`text-dark-text`}>
+                    <span className={tw`font-bold`}>Email:</span>{" "}
+                    {props.data.user.email}
+                  </p>
+                </div>
+              </div>
+              <p
+                className={tw`bg-dark-accent-semitrans h-[fit-content] w-full text-dark-text text-center px-5 py-2 rounded-xl border-l-4 border-r-4 border-dark-accent-solid mb-2`}
+              >
+                {props.data.quote}
+              </p>
+            </div>
+          </div>
+        </a>
         <p
           className={tw`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Description
         </p>
-        <p
-          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
-        >
-          {props.data.quote}
-        </p>
         <p className={tw`text-dark-text mt-3`}>
           Hello, my name's Irvan Malik Azantha. I'm a 19 y'o man currently
-          studying on Universitas Sriwijaya. I live in Palembang, Indonesia.
-          I'm a self taught developer that loves to learn new things.
+          studying on Universitas Sriwijaya. I live in Palembang, Indonesia. I'm
+          a self taught developer that loves to learn new things.
         </p>
         <p className={tw`text-dark-text mt-3`}>
           I've started programming since 2020 (2018 actually but that's mostly
