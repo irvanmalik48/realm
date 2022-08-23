@@ -1,7 +1,7 @@
-import { extract as parse } from "frontmatter";
-import { relative } from "relative";
+import { extract as parse } from "$std/encoding/front_matter.ts";
+import { relative } from "$std/path/posix.ts";
 import { Post } from "@/types.d.tsx";
-import { walk } from "walk";
+import { walk } from "$std/fs/walk.ts";
 import { Any } from "any";
 
 export async function loadPost(
