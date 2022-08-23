@@ -164,12 +164,9 @@ export default function Home(
           {props.data.quote}
         </p>
         <p className={tw`text-dark-text mt-3`}>
-          Hello, my name's Irvan Malik Azantha. I'm a 19 y'o boy currently
-          studying on Universitas Sriwijaya. I live in Palembang, Indonesia. I'm
-          a highly enthusiastic person with subtle interest in open source
-          projects and keen on learning new things. Also likes to watch anime,
-          play games, and have hugs and cuddles (lmao). Give glory for the
-          chaos!
+          Hello, my name's Irvan Malik Azantha. I'm a 19 y'o man currently
+          studying on Universitas Sriwijaya. I live in Palembang, Indonesia.
+          I'm a self taught developer that loves to learn new things.
         </p>
       </section>
       <section
