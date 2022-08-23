@@ -57,17 +57,17 @@ export default function About(
       <section
         className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
       >
-        <a href={props.data.user.html_url}>
+        <a href={props.data.user.html_url} className={tw`group`}>
           <div
-            className={tw`flex flex-col justify-center items-center md:flex-row gap-5 pb-5`}
+            className={tw`flex flex-col justify-center items-center md:flex-row gap-5 p-5`}
           >
             <img
-              className={tw`transition-all duration-200 ease-linear rounded-full w-[fit-content] h-[200px] md:h-[125px] lg:h-[150px] xl:h-[200px] border-[10px] border-dark-accent-quartertrans hover:border-dark-accent-semitrans`}
+              className={tw`transition-all duration-200 ease-linear rounded-full w-[fit-content] h-[200px] md:h-[125px] lg:h-[150px] xl:h-[200px] ring-4 ring-transparent group-hover:ring-dark-accent-semitrans`}
               src={props.data.user.avatar_url}
               alt="GitHub Avatar"
             />
             <div
-              className={tw`flex flex-col gap-3 bg-dark-side rounded-xl px-5 py-3 flex-grow w-full md:w-auto h-auto`}
+              className={tw`flex flex-col gap-3 bg-dark-side rounded-xl px-5 py-3 flex-grow w-full md:w-auto h-auto group-hover:bg-dark-accent-quartertrans transition-all duration-200 ease-linear`}
             >
               <p
                 className={tw`text-dark-text font-bold text-2xl font-mono text-center w-full`}
