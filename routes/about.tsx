@@ -56,9 +56,8 @@ export default function Posts(
         </p>
         <p className={tw`text-dark-text mt-3`}>
           Hello, my name's Irvan Malik Azantha. I'm a 19 y'o man currently
-          studying on Universitas Sriwijaya. I live in Palembang, Indonesia. I'm
-          a highly enthusiastic person with subtle interest in open source
-          projects and keen on learning new things.
+          studying on Universitas Sriwijaya. I live in Palembang, Indonesia.
+          I'm a self taught developer that loves to learn new things.
         </p>
         <p className={tw`text-dark-text mt-3`}>
           I've started programming since 2020 (2018 actually but that's mostly
