@@ -10,9 +10,10 @@ deno task start
 
 This will watch the project directory and restart as necessary.
 
-### Colorscheme
+### Colorschemes
 
-[Everblush](https://github.com/Everblush) by [mangeshrex](https://github.com/Mangeshrex).
+- [Everblush](https://github.com/Everblush) by [mangeshrex](https://github.com/Mangeshrex).
+- [Nord](https://www.nordtheme.com/) by [Arctic Ice Studio](https://github.com/arcticicestudio).
 
 ### License
 
