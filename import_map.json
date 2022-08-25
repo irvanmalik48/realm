@@ -1,8 +1,8 @@
 {
   "imports": {
     "$fresh/": "https://cdn.jsdelivr.net/gh/denoland/fresh@main/",
-    "$std/": "https://deno.land/std@0.152.0/",
-    "any": "https://deno.land/std@0.152.0/encoding/_yaml/utils.ts",
+    "$std/": "https://deno.land/std@0.153.0/",
+    "any": "https://deno.land/std@0.153.0/encoding/_yaml/utils.ts",
     "fresh-seo": "https://deno.land/x/fresh_seo@0.1.0/mod.ts",
     "ky": "https://esm.sh/ky@0.31.1",
     "preact": "https://esm.sh/preact@10.10.6",
