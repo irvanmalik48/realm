@@ -1,4 +1,6 @@
-<h2 style="text-align: center;">the <span style="color: #5DB7CB;">realm<span/></h2>
+<p align="center">
+  <img width="300" height="auto" src="https://irvanma.me/readme-logo.svg">
+</p>
 
 ### Usage
 
