@@ -1,10 +1,10 @@
-## A new, `fresh` blog I somewhat call my 'realm'
+<h2 style="text-align: center;">the <span style="color: #5DB7CB;">realm<span/></h2>
 
 ### Usage
 
 Start the project:
 
-```
+```sh
 deno task start
 ```
 
