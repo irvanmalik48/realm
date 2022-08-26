@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://irvanma.me">
-    <img width="250" height="auto" src="https://irvanma.me/readme-logo.svg" />
+    <img width="250" height="auto" src="https://irvanma.me/readme-logo-new.svg" />
   </a>
 </p>
 
