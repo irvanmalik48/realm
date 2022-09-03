@@ -2,7 +2,7 @@
 import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { CheckIcon, CopyIcon } from "@components/Icons.tsx";
+import { CopyCheckIcon } from "@components/Icons.tsx";
 import { tw } from "@utils/twind.ts";
 
 export default function CopyButton(props: { text: string }) {
@@ -41,9 +41,15 @@ export default function CopyButton(props: { text: string }) {
       }}
       disabled={!IS_BROWSER}
     >
-      {copied
-        ? <CheckIcon className={tw`w-[1rem]`} />
-        : <CopyIcon className={tw`w-[1rem]`} />}
+      <CopyCheckIcon
+        className={tw`w-[1rem]`}
+        pathCopyClassName={tw`${
+          copied ? "opacity-0" : "opacity-100"
+        } transition-all duration-100 ease-linear`}
+        pathCheckClassName={tw`${
+          !copied ? "opacity-0" : "opacity-100"
+        } transition-all duration-100 ease-linear`}
+      />
     </button>
   );
 }
