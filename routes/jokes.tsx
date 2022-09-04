@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import ky from "ky";
 import { JokesImage, JokesText, JokesType } from "@/types.d.tsx";
