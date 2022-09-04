@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from "preact";
 import { Post } from "@/types.d.tsx";
 import PostCard from "@components/PostCard.tsx";
 import { apply, css, tw } from "@utils/twind.ts";
