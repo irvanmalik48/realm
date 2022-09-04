@@ -1,6 +1,3 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { useState } from "preact/hooks";
 import { tw } from "@utils/twind.ts";
 
