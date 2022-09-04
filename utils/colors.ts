@@ -18,10 +18,10 @@ export const colorScheme = {
   },
   everblush: {
     dark: {
-      nav: "#282F32",
+      nav: "#212C30",
       bg: "#141B1E",
       superdark: "#0D1417",
-      side: "#232A2D",
+      side: "#1E292D",
       accent: {
         solid: "#5DB7CB",
         semitrans: "#5DB7CB40",
