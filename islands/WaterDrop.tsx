@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { Spring } from "@/types.d.tsx";
 import WaveTank from "@components/WaveTank.tsx";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
-import { tw } from "@utils/twind.ts";
+import { css, tw } from "@utils/twind.ts";
 
 function easeInCirc(x: number) {
   return 1 - Math.sqrt(1 - Math.pow(x, 2));
@@ -151,7 +151,11 @@ export default function WaterDrop() {
         </polygon>
       </svg>
       <div
-        className={tw`bg-gradient-to-b from-dark-accent-solid to-transparent w-full h-[fit-content] pt-5 pb-36 md:pb-8`}
+        className={tw`bg-gradient-to-b from-dark-accent-solid to-transparent w-full h-[fit-content] pt-5 pb-36 md:pb-8 z-[0] ${css(
+          {
+            "backdrop-filter": "blur(.5rem)",
+          }
+        )}`}
       >
         <p className={tw`mb-2 w-full text-center`}>
           <span
