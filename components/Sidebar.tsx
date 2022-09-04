@@ -36,7 +36,11 @@ export default function Sidebar() {
         className={tw`flex flex-row w-full gap-4 sticky top-0 pt-4 bg-gradient-to-b from-dark-side via-dark-side to-transparent px-4`}
       >
         <div
-          className={tw`w-full px-5 py-3 font-bold font-mono bg-dark-bg rounded-xl text-sm uppercase shadow-xl`}
+          className={tw`w-full px-5 py-3 font-bold font-mono bg-dark-accent-quartertrans rounded-xl text-sm uppercase shadow-xl ${css(
+            {
+              "backdrop-filter": "blur(.5rem)",
+            }
+          )}`}
         >
           <p>All Posts</p>
         </div>
