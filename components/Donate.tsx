@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from "preact";
 import { css, tw } from "@utils/twind.ts";
 
 function CoffeeIcon() {
