@@ -1,6 +1,3 @@
-/** @jsx h */
-import { h } from "preact";
-
 export function HomeIcon() {
   return (
     <svg style="width:24px;height:24px" viewBox="0 0 24 24">
