@@ -1,8 +1,6 @@
 //  SPDX-FileCopyrightText: 2021 Luca Casonato
 //  SPDX-License-Identifier: MIT
 
-/** @jsx h */
-import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { Spring } from "@/types.d.tsx";
 import WaveTank from "@components/WaveTank.tsx";
