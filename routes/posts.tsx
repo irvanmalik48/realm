@@ -2,7 +2,7 @@ import { Post } from "@/types.d.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PostCard from "@components/PostCard.tsx";
 import { loadContent, timeToRead } from "@utils/load.ts";
-import { tw } from "@utils/twind.ts";
+import { css, tw } from "@utils/twind.ts";
 
 const posts = await loadContent("posts/");
 
@@ -36,7 +36,13 @@ export default function Posts() {
         </div>
       </header>
       <section
-        className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
+        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
+          css(
+            {
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
       >
         <p
           className={tw`text-2xl rounded-xl font-bold text-dark-text mt-1 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}

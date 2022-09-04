@@ -1,6 +1,6 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import { tw } from "@utils/twind.ts";
+import { css, tw } from "@utils/twind.ts";
 import { quotes } from "@utils/quotes.ts";
 import { GitHubUser } from "@/types.d.tsx";
 import ky from "ky";
@@ -53,7 +53,13 @@ export default function About(
         </div>
       </header>
       <section
-        className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
+        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
+          css(
+            {
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
       >
         <a href={props.data.user.html_url} className={tw`group`}>
           <div

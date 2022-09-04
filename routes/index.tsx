@@ -4,7 +4,7 @@ import DefaultLayout from "@components/DefaultLayout.tsx";
 import PostCard from "@components/PostCard.tsx";
 import { loadContent, timeToRead } from "@utils/load.ts";
 import { quotes } from "@utils/quotes.ts";
-import { tw } from "@utils/twind.ts";
+import { css, tw } from "@utils/twind.ts";
 import { ChaosLogo } from "@components/ChaosLogo.tsx";
 
 const posts = await loadContent("posts/");
@@ -62,7 +62,15 @@ export default function Home(
           </p>
         </div>
       </header>
-      <section className={tw`mb-10 w-full bg-dark-nav py-4 px-5 rounded-xl`}>
+      <section
+        className={tw`mb-10 w-full bg-dark-navglass py-4 px-5 rounded-xl ${
+          css(
+            {
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
+      >
         <p
           className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}
         >
@@ -80,7 +88,13 @@ export default function Home(
         </p>
       </section>
       <section
-        className={tw`flex flex-col w-full bg-dark-nav py-4 px-5 rounded-xl mb-5`}
+        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
+          css(
+            {
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
       >
         <p
           className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}

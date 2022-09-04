@@ -214,7 +214,15 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         </div>
       </header>
       <Markdown
-        class={tw`${tw(styles)} mb-5 w-full bg-dark-nav py-4 px-5 rounded-xl`}
+        class={tw`${
+          tw(styles)
+        } mb-5 w-full bg-dark-navglass py-4 px-5 rounded-xl ${
+          css(
+            {
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
         options={{
           overrides: {
             pre: PreBlock,
