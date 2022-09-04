@@ -2,6 +2,7 @@ export const colorScheme = {
   nord: {
     dark: {
       nav: "#2E3440",
+      navglass: "#2E3440AA",
       bg: "#242933",
       superdark: "#21242F",
       side: "#292E39",
@@ -19,6 +20,7 @@ export const colorScheme = {
   everblush: {
     dark: {
       nav: "#212C30",
+      navglass: "#212C30AA",
       bg: "#141B1E",
       superdark: "#0D1417",
       side: "#1E292D",
