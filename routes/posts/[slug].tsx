@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import Markdown from "markdown-to-jsx";
 import { Post } from "@/types.d.tsx";
