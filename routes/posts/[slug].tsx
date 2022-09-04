@@ -233,7 +233,13 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         {data.md !== undefined ? data.md : ""}
       </Markdown>
       <div
-        className={tw`grid grid-cols-1 md:grid-cols-2 w-full gap-5 mb-5 bg-dark-nav p-5 rounded-xl`}
+        className={tw`grid grid-cols-1 md:grid-cols-2 w-full gap-5 mb-5 bg-dark-navglass p-5 rounded-xl ${
+          css(
+            {
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
       >
         {before !== -1 && (
           <a
