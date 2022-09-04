@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from "preact";
 import { tw } from "@utils/twind.ts";
 import CounterLogic from "@islands/CounterLogic.tsx";
 
