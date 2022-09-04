@@ -151,11 +151,13 @@ export default function WaterDrop() {
         </polygon>
       </svg>
       <div
-        className={tw`bg-gradient-to-b from-dark-accent-solid to-transparent w-full h-[fit-content] pt-5 pb-36 md:pb-8 z-[0] ${css(
-          {
-            "backdrop-filter": "blur(.5rem)",
-          }
-        )}`}
+        className={tw`bg-gradient-to-b from-dark-accent-solid to-transparent w-full h-[fit-content] pt-5 pb-36 md:pb-8 z-[0] ${
+          css(
+            {
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
       >
         <p className={tw`mb-2 w-full text-center`}>
           <span
