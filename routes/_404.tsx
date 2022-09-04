@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from "preact";
 import { UnknownPageProps } from "$fresh/server.ts";
 import NotFoundPageFound from "@/routes/blooper.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
