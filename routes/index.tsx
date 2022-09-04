@@ -4,7 +4,7 @@ import DefaultLayout from "@components/DefaultLayout.tsx";
 import PostCard from "@components/PostCard.tsx";
 import { loadContent, timeToRead } from "@utils/load.ts";
 import { quotes } from "@utils/quotes.ts";
-import { css, tw } from "@utils/twind.ts";
+import { tw } from "@utils/twind.ts";
 import { ChaosLogo } from "@components/ChaosLogo.tsx";
 
 const posts = await loadContent("posts/");
