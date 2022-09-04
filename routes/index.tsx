@@ -5,7 +5,7 @@ import PostCard from "@components/PostCard.tsx";
 import { loadContent, timeToRead } from "@utils/load.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 import { quotes } from "@utils/quotes.ts";
-import { tw } from "@utils/twind.ts";
+import { css, tw } from "@utils/twind.ts";
 
 const posts = await loadContent("posts/");
 
@@ -23,6 +23,7 @@ function ChaosLogo(props: { class: string }) {
         cx="250"
         cy="250"
         r="194"
+        className={tw`group-hover:stroke-current group-hover:text-transparent transition-all duration-1000 ease-in-out`}
         stroke={colorScheme[currentColorScheme].dark.nav}
         stroke-width="12"
       />
@@ -95,6 +96,7 @@ function ChaosLogo(props: { class: string }) {
         width="140"
         height="140"
         transform="rotate(-45 151.393 250)"
+        className={tw`group-hover:stroke-current group-hover:text-transparent transition-all duration-1000 ease-in-out`}
         stroke={colorScheme[currentColorScheme].dark.nav}
         stroke-width="15"
       />
@@ -138,9 +140,14 @@ export default function Home(
       <header
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >
-        <ChaosLogo
-          class={tw`bg-dark-side rounded-full w-[200px] md:w-[100px] h-[fit-content]`}
-        />
+        <a
+          href="https://en.wikipedia.org/wiki/Symbol_of_Chaos"
+          aria-label="Symbol of Chaos - Wikipedia"
+        >
+          <ChaosLogo
+            class={tw`bg-dark-side group rounded-full w-[200px] md:w-[100px] h-[fit-content] hover:translate-y-[-20px] md:hover:translate-y-[0] md:hover:translate-x-[-20px] hover:rotate-[360deg] hover:scale-[1.2] hover:transform-gpu hover:(ring ring-dark-accent-solid) transition-all duration-1000 ease-in-out`}
+          />
+        </a>
         <div className={tw`flex flex-col justify-start items-center`}>
           <p className={tw`text-dark-text font-bold text-3xl font-heading`}>
             Irvan Malik Azantha
