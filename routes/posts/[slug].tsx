@@ -123,18 +123,18 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         ol: apply`ml-6`,
       })
     }`,
-    a: apply`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`,
+    a: apply`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`,
     ul: apply`list-disc list-inside my-0 ${
       css({
         ul: apply`ml-6`,
         ol: apply`ml-6`,
         "li::marker":
-          apply`text-dark-accent-semitrans transition-all duration-200 ease-linear`,
+          apply`text-dark-accent-semitrans transition-all duration-200 ease-out`,
         "li:hover::marker": apply`text-dark-accent-solid`,
       })
     }`,
     img:
-      apply`w-full h-auto transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
+      apply`w-full h-auto transition-all duration-200 ease-out ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
     code:
       apply`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
     "span.linenumber":
@@ -184,10 +184,12 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
       >
         <div className={tw`flex flex-col justify-center items-center`}>
-          <p className={tw`text-dark-text text-center font-bold text-3xl`}>
+          <p
+            className={tw`text-dark-text text-center font-heading font-bold text-3xl`}
+          >
             {data.title}
           </p>
-          <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
+          <p className={tw`w-full text-center text-dark-accent-solid`}>
             {dateString}
           </p>
           <div className={tw`w-full flex flex-row justify-center items-center`}>
@@ -244,7 +246,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         {before !== -1 && (
           <a
             href={"/posts" + prevPost.path}
-            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
+            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text box-border`}
           >
             <div className={tw`px-5 py-1 bg-dark-accent-solid`}>
               <p
@@ -278,7 +280,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         {after !== -1 && (
           <a
             href={"/posts" + nextPost.path}
-            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
+            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text box-border`}
           >
             <div className={tw`px-5 py-1 bg-dark-accent-solid`}>
               <p

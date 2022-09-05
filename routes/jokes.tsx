@@ -101,7 +101,7 @@ function ImageJoke(props: { data: JokesImage | undefined }) {
         Image:
       </p>
       <img
-        className={tw`w-full h-[500px] object-contain bg-dark-superdark transition-all duration-200 ease-linear ring ring-transparent hover:ring-dark-accent-solid rounded-xl`}
+        className={tw`w-full h-[500px] object-contain bg-dark-superdark transition-all duration-200 ease-out ring ring-transparent hover:ring-dark-accent-solid rounded-xl`}
         src={props?.data?.data.url}
         alt="joke"
       />

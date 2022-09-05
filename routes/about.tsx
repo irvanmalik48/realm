@@ -66,12 +66,12 @@ export default function About(
             className={tw`flex flex-col justify-center items-center md:flex-row gap-5 p-5`}
           >
             <img
-              className={tw`transition-all duration-200 ease-linear rounded-full w-[fit-content] h-[200px] md:h-[125px] lg:h-[150px] xl:h-[200px] ring-4 ring-transparent group-hover:ring-dark-accent-semitrans`}
+              className={tw`transition-all duration-200 ease-out rounded-full w-[fit-content] h-[200px] md:h-[125px] lg:h-[150px] xl:h-[200px] ring-4 ring-transparent group-hover:ring-dark-accent-semitrans`}
               src={props.data.user.avatar_url}
               alt="GitHub Avatar"
             />
             <div
-              className={tw`flex flex-col gap-3 bg-dark-side rounded-xl px-5 py-3 flex-grow w-full md:w-auto h-auto group-hover:bg-dark-accent-quartertrans transition-all duration-200 ease-linear`}
+              className={tw`flex flex-col gap-3 bg-dark-side rounded-xl px-5 py-3 flex-grow w-full md:w-auto h-auto group-hover:bg-dark-accent-quartertrans transition-all duration-200 ease-out`}
             >
               <p
                 className={tw`text-dark-text font-bold text-2xl font-mono text-center w-full`}
@@ -137,7 +137,7 @@ export default function About(
           where I simply exist) but that's what I tend to always do to just have
           fun. No offense given at all. And finally,{" "}
           <a
-            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://t.me/gnuweeb"
           >
             GNU/Weeb
@@ -168,28 +168,28 @@ export default function About(
         <p className={tw`text-dark-text mt-3`}>
           This website is made with Deno's{" "}
           <a
-            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://fresh.deno.dev/"
           >
             fresh
           </a>{" "}
           framework. The tools for stylings are provided by{" "}
           <a
-            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://twind.dev/"
           >
             Twind
           </a>{" "}
           (it's essentially just{" "}
           <a
-            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://tailwindcss.com/"
           >
             Tailwind
           </a>{" "}
           but the entire thing is CSS-in-JS). This website is hosted on{" "}
           <a
-            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-linear duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://deno.com/deploy"
           >
             Deno Deploy
