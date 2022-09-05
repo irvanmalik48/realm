@@ -11,7 +11,7 @@ export default function PostCard(props: {
   return (
     <a
       href={props.path}
-      className={tw`ring ring-transparent flex flex-col justify-between block w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-linear text-dark-text box-border`}
+      className={tw`ring ring-transparent flex flex-col justify-between block w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text box-border`}
     >
       <div>
         <p className={tw`text-dark-accent-solid font-semibold font-heading`}>
