@@ -23,13 +23,13 @@ export default function Nav(props: { active: string }) {
           <div
             className={tw`${
               props.active === "home"
-                ? "md:bg-dark-accent-semitrans md:text-dark-accent-solid"
+                ? "md:bg-dark-accent-semitrans text-dark-accent-solid"
                 : ""
             } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <HomeIcon />
             <span
-              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm text-dark-text transition-all duration-100`}
+              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm transition-all duration-100`}
             >
               Home
             </span>
@@ -42,13 +42,13 @@ export default function Nav(props: { active: string }) {
           <div
             className={tw`${
               props.active === "posts"
-                ? "md:bg-dark-accent-semitrans md:text-dark-accent-solid"
+                ? "md:bg-dark-accent-semitrans text-dark-accent-solid"
                 : ""
             } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <BlogIcon />
             <span
-              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm text-dark-text transition-all duration-100`}
+              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm transition-all duration-100`}
             >
               Posts
             </span>
@@ -61,15 +61,16 @@ export default function Nav(props: { active: string }) {
           <div
             className={tw`${
               props.active === "projects"
-                ? "md:bg-dark-accent-semitrans md:text-dark-accent-solid"
+                ? "md:bg-dark-accent-semitrans text-dark-accent-solid"
                 : ""
             } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <ProjectIcon />
             <span
-              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm text-dark-text transition-all duration-100`}
+              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm transition-all duration-100`}
             >
-              Projects (WIP)
+              Projects
+              <span className={tw`hidden md:inline`}>{" "}(WIP)</span>
             </span>
           </div>
         </a>
@@ -80,13 +81,13 @@ export default function Nav(props: { active: string }) {
           <div
             className={tw`${
               props.active === "about"
-                ? "md:bg-dark-accent-semitrans md:text-dark-accent-solid"
+                ? "md:bg-dark-accent-semitrans text-dark-accent-solid"
                 : ""
             } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <AboutIcon />
             <span
-              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm text-dark-text transition-all duration-100`}
+              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm transition-all duration-100`}
             >
               About
             </span>
