@@ -179,6 +179,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       date={data.date}
       desc={data.desc}
       tag={data.tag}
+      active={data.path}
     >
       <header
         className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
