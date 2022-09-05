@@ -3,6 +3,7 @@ import {
   BlogIcon,
   GitHubIcon,
   HomeIcon,
+  ProjectIcon,
   RepoIcon,
 } from "@components/Icons.tsx";
 import { tw } from "@utils/twind.ts";
@@ -35,21 +36,6 @@ export default function Nav(props: { active: string }) {
           </div>
         </a>
         <a
-          href="https://github.com/irvanmalik48/realm"
-          className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
-        >
-          <div
-            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
-          >
-            <RepoIcon />
-            <span
-              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm text-dark-text transition-all duration-100`}
-            >
-              Repo
-            </span>
-          </div>
-        </a>
-        <a
           href="/posts"
           className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
@@ -65,6 +51,25 @@ export default function Nav(props: { active: string }) {
               className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm text-dark-text transition-all duration-100`}
             >
               Posts
+            </span>
+          </div>
+        </a>
+        <a
+          href="/projects"
+          className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
+        >
+          <div
+            className={tw`${
+              props.active === "projects"
+                ? "md:bg-dark-accent-semitrans md:text-dark-accent-solid"
+                : ""
+            } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+          >
+            <ProjectIcon />
+            <span
+              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm text-dark-text transition-all duration-100`}
+            >
+              Projects (WIP)
             </span>
           </div>
         </a>
@@ -88,22 +93,41 @@ export default function Nav(props: { active: string }) {
           </div>
         </a>
       </div>
-      <a
-        href="https://github.com/irvanmalik48"
-        className={tw`md:flex flex-row justify-center md:justify-start items-center gap-4 hidden`}
+      <div
+        className={tw`hidden md:flex md:flex-col w-full md:w-auto justify-center items-center gap-2 md:gap-5`}
       >
-        <div
-          className={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+        <a
+          href="https://github.com/irvanmalik48/realm"
+          className={tw`w-full md:w-auto flex flex-row justify-center md:justify-start items-center gap-4`}
         >
-          <GitHubIcon />
-          <span
-            className={tw`md:block hidden group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+          <div
+            className={tw`w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
-            Jump to my{" "}
-            <span className={tw`text-dark-accent-solid`}>GitHub Profile</span>
-          </span>
-        </div>
-      </a>
+            <RepoIcon />
+            <span
+              className={tw`block group-hover:text-dark-nav md:group-hover:text-dark-text md:group-hover:scale-100 md:bg-dark-nav md:absolute md:left-24 font-semibold md:m-2 w-auto md:min-w-max md:origin-left md:scale-0 md:rounded-3xl md:uppercase md:px-6 md:py-2 text-xs md:text-sm text-dark-text transition-all duration-100`}
+            >
+              This Blog's Repository
+            </span>
+          </div>
+        </a>
+        <a
+          href="https://github.com/irvanmalik48"
+          className={tw`md:flex flex-row justify-center md:justify-start items-center gap-4 hidden`}
+        >
+          <div
+            className={tw`group flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+          >
+            <GitHubIcon />
+            <span
+              className={tw`md:block hidden group-hover:scale-100 bg-dark-nav absolute left-24 font-semibold m-2 w-auto min-w-max origin-left scale-0 rounded-3xl uppercase px-6 py-2 text-sm text-dark-text transition-all duration-100`}
+            >
+              Jump to my{" "}
+              <span className={tw`text-dark-accent-solid`}>GitHub Profile</span>
+            </span>
+          </div>
+        </a>
+      </div>
     </nav>
   );
 }
