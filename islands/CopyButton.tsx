@@ -32,7 +32,7 @@ export default function CopyButton(props: { text: string }) {
 
   return (
     <button
-      className={tw`font-mono inline-block bg-dark-nav hover:bg-dark-accent-semitrans active:bg-dark-accent-solid focus:outline-none ring ring-transparent focus-visible:ring-dark-accent-solid hover:ring-dark-accent-solid w-[fit-content] text-sm text-dark-text active:text-dark-superdark hover:text-dark-accent-solid transition-all duration-200 ease-linear font-semibold px-4 py-0.5 my-1 rounded-3xl`}
+      className={tw`font-mono inline-block bg-dark-nav hover:bg-dark-accent-semitrans hover:scale-[120%] active:scale-105 active:bg-dark-accent-solid focus:outline-none ring ring-transparent focus-visible:ring-dark-accent-solid hover:ring-dark-accent-solid w-[fit-content] text-sm text-dark-text active:text-dark-superdark hover:text-dark-accent-solid transition-all duration-200 ease-out font-semibold px-4 py-0.5 my-1 rounded-3xl`}
       onClick={async (e) => {
         e.preventDefault();
         await handleClick();
@@ -43,10 +43,10 @@ export default function CopyButton(props: { text: string }) {
         className={tw`w-[1rem]`}
         pathCopyClassName={tw`${
           copied ? "opacity-0" : "opacity-100"
-        } transition-all duration-100 ease-linear`}
+        } transition-all duration-100 ease-out`}
         pathCheckClassName={tw`${
           !copied ? "opacity-0" : "opacity-100"
-        } transition-all duration-100 ease-linear`}
+        } transition-all duration-100 ease-out`}
       />
     </button>
   );
