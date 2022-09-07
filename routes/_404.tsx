@@ -10,6 +10,7 @@ export default function NotFoundPage({ url }: UnknownPageProps) {
       <DefaultLayout
         title="Page not found"
         desc="The page you're looking for is not found."
+        active="404 not found"
       >
         <header
           className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}

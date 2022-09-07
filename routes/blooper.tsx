@@ -6,6 +6,7 @@ export default function NotFoundPageFound() {
     <DefaultLayout
       title="Page found"
       desc="The page you're looking for is found."
+      active="404 is found"
     >
       <header
         className={tw`py-24 w-full flex flex-row justify-center items-center gap-5`}
