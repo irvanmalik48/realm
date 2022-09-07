@@ -39,6 +39,7 @@ export default function Posts() {
         className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
           css(
             {
+              "-webkit-backdrop-filter": "blur(.5rem)",
               "backdrop-filter": "blur(.5rem)",
             },
           )

@@ -207,6 +207,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             className={tw`w-[fit-content] text-center text-dark-text text-sm mt-2 px-5 py-1 bg-dark-accent-quartertrans rounded-3xl ${
               css(
                 {
+                  "-webkit-backdrop-filter": "blur(.5rem)",
                   "backdrop-filter": "blur(.5rem)",
                 },
               )
@@ -222,6 +223,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         } mb-5 w-full bg-dark-navglass py-4 px-5 rounded-xl ${
           css(
             {
+              "-webkit-backdrop-filter": "blur(.5rem)",
               "backdrop-filter": "blur(.5rem)",
             },
           )
@@ -239,6 +241,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         className={tw`grid grid-cols-1 md:grid-cols-2 w-full gap-5 mb-5 bg-dark-navglass p-5 rounded-xl ${
           css(
             {
+              "-webkit-backdrop-filter": "blur(.5rem)",
               "backdrop-filter": "blur(.5rem)",
             },
           )

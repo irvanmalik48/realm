@@ -61,6 +61,7 @@ export default function Jokes(
             className={tw`w-full text-center flex flex-col gap-5 text-xl p-5 pt-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border ${
               css(
                 {
+                  "-webkit-backdrop-filter": "blur(.5rem)",
                   "backdrop-filter": "blur(.5rem)",
                 },
               )

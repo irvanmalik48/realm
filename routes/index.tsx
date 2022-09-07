@@ -66,6 +66,7 @@ export default function Home(
         className={tw`mb-10 w-full bg-dark-navglass py-4 px-5 rounded-xl ${
           css(
             {
+              "-webkit-backdrop-filter": "blur(.5rem)",
               "backdrop-filter": "blur(.5rem)",
             },
           )
@@ -91,6 +92,7 @@ export default function Home(
         className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
           css(
             {
+              "-webkit-backdrop-filter": "blur(.5rem)",
               "backdrop-filter": "blur(.5rem)",
             },
           )
