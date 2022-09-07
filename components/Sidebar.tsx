@@ -39,6 +39,7 @@ export default function Sidebar() {
           className={tw`w-full px-5 py-3 font-bold font-mono bg-dark-accent-quartertrans rounded-xl text-sm uppercase shadow-xl ${
             css(
               {
+                "-webkit-backdrop-filter": "blur(.5rem)",
                 "backdrop-filter": "blur(.5rem)",
               },
             )

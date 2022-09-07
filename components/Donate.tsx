@@ -17,6 +17,7 @@ export default function DonateCard() {
       className={tw`flex flex-row justify-between items-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border mb-10 ${
         css(
           {
+            "-webkit-backdrop-filter": "blur(.5rem)",
             "backdrop-filter": "blur(.5rem)",
           },
         )
