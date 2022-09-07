@@ -154,6 +154,7 @@ export default function WaterDrop() {
         className={tw`bg-gradient-to-b from-dark-accent-solid to-transparent w-full h-[fit-content] pt-5 pb-36 md:pb-8 z-[0] ${
           css(
             {
+              "-webkit-backdrop-filter": "blur(.5rem)",
               "backdrop-filter": "blur(.5rem)",
             },
           )
