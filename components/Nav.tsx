@@ -11,7 +11,7 @@ import { tw } from "@utils/twind.ts";
 export default function Nav(props: { active: string }) {
   return (
     <nav
-      className={tw`bg-dark-nav h-auto md:h-screen w-full text-dark-text sticky md:top-0 bottom-0 shadow z-50 m-0 overflow-y-clip flex flex-row md:flex-col justify-evenly md:justify-between md:w-[fit-content] py-4 md:p-4`}
+      className={tw`bg-dark-nav h-auto md:h-screen w-full text-dark-text fixed md:sticky md:top-0 bottom-0 shadow z-50 m-0 overflow-y-clip flex flex-row md:flex-col justify-evenly md:justify-between md:w-[fit-content] py-4 md:p-4`}
     >
       <div
         className={tw`grid grid-cols-4 md:flex md:flex-col w-full md:w-auto justify-center items-center gap-2 md:gap-5`}
