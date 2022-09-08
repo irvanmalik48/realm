@@ -141,7 +141,6 @@ export default function DefaultLayout(props: {
           <WaterDrop />
         </section>
       </main>
-      <script type="module" src="/pwa-sw-register.js" />
     </>
   );
 }
