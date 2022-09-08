@@ -105,6 +105,7 @@ export default function DefaultLayout(props: {
           href={asset("/icons/favicon.ico")}
         />
         <link rel="apple-touch-icon" href={asset("/icons/ios/192.png")} />
+        <script type="module" defer src={asset("/pwa-sw-register.js")} />
       </Head>
       <Nav active={props.active ?? "home"} />
       <Sidebar />
