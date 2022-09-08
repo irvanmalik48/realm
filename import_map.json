@@ -7,6 +7,7 @@
     "ky": "https://esm.sh/ky@0.31.3",
     "preact": "https://esm.sh/preact@10.10.6",
     "preact/": "https://esm.sh/preact@10.10.6/",
+    "signals": "https://esm.sh/@preact/signals@1.0.3",
     "preact-render-to-string": "https://esm.sh/preact-render-to-string@5.2.3?external=preact",
     "markdown-to-jsx": "https://esm.sh/markdown-to-jsx@7.1.7",
     "twind": "https://esm.sh/twind@0.16.17",
