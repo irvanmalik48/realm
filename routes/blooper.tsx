@@ -13,16 +13,14 @@ export default function NotFoundPageFound() {
       >
         <div className={tw`flex flex-col justify-center items-center`}>
           <p
-            className={tw`text-light-text dark:text-dark-text text-center font-bold text-4xl mb-2 font-heading`}
+            className={tw`text-dark-text text-center font-bold text-4xl mb-2 font-heading`}
           >
             404
           </p>
-          <p
-            className={tw`w-full text-center text-light-accent-solid dark:text-dark-accent-solid text-lg`}
-          >
+          <p className={tw`w-full text-center text-dark-accent-solid text-lg`}>
             Page{" "}
             <code
-              className={tw`font-mono bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans text-sm text-light-accent-solid dark:text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`}
+              className={tw`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`}
             >
               /404
             </code>{" "}

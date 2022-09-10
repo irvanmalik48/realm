@@ -44,20 +44,16 @@ export default function About(
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >
         <div className={tw`flex flex-col justify-center items-center`}>
-          <p
-            className={tw`text-light-text dark:text-dark-text font-bold text-3xl font-heading`}
-          >
+          <p className={tw`text-dark-text font-bold text-3xl font-heading`}>
             About Me
           </p>
-          <p
-            className={tw`w-full text-light-accent-solid dark:text-dark-accent-solid text-lg`}
-          >
+          <p className={tw`w-full text-dark-accent-solid text-lg`}>
             A brief description of me.
           </p>
         </div>
       </header>
       <section
-        className={tw`flex flex-col w-full bg-light-navglass dark:bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
+        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
           css(
             {
               "backdrop-filter": "blur(.5rem)",
@@ -70,54 +66,53 @@ export default function About(
             className={tw`flex flex-col justify-center items-center md:flex-row gap-5 p-5`}
           >
             <img
-              className={tw`transition-all duration-200 ease-out rounded-full w-[fit-content] h-[200px] md:h-[125px] lg:h-[150px] xl:h-[200px] ring-4 ring-transparent group-hover:ring-light-accent-semitrans group-hover:dark:ring-dark-accent-semitrans`}
+              className={tw`transition-all duration-200 ease-out rounded-full w-[fit-content] h-[200px] md:h-[125px] lg:h-[150px] xl:h-[200px] ring-4 ring-transparent group-hover:ring-dark-accent-semitrans`}
               src={props.data.user.avatar_url}
               alt="GitHub Avatar"
             />
             <div
-              className={tw`flex flex-col gap-3 bg-light-side dark:bg-dark-side rounded-xl px-5 py-3 flex-grow w-full md:w-auto h-auto group-hover:(bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans) transition-all duration-200 ease-out`}
+              className={tw`flex flex-col gap-3 bg-dark-side rounded-xl px-5 py-3 flex-grow w-full md:w-auto h-auto group-hover:bg-dark-accent-quartertrans transition-all duration-200 ease-out`}
             >
               <p
-                className={tw`text-light-text dark:text-dark-text font-bold text-2xl font-mono text-center w-full`}
+                className={tw`text-dark-text font-bold text-2xl font-mono text-center w-full`}
               >
-                {props.data.user.name} (<span
-                  className={tw`text-light-accent-solid dark:text-dark-accent-solid`}
-                >
+                {props.data.user.name}{" "}
+                (<span className={tw`text-dark-accent-solid`}>
                   {props.data.user.login}
                 </span>)
               </p>
               <div className={tw`grid xl:grid-cols-2`}>
                 <div>
-                  <p className={tw`text-light-text dark:text-dark-text`}>
+                  <p className={tw`text-dark-text`}>
                     <span className={tw`font-bold`}>Name:</span>{" "}
                     {props.data.user.name}
                   </p>
-                  <p className={tw`text-light-text dark:text-dark-text`}>
+                  <p className={tw`text-dark-text`}>
                     <span className={tw`font-bold`}>Followers:</span>{" "}
                     {props.data.user.followers}
                   </p>
-                  <p className={tw`text-light-text dark:text-dark-text`}>
+                  <p className={tw`text-dark-text`}>
                     <span className={tw`font-bold`}>Following</span>{" "}
                     {props.data.user.following}
                   </p>
                 </div>
                 <div>
-                  <p className={tw`text-light-text dark:text-dark-text`}>
+                  <p className={tw`text-dark-text`}>
                     <span className={tw`font-bold`}>University:</span>{" "}
                     {props.data.user.company}
                   </p>
-                  <p className={tw`text-light-text dark:text-dark-text`}>
+                  <p className={tw`text-dark-text`}>
                     <span className={tw`font-bold`}>Location:</span>{" "}
                     {props.data.user.location}
                   </p>
-                  <p className={tw`text-light-text dark:text-dark-text`}>
+                  <p className={tw`text-dark-text`}>
                     <span className={tw`font-bold`}>Email:</span>{" "}
                     {props.data.user.email}
                   </p>
                 </div>
               </div>
               <p
-                className={tw`bg-light-accent-semitrans text-light-text border-light-accent-solid dark:(bg-dark-accent-semitrans text-dark-text border-dark-accent-solid) h-[fit-content] w-full text-center px-5 py-2 rounded-xl border-l-4 border-r-4 mb-2`}
+                className={tw`bg-dark-accent-semitrans h-[fit-content] w-full text-dark-text text-center px-5 py-2 rounded-xl border-l-4 border-r-4 border-dark-accent-solid mb-2`}
               >
                 {props.data.quote}
               </p>
@@ -125,16 +120,16 @@ export default function About(
           </div>
         </a>
         <p
-          className={tw`text-2xl rounded-xl font-bold text-light-text dark:text-dark-text mt-1 mb-3 px-4 py-2 bg-light-accent-semitrans dark:bg-dark-accent-semitrans text-center font-heading`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Description
         </p>
-        <p className={tw`text-light-text dark:text-dark-text`}>
+        <p className={tw`text-dark-text`}>
           Hello, my name's Irvan Malik Azantha. I'm a 19 y'o man currently
           studying on Universitas Sriwijaya. I live in Palembang, Indonesia. I'm
           a self taught developer that loves to learn new things.
         </p>
-        <p className={tw`text-light-text dark:text-dark-text mt-3`}>
+        <p className={tw`text-dark-text mt-3`}>
           I've started programming since 2020 (2018 actually but that's mostly
           just buzzing around with stuffs) and I've been pretty much hooked up
           with it until now. You might find me annoying sometimes (if you know
@@ -142,7 +137,7 @@ export default function About(
           where I simply exist) but that's what I tend to always do to just have
           fun. No offense given at all. And finally,{" "}
           <a
-            className={tw`text-light-accent-solid dark:text-dark-accent-solid hover:(text-light-text dark:text-dark-text) transition-all ease-out duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://t.me/gnuweeb"
           >
             GNU/Weeb
@@ -150,16 +145,16 @@ export default function About(
           is my place where I moderate and also contribute to nowadays.
         </p>
         <p
-          className={tw`text-2xl rounded-xl font-bold text-light-text dark:text-dark-text my-3 px-4 py-2 bg-light-accent-semitrans dark:bg-dark-accent-semitrans text-center font-heading`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           About This Website
         </p>
         <p
-          className={tw`bg-light-accent-semitrans dark:bg-dark-accent-semitrans text-light-text dark:text-dark-text px-5 py-2 rounded-xl border-l-4 border-light-accent-solid dark:border-dark-accent-solid`}
+          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
           A brief description about this website I made.
         </p>
-        <p className={tw`text-light-text dark:text-dark-text mt-3`}>
+        <p className={tw`text-dark-text mt-3`}>
           So yeah, this is my website. It's that simple. <strong>Oh,</strong>
           {" "}
           you guys <em>want</em> to hear <strong>the story</strong>{" "}
@@ -170,31 +165,31 @@ export default function About(
           can do <em>whatever the f*ck</em>{" "}
           I want". And yes, there you have it, a blog.
         </p>
-        <p className={tw`text-light-text dark:text-dark-text mt-3`}>
+        <p className={tw`text-dark-text mt-3`}>
           This website is made with Deno's{" "}
           <a
-            className={tw`text-light-accent-solid dark:text-dark-accent-solid hover:text-light-text hover:dark:text-dark-text transition-all ease-out duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://fresh.deno.dev/"
           >
             fresh
           </a>{" "}
           framework. The tools for stylings are provided by{" "}
           <a
-            className={tw`text-light-accent-solid dark:text-dark-accent-solid hover:text-light-text hover:dark:text-dark-text transition-all ease-out duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://twind.dev/"
           >
             Twind
           </a>{" "}
           (it's essentially just{" "}
           <a
-            className={tw`text-light-accent-solid dark:text-dark-accent-solid hover:text-light-text hover:dark:text-dark-text transition-all ease-out duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://tailwindcss.com/"
           >
             Tailwind
           </a>{" "}
           but the entire thing is CSS-in-JS). This website is hosted on{" "}
           <a
-            className={tw`text-light-accent-solid dark:text-dark-accent-solid hover:text-light-text hover:dark:text-dark-text transition-all ease-out duration-200 break-all`}
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`}
             href="https://deno.com/deploy"
           >
             Deno Deploy
@@ -205,17 +200,17 @@ export default function About(
           want with it.
         </p>
         <p
-          className={tw`text-2xl rounded-xl font-bold text-light-text dark:text-dark-text my-3 px-4 py-2 bg-light-accent-semitrans dark:bg-dark-accent-semitrans text-center font-heading`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Stuffs I Like
         </p>
         <p
-          className={tw`bg-light-accent-semitrans text-light-text border-light-accent-solid dark:(bg-dark-accent-semitrans text-dark-text border-dark-accent-solid) px-5 py-2 rounded-xl border-l-4`}
+          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
           Bunch of things I like to do or see.
         </p>
         <ul
-          className={tw`text-light-text dark:text-dark-text grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 list-disc list-inside my-3`}
+          className={tw`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 list-disc list-inside my-3`}
         >
           <li>Watching Anime</li>
           <li>Coding</li>
@@ -231,17 +226,17 @@ export default function About(
           <li>Peace</li>
         </ul>
         <p
-          className={tw`text-2xl rounded-xl font-bold text-light-text dark:text-dark-text my-3 px-4 py-2 bg-light-accent-semitrans dark:bg-dark-accent-semitrans text-center font-heading`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Current Affiliation
         </p>
         <p
-          className={tw`bg-light-accent-semitrans text-light-text border-light-accent-solid dark:(bg-dark-accent-semitrans text-dark-text border-dark-accent-solid) px-5 py-2 rounded-xl border-l-4`}
+          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
           Organizations and/or communities that I participate in.
         </p>
         <ul
-          className={tw`text-light-text dark:text-dark-text grid grid-cols-1 xl:grid-cols-2 list-disc list-inside my-3`}
+          className={tw`grid grid-cols-1 xl:grid-cols-2 list-disc list-inside my-3`}
         >
           <li>CompSci Student at Universitas Sriwijaya</li>
           <li>Contributor and Moderator at GNU/Weeb</li>
@@ -251,17 +246,17 @@ export default function About(
           <li>Voluntary Member of HMIF Unsri (Srifoton)</li>
         </ul>
         <p
-          className={tw`text-2xl rounded-xl font-bold text-light-text dark:text-dark-text my-3 px-4 py-2 bg-light-accent-semitrans dark:bg-dark-accent-semitrans text-center font-heading`}
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
           Tools
         </p>
         <p
-          className={tw`bg-light-accent-semitrans text-light-text border-light-accent-solid dark:(bg-dark-accent-semitrans text-dark-text border-dark-accent-solid) px-5 py-2 rounded-xl border-l-4`}
+          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
         >
           Tools/Languages that I use.
         </p>
         <ul
-          className={tw`text-light-text dark:text-dark-text grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 list-disc list-inside my-3`}
+          className={tw`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 list-disc list-inside my-3`}
         >
           <li>GNU/Linux</li>
           <li>Java</li>

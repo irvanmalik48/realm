@@ -21,7 +21,7 @@ export default function Footer() {
           aria-label="GitHub"
         >
           <div
-            className={tw`flex justify-center items-center bg-transparent text-light-text dark:text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-light-accent-solid hover:dark:bg-dark-accent-solid hover:text-light-nav hover:dark:text-dark-nav transition-all duration-300`}
+            className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <GitHubIcon />
           </div>
@@ -32,7 +32,7 @@ export default function Footer() {
           aria-label="Facebook"
         >
           <div
-            className={tw`flex justify-center items-center bg-transparent text-light-text dark:text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-light-accent-solid hover:dark:bg-dark-accent-solid hover:text-light-nav hover:dark:text-dark-nav transition-all duration-300`}
+            className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <FacebookIcon />
           </div>
@@ -43,7 +43,7 @@ export default function Footer() {
           aria-label="Instagram"
         >
           <div
-            className={tw`flex justify-center items-center bg-transparent text-light-text dark:text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-light-accent-solid hover:dark:bg-dark-accent-solid hover:text-light-nav hover:dark:text-dark-nav transition-all duration-300`}
+            className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <InstagramIcon />
           </div>
@@ -54,7 +54,7 @@ export default function Footer() {
           aria-label="Twitter"
         >
           <div
-            className={tw`flex justify-center items-center bg-transparent text-light-text dark:text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-light-accent-solid hover:dark:bg-dark-accent-solid hover:text-light-nav hover:dark:text-dark-nav transition-all duration-300`}
+            className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <TwitterIcon />
           </div>
@@ -65,7 +65,7 @@ export default function Footer() {
           aria-label="Telegram"
         >
           <div
-            className={tw`flex justify-center items-center bg-transparent text-light-text dark:text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-light-accent-solid hover:dark:bg-dark-accent-solid hover:text-light-nav hover:dark:text-dark-nav transition-all duration-300`}
+            className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <TelegramIcon />
           </div>
@@ -76,7 +76,7 @@ export default function Footer() {
           aria-label="LinkedIn"
         >
           <div
-            className={tw`flex justify-center items-center bg-transparent text-light-text dark:text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-light-accent-solid hover:dark:bg-dark-accent-solid hover:text-light-nav hover:dark:text-dark-nav transition-all duration-300`}
+            className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <LinkedInIcon />
           </div>
@@ -87,15 +87,13 @@ export default function Footer() {
           aria-label="Email"
         >
           <div
-            className={tw`flex justify-center items-center bg-transparent text-light-text dark:text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-light-accent-solid hover:dark:bg-dark-accent-solid hover:text-light-nav hover:dark:text-dark-nav transition-all duration-300`}
+            className={tw`flex justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
           >
             <MailIcon />
           </div>
         </a>
       </div>
-      <p
-        className={tw`text-light-footertext dark:text-dark-footertext text-sm m-0 p-0 mb-5`}
-      >
+      <p className={tw`text-dark-footertext text-sm m-0 p-0 mb-5`}>
         This website is deployed in Deno Deploy and made with...
       </p>
     </footer>

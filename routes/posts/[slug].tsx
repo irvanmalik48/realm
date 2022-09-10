@@ -91,18 +91,18 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
 
   const styles = css({
     blockquote:
-      apply`bg-light-accent-semitrans text-light-text border-light-accent-solid dark:(bg-dark-accent-semitrans text-dark-text border-dark-accent-solid) px-5 py-2 my-2 rounded-xl border-l-4`,
+      apply`bg-dark-accent-semitrans text-dark-text px-5 py-2 my-2 rounded-xl border-l-4 border-dark-accent-solid`,
     h1:
-      apply`text-2xl rounded-xl font-bold text-light-text dark:text-dark-text mt-1 mb-3 px-4 py-2 bg-light-accent-semitrans dark:bg-dark-accent-semitrans font-heading`,
+      apply`text-2xl rounded-xl font-bold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-semitrans font-heading`,
     "* + h1": apply`my-3`,
     h2:
-      apply`text-xl rounded-xl font-semibold text-light-text dark:text-dark-text mt-1 mb-3 px-4 py-2 bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans font-heading`,
+      apply`text-xl rounded-xl font-semibold text-dark-text mt-1 mb-3 px-4 py-2 bg-dark-accent-quartertrans font-heading`,
     "* + h2": apply`my-3`,
     h3:
-      apply`text-xl font-semibold text-light-text dark:text-dark-text mt-1 mb-3 pb-1 border-b-2 border-light-accent-solid dark:border-dark-accent-solid font-heading`,
+      apply`text-xl font-semibold text-dark-text mt-1 mb-3 pb-1 border-b-2 border-dark-accent-solid font-heading`,
     "* + h3": apply`my-3`,
     pre:
-      apply`text-light-text dark:text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-0 py-4 rounded-b-xl rounded-t-none ${
+      apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-0 py-4 rounded-xl ${
         css(
           {
             code:
@@ -116,31 +116,29 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
     ol: apply`list-decimal list-inside my-3 ${
       css({
         p: apply`inline`,
-        "::marker":
-          apply`text-light-accent-solid dark:text-dark-accent-solid font-bold`,
+        "::marker": apply`text-dark-accent-solid font-bold`,
         li: apply`my-0`,
         "li:first-child": apply`mt-0`,
         ul: apply`ml-6`,
         ol: apply`ml-6`,
       })
     }`,
-    a: apply`text-light-accent-solid dark:text-dark-accent-solid hover:(text-light-text dark:text-dark-text) transition-all ease-out duration-200 break-all`,
+    a: apply`text-dark-accent-solid hover:text-dark-text transition-all ease-out duration-200 break-all`,
     ul: apply`list-disc list-inside my-0 ${
       css({
         ul: apply`ml-6`,
         ol: apply`ml-6`,
         "li::marker":
-          apply`text-light-accent-semitrans dark:text-dark-accent-semitrans transition-all duration-200 ease-out`,
-        "li:hover::marker":
-          apply`text-light-accent-solid dark:text-dark-accent-solid`,
+          apply`text-dark-accent-semitrans transition-all duration-200 ease-out`,
+        "li:hover::marker": apply`text-dark-accent-solid`,
       })
     }`,
     img:
-      apply`w-full h-auto transition-all duration-200 ease-out ring ring-transparent hover:(ring-light-accent-solid dark:ring-dark-accent-solid) rounded-xl`,
-    ":not(pre) > code":
-      apply`font-mono bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans text-sm text-light-accent-solid dark:text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
+      apply`w-full h-auto transition-all duration-200 ease-out ring ring-transparent hover:ring-dark-accent-solid rounded-xl`,
+    code:
+      apply`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`,
     "span.linenumber":
-      apply`hidden md:inline-block min-w-[2.5rem] border-r-4 border-light-accent-semitrans dark:border-dark-accent-semitrans mr-4`,
+      apply`hidden md:inline-block min-w-[2.5rem] border-r-4 border-dark-accent-semitrans mr-4`,
   });
 
   if (!data || data?.title === "Undefined") {
@@ -154,16 +152,16 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         >
           <div className={tw`flex flex-col justify-center items-center`}>
             <p
-              className={tw`text-light-text dark:text-dark-text text-center font-bold text-4xl mb-2 font-heading`}
+              className={tw`text-dark-text text-center font-bold text-4xl mb-2 font-heading`}
             >
               404
             </p>
             <p
-              className={tw`w-full text-center text-light-accent-solid dark:text-dark-accent-solid text-lg`}
+              className={tw`w-full text-center text-dark-accent-solid text-lg`}
             >
               Page{" "}
               <code
-                className={tw`font-mono bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans text-sm text-light-accent-solid dark:text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`}
+                className={tw`font-mono bg-dark-accent-quartertrans text-sm text-dark-accent-solid font-semibold px-2.5 py-0.5 my-1 rounded-3xl`}
               >
                 {data?.path?.replace(".md", "")}
               </code>{" "}
@@ -188,27 +186,25 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       >
         <div className={tw`flex flex-col justify-center items-center`}>
           <p
-            className={tw`text-light-text dark:text-dark-text text-center font-heading font-bold text-3xl`}
+            className={tw`text-dark-text text-center font-heading font-bold text-3xl`}
           >
             {data.title}
           </p>
-          <p
-            className={tw`w-full text-center text-light-accent-solid dark:text-dark-accent-solid`}
-          >
+          <p className={tw`w-full text-center text-dark-accent-solid`}>
             {dateString}
           </p>
           <div className={tw`w-full flex flex-row justify-center items-center`}>
             {data.tag?.map((el: string, index: number) => (
               <p
                 key={index}
-                className={tw`font-mono bg-light-accent-solid dark:bg-dark-accent-solid text-xs text-light-side dark:text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
+                className={tw`font-mono bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
               >
                 {el}
               </p>
             ))}
           </div>
           <p
-            className={tw`w-[fit-content] text-center text-light-text dark:text-dark-text text-sm mt-2 px-5 py-1 bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans rounded-3xl ${
+            className={tw`w-[fit-content] text-center text-dark-text text-sm mt-2 px-5 py-1 bg-dark-accent-quartertrans rounded-3xl ${
               css(
                 {
                   "-webkit-backdrop-filter": "blur(.5rem)",
@@ -224,7 +220,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
       <Markdown
         class={tw`${
           tw(styles)
-        } text-light-text dark:text-dark-text mb-5 w-full bg-light-navglass dark:bg-dark-navglass py-4 px-5 rounded-xl ${
+        } mb-5 w-full bg-dark-navglass py-4 px-5 rounded-xl ${
           css(
             {
               "-webkit-backdrop-filter": "blur(.5rem)",
@@ -242,7 +238,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         {data.md !== undefined ? data.md : ""}
       </Markdown>
       <div
-        className={tw`grid grid-cols-1 md:grid-cols-2 w-full gap-5 mb-5 bg-light-navglass dark:bg-dark-navglass p-5 rounded-xl ${
+        className={tw`grid grid-cols-1 md:grid-cols-2 w-full gap-5 mb-5 bg-dark-navglass p-5 rounded-xl ${
           css(
             {
               "-webkit-backdrop-filter": "blur(.5rem)",
@@ -254,39 +250,29 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         {before !== -1 && (
           <a
             href={"/posts" + prevPost.path}
-            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans rounded-xl hover:(bg-light-accent-semitrans ring-light-accent-solid dark:(bg-dark-accent-semitrans ring-dark-accent-solid)) transition-all duration-200 ease-out text-light-text dark:text-dark-text box-border`}
+            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text box-border`}
           >
-            <div
-              className={tw`px-5 py-1 bg-light-accent-solid dark:bg-dark-accent-solid`}
-            >
+            <div className={tw`px-5 py-1 bg-dark-accent-solid`}>
               <p
-                className={tw`font-mono font-bold text-sm text-light-nav dark:text-dark-nav w-full`}
+                className={tw`font-mono font-bold text-sm text-dark-nav w-full`}
               >
                 NEWER POST
               </p>
             </div>
             <div className={tw`px-5 pt-3`}>
               <p
-                className={tw`text-light-accent-solid dark:text-dark-accent-solid font-semibold font-heading`}
+                className={tw`text-dark-accent-solid font-semibold font-heading`}
               >
                 {prevPost.title}
               </p>
-              <p
-                className={tw`text-light-text dark:text-dark-text text-xs mb-2`}
-              >
-                {prevPost.date}
-              </p>
-              <p
-                className={tw`text-light-text dark:text-dark-text text-sm mb-1`}
-              >
-                {prevPost.desc}
-              </p>
+              <p className={tw`text-dark-text text-xs mb-2`}>{prevPost.date}</p>
+              <p className={tw`text-dark-text text-sm mb-1`}>{prevPost.desc}</p>
             </div>
             <div className={tw`box-border px-5 pb-3 flex-wrap flex flex-row`}>
               {prevPost?.tag?.map((el: string, index: number) => (
                 <p
                   key={index}
-                  className={tw`bg-light-accent-solid dark:bg-dark-accent-solid text-xs text-light-side dark:text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
+                  className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
                 >
                   {el}
                 </p>
@@ -298,39 +284,29 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
         {after !== -1 && (
           <a
             href={"/posts" + nextPost.path}
-            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans rounded-xl hover:(bg-light-accent-semitrans ring-light-accent-solid dark:(bg-dark-accent-semitrans ring-dark-accent-solid)) transition-all duration-200 ease-out text-light-text dark:text-dark-text box-border`}
+            className={tw`overflow-hidden ring ring-transparent flex flex-col justify-between block w-full bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text box-border`}
           >
-            <div
-              className={tw`px-5 py-1 bg-light-accent-solid dark:bg-dark-accent-solid`}
-            >
+            <div className={tw`px-5 py-1 bg-dark-accent-solid`}>
               <p
-                className={tw`font-mono font-bold text-sm text-light-nav dark:text-dark-nav w-full`}
+                className={tw`font-mono font-bold text-sm text-dark-nav w-full`}
               >
                 OLDER POST
               </p>
             </div>
             <div className={tw`px-5 pt-3`}>
               <p
-                className={tw`text-light-accent-solid dark:text-dark-accent-solid font-semibold font-heading`}
+                className={tw`text-dark-accent-solid font-semibold font-heading`}
               >
                 {nextPost.title}
               </p>
-              <p
-                className={tw`text-light-text dark:text-dark-text text-xs mb-2`}
-              >
-                {nextPost.date}
-              </p>
-              <p
-                className={tw`text-light-text dark:text-dark-text text-sm mb-1`}
-              >
-                {nextPost.desc}
-              </p>
+              <p className={tw`text-dark-text text-xs mb-2`}>{nextPost.date}</p>
+              <p className={tw`text-dark-text text-sm mb-1`}>{nextPost.desc}</p>
             </div>
             <div className={tw`box-border px-5 pb-3 flex-wrap flex flex-row`}>
               {nextPost?.tag?.map((el: string, index: number) => (
                 <p
                   key={index}
-                  className={tw`bg-light-accent-solid dark:bg-dark-accent-solid text-xs text-light-side dark:text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
+                  className={tw`bg-dark-accent-solid text-xs text-dark-side uppercase font-semibold px-2.5 py-0.5 mt-1 mb-1 rounded-3xl mr-2`}
                 >
                   {el}
                 </p>

@@ -24,23 +24,23 @@ export default function CodeBlock(props: {
 
   return (
     <div
-      className={tw`text-light-text dark:text-dark-text font-mono bg-light-bg dark:bg-dark-bg text-sm overflow-x-auto my-3 rounded-xl overflow-clip`}
+      className={tw`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto my-3 rounded-xl overflow-clip`}
     >
-      <div className={tw`px-5 py-2 bg-light-superdark dark:bg-dark-superdark`}>
+      <div className={tw`px-5 py-2 bg-dark-superdark`}>
         <p className={tw`w-full flex flex-row justify-between items-center`}>
           <span
             className={tw`w-[fit-content] gap-2 flex flex-row justify-center items-center`}
           >
             {fileName === "none" && (
               <span
-                className={tw`font-mono bg-light-accent-semitrans dark:bg-dark-accent-semitrans w-[fit-content] text-sm text-light-accent-solid dark:text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
+                className={tw`font-mono bg-dark-accent-semitrans w-[fit-content] text-sm text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
               >
                 {lang === "text" ? "Plain" : lang.toUpperCase()}
               </span>
             )}
             {fileName !== "none" && (
               <span
-                className={tw`font-mono bg-light-accent-semitrans dark:bg-dark-accent-semitrans w-[fit-content] text-sm text-light-accent-solid dark:text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
+                className={tw`font-mono bg-dark-accent-semitrans w-[fit-content] text-sm text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
               >
                 {fileName}
               </span>

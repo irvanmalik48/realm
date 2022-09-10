@@ -32,7 +32,7 @@ export default function CopyButton(props: { text: string }) {
 
   return (
     <button
-      className={tw`font-mono inline-block bg-light-nav dark:bg-dark-nav hover:bg-light-accent-semitrans hover:dark:bg-dark-accent-semitrans hover:scale-[120%] active:scale-105 active:bg-light-accent-solid active:dark:bg-dark-accent-solid focus:outline-none ring ring-transparent focus-visible:ring-light-accent-solid focus-visible:dark:ring-dark-accent-solid hover:ring-light-accent-solid hover:dark:ring-dark-accent-solid w-[fit-content] text-sm text-light-text dark:text-dark-text active:text-light-superdark active:dark:text-dark-superdark hover:text-light-accent-solid hover:dark:text-dark-accent-solid transition-all duration-200 ease-out font-semibold px-4 py-0.5 my-1 rounded-3xl`}
+      className={tw`font-mono inline-block bg-dark-nav hover:bg-dark-accent-semitrans hover:scale-[120%] active:scale-105 active:bg-dark-accent-solid focus:outline-none ring ring-transparent focus-visible:ring-dark-accent-solid hover:ring-dark-accent-solid w-[fit-content] text-sm text-dark-text active:text-dark-superdark hover:text-dark-accent-solid transition-all duration-200 ease-out font-semibold px-4 py-0.5 my-1 rounded-3xl`}
       onClick={async (e) => {
         e.preventDefault();
         await handleClick();
