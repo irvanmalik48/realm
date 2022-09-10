@@ -11,6 +11,10 @@ export const config: Options = {
       mono: ["Source Code Pro", "ui-monospace"],
     },
     extend: {
+      backgroundImage: {
+        "dark-image": `url("/bg.svg")`,
+        "light-image": `url("/bg-light.svg")`,
+      },
       fontFamily: {
         heading: ["Poppins", "sans-serif"],
       },
