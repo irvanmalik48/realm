@@ -27,16 +27,20 @@ export default function Posts() {
         className={tw`py-24 w-full flex flex-col md:flex-row justify-center items-center gap-5`}
       >
         <div className={tw`flex flex-col justify-center items-center`}>
-          <p className={tw`text-dark-text font-bold text-3xl font-heading`}>
+          <p
+            className={tw`text-light-text dark:text-dark-text font-bold text-3xl font-heading`}
+          >
             Blog Posts
           </p>
-          <p className={tw`w-full text-dark-accent-solid text-lg`}>
+          <p
+            className={tw`w-full text-light-accent-solid dark:text-dark-accent-solid text-lg`}
+          >
             All that I have written currently.
           </p>
         </div>
       </header>
       <section
-        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
+        className={tw`flex flex-col w-full bg-light-navglass dark:bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
           css(
             {
               "-webkit-backdrop-filter": "blur(.5rem)",
@@ -46,7 +50,7 @@ export default function Posts() {
         }`}
       >
         <p
-          className={tw`text-2xl rounded-xl font-bold text-dark-text mt-1 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
+          className={tw`text-2xl rounded-xl font-bold text-light-text dark:text-dark-text mt-1 px-4 py-2 bg-light-accent-semitrans dark:bg-dark-accent-semitrans text-center font-heading`}
         >
           All Posts
         </p>
