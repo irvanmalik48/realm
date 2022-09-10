@@ -27,4 +27,4 @@ This will watch the project directory and restart as necessary.
 
 ### License
 
-MIT
+[Lappland Development License](https://raw.githubusercontent.com/irvanmalik48/realm/main/LICENSE)
