@@ -1,5 +1,6 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { Post } from "@/types.d.tsx";
+import ky from "ky";
+import { Covid, Post } from "@/types.d.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PostCard from "@components/PostCard.tsx";
 import { loadContent, timeToRead } from "@utils/load.ts";
@@ -11,11 +12,14 @@ const posts = await loadContent("posts/");
 
 export const handler: Handlers<{
   quote: string;
+  covid: Covid | null;
 }> = {
-  GET(_req, ctx) {
+  async GET(_req, ctx) {
     const randomIndex = Math.floor(Math.random() * 20);
+    const covid = await ky.get("https://covid19.mathdro.id/api").json();
     const body = {
       quote: quotes[randomIndex],
+      covid: covid as Covid,
     };
 
     return ctx.render(body);
@@ -25,6 +29,7 @@ export const handler: Handlers<{
 export default function Home(
   props: PageProps<{
     quote: string;
+    covid: Covid | null;
   }>,
 ) {
   const postProps: Post[] = [];
@@ -63,7 +68,77 @@ export default function Home(
         </div>
       </header>
       <section
-        className={tw`mb-10 w-full bg-dark-navglass py-4 px-5 rounded-xl ${
+        className={tw`mb-5 w-full bg-dark-navglass p-5 rounded-xl ${
+          css(
+            {
+              "-webkit-backdrop-filter": "blur(.5rem)",
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
+      >
+        <p
+          className={tw`text-lg rounded-xl font-bold text-dark-text mb-5 px-4 py-2 bg-dark-accent-quartertrans text-center font-heading`}
+        >
+          COVID-19 Status Tracker
+        </p>
+        <div className={tw`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-5 items-center justify-center`}>
+          <div
+            className={tw`ring ring-transparent flex flex-col justify-center items-center text-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text`}
+          >
+            <p
+              className={tw`bg-dark-accent-semitrans py-0.5 w-full rounded-3xl text-dark-accent-solid font-semibold font-mono uppercase`}
+            >
+              Confirmed
+            </p>
+            <p className={tw`text-dark-text font-bold text-2xl pt-5 py-3`}>
+              {props.data.covid?.confirmed.value}
+            </p>
+          </div>
+          <div
+            className={tw`ring ring-transparent flex flex-col justify-center items-center text-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text`}
+          >
+            <p
+              className={tw`bg-dark-accent-semitrans py-0.5 w-full rounded-3xl text-dark-accent-solid font-semibold font-mono uppercase`}
+            >
+              Deaths
+            </p>
+            <p className={tw`text-dark-text font-bold text-2xl pt-5 py-3`}>
+              {props.data.covid?.deaths.value}
+            </p>
+          </div>
+          <div
+            className={tw`ring ring-transparent flex flex-col justify-center items-center text-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text`}
+          >
+            <p
+              className={tw`bg-dark-accent-semitrans py-0.5 w-full rounded-3xl text-dark-accent-solid font-semibold font-mono uppercase`}
+            >
+              Recovered
+            </p>
+            <p className={tw`text-dark-text font-bold text-2xl pt-5 py-3`}>
+              {props.data.covid?.recovered.value}
+            </p>
+          </div>
+        </div>
+        <p className={tw`text-dark-footertext text-center w-full mt-5`}>
+          The data is fetched from{" "}
+          <a
+            href="https://covid19.mathdro.id/api"
+            className={tw`text-dark-accent-solid hover:text-dark-text transition-all duration-200 ease-out`}
+          >
+            this API
+          </a>
+          .
+        </p>
+        <p className={tw`text-dark-footertext text-center w-full`}>
+          Last updated at{" "}
+          {new Date(props.data.covid?.lastUpdate ?? "").toLocaleString("en-US", {
+            timeZone: "Asia/Jakarta",
+          })}
+        </p>
+      </section>
+      <section
+        className={tw`mb-5 w-full bg-dark-navglass py-4 px-5 rounded-xl ${
           css(
             {
               "-webkit-backdrop-filter": "blur(.5rem)",
