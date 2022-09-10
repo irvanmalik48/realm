@@ -82,7 +82,9 @@ export default function Home(
         >
           COVID-19 Status Tracker
         </p>
-        <div className={tw`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-5 items-center justify-center`}>
+        <div
+          className={tw`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-5 items-center justify-center`}
+        >
           <div
             className={tw`ring ring-transparent flex flex-col justify-center items-center text-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text`}
           >
@@ -132,9 +134,12 @@ export default function Home(
         </p>
         <p className={tw`text-dark-footertext text-center w-full`}>
           Last updated at{" "}
-          {new Date(props.data.covid?.lastUpdate ?? "").toLocaleString("en-US", {
-            timeZone: "Asia/Jakarta",
-          })}
+          {new Date(props.data.covid?.lastUpdate ?? "").toLocaleString(
+            "en-US",
+            {
+              timeZone: "Asia/Jakarta",
+            },
+          )}
         </p>
       </section>
       <section
