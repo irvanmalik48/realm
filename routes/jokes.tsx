@@ -53,12 +53,12 @@ export default function Jokes(
       >
         <div className={tw`w-full flex flex-col justify-center items-center`}>
           <p
-            className={tw`text-dark-text text-center font-bold text-4xl mb-10 font-heading`}
+            className={tw`text-light-text dark:text-dark-text text-center font-bold text-4xl mb-10 font-heading`}
           >
             Generated Joke:
           </p>
           <div
-            className={tw`w-full text-center flex flex-col gap-5 text-xl p-5 pt-3 bg-dark-accent-quartertrans rounded-xl text-dark-text box-border ${
+            className={tw`w-full text-center flex flex-col gap-5 text-xl p-5 pt-3 bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans rounded-xl text-light-text dark:text-dark-text box-border ${
               css(
                 {
                   "-webkit-backdrop-filter": "blur(.5rem)",
@@ -80,12 +80,12 @@ function TextJoke(props: { data: JokesText | undefined }) {
   return (
     <div>
       <p
-        className={tw`text-dark-text text-left font-bold text-xl mb-2 font-heading`}
+        className={tw`text-light-text dark:text-dark-text text-left font-bold text-xl mb-2 font-heading`}
       >
         Text:
       </p>
       <p
-        className={tw`text-dark-text text-center px-5 py-3 text-lg bg-dark-accent-semitrans rounded-xl`}
+        className={tw`text-light-text dark:text-dark-text text-center px-5 py-3 text-lg bg-light-accent-semitrans dark:bg-dark-accent-semitrans rounded-xl`}
       >
         {props?.data?.data}
       </p>
@@ -97,12 +97,12 @@ function ImageJoke(props: { data: JokesImage | undefined }) {
   return (
     <div>
       <p
-        className={tw`text-dark-text text-left font-bold text-xl mb-2 font-heading`}
+        className={tw`text-light-text dark:text-dark-text text-left font-bold text-xl mb-2 font-heading`}
       >
         Image:
       </p>
       <img
-        className={tw`w-full h-[500px] object-contain bg-dark-superdark transition-all duration-200 ease-out ring ring-transparent hover:ring-dark-accent-solid rounded-xl`}
+        className={tw`w-full h-[500px] object-contain bg-light-superdark dark:bg-dark-superdark transition-all duration-200 ease-out ring ring-transparent hover:(ring-light-accent-solid dark:ring-dark-accent-solid) rounded-xl`}
         src={props?.data?.data.url}
         alt="joke"
       />
