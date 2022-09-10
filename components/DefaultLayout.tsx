@@ -33,13 +33,11 @@ export default function DefaultLayout(props: {
       <main
         className={tw`${
           css({
-            background: `url(/bg.svg)`,
             "background-size": "500px",
-            "background-color": `${colorScheme[currentColorScheme].dark.bg}`,
             "background-position": "center",
             "-webkit-tap-highlight-color": "transparent",
           })
-        } ${styles} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
+        } ${styles} bg-light-image dark:bg-dark-image w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
       >
         <Head>
           <meta charSet="utf-8" />
@@ -125,9 +123,9 @@ export default function DefaultLayout(props: {
           } md:${
             css({
               "&::-webkit-scrollbar":
-                apply`block bg-dark-accent-quartertrans w-5`,
+                apply`block bg-light-accent-quartertrans dark:bg-dark-accent-quartertrans w-5`,
               "&::-webkit-scrollbar-thumb":
-                apply`bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
+                apply`bg-light-accent-solid dark:bg-dark-accent-solid border-transparent border-[7px] border-solid bg-clip-content rounded-xl`,
             })
           }`}
           id="main-sect"
