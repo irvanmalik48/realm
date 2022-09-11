@@ -3,7 +3,7 @@
     "$fresh/": "https://cdn.jsdelivr.net/gh/denoland/fresh@main/",
     "$std/": "https://deno.land/std@0.154.0/",
     "any": "https://deno.land/std@0.154.0/encoding/_yaml/utils.ts",
-    "fresh-seo": "https://deno.land/x/fresh_seo@0.1.0/mod.ts",
+    "fresh-seo": "https://deno.land/x/fresh_seo@0.1.2/mod.ts",
     "ky": "https://esm.sh/ky@0.31.3",
     "preact": "https://esm.sh/preact@10.10.6",
     "preact/": "https://esm.sh/preact@10.10.6/",
