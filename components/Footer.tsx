@@ -14,7 +14,9 @@ export default function Footer() {
     <footer
       className={tw`flex flex-col gap-0 mt-4 justify-center items-center`}
     >
-      <div className={tw`mb-5 flex flex-row flex-wrap gap-2 justify-center items-center`}>
+      <div
+        className={tw`mb-5 flex flex-row flex-wrap gap-2 justify-center items-center`}
+      >
         <a
           href="https://github.com/irvanmalik48"
           className={tw`flex flex-row justify-start items-center gap-4`}
