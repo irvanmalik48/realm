@@ -20,7 +20,7 @@ export default function Nav(props: { active: string }) {
         <NavItem
           active="home"
           parentActive={props.active}
-          href="/home"
+          href="/"
           text="Home"
         >
           <HomeIcon />
