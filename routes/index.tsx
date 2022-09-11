@@ -94,7 +94,7 @@ export default function Home(
               Confirmed
             </p>
             <p className={tw`text-dark-text font-bold text-2xl pt-5 py-3`}>
-              {props.data.covid?.confirmed.value}
+              {props.data.covid?.confirmed.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </p>
           </div>
           <div
@@ -106,7 +106,7 @@ export default function Home(
               Deaths
             </p>
             <p className={tw`text-dark-text font-bold text-2xl pt-5 py-3`}>
-              {props.data.covid?.deaths.value}
+              {props.data.covid?.deaths.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </p>
           </div>
           <div
@@ -118,7 +118,7 @@ export default function Home(
               Recovered
             </p>
             <p className={tw`text-dark-text font-bold text-2xl pt-5 py-3`}>
-              {props.data.covid?.recovered.value}
+              {props.data.covid?.recovered.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </p>
           </div>
         </div>
