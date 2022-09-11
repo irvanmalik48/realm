@@ -39,7 +39,7 @@ export default function DefaultLayout(props: {
             "background-position": "center",
             "-webkit-tap-highlight-color": "transparent",
           })
-        } ${styles} w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
+        } ${styles} subpixel-antialiased w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
       >
         <Head>
           <meta charSet="utf-8" />
