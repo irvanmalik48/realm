@@ -233,6 +233,8 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             pre: PreBlock,
             Counter: Counter,
           },
+          wrapper: "article",
+          forceWrapper: true,
         }}
       >
         {data.md !== undefined ? data.md : ""}
