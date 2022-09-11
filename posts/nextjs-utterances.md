@@ -74,7 +74,8 @@ export default class Comments extends Component {
 }
 ```
 
-So the explanation here is that this class creates a reference for how the Utterances script is injected. And yeah, that's it.\
+So the explanation here is that this class creates a reference for how the Utterances script is injected. And yeah, that's it.
+
 After that, I need to put this component in my post layout which is easy. The only thing I have to do is to import the component class and use it somewhere inside the layout. So here's my post layout file:
 
 ```ts|components/layouts/post.tsx
