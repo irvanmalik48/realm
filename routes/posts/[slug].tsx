@@ -282,7 +282,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             </div>
           </a>
         )}
-        {before === -1 && <div></div>}
+        {before === -1 && <div className={tw`hidden md:block`}></div>}
         {after !== -1 && (
           <a
             href={"/posts" + nextPost.path}
@@ -316,7 +316,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
             </div>
           </a>
         )}
-        {after === -1 && <div></div>}
+        {after === -1 && <div className={tw`hidden md:block`}></div>}
       </div>
     </DefaultLayout>
   );
