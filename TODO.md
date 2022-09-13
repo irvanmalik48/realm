@@ -2,6 +2,7 @@
 
 - [x] A scroll to top FAB.
 - [x] A consistent layouting.
+- [x] Service Worker.
 - [ ] Refactor the current branch. (don't repeat yourself don't repeat yourself)
 - [ ] Comments section that is not Giscus.
 - [ ] User authentication for comments.
@@ -13,4 +14,3 @@
 
 - [ ] ~Documentation section for <api.irvanma.me>.~ Currently not needed.
 - [ ] ~Separate rants with actual posts.~ Probably won't be needed.
-- [ ] ~Service Worker (probably).~ Fresh has issues with that.
