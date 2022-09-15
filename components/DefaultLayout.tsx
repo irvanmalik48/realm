@@ -28,9 +28,11 @@ export default function DefaultLayout(props: {
         )
       }`,
   });
+  
   return (
     <>
       <main
+        id="main-body"
         className={tw`${
           css({
             background: `url(/bg.svg)`,
@@ -141,7 +143,7 @@ export default function DefaultLayout(props: {
           <WaterDrop />
         </section>
       </main>
-      <script type="module" src="/pwabuilder-sw-register.js" />
+      <script defer async type="module" src="/pwabuilder-sw-register.js" />
     </>
   );
 }
