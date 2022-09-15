@@ -4,7 +4,6 @@ importScripts(
 
 const HTML_CACHE = "html";
 const JS_CACHE = "javascript";
-const STYLE_CACHE = "stylesheets";
 const IMAGE_CACHE = "images";
 const FONT_CACHE = "fonts";
 
@@ -14,14 +13,25 @@ self.addEventListener("message", (event) => {
   }
 });
 
+const bgSyncPlugin = (queueName) => {
+  return new workbox.backgroundSync.BackgroundSyncPlugin(queueName, {
+    maxRetentionTime: 24 * 60,
+  });
+};
+
+const expirationPlugin = (maxEntries) => {
+  new workbox.expiration.ExpirationPlugin({
+    maxEntries: maxEntries,
+  });
+};
+
 workbox.routing.registerRoute(
   ({ event }) => event.request.destination === "document",
   new workbox.strategies.NetworkFirst({
     cacheName: HTML_CACHE,
     plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 10,
-      }),
+      expirationPlugin(10),
+      bgSyncPlugin("documentQueue"),
     ],
   }),
 );
@@ -31,21 +41,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: JS_CACHE,
     plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 15,
-      }),
-    ],
-  }),
-);
-
-workbox.routing.registerRoute(
-  ({ event }) => event.request.destination === "style",
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: STYLE_CACHE,
-    plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 15,
-      }),
+      expirationPlugin(15),
     ],
   }),
 );
@@ -55,9 +51,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: IMAGE_CACHE,
     plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 15,
-      }),
+      expirationPlugin(15),
     ],
   }),
 );
@@ -67,9 +61,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: FONT_CACHE,
     plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 15,
-      }),
+      expirationPlugin(15),
     ],
   }),
 );
