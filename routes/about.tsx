@@ -1,9 +1,54 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import DefaultLayout from "@components/DefaultLayout.tsx";
-import { css, tw } from "@utils/twind.ts";
+import CopyButton from "@islands/CopyButton.tsx";
+import { syntaxHighlighterTheme } from "@utils/colors.ts";
+import { everblush } from "@utils/everblush.ts";
+import { apply, css, tw } from "@utils/twind.ts";
 import { quotes } from "@utils/quotes.ts";
 import { GitHubUser } from "@/types.d.tsx";
 import ky from "ky";
+import { Prism } from "rsh";
+import * as Themes from "rsh/dist/esm/styles/prism";
+
+export const licenseNotice = `Lapprealm Development License
+Version 1.0 - Generic
+
+Copyright (c) 2021 Irvan Malik Azantha
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software as a subject to following conditions:
+
+1) Copies of the Software are free to be used, copied, modified, merged, published,
+   distributed, sublicensed, and/or sold.
+2) The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+3) If the Software is discontinued and/or archived, any forks in active development
+   may replace this license notice with an established non-copyleft license under
+   the condition that the above copyright notice shall be reincluded in all copies
+   or substantial portions of the Software.
+4) Respecting the author and owner of the software that are distributed in any way.
+   In the means that decisions that are taken by the author and owner of the
+   Software are imposed on both the Software and all its copies, forks, and/or
+   distributions under logical considerations and non-restrictive values.
+
+Any attempted revisions to this license are permitted within the Software scope
+and are subject to following conditions:
+
+1) Each revisions are given a distinguishing identification name stated next to the
+   version number.
+2) Each revisions shall not interfere with the non-copyleft nature of the license,
+   be it implicit, explicit, inclusive, and/or exclusive, and shall retain all
+   properties inherited from the Generic revision.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+`;
 
 export const handler: Handlers<{
   quote: string;
@@ -34,6 +79,21 @@ export default function About(
     quote: string;
   }>,
 ) {
+  const preStyle = css({
+    pre:
+      apply`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto px-5 my-0 py-4 rounded-xl ${
+        css(
+          {
+            code:
+              apply`bg-transparent font-mono text-dark-text p-0 m-0 font-normal`,
+          },
+        )
+      }`,
+    "pre::-webkit-scrollbar": apply`bg-transparent rounded-xl h-5`,
+    "pre::-webkit-scrollbar-thumb":
+      apply`bg-dark-accent-solid border-transparent border-[8px] border-solid bg-clip-content rounded-xl`,
+  });
+
   return (
     <DefaultLayout
       title="About Me"
@@ -53,7 +113,7 @@ export default function About(
         </div>
       </header>
       <section
-        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
+        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${preStyle} ${
           css(
             {
               "backdrop-filter": "blur(.5rem)",
@@ -271,6 +331,42 @@ export default function About(
           <li>Deno</li>
           <li>Firebase/Supabase</li>
         </ul>
+        <p
+          className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
+        >
+          Lapprealm Development License
+        </p>
+        <code
+          className={tw`text-dark-text font-mono bg-dark-bg text-sm overflow-x-auto mb-1 rounded-xl overflow-clip`}
+        >
+          <div className={tw`px-5 py-2 bg-dark-superdark`}>
+            <p
+              className={tw`w-full flex flex-row justify-between items-center`}
+            >
+              <span
+                className={tw`w-[fit-content] gap-2 flex flex-row justify-center items-center`}
+              >
+                <span
+                  className={tw`font-mono bg-dark-accent-semitrans w-[fit-content] text-sm text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
+                >
+                  Version 2.0
+                </span>
+              </span>
+              <span></span>
+              <CopyButton
+                text={licenseNotice}
+              />
+            </p>
+          </div>
+          <Prism
+            language="text"
+            style={(syntaxHighlighterTheme as string) === "everblush"
+              ? everblush
+              : Themes[syntaxHighlighterTheme]}
+          >
+            {licenseNotice}
+          </Prism>
+        </code>
       </section>
     </DefaultLayout>
   );
