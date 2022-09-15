@@ -7,7 +7,7 @@ import { everblush } from "@utils/everblush.ts";
 import { tw } from "@utils/twind.ts";
 
 export default function CodeBlock(props: {
-  className: string;
+  className?: string;
   children: h.JSX.Element | h.JSX.Element[] | string;
 }) {
   let lang = "text";
@@ -17,7 +17,6 @@ export default function CodeBlock(props: {
     if (lang.includes("|")) {
       const temp = lang.split("|");
       lang = temp[0];
-      4567;
       fileName = temp[1].replaceAll("&nbsp;", " ");
     }
   }
