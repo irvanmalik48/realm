@@ -28,7 +28,7 @@ export default function DefaultLayout(props: {
         )
       }`,
   });
-  
+
   return (
     <>
       <main
