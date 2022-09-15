@@ -334,6 +334,11 @@ export default function About(
         <p
           className={tw`text-2xl rounded-xl font-bold text-dark-text my-3 px-4 py-2 bg-dark-accent-semitrans text-center font-heading`}
         >
+          License Notice
+        </p>
+        <p
+          className={tw`bg-dark-accent-semitrans text-dark-text text-center px-5 py-2 rounded-xl border-x-4 border-dark-accent-solid mb-3`}
+        >
           Lapprealm Development License
         </p>
         <code
@@ -349,7 +354,7 @@ export default function About(
                 <span
                   className={tw`font-mono bg-dark-accent-semitrans w-[fit-content] text-sm text-dark-accent-solid font-semibold px-4 py-0.5 my-1 rounded-3xl`}
                 >
-                  Version 2.0
+                  Version 1.0
                 </span>
               </span>
               <span></span>
