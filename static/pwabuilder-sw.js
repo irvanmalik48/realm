@@ -13,17 +13,17 @@ self.addEventListener("message", (event) => {
   }
 });
 
-const bgSyncPlugin = (queueName) => {
+function bgSyncPlugin(queueName) {
   return new workbox.backgroundSync.BackgroundSyncPlugin(queueName, {
     maxRetentionTime: 24 * 60,
   });
-};
+}
 
-const expirationPlugin = (maxEntries) => {
-  new workbox.expiration.ExpirationPlugin({
+function expirationPlugin(maxEntries) {
+  return new workbox.expiration.ExpirationPlugin({
     maxEntries: maxEntries,
   });
-};
+}
 
 workbox.routing.registerRoute(
   ({ event }) => event.request.destination === "document",
