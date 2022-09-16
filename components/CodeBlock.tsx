@@ -56,8 +56,6 @@ export default function CodeBlock(props: {
         style={(syntaxHighlighterTheme as string) === "everblush"
           ? everblush
           : Themes[syntaxHighlighterTheme]}
-        showLineNumbers
-        showInlineLineNumbers
       >
         {props.children}
       </Prism>
