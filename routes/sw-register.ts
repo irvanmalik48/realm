@@ -13,7 +13,7 @@ export class RealmServiceWorkerRegister {
     return /* javascript */ `import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate";
 
     const el = document.createElement("pwa-update");
-    el.setAttribute("swpath", "sw");
+    el.setAttribute("swpath", "/sw");
     document.body.appendChild(el);
     `;
   }
