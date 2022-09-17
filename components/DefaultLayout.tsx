@@ -26,7 +26,7 @@ export default function DefaultLayout(props: {
             "scroll-behavior": "smooth",
           },
         )
-      }`,
+      } motion-reduce:transition-none`,
   });
 
   return (
