@@ -12,6 +12,8 @@ import * as $5 from "./routes/jokes.tsx";
 import * as $6 from "./routes/posts.tsx";
 import * as $7 from "./routes/posts/[slug].tsx";
 import * as $8 from "./routes/sitemap.xml.ts";
+import * as $9 from "./routes/sw-register.ts";
+import * as $10 from "./routes/sw.ts";
 import * as $$0 from "./islands/CopyButton.tsx";
 import * as $$1 from "./islands/CounterLogic.tsx";
 import * as $$2 from "./islands/FAB.tsx";
@@ -28,6 +30,8 @@ const manifest = {
     "./routes/posts.tsx": $6,
     "./routes/posts/[slug].tsx": $7,
     "./routes/sitemap.xml.ts": $8,
+    "./routes/sw-register.ts": $9,
+    "./routes/sw.ts": $10,
   },
   islands: {
     "./islands/CopyButton.tsx": $$0,
