@@ -143,7 +143,7 @@ export default function DefaultLayout(props: {
           <WaterDrop />
         </section>
       </main>
-      <script defer async type="module" src="/pwabuilder-sw-register.js" />
+      <script defer async type="module" src="/sw-register" />
     </>
   );
 }
