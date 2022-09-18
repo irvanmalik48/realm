@@ -22,8 +22,20 @@ export class PostApi {
       title: "Welcome to IrvanMA's Realm API Index Page!",
       desc: "This is a simple API Index Page for IrvanMA's Realm.",
       url: this.url.protocol + "//" + this.url.host + "/",
+      repo: "https://github.com/irvanmalik48/realm",
       locations: {
-        post: this.url.protocol + "//" + this.url.host + "/api/post",
+        index: {
+          url: this.url.protocol + "//" + this.url.host + "/api",
+          desc: "This page.",
+        },
+        post: {
+          url: this.url.protocol + "//" + this.url.host + "/api/post",
+          desc: "Get all posts from IrvanMA's Realm (slug only).",
+        },
+        postmd: {
+          url: this.url.protocol + "//" + this.url.host + "/api/postmd",
+          desc: "Get all posts from IrvanMA's Realm (with markdown).",
+        },
       },
     };
 
