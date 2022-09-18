@@ -47,6 +47,8 @@ export class PostApi {
       const tag = this.params.get("tag") as string;
       return JSON.stringify(
         postProps.filter((post) => post?.tag?.includes(tag)),
+        null,
+        2,
       );
     }
 
@@ -54,13 +56,24 @@ export class PostApi {
       const title = decodeURIComponent(this.params.get("title") as string);
       return JSON.stringify(
         postProps.filter((post) => post?.title?.toLowerCase().includes(title)),
+        null,
+        2,
       );
     }
 
-    return JSON.stringify(postProps);
+    return JSON.stringify(
+      postProps,
+      null,
+      2,
+    );
   }
 
   render() {
+    if (this.params.has("pretty")) {
+      return new Response(this.generate(), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
     return new Response(minify(Language.JSON, this.generate()), {
       headers: { "Content-Type": "application/json" },
     });
