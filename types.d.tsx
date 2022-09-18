@@ -88,6 +88,27 @@ export interface Covid {
   lastUpdate: string;
 }
 
+export interface IndexAPIResponse {
+  title: string;
+  desc: string;
+  url: string;
+  repo: string;
+  locations: {
+    index: {
+      url: string;
+      desc: string;
+    };
+    post: {
+      url: string;
+      desc: string;
+    };
+    postmd: {
+      url: string;
+      desc: string;
+    };
+  };
+}
+
 export type JokesType =
   | JokesText
   | JokesImage
