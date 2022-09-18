@@ -1,5 +1,5 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import ky from "ky";
+import ky, { KyResponse } from "ky";
 import { Covid, Post } from "@/types.d.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PostCard from "@components/PostCard.tsx";
@@ -16,7 +16,30 @@ export const handler: Handlers<{
 }> = {
   async GET(_req, ctx) {
     const randomIndex = Math.floor(Math.random() * 20);
-    const covid = await ky.get("https://covid19.mathdro.id/api").json();
+    const covid = await ky.get("https://covid19.mathdro.id/api")
+      .then((response: KyResponse) => {
+        return response.json();
+      })
+      .catch(() => {
+        const err = JSON.stringify(
+          {
+            confirmed: {
+              value: 0,
+              detail: "Error",
+            },
+            recovered: {
+              value: 0,
+              detail: "Error",
+            },
+            deaths: {
+              value: 0,
+              detail: "Error",
+            },
+            lastUpdate: "Error",
+          },
+        );
+        return err;
+      });
     const body = {
       quote: quotes[randomIndex],
       covid: covid as Covid,
