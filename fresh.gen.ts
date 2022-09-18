@@ -5,15 +5,16 @@
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/about.tsx";
-import * as $2 from "./routes/bg.svg.ts";
-import * as $3 from "./routes/blooper.tsx";
-import * as $4 from "./routes/index.tsx";
-import * as $5 from "./routes/jokes.tsx";
-import * as $6 from "./routes/posts.tsx";
-import * as $7 from "./routes/posts/[slug].tsx";
-import * as $8 from "./routes/sitemap.xml.ts";
-import * as $9 from "./routes/sw-register.ts";
-import * as $10 from "./routes/sw.ts";
+import * as $2 from "./routes/api/post.ts";
+import * as $3 from "./routes/bg.svg.tsx";
+import * as $4 from "./routes/blooper.tsx";
+import * as $5 from "./routes/index.tsx";
+import * as $6 from "./routes/jokes.tsx";
+import * as $7 from "./routes/posts.tsx";
+import * as $8 from "./routes/posts/[slug].tsx";
+import * as $9 from "./routes/sitemap.xml.tsx";
+import * as $10 from "./routes/sw-register.tsx";
+import * as $11 from "./routes/sw.tsx";
 import * as $$0 from "./islands/CopyButton.tsx";
 import * as $$1 from "./islands/CounterLogic.tsx";
 import * as $$2 from "./islands/FAB.tsx";
@@ -23,15 +24,16 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $0,
     "./routes/about.tsx": $1,
-    "./routes/bg.svg.ts": $2,
-    "./routes/blooper.tsx": $3,
-    "./routes/index.tsx": $4,
-    "./routes/jokes.tsx": $5,
-    "./routes/posts.tsx": $6,
-    "./routes/posts/[slug].tsx": $7,
-    "./routes/sitemap.xml.ts": $8,
-    "./routes/sw-register.ts": $9,
-    "./routes/sw.ts": $10,
+    "./routes/api/post.ts": $2,
+    "./routes/bg.svg.tsx": $3,
+    "./routes/blooper.tsx": $4,
+    "./routes/index.tsx": $5,
+    "./routes/jokes.tsx": $6,
+    "./routes/posts.tsx": $7,
+    "./routes/posts/[slug].tsx": $8,
+    "./routes/sitemap.xml.tsx": $9,
+    "./routes/sw-register.tsx": $10,
+    "./routes/sw.tsx": $11,
   },
   islands: {
     "./islands/CopyButton.tsx": $$0,
