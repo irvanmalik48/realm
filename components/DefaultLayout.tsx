@@ -44,12 +44,7 @@ export default function DefaultLayout(props: {
         } ${styles} subpixel-antialiased w-screen gap-0 flex flex-col-reverse md:grid md:grid-cols-tablet lg:grid-cols-root`}
       >
         <Head>
-          <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1.0"
-          />
           <meta name="description" content={props.desc} />
           <meta key="words" name="keywords" content="blog" />
 
