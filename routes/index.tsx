@@ -7,6 +7,7 @@ import { loadContent, timeToRead } from "@utils/load.ts";
 import { quotes } from "@utils/quotes.ts";
 import { css, tw } from "@utils/twind.ts";
 import { ChaosLogo } from "@components/ChaosLogo.tsx";
+import { Button } from "../components/Button.tsx";
 
 const posts = await loadContent("posts/");
 
@@ -237,14 +238,11 @@ export default function Home(
             );
           })}
         </div>
-        <p className={tw`p-0 m-0 mt-2 text-center w-full`}>
-          <a
-            className={tw`bg-dark-accent-quartertrans px-4 py-2 inline-block text-sm text-uppercase text-dark-text rounded-3xl transition-all duration-200 ease-out hover:bg-dark-accent-semitrans hover:text-dark-accent-solid ring ring-dark-accent-quartertrans hover:ring-dark-accent-solid font-bold w-[fit-content] mt-5`}
-            href="/posts"
-          >
+        <div className={tw`flex justify-center items-center mt-5`}>
+          <Button type="anchor" href="/posts">
             More Posts
-          </a>
-        </p>
+          </Button>
+        </div>
       </section>
     </DefaultLayout>
   );

@@ -1,4 +1,5 @@
 import { css, tw } from "@utils/twind.ts";
+import { Button } from "./Button.tsx";
 
 function CoffeeIcon() {
   return (
@@ -37,19 +38,13 @@ export default function DonateCard() {
             You can donate through Trakteer or Saweria with the buttons below:
           </p>
         </div>
-        <div className={tw`flex flex-row gap-5`}>
-          <a
-            href="https://saweria.co/irvanmalik48"
-            className={tw`bg-dark-accent-quartertrans px-4 py-2 inline-block text-sm text-uppercase text-dark-text rounded-3xl transition-all duration-200 ease-out hover:bg-dark-accent-semitrans hover:text-dark-accent-solid ring ring-dark-accent-quartertrans hover:ring-dark-accent-solid font-bold w-[fit-content] mt-5`}
-          >
+        <div className={tw`flex flex-row gap-5 mt-5`}>
+          <Button type="anchor" href="https://saweria.co/irvanmalik48">
             Saweria
-          </a>
-          <a
-            href="https://trakteer.id/lapprealm/tip"
-            className={tw`bg-dark-accent-quartertrans px-4 py-2 inline-block text-sm text-uppercase text-dark-text rounded-3xl transition-all duration-200 ease-out hover:bg-dark-accent-semitrans hover:text-dark-accent-solid ring ring-dark-accent-quartertrans hover:ring-dark-accent-solid font-bold w-[fit-content] mt-5`}
-          >
+          </Button>
+          <Button type="anchor" href="https://trakteer.id/lapprealm/tip">
             Trakteer
-          </a>
+          </Button>
         </div>
       </div>
       <div
