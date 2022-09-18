@@ -7,6 +7,15 @@ export interface Post {
   tag?: string[];
 }
 
+export interface PostAPI {
+  url?: string;
+  path?: string;
+  title?: string;
+  date?: string;
+  desc?: string;
+  tag?: string[];
+}
+
 export interface Spring {
   p: number;
   v: number;
