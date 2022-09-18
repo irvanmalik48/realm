@@ -20,7 +20,7 @@ export function NavItem(
           props.active === props.parentActive
             ? "md:bg-dark-accent-semitrans text-dark-accent-solid"
             : ""
-        } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-3 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
+        } w-full md:w-auto group flex flex-col justify-center items-center bg-transparent text-dark-text w-[fit-content] p-2.5 rounded-xl md:hover:rounded-3xl hover:bg-dark-accent-solid hover:text-dark-nav transition-all duration-300`}
       >
         {props.children}
         <span
