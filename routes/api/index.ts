@@ -1,4 +1,5 @@
 import { Handlers } from "$fresh/server.ts";
+import { IndexAPIResponse } from "@/types.d.tsx";
 
 export const handler: Handlers = {
   GET(req, _ctx) {
@@ -18,7 +19,7 @@ export class PostApi {
   }
 
   generate() {
-    const welcome = {
+    const welcome: IndexAPIResponse = {
       title: "Welcome to IrvanMA's Realm API Index Page!",
       desc: "This is a simple API Index Page for IrvanMA's Realm.",
       url: this.url.protocol + "//" + this.url.host + "/",
