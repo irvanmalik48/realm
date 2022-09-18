@@ -25,9 +25,26 @@ export function Button(
       >
         <div className={tw`flex flex-row justify-center items-center gap-1`}>
           {props.children}
-          <svg className={tw`mt-0.5 ml-2 -mr-1 text-dark-text group-hover:text-dark-accent-solid stroke-2`} fill="none" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
-            <path className="opacity-0 transition group-hover:opacity-100" stroke="currentColor" d="M0 5h7"></path>
-            <path className="transition group-hover:translate-x-[3px]" stroke="currentColor" d="M1 1l4 4-4 4"></path>
+          <svg
+            className={tw`mt-0.5 ml-2 -mr-1 text-dark-text group-hover:text-dark-accent-solid stroke-2`}
+            fill="none"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            aria-hidden="true"
+          >
+            <path
+              className="opacity-0 transition group-hover:opacity-100"
+              stroke="currentColor"
+              d="M0 5h7"
+            >
+            </path>
+            <path
+              className="transition group-hover:translate-x-[3px]"
+              stroke="currentColor"
+              d="M1 1l4 4-4 4"
+            >
+            </path>
           </svg>
         </div>
       </a>
@@ -45,9 +62,26 @@ export function Button(
     >
       <div className={tw`flex flex-row justify-center items-center gap-1`}>
         {props?.children}
-        <svg className={tw`mt-0.5 ml-2 -mr-1 text-dark-text group-hover:text-dark-accent-solid stroke-2`} fill="none" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
-          <path className="opacity-0 transition group-hover:opacity-100" stroke="currentColor" d="M0 5h7"></path>
-          <path className="transition group-hover:translate-x-[3px]" stroke="currentColor" d="M1 1l4 4-4 4"></path>
+        <svg
+          className={tw`mt-0.5 ml-2 -mr-1 text-dark-text group-hover:text-dark-accent-solid stroke-2`}
+          fill="none"
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          aria-hidden="true"
+        >
+          <path
+            className="opacity-0 transition group-hover:opacity-100"
+            stroke="currentColor"
+            d="M0 5h7"
+          >
+          </path>
+          <path
+            className="transition group-hover:translate-x-[3px]"
+            stroke="currentColor"
+            d="M1 1l4 4-4 4"
+          >
+          </path>
         </svg>
       </div>
     </button>
