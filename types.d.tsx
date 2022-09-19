@@ -108,9 +108,3 @@ export interface IndexAPIResponse {
     };
   };
 }
-
-export type JokesType =
-  | JokesText
-  | JokesImage
-  | { text?: JokesText; img?: JokesImage }
-  | null;
