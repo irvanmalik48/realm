@@ -1,12 +1,12 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export default function Thumbnail(
-  titleP: string | undefined,
-  dateP: string | undefined,
-  tagsP: string | string[] | undefined,
+  titleP?: string,
+  dateP?: string,
+  tagsP?: string | string[],
 ) {
   let processedTags = "";
-  if (tagsP == undefined) {
+  if (tagsP === undefined) {
     processedTags = "";
   } else if (typeof tagsP === "string") {
     processedTags = `tags=${tagsP}&`;
@@ -17,7 +17,7 @@ export default function Thumbnail(
     processedTags = processedTags.replace(/,/g, "");
   }
 
-  const processedTitle = titleP == undefined ? "" : encodeURIComponent(titleP);
+  const processedTitle = titleP ? "" : encodeURIComponent(titleP as string);
   const nameText = encodeURIComponent("Irvan Malik Azantha");
   const emailText = encodeURIComponent("irvanmalik48@gmail.com");
   const dateText = dateP == undefined
