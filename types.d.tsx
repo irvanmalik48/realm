@@ -16,26 +16,31 @@ export interface PostAPI {
   tag?: string[];
 }
 
+export interface Projects {
+  path?: string;
+  md?: string;
+  title?: string;
+  desc?: string;
+  screenshot?: string;
+  link?: string;
+  gh?: string;
+  stack?: string[];
+}
+
+export interface ProjectsAPI {
+  url?: string;
+  path?: string;
+  title?: string;
+  desc?: string;
+  screenshot?: string;
+  link?: string;
+  gh?: string;
+  stack?: string[];
+}
+
 export interface Spring {
   p: number;
   v: number;
-}
-
-export interface JokesText {
-  status: number;
-  end_point: string;
-  method: string;
-  data: string;
-}
-
-export interface JokesImage {
-  status: number;
-  end_point: string;
-  method: string;
-  data: {
-    url: string;
-    source: string;
-  };
 }
 
 export interface GitHubUser {
