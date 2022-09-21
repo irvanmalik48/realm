@@ -39,7 +39,7 @@ Asking is one of our natural way to simply know and/or learn something. Asking s
 
 ## Don't Ask to Ask
 
-Yes, as the name said. **Don't ask to ask**. Let's say, there's a women (no I'm not being gender-biased here if you're a pro-choice and/or SJW motherfucker. It's just that women tend to do it more frequently. Not saying that man don't do it. It's just retarded how the audacity and frequency of a women doing it is just too high to comprehend) in a forum that doesn't understand how Y work. Let's call her Liz. She then asks in the forum,
+Yes, as the name said. **Don't ask to ask**. Let's say, there's a person in a forum that doesn't understand how Y work. Let's call her Liz. She then asks in the forum,
 
 ```text
 Liz: Hello, does anybody know anything about Y?
