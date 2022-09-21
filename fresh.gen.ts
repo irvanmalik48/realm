@@ -20,7 +20,8 @@ import * as $13 from "./routes/sw.tsx";
 import * as $$0 from "./islands/CopyButton.tsx";
 import * as $$1 from "./islands/CounterLogic.tsx";
 import * as $$2 from "./islands/FAB.tsx";
-import * as $$3 from "./islands/WaterDrop.tsx";
+import * as $$3 from "./islands/FABNav.tsx";
+import * as $$4 from "./islands/WaterDrop.tsx";
 
 const manifest = {
   routes: {
@@ -43,7 +44,8 @@ const manifest = {
     "./islands/CopyButton.tsx": $$0,
     "./islands/CounterLogic.tsx": $$1,
     "./islands/FAB.tsx": $$2,
-    "./islands/WaterDrop.tsx": $$3,
+    "./islands/FABNav.tsx": $$3,
+    "./islands/WaterDrop.tsx": $$4,
   },
   baseUrl: import.meta.url,
   config,
