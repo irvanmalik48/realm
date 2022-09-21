@@ -6,7 +6,7 @@ import DefaultLayout from "@components/DefaultLayout.tsx";
 import { apply, css, tw } from "@utils/twind.ts";
 import { loadProject, loadShowcases } from "@utils/load.ts";
 import Counter from "@components/Counter.tsx";
-import { Button } from "../../components/Button.tsx";
+import { Button } from "@components/Button.tsx";
 
 const projectDir = "projects/";
 
