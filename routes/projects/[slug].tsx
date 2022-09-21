@@ -26,7 +26,7 @@ export const handler: Handlers<Projects | null> = {
   },
 };
 
-export default function PostPage(
+export default function ProjectsPage(
   { data, ...props }: PageProps<Projects | null>,
 ) {
   const projectProps: Projects[] = [];
