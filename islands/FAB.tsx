@@ -27,7 +27,7 @@ export default function FAB() {
 
   return (
     <button
-      className={tw`fixed ${
+      className={tw`hidden md:block fixed ${
         isVisible ? "opacity-100" : "opacity-0 cursor-default"
       } bottom-[7rem] right-[1rem] md:bottom-[3rem] md:right-[5rem] text-dark-text bg-dark-nav ring ring-dark-accent-semitrans shadow-lg text-dark-accent-solid w-[fit-content] p-4 rounded-full hover:bg-dark-accent-solid hover:ring-dark-accent-solid hover:shadow-xl hover:text-dark-nav transition-all duration-300 z-[999]`}
       aria-label="Back to top"
