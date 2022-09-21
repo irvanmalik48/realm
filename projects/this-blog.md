@@ -1,0 +1,41 @@
+---
+title: "The Realm"
+desc: "Yes, this blog."
+stack:
+  - "Deno"
+  - "Fresh"
+  - "Preact"
+  - "TypeScript" 
+  - "Markdown"
+link: "https://irvanma.me"
+gh: "https://github.com/irvanmalik48/realm"
+screenshot: "/showcase/this-blog.webp"
+---
+
+# Description
+
+Made with the newest, edgiest framework currently. This blog shall be the first project I list. It is just a regular blog with few stuffs missing which I am still trying to bring back.
+
+Features include:
+
+- A layout following Material You with slight modifications.
+- Using Markdown files for content.
+- Less JavaScript sent to browser.
+- A nice footer I got from literally the <fresh.deno.dev> header. (Shoutout to them for creating that awesome water drop and waves animations)
+- Progressive Web App implemented.
+- Full `twind` integration.
+- Using `ky` as fetch utility for better DX.
+- No build step. (It deploys instantly thanks to fresh framework)
+- Fast. Really fast.
+- Strict TypeScript type definitions.
+- No test cases cause why do you even want it in a blog?
+
+Features that may/may not be implemented in the future:
+
+- Comment system.
+- Contact Me page.
+- Theme Switcher. (The blog itself actually has 2 themes)
+- Test cases. (Yeah, I actually need it)
+- A search bar for both posts and projects.
+- Switch to FAB-based navigation.
+- Code refactoring.
