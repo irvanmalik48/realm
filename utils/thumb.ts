@@ -19,7 +19,7 @@ export default function Thumbnail(
 
   const processedTitle = titleP ? "" : encodeURIComponent(titleP as string);
   const nameText = encodeURIComponent("Irvan Malik Azantha");
-  const emailText = encodeURIComponent("irvanmalik48@gmail.com");
+  const emailText = encodeURIComponent("me@irvanma.me");
   const dateText = dateP == undefined
     ? encodeURIComponent("-")
     : encodeURIComponent(dateP);
