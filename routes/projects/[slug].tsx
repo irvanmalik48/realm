@@ -1,4 +1,5 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { asset } from "$fresh/runtime.ts";
 import Markdown from "markdown-to-jsx";
 import { Projects } from "@/types.d.tsx";
 import PreBlock from "@components/PreBlock.tsx";
@@ -131,7 +132,7 @@ export default function ProjectsPage(
       >
         <div className={tw`flex flex-col justify-center items-center`}>
           <img
-            src={data.screenshot}
+            src={asset(data.screenshot as string)}
             className={tw`xl:w-1/2 mb-5 rounded-xl border-[.125rem] border-dark-accent-semitrans`}
             alt="Project Image"
           />
@@ -158,9 +159,13 @@ export default function ProjectsPage(
             <Button type="anchor" href={data.link}>
               Visit site
             </Button>
-            <Button type="anchor" href={data.gh}>
-              GitHub repo
-            </Button>
+            {
+              data?.gh !== "private" && (
+                <Button type="anchor" href={data.gh}>
+                  GitHub repo
+                </Button>
+              ) 
+            }
           </div>
         </div>
       </header>
