@@ -249,7 +249,7 @@ export default function Home(
         <p
           className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}
         >
-          Recent Projects
+          Projects
         </p>
         <p
           className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
