@@ -1,7 +1,7 @@
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export default function Thumbnail(
-  titleP?: string,
+  titleP: string,
   dateP?: string,
   tagsP?: string | string[],
 ) {
@@ -17,7 +17,7 @@ export default function Thumbnail(
     processedTags = processedTags.replace(/,/g, "");
   }
 
-  const processedTitle = titleP ? "" : encodeURIComponent(titleP as string);
+  const processedTitle = encodeURIComponent(titleP);
   const nameText = encodeURIComponent("Irvan Malik Azantha");
   const emailText = encodeURIComponent("me@irvanma.me");
   const dateText = dateP == undefined
