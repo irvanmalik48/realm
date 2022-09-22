@@ -38,12 +38,7 @@ export default function Nav(props: { active: string }) {
           active="projects"
           parentActive={props.active}
           href="/projects"
-          text={
-            <>
-              Projects
-              <span className={tw`hidden md:inline`}>{" "}(WIP)</span>
-            </>
-          }
+          text="Projects"
         >
           <ProjectIcon />
         </NavItem>
