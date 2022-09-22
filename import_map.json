@@ -13,6 +13,7 @@
     "markdown-to-jsx": "https://esm.sh/markdown-to-jsx@7.1.7",
     "twind": "https://esm.sh/twind@0.16.17",
     "twind/": "https://esm.sh/twind@0.16.17/",
+    "twind/line-clamp": "https://esm.sh/@twind/line-clamp@0.1.1",
     "rsh": "https://esm.sh/react-syntax-highlighter@15.5.0",
     "rsh/": "https://esm.sh/react-syntax-highlighter@15.5.0/",
     "@components/": "./components/",
