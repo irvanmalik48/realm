@@ -114,7 +114,7 @@ export default function Home(
           COVID-19 Status Tracker
         </p>
         <div
-          className={tw`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-5 items-center justify-center`}
+          className={tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-5 items-center justify-center`}
         >
           <div
             className={tw`ring ring-transparent flex flex-col justify-center items-center text-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text`}
@@ -141,21 +141,6 @@ export default function Home(
             </p>
             <p className={tw`text-dark-text font-bold text-2xl pt-5 py-3`}>
               {props.data.covid?.deaths.value.toString().replace(
-                /\B(?=(\d{3})+(?!\d))/g,
-                ",",
-              )}
-            </p>
-          </div>
-          <div
-            className={tw`ring ring-transparent flex flex-col justify-center items-center text-center w-full px-5 py-3 bg-dark-accent-quartertrans rounded-xl hover:bg-dark-accent-semitrans hover:ring-dark-accent-solid transition-all duration-200 ease-out text-dark-text`}
-          >
-            <p
-              className={tw`bg-dark-accent-semitrans py-0.5 w-full rounded-3xl text-dark-accent-solid font-semibold font-mono uppercase`}
-            >
-              Recovered
-            </p>
-            <p className={tw`text-dark-text font-bold text-2xl pt-5 py-3`}>
-              {props.data.covid?.recovered.value.toString().replace(
                 /\B(?=(\d{3})+(?!\d))/g,
                 ",",
               )}
