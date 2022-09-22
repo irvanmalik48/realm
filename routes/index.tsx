@@ -1,15 +1,17 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import ky, { KyResponse } from "ky";
-import { Covid, Post } from "@/types.d.tsx";
+import { Covid, Post, Projects } from "@/types.d.tsx";
 import DefaultLayout from "@components/DefaultLayout.tsx";
 import PostCard from "@components/PostCard.tsx";
-import { loadContent, timeToRead } from "@utils/load.ts";
+import { loadContent, loadShowcases, timeToRead } from "@utils/load.ts";
 import { quotes } from "@utils/quotes.ts";
 import { css, tw } from "@utils/twind.ts";
 import { ChaosLogo } from "@components/ChaosLogo.tsx";
 import { Button } from "../components/Button.tsx";
+import ProjectCard from "../components/ProjectCard.tsx";
 
 const posts = await loadContent("posts/");
+const projects = await loadShowcases("projects/");
 
 export const handler: Handlers<{
   quote: string;
@@ -57,9 +59,14 @@ export default function Home(
   }>,
 ) {
   const postProps: Post[] = [];
+  const projectProps: Projects[] = [];
 
   for (const [_key, post] of posts.entries()) {
     postProps.push(post);
+  }
+
+  for (const [_key, project] of projects.entries()) {
+    projectProps.push(project);
   }
 
   postProps.sort((a, b) => {
@@ -202,7 +209,7 @@ export default function Home(
         </p>
       </section>
       <section
-        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
+        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 mb-5 rounded-xl ${
           css(
             {
               "-webkit-backdrop-filter": "blur(.5rem)",
@@ -241,6 +248,47 @@ export default function Home(
         <div className={tw`flex justify-center items-center mt-5`}>
           <Button type="anchor" href="/posts">
             More Posts
+          </Button>
+        </div>
+      </section>
+      <section
+        className={tw`flex flex-col w-full bg-dark-navglass py-4 px-5 rounded-xl mb-5 ${
+          css(
+            {
+              "-webkit-backdrop-filter": "blur(.5rem)",
+              "backdrop-filter": "blur(.5rem)",
+            },
+          )
+        }`}
+      >
+        <p
+          className={tw`text-2xl font-semibold text-dark-text mb-3 font-heading`}
+        >
+          Recent Projects
+        </p>
+        <p
+          className={tw`bg-dark-accent-semitrans text-dark-text px-5 py-2 rounded-xl border-l-4 border-dark-accent-solid`}
+        >
+          Projects that I have done currently.
+        </p>
+        <div
+          className={tw`grid grid-cols-1 xl:grid-cols-4 mt-5 gap-5 items-between`}
+        >
+          {projectProps.slice(0, 4).map((data: Projects, key: number) => {
+            return (
+              <ProjectCard
+                key={key}
+                path={"/projects" + data.path}
+                img={data.screenshot}
+                title={data.title}
+                desc={data.desc}
+              />
+            );
+          })}
+        </div>
+        <div className={tw`flex justify-center items-center mt-5`}>
+          <Button type="anchor" href="/projects">
+            More Projects
           </Button>
         </div>
       </section>
