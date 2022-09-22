@@ -12,6 +12,10 @@ gh: "https://github.com/irvanmalik48/realm"
 screenshot: "/showcase/this-blog.webp"
 ---
 
+# Collaborators
+
+- [Irvan Malik <irvanmalik48@gmail.com>](https://github.com/irvanmalik48)
+
 # Description
 
 Made with the newest, edgiest framework currently. This blog shall be the first project I list. It is just a regular blog with few stuffs missing which I am still trying to bring back.
