@@ -272,7 +272,7 @@ export default function Home(
           Projects that I have done currently.
         </p>
         <div
-          className={tw`grid grid-cols-1 xl:grid-cols-4 mt-5 gap-5 items-between`}
+          className={tw`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 mt-5 gap-5 items-between`}
         >
           {projectProps.slice(0, 4).map((data: Projects, key: number) => {
             return (
