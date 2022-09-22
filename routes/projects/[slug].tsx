@@ -156,9 +156,13 @@ export default function ProjectsPage(
           <div
             className={tw`w-full flex flex-row justify-center gap-5 items-center`}
           >
-            <Button type="anchor" href={data.link}>
-              Visit site
-            </Button>
+            {
+              data?.link !== "none" && (
+              <Button type="anchor" href={data.link}>
+                Visit site
+              </Button>
+              )
+            }
             {
               data?.gh !== "private" && (
                 <Button type="anchor" href={data.gh}>
