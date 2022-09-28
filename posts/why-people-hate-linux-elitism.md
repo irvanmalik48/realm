@@ -1,5 +1,5 @@
 ---
-title: "Rant: Linux ELitism"
+title: "Rant: Linux Elitism"
 date: "2022-09-28"
 desc: "A bit of coined opinion."
 tag:
