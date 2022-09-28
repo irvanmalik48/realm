@@ -8,6 +8,16 @@ tag:
   - "elitism"
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [What is it anyways?](#what-is-it-anyways)
+- [Why people hate it so much?](#why-people-hate-it-so-much)
+- [Is it justified?](#is-it-justified)
+- ["Use what works"](#use-what-works)
+- [Conclusion](#conclusion)
+
 # Abstract
 
 You may not be aware of it but there is a certain level of elitism that exists among the users and developers of Linux. This attitude is prevalent among those who use and develop software specifically for the Linux operating system.
