@@ -122,7 +122,7 @@ export default function ProjectsPage(
 
   return (
     <DefaultLayout
-      title={data.title}
+      title={data.title as string}
       desc={data.desc}
       tag={data.stack}
       active={data.path}
@@ -156,20 +156,16 @@ export default function ProjectsPage(
           <div
             className={tw`w-full flex flex-row justify-center gap-5 items-center`}
           >
-            {
-              data?.link !== "none" && (
+            {data?.link !== "none" && (
               <Button type="anchor" href={data.link}>
                 Visit site
               </Button>
-              )
-            }
-            {
-              data?.gh !== "private" && (
-                <Button type="anchor" href={data.gh}>
-                  GitHub repo
-                </Button>
-              ) 
-            }
+            )}
+            {data?.gh !== "private" && (
+              <Button type="anchor" href={data.gh}>
+                GitHub repo
+              </Button>
+            )}
           </div>
         </div>
       </header>
