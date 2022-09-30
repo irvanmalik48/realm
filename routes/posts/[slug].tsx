@@ -175,7 +175,7 @@ export default function PostPage({ data, ...props }: PageProps<Post | null>) {
 
   return (
     <DefaultLayout
-      title={data.title}
+      title={data.title as string}
       date={data.date}
       desc={data.desc}
       tag={data.tag}
