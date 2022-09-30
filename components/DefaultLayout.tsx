@@ -11,7 +11,7 @@ import Thumbnail from "@utils/thumb.ts";
 import { colorScheme, currentColorScheme } from "@utils/colors.ts";
 
 export default function DefaultLayout(props: {
-  title?: string;
+  title: string;
   desc?: string;
   date?: string;
   tag?: string[];
@@ -49,11 +49,13 @@ export default function DefaultLayout(props: {
           <meta key="words" name="keywords" content="blog" />
 
           <meta property="og:url" content="https://irvanma.live" />
-          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content={props.title} />
           <meta property="og:title" content={props.title} />
+          <meta property="og:type" content="website" />
           <meta property="og:description" content={props.desc} />
           <meta
             property="og:image"
+            itemProp="image"
             content={Thumbnail(props.title, props.date, props.tag)}
           />
 
@@ -62,6 +64,7 @@ export default function DefaultLayout(props: {
           <meta name="twitter:description" content={props.desc} />
           <meta
             name="twitter:image"
+            itemProp="image"
             content={Thumbnail(props.title, props.date, props.tag)}
           />
 
