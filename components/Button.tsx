@@ -20,7 +20,7 @@ export function Button(
           | undefined}
         href={props.href}
         className={tw`group bg-dark-accent-quartertrans px-4 py-2 inline-block text-sm text-uppercase text-dark-text rounded-3xl transition-all duration-200 ease-out hover:bg-dark-accent-semitrans hover:text-dark-accent-solid ring ring-dark-accent-quartertrans hover:ring-dark-accent-solid font-bold w-[fit-content] ${
-          props.className ?? ""
+          props.className as string ?? ""
         }`}
       >
         <div className={tw`flex flex-row justify-center items-center gap-1`}>
@@ -57,7 +57,7 @@ export function Button(
         | h.JSX.MouseEventHandler<HTMLButtonElement>
         | undefined}
       className={tw`group bg-dark-accent-quartertrans px-4 py-2 inline-block text-sm text-uppercase text-dark-text rounded-3xl transition-all duration-200 ease-out hover:bg-dark-accent-semitrans hover:text-dark-accent-solid ring ring-dark-accent-quartertrans hover:ring-dark-accent-solid font-bold w-[fit-content] ${
-        props?.className ?? ""
+        props?.className as string ?? ""
       }`}
     >
       <div className={tw`flex flex-row justify-center items-center gap-1`}>
