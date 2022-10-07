@@ -9,7 +9,7 @@
     "preact": "https://esm.sh/preact@10.11.1",
     "preact/": "https://esm.sh/preact@10.11.1/",
     "signals": "https://esm.sh/@preact/signals@1.1.1",
-    "preact-render-to-string": "https://esm.sh/preact-render-to-string@5.2.5?external=preact",
+    "preact-render-to-string": "https://esm.sh/preact-render-to-string@5.2.4?external=preact",
     "markdown-to-jsx": "https://esm.sh/markdown-to-jsx@7.1.7",
     "twind": "https://esm.sh/twind@0.16.17",
     "twind/": "https://esm.sh/twind@0.16.17/",
