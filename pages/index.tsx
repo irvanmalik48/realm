@@ -4,6 +4,7 @@ import { AnchorButton, NextLinkButton } from "../components/stateless/Button";
 import Logo from "../components/stateless/Logo";
 import PostCard from "../components/stateless/PostCard";
 import ProjectCard from "../components/stateless/ProjectCard";
+import { getPostSlugs, getProjectSlugs } from "../utils/utils";
 
 const slug = {
   title: "Landing",
@@ -60,17 +61,16 @@ export default function Home(props: any) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const urlPost = new URL("/api/posts", process.env.NEXT_PUBLIC_API_URL);
-  const urlProject = new URL("/api/projects", process.env.NEXT_PUBLIC_API_URL);
-  const posts = await fetch(urlPost.toString());
-  const projects = await fetch(urlProject.toString());
-  const postsJSON = await posts.json();
-  const projectsJSON = await projects.json();
+  const postSlugs = getPostSlugs().sort((a: any, b: any) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
+  const projectSlugs = getProjectSlugs();
 
   return {
     props: {
-      posts: postsJSON,
-      projects: projectsJSON,
+      posts: postSlugs,
+      projects: projectSlugs,
     },
   };
 };

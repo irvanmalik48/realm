@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import BaseLayout from "../../components/layouts/BaseLayout";
 import PostCard from "../../components/stateless/PostCard";
+import { getPostSlugs } from "../../utils/utils";
 
 const slug = {
   title: "Posts",
@@ -30,13 +31,13 @@ export default function Blog(props: any) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const url = new URL("/api/posts", process.env.NEXT_PUBLIC_API_URL);
-  const posts = await fetch(url.toString());
-  const postsJSON = await posts.json();
+  const postSlugs = getPostSlugs().sort((a: any, b: any) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 
   return {
     props: {
-      posts: postsJSON,
+      posts: postSlugs,
     },
   };
 };

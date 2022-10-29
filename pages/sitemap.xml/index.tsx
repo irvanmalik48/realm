@@ -1,11 +1,12 @@
 // pages/server-sitemap-index.xml/index.tsx
 import { getServerSideSitemap } from "next-sitemap";
 import { GetServerSideProps } from "next";
+import { getPostSlugs } from "../../utils/utils";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const urlPost = new URL("/api/posts", process.env.NEXT_PUBLIC_API_URL);
-  const posts = await fetch(urlPost.toString());
-  const postsJSON = await posts.json();
+  const postSlugs = getPostSlugs().sort((a: any, b: any) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 
   const fieldsRegular = [
     {
@@ -26,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     },
   ];
 
-  const fieldsPost = postsJSON.map((post: any) => ({
+  const fieldsPost = postSlugs.map((post: any) => ({
     loc: `https://www.irvanma.me${post.slug}`,
     lastmod: new Date(post.date).toISOString(),
   }));

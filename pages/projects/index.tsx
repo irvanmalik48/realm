@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import BaseLayout from "../../components/layouts/BaseLayout";
 import ProjectCard from "../../components/stateless/ProjectCard";
+import { getProjectSlugs } from "../../utils/utils";
 
 const slug = {
   title: "Projects",
@@ -30,13 +31,11 @@ export default function Blog(props: any) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const url = new URL("/api/projects", process.env.NEXT_PUBLIC_API_URL);
-  const projects = await fetch(url.toString());
-  const postsJSON = await projects.json();
+  const projectSlugs = getProjectSlugs();
 
   return {
     props: {
-      projects: postsJSON,
+      projects: projectSlugs,
     },
   };
 };
