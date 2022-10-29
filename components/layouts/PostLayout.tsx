@@ -4,7 +4,7 @@ import Image from "next/image";
 import BaseLayout from "./BaseLayout";
 
 const ResponsiveImage = (props: any) => {
-  return <Image alt={props.alt} layout="responsive" {...props} />;
+  return <Image className="w-full" alt={props.alt} layout="responsive" {...props} />;
 };
 
 const components = { img: ResponsiveImage };
