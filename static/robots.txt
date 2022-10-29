@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://www.irvanma.me
-
-# Sitemaps
-Sitemap: https://www.irvanma.me/sitemap.xml

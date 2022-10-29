@@ -1,0 +1,289 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .stack {
+    transform-style: preserve-3d;
+  }
+
+  .stack:before {
+    transform: translateZ(-1px) translateY(0.5rem) translateX(0.5rem);
+    @apply rounded-md;
+  }
+
+  .stack:hover:before {
+    transform: translateZ(-1px) translateY(0.7rem) translateX(0.7rem);
+  }
+
+  .container-responsive {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  pre[class*="language-"],
+  code[class*="language-"] {
+    text-shadow: none;
+    direction: ltr;
+    word-spacing: normal;
+    word-break: normal;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    @apply text-gray-200 font-mono text-sm whitespace-pre;
+  }
+
+  pre[class*="language-"]::selection,
+  code[class*="language-"]::selection,
+  pre[class*="language-"] *::selection,
+  code[class*="language-"] *::selection {
+    text-shadow: none;
+    @apply bg-red-800;
+  }
+
+  @media print {
+    pre[class*="language-"],
+    code[class*="language-"] {
+      text-shadow: none;
+    }
+  }
+
+  pre[class*="language-"] {
+    @apply px-5 py-3 my-2 overflow-auto bg-[#090d15] scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-400;
+  }
+
+  :not(pre) > code[class*="language-"] {
+    padding: 0.1rem 0.3rem;
+    @apply bg-[#090d15] text-red-400 rounded-xl;
+  }
+  /*********************************************************
+  * Tokens
+  */
+  .namespace {
+    @apply opacity-70;
+  }
+
+  .token.doctype .token.doctype-tag {
+    @apply text-sky-400;
+  }
+
+  .token.doctype .token.name {
+    @apply text-cyan-400;
+  }
+
+  .token.comment,
+  .token.prolog {
+    @apply text-green-400;
+  }
+
+  .token.punctuation,
+  .language-html .language-css .token.punctuation,
+  .language-html .language-javascript .token.punctuation {
+    @apply text-gray-300;
+  }
+
+  .token.property,
+  .token.tag,
+  .token.boolean,
+  .token.number,
+  .token.constant,
+  .token.symbol,
+  .token.inserted,
+  .token.unit {
+    @apply text-lime-300;
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.deleted {
+    @apply text-orange-300;
+  }
+
+  .language-css .token.string.url {
+    @apply underline;
+  }
+
+  .token.operator,
+  .token.entity {
+    @apply text-gray-300;
+  }
+
+  .token.operator.arrow {
+    @apply text-sky-400;
+  }
+
+  .token.atrule {
+    @apply text-orange-300;
+  }
+
+  .token.atrule .token.rule {
+    @apply text-purple-400;
+  }
+
+  .token.atrule .token.url {
+    @apply text-cyan-400;
+  }
+
+  .token.atrule .token.url .token.function {
+    @apply text-green-200;
+  }
+
+  .token.atrule .token.url .token.punctuation {
+    @apply text-gray-300;
+  }
+
+  .token.keyword {
+    @apply text-sky-400;
+  }
+
+  .token.keyword.module,
+  .token.keyword.control-flow {
+    @apply text-purple-400;
+  }
+
+  .token.function,
+  .token.function .token.maybe-class-name {
+    @apply text-green-200;
+  }
+
+  .token.regex {
+    @apply text-red-500;
+  }
+
+  .token.important {
+    @apply text-sky-400;
+  }
+
+  .token.italic {
+    @apply italic;
+  }
+
+  .token.constant {
+    @apply text-cyan-400;
+  }
+
+  .token.class-name,
+  .token.maybe-class-name {
+    @apply text-sky-500;
+  }
+
+  .token.console {
+    @apply text-cyan-400;
+  }
+
+  .token.parameter {
+    @apply text-cyan-400;
+  }
+
+  .token.interpolation {
+    @apply text-cyan-400;
+  }
+
+  .token.punctuation.interpolation-punctuation {
+    @apply text-sky-400;
+  }
+
+  .token.boolean {
+    @apply text-sky-400;
+  }
+
+  .token.property,
+  .token.variable,
+  .token.imports .token.maybe-class-name,
+  .token.exports .token.maybe-class-name {
+    @apply text-cyan-400;
+  }
+
+  .token.selector {
+    @apply text-yellow-300;
+  }
+
+  .token.escape {
+    @apply text-yellow-300;
+  }
+
+  .token.tag {
+    @apply text-sky-400;
+  }
+
+  .token.tag .token.punctuation {
+    @apply text-gray-500;
+  }
+
+  .token.cdata {
+    @apply text-gray-500;
+  }
+
+  .token.attr-name {
+    @apply text-cyan-400;
+  }
+
+  .token.attr-value,
+  .token.attr-value .token.punctuation {
+    @apply text-orange-300;
+  }
+
+  .token.attr-value .token.punctuation.attr-equals {
+    @apply text-gray-300;
+  }
+
+  .token.entity {
+    @apply text-sky-400;
+  }
+
+  .token.namespace {
+    @apply text-sky-500;
+  }
+  /*********************************************************
+  * Language Specific
+  */
+
+  pre[class*="language-javascript"],
+  code[class*="language-javascript"],
+  pre[class*="language-jsx"],
+  code[class*="language-jsx"],
+  pre[class*="language-typescript"],
+  code[class*="language-typescript"],
+  pre[class*="language-tsx"],
+  code[class*="language-tsx"] {
+    @apply text-cyan-400;
+  }
+
+  pre[class*="language-css"],
+  code[class*="language-css"] {
+    @apply text-orange-300;
+  }
+
+  pre[class*="language-html"],
+  code[class*="language-html"] {
+    @apply text-gray-300;
+  }
+
+  .language-regex .token.anchor {
+    @apply text-green-200;
+  }
+
+  .language-html .token.punctuation {
+    @apply text-gray-500;
+  }
+
+  pre[class*="language-"] > code[class*="language-"] {
+    @apply relative z-[1];
+  }
+
+  .line-highlight.line-highlight {
+    background: #f7ebc6;
+    z-index: 0;
+  }
+}
+
+@import "material-symbols/sharp.css";
+@import url("http://fonts.cdnfonts.com/css/helvetica-neue-9");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap");
