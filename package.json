@@ -14,6 +14,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@next/env": "^13.0.0",
     "@tailwindcss/typography": "^0.5.7",
     "@types/node": "18.11.5",
     "@types/react": "18.0.23",
@@ -25,6 +26,7 @@
     "material-symbols": "^0.2.14",
     "next-mdx-remote": "^4.1.0",
     "next-seo": "^5.11.1",
+    "next-sitemap": "^3.1.29",
     "postcss": "^8.4.18",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-prism-plus": "^1.5.0",
@@ -36,6 +38,7 @@
     "webpack": ">=4"
   },
   "peerDependencies": {
+    "@next/env": "^13.0.0",
     "webpack": ">=4"
   }
 }
