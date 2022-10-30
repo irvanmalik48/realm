@@ -22,7 +22,7 @@ export default function Blog(props: any) {
           </section>
         </div>
         <PostsSearchBar />
-        <div className="grid md:grid-cols-2 gap-5 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
           {props.posts.map((post: any, index: any) => (
             <PostCard key={index} meta={post} />
           ))}
