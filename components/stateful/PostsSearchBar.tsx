@@ -43,7 +43,7 @@ export default function PostsSearchBar(props: any) {
     <>
       {bgActive && (
         <div
-          className="fixed z-30 inset-0 w-full h-full bg-gray-900 bg-opacity-80"
+          className="fixed z-30 inset-0 w-full h-full bg-gray-900 bg-opacity-80 backdrop-blur-md"
           onClick={onClick}
         ></div>
       )}
