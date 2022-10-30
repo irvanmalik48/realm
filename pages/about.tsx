@@ -84,8 +84,8 @@ export default function About(props: any) {
           </div>
           <h2>Tools I Commonly Use</h2>
           <div className="grid md:grid-cols-2">
-            <ul>
-              <li className="mb-0 pb-0">
+            <ul className="mb-0 pb-0">
+              <li>
                 <a href="https://code.visualstudio.com/">Visual Studio Code</a>
               </li>
               <li>
@@ -98,8 +98,8 @@ export default function About(props: any) {
                 <a href="https://nextjs.org/">Next.js</a>
               </li>
             </ul>
-            <ul>
-              <li className="mt-0 pt-0">
+            <ul className="mt-0 pt-0">
+              <li>
                 <a href="https://tailwindcss.com/">Tailwind CSS</a>
               </li>
               <li>
