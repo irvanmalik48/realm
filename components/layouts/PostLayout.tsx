@@ -46,6 +46,15 @@ export default function PostLayout(props: any) {
           {...props}
         >
           <MDXRemote {...props.source} components={components} />
+          <p className="mt-12 w-full text-center text-sm">
+            This post is licensed under{" "}
+            <a
+              href="https://artlibre.org/licence/lal/en/"
+            >
+              Free Art License 1.3
+            </a>
+            .
+          </p>
         </article>
       </section>
     </BaseLayout>
