@@ -11,7 +11,7 @@ const components = { img: ResponsiveImage };
 
 export default function PostLayout(props: any) {
   return (
-    <BaseLayout title={props.meta.title} description={props.meta.description}>
+    <BaseLayout title={props.meta.title} description={props.meta.desc}>
       <ArticleJsonLd
         type="BlogPosting"
         title={props.meta.title}
