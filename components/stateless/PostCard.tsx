@@ -9,7 +9,6 @@ export default function PostCard(props: any) {
       <p className="text-lg font-bold font-helvetica truncate">
         {props.meta.title}
       </p>
-      <p className="text-sm truncate">{props.meta.description}</p>
       <div className="flex justify-between items-center">
         <p className="text-sm text-gray-400">{props.meta.date}</p>
         <div className="flex gap-2">
@@ -20,7 +19,7 @@ export default function PostCard(props: any) {
           ))}
         </div>
       </div>
-      <p className="text-sm text-gray-300">{props.meta.desc}</p>
+      <p className="text-sm truncate text-gray-300">{props.meta.desc}</p>
     </Link>
   );
 }
