@@ -1,5 +1,6 @@
 import { GetStaticProps } from "next";
 import BaseLayout from "../../components/layouts/BaseLayout";
+import PostsSearchBar from "../../components/stateful/PostsSearchBar";
 import PostCard from "../../components/stateless/PostCard";
 import { getPostSlugs } from "../../utils/utils";
 
@@ -20,6 +21,7 @@ export default function Blog(props: any) {
             <p>Everything that I&apos;ve written.</p>
           </section>
         </div>
+        <PostsSearchBar />
         <div className="grid md:grid-cols-2 gap-5 w-full">
           {props.posts.map((post: any, index: any) => (
             <PostCard key={index} meta={post} />
