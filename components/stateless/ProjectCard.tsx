@@ -20,7 +20,7 @@ export default function PostCard(props: any) {
         </p>
         <p className="text-sm truncate">{props.meta.description}</p>
         <div className="flex justify-between items-center">
-          <div className="flex gap-2">
+          <div className="flex gap-x-2 flex-wrap">
             {props.meta.tag.map((tag: any, index: any) => (
               <p key={index} className="text-sm text-red-400 text-opacity-70">
                 #{tag}
