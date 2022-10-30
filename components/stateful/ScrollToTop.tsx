@@ -4,8 +4,8 @@ export default function ScrollToTop() {
   const handleClick = (e: any) => {
     e.preventDefault();
     window?.top?.scrollTo(0, 0);
-  }
-  
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const scrollBtn = document.getElementById("scroll-to-top");
@@ -17,8 +17,7 @@ export default function ScrollToTop() {
         scrollBtn?.classList.remove("opacity-100");
       }
     });
-  }
-  , []);
+  }, []);
 
   return (
     <button

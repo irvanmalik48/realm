@@ -57,7 +57,7 @@ export default function PostsSearchBar(props: any) {
           onChange={onChange}
           onFocus={onFocus}
         />
-        {(active && searchQuery !== "" && searchResult.length > 0) && (
+        {active && searchQuery !== "" && searchResult.length > 0 && (
           <div className="absolute top-full left-0 w-full mt-5">
             <div className="bg-gray-800 rounded-lg border-2 border-red-400 divide-y-2 divide-red-400">
               {searchResult.map((post: any, index: any) => (
@@ -66,12 +66,17 @@ export default function PostsSearchBar(props: any) {
                   href={post.slug}
                   className="block transition px-5 py-3 text-gray-200 hover:bg-red-400 hover:bg-opacity-20"
                 >
-                  <p className="text-lg font-bold font-helvetica truncate">{post.title}</p>
+                  <p className="text-lg font-bold font-helvetica truncate">
+                    {post.title}
+                  </p>
                   <div className="flex justify-between items-center">
                     <p className="text-sm text-gray-400">{post.date}</p>
                     <div className="flex gap-2">
                       {post.tag.map((tag: any, index: any) => (
-                        <p key={index} className="text-sm text-red-400 text-opacity-70">
+                        <p
+                          key={index}
+                          className="text-sm text-red-400 text-opacity-70"
+                        >
                           #{tag}
                         </p>
                       ))}
