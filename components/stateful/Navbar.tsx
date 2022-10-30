@@ -10,7 +10,6 @@ export default function Navbar(props: any) {
 
   return (
     <nav className="fixed bottom-4 left-4 lg:bottom-1/2 lg:translate-y-1/2 xl:left-8 z-50">
-      <div className="fixed bottom-0 left-0 w-full h-24 lg:hidden bg-gradient-to-t from-gray-900 to-transparent"></div>
       <div className="stack hover:before:bg-red-400 hover:before:bg-opacity-40 before:transition rounded-md relative p-2 bg-gray-800 border-2 border-red-400 before:absolute before:inset-0 before:bg-gray-700">
         <div className="flex items-center justify-center lg:flex-col gap-2">
           <Link
