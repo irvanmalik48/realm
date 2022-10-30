@@ -7,7 +7,7 @@ Basically my website. Nothing so special about it.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/irvanmalik48/blog blog
+git clone https://github.com/irvanmalik48/realm
 ```
 
 2. Modify template using your beloved text-editor.
