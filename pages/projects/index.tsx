@@ -20,7 +20,7 @@ export default function Blog(props: any) {
             <p>Everything that I&apos;ve (or we&apos;ve) made.</p>
           </section>
         </div>
-        <div className="grid md:grid-cols-2 gap-5 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
           {props.projects.map((project: any, index: any) => (
             <ProjectCard key={index} meta={project} />
           ))}
