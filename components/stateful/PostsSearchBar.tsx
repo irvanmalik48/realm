@@ -41,53 +41,65 @@ export default function PostsSearchBar(props: any) {
 
   return (
     <>
-      {bgActive && (
-        <div
-          className="fixed z-30 inset-0 w-full h-full bg-gray-900 bg-opacity-80 backdrop-blur-md"
-          onClick={onClick}
-        ></div>
-      )}
+      <div
+        className="fixed z-30 transition inset-0 w-full h-full bg-gray-900 bg-opacity-80 backdrop-blur-md"
+        onClick={onClick}
+        style={{
+          opacity: bgActive ? "1" : "0",
+          pointerEvents: bgActive ? "all" : "none",
+        }}
+      ></div>
       <div className="relative w-full z-30">
         <input
           ref={searchRef}
-          className="w-full px-4 py-2 bg-gray-800 text-gray-200 rounded-lg border-2 border-red-400 focus:outline-none focus:border-red-400"
+          className="w-full px-4 py-2 bg-gray-800 text-gray-200 rounded-lg border-2 transition focus:ring-4 focus:ring-red-400 focus:ring-opacity-30 border-red-400 focus:outline-none focus:border-red-400"
           type="text"
           placeholder="Search posts"
           value={searchQuery}
           onChange={onChange}
           onFocus={onFocus}
         />
-        {active && searchQuery !== "" && searchResult.length > 0 && (
-          <div className="absolute top-full left-0 w-full mt-5">
-            <div className="bg-gray-800 rounded-lg border-2 border-red-400 divide-y-2 divide-red-400">
-              {searchResult.map((post: any, index: any) => (
-                <Link
-                  key={index}
-                  href={post.slug}
-                  className="block transition px-5 py-3 text-gray-200 hover:bg-red-400 hover:bg-opacity-20"
-                >
-                  <p className="text-lg font-bold font-helvetica truncate">
-                    {post.title}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <p className="text-sm text-gray-400">{post.date}</p>
-                    <div className="flex gap-2">
-                      {post.tag.map((tag: any, index: any) => (
-                        <p
-                          key={index}
-                          className="text-sm text-red-400 text-opacity-70"
-                        >
-                          #{tag}
-                        </p>
-                      ))}
-                    </div>
+        <div
+          className="absolute top-full left-0 w-full mt-5 transition"
+          style={{
+            opacity:
+              active && searchQuery !== "" && searchResult.length > 0
+                ? "1"
+                : "0",
+            pointerEvents:
+              active && searchQuery !== "" && searchResult.length > 0
+                ? "all"
+                : "none",
+          }}
+        >
+          <div className="bg-gray-800 rounded-lg border-2 border-red-400 divide-y-2 divide-red-400">
+            {searchResult.map((post: any, index: any) => (
+              <Link
+                key={index}
+                href={post.slug}
+                className="block transition px-5 py-3 text-gray-200 hover:bg-red-400 hover:bg-opacity-20"
+              >
+                <p className="text-lg font-bold font-helvetica truncate">
+                  {post.title}
+                </p>
+                <div className="flex justify-between items-center">
+                  <p className="text-sm text-gray-400">{post.date}</p>
+                  <div className="flex gap-2">
+                    {post.tag.map((tag: any, index: any) => (
+                      <p
+                        key={index}
+                        className="text-sm text-red-400 text-opacity-70"
+                      >
+                        #{tag}
+                      </p>
+                    ))}
                   </div>
-                  <p className="text-sm truncate text-gray-300">{post.desc}</p>
-                </Link>
-              ))}
-            </div>
+                </div>
+                <p className="text-sm truncate text-gray-300">{post.desc}</p>
+              </Link>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </>
   );
