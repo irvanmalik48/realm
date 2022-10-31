@@ -9,6 +9,7 @@ specifiers:
   autoprefixer: ^10.4.13
   eslint: 8.26.0
   eslint-config-next: 13.0.0
+  framer-motion: ^7.6.2
   gray-matter: ^4.0.3
   material-symbols: ^0.2.14
   next: 13.0.0
@@ -16,8 +17,11 @@ specifiers:
   next-seo: ^5.11.1
   next-sitemap: ^3.1.29
   postcss: ^8.4.18
-  react: 18.2.0
-  react-dom: 18.2.0
+  preact: ^10.11.2
+  preact-render-to-string: ^5.2.6
+  preact-ssr-prepass: ^1.2.0
+  react: ^18.2.0
+  react-dom: ^18.2.0
   rehype-autolink-headings: ^6.1.1
   rehype-prism-plus: ^1.5.0
   rehype-slug: ^5.0.1
@@ -29,6 +33,9 @@ specifiers:
 
 dependencies:
   next: 13.0.0_biqbaboplfbrettd7655fr4n2y
+  preact: 10.11.2
+  preact-render-to-string: 5.2.6_preact@10.11.2
+  preact-ssr-prepass: 1.2.0_preact@10.11.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -41,6 +48,7 @@ devDependencies:
   autoprefixer: 10.4.13_postcss@8.4.18
   eslint: 8.26.0
   eslint-config-next: 13.0.0_wyqvi574yv7oiwfeinomdzmc3m
+  framer-motion: 7.6.2_biqbaboplfbrettd7655fr4n2y
   gray-matter: 4.0.3
   material-symbols: 0.2.14
   next-mdx-remote: 4.1.0_biqbaboplfbrettd7655fr4n2y
@@ -84,6 +92,25 @@ packages:
         integrity: sha512-q/yVUnqckA8Do+EvAfpy7RLdumnBy9ZsducMUtZTvpdbJC7azEf1hGtnYYxm0QfphYxjwggv6XtH64prvS1W+A==,
       }
     dev: true
+
+  /@emotion/is-prop-valid/0.8.8:
+    resolution:
+      {
+        integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==,
+      }
+    requiresBuild: true
+    dependencies:
+      "@emotion/memoize": 0.7.4
+    dev: true
+    optional: true
+
+  /@emotion/memoize/0.7.4:
+    resolution:
+      {
+        integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==,
+      }
+    dev: true
+    optional: true
 
   /@eslint/eslintrc/1.3.3:
     resolution:
@@ -227,6 +254,71 @@ packages:
       "@types/mdx": 2.0.3
       "@types/react": 18.0.23
       react: 18.2.0
+    dev: true
+
+  /@motionone/animation/10.14.0:
+    resolution:
+      {
+        integrity: sha512-h+1sdyBP8vbxEBW5gPFDnj+m2DCqdlAuf2g6Iafb1lcMnqjsRXWlPw1AXgvUMXmreyhqmPbJqoNfIKdytampRQ==,
+      }
+    dependencies:
+      "@motionone/easing": 10.14.0
+      "@motionone/types": 10.14.0
+      "@motionone/utils": 10.14.0
+      tslib: 2.4.0
+    dev: true
+
+  /@motionone/dom/10.13.1:
+    resolution:
+      {
+        integrity: sha512-zjfX+AGMIt/fIqd/SL1Lj93S6AiJsEA3oc5M9VkUr+Gz+juRmYN1vfvZd6MvEkSqEjwPQgcjN7rGZHrDB9APfQ==,
+      }
+    dependencies:
+      "@motionone/animation": 10.14.0
+      "@motionone/generators": 10.14.0
+      "@motionone/types": 10.14.0
+      "@motionone/utils": 10.14.0
+      hey-listen: 1.0.8
+      tslib: 2.4.0
+    dev: true
+
+  /@motionone/easing/10.14.0:
+    resolution:
+      {
+        integrity: sha512-2vUBdH9uWTlRbuErhcsMmt1jvMTTqvGmn9fHq8FleFDXBlHFs5jZzHJT9iw+4kR1h6a4SZQuCf72b9ji92qNYA==,
+      }
+    dependencies:
+      "@motionone/utils": 10.14.0
+      tslib: 2.4.0
+    dev: true
+
+  /@motionone/generators/10.14.0:
+    resolution:
+      {
+        integrity: sha512-6kRHezoFfIjFN7pPpaxmkdZXD36tQNcyJe3nwVqwJ+ZfC0e3rFmszR8kp9DEVFs9QL/akWjuGPSLBI1tvz+Vjg==,
+      }
+    dependencies:
+      "@motionone/types": 10.14.0
+      "@motionone/utils": 10.14.0
+      tslib: 2.4.0
+    dev: true
+
+  /@motionone/types/10.14.0:
+    resolution:
+      {
+        integrity: sha512-3bNWyYBHtVd27KncnJLhksMFQ5o2MSdk1cA/IZqsHtA9DnRM1SYgN01CTcJ8Iw8pCXF5Ocp34tyAjY7WRpOJJQ==,
+      }
+    dev: true
+
+  /@motionone/utils/10.14.0:
+    resolution:
+      {
+        integrity: sha512-sLWBLPzRqkxmOTRzSaD3LFQXCPHvDzyHJ1a3VP9PRzBxyVd2pv51/gMOsdAcxQ9n+MIeGJnxzXBYplUHKj4jkw==,
+      }
+    dependencies:
+      "@motionone/types": 10.14.0
+      hey-listen: 1.0.8
+      tslib: 2.4.0
     dev: true
 
   /@next/env/13.0.0:
@@ -2159,6 +2251,36 @@ packages:
       }
     dev: true
 
+  /framer-motion/7.6.2_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-YRr+KaC+1MlLx7iArVyjZRpc0QXI7H0XIOJrdol+dF1+WLQJwS2sP04KGq808BG+byD36UAmAt4YqObE5YFLtw==,
+      }
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      "@motionone/dom": 10.13.1
+      framesync: 6.1.2
+      hey-listen: 1.0.8
+      popmotion: 11.0.5
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      style-value-types: 5.1.2
+      tslib: 2.4.0
+    optionalDependencies:
+      "@emotion/is-prop-valid": 0.8.8
+    dev: true
+
+  /framesync/6.1.2:
+    resolution:
+      {
+        integrity: sha512-jBTqhX6KaQVDyus8muwZbBeGGP0XgujBRbQ7gM7BRdS3CadCZIHiawyzYLnafYcvZIh5j8WE7cxZKFn7dXhu9g==,
+      }
+    dependencies:
+      tslib: 2.4.0
+    dev: true
+
   /fs.realpath/1.0.0:
     resolution:
       {
@@ -2495,6 +2617,13 @@ packages:
       hast-util-parse-selector: 3.1.0
       property-information: 6.1.1
       space-separated-tokens: 2.0.1
+    dev: true
+
+  /hey-listen/1.0.8:
+    resolution:
+      {
+        integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==,
+      }
     dev: true
 
   /ignore/5.2.0:
@@ -4148,6 +4277,18 @@ packages:
     engines: { node: ">=0.10.0" }
     dev: true
 
+  /popmotion/11.0.5:
+    resolution:
+      {
+        integrity: sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA==,
+      }
+    dependencies:
+      framesync: 6.1.2
+      hey-listen: 1.0.8
+      style-value-types: 5.1.2
+      tslib: 2.4.0
+    dev: true
+
   /postcss-import/14.1.0_postcss@8.4.18:
     resolution:
       {
@@ -4250,6 +4391,36 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /preact-render-to-string/5.2.6_preact@10.11.2:
+    resolution:
+      {
+        integrity: sha512-JyhErpYOvBV1hEPwIxc/fHWXPfnEGdRKxc8gFdAZ7XV4tlzyzG847XAyEZqoDnynP88akM4eaHcSOzNcLWFguw==,
+      }
+    peerDependencies:
+      preact: ">=10"
+    dependencies:
+      preact: 10.11.2
+      pretty-format: 3.8.0
+    dev: false
+
+  /preact-ssr-prepass/1.2.0_preact@10.11.2:
+    resolution:
+      {
+        integrity: sha512-UKz6FB2+KepjHQ6aGqiTUMZfGgdoTunxtByczdUNho9UvSRTJw31Np9J+wUSAlJ1kALJGX1BpcBLvO3iohQUSA==,
+      }
+    peerDependencies:
+      preact: ">=10 || ^10.0.0-beta.0 || ^10.0.0-alpha.0"
+    dependencies:
+      preact: 10.11.2
+    dev: false
+
+  /preact/10.11.2:
+    resolution:
+      {
+        integrity: sha512-skAwGDFmgxhq1DCBHke/9e12ewkhc7WYwjuhHB8HHS8zkdtITXLRmUMTeol2ldxvLwYtwbFeifZ9uDDWuyL4Iw==,
+      }
+    dev: false
+
   /prelude-ls/1.2.1:
     resolution:
       {
@@ -4257,6 +4428,13 @@ packages:
       }
     engines: { node: ">= 0.8.0" }
     dev: true
+
+  /pretty-format/3.8.0:
+    resolution:
+      {
+        integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==,
+      }
+    dev: false
 
   /prop-types/15.8.1:
     resolution:
@@ -4820,6 +4998,16 @@ packages:
       }
     dependencies:
       inline-style-parser: 0.1.1
+    dev: true
+
+  /style-value-types/5.1.2:
+    resolution:
+      {
+        integrity: sha512-Vs9fNreYF9j6W2VvuDTP7kepALi7sk0xtk2Tu8Yxi9UoajJdEVpNpCov0HsLTqXvNGKX+Uv09pkozVITi1jf3Q==,
+      }
+    dependencies:
+      hey-listen: 1.0.8
+      tslib: 2.4.0
     dev: true
 
   /styled-jsx/5.1.0_react@18.2.0:

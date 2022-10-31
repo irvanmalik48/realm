@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "next": "13.0.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "preact": "^10.11.2",
+    "preact-render-to-string": "^5.2.6",
+    "preact-ssr-prepass": "^1.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@next/env": "^13.0.0",
@@ -23,6 +26,7 @@
     "autoprefixer": "^10.4.13",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
+    "framer-motion": "^7.6.2",
     "gray-matter": "^4.0.3",
     "material-symbols": "^0.2.14",
     "next-mdx-remote": "^4.1.0",
