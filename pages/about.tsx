@@ -114,10 +114,12 @@ export default function About(props: any) {
             </ul>
           </div>
           <h2>Contact Me</h2>
-          <p>
-            You can contact me on my social media platforms or you can send me
-            an email. I&apos;ll try to reply as soon as possible. Listed below
-            are the options to choose from.
+          <>
+            <p>
+              You can contact me on my social media platforms or you can send me
+              an email. I&apos;ll try to reply as soon as possible. Listed below
+              are the options to choose from.
+            </p>
             <ul>
               <li>
                 <a href="https://t.me/irvanmalik48">Telegram</a>
@@ -135,7 +137,7 @@ export default function About(props: any) {
                 <a href="mailto:me@irvanma.me">Email</a>
               </li>
             </ul>
-          </p>
+          </>
         </div>
       </section>
     </BaseLayout>
