@@ -44,7 +44,7 @@ export default function PostLayout(props: any) {
           </div>
         </div>
         <article
-          className="prose prose-invert max-w-none prose-headings:font-helvetica prose-headings:text-gray-200 prose-p:text-gray-200 prose-a:text-red-400 prose-code:text-gray-200"
+          className="prose prose-invert max-w-none prose-code:break-words prose-headings:font-helvetica prose-headings:text-gray-200 prose-p:text-gray-200 prose-a:text-red-400 prose-code:text-gray-200"
           {...props}
         >
           <MDXRemote {...props.source} components={components} />
