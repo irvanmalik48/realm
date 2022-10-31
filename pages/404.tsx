@@ -32,9 +32,7 @@ export default function Custom404() {
           <h1 className="text-red-400 text-3xl font-helvetica font-bold">
             404
           </h1>
-          <h2 className="text-gray-200 font-sans pt-1">
-            Page not found.
-          </h2>
+          <h2 className="text-gray-200 font-sans pt-1">Page not found.</h2>
         </div>
       </section>
     </BaseLayout>
