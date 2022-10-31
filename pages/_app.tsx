@@ -1,8 +1,31 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
+import { AnimatePresence, LazyMotion, m } from "framer-motion";
+import Navbar from "../components/stateful/Navbar";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
+  const turnOpacity = {
+    name: "turnOpacity",
+    variants: {
+      initial: {
+        opacity: 0,
+        y: 10,
+      },
+      animate: {
+        opacity: 1,
+        y: 0,
+      },
+      exit: {
+        opacity: 0,
+        y: -10,
+      },
+    },
+    transition: {
+      duration: 0.2,
+    },
+  };
+
   return (
     <>
       <DefaultSeo
@@ -41,7 +64,24 @@ export default function App({ Component, pageProps }: AppProps) {
           },
         ]}
       />
-      <Component {...pageProps} />
+      <Navbar />
+      <LazyMotion
+        features={() => import("../utils/domAnim").then((res) => res.default)}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          <m.div
+            key={router.route.concat(turnOpacity.name)}
+            variants={turnOpacity.variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={turnOpacity.transition}
+          >
+            <Component {...pageProps} />
+          </m.div>
+        </AnimatePresence>
+      </LazyMotion>
+      <div className="fixed bottom-0 left-0 right-0 z-40 w-full h-24 md:h-16 lg:h-12 bg-gradient-to-t from-gray-900 to-transparent"></div>
     </>
   );
 }
