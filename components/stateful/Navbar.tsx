@@ -1,12 +1,14 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Navbar(props: any) {
-  const [matchUrl, setMatchUrl] = useState("");
+  const router = useRouter();
+  const [matchUrl, setMatchUrl] = useState(router.asPath);
 
   useEffect(() => {
-    setMatchUrl(window.location.pathname);
-  }, []);
+    setMatchUrl(router.asPath);
+  }, [router.asPath]);
 
   return (
     <nav className="fixed bottom-4 left-4 lg:bottom-1/2 lg:translate-y-1/2 xl:left-8 z-50">
