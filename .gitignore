@@ -40,5 +40,5 @@ next-env.d.ts
 
 # a couple of stuff
 /.env
-/public/precache.*.js
+/public/workbox.*.js
 /public/sw.js
