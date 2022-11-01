@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import { useEffect } from "react";
 import BaseLayout from "../components/layouts/BaseLayout";
 import { AnchorButton, NextLinkButton } from "../components/stateless/Button";
 import Logo from "../components/stateless/Logo";
@@ -12,6 +13,61 @@ const slug = {
 };
 
 export default function Home(props: any) {
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      "serviceWorker" in navigator &&
+      window.workbox !== undefined
+    ) {
+      const wb = window.workbox;
+      wb.addEventListener("installed", (e: any) => {
+        if (process.env.NODE_ENV === "development") {
+          console.log(`Event ${e.type} is triggered.`);
+          console.log(e);
+        }
+      });
+
+      wb.addEventListener("controlling", (e: any) => {
+        if (process.env.NODE_ENV === "development") {
+          console.log(`Event ${e.type} is triggered.`);
+          console.log(e);
+        }
+      });
+
+      wb.addEventListener("activated", (e: any) => {
+        if (process.env.NODE_ENV === "development") {
+          console.log(`Event ${e.type} is triggered.`);
+          console.log(e);
+        }
+      });
+      const promptNewVersionAvailable = (e: any) => {
+        if (
+          confirm(
+            "A newer version of this web app is available, reload to update?"
+          )
+        ) {
+          wb.addEventListener("controlling", (e: any) => {
+            window.location.reload();
+          });
+          wb.messageSkipWaiting();
+        } else {
+          alert(
+            "User rejected to reload the web app, keep using old version. New version will be automatically load when user open the app next time."
+          );
+        }
+      };
+
+      wb.addEventListener("waiting", promptNewVersionAvailable);
+      wb.addEventListener("message", (e: any) => {
+        if (process.env.NODE_ENV === "development") {
+          console.log(`Event ${e.type} is triggered.`);
+          console.log(e);
+        }
+      });
+      wb.register();
+    }
+  });
+
   return (
     <BaseLayout {...slug}>
       <section className="w-full min-h-screen grid place-content-center place-items-center gap-5 py-24 container-responsive">
