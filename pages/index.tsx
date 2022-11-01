@@ -63,7 +63,6 @@ export default function Home(props: any) {
         <div
           className="fixed top-0 left-0 w-full py-2 flex justify-center items-center bg-red-400 z-50 transition-all"
           style={{
-            visibility: isUpToDate ? "hidden" : "visible",
             opacity: isUpToDate ? 0 : 1,
           }}
         >

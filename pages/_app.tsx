@@ -67,7 +67,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           {
             name: "viewport",
             content:
-              "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, maximum-scale=5, viewport-fit=cover",
+              "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
           },
           {
             name: "theme-color",
