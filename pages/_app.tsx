@@ -63,6 +63,41 @@ export default function App({ Component, pageProps, router }: AppProps) {
             href: "/site.webmanifest",
           },
         ]}
+        additionalMetaTags={[
+          {
+            name: "viewport",
+            content:
+              "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover",
+          },
+          {
+            name: "theme-color",
+            content: "#000000",
+          },
+          {
+            name: "apple-mobile-web-app-capable",
+            content: "yes",
+          },
+          {
+            name: "apple-mobile-web-app-status-bar-style",
+            content: "black-translucent",
+          },
+          {
+            name: "apple-mobile-web-app-title",
+            content: "The Realm",
+          },
+          {
+            name: "application-name",
+            content: "The Realm",
+          },
+          {
+            name: "msapplication-TileColor",
+            content: "#000000",
+          },
+          {
+            name: "msapplication-config",
+            content: "/site.webmanifest",
+          },
+        ]}
       />
       <Navbar />
       <LazyMotion
