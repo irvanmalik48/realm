@@ -5,6 +5,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 import remarkGfm from "remark-gfm";
+import codeTitle from "../../utils/rehypeCodeTitle";
 import PostLayout from "../../components/layouts/PostLayout";
 import { getPost, postFilePaths } from "../../utils/utils";
 
@@ -19,7 +20,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypePrism],
+      rehypePlugins: [
+        codeTitle,
+        rehypePrism,
+        rehypeSlug,
+        rehypeAutolinkHeadings,
+      ],
     },
     scope: data,
   });
