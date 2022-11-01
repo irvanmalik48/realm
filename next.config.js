@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: false,
+  disable: process.env.NODE_ENV === "development",
+});
+
+const nextConfig = withPWA({
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config, { dev, isServer }) => {
@@ -19,6 +25,6 @@ const nextConfig = {
   images: {
     domains: ["github.com", "www.github.com"],
   },
-};
+});
 
 module.exports = nextConfig;
