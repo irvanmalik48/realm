@@ -52,16 +52,26 @@
   }
 
   pre[class*="language-"] {
-    @apply px-5 py-3 my-2 overflow-auto bg-[#090d15] scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-400;
+    @apply px-5 py-3 my-2 overflow-auto bg-[#090d15] rounded-lg scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-400;
+  }
+
+  div[class*="rehype-code-title"] {
+    @apply bg-[#090d15] rounded-lg overflow-clip pb-2;
+  }
+
+  div[class*="rehype-code-title"] > h1 {
+    @apply mb-0 font-mono font-semibold text-sm px-5 py-2 w-full bg-gray-800;
+  }
+
+  div[class*="rehype-code-title"] > pre {
+    @apply my-0;
   }
 
   :not(pre) > code[class*="language-"] {
     padding: 0.1rem 0.3rem;
-    @apply bg-[#090d15] text-red-400 rounded-xl;
+    @apply bg-[#090d15] text-red-400;
   }
-  /*********************************************************
-  * Tokens
-  */
+
   .namespace {
     @apply opacity-70;
   }
@@ -240,9 +250,6 @@
   .token.namespace {
     @apply text-sky-500;
   }
-  /*********************************************************
-  * Language Specific
-  */
 
   pre[class*="language-javascript"],
   code[class*="language-javascript"],
