@@ -8,11 +8,11 @@ export const PROJECTS_PATH = path.join(process.cwd(), "projects");
 
 export const postFilePaths = fs
   .readdirSync(POSTS_PATH)
-  .filter((path: string) => /\.mdx?$/.test(path));
+  .filter((path: string) => /\.(mdx|md)?$/.test(path));
 
 export const projectFilePaths = fs
   .readdirSync(PROJECTS_PATH)
-  .filter((path: string) => /\.mdx?$/.test(path));
+  .filter((path: string) => /\.(mdx|md)?$/.test(path));
 
 export function getPost(slug: string) {
   const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`);
@@ -31,7 +31,7 @@ export function getPostSlugs() {
     const source = fs.readFileSync(POSTS_PATH + "/" + path);
     const { data } = matter(source);
     return {
-      slug: "/posts/" + path.replace(/\.mdx?$/, ""),
+      slug: "/posts/" + path.replace(/\.(mdx|md)?$/, ""),
       ...data,
     };
   });
@@ -44,7 +44,7 @@ export function getProjectSlugs() {
     const source = fs.readFileSync(PROJECTS_PATH + "/" + path);
     const { data } = matter(source);
     return {
-      slug: "/projects/" + path.replace(/\.mdx?$/, ""),
+      slug: "/projects/" + path.replace(/\.(mdx|md)?$/, ""),
       ...data,
     };
   });
