@@ -5,7 +5,14 @@ import BaseLayout from "./BaseLayout";
 
 const ResponsiveImage = (props: any) => {
   return (
-    <Image className="w-full rounded-lg" width={720} height={720} alt={props.alt} layout="responsive" {...props} />
+    <Image
+      className="w-full rounded-lg"
+      width={720}
+      height={720}
+      alt={props.alt}
+      layout="responsive"
+      {...props}
+    />
   );
 };
 
