@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 import { AnimatePresence, LazyMotion, m } from "framer-motion";
 import Navbar from "../components/stateful/Navbar";
+import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const turnOpacity = {
@@ -25,6 +26,39 @@ export default function App({ Component, pageProps, router }: AppProps) {
       duration: 0.2,
     },
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => {
+    if (typeof window !== "undefined") {
+      setShow(false);
+      window.location.reload();
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const sw = "/sw.js";
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register(sw).then((reg) => {
+            reg.onupdatefound = () => {
+              const installingWorker = reg.installing;
+              if (installingWorker) {
+                installingWorker.onstatechange = () => {
+                  if (installingWorker.state === "installed") {
+                    if (navigator.serviceWorker.controller) {
+                      setShow(true);
+                    }
+                  }
+                };
+              }
+            };
+          });
+        });
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -100,6 +134,22 @@ export default function App({ Component, pageProps, router }: AppProps) {
         ]}
       />
       <Navbar />
+      <div
+        className="fixed py-2 top-0 w-full bg-red-400 flex items-center justify-center z-[99] transition"
+        style={{ opacity: show ? 1 : 0, pointerEvents: show ? "all" : "none" }}
+      >
+        <div className="flex items-center justify-center gap-4">
+          <p className="text-gray-900 font-helvetica text-sm">
+            There&apos;s a new version available. Do you want to refresh?
+          </p>
+          <button
+            className="bg-gray-900 text-gray-200 px-3 py-1 uppercase font-mono font-bold text-xs rounded-md"
+            onClick={handleClick}
+          >
+            Refresh
+          </button>
+        </div>
+      </div>
       <LazyMotion
         features={() => import("../utils/domAnim").then((res) => res.default)}
       >
