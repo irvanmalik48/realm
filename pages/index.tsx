@@ -1,5 +1,4 @@
 import { GetStaticProps } from "next";
-import { useEffect, useState } from "react";
 import BaseLayout from "../components/layouts/BaseLayout";
 import { AnchorButton, NextLinkButton } from "../components/stateless/Button";
 import Logo from "../components/stateless/Logo";
@@ -13,65 +12,8 @@ const slug = {
 };
 
 export default function Home(props: any) {
-  const [isUpToDate, setIsUpToDate] = useState(true);
-
-  useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      "serviceWorker" in navigator &&
-      window.workbox !== undefined
-    ) {
-      const wb = window.workbox;
-      wb.addEventListener("installed", (e: any) => {
-        if (process.env.NODE_ENV === "development") {
-          console.log(`Event ${e.type} is triggered.`);
-          console.log(e);
-        }
-      });
-
-      wb.addEventListener("controlling", (e: any) => {
-        if (process.env.NODE_ENV === "development") {
-          console.log(`Event ${e.type} is triggered.`);
-          console.log(e);
-        }
-      });
-
-      wb.addEventListener("activated", (e: any) => {
-        if (process.env.NODE_ENV === "development") {
-          console.log(`Event ${e.type} is triggered.`);
-          console.log(e);
-        }
-      });
-      const promptNewVersionAvailable = (e: any) => {
-        setIsUpToDate(false);
-      };
-
-      wb.addEventListener("waiting", promptNewVersionAvailable);
-      wb.addEventListener("message", (e: any) => {
-        if (process.env.NODE_ENV === "development") {
-          console.log(`Event ${e.type} is triggered.`);
-          console.log(e);
-        }
-      });
-      wb.register();
-    }
-  });
-
   return (
     <BaseLayout {...slug}>
-      {!isUpToDate && (
-        <div
-          className="fixed top-0 left-0 w-full py-2 flex justify-center items-center bg-red-400 z-50 transition-all"
-          style={{
-            opacity: isUpToDate ? 0 : 1,
-          }}
-        >
-          <p className="font-bold text-gray-900">
-            A newer version of this web app is available, please reload to
-            update.
-          </p>
-        </div>
-      )}
       <section className="w-full min-h-screen grid place-content-center place-items-center gap-5 py-24 container-responsive">
         <div className="flex flex-col md:flex-row justify-center items-center gap-5">
           <Logo />
