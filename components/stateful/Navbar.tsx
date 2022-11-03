@@ -17,7 +17,10 @@ export default function Navbar(props: any) {
           <Link
             className="leading-none hover:bg-red-400 flex items-center hover:bg-opacity-80 transition ease-out p-3 rounded group"
             style={{
-              background: matchUrl === "/" ? "rgb(248 113 113 / 0.8)" : "rgb(55 65 81 / 1)",
+              background:
+                matchUrl === "/"
+                  ? "rgb(248 113 113 / 0.8)"
+                  : "rgb(55 65 81 / 1)",
             }}
             href={"/"}
           >
@@ -29,7 +32,10 @@ export default function Navbar(props: any) {
           <Link
             className="leading-none hover:bg-red-400 flex items-center hover:bg-opacity-80 transition ease-out p-3 rounded group"
             style={{
-              background: matchUrl === "/posts" ? "rgb(248 113 113 / 0.8)" : "rgb(55 65 81 / 1)",
+              background:
+                matchUrl === "/posts"
+                  ? "rgb(248 113 113 / 0.8)"
+                  : "rgb(55 65 81 / 1)",
             }}
             href={"/posts"}
           >
@@ -41,7 +47,10 @@ export default function Navbar(props: any) {
           <Link
             className="leading-none hover:bg-red-400 flex items-center hover:bg-opacity-80 transition ease-out p-3 rounded group"
             style={{
-              background: matchUrl === "/projects" ? "rgb(248 113 113 / 0.8)" : "rgb(55 65 81 / 1)",
+              background:
+                matchUrl === "/projects"
+                  ? "rgb(248 113 113 / 0.8)"
+                  : "rgb(55 65 81 / 1)",
             }}
             href={"/projects"}
           >
@@ -53,7 +62,10 @@ export default function Navbar(props: any) {
           <Link
             className="leading-none hover:bg-red-400 flex items-center hover:bg-opacity-80 transition ease-out p-3 rounded group"
             style={{
-              background: matchUrl === "/about" ? "rgb(248 113 113 / 0.8)" : "rgb(55 65 81 / 1)",
+              background:
+                matchUrl === "/about"
+                  ? "rgb(248 113 113 / 0.8)"
+                  : "rgb(55 65 81 / 1)",
             }}
             href={"/about"}
           >
