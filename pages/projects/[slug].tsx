@@ -5,9 +5,9 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 import remarkGfm from "remark-gfm";
-import { getProject, projectFilePaths } from "../../utils/utils";
-import ProjectLayout from "../../components/layouts/ProjectLayout";
-import { ProjectLayoutProps } from "../../utils/types";
+import { getProject, projectFilePaths } from "@utils/utils";
+import ProjectLayout from "@cly/ProjectLayout";
+import { ProjectLayoutProps } from "@utils/types";
 
 export default function Post({ source, meta }: ProjectLayoutProps) {
   return <ProjectLayout source={source} meta={meta} />;

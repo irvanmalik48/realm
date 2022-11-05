@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BaseLayout from "../components/layouts/BaseLayout";
+import BaseLayout from "@cly/BaseLayout";
 
 const slug = {
   title: "About",

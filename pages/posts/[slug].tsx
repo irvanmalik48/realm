@@ -5,10 +5,10 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 import remarkGfm from "remark-gfm";
-import codeTitle from "../../utils/rehypeCodeTitle";
-import PostLayout from "../../components/layouts/PostLayout";
-import { getPost, postFilePaths } from "../../utils/utils";
-import { PostLayoutProps } from "../../utils/types";
+import codeTitle from "@utils/rehypeCodeTitle";
+import PostLayout from "@cly/PostLayout";
+import { getPost, postFilePaths } from "@utils/utils";
+import { PostLayoutProps } from "@utils/types";
 
 export default function Post({ source, meta }: PostLayoutProps) {
   return <PostLayout source={source} meta={meta} />;

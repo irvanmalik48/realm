@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getProjectSlugs } from "../../utils/utils";
+import { getProjectSlugs } from "@utils/utils";
 
 export default async function handler(
   _req: NextApiRequest,

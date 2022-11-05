@@ -1,9 +1,9 @@
 import { GetStaticProps } from "next";
-import BaseLayout from "../../components/layouts/BaseLayout";
-import PostsSearchBar from "../../components/stateful/PostsSearchBar";
-import PostCard from "../../components/stateless/PostCard";
-import { PostSlugs } from "../../utils/types";
-import { getPostSlugs } from "../../utils/utils";
+import BaseLayout from "@cly/BaseLayout";
+import PostsSearchBar from "@csf/PostsSearchBar";
+import PostCard from "@csl/PostCard";
+import { PostSlugs } from "@utils/types";
+import { getPostSlugs } from "@utils/utils";
 
 const slug = {
   title: "Posts",

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getPostSlugs } from "../../utils/utils";
+import { getPostSlugs } from "@utils/utils";
 
 export default async function handler(
   _req: NextApiRequest,

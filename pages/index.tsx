@@ -1,9 +1,9 @@
 import { GetStaticProps } from "next";
 import BaseLayout from "../components/layouts/BaseLayout";
-import { AnchorButton, NextLinkButton } from "../components/stateless/Button";
-import Logo from "../components/stateless/Logo";
-import PostCard from "../components/stateless/PostCard";
-import ProjectCard from "../components/stateless/ProjectCard";
+import { AnchorButton, NextLinkButton } from "@csl/Button";
+import Logo from "@csl/Logo";
+import PostCard from "@csl/PostCard";
+import ProjectCard from "@csl/ProjectCard";
 import { PostSlugs, ProjectSlugs } from "../utils/types";
 import { getPostSlugs, getProjectSlugs } from "../utils/utils";
 

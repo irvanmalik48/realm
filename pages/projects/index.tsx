@@ -1,8 +1,8 @@
 import { GetStaticProps } from "next";
-import BaseLayout from "../../components/layouts/BaseLayout";
-import ProjectCard from "../../components/stateless/ProjectCard";
-import { ProjectSlugs } from "../../utils/types";
-import { getProjectSlugs } from "../../utils/utils";
+import BaseLayout from "@cly/BaseLayout";
+import ProjectCard from "../@csl/ProjectCard";
+import { ProjectSlugs } from "@utils/types";
+import { getProjectSlugs } from "@utils/utils";
 
 const slug = {
   title: "Projects",

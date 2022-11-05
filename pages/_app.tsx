@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 import { AnimatePresence, LazyMotion, m } from "framer-motion";
-import Navbar from "../components/stateful/Navbar";
+import Navbar from "@csf/Navbar";
 import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps, router }: AppProps) {

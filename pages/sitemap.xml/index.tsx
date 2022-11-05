@@ -1,7 +1,7 @@
 // pages/server-sitemap-index.xml/index.tsx
 import { getServerSideSitemap } from "next-sitemap";
 import { GetServerSideProps } from "next";
-import { getPostSlugs } from "../../utils/utils";
+import { getPostSlugs } from "@utils/utils";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const postSlugs = getPostSlugs().sort((a: any, b: any) => {
