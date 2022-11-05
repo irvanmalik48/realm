@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import BaseLayout from "../../components/layouts/BaseLayout";
 import ProjectCard from "../../components/stateless/ProjectCard";
+import { ProjectSlugs } from "../../utils/types";
 import { getProjectSlugs } from "../../utils/utils";
 
 const slug = {
@@ -8,7 +9,7 @@ const slug = {
   description: "IrvanMA's niche projects.",
 };
 
-export default function Blog(props: any) {
+export default function Blog(props: ProjectSlugs) {
   return (
     <BaseLayout {...slug}>
       <section className="w-full min-h-screen grid place-content-center place-items-center gap-5 py-24 container-responsive">
