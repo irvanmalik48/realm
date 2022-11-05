@@ -2,8 +2,9 @@ import Footer from "../stateless/Footer";
 import { NextSeo } from "next-seo";
 import ScrollToTop from "../stateful/ScrollToTop";
 import Thumbnail from "../../utils/thumbnail";
+import { BaseLayoutProps } from "../../utils/types";
 
-export default function BaseLayout(props: any) {
+export default function BaseLayout(props: BaseLayoutProps) {
   return (
     <>
       <NextSeo
