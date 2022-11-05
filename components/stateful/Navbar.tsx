@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function Navbar(props: any) {
+export default function Navbar() {
   const router = useRouter();
   const [matchUrl, setMatchUrl] = useState(router.asPath);
 
