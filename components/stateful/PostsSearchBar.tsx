@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MutableRefObject, useCallback, useRef, useState } from "react";
 
-export default function PostsSearchBar(props: any) {
+export default function PostsSearchBar() {
   const searchRef: MutableRefObject<HTMLInputElement | null> = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
