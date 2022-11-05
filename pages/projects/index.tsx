@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import BaseLayout from "@cly/BaseLayout";
-import ProjectCard from "../@csl/ProjectCard";
+import ProjectCard from "@csl/ProjectCard";
 import { ProjectSlugs } from "@utils/types";
 import { getProjectSlugs } from "@utils/utils";
 
