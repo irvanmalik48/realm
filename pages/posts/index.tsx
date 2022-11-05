@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import BaseLayout from "../../components/layouts/BaseLayout";
 import PostsSearchBar from "../../components/stateful/PostsSearchBar";
 import PostCard from "../../components/stateless/PostCard";
+import { PostSlugs } from "../../utils/types";
 import { getPostSlugs } from "../../utils/utils";
 
 const slug = {
@@ -9,7 +10,7 @@ const slug = {
   description: "IrvanMA's shitposting stash.",
 };
 
-export default function Blog(props: any) {
+export default function Blog(props: PostSlugs) {
   return (
     <BaseLayout {...slug}>
       <section className="w-full min-h-screen grid place-content-center place-items-center gap-5 py-24 container-responsive">

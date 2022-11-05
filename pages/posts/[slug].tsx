@@ -8,8 +8,9 @@ import remarkGfm from "remark-gfm";
 import codeTitle from "../../utils/rehypeCodeTitle";
 import PostLayout from "../../components/layouts/PostLayout";
 import { getPost, postFilePaths } from "../../utils/utils";
+import { PostLayoutProps } from "../../utils/types";
 
-export default function Post({ source, meta }: any) {
+export default function Post({ source, meta }: PostLayoutProps) {
   return <PostLayout source={source} meta={meta} />;
 }
 
