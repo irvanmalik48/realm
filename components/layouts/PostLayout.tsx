@@ -1,24 +1,10 @@
 import { MDXRemote } from "next-mdx-remote";
 import { ArticleJsonLd } from "next-seo";
-import Image from "next/image";
 import BaseLayout from "./BaseLayout";
+import { PostLayoutProps } from "../../utils/types";
+import { components } from "./MDXComponentOverrides";
 
-const ResponsiveImage = (props: any) => {
-  return (
-    <Image
-      className="w-full rounded-lg"
-      width={720}
-      height={720}
-      alt={props.alt}
-      layout="responsive"
-      {...props}
-    />
-  );
-};
-
-const components = { img: ResponsiveImage };
-
-export default function PostLayout(props: any) {
+export default function PostLayout(props: PostLayoutProps) {
   return (
     <BaseLayout
       title={props.meta.title}
@@ -29,7 +15,7 @@ export default function PostLayout(props: any) {
       <ArticleJsonLd
         type="BlogPosting"
         title={props.meta.title}
-        description={props.meta.description}
+        description={props.meta.desc}
         datePublished={props.meta.date}
         dateModified={props.meta.date}
         images={[]}
