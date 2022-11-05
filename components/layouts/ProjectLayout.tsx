@@ -1,21 +1,17 @@
 import { MDXRemote } from "next-mdx-remote";
 import { ArticleJsonLd } from "next-seo";
 import Image from "next/image";
+import { ProjectLayoutProps } from "../../utils/types";
 import BaseLayout from "./BaseLayout";
+import { components } from "./MDXComponentOverrides";
 
-const ResponsiveImage = (props: any) => {
-  return <Image alt={props.alt} layout="responsive" {...props} />;
-};
-
-const components = { img: ResponsiveImage };
-
-export default function ProjectLayout(props: any) {
+export default function ProjectLayout(props: ProjectLayoutProps) {
   return (
-    <BaseLayout title={props.meta.title} description={props.meta.description}>
+    <BaseLayout title={props.meta.title} description={props.meta.desc}>
       <ArticleJsonLd
         type="BlogPosting"
         title={props.meta.title}
-        description={props.meta.description}
+        description={props.meta.desc}
         datePublished={"2021-01-01"} // TODO: Add proper dates
         dateModified={"2021-01-01"}
         images={[]}
