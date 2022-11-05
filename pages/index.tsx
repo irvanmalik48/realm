@@ -4,6 +4,7 @@ import { AnchorButton, NextLinkButton } from "../components/stateless/Button";
 import Logo from "../components/stateless/Logo";
 import PostCard from "../components/stateless/PostCard";
 import ProjectCard from "../components/stateless/ProjectCard";
+import { PostSlugs, ProjectSlugs } from "../utils/types";
 import { getPostSlugs, getProjectSlugs } from "../utils/utils";
 
 const slug = {
@@ -11,7 +12,7 @@ const slug = {
   description: "IrvanMA's secret hideout.",
 };
 
-export default function Home(props: any) {
+export default function Home(props: PostSlugs & ProjectSlugs) {
   return (
     <BaseLayout {...slug}>
       <section className="w-full min-h-screen grid place-content-center place-items-center gap-5 py-24 container-responsive">
