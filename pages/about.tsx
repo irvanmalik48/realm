@@ -6,7 +6,7 @@ const slug = {
   description: "IrvanMA's little secrets.",
 };
 
-export default function About(props: any) {
+export default function About() {
   return (
     <BaseLayout {...slug}>
       <section className="w-full min-h-screen grid place-content-center place-items-center gap-5 py-24 container-responsive">
