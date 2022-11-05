@@ -1,8 +1,8 @@
-import Footer from "../stateless/Footer";
+import Footer from "@csl/Footer";
 import { NextSeo } from "next-seo";
-import ScrollToTop from "../stateful/ScrollToTop";
-import Thumbnail from "../../utils/thumbnail";
-import { BaseLayoutProps } from "../../utils/types";
+import ScrollToTop from "@csf/ScrollToTop";
+import Thumbnail from "@utils/thumbnail";
+import { BaseLayoutProps } from "@utils/types";
 
 export default function BaseLayout(props: BaseLayoutProps) {
   return (

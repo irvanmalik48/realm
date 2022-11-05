@@ -1,8 +1,8 @@
 import { MDXRemote } from "next-mdx-remote";
 import { ArticleJsonLd } from "next-seo";
-import BaseLayout from "./BaseLayout";
-import { PostLayoutProps } from "../../utils/types";
-import { components } from "./MDXComponentOverrides";
+import BaseLayout from "@cly/BaseLayout";
+import { PostLayoutProps } from "@utils/types";
+import { components } from "@cly/MDXComponentOverrides";
 
 export default function PostLayout(props: PostLayoutProps) {
   return (

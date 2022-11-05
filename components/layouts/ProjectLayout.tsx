@@ -1,9 +1,9 @@
 import { MDXRemote } from "next-mdx-remote";
 import { ArticleJsonLd } from "next-seo";
 import Image from "next/image";
-import { ProjectLayoutProps } from "../../utils/types";
-import BaseLayout from "./BaseLayout";
-import { components } from "./MDXComponentOverrides";
+import { ProjectLayoutProps } from "@utils/types";
+import BaseLayout from "@cly/BaseLayout";
+import { components } from "@cly/MDXComponentOverrides";
 
 export default function ProjectLayout(props: ProjectLayoutProps) {
   return (
