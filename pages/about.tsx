@@ -24,7 +24,12 @@ export default function About() {
             <p className="w-fit text-4xl font-bold border-b-2 border-red-400 border-opacity-50">
               About Me
             </p>
-            <p className="text-lg">Things about me.</p>
+            <p className="text-lg">
+              Anyways, here&apos;s my
+              <a href="/resume.pdf">
+                <span className="text-red-400"> resume</span>.
+              </a>
+            </p>
           </div>
         </section>
         <div className="prose prose-invert max-w-none prose-headings:font-helvetica prose-headings:text-gray-200 prose-p:text-gray-200 prose-a:text-red-400 prose-code:text-gray-200">
