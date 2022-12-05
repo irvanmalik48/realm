@@ -69,13 +69,13 @@ export default function About() {
           </p>
           <h2>Things I Like</h2>
           <div className="grid md:grid-cols-2">
-            <ul className="mb-0 pb-0">
+            <ul className="my-0 pb-0">
               <li>Programming</li>
               <li>Design</li>
               <li>Music</li>
               <li>GNU/Linux</li>
             </ul>
-            <ul className="mt-0 pt-0">
+            <ul className="my-0 pt-0">
               <li>Coffee</li>
               <li>Tea</li>
               <li>Philosophy</li>
@@ -84,7 +84,7 @@ export default function About() {
           </div>
           <h2>Tools I Commonly Use</h2>
           <div className="grid md:grid-cols-2">
-            <ul className="mb-0 pb-0">
+            <ul className="my-0 pb-0">
               <li>
                 <a href="https://code.visualstudio.com/">Visual Studio Code</a>
               </li>
@@ -98,7 +98,7 @@ export default function About() {
                 <a href="https://nextjs.org/">Next.js</a>
               </li>
             </ul>
-            <ul className="mt-0 pt-0">
+            <ul className="my-0 pt-0">
               <li>
                 <a href="https://tailwindcss.com/">Tailwind CSS</a>
               </li>
