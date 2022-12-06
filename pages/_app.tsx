@@ -4,6 +4,7 @@ import { DefaultSeo } from "next-seo";
 import { AnimatePresence, LazyMotion, m } from "framer-motion";
 import Navbar from "@csf/Navbar";
 import { useEffect, useState } from "react";
+import SnowfallWrapper from "@csl/SnowfallWrapper";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const turnOpacity = {
@@ -138,7 +139,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         className="fixed py-2 top-0 w-full bg-red-400 flex items-center justify-center z-[99] transition"
         style={{ opacity: show ? 1 : 0, pointerEvents: show ? "all" : "none" }}
       >
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4 px-4">
           <p className="text-gray-900 font-helvetica text-sm">
             There&apos;s a new version available. Do you want to refresh?
           </p>
@@ -150,6 +151,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           </button>
         </div>
       </div>
+      <SnowfallWrapper />
       <LazyMotion
         features={() => import("../utils/domAnim").then((res) => res.default)}
       >
