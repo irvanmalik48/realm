@@ -22,7 +22,12 @@ const nextConfig = withPWA({
   },
   pageExtensions: ["ts", "tsx", "js", "jsx"],
   images: {
-    domains: ["github.com", "www.github.com"],
+    domains: [
+      "github.com",
+      "www.github.com",
+      "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
+    ],
   },
 });
 
