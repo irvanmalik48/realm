@@ -3,6 +3,7 @@ import { ArticleJsonLd } from "next-seo";
 import BaseLayout from "@cly/BaseLayout";
 import { PostLayoutProps } from "@utils/types";
 import { components } from "@cly/MDXComponentOverrides";
+import Comments from "@csf/Comments";
 
 export default function PostLayout(props: PostLayoutProps) {
   return (
@@ -54,6 +55,7 @@ export default function PostLayout(props: PostLayoutProps) {
             .
           </p>
         </article>
+        <Comments />
       </section>
     </BaseLayout>
   );
