@@ -27,6 +27,7 @@
     "autoprefixer": "^10.4.13",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
+    "firebase": "^9.15.0",
     "framer-motion": "^7.6.19",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.1.0",
