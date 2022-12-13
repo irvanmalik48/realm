@@ -1,10 +1,10 @@
 import { auth } from "@utils/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { DocumentData } from "firebase/firestore";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
-export function useFirebaseAuth<T>() {
+export function useFirebaseAuth() {
   const [user, setUser] = useState<User | null>(null);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -15,5 +15,6 @@ export function useFirebaseAuth<T>() {
     });
     return () => unsubscribe();
   }, []);
+  
   return { user, setUser };
 }
