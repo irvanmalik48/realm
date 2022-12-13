@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ProjectLayoutProps } from "@utils/types";
 import BaseLayout from "@cly/BaseLayout";
 import { components } from "@cly/MDXComponentOverrides";
+import Comments from "@csf/Comments";
 
 export default function ProjectLayout(props: ProjectLayoutProps) {
   return (
@@ -45,6 +46,7 @@ export default function ProjectLayout(props: ProjectLayoutProps) {
         >
           <MDXRemote {...props.source} components={components} />
         </article>
+        <Comments />
       </section>
     </BaseLayout>
   );
