@@ -15,6 +15,6 @@ export function useFirebaseAuth() {
     });
     return () => unsubscribe();
   }, []);
-  
+
   return { user, setUser };
 }
