@@ -176,25 +176,25 @@ export default function AddComment() {
               </button>
             </m.div>
           )}
+          {error && (
+            <m.div
+              className="fixed top-5 right-5 bg-red-300 flex flex-row gap-5 px-5 py-2 rounded justify-center items-center"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 0.3 }}
+            >
+              <p className="text-gray-900">Failed to add comment.</p>
+              <button
+                className="text-red-500 w-10 h-10 flex flex-row justify-center items-center transition hover:bg-red-400 rounded-full"
+                onClick={() => setError(false)}
+              >
+                <span className="material-symbols-sharp">close</span>
+              </button>
+            </m.div>
+          )}
         </AnimatePresence>
       </LazyMotion>
-      {error && (
-        <m.div
-          className="fixed top-5 right-5 bg-red-300 flex flex-row gap-5 px-5 py-2 rounded justify-center items-center"
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 100 }}
-          transition={{ duration: 0.3 }}
-        >
-          <p className="text-gray-900">Failed to add comment.</p>
-          <button
-            className="text-red-500 w-10 h-10 flex flex-row justify-center items-center transition hover:bg-red-400 rounded-full"
-            onClick={() => setError(false)}
-          >
-            <span className="material-symbols-sharp">close</span>
-          </button>
-        </m.div>
-      )}
     </section>
   );
 }
