@@ -31,11 +31,13 @@ export default function Comment(props: any) {
 
   const handleDeleteComment = async () => {
     setButtonDeleteSelected(false);
-    await deleteDoc(doc(db, "todolist-irvanma", props.comment.id)).then(() => {
-      deleteCommentSuccessful();
-    }).catch(() => {
-      deleteCommentFailed();
-    });
+    await deleteDoc(doc(db, "todolist-irvanma", props.comment.id))
+      .then(() => {
+        deleteCommentSuccessful();
+      })
+      .catch(() => {
+        deleteCommentFailed();
+      });
   };
 
   const handleEditComment = async () => {
@@ -45,11 +47,13 @@ export default function Comment(props: any) {
         .value,
       editedAt: new Date().toISOString(),
       edited: true,
-    }).then(() => {
-      editCommentSuccessful();
-    }).catch(() => {
-      editCommentFailed();
-    });
+    })
+      .then(() => {
+        editCommentSuccessful();
+      })
+      .catch(() => {
+        editCommentFailed();
+      });
   };
 
   const editCommentSuccessful = () => {
