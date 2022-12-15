@@ -61,10 +61,7 @@ export default function AddComment() {
     };
 
     try {
-      const docRef = await addDoc(
-        collection(db, "comments"),
-        commentData
-      );
+      const docRef = await addDoc(collection(db, "comments"), commentData);
       await updateDoc(doc(db, "comments", docRef.id), {
         id: docRef.id,
       });
