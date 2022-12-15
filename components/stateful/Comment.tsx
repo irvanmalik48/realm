@@ -31,7 +31,7 @@ export default function Comment(props: any) {
 
   const handleDeleteComment = async () => {
     setButtonDeleteSelected(false);
-    await deleteDoc(doc(db, "todolist-irvanma", props.comment.id))
+    await deleteDoc(doc(db, "comments", props.comment.id))
       .then(() => {
         deleteCommentSuccessful();
       })
@@ -42,7 +42,7 @@ export default function Comment(props: any) {
 
   const handleEditComment = async () => {
     setButtonEditSelected(false);
-    await updateDoc(doc(db, "todolist-irvanma", props.comment.id), {
+    await updateDoc(doc(db, "comments", props.comment.id), {
       text: (document.getElementById("edit-comment") as HTMLTextAreaElement)
         .value,
       editedAt: new Date().toISOString(),

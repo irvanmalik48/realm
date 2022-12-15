@@ -10,7 +10,7 @@ export default function Comments() {
   const [slugName, setSlugName] = useState("");
 
   const getComments = useCallback(async () => {
-    onSnapshot(collection(db, "todolist-irvanma"), (querySnapshot) => {
+    onSnapshot(collection(db, "comments"), (querySnapshot) => {
       const comments: DocumentData[] = [];
       querySnapshot.forEach((doc) => {
         comments.push(doc.data());
