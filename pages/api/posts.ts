@@ -1,29 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getPostSlugs } from "@utils/utils";
+import { getSortedPostSlugs, getPostSlug } from "u/posts";
 
 export default async function handler(
-  _req: NextApiRequest,
+  req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const slugs = getPostSlugs().sort((a: any, b: any) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  const query = req.query;
 
-  const query = _req.query.q as string;
-  if (query) {
-    const filteredSlugs = slugs.filter((slug: any) => {
-      return (
-        slug.title.toLowerCase().includes(query.toLowerCase()) ||
-        slug.tag.some((tag: string) =>
-          tag.toLowerCase().includes(query.toLowerCase())
-        )
-      );
-    });
-    res
-      .status(200)
-      .setHeader("content-type", "application/json")
-      .json(filteredSlugs);
+  if (query.q !== undefined) {
+    res.status(200).json(getPostSlug(query.q as string));
   } else {
-    res.status(200).setHeader("content-type", "application/json").json(slugs);
+    res.status(200).json(getSortedPostSlugs());
   }
 }

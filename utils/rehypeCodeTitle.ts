@@ -2,7 +2,7 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 
 export default function codeTitle(opt: any) {
-  const className = (opt && opt.className) || "rehype-code-title";
+  const className = (opt && opt.className) || "flex flex-col";
 
   return function (tree: any) {
     visit(tree, { tagName: "pre" }, visitor);
@@ -17,7 +17,7 @@ export default function codeTitle(opt: any) {
           properties.className = lang;
           if (!filename) return;
 
-          const title = h("h1", filename);
+          const title = h("p", { class: "code-title" }, filename);
           const container = h("div", { class: className }, [title, node]);
           tree.children[index] = container;
         }

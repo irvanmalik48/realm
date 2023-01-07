@@ -1,25 +1,42 @@
 import Link from "next/link";
+import React from "react";
+import { PostCardProps } from "t/types";
 
-export default function PostCard(props: any) {
+export function PostCard(props: PostCardProps) {
+  const title = props.title ?? "Untitled";
+  const tags = props.tag ?? ["No tags"];
+  const body = props.desc ?? "No description.";
+  const date = props.date ?? "01/01/1970";
+  const slug = props.slug ?? "#";
+
   return (
     <Link
-      className="block relative stack px-5 py-3 bg-gray-800 text-gray-200 rounded-lg border-2 border-red-400 before:absolute before:inset-0 before:bg-gray-700 before:transition hover:before:bg-red-400 hover:before:bg-opacity-40"
-      href={props.meta.slug}
+      href={`/posts/${slug}`}
+      className="flex flex-col gap-2 p-5 rounded-xl border-2 border-neutral-800 hover:bg-neutral-800 transition"
     >
-      <p className="text-lg font-bold font-helvetica truncate">
-        {props.meta.title}
-      </p>
-      <div className="flex justify-between items-center">
-        <p className="text-sm text-gray-400">{props.meta.date}</p>
-        <div className="flex gap-x-2">
-          {props.meta.tag.map((tag: any, index: any) => (
-            <p key={index} className="text-sm text-red-400 text-opacity-70">
-              #{tag}
-            </p>
-          ))}
-        </div>
+      <h3 className="text-lg font-heading font-semibold text-white truncate">
+        {title}
+      </h3>
+      <div className="flex flex-row justify-start items-center gap-3 flex-wrap">
+        {tags.map((tag, index) => (
+          <p
+            key={index}
+            className="uppercase bg-teal-300 bg-opacity-40 px-2.5 rounded-full py-0.5 text-white text-xs font-heading font-semibold"
+          >
+            {tag}
+          </p>
+        ))}
       </div>
-      <p className="text-sm truncate text-gray-300">{props.meta.desc}</p>
+      <p className="text-white text-opacity-50 truncate">{body}</p>
+      <div className="flex flex-row justify-between items-center mt-auto">
+        <p className="text-white text-opacity-50">{date}</p>
+        <Link
+          href={`/posts/${slug}`}
+          className="text-white text-opacity-50 hover:text-opacity-100 transition ease-out"
+        >
+          Read more
+        </Link>
+      </div>
     </Link>
   );
 }
