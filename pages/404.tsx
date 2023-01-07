@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <div className="bg-neutral-900 w-full px-5 relative">
       <Head>
-        <title>Realm | 404</title>
+        <title>The Realm | 404</title>
       </Head>
       <img
         src="/misc/lottie.svg"
