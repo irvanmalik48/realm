@@ -5,3 +5,13 @@ export interface PostCardProps {
   desc?: string;
   tag?: string[];
 }
+
+export interface ProjectCardProps {
+  slug?: string;
+  title?: string;
+  desc?: string;
+  link?: string;
+  gh?: string;
+  tag?: string[];
+  screenshot?: string;
+}
