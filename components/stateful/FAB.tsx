@@ -104,7 +104,7 @@ export function FAB() {
         </AnimatePresence>
       </LazyMotion>
       <button
-        className="fixed block box-content w-[28px] h-[28px] bottom-5 lg:bottom-10 right-5 lg:right-10 p-4 bg-teal-300 rounded-xl hover:scale-110 transition active:scale-90 z-20"
+        className="fixed block overflow-y-hidden box-content w-[28px] h-[28px] bottom-5 lg:bottom-10 right-5 lg:right-10 p-4 bg-teal-300 rounded-xl hover:scale-110 transition active:scale-90 z-20"
         onClick={toggle}
       >
         <Icon
@@ -113,7 +113,7 @@ export function FAB() {
           fill
           className={`${
             isOpen ? "rotate-45" : ""
-          } block text-neutral-900 transition`}
+          } block text-neutral-900 transition overflow-hidden`}
           as="i"
         />
       </button>
