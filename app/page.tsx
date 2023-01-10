@@ -2,10 +2,12 @@ import Icon from "react-material-symbols/rounded";
 import { Posts } from "c/Posts";
 import { Projects } from "c/Projects";
 import Link from "next/link";
+import { AnimatedSVGBack } from "c/AnimatedSVGBG";
 
 export default function Page() {
   return (
-    <main className="min-h-screen w-full px-5 relative">
+    <main className="min-h-screen w-full px-5 relative overflow-x-hidden">
+      <AnimatedSVGBack className="absolute top-0 left-1/2 -translate-x-1/2 hidden md:block" />
       <img
         src="/misc/lottie.svg"
         className="w-48 absolute left-0 top-0 hidden lg:block"
