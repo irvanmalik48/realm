@@ -1,5 +1,6 @@
 import Icon from "react-material-symbols/rounded";
 import { Posts } from "c/Posts";
+import { Projects } from "c/Projects";
 import Link from "next/link";
 
 export default function Page() {
@@ -90,6 +91,31 @@ export default function Page() {
             className="text-white text-opacity-50 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-2 justify-center items-center"
           >
             Show more posts
+            <Icon
+              icon="arrow_forward"
+              size={18}
+              fill
+              className="block bg-white opacity-50 group-hover:opacity-100 text-neutral-900 p-1 rounded-full transition"
+            />
+          </Link>
+        </div>
+      </section>
+      <section className="max-w-4xl mx-auto grid grid-cols-1 relative min-h-screen place-content-center mt-12 md:mt-0">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-white w-full">
+          I also regularly <span className="text-teal-300">make</span>{" "}
+          something.
+        </h1>
+        <h2 className="text-2xl mt-3 font-display text-white w-full">
+          It's useful for me, so sure.
+        </h2>
+        <Projects sliced={true} />
+        <div className="flex flex-row justify-end items-center">
+          <Link
+            href="/projects"
+            scroll={true}
+            className="text-white text-opacity-50 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-2 justify-center items-center"
+          >
+            Show more projects
             <Icon
               icon="arrow_forward"
               size={18}
