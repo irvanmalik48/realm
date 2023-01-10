@@ -8,6 +8,10 @@
   @apply bg-neutral-800 border-2 border-neutral-800 text-white text-sm font-bold font-mono px-4 my-0 py-3 rounded-xl;
 }
 
+.scrollbars {
+  @apply scrollbar-thin scrollbar-thumb-teal-300 scrollbar-track-transparent scrollbar-thumb-rounded-xl;
+}
+
 /**
  * atom-dark theme for `prism.js`
  * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax
@@ -41,7 +45,7 @@ pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  @apply rounded-xl;
+  @apply rounded-xl scrollbars;
 }
 
 :not(pre) > code[class*="language-"],
