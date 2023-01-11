@@ -11,6 +11,7 @@ export default function Page() {
       <img
         src="/misc/lottie.svg"
         className="w-48 absolute left-0 top-0 hidden lg:block"
+        alt="lottie"
       />
       <section className="max-w-4xl min-h-screen place-content-center mx-auto grid grid-cols-1 relative">
         <h1 className="text-4xl text-center md:text-start md:text-5xl lg:text-7xl font-heading font-semibold text-white w-full">
@@ -90,14 +91,14 @@ export default function Page() {
           <Link
             href="/posts"
             scroll={true}
-            className="text-white text-opacity-50 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-2 justify-center items-center"
+            className="text-white text-opacity-70 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-2 justify-center items-center"
           >
             Show more posts
             <Icon
               icon="arrow_forward"
               size={18}
               fill
-              className="block bg-white opacity-50 group-hover:opacity-100 text-neutral-900 p-1 rounded-full transition"
+              className="block bg-white opacity-70 group-hover:opacity-100 text-neutral-900 p-1 rounded-full transition"
             />
           </Link>
         </div>
@@ -115,14 +116,14 @@ export default function Page() {
           <Link
             href="/projects"
             scroll={true}
-            className="text-white text-opacity-50 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-2 justify-center items-center"
+            className="text-white text-opacity-70 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-2 justify-center items-center"
           >
             Show more projects
             <Icon
               icon="arrow_forward"
               size={18}
               fill
-              className="block bg-white opacity-50 group-hover:opacity-100 text-neutral-900 p-1 rounded-full transition"
+              className="block bg-white opacity-70 group-hover:opacity-100 text-neutral-900 p-1 rounded-full transition"
             />
           </Link>
         </div>
