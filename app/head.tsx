@@ -1,12 +1,9 @@
+import { NextSeo } from "next-seo";
+import { getProps } from "next-seo.config";
+
 export default function Head() {
-  return (
-    <>
-      <title>Realm | Landing</title>
-      <meta
-        name="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-      />
-      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    </>
-  );
+  return <NextSeo useAppDir={true} {...getProps({
+    title: "Landing",
+    desc: "IrvanMA's personal blog."
+  })} />;
 }
