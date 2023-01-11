@@ -1,10 +1,10 @@
 "use client";
 
 import useSWR from "swr";
-
 import { ProjectCard } from "c/ProjectCard";
 import { ProjectCardProps } from "t/types";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { Suspense } from "react";
 
 async function fetcher(url: string) {
   return await fetch(url).then((res) => res.json());
@@ -16,55 +16,7 @@ export function Projects(props: { sliced?: boolean }) {
   return (
     <LazyMotion features={domAnimation}>
       <AnimatePresence initial={false}>
-        {data ? (
-          <m.section
-            key={"data"}
-            className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, delay: 0.5 }}
-          >
-            {props.sliced === true
-              ? data
-                  .slice(0, 2)
-                  .map((post: ProjectCardProps) => (
-                    <ProjectCard
-                      key={post.slug}
-                      title={post.title}
-                      tag={post.tag}
-                      slug={post.slug}
-                      desc={post.desc}
-                      link={post.link}
-                      gh={post.gh}
-                      screenshot={post.screenshot}
-                    />
-                  ))
-              : data.map((post: ProjectCardProps) => (
-                  <ProjectCard
-                    key={post.slug}
-                    title={post.title}
-                    tag={post.tag}
-                    slug={post.slug}
-                    desc={post.desc}
-                    link={post.link}
-                    gh={post.gh}
-                    screenshot={post.screenshot}
-                  />
-                ))}
-          </m.section>
-        ) : error ? (
-          <m.section
-            key={"error"}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            <Error />
-          </m.section>
-        ) : (
+        <Suspense fallback={
           <m.section
             key={"loading"}
             className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5"
@@ -75,7 +27,57 @@ export function Projects(props: { sliced?: boolean }) {
           >
             <Loading />
           </m.section>
-        )}
+        }>
+          {data ? (
+            <m.section
+              key={"data"}
+              className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, delay: 0.5 }}
+            >
+              {props.sliced === true
+                ? data
+                    .slice(0, 2)
+                    .map((post: ProjectCardProps) => (
+                      <ProjectCard
+                        key={post.slug}
+                        title={post.title}
+                        tag={post.tag}
+                        slug={post.slug}
+                        desc={post.desc}
+                        link={post.link}
+                        gh={post.gh}
+                        screenshot={post.screenshot}
+                      />
+                    ))
+                : data.map((post: ProjectCardProps) => (
+                    <ProjectCard
+                      key={post.slug}
+                      title={post.title}
+                      tag={post.tag}
+                      slug={post.slug}
+                      desc={post.desc}
+                      link={post.link}
+                      gh={post.gh}
+                      screenshot={post.screenshot}
+                    />
+                  ))}
+            </m.section>
+          ) : error && (
+            <m.section
+              key={"error"}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <Error />
+            </m.section>
+          )}
+        </Suspense>
       </AnimatePresence>
     </LazyMotion>
   );
