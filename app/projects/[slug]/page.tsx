@@ -6,6 +6,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import codeTitle from "u/rehypeCodeTitle";
+import { ArticleJsonLd } from "next-seo";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -54,6 +55,25 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <img src={content.frontmatter.screenshot} className="w-full" />
         <MDXComponent source={source} />
       </main>
+      <ArticleJsonLd 
+        useAppDir={true}
+        type="BlogPosting"
+        url={`https://www.irvanma.me/posts/${slug}`}
+        title={content.frontmatter.title}
+        datePublished={content.frontmatter.date}
+        dateModified={content.frontmatter.date}
+        authorName={[
+          {
+            name: "Irvan Malik",
+            url: "https://www.irvanma.me",
+          }
+        ]}
+        images={[
+          content.frontmatter.screenshot
+        ]}
+        description={content.frontmatter.desc}
+        isAccessibleForFree={true}
+      />
     </>
   );
 }
