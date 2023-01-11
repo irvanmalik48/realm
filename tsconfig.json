@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,21 +18,41 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "allowUmdGlobalAccess": true,
     "incremental": true,
     "baseUrl": "./",
+    "sourceMap": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "c/*": ["components/stateful/*", "components/stateless/*"],
-      "s/*": ["styles/*"],
-      "u/*": ["utils/*"],
-      "h/*": ["hooks/*"],
-      "t/*": ["types/*"]
+      "c/*": [
+        "components/stateful/*",
+        "components/stateless/*"
+      ],
+      "s/*": [
+        "styles/*"
+      ],
+      "u/*": [
+        "utils/*"
+      ],
+      "h/*": [
+        "hooks/*"
+      ],
+      "t/*": [
+        "types/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
