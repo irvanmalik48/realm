@@ -11,7 +11,7 @@ async function fetcher(url: string) {
 }
 
 export function Posts(props: { sliced?: boolean }) {
-  const { data, error } = useSWR("/api/posts", fetcher, { suspense: true });
+  const { data, error } = useSWR("/api/posts", fetcher);
 
   return (
     <LazyMotion features={domAnimation}>
