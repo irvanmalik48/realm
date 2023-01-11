@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import React from "react";
+
 import { PostCard } from "../stateless/PostCard";
 import { PostCardProps } from "../../types/types";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";

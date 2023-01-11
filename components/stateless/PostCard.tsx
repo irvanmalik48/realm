@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+
 import { PostCardProps } from "t/types";
 
 export function PostCard(props: PostCardProps) {

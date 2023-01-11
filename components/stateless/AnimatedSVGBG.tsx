@@ -1,5 +1,3 @@
-import React from "react";
-
 export function AnimatedSVGBack(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -11,7 +9,7 @@ export function AnimatedSVGBack(props: React.SVGProps<SVGSVGElement>) {
       width="1800px"
       height="1200px"
       viewBox="0 0 1800 1200"
-      enable-background="new 0 0 1800 1200"
+      enableBackground="new 0 0 1800 1200"
       xmlSpace="preserve"
       {...props}
     >

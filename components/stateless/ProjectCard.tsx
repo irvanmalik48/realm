@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+
 import { ProjectCardProps } from "t/types";
 
 export function ProjectCard(props: ProjectCardProps) {
@@ -22,7 +22,7 @@ export function ProjectCard(props: ProjectCardProps) {
         src={img}
         width={1280}
         height={700}
-        className="h-[200px] object-cover"
+        className="h-[200px] object-cover grayscale group-hover:grayscale-0 transition"
         alt={title}
       />
       <div className="flex flex-col gap-2 p-5">

@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import React from "react";
+
 import { ProjectCard } from "c/ProjectCard";
 import { ProjectCardProps } from "t/types";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";

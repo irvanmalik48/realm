@@ -1,5 +1,3 @@
-import React from "react";
-
 export function Footer() {
   return (
     <footer className="w-full px-5 py-8 mb-20 lg:mb-0">
