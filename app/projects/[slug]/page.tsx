@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <img src={content.frontmatter.screenshot} className="w-full" />
         <MDXComponent source={source} />
       </main>
-      <ArticleJsonLd 
+      <ArticleJsonLd
         useAppDir={true}
         type="BlogPosting"
         url={`https://www.irvanma.me/posts/${slug}`}
@@ -66,11 +66,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {
             name: "Irvan Malik",
             url: "https://www.irvanma.me",
-          }
+          },
         ]}
-        images={[
-          content.frontmatter.screenshot
-        ]}
+        images={[content.frontmatter.screenshot]}
         description={content.frontmatter.desc}
         isAccessibleForFree={true}
       />

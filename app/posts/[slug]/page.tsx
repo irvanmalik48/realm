@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </div>
         <MDXComponent source={source} />
       </main>
-      <ArticleJsonLd 
+      <ArticleJsonLd
         useAppDir={true}
         type="BlogPosting"
         url={`https://www.irvanma.me/posts/${slug}`}
@@ -61,7 +61,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {
             name: "Irvan Malik",
             url: "https://www.irvanma.me",
-          }
+          },
         ]}
         images={[]}
         description={content.frontmatter.desc}

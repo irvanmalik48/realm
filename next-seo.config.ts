@@ -20,5 +20,5 @@ export function getProps(props: RealmPageProps): NextSeoProps {
       site: "@irvanmalik48",
       cardType: "summary_large_image",
     },
-  }
+  };
 }
