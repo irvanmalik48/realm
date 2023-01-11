@@ -1,4 +1,3 @@
-import React from "react";
 import { getProjectSlug } from "u/projects";
 
 export default function Head({ params }: { params: { slug: string } }) {

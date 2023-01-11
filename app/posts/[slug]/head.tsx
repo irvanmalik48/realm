@@ -1,4 +1,3 @@
-import React from "react";
 import { getPostSlug } from "u/posts";
 
 export default function Head({ params }: { params: { slug: string } }) {

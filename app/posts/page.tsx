@@ -1,5 +1,4 @@
 import { Posts } from "c/Posts";
-import React from "react";
 
 export default function Page() {
   return (

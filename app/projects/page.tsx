@@ -1,5 +1,4 @@
 import { Projects } from "c/Projects";
-import React from "react";
 
 export default function Page() {
   return (

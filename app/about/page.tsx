@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Page() {
   return (
     <main className="min-h-screen w-full px-5 relative">
