@@ -15,3 +15,9 @@ export interface ProjectCardProps {
   tag?: string[];
   screenshot?: string;
 }
+
+export interface RealmPageProps {
+  title?: string;
+  desc?: string;
+  path?: string;
+}
