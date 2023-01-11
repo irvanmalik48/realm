@@ -1,5 +1,6 @@
 import { FAB } from "c/FAB";
 import { Footer } from "c/Footer";
+import { NextSeo } from "next-seo";
 import "s/globals.css";
 
 export default function RootLayout({
@@ -9,7 +10,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth scrollbars">
-      <head />
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="robots" content="index,follow" />
+      </head>
       <body className="bg-neutral-900">
         <FAB />
         {children}
