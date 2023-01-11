@@ -1,12 +1,10 @@
+import { NextSeo } from "next-seo";
+import { getProps } from "next-seo.config";
+
 export default function Head() {
-  return (
-    <>
-      <title>Realm | About</title>
-      <meta
-        name="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-      />
-      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    </>
-  );
+  return <NextSeo useAppDir={true} {...getProps({
+    title: "About",
+    desc: "About me.",
+    path: "/about"
+  })} />;
 }
