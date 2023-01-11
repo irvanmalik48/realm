@@ -33,6 +33,7 @@ export function PostCard(props: PostCardProps) {
         <Link
           href={`/posts/${slug}`}
           className="text-white text-opacity-50 hover:text-opacity-100 transition ease-out"
+          aria-label={`Read more about ${title}`}
         >
           Read more
         </Link>

@@ -45,6 +45,7 @@ export function ProjectCard(props: ProjectCardProps) {
           <a
             href={linkHref}
             className="text-white text-opacity-50 hover:text-opacity-100 transition ease-out"
+            aria-label={`Visit ${title}`}
           >
             {link}
           </a>
