@@ -101,6 +101,7 @@ export function FAB() {
       <button
         className="fixed block overflow-y-hidden bottom-5 lg:bottom-10 right-5 lg:right-10 p-4 bg-teal-300 rounded-xl hover:scale-110 transition active:scale-90 z-20"
         onClick={toggle}
+        id="fab-button"
       >
         <AddCircleFill
           className={`${
