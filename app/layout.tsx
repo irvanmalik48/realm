@@ -1,6 +1,5 @@
 import { FAB } from "c/FAB";
 import { Footer } from "c/Footer";
-import { NextSeo } from "next-seo";
 import "s/globals.css";
 
 export default function RootLayout({
@@ -19,7 +18,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <meta name="robots" content="index,follow" />
         <meta name="googlebot" content="index,follow" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta
           name="apple-mobile-web-app-status-bar-style"

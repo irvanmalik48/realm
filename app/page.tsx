@@ -1,8 +1,10 @@
-import Icon from "react-material-symbols/rounded";
 import { Posts } from "c/Posts";
 import { Projects } from "c/Projects";
 import Link from "next/link";
 import { AnimatedSVGBack } from "c/AnimatedSVGBG";
+
+import CheckFill from "c/CheckFill";
+import ArrowForwardFill from "c/ArrowForwardFill";
 
 export default function Page() {
   return (
@@ -26,11 +28,9 @@ export default function Page() {
             href="#self-intro"
             className="flex flex-row justify-start items-center w-fit pl-2 pr-9 py-2 font-semibold text-lg bg-teal-300 hover:scale-110 active:scale-90 transition ease-out rounded-full"
           >
-            <Icon
-              icon="check"
-              size={18}
-              fill
-              className="block p-2 rounded-full bg-neutral-900 text-white mr-5"
+            <CheckFill
+              className="block p-2 rounded-full bg-neutral-900 fill-white mr-5"
+              size="18px"
             />
             I've coped enough, let me in
           </a>
@@ -91,14 +91,12 @@ export default function Page() {
           <Link
             href="/posts"
             scroll={true}
-            className="text-white text-opacity-70 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-2 justify-center items-center"
+            className="w-fit text-white text-opacity-70 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-5 justify-center items-center"
           >
             Show more posts
-            <Icon
-              icon="arrow_forward"
-              size={18}
-              fill
-              className="block bg-white opacity-70 group-hover:opacity-100 text-neutral-900 p-1 rounded-full transition"
+            <ArrowForwardFill
+              className="block bg-white opacity-70 group-hover:opacity-100 fill-neutral-900 p-1 rounded-full transition"
+              size="18px"
             />
           </Link>
         </div>
@@ -116,14 +114,12 @@ export default function Page() {
           <Link
             href="/projects"
             scroll={true}
-            className="text-white text-opacity-70 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-2 justify-center items-center"
+            className="w-fit text-white text-opacity-70 hover:text-opacity-100 mt-3 group transition ease-out flex flex-row gap-5 justify-center items-center"
           >
             Show more projects
-            <Icon
-              icon="arrow_forward"
-              size={18}
-              fill
-              className="block bg-white opacity-70 group-hover:opacity-100 text-neutral-900 p-1 rounded-full transition"
+            <ArrowForwardFill
+              className="block bg-white opacity-70 group-hover:opacity-100 fill-neutral-900 p-1 rounded-full transition"
+              size="18px"
             />
           </Link>
         </div>
