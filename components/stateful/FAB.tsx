@@ -102,7 +102,11 @@ export function FAB() {
         className="fixed block overflow-y-hidden bottom-5 lg:bottom-10 right-5 lg:right-10 p-4 bg-teal-300 rounded-xl hover:scale-110 transition active:scale-90 z-20"
         onClick={toggle}
         id="fab-button"
+        aria-labelledby="fab-button-label"
       >
+        <span id="fab-button-label" className="sr-only">
+          Open FAB menu
+        </span>
         <AddCircleFill
           className={`${
             isOpen ? "rotate-45" : ""
