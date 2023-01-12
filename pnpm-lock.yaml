@@ -8,6 +8,7 @@ specifiers:
   "@types/react": 18.0.21
   "@types/react-dom": 18.0.6
   autoprefixer: ^10.4.13
+  fast-fuzzy: ^1.12.0
   framer-motion: ^8.4.2
   fs: 0.0.1-security
   gray-matter: ^4.0.3
@@ -19,7 +20,6 @@ specifiers:
   postcss: ^8.4.21
   react: 18.2.0
   react-dom: 18.2.0
-  react-material-symbols: ^2.0.2
   rehype-autolink-headings: ^6.1.1
   rehype-prism-plus: ^1.5.0
   rehype-slug: ^5.1.0
@@ -44,6 +44,7 @@ devDependencies:
   "@types/react": 18.0.21
   "@types/react-dom": 18.0.6
   autoprefixer: 10.4.13_postcss@8.4.21
+  fast-fuzzy: 1.12.0
   framer-motion: 8.4.2_biqbaboplfbrettd7655fr4n2y
   fs: 0.0.1-security
   gray-matter: 4.0.3
@@ -52,7 +53,6 @@ devDependencies:
   next-seo: 5.15.0_q76c2b4vyoegvsbrcwkfvimnai
   path: 0.12.7
   postcss: 8.4.21
-  react-material-symbols: 2.0.2
   rehype-autolink-headings: 6.1.1
   rehype-prism-plus: 1.5.0
   rehype-slug: 5.1.0
@@ -1996,14 +1996,6 @@ packages:
       rollup: 2.79.1
     dev: true
 
-  /@senojs/rollup-plugin-style-inject/0.2.3:
-    resolution:
-      {
-        integrity: sha512-3/spt7JG2iHMW1YdtFbDafWa4IYNkJ99tibY7oDe5LXVTq2JxBpOsdRmJyCCqI5I4kBoUUYWS2yEG/FKwrLy/A==,
-      }
-    engines: { node: ">=12" }
-    dev: true
-
   /@surma/rollup-plugin-off-main-thread/2.2.3:
     resolution:
       {
@@ -3605,6 +3597,15 @@ packages:
       }
     dev: true
 
+  /fast-fuzzy/1.12.0:
+    resolution:
+      {
+        integrity: sha512-sXxGgHS+ubYpsdLnvOvJ9w5GYYZrtL9mkosG3nfuD446ahvoWEsSKBP7ieGmWIKVLnaxRDgUJkZMdxRgA2Ni+Q==,
+      }
+    dependencies:
+      graphemesplit: 2.4.4
+    dev: true
+
   /fast-glob/3.2.12:
     resolution:
       {
@@ -3898,6 +3899,16 @@ packages:
       {
         integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==,
       }
+    dev: true
+
+  /graphemesplit/2.4.4:
+    resolution:
+      {
+        integrity: sha512-lKrpp1mk1NH26USxC/Asw4OHbhSQf5XfrWZ+CDv/dFVvd1j17kFgMotdJvOesmHkbFX9P9sBfpH8VogxOWLg8w==,
+      }
+    dependencies:
+      js-base64: 3.7.4
+      unicode-trie: 2.0.0
     dev: true
 
   /gray-matter/4.0.3:
@@ -4498,6 +4509,13 @@ packages:
       "@types/node": 18.11.3
       merge-stream: 2.0.0
       supports-color: 8.1.1
+    dev: true
+
+  /js-base64/3.7.4:
+    resolution:
+      {
+        integrity: sha512-wpM/wi20Tl+3ifTyi0RdDckS4YTD4Lf953mBRrpG8547T7hInHNPEj8+ck4gB8VDcGyeAWFK++Wb/fU1BeavKQ==,
+      }
     dev: true
 
   /js-tokens/4.0.0:
@@ -5711,6 +5729,13 @@ packages:
     engines: { node: ">=6" }
     dev: true
 
+  /pako/0.2.9:
+    resolution:
+      {
+        integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==,
+      }
+    dev: true
+
   /parse-entities/4.0.0:
     resolution:
       {
@@ -6055,18 +6080,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-
-  /react-material-symbols/2.0.2:
-    resolution:
-      {
-        integrity: sha512-cLWlRBkc0ctG87ERvUNaKGgQ/wYUU1HnLrtvZsa0sNV3w0OZF0EyskmIDlnX+QXnXmhVrGOZGUCHzU3pUaKnIg==,
-      }
-    engines: { node: 18.12.1 }
-    dependencies:
-      "@senojs/rollup-plugin-style-inject": 0.2.3
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: true
 
   /react/18.2.0:
     resolution:
@@ -6920,6 +6933,13 @@ packages:
       source-map-support: 0.5.21
     dev: true
 
+  /tiny-inflate/1.0.3:
+    resolution:
+      {
+        integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==,
+      }
+    dev: true
+
   /to-fast-properties/2.0.0:
     resolution:
       {
@@ -7049,6 +7069,16 @@ packages:
         integrity: sha512-6t3foTQI9qne+OZoVQB/8x8rk2k1eVy1gRXhV3oFQ5T6R1dqQ1xtin3XqSlx3+ATBkliTaR/hHyJBm+LVPNM8w==,
       }
     engines: { node: ">=4" }
+    dev: true
+
+  /unicode-trie/2.0.0:
+    resolution:
+      {
+        integrity: sha512-x7bc76x0bm4prf1VLg79uhAzKw8DVboClSN5VxJuQ+LKDOVEW9CdH+VY7SP+vX7xCYQqzzgQpFqz15zeLvAtZQ==,
+      }
+    dependencies:
+      pako: 0.2.9
+      tiny-inflate: 1.0.3
     dev: true
 
   /unified/10.1.2:
