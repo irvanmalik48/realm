@@ -9,8 +9,6 @@ export function ProjectCard(props: ProjectCardProps) {
   const body = props.desc ?? "No description.";
   const slug = props.slug ?? "#";
   const gh = props.gh === "private" ? "Private" : "Public";
-  const link = props.link === "none" ? "" : "Visit Project";
-  const linkHref = props.link !== "none" ? props.link : "#";
   const img = props.screenshot ?? "/showcase/no-image.webp";
 
   return (
@@ -42,13 +40,6 @@ export function ProjectCard(props: ProjectCardProps) {
         <p className="text-white text-opacity-50 truncate">{body}</p>
         <div className="flex flex-row justify-between items-center mt-auto">
           <p className="text-white text-opacity-50">{gh}</p>
-          <a
-            href={linkHref}
-            className="text-white text-opacity-50 hover:text-opacity-100 transition ease-out"
-            aria-label={`Visit ${title}`}
-          >
-            {link}
-          </a>
         </div>
       </div>
     </Link>

@@ -12,7 +12,7 @@ export function PostCard(props: PostCardProps) {
   return (
     <Link
       href={`/posts/${slug}`}
-      className="flex flex-col gap-2 p-5 rounded-xl border-2 border-neutral-800 hover:bg-neutral-800 transition"
+      className="flex flex-col gap-2 p-5 rounded-xl border-2 group border-neutral-800 hover:bg-neutral-800 transition"
     >
       <h3 className="text-lg font-heading font-semibold text-white truncate">
         {title}
@@ -30,13 +30,9 @@ export function PostCard(props: PostCardProps) {
       <p className="text-white text-opacity-50 truncate">{body}</p>
       <div className="flex flex-row justify-between items-center mt-auto">
         <p className="text-white text-opacity-50">{date}</p>
-        <Link
-          href={`/posts/${slug}`}
-          className="text-white text-opacity-50 hover:text-opacity-100 transition ease-out"
-          aria-label={`Read more about ${title}`}
-        >
+        <p className="text-white text-opacity-50 group-hover:text-opacity-100 transition ease-out">
           Read more
-        </Link>
+        </p>
       </div>
     </Link>
   );

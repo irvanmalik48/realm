@@ -22,18 +22,21 @@ export function Footer() {
           <a
             href="https://twitter.com/irvanmalik48"
             className="bg-white bg-opacity-50 text-neutral-900 p-2 rounded-full block hover:bg-opacity-100 transition ease-out"
+            aria-label="icon-twitter"
           >
             <TwitterIcon className="w-6" />
           </a>
           <a
             href="https://linkedin.com/in/irvanmalik48"
             className="bg-white bg-opacity-50 text-neutral-900 p-2 rounded-full block hover:bg-opacity-100 transition ease-out"
+            aria-label="icon-linkedin"
           >
             <LinkedInIcon className="w-6" />
           </a>
           <a
             href="mailto:irvanmalik48@gmail.com"
             className="bg-white bg-opacity-50 text-neutral-900 p-2 rounded-full block hover:bg-opacity-100 transition ease-out"
+            aria-label="icon-email"
           >
             <MailFastIcon className="w-6" />
           </a>
