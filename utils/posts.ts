@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import matter from "gray-matter";
+import { PostCardProps } from "t/types";
 
 export function getPostSlug(slug: string) {
   const dir = path.join(process.cwd(), "posts");
@@ -13,7 +14,7 @@ export function getPostSlug(slug: string) {
   };
 }
 
-export function getSortedPostSlugs() {
+export function getSortedPostSlugs(): PostCardProps[] {
   const dir = path.join(process.cwd(), "posts");
   const files = fs.readdirSync(dir);
   const allPostsData = files.map((fileName) => {

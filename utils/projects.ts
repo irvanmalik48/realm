@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import matter from "gray-matter";
+import { ProjectCardProps } from "t/types";
 
 export function getProjectSlug(slug: string) {
   const dir = path.join(process.cwd(), "projects");
@@ -13,7 +14,7 @@ export function getProjectSlug(slug: string) {
   };
 }
 
-export function getSortedProjectSlugs() {
+export function getSortedProjectSlugs(): ProjectCardProps[] {
   const dir = path.join(process.cwd(), "projects");
   const files = fs.readdirSync(dir);
   const allProjectsData = files.map((fileName) => {
