@@ -2,8 +2,13 @@
 
 import { useState } from "react";
 import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
-import Icon from "react-material-symbols/rounded";
 import Link from "next/link";
+import HomeFill from "c/HomeFill";
+import PagesFill from "c/PagesFill";
+import WorkFill from "c/WorkFill";
+import InfoFill from "c/InfoFill";
+import ArrowUpwardFill from "c/ArrowUpwardFill";
+import AddCircleFill from "c/AddCircleFill";
 
 export function FAB() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,11 +35,9 @@ export function FAB() {
                 className="flex flex-row gap-5 items-center group-hover:opacity-80 group-hover:hover:opacity-100 group-hover:hover:scale-110 transition group-hover:active:scale-90"
               >
                 <p className="text-white">Home</p>
-                <Icon
-                  icon="home"
-                  size={24}
-                  fill
-                  className="block text-neutral-900 bg-teal-300 rounded-xl p-3"
+                <HomeFill
+                  className="block fill-neutral-900 bg-teal-300 rounded-xl p-3"
+                  size="24px"
                 />
               </Link>
               <Link
@@ -45,11 +48,9 @@ export function FAB() {
                 className="flex flex-row gap-5 items-center group-hover:opacity-80 group-hover:hover:opacity-100 group-hover:hover:scale-110 transition group-hover:active:scale-90"
               >
                 <p className="text-white">Posts</p>
-                <Icon
-                  icon="pages"
-                  size={24}
-                  fill
-                  className="block text-neutral-900 bg-teal-300 rounded-xl p-3"
+                <PagesFill
+                  className="block fill-neutral-900 bg-teal-300 rounded-xl p-3"
+                  size="24px"
                 />
               </Link>
               <Link
@@ -60,11 +61,9 @@ export function FAB() {
                 className="flex flex-row gap-5 items-center group-hover:opacity-80 group-hover:hover:opacity-100 group-hover:hover:scale-110 transition group-hover:active:scale-90"
               >
                 <p className="text-white">Projects</p>
-                <Icon
-                  icon="work"
-                  size={24}
-                  fill
-                  className="block text-neutral-900 bg-teal-300 rounded-xl p-3"
+                <WorkFill
+                  className="block fill-neutral-900 bg-teal-300 rounded-xl p-3"
+                  size="24px"
                 />
               </Link>
               <Link
@@ -75,11 +74,9 @@ export function FAB() {
                 className="flex flex-row gap-5 items-center group-hover:opacity-80 group-hover:hover:opacity-100 group-hover:hover:scale-110 transition group-hover:active:scale-90"
               >
                 <p className="text-white">About</p>
-                <Icon
-                  icon="info"
-                  size={24}
-                  fill
-                  className="block text-neutral-900 bg-teal-300 rounded-xl p-3"
+                <InfoFill
+                  className="block fill-neutral-900 bg-teal-300 rounded-xl p-3"
+                  size="24px"
                 />
               </Link>
               <m.button
@@ -92,11 +89,9 @@ export function FAB() {
                 }}
               >
                 <p className="text-white">Back to top</p>
-                <Icon
-                  icon="arrow_upward"
-                  size={24}
-                  fill
-                  className="block leading-none text-neutral-900 bg-teal-300 rounded-xl p-3"
+                <ArrowUpwardFill
+                  className="block fill-neutral-900 bg-teal-300 rounded-xl p-3"
+                  size="24px"
                 />
               </m.button>
             </m.div>
@@ -104,17 +99,14 @@ export function FAB() {
         </AnimatePresence>
       </LazyMotion>
       <button
-        className="fixed block overflow-y-hidden box-content w-[28px] h-[28px] bottom-5 lg:bottom-10 right-5 lg:right-10 p-4 bg-teal-300 rounded-xl hover:scale-110 transition active:scale-90 z-20"
+        className="fixed block overflow-y-hidden bottom-5 lg:bottom-10 right-5 lg:right-10 p-4 bg-teal-300 rounded-xl hover:scale-110 transition active:scale-90 z-20"
         onClick={toggle}
       >
-        <Icon
-          icon="add_circle"
-          size={28}
-          fill
+        <AddCircleFill
           className={`${
             isOpen ? "rotate-45" : ""
-          } block text-neutral-900 transition overflow-hidden`}
-          as="i"
+          } block fill-neutral-900 transition overflow-hidden`}
+          size="28px"
         />
       </button>
       <LazyMotion features={domAnimation}>
