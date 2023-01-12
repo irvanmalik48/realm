@@ -6,6 +6,9 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 /** @type {import('next').NextConfig} */
 module.exports = withPWA({
   reactStrictMode: true,
+  compiler: {
+    removeConsole: true,
+  },
   experimental: {
     appDir: true,
   },
