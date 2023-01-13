@@ -12,7 +12,8 @@
   },
   "devDependencies": {
     "@ducanh2912/next-pwa": "^7.2.0",
-    "@swc/core": "^1.3.25",
+    "@plaiceholder/next": "^2.5.0",
+    "@swc/core": "^1.3.26",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "18.11.3",
     "@types/react": "18.0.21",
@@ -26,6 +27,7 @@
     "next-mdx-remote": "^4.2.1",
     "next-seo": "^5.15.0",
     "path": "^0.12.7",
+    "plaiceholder": "^2.5.0",
     "postcss": "^8.4.21",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-prism-plus": "^1.5.0",
