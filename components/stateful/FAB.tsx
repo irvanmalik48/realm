@@ -21,7 +21,7 @@ export function FAB() {
         <AnimatePresence>
           {isOpen && (
             <m.div
-              className="fixed top-1/2 right-5 lg:right-10 flex flex-col items-end gap-4 rounded-xl origin-right z-20 ease-out group"
+              className="fixed top-1/2 right-5 lg:right-10 flex flex-col items-end gap-4 rounded-xl origin-right z-30 ease-out group"
               initial={{ opacity: 0, x: 100, y: "-50%" }}
               animate={{ opacity: 1, x: 0, y: "-50%" }}
               exit={{ opacity: 0, x: 100, y: "-50%" }}
