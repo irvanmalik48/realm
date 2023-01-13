@@ -36,8 +36,8 @@ export interface UnistNode {
 }
 
 export interface UnistPosition {
-  start: UnistPoint
-  end: UnistPoint
+  start: UnistPoint;
+  end: UnistPoint;
   indent?: number;
 }
 
@@ -47,6 +47,4 @@ export interface UnistPoint {
   offset?: number;
 }
 
-export interface UnistData {
-
-}
+export interface UnistData {}

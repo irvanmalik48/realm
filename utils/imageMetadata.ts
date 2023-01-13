@@ -49,7 +49,9 @@ async function addProps(node: ImageNode): Promise<void> {
   // If it's local, we can use the sizeOf method directly, and pass the path of the image
   if (!isExternal) {
     // Calculate image resolution (width, height)
-    res = (await sizeOf(path.join(process.cwd(), "public", node.properties.src)))!;
+    res = (await sizeOf(
+      path.join(process.cwd(), "public", node.properties.src)
+    ))!;
     // Calculate base64 for the blur
     blur64 = (await getPlaiceholder(node.properties.src)).base64;
   } else {
