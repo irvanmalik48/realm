@@ -22,3 +22,33 @@ export function getProps(props: RealmPageProps): NextSeoProps {
     },
   };
 }
+
+export function noIndexNoFollow(): NextSeoProps {
+  return {
+    additionalMetaTags: [
+      {
+        name: "robots",
+        content: "noindex,nofollow",
+      },
+      {
+        name: "googlebot",
+        content: "noindex,nofollow",
+      }
+    ],
+  };
+}
+
+export function indexFollow(): NextSeoProps {
+  return {
+    additionalMetaTags: [
+      {
+        name: "robots",
+        content: "index,follow",
+      },
+      {
+        name: "googlebot",
+        content: "index,follow",
+      }
+    ],
+  };
+}
