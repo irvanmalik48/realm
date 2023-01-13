@@ -33,7 +33,7 @@ export function noIndexNoFollow(): NextSeoProps {
       {
         name: "googlebot",
         content: "noindex,nofollow",
-      }
+      },
     ],
   };
 }
@@ -48,7 +48,7 @@ export function indexFollow(): NextSeoProps {
       {
         name: "googlebot",
         content: "index,follow",
-      }
+      },
     ],
   };
 }
