@@ -51,7 +51,11 @@ export default function Page() {
         className="max-w-4xl min-h-screen place-content-center mx-auto grid grid-cols-1 relative"
       >
         <picture>
-          <source srcSet="/misc/intro-hero.webp" type="image/webp" />
+          <source
+            media="(min-width: 768px)"
+            srcSet="/misc/intro-hero.webp"
+            type="image/webp"
+          />
           <source srcSet="/misc/intro-hero-mobile.webp" type="image/webp" />
           <Image
             src={IntroHero}
