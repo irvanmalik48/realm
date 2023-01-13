@@ -5,15 +5,13 @@ export const config = {
   runtime: "edge",
 };
 
-export default async function handler(
-  req: NextApiRequest
-) {
-  const { searchParams } = new URL(req.url || '');
+export default async function handler(req: NextApiRequest) {
+  const { searchParams } = new URL(req.url || "");
 
-  const hasTitle = searchParams.has('title');
+  const hasTitle = searchParams.has("title");
   const title = hasTitle
-    ? searchParams.get('title')?.slice(0, 100)
-    : 'The Realm';
+    ? searchParams.get("title")?.slice(0, 100)
+    : "The Realm";
 
   return new ImageResponse(
     (
@@ -69,7 +67,8 @@ export default async function handler(
           {title}
         </div>
       </div>
-    ), {
+    ),
+    {
       width: 1200,
       height: 627,
     }

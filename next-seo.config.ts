@@ -16,7 +16,9 @@ export function getProps(props: RealmPageProps): NextSeoProps {
       description: props.desc,
       images: [
         {
-          url: "https://www.irvanma.me/api/og?title=" + encodeURIComponent(props.title!),
+          url:
+            "https://www.irvanma.me/api/og?title=" +
+            encodeURIComponent(props.title!),
           width: 1200,
           height: 630,
           alt: "Realm | " + props.title,
