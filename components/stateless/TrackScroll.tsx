@@ -11,9 +11,17 @@ export function TrackScroll() {
   });
 
   return (
-    <motion.div
-      className="h-1 w-full fixed top-0 left-0 bg-teal-300 z-[999]"
-      style={{ scaleX }}
-    />
+    <>
+      <motion.div
+        className="h-1 w-full fixed top-0 left-0 bg-teal-300 z-[999]"
+        style={{ scaleX }}
+      />
+      <div
+        className="h-[40px] w-full fixed top-0 left-0 z-[5] bg-gradient-to-b from-neutral-900 to-transparent"
+      />
+      <div
+        className="h-[40px] w-full fixed bottom-0 left-0 z-[5] bg-gradient-to-t from-neutral-900 to-transparent"
+      />
+    </>
   );
 }
