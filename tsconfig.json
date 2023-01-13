@@ -32,7 +32,8 @@
       "s/*": ["styles/*"],
       "u/*": ["utils/*"],
       "h/*": ["hooks/*"],
-      "t/*": ["types/*"]
+      "t/*": ["types/*"],
+      "p/*": ["public/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
