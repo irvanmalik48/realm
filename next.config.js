@@ -3,8 +3,10 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   disable: process.env.NODE_ENV === "development",
 });
 
+const { withPlaiceholder } = require("@plaiceholder/next");
+
 /** @type {import('next').NextConfig} */
-module.exports = withPWA({
+module.exports = withPWA(withPlaiceholder({
   reactStrictMode: true,
   compiler: {
     removeConsole: true,
@@ -13,4 +15,4 @@ module.exports = withPWA({
     appDir: true,
   },
   productionBrowserSourceMaps: true,
-});
+}));
