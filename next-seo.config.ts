@@ -14,6 +14,14 @@ export function getProps(props: RealmPageProps): NextSeoProps {
       url: "https://www.irvanma.me" + (props.path || "/"),
       title: "Realm | " + props.title,
       description: props.desc,
+      images: [
+        {
+          url: "https://www.irvanma.me/api/og?title=" + encodeURIComponent(props.title!),
+          width: 1200,
+          height: 630,
+          alt: "Realm | " + props.title,
+        },
+      ],
     },
     twitter: {
       handle: "@irvanmalik48",
