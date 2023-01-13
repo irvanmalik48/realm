@@ -21,3 +21,32 @@ export interface RealmPageProps {
   desc?: string;
   path?: string;
 }
+
+export interface PlaiceholderImage {
+  height: number;
+  width: number;
+  type?: string;
+  src: string;
+}
+
+export interface UnistNode {
+  type: string;
+  data?: UnistData;
+  position?: UnistPosition;
+}
+
+export interface UnistPosition {
+  start: UnistPoint
+  end: UnistPoint
+  indent?: number;
+}
+
+export interface UnistPoint {
+  line: number;
+  column: number;
+  offset?: number;
+}
+
+export interface UnistData {
+
+}
