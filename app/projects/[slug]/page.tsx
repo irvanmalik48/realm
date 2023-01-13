@@ -7,6 +7,7 @@ import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import codeTitle from "u/rehypeCodeTitle";
 import { ArticleJsonLd } from "next-seo";
+import imageMetadata from "u/imageMetadata";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -15,6 +16,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [
+        imageMetadata,
         codeTitle,
         rehypePrism,
         rehypeSlug,

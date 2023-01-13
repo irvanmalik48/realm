@@ -1,5 +1,6 @@
 import { FAB } from "c/FAB";
 import { Footer } from "c/Footer";
+import { TrackScroll } from "c/TrackScroll";
 import "s/globals.css";
 
 export default function RootLayout({
@@ -35,6 +36,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
       </head>
       <body className="bg-neutral-900">
+        <TrackScroll />
         <FAB />
         {children}
         <Footer />

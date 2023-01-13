@@ -1,4 +1,5 @@
 import { Projects } from "c/Projects";
+import { getSortedProjectSlugs } from "u/projects";
 
 export default function Page() {
   return (
