@@ -6,8 +6,8 @@ export default function Head({ params }: { params: { slug: string } }) {
   const data = getProjectSlug(params.slug);
   return (
     <NextSeo
-      useAppDir={true} 
-{...indexFollow()}
+      useAppDir={true}
+      {...indexFollow()}
       {...getProps({
         title: data.frontmatter.title,
         desc: data.frontmatter.desc,
