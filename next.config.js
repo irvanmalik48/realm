@@ -3,7 +3,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   disable: process.env.NODE_ENV === "development",
 });
 
-const withPlaiceholder = require("@plaiceholder/next");
+const { withPlaiceholder } = require("@plaiceholder/next");
 
 /** @type {import('next').NextConfig} */
 module.exports = withPWA(
