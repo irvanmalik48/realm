@@ -34,6 +34,7 @@
       "h/*": ["hooks/*"],
       "t/*": ["types/*"],
       "p/*": ["public/*"],
+      "sc/*": ["app/(server-components)/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
