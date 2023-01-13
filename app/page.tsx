@@ -15,7 +15,7 @@ export default function Page() {
       <AnimatedSVGBack className="absolute top-0 left-1/2 -translate-x-1/2 hidden md:block" />
       <img
         src="/misc/lottie.svg"
-        className="w-48 absolute left-0 top-0 hidden lg:block"
+        className="w-48 z-[6] absolute left-0 top-0 hidden lg:block"
         alt="lottie"
       />
       <section className="max-w-4xl min-h-screen place-content-center mx-auto grid grid-cols-1 relative">

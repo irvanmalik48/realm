@@ -5,7 +5,7 @@ export default function Page() {
     <main className="min-h-screen w-full px-5 relative">
       <img
         src="/misc/lottie.svg"
-        className="w-48 absolute left-0 top-0 hidden lg:block"
+        className="w-48 z-[6] absolute left-0 top-0 hidden lg:block"
       />
       <section className="max-w-4xl mx-auto py-48 relative">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-white w-full">
