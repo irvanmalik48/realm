@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="w-full px-5 py-8 mb-20 lg:mb-0">
+    <footer className="w-full px-5 py-8 mb-20 lg:mb-10">
       <div className="flex flex-col-reverse md:flex-row max-w items-center justify-between max-w-4xl mx-auto">
         <div className="">
           <p className="text-white text-center md:text-start text-opacity-50">
