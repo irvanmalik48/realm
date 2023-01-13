@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { getPlaiceholder } from "plaiceholder";
 import { ProjectCardProps } from "t/types";
 
-export function ProjectCard(props: ProjectCardProps) {
+export async function ProjectCard(props: ProjectCardProps) {
   const title = props.title ?? "Untitled";
   const tags = props.tag ?? ["No tags"];
   const body = props.desc ?? "No description.";
   const slug = props.slug ?? "#";
   const gh = props.gh === "private" ? "Private" : "Public";
-  const img = props.screenshot ?? "/showcase/no-image.webp";
+  const getImg = props.screenshot ?? "/showcase/no-image.webp";
+
+  const { base64, img } = await getPlaiceholder(getImg);
 
   return (
     <Link
@@ -20,6 +22,8 @@ export function ProjectCard(props: ProjectCardProps) {
         src={img}
         width={1280}
         height={700}
+        placeholder="blur"
+        blurDataURL={base64}
         className="h-[200px] object-cover grayscale group-hover:grayscale-0 transition"
         alt={title}
       />
