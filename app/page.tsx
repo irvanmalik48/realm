@@ -2,9 +2,12 @@ import { Posts } from "c/Posts";
 import { Projects } from "c/Projects";
 import Link from "next/link";
 import { AnimatedSVGBack } from "c/AnimatedSVGBG";
+import Image from "next/image";
 
 import CheckFill from "c/CheckFill";
 import ArrowForwardFill from "c/ArrowForwardFill";
+
+import IntroHero from "p/misc/intro-hero.webp";
 
 export default function Page() {
   return (
@@ -48,15 +51,11 @@ export default function Page() {
         className="max-w-4xl min-h-screen place-content-center mx-auto grid grid-cols-1 relative"
       >
         <picture>
-          <source
-            media="(min-width: 768px)"
-            srcSet="/misc/intro-hero.webp"
-            type="image/webp"
-          />
           <source srcSet="/misc/intro-hero-mobile.webp" type="image/webp" />
-          <img
-            src="/misc/intro-hero.webp"
+          <Image
+            src={IntroHero}
             alt="lmao photos"
+            placeholder="blur"
             className="rounded-xl border-2 border-neutral-800"
           />
         </picture>
