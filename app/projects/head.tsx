@@ -1,11 +1,11 @@
 import { NextSeo } from "next-seo";
-import { getProps } from "next-seo.config";
-import path from "path";
+import { getProps, indexFollow } from "next-seo.config";
 
 export default function Head() {
   return (
     <NextSeo
-      useAppDir={true}
+      useAppDir={true} 
+{...indexFollow()}
       {...getProps({
         title: "Projects",
         desc: "Projects I made.",
