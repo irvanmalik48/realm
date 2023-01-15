@@ -48,6 +48,7 @@ export default function Page() {
         </div>
       </section>
       <section>
+        {/* prettier-ignore */}
         <Marquee className="text-neutral-900 uppercase h-12 font-heading text-3xl font-bold bg-teal-300 tracking-wide" speed={15} direction="right" gradient gradientColor={[23, 23, 23]}>
           . Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you
         </Marquee>
@@ -89,6 +90,7 @@ export default function Page() {
         </p>
       </section>
       <section>
+        {/* prettier-ignore */}
         <Marquee className="text-neutral-900 uppercase h-12 font-heading text-3xl font-bold bg-teal-300 tracking-wide" speed={15} direction="left" gradient gradientColor={[23, 23, 23]}>
           . うぃーあーざじゃぱにーずごぶりん
           . どぅゆぅはぶけいのたかとびおにごろし
@@ -97,7 +99,7 @@ export default function Page() {
           . はいびびっとしゃとるーずぐりーんおに
           . せくしーみでぃあむばいおれっとおに
           . むらさきだいだいしゃくなげおに
-          . らららいえるかなとぅないひゃっきやぎょう  
+          . らららいえるかなとぅないひゃっきやぎょう
         </Marquee>
       </section>
       <section className="py-12 lg:py-0 max-w-4xl mx-auto grid grid-cols-1 relative min-h-screen place-content-center">
