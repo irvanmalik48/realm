@@ -7,7 +7,7 @@ export function Footer() {
             Made with{" "}
             <span className="text-teal-300">pure sarcastic remarks</span> by{" "}
             <a
-              href="github.com/irvanmalik48"
+              href="https://github.com/irvanmalik48"
               className="text-teal-300 hover:text-opacity-100 transition ease-out underline underline-offset-2"
             >
               my own self
