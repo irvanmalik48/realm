@@ -3,6 +3,7 @@ import { Projects } from "c/Projects";
 import Link from "next/link";
 import { AnimatedSVGBack } from "c/AnimatedSVGBG";
 import Image from "next/image";
+import Marquee from "c/Marquee";
 
 import CheckFill from "c/CheckFill";
 import ArrowForwardFill from "c/ArrowForwardFill";
@@ -46,6 +47,11 @@ export default function Page() {
           </a>
         </div>
       </section>
+      <section>
+        <Marquee className="text-neutral-900 uppercase h-12 font-heading text-3xl font-bold bg-teal-300 tracking-wide" speed={15} direction="right" gradient gradientColor={[23, 23, 23]}>
+          . Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you
+        </Marquee>
+      </section>
       <section
         id="self-intro"
         className="max-w-4xl min-h-screen place-content-center mx-auto grid grid-cols-1 relative"
@@ -82,7 +88,19 @@ export default function Page() {
           Yes, you can just scroll down. Don't be a lazy bum.
         </p>
       </section>
-      <section className="max-w-4xl mx-auto grid grid-cols-1 relative min-h-screen place-content-center">
+      <section>
+        <Marquee className="text-neutral-900 uppercase h-12 font-heading text-3xl font-bold bg-teal-300 tracking-wide" speed={15} direction="left" gradient gradientColor={[23, 23, 23]}>
+          . うぃーあーざじゃぱにーずごぶりん
+          . どぅゆぅはぶけいのたかとびおにごろし
+          . あいあむえぇとじゃぱにーずごぶりん
+          . あかあおきいろのおにずあんどもあ
+          . はいびびっとしゃとるーずぐりーんおに
+          . せくしーみでぃあむばいおれっとおに
+          . むらさきだいだいしゃくなげおに
+          . らららいえるかなとぅないひゃっきやぎょう  
+        </Marquee>
+      </section>
+      <section className="py-12 lg:py-0 max-w-4xl mx-auto grid grid-cols-1 relative min-h-screen place-content-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-white w-full">
           I regularly <span className="text-teal-300">post</span> about{" "}
           <span className="text-teal-300">something</span>.
