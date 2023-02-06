@@ -1,3 +1,4 @@
+import AuthContext from "c/AuthContext";
 import { FAB } from "c/FAB";
 import { Footer } from "c/Footer";
 import { TrackScroll } from "c/TrackScroll";
@@ -36,8 +37,10 @@ export default function RootLayout({
       </head>
       <body className="bg-neutral-900">
         <TrackScroll />
-        <FAB />
-        {children}
+        <AuthContext>
+          <FAB />
+          {children}
+        </AuthContext>
         <Footer />
         <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3762669166645243"
         crossOrigin="anonymous" />

@@ -7,6 +7,7 @@ import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import codeTitle from "u/rehypeCodeTitle";
 import { ArticleJsonLd } from "next-seo";
+import Comments from "c/Comments";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -29,7 +30,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         src="/misc/lottie.svg"
         className="w-48 z-[6] absolute left-0 top-0 hidden lg:block"
       />
-      <main className="relative prose prose-img:w-full prose-invert prose-code:font-mono prose-pre:rounded-xl prose-headings:font-heading prose-headings:border-b-2 prose-headings:border-neutral-800 prose-h2:py-3 prose-h3:py-3 prose-h4:py-3 prose-h5:py-3 prose-img:rounded-xl prose-img:border-2 prose-img:border-neutral-800 prose-h1:text-center py-48 mx-auto max-w-4xl px-5">
+      <main className="relative prose prose-img:w-full prose-invert prose-code:font-mono prose-pre:rounded-xl prose-headings:font-heading prose-headings:border-b-2 prose-headings:border-neutral-800 prose-h2:py-3 prose-h3:py-3 prose-h4:py-3 prose-h5:py-3 prose-img:rounded-xl prose-img:border-2 prose-img:border-neutral-800 prose-h1:text-center pt-48 pb-5 mx-auto max-w-4xl px-5">
         <h1 className="rounded-xl text-3xl p-5 border-2 border-neutral-800 mb-0">
           {content.frontmatter.title}
         </h1>
@@ -50,6 +51,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </div>
         <MDXComponent source={source} />
       </main>
+      <section className="px-5">
+        <Comments />
+      </section>
       <ArticleJsonLd
         useAppDir={true}
         type="BlogPosting"

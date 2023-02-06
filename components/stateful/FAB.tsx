@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import HomeFill from "c/HomeFill";
@@ -9,11 +9,25 @@ import WorkFill from "c/WorkFill";
 import InfoFill from "c/InfoFill";
 import ArrowUpwardFill from "c/ArrowUpwardFill";
 import AddCircleFill from "c/AddCircleFill";
+import LoginFill from "c/LoginFill";
+import LogoutFill from "c/LogoutFill";
+
+import { useSession, signOut } from "next-auth/react";
 
 export function FAB() {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasSession, setHasSession] = useState(false);
+  const session = useSession();
 
   const toggle = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    if (session.data?.user) {
+      setHasSession(true);
+    } else {
+      setHasSession(false);
+    }
+  }, []);
 
   return (
     <>
@@ -79,6 +93,35 @@ export function FAB() {
                   size="24px"
                 />
               </Link>
+              {!hasSession ? (
+                <Link
+                  className="flex flex-row gap-5 items-center group-hover:opacity-80 group-hover:hover:opacity-100 group-hover:hover:scale-110 transition group-hover:active:scale-90"
+                  href="/login"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  <p className="text-white">Login</p>
+                  <LoginFill
+                    className="block fill-neutral-900 bg-teal-300 rounded-xl p-3"
+                    size="24px"
+                  />
+                </Link>
+              ) : (
+                <m.button
+                  className="flex flex-row gap-5 items-center group-hover:opacity-80 group-hover:hover:opacity-100 group-hover:hover:scale-110 transition group-hover:active:scale-90"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signOut();
+                  }}
+                >
+                  <p className="text-white">Logout</p>
+                  <LogoutFill
+                    className="block fill-neutral-900 bg-teal-300 rounded-xl p-3"
+                    size="24px"
+                  />
+                </m.button>
+              )}
               <m.button
                 className="flex flex-row gap-5 items-center group-hover:opacity-80 group-hover:hover:opacity-100 group-hover:hover:scale-110 transition group-hover:active:scale-90"
                 onClick={(e) => {
