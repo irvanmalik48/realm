@@ -1,6 +1,7 @@
 import { FAB } from "c/FAB";
 import { Footer } from "c/Footer";
 import { TrackScroll } from "c/TrackScroll";
+import Script from "next/script";
 import "s/globals.css";
 
 export default function RootLayout({
@@ -38,6 +39,8 @@ export default function RootLayout({
         <FAB />
         {children}
         <Footer />
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3762669166645243"
+        crossOrigin="anonymous" />
       </body>
     </html>
   );
