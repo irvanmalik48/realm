@@ -8,6 +8,7 @@ import rehypeSlug from "rehype-slug";
 import codeTitle from "u/rehypeCodeTitle";
 import { ArticleJsonLd } from "next-seo";
 import Comments from "c/Comments";
+import Script from "next/script";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -51,6 +52,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </div>
         <MDXComponent source={source} />
       </main>
+      <ins className="adsbygoogle"
+        style={{ display: "block", textAlign: "center" }}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
+        data-ad-client="ca-pub-3762669166645243"
+        data-ad-slot="3424870960"
+      >
+      </ins>
       <section className="px-5">
         <Comments />
       </section>
@@ -71,6 +80,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
         description={content.frontmatter.desc}
         isAccessibleForFree={true}
       />
+      <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3762669166645243"
+      crossOrigin="anonymous" />
+      <Script>
+        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+      </Script>
     </>
   );
 }
