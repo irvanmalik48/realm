@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@hattip/adapter-vercel-edge': ^0.0.33
+  '@hattip/response': ^0.0.33
   '@tailwindcss/typography': ^0.5.9
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
@@ -36,6 +37,7 @@ dependencies:
 
 devDependencies:
   '@hattip/adapter-vercel-edge': 0.0.33
+  '@hattip/response': 0.0.33
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
@@ -590,6 +592,12 @@ packages:
     dependencies:
       '@hattip/core': 0.0.33
       node-fetch-native: 1.0.2
+    dev: true
+
+  /@hattip/response/0.0.33:
+    resolution: {integrity: sha512-blwq1PJITeWwhx/Tyret8OYqTcrGEu/eTlSoC5U8b1uy6s+oNTJ/bhQUtfj8P5X+DSaKmbo1ymBKyCPpmPv6vg==}
+    dependencies:
+      '@hattip/core': 0.0.33
     dev: true
 
   /@humanwhocodes/config-array/0.11.8:
