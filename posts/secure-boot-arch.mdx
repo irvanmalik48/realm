@@ -1,30 +1,11 @@
 ---
 title: "Arch Linux Secure Boot Tutorial"
 date: "2021-09-23"
-desc: "Configure Secure Boot on Arch Linux."
-tag:
+description: "Configure Secure Boot on Arch Linux."
+tags:
   - "arch"
   - "linux"
 ---
-
-## Table of Contents
-
-- [Table of Contents](#table-of-contents)
-- [Abstract](#abstract)
-- [Implementing Secure Boot](#implementing-secure-boot)
-  - [Disclaimer](#disclaimer)
-  - [Before you do anything](#before-you-do-anything)
-    - [Backup all old stuffs](#backup-all-old-stuffs)
-    - [Create your own keys](#create-your-own-keys)
-    - [Optional: Adding Microsoft keys](#optional-adding-microsoft-keys)
-    - [Reinstalling GRUB](#reinstalling-grub)
-    - [Signing EFI binaries](#signing-efi-binaries)
-    - [Prepare pacman hook for automatic kernel signing](#prepare-pacman-hook-for-automatic-kernel-signing)
-    - [Put your firmware to "Setup Mode"](#put-your-firmware-to-setup-mode)
-    - [Enroll your keys](#enroll-your-keys)
-  - [Finishing Touch](#finishing-touch)
-- [Verdict](#verdict)
-- [References](#references)
 
 ## Abstract
 

@@ -1,7 +1,6 @@
 {
   "editor.tabSize": 2,
-  "editor.insertSpaces": true,
   "editor.detectIndentation": false,
-  "typescript.tsdk": "node_modules/.pnpm/typescript@4.9.4/node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
 }

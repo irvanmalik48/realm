@@ -1,23 +1,18 @@
-# My Website
+# Realm
 
-Basically my website. Nothing so special about it.
+Just a simple blog. Never completed, always WIP.
 
-## Using as Template
+## Code Style
 
-1. Clone the repository:
+[![js-semistandard-style](https://raw.githubusercontent.com/standard/semistandard/master/badge.svg)](https://github.com/standard/semistandard)
 
-```bash
-git clone https://github.com/irvanmalik48/realm
-```
+## Stack
 
-2. Modify template using your beloved text-editor.
-
-   > Clue: Everything is in the `components` folder. Not everything tho.
-
-3. Start blogging. (Don't forget to delete all my contents)
-
-Run `npm run dev` to preview the site.
+- Rakkasjs
+- MDX
+- Tailwind
+- Vercel
 
 ## License
 
-[MIT](https://raw.githubusercontent.com/irvanmalik48/realm/main/LICENSE)
+MIT

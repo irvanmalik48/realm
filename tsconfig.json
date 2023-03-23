@@ -1,42 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "checkJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "target": "es2020",
+    "module": "ESNext",
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "allowUmdGlobalAccess": true,
-    "incremental": true,
-    "baseUrl": "./",
-    "sourceMap": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "c/*": [
-        "components/stateful/*",
-        "components/stateless/*",
-        "components/icons/*"
-      ],
-      "s/*": ["styles/*"],
-      "u/*": ["utils/*"],
-      "h/*": ["hooks/*"],
-      "t/*": ["types/*"],
-      "p/*": ["public/*"],
-      "sc/*": ["app/(server-components)/*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "types": ["vite/client"]
+  }
 }
