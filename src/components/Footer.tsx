@@ -23,10 +23,10 @@ export default function Footer() {
             </a>
             ,{" "}deployed on{" "}
             <a
-              href="https://vercel.com"
+              href="https://netlify.com"
               className="text-red-400 hover:text-neutral-200 underline transition"
             >
-              Vercel
+              Netlify
             </a>
             .
           </span>
