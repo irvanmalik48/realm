@@ -1,7 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@hattip/adapter-vercel-edge': ^0.0.33
+  '@hattip/adapter-netlify-edge': ^0.0.33
+  '@hattip/adapter-netlify-functions': ^0.0.33
   '@hattip/response': ^0.0.33
   '@tailwindcss/typography': ^0.5.9
   '@types/react': ^18.0.28
@@ -36,7 +37,8 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
 
 devDependencies:
-  '@hattip/adapter-vercel-edge': 0.0.33
+  '@hattip/adapter-netlify-edge': 0.0.33
+  '@hattip/adapter-netlify-functions': 0.0.33
   '@hattip/response': 0.0.33
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
   '@types/react': 18.0.28
@@ -529,17 +531,26 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
+  /@hattip/adapter-netlify-edge/0.0.33:
+    resolution: {integrity: sha512-2zH6eJYNpZLSxZBL1csv4Nh7rIcfUXaqKhzbmU+A1JXes/i2HJw5EQehixc/3yEaT8Deg4FM1xwAoL777f7fHA==}
+    dependencies:
+      '@hattip/core': 0.0.33
+    dev: true
+
+  /@hattip/adapter-netlify-functions/0.0.33:
+    resolution: {integrity: sha512-tKU2vrYsb2Vk+7hm4RXwOnYULxdB5yJzpkJJwQ2U/fJ1HBq9c38jz8ztJdRBqUEcPUnMHS6qaGfgtuoos9Oezw==}
+    dependencies:
+      '@hattip/adapter-node': 0.0.33
+      '@hattip/core': 0.0.33
+      '@hattip/polyfills': 0.0.33
+      netlify-lambda-types: 1.0.0
+    dev: true
+
   /@hattip/adapter-node/0.0.33:
     resolution: {integrity: sha512-tEEYo/V0Vj7kQRuruoBHUzfJnaoKjW5EHALsU9RgyPvOs1hCJUil9UEkyVebneTBdQHUcljx4a4ZgS2pnrWOAA==}
     dependencies:
       '@hattip/core': 0.0.33
       '@hattip/polyfills': 0.0.33
-    dev: true
-
-  /@hattip/adapter-vercel-edge/0.0.33:
-    resolution: {integrity: sha512-9nKLcW5698dzVwPVLbETuWNeHhyTR+vUnNyxFrLKYwfzsmqTecscIaapq2s70houSTcZckIjzMXSyvPdQECKNg==}
-    dependencies:
-      '@hattip/core': 0.0.33
     dev: true
 
   /@hattip/bundler-cloudflare-workers/0.0.33:
@@ -699,6 +710,10 @@ packages:
       tailwindcss: 3.2.7_postcss@8.4.21
     dev: true
 
+  /@types/aws-lambda/8.10.114:
+    resolution: {integrity: sha512-M8WpEGfC9iQ6V2Ccq6nGIXoQgeVc6z0Ngk8yCOL5V/TYIxshvb0MWQYLFFTZDesL0zmsoBc4OBjG9DB/4rei6w==}
+    dev: true
+
   /@types/debug/4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -727,6 +742,10 @@ packages:
 
   /@types/ms/0.7.31:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
+    dev: true
+
+  /@types/node/14.18.40:
+    resolution: {integrity: sha512-pGteXO/JQX7wPxGR8lyT+doqjMa7XvlVowwrDwLfX92k5SdLkk4cwC7CYSLBxrenw/R5oQwKioVIak7ZgplM3g==}
     dev: true
 
   /@types/node/18.15.5:
@@ -2950,6 +2969,13 @@ packages:
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+    dev: true
+
+  /netlify-lambda-types/1.0.0:
+    resolution: {integrity: sha512-MRm3o0OSrl5kjz1Wwb+SjT7dX2JRaYt8gYjGaGHJyw4PLfPTPsBdZn37hISMU6xLh3JAeyGQ16OGfg645Z1ovQ==}
+    dependencies:
+      '@types/aws-lambda': 8.10.114
+      '@types/node': 14.18.40
     dev: true
 
   /node-fetch-native/1.0.2:

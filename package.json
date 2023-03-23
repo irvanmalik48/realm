@@ -13,7 +13,8 @@
     "test:lint": "eslint . --ignore-pattern dist"
   },
   "devDependencies": {
-    "@hattip/adapter-vercel-edge": "^0.0.33",
+    "@hattip/adapter-netlify-edge": "^0.0.33",
+    "@hattip/adapter-netlify-functions": "^0.0.33",
     "@hattip/response": "^0.0.33",
     "@tailwindcss/typography": "^0.5.9",
     "@types/react": "^18.0.28",

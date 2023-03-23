@@ -4,6 +4,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [tsconfigPaths(), rakkas({
-    adapter: "vercel",
+    adapter: "netlify",
   })],
 });
