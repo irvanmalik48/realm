@@ -36,7 +36,7 @@ export default function Sidebar() {
   });
 
   const [items, setItems] = useState<PostProps[] | LyricProps[]>(allPosts);
-  const [active, setActive] = useState<"Posts" | "Lyrics">("Posts");
+  const [active, setActive] = useState<string>("Posts");
 
   return (
     <nav className="w-[25rem] border-r border-neutral-700 overflow-x-hidden overflow-y-scroll bg-neutral-800 h-screen scrollbar-thin scrollbar-track-neutral-700 scrollbar-thumb-neutral-500">
