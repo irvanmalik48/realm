@@ -1,6 +1,7 @@
 import { type PageProps, Head, useQuery } from "rakkasjs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import rehypePrismPlus from "rehype-prism-plus";
 import "../../styles/vsc-dark-plus.css";
 
@@ -65,6 +66,7 @@ export default function PostPage(props: PageProps<Params>) {
             remarkGfm,
           ]}
           rehypePlugins={[
+            rehypeRaw,
             rehypePrismPlus,
           ]}
         >
