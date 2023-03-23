@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/indent */
 import { List, ListMusic, Newspaper } from "lucide-react";
 import SidebarItem from "./SidebarItem";
-import { type PostFrontMatter, getPosts } from "src/lib/posts";
-import { type LyricFrontMatter, getLyrics } from "src/lib/lyrics";
-import { useSSQ } from "rakkasjs";
+import { type PostFrontMatter } from "src/lib/posts";
+import { type LyricFrontMatter } from "src/lib/lyrics";
+import { useQuery } from "rakkasjs";
 import { useState } from "react";
 import SidebarLyricsItem from "./SidebarLyricsItem";
 
@@ -20,10 +20,13 @@ interface LyricProps {
 }
 
 export default function Sidebar() {
-  const query = useSSQ(() => {
+  const query = useQuery("void", async () => {
+    const posts = await fetch("/api/posts").then(async (res) => await res.json());
+    const lyrics = await fetch("/api/lyrics").then(async (res) => await res.json());
+
     return {
-      posts: getPosts(),
-      lyrics: getLyrics(),
+      posts,
+      lyrics,
     };
   });
 

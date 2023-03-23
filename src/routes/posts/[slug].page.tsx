@@ -1,5 +1,4 @@
-import { type PageProps, useSSQ, Head } from "rakkasjs";
-import { getPostBySlug } from "src/lib/posts";
+import { type PageProps, Head, useQuery } from "rakkasjs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypePrismPlus from "rehype-prism-plus";
@@ -12,11 +11,12 @@ interface Params {
 export default function PostPage(props: PageProps<Params>) {
   const { params: { slug } } = props;
 
-  const query = useSSQ(() => {
-    if (typeof slug !== "string") {
-      throw new Error("Invalid request");
-    }
-    return getPostBySlug(slug);
+  const key = `post-${slug}`;
+
+  const query = useQuery(key, async () => {
+    const post = await fetch(`/api/post?slug=${slug}`).then(async (res) => await res.json());
+
+    return post;
   });
 
   return (
@@ -49,7 +49,7 @@ export default function PostPage(props: PageProps<Params>) {
           </p>
           <div className="flex items-center flex-wrap gap-2">
             {
-              query.data?.frontMatter.tags.map((tag) => {
+              query.data?.frontMatter.tags.map((tag: string) => {
                 return (
                   <span className="bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-xs text-neutral-200">
                     {tag}

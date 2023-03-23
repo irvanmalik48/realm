@@ -1,15 +1,16 @@
 import { Ticket, Newspaper, ListMusic, GitBranch, Send, Instagram, AlignJustify } from "lucide-react";
-import { Head, useSSQ } from "rakkasjs";
+import { Head, useQuery } from "rakkasjs";
 import LyricsItem from "src/components/LyricsItem";
 import PostItem from "src/components/PostItem";
-import { getLyrics } from "src/lib/lyrics";
-import { getPosts } from "src/lib/posts";
 
 export default function HomePage() {
-  const query = useSSQ(() => {
+  const query = useQuery("void", async () => {
+    const getPosts = await fetch("/api/posts").then(async (res) => await res.json());
+    const getLyrics = await fetch("/api/lyrics").then(async (res) => await res.json());
+
     return {
-      posts: getPosts(),
-      lyrics: getLyrics(),
+      posts: getPosts,
+      lyrics: getLyrics,
     };
   });
 
@@ -92,7 +93,7 @@ export default function HomePage() {
               Here's 4 recent posts I wrote:
             </p>
             <div className="not-prose grid grid-cols-2 gap-4">
-              {allPosts.map((post: any, i) => (
+              {allPosts.map((post: any, i: number) => (
                 <PostItem key={i} slug={post.slug} {...post.frontMatter} />
               ))}
             </div>
@@ -106,7 +107,7 @@ export default function HomePage() {
               Here's 4 recent lyrics I stashed:
             </p>
             <div className="not-prose grid grid-cols-2 gap-4">
-              {allLyrics.map((lyric: any, i) => (
+              {allLyrics.map((lyric: any, i: number) => (
                 <LyricsItem key={i} slug={lyric.slug} {...lyric.frontMatter} />
               ))}
             </div>

@@ -1,9 +1,9 @@
-import { type PageProps, useSSQ, Head } from "rakkasjs";
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+import { type PageProps, Head, useQuery } from "rakkasjs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypePrismPlus from "rehype-prism-plus";
 import "../../styles/vsc-dark-plus.css";
-import { getLyricBySlug } from "src/lib/lyrics";
 
 interface Params {
   slug: string
@@ -11,12 +11,12 @@ interface Params {
 
 export default function PostPage(props: PageProps<Params>) {
   const { params: { slug } } = props;
+  const key = `lyric-${slug}`;
 
-  const query = useSSQ(() => {
-    if (typeof slug !== "string") {
-      throw new Error("Invalid request");
-    }
-    return getLyricBySlug(slug);
+  const query = useQuery(key, async () => {
+    const lyric = await fetch(`/api/lyric?slug=${slug}`).then(async (res) => await res.json());
+
+    return lyric;
   });
 
   return (
