@@ -7,9 +7,16 @@ import {
   Instagram,
   AlignJustify,
 } from "lucide-react";
-import { Head, useQuery } from "rakkasjs";
+import { Head, type PrerenderResult, useQuery } from "rakkasjs";
 import LyricsItem from "src/components/LyricsItem";
 import PostItem from "src/components/PostItem";
+
+export function prerender(): PrerenderResult {
+  return {
+    shouldPrerender: true,
+    shouldCrawl: true,
+  };
+}
 
 export default function HomePage() {
   const query = useQuery("void", async () => {

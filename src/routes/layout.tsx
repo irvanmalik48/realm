@@ -1,7 +1,7 @@
 import { type LayoutProps, useLocation } from "rakkasjs";
 import Footer from "src/components/Footer";
-import NavRail from "src/components/NavRail";
 import Sidebar from "src/components/Sidebar";
+import NavRail from "src/components/NavRail";
 import "src/styles/globals.css";
 
 export default function RootLayout({ children }: LayoutProps) {

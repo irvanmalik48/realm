@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import { List, ListMusic, Newspaper } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 import { type PostFrontMatter } from "src/lib/posts";
