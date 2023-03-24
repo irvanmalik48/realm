@@ -30,5 +30,19 @@ module.exports = {
         asyncArrow: "always",
       },
     ],
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        multiline: {
+          delimiter: "semi",
+          requireLast: true,
+        },
+        singleline: {
+          delimiter: "semi",
+          requireLast: false,
+        },
+      },
+    ],
   },
 };
