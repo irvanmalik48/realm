@@ -11,7 +11,7 @@ Just a simple blog. Never completed, always WIP.
 - Rakkasjs
 - MDX
 - Tailwind
-- Vercel
+- Netlify
 
 ## License
 
