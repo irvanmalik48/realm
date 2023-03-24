@@ -3,10 +3,10 @@ import path from "path";
 import matter from "gray-matter";
 
 export interface PostFrontMatter {
-  title: string
-  date: string
-  description: string
-  tags: string[]
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
 }
 
 export const postsDirectory = path.join(process.cwd(), "posts");
@@ -19,8 +19,8 @@ export function getPostData(slug: string) {
   const fullPath = path.join(postsDirectory, slug);
   const fileContents = readFileSync(fullPath, "utf8");
   const { data: frontMatter, content } = matter(fileContents) as unknown as {
-    data: PostFrontMatter
-    content: string
+    data: PostFrontMatter;
+    content: string;
   };
   return {
     frontMatter,

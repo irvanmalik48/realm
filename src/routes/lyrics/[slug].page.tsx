@@ -6,15 +6,19 @@ import rehypePrismPlus from "rehype-prism-plus";
 import "../../styles/vsc-dark-plus.css";
 
 interface Params {
-  slug: string
+  slug: string;
 }
 
 export default function PostPage(props: PageProps<Params>) {
-  const { params: { slug } } = props;
+  const {
+    params: { slug },
+  } = props;
   const key = `lyric-${slug}`;
 
   const query = useQuery(key, async () => {
-    const lyric = await fetch(`/api/lyric?slug=${slug}`).then(async (res) => await res.json());
+    const lyric = await fetch(`/api/lyric?slug=${slug}`).then(
+      async (res) => await res.json(),
+    );
 
     return lyric;
   });
@@ -24,14 +28,14 @@ export default function PostPage(props: PageProps<Params>) {
       <Head
         charset="utf-8"
         title={`${query.data?.frontMatter.title} - ${query.data?.frontMatter.artist}`}
-        description={`${`${query.data?.frontMatter.title} - ${query.data?.frontMatter.artist}`} - ${query.data?.frontMatter.artist} Lyrics`}
-
+        description={`${`${query.data?.frontMatter.title} - ${query.data?.frontMatter.artist}`} - ${query.data?.frontMatter.artist
+          } Lyrics`}
         // Open Graph
         og:title={`${query.data?.frontMatter.title} - ${query.data?.frontMatter.artist}`}
-        og:description={`${`${query.data?.frontMatter.title} - ${query.data?.frontMatter.artist}`} - ${query.data?.frontMatter.artist} Lyrics`}
+        og:description={`${`${query.data?.frontMatter.title} - ${query.data?.frontMatter.artist}`} - ${query.data?.frontMatter.artist
+          } Lyrics`}
         og:type="website"
         og:url={`https://irvanma.eu.org/lyrics/${slug}`}
-
         // Twitter
         twitter:card="summary"
         twitter:site="@irvanmalik48"
@@ -53,12 +57,8 @@ export default function PostPage(props: PageProps<Params>) {
         </div>
         <ReactMarkdown
           className="prose prose-invert prose-headings:text-neutral-200 rounded border prose-img:rounded prose-img:border prose-img:border-neutral-700 prose-img:w-full prose-img:max-h-72 prose-img:object-contain prose-img:bg-neutral-900 border-neutral-700 bg-neutral-800 max-w-full prose-headings:pb-2 prose-headings:border-b prose-headings:border-neutral-700 px-4 py-3 prose-pre:rounded prose-pre:scrollbar-thin prose-pre:scrollbar-track-neutral-700 prose-pre:scrollbar-thumb-neutral-500"
-          remarkPlugins={[
-            remarkGfm,
-          ]}
-          rehypePlugins={[
-            rehypePrismPlus,
-          ]}
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypePrismPlus]}
         >
           {query.data?.content}
         </ReactMarkdown>

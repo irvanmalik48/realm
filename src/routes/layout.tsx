@@ -11,13 +11,13 @@ export default function RootLayout({ children }: LayoutProps) {
     <div id="REALM" className="flex w-full h-screen scroll-smooth">
       <NavRail />
       <Sidebar />
-      <main
-        className="bg-neutral-900 min-h-screen w-full overflow-y-scroll scrollbar-thin scrollbar-track-neutral-700 scrollbar-thumb-neutral-500"
-      >
+      <main className="bg-neutral-900 min-h-screen w-full overflow-y-scroll scrollbar-thin scrollbar-track-neutral-700 scrollbar-thumb-neutral-500">
         <section className="bg-neutral-800 border-b border-neutral-700 bg-opacity-50 py-3 sticky top-0 z-50 backdrop-blur-md">
           <div className="px-4">
             <p className="text-neutral-200 text-xs font-mono font-bold">
-              {(location.pending != null) ? "Loading..." : location.current.pathname}
+              {location.pending != null
+                ? "Loading..."
+                : location.current.pathname}
             </p>
           </div>
         </section>

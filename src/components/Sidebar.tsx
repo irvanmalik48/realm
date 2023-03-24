@@ -8,21 +8,25 @@ import { useState } from "react";
 import SidebarLyricsItem from "./SidebarLyricsItem";
 
 interface PostProps {
-  frontMatter: PostFrontMatter
-  content: string
-  slug: string
+  frontMatter: PostFrontMatter;
+  content: string;
+  slug: string;
 }
 
 interface LyricProps {
-  frontMatter: LyricFrontMatter
-  content: string
-  slug: string
+  frontMatter: LyricFrontMatter;
+  content: string;
+  slug: string;
 }
 
 export default function Sidebar() {
   const query = useQuery("void", async () => {
-    const posts = await fetch("/api/posts").then(async (res) => await res.json());
-    const lyrics = await fetch("/api/lyrics").then(async (res) => await res.json());
+    const posts = await fetch("/api/posts").then(
+      async (res) => await res.json(),
+    );
+    const lyrics = await fetch("/api/lyrics").then(
+      async (res) => await res.json(),
+    );
 
     return {
       posts,
@@ -31,11 +35,17 @@ export default function Sidebar() {
   });
 
   const allPosts = query.data.posts.sort((a: any, b: any) => {
-    return new Date(b.frontMatter.date).getTime() - new Date(a.frontMatter.date).getTime();
+    return (
+      new Date(b.frontMatter.date).getTime() -
+      new Date(a.frontMatter.date).getTime()
+    );
   });
 
   const allLyrics = query.data.lyrics.sort((a: any, b: any) => {
-    return new Date(b.frontMatter.date).getTime() - new Date(a.frontMatter.date).getTime();
+    return (
+      new Date(b.frontMatter.date).getTime() -
+      new Date(a.frontMatter.date).getTime()
+    );
   });
 
   const [items, setItems] = useState<PostProps[] | LyricProps[]>(allPosts);
@@ -66,32 +76,30 @@ export default function Sidebar() {
             )}
         </button>
       </div>
-      {
-        items.map((x: any, i) => {
-          if (active === "Posts") {
-            return (
-              <SidebarItem
-                key={i}
-                title={x.frontMatter.title}
-                date={x.frontMatter.date}
-                description={x.frontMatter.description}
-                slug={x.slug}
-                tags={x.frontMatter.tags}
-              />
-            );
-          } else {
-            return (
-              <SidebarLyricsItem
-                key={i}
-                title={x.frontMatter.title}
-                date={x.frontMatter.date}
-                artist={x.frontMatter.artist}
-                slug={x.slug}
-              />
-            );
-          }
-        })
-      }
+      {items.map((x: any, i) => {
+        if (active === "Posts") {
+          return (
+            <SidebarItem
+              key={i}
+              title={x.frontMatter.title}
+              date={x.frontMatter.date}
+              description={x.frontMatter.description}
+              slug={x.slug}
+              tags={x.frontMatter.tags}
+            />
+          );
+        } else {
+          return (
+            <SidebarLyricsItem
+              key={i}
+              title={x.frontMatter.title}
+              date={x.frontMatter.date}
+              artist={x.frontMatter.artist}
+              slug={x.slug}
+            />
+          );
+        }
+      })}
     </nav>
   );
 }

@@ -22,9 +22,7 @@ export default function NavRail() {
           activeClass="nav-item-active"
         >
           <Home size={18} />
-          <p className="nav-item-label">
-            Home
-          </p>
+          <p className="nav-item-label">Home</p>
         </StyledLink>
         <StyledLink
           href="/posts"
@@ -32,9 +30,7 @@ export default function NavRail() {
           activeClass="nav-item-active"
         >
           <Newspaper size={18} />
-          <p className="nav-item-label">
-            Posts
-          </p>
+          <p className="nav-item-label">Posts</p>
         </StyledLink>
         <StyledLink
           href="/lyrics"
@@ -42,9 +38,7 @@ export default function NavRail() {
           activeClass="nav-item-active"
         >
           <ListMusic size={18} />
-          <p className="nav-item-label">
-            Song Lyrics
-          </p>
+          <p className="nav-item-label">Song Lyrics</p>
         </StyledLink>
         <StyledLink
           href="/about"
@@ -52,9 +46,7 @@ export default function NavRail() {
           activeClass="nav-item-active"
         >
           <Info size={18} />
-          <p className="nav-item-label">
-            About
-          </p>
+          <p className="nav-item-label">About</p>
         </StyledLink>
         <StyledLink
           href="/creed"
@@ -62,9 +54,7 @@ export default function NavRail() {
           activeClass="nav-item-active"
         >
           <Scale size={18} />
-          <p className="nav-item-label">
-            Journalist's Creed
-          </p>
+          <p className="nav-item-label">Journalist's Creed</p>
         </StyledLink>
         <StyledLink
           href="/oath"
@@ -72,9 +62,7 @@ export default function NavRail() {
           activeClass="nav-item-active"
         >
           <Code2 size={18} />
-          <p className="nav-item-label">
-            Programmer's Oath
-          </p>
+          <p className="nav-item-label">Programmer's Oath</p>
         </StyledLink>
       </div>
       <div className="flex flex-col gap-3">
@@ -83,36 +71,19 @@ export default function NavRail() {
           className="group nav-item"
         >
           <Linkedin size={18} />
-          <p className="nav-item-label">
-            LinkedIn
-          </p>
+          <p className="nav-item-label">LinkedIn</p>
         </a>
-        <a
-          href="https://twitter.com/irvanmalik48"
-          className="group nav-item"
-        >
+        <a href="https://twitter.com/irvanmalik48" className="group nav-item">
           <Twitter size={18} />
-          <p className="nav-item-label">
-            Twitter
-          </p>
+          <p className="nav-item-label">Twitter</p>
         </a>
-        <a
-          href="https://github.com/irvanmalik48"
-          className="group nav-item"
-        >
+        <a href="https://github.com/irvanmalik48" className="group nav-item">
           <Github size={18} />
-          <p className="nav-item-label">
-            GitHub
-          </p>
+          <p className="nav-item-label">GitHub</p>
         </a>
-        <a
-          href="mailto:irvanmalik48@gmail.com"
-          className="group nav-item"
-        >
+        <a href="mailto:irvanmalik48@gmail.com" className="group nav-item">
           <AtSign size={18} />
-          <p className="nav-item-label">
-            Email
-          </p>
+          <p className="nav-item-label">Email</p>
         </a>
       </div>
     </nav>

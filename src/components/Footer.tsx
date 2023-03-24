@@ -13,15 +13,15 @@ export default function Footer() {
               className="text-red-400 hover:text-neutral-200 underline transition"
             >
               Rakkas
-            </a>
-            {" "}and{" "}
+            </a>{" "}
+            and{" "}
             <a
               href="https://tailwindcss.com"
               className="text-red-400 hover:text-neutral-200 underline transition"
             >
               Tailwind
             </a>
-            ,{" "}deployed on{" "}
+            , deployed on{" "}
             <a
               href="https://netlify.com"
               className="text-red-400 hover:text-neutral-200 underline transition"
