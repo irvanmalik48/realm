@@ -1,6 +1,5 @@
 ---
 import Default from "./Default.astro";
-import { Image } from "@astrojs/image/components";
 
 const { frontmatter } = Astro.props;
 ---
@@ -8,13 +7,9 @@ const { frontmatter } = Astro.props;
 <Default title={frontmatter.title} description={frontmatter.description}>
   <article class="text-neutral-200">
     <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
-      {/* @ts-ignore */}
-      <Image
+      <img
         src="/profile/unsplash-bg.webp"
         alt="Unsplash Background by Alex Perez"
-        height={4680}
-        format="webp"
-        aspectRatio={16 / 9}
         class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
       />
       <header class="relative text-neutral-200 max-w-3xl w-full mx-auto flex flex-col justify-center">
