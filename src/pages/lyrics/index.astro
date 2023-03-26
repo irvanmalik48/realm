@@ -2,7 +2,6 @@
 import { ListMusic } from "lucide-react";
 import DefaultLayout from "../../layouts/Default.astro";
 import LyricsItem from "../../components/LyricsItem";
-import { Image } from "@astrojs/image/components"
 import "../../styles/globals.css";
 import { getSortedLyrics } from "../../lib/lyrics";
 
@@ -14,13 +13,9 @@ let description = "My song lyrics collection.";
 
 <DefaultLayout title={title} description={description}>
   <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
-    {/* @ts-ignore */}
-    <Image
+    <img
       src="/profile/unsplash-bg.webp"
       alt="Unsplash Background by Alex Perez"
-      height={4680}
-      format="webp"
-      aspectRatio={16 / 9}
       class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
     />
     <header class="relative text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">

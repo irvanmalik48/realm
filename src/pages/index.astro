@@ -3,7 +3,6 @@ import { AlignJustify, CornerDownRight, GitBranch, Instagram, ListMusic, Newspap
 import DefaultLayout from "../layouts/Default.astro";
 import PostItem from "../components/PostItem";
 import LyricsItem from "../components/LyricsItem";
-import { Image } from "@astrojs/image/components"
 import "../styles/globals.css";
 import { getSortedPosts } from "../lib/posts";
 import { getSortedLyrics } from "../lib/lyrics";
@@ -17,26 +16,17 @@ let description = "The Realm of Irvan Malik Azantha";
 
 <DefaultLayout title={title} description={description}>
   <div class="absolute top-0 w-full border-b border-neutral-700">
-    {/* @ts-ignore */}
-    <Image
+    <img
       src="/profile/unsplash-bg.webp"
       alt="Unsplash Background by Alex Perez"
-      height={4680}
-      format="webp"
-      aspectRatio={16 / 9}
-      class="h-72 w-full object-cover brightness-50"
+      class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
     />
   </div>
   <section class="w-full pt-20 pb-5 relative">
     <div class="border border-neutral-700 relative rounded p-4 bg-neutral-800 bg-opacity-20 backdrop-blur-md max-w-3xl mx-auto mt-36 flex flex-col items-center w-full">
-      {/* @ts-ignore */}
-      <Image
+      <img
         src="/profile/main.webp"
         alt="Profile Picture"
-        format="webp"
-        quality={100}
-        aspectRatio="1:1"
-        width={192}
         class="w-48 h-48 absolute rounded-full -mt-28 border border-neutral-700 ring-4 ring-opacity-20 ring-offset-red-400 ring-offset-2 ring-red-400"
       />
       <div class="w-full mt-28 text-center">

@@ -3,7 +3,6 @@ import react from "@astrojs/react";
 
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import image from "@astrojs/image";
 import partytown from "@astrojs/partytown";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
@@ -24,9 +23,6 @@ export default defineConfig({
         applyBaseStyles: true,
         path: "./tailwind.config.cjs",
       },
-    }),
-    image({
-      serviceEntryPoint: "@astrojs/image/sharp",
     }),
     partytown(),
     mdx({
