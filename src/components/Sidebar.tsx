@@ -55,6 +55,8 @@ export default function Sidebar(props: any) {
         </div>
         <button
           className="outline-none text-neutral-400 hover:text-neutral-200 transition rounded"
+          aria-label="Toggle Posts/Lyrics"
+          id="toggle-posts-lyrics"
           onClick={() => {
             setItems(
               active === "Posts" ? lyricsData.data ?? [] : postData.data ?? []
