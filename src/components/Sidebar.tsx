@@ -44,7 +44,7 @@ export default function Sidebar(props: any) {
   return (
     <nav
       id={props.id}
-      className="scroll-smooth w-[25rem] border-r border-neutral-700 overflow-x-hidden overflow-y-scroll bg-neutral-800 h-screen scrollbar-thin scrollbar-track-neutral-700 scrollbar-thumb-neutral-500"
+      className="hidden lg:block scroll-smooth w-[20rem] xl:w-[25rem] border-r border-neutral-700 overflow-x-hidden overflow-y-scroll bg-neutral-800 h-screen scrollbar-thin scrollbar-track-neutral-700 scrollbar-thumb-neutral-500"
     >
       <div className="p-3 sticky top-0 bg-neutral-800 z-40 bg-opacity-50 backdrop-blur-md flex justify-between items-center border-b border-neutral-700 w-full">
         <div className="flex items-center gap-3">
