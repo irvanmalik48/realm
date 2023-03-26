@@ -23,10 +23,10 @@ export default function Footer() {
             </a>
             , deployed on{" "}
             <a
-              href="https://pages.cloudflare.com"
+              href="https://vercel.com"
               className="text-red-400 hover:text-neutral-200 underline transition"
             >
-              Cloudflare Pages
+              Vercel
             </a>
             .
           </span>
