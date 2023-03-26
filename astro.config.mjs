@@ -7,6 +7,7 @@ import image from "@astrojs/image";
 import partytown from "@astrojs/partytown";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
+import netlify from "@astrojs/netlify/functions";
 
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -24,9 +25,7 @@ export default defineConfig({
         path: "./tailwind.config.cjs",
       },
     }),
-    image({
-      serviceEntryPoint: "@astrojs/image/sharp",
-    }),
+    image(),
     partytown(),
     mdx({
       syntaxHighlight: "shiki",
@@ -39,5 +38,6 @@ export default defineConfig({
     }),
     prefetch(),
   ],
-  output: "static",
+  output: "server",
+  adapter: netlify(),
 });
