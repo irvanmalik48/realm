@@ -1,3 +1,0 @@
-[functions]
-  external_node_modules = ["astro"]
-  included_files = ["node_modules/sharp/**/*"]
