@@ -1,0 +1,60 @@
+---
+import Default from "../layouts/Default.astro";
+
+let title = "Journalist's Creed";
+let description = "A personal and professional affirmation and code of journalism ethics.";
+---
+
+<Default title={title} description={description}>
+  <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
+    <img
+      src="/profile/unsplash-bg.webp"
+      alt="Unsplash Background by Alex Perez"
+      class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
+    />
+    <header class="relative px-4 text-center lg:text-left text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
+      <h1 class="font-heading font-bold text-4xl">
+        Journalist's Creed
+      </h1>
+      <p class="text-xl text-neutral-400">
+        A personal and professional affirmation and code of journalism ethics.
+      </p>
+    </header>
+  </div>
+  <section class="w-full py-12 z-10 relative">
+    <div class="max-w-3xl mx-auto px-4 prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:font-heading">
+      <p>
+        I, Irvan Malik Azantha, do solemnly swear to uphold the following principles as a journalist:
+      </p>
+      <ul>
+        <li>
+          I believe in the profession of journalism.
+        </li>
+        <li>
+          I believe that the public journal is a public trust; that all connected with it are, to the full measure of their responsibility, trustees for the public; that acceptance of a lesser service than the public service is betrayal of this trust.
+        </li>
+        <li>
+          I believe that clear thinking and clear statement, accuracy and fairness are fundamental to good journalism.
+        </li>
+        <li>
+          I believe that a journalist should write only what he holds in his heart to be true.
+        </li>
+        <li>
+          I believe that suppression of the news, for any consideration other than the welfare of society, is indefensible.
+        </li>
+        <li>
+          I believe that no one should write as a journalist what he would not say as a gentleman; that bribery by one's own pocketbook is as much to be avoided as bribery by the pocketbook of another; that individual responsibility may not be escaped by pleading another's instructions or another's dividends.
+        </li>
+        <li>
+          I believe that advertising, news and editorial columns should alike serve the best interests of readers; that a single standard of helpful truth and cleanness should prevail for all; that the supreme test of good journalism is the measure of its public service.
+        </li>
+        <li>
+          I believe that the journalism which succeeds best — and best deserves success — fears God and honors Man; is stoutly independent, unmoved by pride of opinion or greed of power, constructive, tolerant but never careless, self-controlled, patient, always respectful of its readers but always unafraid, is quickly indignant at injustice; is unswayed by the appeal of privilege or the clamor of the mob; seeks to give every man a chance and, as far as law and honest wage and recognition of human brotherhood can make it so, an equal chance; is profoundly patriotic while sincerely promoting international good will and cementing world-comradeship; is a journalism of humanity, of and for today's world.
+        </li>
+      </ul>
+      <p>
+        In the events of me not being able to uphold these principles without reasonable evidences, I will resign from my position as a journalist and will never call myself a journalist again.
+      </p>
+    </div>
+  </section>
+</Default>
