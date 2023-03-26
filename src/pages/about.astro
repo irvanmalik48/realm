@@ -1,0 +1,129 @@
+---
+import { Banana, Bean, Component, Dog, Flag, LayoutTemplate } from "lucide-react";
+import Default from "../layouts/Default.astro";
+
+let title = "About";
+let description = "Who am I? Read this page to find out.";
+---
+
+<Default title={title} description={description}>
+  <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
+    <img
+      src="/profile/unsplash-bg.webp"
+      alt="Unsplash Background by Alex Perez"
+      class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
+    />
+    <header class="relative px-4 text-center lg:text-left text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
+      <h1 class="font-heading font-bold text-4xl">
+        About Me
+      </h1>
+      <p class="text-xl text-neutral-400">
+        Who am I? Read this page to find out.
+      </p>
+    </header>
+  </div>
+  <section class="w-full py-12 z-10 relative">
+    <div class="max-w-3xl mx-auto px-4 prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:font-heading">
+      <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
+        <div class="flex items-center gap-3">
+          <Component size={28} />
+        </div>
+        Introduction
+      </h2>
+      <p>
+        Hello, I'm Irvan Malik Azantha. A result-oriented programmer with 2 years of experience in creating and maintaining web development projects. Highly ambitious and logical. Very interested in open source technology and related project developments. Skilled at web development and UI/UX designing.
+      </p>
+      <p>
+        I'm a self-taught programmer currently enrolled in Universitas Sriwijaya. I started learning programming since 2020. I started with HTML and CSS, then I learned JavaScript and PHP. I also learned some frameworks like React, Svelte, Qwik, Solid, and UI/UX design tools like Figma.
+      </p>
+      <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
+        <div class="flex items-center gap-3">
+          <LayoutTemplate size={28} />
+        </div>
+        Why I make this website
+      </h2>
+      <p>
+        I made this website to... I don't actually know why I make this website. My website is simply my canvas. I like to make my website as a place to experiment with new things, to share my knowledge and experience with others.
+      </p>
+      <p>
+        Probably why this website has gone through so many framework change you'll puke if you see it. I'm currently using Astro, a shiny framework that I just discovered. I'm still learning how to use it, but I'm sure I'll get used to it soon.
+      </p>
+      <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
+        <div class="flex items-center gap-3">
+          <Flag size={28} />
+        </div>
+        Affiliations
+      </h2>
+      <ul>
+        <li>
+          IT Lead/Support : Halo Sriwijaya
+        </li>
+        <li>
+          Contributor and Moderator : GNU/Weeb
+        </li>
+        <li>
+          Community Lead : ngodingpoi Community
+        </li>
+        <li>
+          Student : Universitas Sriwijaya
+        </li>
+        <li>
+          Cloud Computing Cohort : Bangkit Academy
+        </li>
+      </ul>
+      <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
+        <div class="flex items-center gap-3">
+          <Banana size={28} />
+        </div>
+        Skillset
+      </h2>
+      <ul>
+        <li>
+          Web Development
+        </li>
+        <li>
+          UI Designer
+        </li>
+        <li>
+          UX Researcher
+        </li>
+        <li>
+          Cloud Computing
+        </li>
+        <li>
+          Linux System Administration
+        </li>
+      </ul>
+      <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
+        <div class="flex items-center gap-3">
+          <Bean size={28} />
+        </div>
+        Hobbies
+      </h2>
+      <ul>
+        <li>
+          Programming
+        </li>
+        <li>
+          Scrolling Twitter/Instagram/Telegram
+        </li>
+        <li>
+          Reading Quora
+        </li>
+        <li>
+          Watching Anime
+        </li>
+        <li>
+          Listening to Music
+        </li>
+      </ul>
+      <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
+        <div class="flex items-center gap-3">
+          <Dog size={28} />
+        </div>
+        Ay yo!
+      </h2>
+      <p>What the dog doin'?</p>
+    </div>
+  </section>
+</Default>
