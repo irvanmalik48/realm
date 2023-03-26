@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import { Link } from "rakkasjs";
 
 interface LyricsItemProps {
   title: string;
@@ -10,7 +9,7 @@ interface LyricsItemProps {
 
 export default function LyricsItem(props: LyricsItemProps) {
   return (
-    <Link
+    <a
       href={`/lyrics/${props.slug}`}
       className="group w-full block relative text-neutral-200 p-3 bg-neutral-800 border rounded border-neutral-700 bg-opacity-50 not-prose no-underline transition"
     >
@@ -28,6 +27,6 @@ export default function LyricsItem(props: LyricsItemProps) {
         <p className="text-xs">Read more</p>
       </div>
       <div className="group-hover:opacity-100 opacity-0 transition w-full z-[1] h-full absolute top-0 right-0 bg-gradient-to-l from-neutral-800 to-transparent" />
-    </Link>
+    </a>
   );
 }

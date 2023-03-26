@@ -9,7 +9,7 @@ export interface PostFrontMatter {
   tags: string[];
 }
 
-export const postsDirectory = path.join(process.cwd(), "posts");
+export const postsDirectory = path.join(process.cwd(), "src", "pages", "posts");
 
 export function getPostPaths() {
   return readdirSync(postsDirectory);
@@ -31,10 +31,25 @@ export function getPostData(slug: string) {
 
 export function getPosts() {
   const postFileNames = getPostPaths();
-  const posts = postFileNames.map((fileName) => {
-    return getPostData(fileName);
-  });
+  const posts = postFileNames
+    .map((fileName) => {
+      return getPostData(fileName);
+    })
+    .filter((post) => {
+      return post.frontMatter.date !== undefined;
+    });
   return posts;
+}
+
+export function getSortedPosts() {
+  const posts = getPosts();
+  return posts.sort((a, b) => {
+    if (a.frontMatter.date < b.frontMatter.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 }
 
 export function getPostBySlug(slug: string) {

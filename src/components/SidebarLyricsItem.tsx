@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import { StyledLink } from "rakkasjs";
 
 export interface SidebarLyricsItemProps {
   title: string;
@@ -10,10 +9,9 @@ export interface SidebarLyricsItemProps {
 
 export default function SidebarLyricsItem(props: SidebarLyricsItemProps) {
   return (
-    <StyledLink
+    <a
       href={`/lyrics/${props.slug}`}
       className="group w-full block relative text-neutral-200 p-3 border-b border-neutral-700 hover:bg-neutral-700 hover:bg-opacity-20 transition"
-      activeClass="bg-neutral-600 bg-opacity-20"
     >
       <h2 className="font-bold truncate font-heading">{props.title}</h2>
       <p className="text-sm truncate">
@@ -29,6 +27,6 @@ export default function SidebarLyricsItem(props: SidebarLyricsItemProps) {
         <p className="text-xs">Read more</p>
       </div>
       <div className="group-hover:opacity-100 opacity-0 transition w-full z-[1] h-full absolute top-0 right-0 bg-gradient-to-l from-neutral-800 to-transparent" />
-    </StyledLink>
+    </a>
   );
 }

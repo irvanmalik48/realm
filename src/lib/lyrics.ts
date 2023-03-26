@@ -8,7 +8,12 @@ export interface LyricFrontMatter {
   date: string;
 }
 
-export const lyricsDirectory = path.join(process.cwd(), "lyrics");
+export const lyricsDirectory = path.join(
+  process.cwd(),
+  "src",
+  "pages",
+  "lyrics"
+);
 
 export function getLyricPaths() {
   return readdirSync(lyricsDirectory);
@@ -30,10 +35,25 @@ export function getLyricData(slug: string) {
 
 export function getLyrics() {
   const lyricFileNames = getLyricPaths();
-  const lyrics = lyricFileNames.map((fileName) => {
-    return getLyricData(fileName);
-  });
+  const lyrics = lyricFileNames
+    .map((fileName) => {
+      return getLyricData(fileName);
+    })
+    .filter((lyric) => {
+      return lyric.frontMatter.date !== undefined;
+    });
   return lyrics;
+}
+
+export function getSortedLyrics() {
+  const lyrics = getLyrics();
+  return lyrics.sort((a, b) => {
+    if (a.frontMatter.date < b.frontMatter.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 }
 
 export function getLyricBySlug(slug: string) {

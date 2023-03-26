@@ -10,78 +10,86 @@ import {
   Scale,
   Code2,
 } from "lucide-react";
-import { StyledLink } from "rakkasjs";
 
-export default function NavRail() {
+export default function NavRail(props: any) {
   return (
-    <nav className="bg-neutral-800 h-screen sticky top-0 p-3 w-fit flex flex-col justify-between border-r border-neutral-700 z-50">
+    <nav
+      id={props.id}
+      className="bg-neutral-800 h-screen sticky top-0 p-3 w-fit flex flex-col justify-between border-r border-neutral-700 z-50"
+    >
       <div className="flex flex-col gap-3">
-        <StyledLink
+        <a
           href="/"
-          className="group nav-item"
-          activeClass="nav-item-active"
+          className={`group nav-item ${
+            props.path === "/" ? "nav-item-active" : ""
+          }`}
         >
           <Home size={18} />
           <p className="nav-item-label">Home</p>
-        </StyledLink>
-        <StyledLink
+        </a>
+        <a
           href="/posts"
-          className="group nav-item"
-          activeClass="nav-item-active"
+          className={`group nav-item ${
+            props.path === "/posts" ? "nav-item-active" : ""
+          }`}
         >
           <Newspaper size={18} />
           <p className="nav-item-label">Posts</p>
-        </StyledLink>
-        <StyledLink
+        </a>
+        <a
           href="/lyrics"
-          className="group nav-item"
-          activeClass="nav-item-active"
+          className={`group nav-item ${
+            props.path === "/lyrics" ? "nav-item-active" : ""
+          }`}
         >
           <ListMusic size={18} />
           <p className="nav-item-label">Song Lyrics</p>
-        </StyledLink>
-        <StyledLink
+        </a>
+        <a
           href="/about"
-          className="group nav-item"
-          activeClass="nav-item-active"
+          className={`group nav-item ${
+            props.path === "/about" ? "nav-item-active" : ""
+          }`}
         >
           <Info size={18} />
           <p className="nav-item-label">About</p>
-        </StyledLink>
-        <StyledLink
+        </a>
+        <a
           href="/creed"
-          className="group nav-item"
-          activeClass="nav-item-active"
+          className={`group nav-item ${
+            props.path === "/creed" ? "nav-item-active" : ""
+          }`}
         >
           <Scale size={18} />
           <p className="nav-item-label">Journalist's Creed</p>
-        </StyledLink>
-        <StyledLink
+        </a>
+        <a
           href="/oath"
-          className="group nav-item"
-          activeClass="nav-item-active"
+          className={`group nav-item ${
+            props.path === "/oath" ? "nav-item-active" : ""
+          }`}
         >
           <Code2 size={18} />
           <p className="nav-item-label">Programmer's Oath</p>
-        </StyledLink>
+        </a>
       </div>
       <div className="flex flex-col gap-3">
         <a
           href="https://linkedin.com/in/irvanmalik48"
-          className="group nav-item"
+          className={`group nav-item`}
         >
           <Linkedin size={18} />
           <p className="nav-item-label">LinkedIn</p>
         </a>
-        <a href="https://twitter.com/irvanmalik48" className="group nav-item">
+        <a href="https://twitter.com/irvanmalik48" className={`group nav-item`}>
           <Twitter size={18} />
           <p className="nav-item-label">Twitter</p>
         </a>
-        <a href="https://github.com/irvanmalik48" className="group nav-item">
+        <a href="https://github.com/irvanmalik48" className={`group nav-item`}>
           <Github size={18} />
           <p className="nav-item-label">GitHub</p>
         </a>
-        <a href="mailto:irvanmalik48@gmail.com" className="group nav-item">
+        <a href="mailto:irvanmalik48@gmail.com" className={`group nav-item`}>
           <AtSign size={18} />
           <p className="nav-item-label">Email</p>
         </a>

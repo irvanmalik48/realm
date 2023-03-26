@@ -1,10 +1,9 @@
 import { ArrowRight } from "lucide-react";
-import { Link } from "rakkasjs";
-import { type SidebarItemProps } from "./SidebarItem";
+import type { SidebarItemProps } from "./SidebarItem";
 
 export default function PostItem(props: SidebarItemProps) {
   return (
-    <Link
+    <a
       href={`/posts/${props.slug}`}
       className="group w-full block relative text-neutral-200 p-3 bg-neutral-800 border rounded border-neutral-700 bg-opacity-50 not-prose no-underline transition"
     >
@@ -14,8 +13,11 @@ export default function PostItem(props: SidebarItemProps) {
       </p>
       <p className="text-sm pt-2 truncate">{props.description}</p>
       <div className="flex gap-2 items-center flex-wrap pt-3">
-        {props.tags.map((tag, i) => (
-          <p className="bg-neutral-800 border rounded border-neutral-700 px-2 py-1 text-xs">
+        {props.tags.map((tag, i: number) => (
+          <p
+            key={i}
+            className="bg-neutral-800 border rounded border-neutral-700 px-2 py-1 text-xs"
+          >
             {tag}
           </p>
         ))}
@@ -27,6 +29,6 @@ export default function PostItem(props: SidebarItemProps) {
         <p className="text-xs">Read more</p>
       </div>
       <div className="group-hover:opacity-100 opacity-0 transition w-full z-[1] h-full absolute top-0 right-0 bg-gradient-to-l from-neutral-800 to-transparent" />
-    </Link>
+    </a>
   );
 }

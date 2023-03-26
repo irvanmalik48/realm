@@ -1,0 +1,57 @@
+---
+import { Newspaper } from "lucide-react";
+import DefaultLayout from "../../layouts/Default.astro";
+import { Image } from "@astrojs/image/components"
+import "../../styles/globals.css";
+import PostItem from "../../components/PostItem";
+
+const allPosts = await fetch(`${process.env.SITE_URL || "http://localhost:3000"}/api/posts`).then((res) => res.json());
+
+let title = "Blog Posts";
+let description = "All that I've posted.";
+---
+
+<DefaultLayout title={title} description={description}>
+  <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
+    {/* @ts-ignore */}
+    <Image
+      src="/profile/unsplash-bg.webp"
+      alt="Unsplash Background by Alex Perez"
+      height={4680}
+      format="webp"
+      aspectRatio={16 / 9}
+      class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
+    />
+    <header class="relative text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
+      <h1 class="font-heading font-bold text-4xl">
+        Blog Posts
+      </h1>
+      <p class="text-xl text-neutral-400">
+        Everything that I've written, then 'til now.
+      </p>
+    </header>
+  </div>
+  <section class="w-full py-12 z-10 relative">
+    <div class="max-w-3xl mx-auto px-4 prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:font-heading">
+      <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
+        <div class="flex items-center gap-3">
+          <Newspaper size={28} />
+        </div>
+        A bit of notice
+      </h2>
+      <p>
+        It really isn't a big deal anymore for me to maintain my blog but I kept on doing so because of hobby so yeah.
+        I'll post if I want to and if I'm not? I'll just leave it as it is. I'm not really sure if I'll be able to post
+        regularly but I'll try my best to do so.
+      </p>
+      <p>
+        Oh, here's your list:
+      </p>
+      <div class="not-prose grid grid-cols-2 gap-4">
+        {allPosts.map((post: any, i: number) => (
+          <PostItem key={i} slug={post.slug} {...post.frontMatter} />
+        ))}
+      </div>
+    </div>
+  </section>
+</DefaultLayout>

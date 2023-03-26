@@ -1,0 +1,42 @@
+---
+import Footer from "../components/Footer";
+import NavRail from "../components/NavRail";
+import Sidebar from "../components/Sidebar";
+import "../styles/globals.css";
+
+const { title, description } = Astro.props;
+const { pathname } = Astro.url;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <title>{"Realm | " + title}</title>
+    <meta name="description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@irvanmalik48" />
+    <meta name="twitter:creator" content="@irvanmalik48" />
+    <meta property="og:url" content="https://irvanma.eu.org" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="theme-color" content="#222222" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script>
+      import "../scripts/router.js"
+    </script>
+  </head>
+  <body class="bg-neutral-900 w-full h-screen flex overflow-hidden">
+    <NavRail path={pathname} />
+    <div id="sidebar" style="display: content;" data-turbo-permanent>
+      <Sidebar client:load />
+    </div>
+    <main class="w-full relative scrollbar-thin scrollbar-thumb-neutral-500 scrollbar-track-neutral-700 overflow-y-scroll">
+      <slot />
+      <Footer />
+    </main>
+  </body>
+</html>

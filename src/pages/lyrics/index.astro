@@ -1,0 +1,56 @@
+---
+import { ListMusic } from "lucide-react";
+import DefaultLayout from "../../layouts/Default.astro";
+import LyricsItem from "../../components/LyricsItem";
+import { Image } from "@astrojs/image/components"
+import "../../styles/globals.css";
+
+const allLyrics = await fetch(`${process.env.SITE_URL || "http://localhost:3000"}/api/lyrics`).then((res) => res.json());
+
+let title = "Song Lyrics";
+let description = "My song lyrics collection.";
+---
+
+<DefaultLayout title={title} description={description}>
+  <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
+    {/* @ts-ignore */}
+    <Image
+      src="/profile/unsplash-bg.webp"
+      alt="Unsplash Background by Alex Perez"
+      height={4680}
+      format="webp"
+      aspectRatio={16 / 9}
+      class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
+    />
+    <header class="relative text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
+      <h1 class="font-heading font-bold text-4xl">
+        Song Lyrics
+      </h1>
+      <p class="text-xl text-neutral-400">
+        Every song lyrics that I've stashed, then 'til now.
+      </p>
+    </header>
+  </div>
+  <section class="w-full py-12 z-10 relative">
+    <div class="max-w-3xl mx-auto px-4 prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:font-heading">
+      <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
+        <div class="flex items-center gap-3">
+          <ListMusic size={28} />
+        </div>
+        Why I make this section
+      </h2>
+      <p>
+        I'm a really huge fan of music so yeah. That's the short answer. The long answer is that I'm bored and I need to post somehow since I use MDX as my
+        blog post format. So yeah, I just make this section to fill the gap (and maybe get those extra GitHub commits).
+      </p>
+      <p>
+        Oh, here's your list:
+      </p>
+      <div class="not-prose grid grid-cols-2 gap-4">
+        {allLyrics.map((lyric: any, i: number) => (
+          <LyricsItem key={i} slug={lyric.slug} {...lyric.frontMatter} />
+        ))}
+      </div>
+    </div>
+  </section>
+</DefaultLayout>

@@ -9,10 +9,10 @@ export default function Footer() {
           <span className="block">
             Built with{" "}
             <a
-              href="https://rakkasjs.org"
+              href="https://astro.build/"
               className="text-red-400 hover:text-neutral-200 underline transition"
             >
-              Rakkas
+              Astro
             </a>{" "}
             and{" "}
             <a
