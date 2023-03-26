@@ -12,7 +12,7 @@ let description = "My song lyrics collection.";
 ---
 
 <DefaultLayout title={title} description={description}>
-  <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
+  <div class="relative px-4 text-center lg:text-start min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
     <img
       src="/profile/unsplash-bg.webp"
       alt="Unsplash Background by Alex Perez"
@@ -42,7 +42,7 @@ let description = "My song lyrics collection.";
       <p>
         Oh, here's your list:
       </p>
-      <div class="not-prose grid grid-cols-2 gap-4">
+      <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4">
         {allLyrics.map((lyric: any, i: number) => (
           <LyricsItem key={i} slug={lyric.slug} {...lyric.frontMatter} />
         ))}

@@ -18,7 +18,7 @@ let description = "All that I've posted.";
       alt="Unsplash Background by Alex Perez"
       class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
     />
-    <header class="relative text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
+    <header class="relative px-4 text-center lg:text-left text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
       <h1 class="font-heading font-bold text-4xl">
         Blog Posts
       </h1>
@@ -43,7 +43,7 @@ let description = "All that I've posted.";
       <p>
         Oh, here's your list:
       </p>
-      <div class="not-prose grid grid-cols-2 gap-4">
+      <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4">
         {allPosts.map((post: any, i: number) => (
           <PostItem key={i} slug={post.slug} {...post.frontMatter} />
         ))}
