@@ -4,8 +4,9 @@ import DefaultLayout from "../../layouts/Default.astro";
 import { Image } from "@astrojs/image/components"
 import "../../styles/globals.css";
 import PostItem from "../../components/PostItem";
+import { getSortedPosts } from "../../lib/posts";
 
-const allPosts = await fetch(`${process.env.SITE_URL || "http://localhost:3000"}/api/posts`).then((res) => res.json());
+const allPosts = getSortedPosts();
 
 let title = "Blog Posts";
 let description = "All that I've posted.";

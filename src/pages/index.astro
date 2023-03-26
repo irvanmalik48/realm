@@ -5,9 +5,11 @@ import PostItem from "../components/PostItem";
 import LyricsItem from "../components/LyricsItem";
 import { Image } from "@astrojs/image/components"
 import "../styles/globals.css";
+import { getSortedPosts } from "../lib/posts";
+import { getSortedLyrics } from "../lib/lyrics";
 
-const allPosts = await fetch(`${process.env.SITE_URL || "http://localhost:3000"}/api/posts`).then((res) => res.json());
-const allLyrics = await fetch(`${process.env.SITE_URL || "http://localhost:3000"}/api/lyrics`).then((res) => res.json());
+const allPosts = getSortedPosts();
+const allLyrics = getSortedLyrics();
 
 let title = "Landing";
 let description = "The Realm of Irvan Malik Azantha";

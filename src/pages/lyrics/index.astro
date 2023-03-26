@@ -4,8 +4,9 @@ import DefaultLayout from "../../layouts/Default.astro";
 import LyricsItem from "../../components/LyricsItem";
 import { Image } from "@astrojs/image/components"
 import "../../styles/globals.css";
+import { getSortedLyrics } from "../../lib/lyrics";
 
-const allLyrics = await fetch(`${process.env.SITE_URL || "http://localhost:3000"}/api/lyrics`).then((res) => res.json());
+const allLyrics = getSortedLyrics();
 
 let title = "Song Lyrics";
 let description = "My song lyrics collection.";
