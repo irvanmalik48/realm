@@ -14,7 +14,7 @@
   }
 
   .nav-item-label {
-    @apply shadow-lg shadow-neutral-800 w-[max-content] origin-left pointer-events-none border border-neutral-700 bg-neutral-900 bg-opacity-70 backdrop-blur-md duration-200 px-4 py-2 rounded text-sm -translate-x-0 opacity-0 group-hover:opacity-100 absolute top-1/2 group-hover:translate-x-16 -translate-y-1/2;
+    @apply hidden md:block shadow-lg shadow-neutral-800 w-[max-content] origin-left pointer-events-none border border-neutral-700 bg-neutral-900 bg-opacity-70 backdrop-blur-md duration-200 px-4 py-2 rounded text-sm -translate-x-0 opacity-0 group-hover:opacity-100 absolute top-1/2 group-hover:translate-x-16 -translate-y-1/2;
   }
 
   .main-page-card-btn {
