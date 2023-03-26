@@ -23,10 +23,10 @@ export default function Footer() {
             </a>
             , deployed on{" "}
             <a
-              href="https://netlify.com"
+              href="https://pages.cloudflare.com"
               className="text-red-400 hover:text-neutral-200 underline transition"
             >
-              Netlify
+              Cloudflare Pages
             </a>
             .
           </span>

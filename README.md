@@ -8,7 +8,7 @@ Just a simple blog. Never completed, always WIP.
 - React
 - MDX
 - Tailwind
-- Netlify
+- Cloudflare Pages
 
 ## License
 
