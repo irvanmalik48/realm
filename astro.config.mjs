@@ -6,7 +6,7 @@ import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
-import cloudflare from "@astrojs/cloudflare";
+import vercel from "@astrojs/vercel/serverless";
 
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -37,5 +37,5 @@ export default defineConfig({
     prefetch(),
   ],
   output: "server",
-  adapter: cloudflare({ mode: "directory" }),
+  adapter: vercel(),
 });

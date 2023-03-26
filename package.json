@@ -10,13 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^6.2.2",
     "@astrojs/mdx": "^0.18.2",
     "@astrojs/partytown": "^1.1.1",
     "@astrojs/prefetch": "^0.2.1",
     "@astrojs/react": "^2.1.0",
     "@astrojs/sitemap": "^1.2.1",
     "@astrojs/tailwind": "^3.1.1",
+    "@astrojs/vercel": "^3.2.1",
     "@hotwired/turbo": "^7.3.0",
     "@tailwindcss/typography": "^0.5.9",
     "@types/react": "^18.0.10",
