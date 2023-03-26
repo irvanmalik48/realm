@@ -6,20 +6,20 @@ const { frontmatter } = Astro.props;
 
 <Default title={frontmatter.title} description={frontmatter.description}>
   <article class="text-neutral-200">
-    <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
+    <div class="relative px-4 min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
       <img
         src="/profile/unsplash-bg.webp"
         alt="Unsplash Background by Alex Perez"
         class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
       />
-      <header class="relative text-neutral-200 max-w-3xl w-full mx-auto flex flex-col justify-center">
+      <header class="relative text-center lg:text-left text-neutral-200 max-w-3xl w-full mx-auto flex flex-col justify-center">
         <h1 class="font-heading font-bold text-4xl">
           {frontmatter.title}
         </h1>
-        <time class="">
+        <time class="pt-2 lg:pt-0">
           {frontmatter.date}
         </time>
-        <div class="flex items-center flex-wrap gap-2 pt-2">
+        <div class="w-full justify-center lg:justify-start flex items-center flex-wrap gap-2 pt-2">
           {frontmatter.tags.map((tag: string) => (
             <p class="bg-neutral-800 bg-opacity-50 backdrop-blur-sm border rounded border-neutral-700 px-2 py-1 text-xs">
               {tag}
@@ -28,7 +28,7 @@ const { frontmatter } = Astro.props;
         </div>
       </header>
     </div>
-    <div class="prose prose-img:rounded prose-img:border prose-img:border-neutral-700 prose-img:max-h-80 prose-img:w-full prose-img:object-contain prose-img:bg-neutral-800 prose-headings:text-neutral-200 prose-invert max-w-3xl mx-auto py-12 w-full prose-headings:pb-2 prose-headings:border-b prose-headings:border-neutral-700 prose-pre:border prose-pre:border-neutral-700">
+    <div class="prose px-4 prose-img:rounded prose-img:border prose-img:border-neutral-700 prose-img:max-h-80 prose-img:w-full prose-img:object-contain prose-img:bg-neutral-800 prose-headings:text-neutral-200 prose-invert max-w-3xl mx-auto py-12 w-full prose-headings:pb-2 prose-headings:border-b prose-headings:border-neutral-700 prose-pre:border prose-pre:border-neutral-700">
       <slot />
     </div>
   </article>
