@@ -2,9 +2,9 @@ import { AtSign, Github, Linkedin, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-b from-neutral-800 via-transparent to-transparent border-t border-neutral-700 pt-4 pb-12 mt-24 flex justify-center items-center">
+    <footer className="w-full bg-gradient-to-b from-neutral-800 via-transparent to-transparent border-t border-neutral-700 pt-4 pb-28 md:pb-12 mt-24 flex flex-col-reverse md:flex-row gap-4 lg:gap-0 justify-center items-center">
       <div className="w-full px-4 flex justify-between items-center">
-        <p className="text-neutral-200 text-sm w-full">
+        <p className="text-neutral-200 text-center md:text-left text-sm w-full">
           Copyright © 2023 Irvan Malik Azantha.
           <span className="block">
             Built with{" "}
