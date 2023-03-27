@@ -1,5 +1,12 @@
 import { ArrowRight } from "lucide-solid";
-import type { SidebarItemProps } from "./SidebarItem";
+
+export interface SidebarItemProps {
+  title: string;
+  date: string;
+  description: string;
+  slug: string;
+  tags: string[];
+}
 
 export default function PostItem(props: SidebarItemProps) {
   return (

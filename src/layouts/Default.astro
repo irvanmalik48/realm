@@ -30,9 +30,6 @@ const { pathname } = Astro.url;
   </head>
   <body class="bg-neutral-900 w-full h-screen flex flex-col md:flex-row overflow-hidden">
     <NavRail path={pathname} />
-    <div id="sidebar" style="display: content;" data-turbo-permanent>
-      <Sidebar client:load />
-    </div>
     <main class="w-full relative scrollbar-none md:scrollbar-thin scrollbar-thumb-neutral-500 scrollbar-track-neutral-700 overflow-y-scroll">
       <slot />
       <Footer />
