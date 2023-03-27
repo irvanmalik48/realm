@@ -26,10 +26,11 @@ export default function Sidebar(props: any) {
   const [active, setActive] = createSignal<string>("Posts");
   const [items, setItems] = createSignal<PostProps[] | LyricProps[]>([]);
 
-  const [postData] = createResource("/api/posts", fetcher);
+  const [postData, { refetch }] = createResource("/api/posts", fetcher);
   const [lyricsData] = createResource("/api/lyrics", fetcher);
 
   createEffect(() => {
+    refetch();
     if (postData && active() === "Posts") {
       setItems(postData);
     } else if (lyricsData && active() === "Lyrics") {
