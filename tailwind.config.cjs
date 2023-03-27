@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         sans: ["Archivo", "sans-serif"],
         heading: ["Raleway", "sans-serif"],
+        display: ["Red Hat Display", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
     },
