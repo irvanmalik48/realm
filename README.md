@@ -5,7 +5,7 @@ Just a simple blog. Never completed, always WIP.
 ## Stack
 
 - Astro
-- React
+- SolidJS
 - MDX
 - Tailwind
 - Vercel
