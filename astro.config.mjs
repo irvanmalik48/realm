@@ -1,22 +1,20 @@
 import { defineConfig } from "astro/config";
-import react from "@astrojs/react";
-
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import vercel from "@astrojs/vercel/serverless";
-
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+
+import solidJs from "@astrojs/solid-js";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://irvanma.eu.org",
   // Enable React to support React JSX components.
   integrations: [
-    react(),
     sitemap(),
     tailwind({
       config: {
@@ -35,6 +33,7 @@ export default defineConfig({
       rehypePlugins: [rehypeKatex],
     }),
     prefetch(),
+    solidJs(),
   ],
   output: "server",
   adapter: vercel(),

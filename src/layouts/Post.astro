@@ -1,6 +1,6 @@
 ---
 import Default from "./Default.astro";
-import Giscus from "@giscus/react";
+import Giscus from "@giscus/solid";
 
 const { frontmatter } = Astro.props;
 ---
@@ -44,7 +44,7 @@ const { frontmatter } = Astro.props;
           inputPosition="top"
           theme="transparent_dark"
           lang="en"
-          client:only="react"
+          client:only="solid"
         />
       </div>
     </div>
