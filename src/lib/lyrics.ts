@@ -71,6 +71,6 @@ export function getAllLyricSlugs() {
 export function getAllLyricLinks() {
   const lyrics = getAllLyricSlugs();
   return lyrics.map((lyric) => {
-    return `https://irvanma.eu.org/posts/${lyric}`;
+    return `https://irvanma.eu.org/lyrics/${lyric}`;
   });
 }
