@@ -1,7 +1,6 @@
 ---
 import Footer from "../components/Footer";
 import NavRail from "../components/NavRail";
-import Sidebar from "../components/Sidebar";
 import "../styles/globals.css";
 
 const { title, description } = Astro.props;
@@ -24,6 +23,7 @@ const { pathname } = Astro.url;
     <meta property="og:description" content={description} />
     <meta name="theme-color" content="#222222" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <script>
       import "../scripts/router.js"
     </script>
