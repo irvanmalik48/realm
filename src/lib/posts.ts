@@ -56,3 +56,17 @@ export function getPostBySlug(slug: string) {
   const post = getPostData(`${slug}.mdx`);
   return post;
 }
+
+export function getAllPostSlugs() {
+  const posts = getPosts();
+  return posts.map((post) => {
+    return post.slug;
+  });
+}
+
+export function getAllPostLinks() {
+  const posts = getAllPostSlugs();
+  return posts.map((post) => {
+    return `https://irvanma.eu.org/posts/${post}`;
+  });
+}

@@ -60,3 +60,17 @@ export function getLyricBySlug(slug: string) {
   const lyric = getLyricData(`${slug}.mdx`);
   return lyric;
 }
+
+export function getAllLyricSlugs() {
+  const lyrics = getLyrics();
+  return lyrics.map((lyric) => {
+    return lyric.slug;
+  });
+}
+
+export function getAllLyricLinks() {
+  const lyrics = getAllLyricSlugs();
+  return lyrics.map((lyric) => {
+    return `https://irvanma.eu.org/posts/${lyric}`;
+  });
+}
