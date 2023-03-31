@@ -14,7 +14,6 @@ import { getAllLyricLinks } from "./src/lib/lyrics";
 // https://astro.build/config
 export default defineConfig({
   site: "https://irvanma.eu.org",
-  // Enable React to support React JSX components.
   integrations: [
     sitemap({
       customPages: [
