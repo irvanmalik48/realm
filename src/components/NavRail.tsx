@@ -9,6 +9,7 @@ import {
   ListMusic,
   Scale,
   Code2,
+  Book,
 } from "lucide-solid";
 
 export default function NavRail(props: any) {
@@ -33,6 +34,14 @@ export default function NavRail(props: any) {
         >
           <Newspaper size={18} />
           <p class="nav-item-label">Posts</p>
+        </a>
+        <a
+          href="/diaries"
+          class={`group nav-item ${props.path === "/diaries" ? "nav-item-active" : ""
+            }`}
+        >
+          <Book size={18} />
+          <p class="nav-item-label">Diaries</p>
         </a>
         <a
           href="/lyrics"
