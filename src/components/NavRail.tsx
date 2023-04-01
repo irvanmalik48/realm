@@ -2,10 +2,6 @@ import {
   Home,
   Newspaper,
   Info,
-  Linkedin,
-  Twitter,
-  Github,
-  AtSign,
   ListMusic,
   Scale,
   Code2,
@@ -66,6 +62,26 @@ export default function NavRail(props: any) {
         </a>
         <a
           href="/creed"
+          class={`md:hidden group nav-item ${
+            props.path === "/creed" ? "nav-item-active" : ""
+          }`}
+        >
+          <Scale size={18} />
+          <p class="nav-item-label">Journalist's Creed</p>
+        </a>
+        <a
+          href="/oath"
+          class={`md:hidden group nav-item ${
+            props.path === "/oath" ? "nav-item-active" : ""
+          }`}
+        >
+          <Code2 size={18} />
+          <p class="nav-item-label">Programmer's Oath</p>
+        </a>
+      </div>
+      <div class="hidden md:flex flex-col gap-3">
+        <a
+          href="/creed"
           class={`group nav-item ${
             props.path === "/creed" ? "nav-item-active" : ""
           }`}
@@ -81,24 +97,6 @@ export default function NavRail(props: any) {
         >
           <Code2 size={18} />
           <p class="nav-item-label">Programmer's Oath</p>
-        </a>
-      </div>
-      <div class="hidden md:flex flex-col gap-3">
-        <a href="https://linkedin.com/in/irvanmalik48" class={`group nav-item`}>
-          <Linkedin size={18} />
-          <p class="nav-item-label">LinkedIn</p>
-        </a>
-        <a href="https://twitter.com/irvanmalik48" class={`group nav-item`}>
-          <Twitter size={18} />
-          <p class="nav-item-label">Twitter</p>
-        </a>
-        <a href="https://github.com/irvanmalik48" class={`group nav-item`}>
-          <Github size={18} />
-          <p class="nav-item-label">GitHub</p>
-        </a>
-        <a href="mailto:irvanmalik48@gmail.com" class={`group nav-item`}>
-          <AtSign size={18} />
-          <p class="nav-item-label">Email</p>
         </a>
       </div>
     </nav>
