@@ -1,0 +1,28 @@
+---
+import Default from "./Default.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Default title={frontmatter.title} description={frontmatter.description}>
+  <article class="text-neutral-200">
+    <div class="relative px-4 min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
+      <img
+        src="/profile/unsplash-bg.webp"
+        alt="Unsplash Background by Alex Perez"
+        class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
+      />
+      <header class="relative text-center lg:text-left text-neutral-200 max-w-3xl w-full mx-auto flex flex-col justify-center">
+        <h1 class="font-heading font-bold text-4xl">
+          {frontmatter.title}
+        </h1>
+        <time class="pt-2 lg:pt-0">
+          {frontmatter.date}
+        </time>
+      </header>
+    </div>
+    <div class="prose px-4 prose-img:rounded prose-img:border prose-blockquote:font-heading prose-img:border-neutral-700 prose-img:max-h-80 prose-img:w-full prose-img:object-contain prose-img:bg-neutral-800 prose-headings:text-neutral-200 prose-invert max-w-3xl mx-auto py-12 w-full prose-headings:pb-2 prose-headings:border-b prose-headings:border-neutral-700 prose-pre:scrollbar-thin prose-pre:scrollbar-thumb-neutral-600 prose-pre:scrollbar-track-neutral-700 prose-pre:border prose-pre:border-neutral-700">
+      <slot />
+    </div>
+  </article>
+</Default>
