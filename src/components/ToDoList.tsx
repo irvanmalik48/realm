@@ -19,10 +19,7 @@ export default function ToDoList() {
             if (e.key === "Enter") {
               const current = e.currentTarget as HTMLInputElement;
               setTodos([...todos(), current.value]);
-              localStorage.setItem(
-                "todos",
-                JSON.stringify(todos())
-              );
+              localStorage.setItem("todos", JSON.stringify(todos()));
               e.currentTarget.value = "";
             }
           }}
@@ -36,10 +33,7 @@ export default function ToDoList() {
                   class="hover:bg-opacity-50 transition bg-neutral-800 border-neutral-700 rounded border px-4 py-1"
                   onClick={() => {
                     setTodos(todos().filter((t) => t !== todo));
-                    localStorage.setItem(
-                      "todos",
-                      JSON.stringify(todos())
-                    );
+                    localStorage.setItem("todos", JSON.stringify(todos()));
                   }}
                 >
                   Delete

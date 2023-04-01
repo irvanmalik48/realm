@@ -21,9 +21,7 @@ export default function PostItem(props: SidebarItemProps) {
       <p class="text-sm pt-2 truncate">{props.description}</p>
       <div class="flex gap-2 items-center flex-wrap pt-3">
         {props.tags.map((tag) => (
-          <p
-            class="bg-neutral-800 border rounded border-neutral-700 px-2 py-1 text-xs"
-          >
+          <p class="bg-neutral-800 border rounded border-neutral-700 px-2 py-1 text-xs">
             {tag}
           </p>
         ))}

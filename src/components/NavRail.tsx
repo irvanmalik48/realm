@@ -21,66 +21,70 @@ export default function NavRail(props: any) {
       <div class="flex flex-row justify-between md:justify-center w-full md:w-fit md:flex-col gap-3">
         <a
           href="/"
-          class={`group nav-item ${props.path === "/" ? "nav-item-active" : ""
-            }`}
+          class={`group nav-item ${
+            props.path === "/" ? "nav-item-active" : ""
+          }`}
         >
           <Home size={18} />
           <p class="nav-item-label">Home</p>
         </a>
         <a
           href="/posts"
-          class={`group nav-item ${props.path === "/posts" ? "nav-item-active" : ""
-            }`}
+          class={`group nav-item ${
+            props.path === "/posts" ? "nav-item-active" : ""
+          }`}
         >
           <Newspaper size={18} />
           <p class="nav-item-label">Posts</p>
         </a>
         <a
           href="/diaries"
-          class={`group nav-item ${props.path === "/diaries" ? "nav-item-active" : ""
-            }`}
+          class={`group nav-item ${
+            props.path === "/diaries" ? "nav-item-active" : ""
+          }`}
         >
           <Book size={18} />
           <p class="nav-item-label">Diaries</p>
         </a>
         <a
           href="/lyrics"
-          class={`group nav-item ${props.path === "/lyrics" ? "nav-item-active" : ""
-            }`}
+          class={`group nav-item ${
+            props.path === "/lyrics" ? "nav-item-active" : ""
+          }`}
         >
           <ListMusic size={18} />
           <p class="nav-item-label">Song Lyrics</p>
         </a>
         <a
           href="/about"
-          class={`group nav-item ${props.path === "/about" ? "nav-item-active" : ""
-            }`}
+          class={`group nav-item ${
+            props.path === "/about" ? "nav-item-active" : ""
+          }`}
         >
           <Info size={18} />
           <p class="nav-item-label">About</p>
         </a>
         <a
           href="/creed"
-          class={`group nav-item ${props.path === "/creed" ? "nav-item-active" : ""
-            }`}
+          class={`group nav-item ${
+            props.path === "/creed" ? "nav-item-active" : ""
+          }`}
         >
           <Scale size={18} />
           <p class="nav-item-label">Journalist's Creed</p>
         </a>
         <a
           href="/oath"
-          class={`group nav-item ${props.path === "/oath" ? "nav-item-active" : ""
-            }`}
+          class={`group nav-item ${
+            props.path === "/oath" ? "nav-item-active" : ""
+          }`}
         >
           <Code2 size={18} />
           <p class="nav-item-label">Programmer's Oath</p>
         </a>
       </div>
       <div class="hidden md:flex flex-col gap-3">
-        <a
-          href="https://linkedin.com/in/irvanmalik48"
-          class={`group nav-item`}
-        >
+        <a href="https://linkedin.com/in/irvanmalik48" class={`group nav-item`}>
           <Linkedin size={18} />
           <p class="nav-item-label">LinkedIn</p>
         </a>

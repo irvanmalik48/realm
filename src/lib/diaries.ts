@@ -8,7 +8,12 @@ export interface DiaryFrontMatter {
   description: string;
 }
 
-export const diariesDirectory = path.join(process.cwd(), "src", "pages", "diaries");
+export const diariesDirectory = path.join(
+  process.cwd(),
+  "src",
+  "pages",
+  "diaries"
+);
 
 export function getDiaryPaths() {
   return readdirSync(diariesDirectory, { withFileTypes: true });
