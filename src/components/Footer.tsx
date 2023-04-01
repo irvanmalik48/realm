@@ -64,7 +64,7 @@ export default function Footer() {
         <a
           href="https://t.me/lappretard"
           class="nav-item rounded-full"
-          aria-label="Github Profile"
+          aria-label="Telegram Profile"
         >
           <Send size={18} />
         </a>
