@@ -1,4 +1,11 @@
-import { AtSign, Github, Instagram, Linkedin, Send, Twitter } from "lucide-solid";
+import {
+  AtSign,
+  Github,
+  Instagram,
+  Linkedin,
+  Send,
+  Twitter,
+} from "lucide-solid";
 
 export default function Footer() {
   return (
