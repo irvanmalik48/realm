@@ -35,3 +35,7 @@ pre code .line::before {
   content: counter(line);
   @apply w-4 text-right text-neutral-400 mr-4 hidden md:inline-block;
 }
+
+lite-youtube {
+  @apply w-full max-w-none !important;
+}
