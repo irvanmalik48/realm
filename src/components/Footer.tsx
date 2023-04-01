@@ -1,4 +1,4 @@
-import { AtSign, Github, Linkedin, Twitter } from "lucide-solid";
+import { AtSign, Github, Instagram, Linkedin, Send, Twitter } from "lucide-solid";
 
 export default function Footer() {
   return (
@@ -53,6 +53,20 @@ export default function Footer() {
           aria-label="Github Profile"
         >
           <Github size={18} />
+        </a>
+        <a
+          href="https://instagram.com/irvann48_"
+          class="nav-item rounded-full"
+          aria-label="Instagram Profile"
+        >
+          <Instagram size={18} />
+        </a>
+        <a
+          href="https://t.me/lappretard"
+          class="nav-item rounded-full"
+          aria-label="Github Profile"
+        >
+          <Send size={18} />
         </a>
         <a
           href="mailto:irvanmalik48@gmail.com"
