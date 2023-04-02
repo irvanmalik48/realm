@@ -35,7 +35,11 @@ export default defineConfig({
         path: "./tailwind.config.cjs",
       },
     }),
-    partytown({}),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      }
+    }),
     mdx({
       syntaxHighlight: "shiki",
       shikiConfig: {
