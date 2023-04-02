@@ -27,6 +27,19 @@ const { pathname } = Astro.url;
     <script>
       import "../scripts/router.js"
     </script>
+    <script
+      type="text/partytown"
+      src="https://www.googletagmanager.com/gtag/js?id=G-J9LL45HF21"
+    ></script>
+    <script
+      type="text/partytown"
+    >
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-J9LL45HF21');
+    </script>
   </head>
   <body class="bg-neutral-900 w-full h-screen flex flex-col md:flex-row overflow-hidden">
     <NavRail path={pathname} />
