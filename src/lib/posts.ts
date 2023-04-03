@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { extractHeadings } from "extract-md-headings";
 
 export interface PostFrontMatter {
   title: string;
@@ -31,6 +32,11 @@ export function getPostData(slug: string) {
     content,
     slug: slug.replace(/\.mdx$/, ""),
   };
+}
+
+export function getPostHeadings(slug: string) {
+  const fullPath = path.join(postsDirectory, slug);
+  return extractHeadings(fullPath);
 }
 
 export function getPosts() {
