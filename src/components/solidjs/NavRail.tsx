@@ -12,7 +12,7 @@ export default function NavRail(props: any) {
   return (
     <nav
       id={props.id}
-      class="bg-neutral-800 box-border h-fit md:h-full fixed md:sticky md:top-0 bottom-0 py-3 px-4 md:px-3 md:py-3 w-full md:w-fit flex md:flex-col justify-center md:justify-between border-t md:border-t-0 md:border-r border-neutral-700 z-50"
+      class="bg-neutral-800 h-fit md:h-screen fixed md:sticky md:top-0 bottom-0 py-3 px-4 md:px-3 md:py-3 w-full md:w-fit flex flex-row md:flex-col justify-center md:justify-between border-t md:border-t-0 md:border-r border-neutral-700 z-50"
     >
       <div class="flex flex-row justify-between md:justify-center w-full md:w-fit md:flex-col gap-3">
         <a
