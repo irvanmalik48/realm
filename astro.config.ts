@@ -21,7 +21,6 @@ export default defineConfig({
         "https://irvanma.eu.org/lyrics",
         "https://irvanma.eu.org/creed",
         "https://irvanma.eu.org/oath",
-        "https://irvanma.eu.org/posts/",
         ...getAllPostLinks(),
         ...getAllLyricLinks(),
       ],
