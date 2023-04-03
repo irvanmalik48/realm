@@ -1,25 +1,29 @@
 ---
+import { getPostHeadings } from "../lib/posts";
 import Default from "./Default.astro";
 
 const { frontmatter } = Astro.props;
+const { pathname } = Astro.url;
+
+const headings = getPostHeadings(pathname.replace("/posts/", "") + ".mdx");
 ---
 
 <Default title={frontmatter.title} description={frontmatter.description}>
-  <article class="text-neutral-200">
+  <article id="article-post" class="text-neutral-200">
     <div class="relative px-4 min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
       <img
         src="/profile/unsplash-bg.webp"
         alt="Unsplash Background by Alex Perez"
         class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
       />
-      <header class="relative text-center lg:text-left text-neutral-200 max-w-3xl w-full mx-auto flex flex-col justify-center">
+      <header class="relative text-center xl:text-left text-neutral-200 max-w-7xl w-full mx-auto flex flex-col justify-center">
         <h1 class="font-heading font-bold text-4xl">
           {frontmatter.title}
         </h1>
         <time class="pt-2 lg:pt-0">
           {frontmatter.date}
         </time>
-        <div class="w-full justify-center lg:justify-start flex items-center flex-wrap gap-2 pt-2">
+        <div class="w-full justify-center xl:justify-start flex items-center flex-wrap gap-2 pt-2">
           {frontmatter.tags.map((tag: string) => (
             <p class="bg-neutral-800 bg-opacity-50 backdrop-blur-sm border rounded border-neutral-700 px-2 py-1 text-xs">
               {tag}
@@ -28,23 +32,50 @@ const { frontmatter } = Astro.props;
         </div>
       </header>
     </div>
-    <div class="prose px-4 prose-img:rounded prose-img:border prose-blockquote:font-heading prose-img:border-neutral-700 prose-img:max-h-80 prose-img:w-full prose-img:object-contain prose-img:bg-neutral-800 prose-headings:text-neutral-200 prose-invert max-w-3xl mx-auto py-12 w-full prose-headings:pb-2 prose-headings:border-b prose-headings:border-neutral-700 prose-pre:scrollbar-thin prose-pre:scrollbar-thumb-neutral-600 prose-pre:scrollbar-track-neutral-700 prose-pre:border prose-pre:border-neutral-700">
-      <slot />
-      <div class="w-full py-12">
-        <giscus-widget 
-          repo="irvanmalik48/realm"
-          repoid="R_kgDOHpHiPg"
-          category="Comments"
-          categoryid="DIC_kwDOHpHiPs4CQsGa"
-          mapping="title"
-          strict="1"
-          reactionsenabled="1"
-          emitmetadata="0"
-          inputposition="top"
-          theme="transparent_dark"
-          lang="en"
-          loading="lazy"
-        ></giscus-widget>
+    <div class="flex flex-col-reverse xl:flex-row w-full max-w-7xl mx-auto gap-4 h-full">
+      <div class="prose prose-a:break-words px-4 prose-img:rounded prose-img:border prose-headings:scroll-mt-[20px] prose-blockquote:font-heading prose-img:border-neutral-700 prose-img:max-h-80 prose-img:w-full prose-img:object-contain prose-img:bg-neutral-800 prose-headings:text-neutral-200 prose-invert max-w-4xl flex-grow mx-auto py-12 w-full prose-headings:pb-2 prose-headings:border-b prose-headings:border-neutral-700 prose-pre:scrollbar-thin prose-pre:scrollbar-thumb-neutral-600 prose-pre:scrollbar-track-neutral-700 prose-pre:border prose-pre:border-neutral-700">
+        <slot />
+        <div class="w-full py-12">
+          <giscus-widget 
+            repo="irvanmalik48/realm"
+            repoid="R_kgDOHpHiPg"
+            category="Comments"
+            categoryid="DIC_kwDOHpHiPs4CQsGa"
+            mapping="title"
+            strict="1"
+            reactionsenabled="1"
+            emitmetadata="0"
+            inputposition="top"
+            theme="transparent_dark"
+            lang="en"
+            loading="lazy"
+          ></giscus-widget>
+        </div>
+      </div>
+      <div id="scrollspy" class="w-full mx-auto max-w-4xl xl:max-w-sm flex-shrink h-auto xl:h-screen pt-12 xl:py-12 px-4 relative xl:sticky xl:top-0">
+        <div class="px-5 w-full max-w-none h-fit xl:max-h-full py-3 xl:overflow-y-scroll rounded border border-neutral-700 bg-neutral-800 prose-sm prose-li:py-0 prose prose-invert prose-headings:text-neutral-200 prose-headings:border-b prose-headings:border-neutral-700 prose-headings:pb-2">
+          <h3 class="mb-4">
+            Table of Contents
+          </h3>
+          <!-- using heading.level, map to level 4 using ul -->
+          <ul class="pl-0 mt-2 list-none">
+            {headings.map((heading) => (
+              <li
+                class="truncate text-opacity-70 overflow-hidden my-0 whitespace-nowrap bg-transparent" 
+                style={{
+                  paddingLeft: (heading.level - 2) + "rem"
+                }}
+              >
+                <a
+                  href={`#${heading.slug}`}
+                  class="text-neutral-200 text-opacity-70 transition no-underline inline-block px-2 py-1 hover:text-opacity-100 m-0 hover:bg-red-400 hover:bg-opacity-20 w-full rounded truncate leading-tight"
+                >
+                  {heading.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   </article>
