@@ -9,7 +9,7 @@ export default function ToDoList() {
   });
 
   return (
-    <div class="flex flex-col bg-neutral-800 rounded border border-neutral-700 p-3 items-center justify-center h-full">
+    <div class="flex flex-col bg-neutral-800 rounded border border-neutral-700 p-3 items-center justify-center">
       <div class="flex flex-col gap-3 items-center justify-center w-full">
         <input
           class="w-full p-3 rounded border border-neutral-700 bg-neutral-900 text-neutral-100"
