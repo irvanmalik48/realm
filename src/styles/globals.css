@@ -20,6 +20,11 @@
   .main-page-card-btn {
     @apply flex p-2 rounded border border-neutral-700 bg-neutral-900 justify-center text-neutral-200 items-center gap-2 hover:bg-red-400 hover:bg-opacity-20 transition;
   }
+
+}
+
+.scrollspy-active {
+  @apply bg-red-400 bg-opacity-10 text-opacity-100;
 }
 
 .turbo-progress-bar {
