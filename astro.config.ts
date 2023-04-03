@@ -37,7 +37,7 @@ export default defineConfig({
     partytown({
       config: {
         forward: ["dataLayer.push"],
-      }
+      },
     }),
     mdx({
       syntaxHighlight: "shiki",
