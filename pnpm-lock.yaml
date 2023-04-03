@@ -40,6 +40,9 @@ dependencies:
   astro-seo:
     specifier: ^0.7.2
     version: 0.7.2
+  extract-md-headings:
+    specifier: ^0.2.5
+    version: 0.2.5
   gray-matter:
     specifier: ^4.0.3
     version: 4.0.3
@@ -2966,6 +2969,12 @@ packages:
 
   /extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
+    dev: false
+
+  /extract-md-headings@0.2.5:
+    resolution: {integrity: sha512-1x49be07xQxXDDI/n0SCGLRbMbHShOE4fblGgzF+uCE+bCWIH0j2UphXvGL8LjGr8a+U1aPzPqyiNoNLrAdY/Q==}
+    dependencies:
+      tslib: 2.5.0
     dev: false
 
   /fast-deep-equal@3.1.3:

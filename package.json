@@ -23,6 +23,7 @@
     "@vite-pwa/astro": "^0.0.5",
     "astro": "^2.1.9",
     "astro-seo": "^0.7.2",
+    "extract-md-headings": "^0.2.5",
     "gray-matter": "^4.0.3",
     "lucide-solid": "^0.127.0",
     "rehype-katex": "^6.0.2",
