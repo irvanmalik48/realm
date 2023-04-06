@@ -4,6 +4,7 @@ import DefaultLayout from "../layouts/Default.astro";
 import "../styles/globals.css";
 import PostItem from "../components/solidjs/PostItem";
 import { getSortedPosts } from "../lib/posts";
+import { Image } from "@astrojs/image/components";
 
 const allPosts = getSortedPosts();
 
@@ -13,10 +14,12 @@ let description = "All that I've posted.";
 
 <DefaultLayout title={title} description={description}>
   <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
-    <img
+    <Image
       src="/profile/unsplash-bg.webp"
       alt="Unsplash Background by Alex Perez"
       class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
+      height={1080}
+      width={2340}
     />
     <header class="relative px-4 text-center lg:text-left text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
       <h1 class="font-heading font-bold text-4xl">
