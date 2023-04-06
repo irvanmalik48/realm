@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
+import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import vercel from "@astrojs/vercel/serverless";
@@ -12,6 +13,7 @@ import { getAllPostLinks } from "./src/lib/posts";
 import { getAllLyricLinks } from "./src/lib/lyrics";
 import type { AstroIntegration } from "astro";
 
+// https://astro.build/config
 export default defineConfig({
   site: "https://irvanma.eu.org",
   integrations: [
@@ -35,11 +37,7 @@ export default defineConfig({
         path: "./tailwind.config.cjs",
       },
     }) as AstroIntegration,
-    partytown({
-      config: {
-        forward: ["dataLayer.push"],
-      },
-    }),
+    partytown({}),
     mdx({
       syntaxHighlight: "shiki",
       shikiConfig: {
@@ -51,6 +49,9 @@ export default defineConfig({
     }),
     prefetch(),
     solidJs(),
+    image({
+      serviceEntryPoint: "@astrojs/image/sharp",
+    }),
   ],
   output: "server",
   adapter: vercel() as AstroIntegration,
