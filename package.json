@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.2.2",
+    "@astrojs/image": "^0.16.5",
     "@astrojs/mdx": "^0.18.2",
     "@astrojs/partytown": "^1.2.0",
     "@astrojs/prefetch": "^0.2.1",
@@ -35,11 +36,13 @@
   "devDependencies": {
     "@babel/core": "^7.21.4",
     "rollup": "^3.20.2",
+    "sharp": "^0.31.3",
     "vite": "^4.2.1"
   },
   "peerDependencies": {
     "@babel/core": ">=7.20.12 <8.0.0",
     "rollup": "^3.20.1",
+    "sharp": "^0.31.3",
     "vite": "^4.2.1"
   }
 }
