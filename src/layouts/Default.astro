@@ -30,11 +30,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import "../scripts/router.js"
     </script>
     <script
-      type="text/partytown"
+      async
       src="https://www.googletagmanager.com/gtag/js?id=G-J9LL45HF21"
     ></script>
     <script
-      type="text/partytown"
+      async
     >
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -43,7 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       gtag('config', 'G-J9LL45HF21');
     </script>
     <script
-      type="text/partytown"
+      async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3762669166645243"
       crossorigin="anonymous"
     ></script>
