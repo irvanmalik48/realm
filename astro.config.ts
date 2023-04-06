@@ -10,6 +10,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { getAllPostLinks } from "./src/lib/posts";
 import { getAllLyricLinks } from "./src/lib/lyrics";
+import type { AstroIntegration } from "astro";
 
 export default defineConfig({
   site: "https://irvanma.eu.org",
@@ -33,7 +34,7 @@ export default defineConfig({
         applyBaseStyles: true,
         path: "./tailwind.config.cjs",
       },
-    }),
+    }) as AstroIntegration,
     partytown({
       config: {
         forward: ["dataLayer.push"],
@@ -52,5 +53,5 @@ export default defineConfig({
     solidJs(),
   ],
   output: "server",
-  adapter: vercel(),
+  adapter: vercel() as AstroIntegration,
 });
