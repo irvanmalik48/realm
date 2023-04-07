@@ -1,0 +1,92 @@
+---
+import Default from "../layouts/Default.astro";
+import { Image } from "@astrojs/image/components";
+
+let title = "Privacy Policy";
+let description = "Realm's Privacy Policy";
+---
+
+<Default title={title} description={description}>
+  <div class="relative min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center">
+    <Image
+      src="/profile/unsplash-bg.webp"
+      alt="Unsplash Background by Alex Perez"
+      class="min-h-[18rem] max-h-full w-full object-cover brightness-50 absolute inset-0"
+      height={720}
+      width={1560}
+      loading="eager"
+    />
+    <header class="relative px-4 text-center lg:text-left text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
+      <h1 class="font-heading font-bold text-4xl">
+        Privacy Policy
+      </h1>
+      <p class="text-xl text-neutral-400">
+        Realm's Privacy Policy
+      </p>
+    </header>
+  </div>
+  <section class="w-full py-12 z-10 relative">
+    <div class="max-w-3xl mx-auto px-4 prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:pb-2 prose-headings:border-b prose-headings:border-neutral-700 prose-headings:font-heading">
+      <div class="not-prose px-4 py-2 bg-green-400 bg-opacity-20 rounded ring-2 text-neutral-200 ring-green-400">
+        <p>
+          This Privacy Policy complies with the requirements of the European Union's General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA).
+        </p>
+      </div>
+      <p>
+        Effective Date:
+        <time>
+          2023-03-01
+        </time>
+      </p>
+      <p>
+        At The Realm, I respect the privacy of my users and committed to protecting their personal information. This Privacy Policy explains how I collect, use, and disclose information when you use my website.
+      </p>
+      <h2>
+        Collection of Information
+      </h2>
+      <p>
+        I want to assure you that I do not collect any personal data from my users. When you visit my website, I do not collect any information that can personally identify you, such as your name, address, phone number, email address, or any other personally identifiable information ("Personal Data").
+      </p>
+      <h2>
+        Use of Information
+      </h2>
+      <p>
+        Since I do not collect any Personal Data, I do not use or process any Personal Data for any purpose. I do not track or store any information that can be used to identify you as an individual.
+      </p>
+      <h2>
+        Cookies and Other Technologies
+      </h2>
+      <p>
+        I do not use cookies, web beacons, or any other tracking technologies that collect personal information or track your activities on my website.
+      </p>
+      <h2>
+        Third-Party Links
+      </h2>
+      <p>
+        My website may contain links to third-party websites. However, I do not have control over the privacy practices or content of those websites. I encourage you to review the privacy policies of those third-party websites before providing any personal information.
+      </p>
+      <h2>
+        Security
+      </h2>
+      <p>
+        I take reasonable measures to protect the information on my website, but please note that no method of transmission over the internet or electronic storage is 100% secure. Therefore, I cannot guarantee the absolute security of your information.
+      </p>
+      <h2>
+        Changes to this Privacy Policy
+      </h2>
+      <p>
+        I reserve the right to modify or update this Privacy Policy at any time without prior notice. I will indicate the effective date of the updated Privacy Policy at the top of this page. Your continued use of my website after any changes to this Privacy Policy will constitute your acceptance of such changes.
+      </p>
+      <h2>
+        Contact Me
+      </h2>
+      <p>
+        If you have any questions or concerns about my Privacy Policy or my practices regarding your personal information, please contact me at
+        <a href="mailto:me@irvanma.eu.org">me@irvanma.eu.org</a>.
+      </p>
+      <p>
+        By visiting my website, you acknowledge that you have read, understood, and agree to this Privacy Policy. Thank you for visiting The Realm.
+      </p>
+    </div>
+  </section>
+</Default>
