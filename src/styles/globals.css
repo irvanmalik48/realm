@@ -59,7 +59,7 @@
 
 @keyframes slide-down-in {
   0% {
-    transform: translateY(-20%) scale(1.15);
+    transform: translateY(-20%);
   }
   100% {
     transform: translateY(0);
