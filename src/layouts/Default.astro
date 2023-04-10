@@ -24,7 +24,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta name="theme-color" content="#222222" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <link rel="canonical" href={canonicalURL} />
     <script>
       import "../scripts/router.js"

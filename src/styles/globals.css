@@ -22,6 +22,11 @@
   }
 }
 
+html,
+body {
+  @apply scroll-smooth;
+}
+
 .scrollspy-active {
   @apply bg-red-400 bg-opacity-10 text-opacity-100;
 }

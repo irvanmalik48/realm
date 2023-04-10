@@ -1,12 +1,8 @@
 ---
-import { getPostHeadings } from "../lib/posts";
 import Default from "./Default.astro";
 import { Image } from "@astrojs/image/components";
 
-const { frontmatter } = Astro.props;
-const { pathname } = Astro.url;
-
-const headings = getPostHeadings(pathname.replace("/posts/", "") + ".mdx");
+const { frontmatter, headings } = Astro.props;
 ---
 
 <Default title={frontmatter.title} description={frontmatter.description}>
@@ -63,18 +59,22 @@ const headings = getPostHeadings(pathname.replace("/posts/", "") + ".mdx");
           </h3>
           <!-- using heading.level, map to level 4 using ul -->
           <ul class="pl-0 mt-2 list-none">
-            {headings.map((heading) => (
+            {headings.map((heading: {
+              depth: number;
+              slug: string;
+              text: string;
+            }) => (
               <li
                 class="truncate text-opacity-70 overflow-hidden my-0 whitespace-nowrap bg-transparent" 
                 style={{
-                  paddingLeft: (heading.level - 2) + "rem"
+                  paddingLeft: (heading.depth - 2) + "rem"
                 }}
               >
                 <a
                   href={`#${heading.slug}`}
                   class="text-neutral-200 text-opacity-70 transition no-underline inline-block px-2 py-1 hover:text-opacity-100 m-0 hover:bg-red-400 hover:bg-opacity-20 w-full rounded truncate leading-tight"
                 >
-                  {heading.title}
+                  {heading.text}
                 </a>
               </li>
             ))}

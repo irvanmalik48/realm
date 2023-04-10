@@ -1,0 +1,21 @@
+---
+import { getEntryBySlug } from "astro:content";
+import Lyric from "../../layouts/Lyric.astro";
+
+const { slug } = Astro.params;
+if (slug === undefined) {
+  throw new Error("Slug is required");
+}
+
+const entry = await getEntryBySlug("lyrics", slug);
+
+if (entry === undefined) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await entry.render();
+---
+
+<Lyric frontmatter={entry.data}>
+  <Content />
+</Lyric>
