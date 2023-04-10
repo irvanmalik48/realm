@@ -1,0 +1,21 @@
+---
+import { getEntryBySlug } from "astro:content";
+import Diary from "../../layouts/Diary.astro";
+
+const { slug } = Astro.params;
+if (slug === undefined) {
+  throw new Error("Slug is required");
+}
+
+const entry = await getEntryBySlug("diaries", slug);
+
+if (entry === undefined) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await entry.render();
+---
+
+<Diary frontmatter={entry.data}>
+  <Content />
+</Diary>
