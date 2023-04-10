@@ -4,12 +4,11 @@ import DefaultLayout from "../layouts/Default.astro";
 import PostItem from "../components/solidjs/PostItem";
 import LyricsItem from "../components/solidjs/LyricsItem";
 import "../styles/globals.css";
-import { getSortedPosts } from "../lib/posts";
-import { getSortedLyrics } from "../lib/lyrics";
 import { Image } from "@astrojs/image/components";
+import { getCollection } from "astro:content";
 
-const allPosts = getSortedPosts();
-const allLyrics = getSortedLyrics();
+const allPosts = await getCollection("posts");
+const allLyrics = await getCollection("lyrics");
 
 let title = "Landing";
 let description = "The Realm of Irvan Malik Azantha";
@@ -95,8 +94,8 @@ let description = "The Realm of Irvan Malik Azantha";
       </h2>
       <p>Here's 4 recent posts I wrote:</p>
       <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4">
-        {allPosts.slice(0, 4).map((post: any, i: number) => (
-          <PostItem key={i} slug={post.slug} {...post.frontMatter} />
+        {allPosts.sort((a, b) => (new Date(b.data.date)).getTime() - (new Date(a.data.date)).getTime()).slice(0, 4).map((post) => (
+          <PostItem slug={post.slug} {...post.data} />
         ))}
         <a
           href="/posts"
@@ -114,8 +113,8 @@ let description = "The Realm of Irvan Malik Azantha";
       </h2>
       <p>Here's 4 recent lyrics I stashed:</p>
       <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4">
-        {allLyrics.slice(0, 4).map((lyric: any, i: number) => (
-          <LyricsItem key={i} slug={lyric.slug} {...lyric.frontMatter} />
+        {allLyrics.sort((a, b) => (new Date(b.data.date)).getTime() - (new Date(a.data.date)).getTime()).slice(0, 4).map((lyric) => (
+          <LyricsItem slug={lyric.slug} {...lyric.data} />
         ))}
         <a
           href="/lyrics"
