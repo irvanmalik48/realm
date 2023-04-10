@@ -1,0 +1,21 @@
+---
+import { getEntryBySlug } from "astro:content";
+import Post from "../../layouts/Post.astro";
+
+const { slug } = Astro.params;
+if (slug === undefined) {
+  throw new Error("Slug is required");
+}
+
+const entry = await getEntryBySlug("posts", slug);
+
+if (entry === undefined) {
+  return Astro.redirect("/404");
+}
+
+const { Content, headings } = await entry.render();
+---
+
+<Post frontmatter={entry.data} headings={headings}>
+  <Content />
+</Post>
