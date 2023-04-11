@@ -2,11 +2,12 @@
 import Default from "./Default.astro";
 import { Image } from "@astrojs/image/components";
 
-const { frontmatter, headings } = Astro.props;
+const { frontmatter, pathname, headings } = Astro.props;
 const schema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": frontmatter.title,
+  "image": `https://irvanma.eu.org/og${pathname}.jpg`,
   "description": frontmatter.description,
   "keywords": frontmatter.tags,
   "author": {
