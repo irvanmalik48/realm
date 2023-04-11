@@ -6,7 +6,7 @@ const conn = createClient(
   {
     db: {
       schema: "public",
-    }
+    },
   }
 );
 

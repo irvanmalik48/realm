@@ -1,9 +1,13 @@
 import type { APIContext } from "astro";
 
 const uppercase = () =>
-  [...Array(26)].map((_n, i) => `${String.fromCharCode(i + "A".charCodeAt(0))}`);
+  [...Array(26)].map(
+    (_n, i) => `${String.fromCharCode(i + "A".charCodeAt(0))}`
+  );
 const lowercase = () =>
-  [...Array(26)].map((_n, i) => `${String.fromCharCode(i + "a".charCodeAt(0))}`);
+  [...Array(26)].map(
+    (_n, i) => `${String.fromCharCode(i + "a".charCodeAt(0))}`
+  );
 
 const mod = (a: any, b: any) => {
   const c = a % b;
@@ -49,11 +53,11 @@ export async function get({ request }: APIContext) {
   const res = {
     cipher: cipherText(text, 13),
     generatedAt: new Date(),
-  }
+  };
 
   return new Response(JSON.stringify(res), {
     status: 200,
     statusText: "OK",
-    headers: { "content-type": "text/plain" }
-  })
+    headers: { "content-type": "text/plain" },
+  });
 }

@@ -7,11 +7,14 @@ export async function post({ request }: APIContext) {
   const { content, lang } = body;
   const id = nanoid(10);
 
-  const { data, error } = await conn.from("paste").insert({
-    id,
-    content,
-    lang,
-  }).select();
+  const { data, error } = await conn
+    .from("paste")
+    .insert({
+      id,
+      content,
+      lang,
+    })
+    .select();
 
   if (error) {
     return new Response(JSON.stringify(error), {

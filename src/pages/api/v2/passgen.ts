@@ -5,7 +5,7 @@ export async function get({ request }: APIContext) {
 
   const sizeParams = url.searchParams.get("size");
   const includeSpecialChars = url.searchParams.has("special");
-  
+
   if (!sizeParams) {
     return new Response("I'm a teapot", {
       status: 418,
@@ -13,7 +13,7 @@ export async function get({ request }: APIContext) {
       headers: { "content-type": "text/plain" },
     });
   }
-  
+
   const size = parseInt(sizeParams!);
 
   if (isNaN(size)) {
@@ -32,9 +32,10 @@ export async function get({ request }: APIContext) {
     });
   }
 
-  let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let password = "";
-  
+
   if (includeSpecialChars) {
     charset += "!@#$%&*()_+~|?,./-=";
   }
@@ -46,7 +47,7 @@ export async function get({ request }: APIContext) {
   const res = {
     password: password,
     generatedAt: new Date(),
-  }
+  };
 
   return new Response(JSON.stringify(res), {
     status: 200,
