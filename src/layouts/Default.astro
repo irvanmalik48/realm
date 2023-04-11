@@ -22,7 +22,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content="https://irvanma.eu.org" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`https://irvanma.eu.org/og${pathname.split("/")[1] === "lyrics" || pathname.split("/")[1] === "diaries" ? "default" : pathname === "/" ? "index" : pathname}.jpg`} />
+    <meta property="og:image" content={`https://irvanma.eu.org/og${pathname.split("/")[1] === "lyrics" || pathname.split("/")[1] === "diaries" ? "/default" : pathname === "/" ? "/index" : pathname}.jpg`} />
     <meta name="theme-color" content="#222222" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonicalURL} />
