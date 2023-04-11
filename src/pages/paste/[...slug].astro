@@ -8,7 +8,9 @@ if (slug === undefined) {
 
 const url = new URL(`/api/v2/paste?id=${slug}`, import.meta.env.DEVELOPMENT === "true" ? "http://localhost:3000" : Astro.url);
 
-const item = await fetch(url);
+const item = await fetch(url).catch((err) => {
+  throw new Error(err);
+});
 const data = (await item.json())[0];
 ---
 
