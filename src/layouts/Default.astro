@@ -29,6 +29,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" href="/endpoints/rss.xml" type="application/rss+xml" title="RSS" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/endpoints/sitemap.xml" />
+    <slot name="head" />
     <script>
       import "../scripts/router.js"
     </script>
