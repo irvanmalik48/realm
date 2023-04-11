@@ -22,47 +22,47 @@ export async function generateSitemapXml(
     <urlset xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <url>
         <loc>${site.url}</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>${site.url}/posts</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>${site.url}/lyrics</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>${site.url}/diaries</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>${site.url}/about</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>${site.url}/privacy-policy</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>${site.url}/paste</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>${site.url}/oath</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>${site.url}/creed</loc>
-        <lastmod>${new Date()}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>1.00</priority>
     </url>
     ${posts
