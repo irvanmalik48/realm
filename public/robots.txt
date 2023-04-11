@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://irvanma.eu.org/sitemap-index.xml
+Sitemap: https://www.irvanma.eu.org/endpoints/sitemap.xml
