@@ -10,6 +10,13 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import type { AstroIntegration } from "astro";
 
+const shikiResourcePaths = Object.keys(
+	import.meta.glob([
+		"./node_modules/.pnpm/shiki@*/node_modules/shiki/languages/*.tmLanguage.json",
+		"./node_modules/.pnpm/shiki@*/node_modules/shiki/themes/*.json",
+	]),
+);
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://irvanma.eu.org",
@@ -37,5 +44,7 @@ export default defineConfig({
     }),
   ],
   output: "server",
-  adapter: vercel() as AstroIntegration,
+  adapter: vercel({
+    includeFiles: shikiResourcePaths,
+  }) as AstroIntegration,
 });
