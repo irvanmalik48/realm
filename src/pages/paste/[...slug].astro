@@ -11,7 +11,9 @@ const url = new URL(`/api/v2/paste?id=${slug}`, import.meta.env.DEVELOPMENT === 
 const item = await fetch(url).catch((err) => {
   throw new Error(err);
 });
-const data = (await item.json())[0];
+const data = (await item.json().catch((err) => {
+  throw new Error(err);
+}))[0];
 ---
 
 <html>
