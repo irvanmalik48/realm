@@ -1,0 +1,20 @@
+---
+import "../../styles/globals.css";
+import { Code } from 'astro/components';
+const { slug } = Astro.params;
+if (slug === undefined) {
+  throw new Error("Slug is required");
+}
+
+const item = await fetch(`http://localhost:3000/api/v2/paste?id=${slug}`);
+const data = (await item.json())[0];
+---
+
+<html>
+  <head>
+    <title>{data.id}</title>
+  </head>
+  <body class="bg-[#1E1E1E] p-5">
+    <Code code={data.content} theme="dark-plus" lang={data.lang} />
+  </body>
+</html>
