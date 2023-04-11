@@ -3,6 +3,19 @@ import Default from "./Default.astro";
 import { Image } from "@astrojs/image/components";
 
 const { frontmatter, headings } = Astro.props;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": frontmatter.title,
+  "description": frontmatter.description,
+  "keywords": frontmatter.tags,
+  "author": {
+    "@type": "Person",
+    "name": "Irvan Malik Azantha",
+    "url": "https://irvanma.eu.org",
+  },
+  "datePublished": new Date(frontmatter.date).toISOString().substring(0, 10)
+};
 ---
 
 <Default title={frontmatter.title} description={frontmatter.description}>
@@ -84,4 +97,5 @@ const { frontmatter, headings } = Astro.props;
     </div>
   </article>
   <script type="module" src="https://unpkg.com/giscus?module"></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
 </Default>
