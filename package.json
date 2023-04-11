@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "verbose": "astro dev --verbose",
+    "dev": "DEVELOPMENT=true astro dev",
+    "verbose": "DEVELOPMENT=true astro dev --verbose",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
