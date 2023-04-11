@@ -7,6 +7,7 @@ import {
   Code2,
   Book,
   ShieldCheck,
+  ClipboardType,
 } from "lucide-solid";
 
 export default function NavRail(props: any) {
@@ -72,6 +73,15 @@ export default function NavRail(props: any) {
         </a>
       </div>
       <div class="hidden md:flex flex-col gap-3">
+        <a
+          href="/paste"
+          class={`group nav-item ${
+            props.path === "/paste" ? "nav-item-active" : ""
+          }`}
+        >
+          <ClipboardType size={18} />
+          <p class="nav-item-label">Pastebin Clone</p>
+        </a>
         <a
           href="/privacy-policy"
           class={`group nav-item ${
