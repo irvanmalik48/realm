@@ -6,7 +6,9 @@ if (slug === undefined) {
   throw new Error("Slug is required");
 }
 
-const item = await fetch(`http://localhost:3000/api/v2/paste?id=${slug}`);
+const url = new URL(`/api/v2/paste?id=${slug}`, import.meta.env.DEVELOPMENT === "true" ? "http://localhost:3000" : Astro.url);
+
+const item = await fetch(url);
 const data = (await item.json())[0];
 ---
 
