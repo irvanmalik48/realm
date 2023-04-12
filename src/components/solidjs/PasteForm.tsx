@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
 
 const supportedLanguages = [
+  { name: "Astro", value: "astro" },
   { name: "Bash", value: "bash" },
   { name: "C", value: "c" },
   { name: "C++", value: "cpp" },
