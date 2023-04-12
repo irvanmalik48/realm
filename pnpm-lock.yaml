@@ -3,13 +3,13 @@ lockfileVersion: "6.0"
 dependencies:
   "@astro-community/astro-embed-youtube":
     specifier: ^0.2.2
-    version: 0.2.2(astro@2.2.1)
+    version: 0.2.2(astro@2.2.3)
   "@astrojs/image":
-    specifier: ^0.16.5
-    version: 0.16.5(astro@2.2.1)(sharp@0.31.3)
+    specifier: ^0.16.6
+    version: 0.16.6(astro@2.2.3)(sharp@0.31.3)
   "@astrojs/mdx":
-    specifier: ^0.18.3
-    version: 0.18.3(astro@2.2.1)(rollup@3.20.2)
+    specifier: ^0.18.4
+    version: 0.18.4(astro@2.2.3)(rollup@3.20.2)
   "@astrojs/partytown":
     specifier: ^1.2.0
     version: 1.2.0
@@ -24,10 +24,10 @@ dependencies:
     version: 2.1.0(@babel/core@7.21.4)(solid-js@1.7.3)(vite@4.2.1)
   "@astrojs/tailwind":
     specifier: ^3.1.1
-    version: 3.1.1(astro@2.2.1)(tailwindcss@3.3.1)
+    version: 3.1.1(astro@2.2.3)(tailwindcss@3.3.1)
   "@astrojs/vercel":
     specifier: ^3.2.3
-    version: 3.2.3(astro@2.2.1)(react@18.2.0)
+    version: 3.2.3(astro@2.2.3)(react@18.2.0)
   "@domchristie/turn":
     specifier: 2.0.0-0
     version: 2.0.0-0
@@ -35,17 +35,17 @@ dependencies:
     specifier: ^7.3.0
     version: 7.3.0
   "@supabase/supabase-js":
-    specifier: ^2.17.0
-    version: 2.17.0
+    specifier: ^2.20.0
+    version: 2.20.0
   "@tailwindcss/typography":
     specifier: ^0.5.9
     version: 0.5.9(tailwindcss@3.3.1)
   "@vite-pwa/astro":
     specifier: ^0.0.5
-    version: 0.0.5(astro@2.2.1)(vite-plugin-pwa@0.14.7)
+    version: 0.0.5(astro@2.2.3)(vite-plugin-pwa@0.14.7)
   astro:
-    specifier: ^2.2.1
-    version: 2.2.1(sharp@0.31.3)
+    specifier: ^2.2.3
+    version: 2.2.3(sharp@0.31.3)
   astro-seo:
     specifier: ^0.7.2
     version: 0.7.2
@@ -121,7 +121,7 @@ packages:
       leven: 3.1.0
     dev: false
 
-  /@astro-community/astro-embed-youtube@0.2.2(astro@2.2.1):
+  /@astro-community/astro-embed-youtube@0.2.2(astro@2.2.3):
     resolution:
       {
         integrity: sha512-eGBVujUNOv6x2x/iXS7D/XWmlx69frLQKyYBW0zTFzzgDCeOuXkJ4TPMOdQHsttp2ZCvbqii8f27GoaTKHIa7g==,
@@ -129,7 +129,7 @@ packages:
     peerDependencies:
       astro: ^1.0.0 || ^2.0.0-beta
     dependencies:
-      astro: 2.2.1(sharp@0.31.3)
+      astro: 2.2.3(sharp@0.31.3)
       lite-youtube-embed: 0.2.0
     dev: false
 
@@ -147,20 +147,20 @@ packages:
       }
     dev: false
 
-  /@astrojs/image@0.16.5(astro@2.2.1)(sharp@0.31.3):
+  /@astrojs/image@0.16.6(astro@2.2.3)(sharp@0.31.3):
     resolution:
       {
-        integrity: sha512-pps2fXTcPqUJOaATgrXT2eQwYJeW2fmd+QuQLqBiiIQHaECNugHCt/MwBi9skn+195VcFtYM3eCTjvmRrx4fPQ==,
+        integrity: sha512-/MJ0aByhuNAT7VeMwXVjS0e5IH8MxsYeEnymOJ0/1VBmZFmcbtb1nUeLE0uO3EV3kNYGRJtwGyald8YJ9ncW4A==,
       }
     peerDependencies:
-      astro: ^2.2.0
+      astro: ^2.2.2
       sharp: ">=0.31.0"
     peerDependenciesMeta:
       sharp:
         optional: true
     dependencies:
       "@altano/tiny-async-pool": 1.0.2
-      astro: 2.2.1(sharp@0.31.3)
+      astro: 2.2.3(sharp@0.31.3)
       http-cache-semantics: 4.1.1
       image-size: 1.0.2
       kleur: 4.1.5
@@ -190,7 +190,7 @@ packages:
       vscode-uri: 3.0.7
     dev: false
 
-  /@astrojs/markdown-remark@2.1.3(astro@2.2.1):
+  /@astrojs/markdown-remark@2.1.3(astro@2.2.3):
     resolution:
       {
         integrity: sha512-Di8Qbit9p7L7eqKklAJmiW9nVD+XMsNHpaNzCLduWjOonDu9fVgEzdjeDrTVCDtgrvkfhpAekuNXrp5+w4F91g==,
@@ -199,7 +199,7 @@ packages:
       astro: ^2.2.0
     dependencies:
       "@astrojs/prism": 2.1.1
-      astro: 2.2.1(sharp@0.31.3)
+      astro: 2.2.3(sharp@0.31.3)
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.2
       rehype-raw: 6.1.1
@@ -216,14 +216,14 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/mdx@0.18.3(astro@2.2.1)(rollup@3.20.2):
+  /@astrojs/mdx@0.18.4(astro@2.2.3)(rollup@3.20.2):
     resolution:
       {
-        integrity: sha512-fFkzYthnFqxmdp6IesvzU6FDHdAGo9bf4dbMOPCREcBfEhATqSpT9gjK/HdJ5s1MfZI8jjYeSC3yzhmNlq62qA==,
+        integrity: sha512-yLlHF74oBtCCPnCY4LBios3OrXc97IXIBVOWuyXxmNwAYMA4xIfClN2YP9cFQJITDI/d80qrANzQLQInUNKlHA==,
       }
     engines: { node: ">=16.12.0" }
     dependencies:
-      "@astrojs/markdown-remark": 2.1.3(astro@2.2.1)
+      "@astrojs/markdown-remark": 2.1.3(astro@2.2.3)
       "@astrojs/prism": 2.1.1
       "@mdx-js/mdx": 2.3.0
       "@mdx-js/rollup": 2.3.0(rollup@3.20.2)
@@ -238,6 +238,7 @@ packages:
       remark-gfm: 3.0.1
       remark-smartypants: 2.0.0
       shiki: 0.11.1
+      source-map: 0.7.4
       unist-util-visit: 4.1.2
       vfile: 5.3.7
     transitivePeerDependencies:
@@ -302,7 +303,7 @@ packages:
       - vite
     dev: false
 
-  /@astrojs/tailwind@3.1.1(astro@2.2.1)(tailwindcss@3.3.1):
+  /@astrojs/tailwind@3.1.1(astro@2.2.3)(tailwindcss@3.3.1):
     resolution:
       {
         integrity: sha512-Wx/ZtVnmtfqHWGVzvUEYZm8rufVKVgDIef0q6fzwUxoT1EpTTwBkTbpnzooogewMLOh2eTscasGe3Ih2HC1wVA==,
@@ -312,7 +313,7 @@ packages:
       tailwindcss: ^3.0.24
     dependencies:
       "@proload/core": 0.3.3
-      astro: 2.2.1(sharp@0.31.3)
+      astro: 2.2.3(sharp@0.31.3)
       autoprefixer: 10.4.14(postcss@8.4.21)
       postcss: 8.4.21
       postcss-load-config: 4.0.1(postcss@8.4.21)
@@ -340,7 +341,7 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/vercel@3.2.3(astro@2.2.1)(react@18.2.0):
+  /@astrojs/vercel@3.2.3(astro@2.2.3)(react@18.2.0):
     resolution:
       {
         integrity: sha512-JQFqSpaUxLVSFWNREMFmeVNwLuBexjZ3CrLnas5iSWncY4e4eFzZJsQBW28Dnf96bRwIdPNdOle0GYILkakueA==,
@@ -351,7 +352,7 @@ packages:
       "@astrojs/webapi": 2.1.0
       "@vercel/analytics": 0.1.11(react@18.2.0)
       "@vercel/nft": 0.22.6
-      astro: 2.2.1(sharp@0.31.3)
+      astro: 2.2.3(sharp@0.31.3)
       fast-glob: 3.2.12
       set-cookie-parser: 2.6.0
       web-vitals: 3.3.1
@@ -2426,10 +2427,10 @@ packages:
       rollup: 3.20.2
     dev: false
 
-  /@supabase/functions-js@2.1.0:
+  /@supabase/functions-js@2.1.1:
     resolution:
       {
-        integrity: sha512-vRziB+AqRXRaGHjEFHwBo0kuNDTuAxI7VUeqU24Fe86ISoD8YEQm0dGdpleJEcqgDGWaO6pxT1tfj1BRY5PwMg==,
+        integrity: sha512-bIR1Puae6W+1/MzPfYBWOG/SCWGo4B5CB7c0ZZksvliNEAzhxNBJ0UFKYINcGdGtxG8ZC+1xr3utWpNZNwnoRw==,
       }
     dependencies:
       cross-fetch: 3.1.5
@@ -2437,10 +2438,10 @@ packages:
       - encoding
     dev: false
 
-  /@supabase/gotrue-js@2.20.2:
+  /@supabase/gotrue-js@2.22.1:
     resolution:
       {
-        integrity: sha512-m7sVlPcaI+2TFDVc30JTUvbcdHeMQNeBXQKw5ORk8dRb+OqSZM7g+4thIaIdIfcrkKlVoWoEcPjiWVaVSOnK1w==,
+        integrity: sha512-hwM8dFzGqqU/xqv9coxIpujSU++bs2Vw6EiZZSeUdGZkeKQ07YXFlNG56aQKkwnpHRIQjHSgZ2bAoVX1n9Owbw==,
       }
     dependencies:
       cross-fetch: 3.1.5
@@ -2472,10 +2473,10 @@ packages:
       - supports-color
     dev: false
 
-  /@supabase/storage-js@2.5.0:
+  /@supabase/storage-js@2.5.1:
     resolution:
       {
-        integrity: sha512-6brHcFA8Ba8tDw72/mSf+pIgDfWQYkd9BjAra/RSAA0uCy84kALGnxIpxsf6mv40ka2GNRzstRGIKRlUdJgi/g==,
+        integrity: sha512-nkR0fQA9ScAtIKA3vNoPEqbZv1k5B5HVRYEvRWdlP6mUpFphM9TwPL2jZ/ztNGMTG5xT6SrHr+H7Ykz8qzbhjw==,
       }
     dependencies:
       cross-fetch: 3.1.5
@@ -2483,17 +2484,17 @@ packages:
       - encoding
     dev: false
 
-  /@supabase/supabase-js@2.17.0:
+  /@supabase/supabase-js@2.20.0:
     resolution:
       {
-        integrity: sha512-fImOK79Qht28CTYJznIrgTShbRRb4K4Z+Fp9X+W/5ON//N44HaYlQMiWCYFXbI/liK7am+Mrc9pKJoFQtY3bXg==,
+        integrity: sha512-6sNX4WEaVBbmOS1K2U3PcpAhp0FcjVo1FRSEoj4N+NZ6DIokX+yut8IBhF176pg5kFCdFIL2wyNhf3SltREmWw==,
       }
     dependencies:
-      "@supabase/functions-js": 2.1.0
-      "@supabase/gotrue-js": 2.20.2
+      "@supabase/functions-js": 2.1.1
+      "@supabase/gotrue-js": 2.22.1
       "@supabase/postgrest-js": 1.5.0
       "@supabase/realtime-js": 2.7.2
-      "@supabase/storage-js": 2.5.0
+      "@supabase/storage-js": 2.5.1
       cross-fetch: 3.1.5
     transitivePeerDependencies:
       - encoding
@@ -2773,7 +2774,7 @@ packages:
       - supports-color
     dev: false
 
-  /@vite-pwa/astro@0.0.5(astro@2.2.1)(vite-plugin-pwa@0.14.7):
+  /@vite-pwa/astro@0.0.5(astro@2.2.3)(vite-plugin-pwa@0.14.7):
     resolution:
       {
         integrity: sha512-QCFHh7aF2dLwrUBtGi3gpQ7J5X4l9tWX8znqT36yaCsnFg1KtQ5HWhhxD3z/ecdemmlscntTdMqpW+cIf1zeuA==,
@@ -2782,7 +2783,7 @@ packages:
       astro: ^1.6.0 || ^2.0.0
       vite-plugin-pwa: ^0.14.0
     dependencies:
-      astro: 2.2.1(sharp@0.31.3)
+      astro: 2.2.3(sharp@0.31.3)
       vite-plugin-pwa: 0.14.7(vite@4.2.1)(workbox-build@6.5.4)(workbox-window@6.5.4)
     dev: false
 
@@ -3000,10 +3001,10 @@ packages:
       }
     dev: false
 
-  /astro@2.2.1(sharp@0.31.3):
+  /astro@2.2.3(sharp@0.31.3):
     resolution:
       {
-        integrity: sha512-yYPRzh3su38bi3VBCKmYAUBkQSaFQMKFsu8JAVDzFRoGLbskJ/6JkDX2abSB9/iRug8GAKaH/FWxXOTzIsSQ7Q==,
+        integrity: sha512-Pd67ZBoYxqeyHCZ0UpdmDZYNgcs7JTwc0NMzUScrH4y2hjSY4S8iwmNUtd9pf65gkxMpEbqfvQj06kLzgi4HZg==,
       }
     engines: { node: ">=16.12.0", npm: ">=6.14.0" }
     hasBin: true
@@ -3015,7 +3016,7 @@ packages:
     dependencies:
       "@astrojs/compiler": 1.3.1
       "@astrojs/language-server": 0.28.3
-      "@astrojs/markdown-remark": 2.1.3(astro@2.2.1)
+      "@astrojs/markdown-remark": 2.1.3(astro@2.2.3)
       "@astrojs/telemetry": 2.1.0
       "@astrojs/webapi": 2.1.0
       "@babel/core": 7.21.4
@@ -3110,7 +3111,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.5
-      caniuse-lite: 1.0.30001477
+      caniuse-lite: 1.0.30001478
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3311,8 +3312,8 @@ packages:
     engines: { node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7 }
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001477
-      electron-to-chromium: 1.4.356
+      caniuse-lite: 1.0.30001478
+      electron-to-chromium: 1.4.360
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10(browserslist@4.21.5)
 
@@ -3397,10 +3398,10 @@ packages:
     engines: { node: ">=10" }
     dev: false
 
-  /caniuse-lite@1.0.30001477:
+  /caniuse-lite@1.0.30001478:
     resolution:
       {
-        integrity: sha512-lZim4iUHhGcy5p+Ri/G7m84hJwncj+Kz7S5aD4hoQfslKZJgt0tHc/hafVbqHC5bbhHb+mrW2JOUHkI5KH7toQ==,
+        integrity: sha512-gMhDyXGItTHipJj2ApIvR+iVB5hd0KP3svMWWXDvZOmjzJJassGLMfxRkQCSYgGd2gtdL/ReeiyvMSFD1Ss6Mw==,
       }
 
   /ccount@2.0.1:
@@ -3911,10 +3912,10 @@ packages:
       jake: 10.8.5
     dev: false
 
-  /electron-to-chromium@1.4.356:
+  /electron-to-chromium@1.4.360:
     resolution:
       {
-        integrity: sha512-nEftV1dRX3omlxAj42FwqRZT0i4xd2dIg39sog/CnCJeCcL1TRd2Uh0i9Oebgv8Ou0vzTPw++xc+Z20jzS2B6A==,
+        integrity: sha512-EP/jdF15S+l3iSSzgUpUqeazvkbVFXNuVxwwLMVUSie3lUeH1HH70gKe0IS7TASB/0h5QPG2bLMzv2jelSztIQ==,
       }
 
   /emmet@2.4.2:
@@ -6540,10 +6541,10 @@ packages:
       yallist: 4.0.0
     dev: false
 
-  /minipass@4.2.7:
+  /minipass@4.2.8:
     resolution:
       {
-        integrity: sha512-ScVIgqHcXRMyfflqHmEW0bm8z8rb5McHyOY3ewX9JBgZaR77G7nxq9L/mtV96/QbAAwtbCAHVVLzD1kkyfFQEw==,
+        integrity: sha512-fNzuVyifolSLFL4NzpF+wEF4qrgqaaKX0haXPQEdQ7NKAN+WecoKMHV09YcuL/DHxrUsYQOK3MiuDf7Ip2OXfQ==,
       }
     engines: { node: ">=8" }
     dev: false
@@ -8397,7 +8398,7 @@ packages:
     dependencies:
       chownr: 2.0.0
       fs-minipass: 2.1.0
-      minipass: 4.2.7
+      minipass: 4.2.8
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
