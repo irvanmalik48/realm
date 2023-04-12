@@ -30,23 +30,23 @@ const schema = {
         width={1560}
         loading="eager"
       />
-      <header class="relative text-center xl:text-left text-neutral-200 max-w-7xl w-full mx-auto flex flex-col justify-center">
-        <h1 class="font-heading font-bold text-4xl">
+      <header class="relative flex flex-col justify-center w-full mx-auto text-center xl:text-left text-neutral-200 max-w-7xl">
+        <h1 class="text-4xl font-bold font-heading">
           {frontmatter.title}
         </h1>
         <time class="pt-2 lg:pt-0">
           {frontmatter.date}
         </time>
-        <div class="w-full justify-center xl:justify-start flex items-center flex-wrap gap-2 pt-2">
+        <div class="flex flex-wrap items-center justify-center w-full gap-2 pt-2 xl:justify-start">
           {frontmatter.tags.map((tag: string) => (
-            <p class="bg-neutral-800 bg-opacity-50 backdrop-blur-sm border rounded border-neutral-700 px-2 py-1 text-xs">
+            <p class="px-2 py-1 text-xs bg-opacity-50 border rounded bg-neutral-800 backdrop-blur-sm border-neutral-700">
               {tag}
             </p>
           ))}
         </div>
       </header>
     </div>
-    <div class="flex flex-col-reverse xl:flex-row w-full max-w-7xl mx-auto gap-4 h-full">
+    <div class="flex flex-col-reverse w-full h-full gap-4 mx-auto xl:flex-row max-w-7xl">
       <div class="prose prose-a:break-words px-4 prose-img:rounded prose-img:border prose-headings:scroll-mt-[20px] prose-blockquote:font-heading prose-img:border-neutral-700 prose-img:max-h-80 prose-img:w-full prose-img:object-contain prose-img:bg-neutral-800 prose-headings:text-neutral-200 prose-invert max-w-4xl flex-grow mx-auto py-12 w-full prose-headings:pb-2 prose-headings:border-b prose-headings:border-neutral-700 prose-pre:scrollbar-thin prose-pre:scrollbar-thumb-neutral-600 prose-pre:scrollbar-track-neutral-700 prose-pre:border prose-pre:border-neutral-700">
         <slot />
         <div class="w-full py-12">
@@ -66,8 +66,8 @@ const schema = {
           ></giscus-widget>
         </div>
       </div>
-      <div id="scrollspy" class="w-full mx-auto max-w-4xl xl:max-w-sm flex-shrink h-auto xl:h-screen pt-12 xl:py-12 px-4 relative xl:sticky xl:top-0">
-        <div class="px-5 w-full max-w-none h-fit xl:max-h-full py-3 xl:overflow-y-scroll rounded border border-neutral-700 bg-neutral-800 prose-sm prose-li:py-0 prose prose-invert prose-headings:text-neutral-200 prose-headings:border-b prose-headings:border-neutral-700 prose-headings:pb-2">
+      <div id="scrollspy" class="relative flex-shrink w-full h-auto max-w-4xl px-4 pt-12 mx-auto xl:max-w-sm xl:h-screen xl:py-12 xl:sticky xl:top-0">
+        <div class="w-full px-5 py-3 prose-sm prose border rounded max-w-none h-fit xl:max-h-full xl:overflow-y-scroll border-neutral-700 bg-neutral-800 prose-li:py-0 prose-invert prose-headings:text-neutral-200 prose-headings:border-b prose-headings:border-neutral-700 prose-headings:pb-2">
           <h3 class="mb-4">
             Table of Contents
           </h3>
@@ -79,14 +79,14 @@ const schema = {
               text: string;
             }) => (
               <li
-                class="truncate text-opacity-70 overflow-hidden my-0 whitespace-nowrap bg-transparent" 
+                class="my-0 overflow-hidden truncate bg-transparent text-opacity-70 whitespace-nowrap" 
                 style={{
                   paddingLeft: (heading.depth - 2) + "rem"
                 }}
               >
                 <a
                   href={`#${heading.slug}`}
-                  class="text-neutral-200 text-opacity-70 transition no-underline inline-block px-2 py-1 hover:text-opacity-100 m-0 hover:bg-red-400 hover:bg-opacity-20 w-full rounded truncate leading-tight"
+                  class="inline-block w-full px-2 py-1 m-0 leading-tight no-underline truncate transition rounded text-neutral-200 text-opacity-70 hover:text-opacity-100 hover:bg-red-400 hover:bg-opacity-20"
                 >
                   {heading.text}
                 </a>

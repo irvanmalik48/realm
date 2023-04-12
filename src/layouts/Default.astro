@@ -34,7 +34,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import "../scripts/router.js"
     </script>
   </head>
-  <body class="bg-neutral-900 w-full h-screen flex flex-col md:flex-row overflow-hidden">
+  <body class="flex flex-col w-full h-screen overflow-hidden bg-neutral-900 md:flex-row">
     <NavRail
       path={pathname}
       id="navrail_realm"
@@ -43,7 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       id="main_realm"
       data-turn-enter
       data-turn-exit
-      class="w-full relative scrollbar-none md:scrollbar-thin scrollbar-thumb-neutral-500 scrollbar-track-neutral-700 overflow-y-scroll"
+      class="relative w-full overflow-y-scroll scrollbar-none md:scrollbar-thin scrollbar-thumb-neutral-500 scrollbar-track-neutral-700"
     >
       <slot />
       <Footer />
