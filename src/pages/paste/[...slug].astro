@@ -34,12 +34,12 @@ const data = (await item.json().catch((err) => {
       data-turn-exit
       class="w-full"
     >
-      <nav class="select-none bg-neutral-800 flex items-center gap-3 border-b sticky top-0 p-4 w-full border-neutral-700">
-        <a href="/" class="min-w-fit flex items-center justify-center w-fit gap-0 md:gap-3 px-3 py-3 md:py-2 bg-neutral-900 rounded border border-neutral-700 hover:bg-opacity-50 transition text-neutral-200">
+      <nav class="sticky top-0 flex items-center w-full gap-3 p-4 border-b select-none bg-neutral-800 border-neutral-700">
+        <a href="/" class="flex items-center justify-center gap-0 px-3 py-3 transition border rounded min-w-fit w-fit md:gap-3 md:py-2 bg-neutral-900 border-neutral-700 hover:bg-opacity-50 text-neutral-200">
           <Home size={18} />
           <span class="hidden md:block">Back to Landing</span>
         </a>
-        <h1 class="font-mono flex flex-col gap-0 text-neutral-200 w-full">
+        <h1 class="flex flex-col w-full gap-0 font-mono text-neutral-200">
           <span class="text-sm">
             {data.id}
           </span>
@@ -47,12 +47,12 @@ const data = (await item.json().catch((err) => {
             {data.lang}
           </span>
         </h1>
-        <a href="/paste" class="min-w-fit flex items-center justify-center w-fit gap-0 md:gap-3 px-3 py-3 md:py-2 bg-neutral-900 rounded border border-neutral-700 hover:bg-opacity-50 transition text-neutral-200">
+        <a href="/paste" class="flex items-center justify-center gap-0 px-3 py-3 transition border rounded min-w-fit w-fit md:gap-3 md:py-2 bg-neutral-900 border-neutral-700 hover:bg-opacity-50 text-neutral-200">
           <PlusCircle size={18} />
           <span class="hidden md:block">New Paste</span>
         </a>
       </nav>
-      <article class="w-full p-4 flex">
+      <article class="flex w-full p-4">
         <Code code={data.content} theme="dark-plus" lang={data.lang} />
       </article>
     </main>

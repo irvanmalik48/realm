@@ -19,33 +19,33 @@ let description = "The Realm of Irvan Malik Azantha";
     <Image
       src="/profile/unsplash-bg.webp"
       alt="Unsplash Background by Alex Perez"
-      class="h-72 w-full object-cover brightness-50"
+      class="object-cover w-full h-72 brightness-50"
       height={720}
       width={1560}
       loading="eager"
     />
   </div>
-  <section class="w-full pt-20 pb-5 px-4 relative">
-    <div class="border border-neutral-700 relative rounded p-4 bg-neutral-800 bg-opacity-20 backdrop-blur-md max-w-3xl mx-auto mt-36 flex flex-col items-center w-full">
+  <section class="relative w-full px-4 pt-20 pb-5">
+    <div class="relative flex flex-col items-center w-full max-w-3xl p-4 mx-auto border rounded border-neutral-700 bg-neutral-800 bg-opacity-20 backdrop-blur-md mt-36">
       <Image
         src="/profile/main.webp"
         alt="Profile Picture"
-        class="w-48 h-48 absolute rounded-full -mt-28 border border-neutral-700 ring-4 ring-opacity-20 ring-offset-red-400 ring-offset-2 ring-red-400"
+        class="absolute w-48 h-48 border rounded-full -mt-28 border-neutral-700 ring-4 ring-opacity-20 ring-offset-red-400 ring-offset-2 ring-red-400"
         width={420}
         height={420}
         loading="eager"
       />
-      <div class="w-full mt-28 text-center">
+      <div class="w-full text-center mt-28">
         <p class="text-neutral-200 text-opacity-80">
           Hello, my name is
         </p>
-        <h1 class="font-heading text-2xl md:text-4xl font-bold text-neutral-200">
+        <h1 class="text-2xl font-bold font-heading md:text-4xl text-neutral-200">
           Irvan Malik Azantha
         </h1>
-        <p class="md:text-lg text-neutral-200 text-opacity-80 pb-4">
+        <p class="pb-4 md:text-lg text-neutral-200 text-opacity-80">
           Part-time Developer, Full-time Weeb
         </p>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <a
             href="https://github.com/irvanmalik48/realm"
             class="main-page-card-btn"
@@ -71,8 +71,8 @@ let description = "The Realm of Irvan Malik Azantha";
       </div>
     </div>
   </section>
-  <section class="w-full py-5 z-10 relative">
-    <div class="max-w-3xl mx-auto px-4 prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:font-heading">
+  <section class="relative z-10 w-full py-5">
+    <div class="max-w-3xl px-4 mx-auto prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:font-heading">
       <h2 class="flex items-center justify-start gap-5">
         <div class="flex items-center gap-3">
           <Component size={28} />
@@ -93,13 +93,13 @@ let description = "The Realm of Irvan Malik Azantha";
         Recent Posts
       </h2>
       <p>Here's 4 recent posts I wrote:</p>
-      <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 gap-4 not-prose md:grid-cols-2">
         {allPosts.sort((a, b) => (new Date(b.data.date)).getTime() - (new Date(a.data.date)).getTime()).slice(0, 4).map((post) => (
           <PostItem slug={post.slug} {...post.data} />
         ))}
         <a
           href="/posts"
-          class="main-page-card-btn no-underline md:col-span-2"
+          class="no-underline main-page-card-btn md:col-span-2"
         >
           <CornerDownRight size={20} />
           See more posts
@@ -112,13 +112,13 @@ let description = "The Realm of Irvan Malik Azantha";
         Recent Lyrics
       </h2>
       <p>Here's 4 recent lyrics I stashed:</p>
-      <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 gap-4 not-prose md:grid-cols-2">
         {allLyrics.sort((a, b) => (new Date(b.data.date)).getTime() - (new Date(a.data.date)).getTime()).slice(0, 4).map((lyric) => (
           <LyricsItem slug={lyric.slug} {...lyric.data} />
         ))}
         <a
           href="/lyrics"
-          class="main-page-card-btn no-underline md:col-span-2"
+          class="no-underline main-page-card-btn md:col-span-2"
         >
           <CornerDownRight size={20} />
           See more lyrics
@@ -135,7 +135,7 @@ let description = "The Realm of Irvan Malik Azantha";
           This blog is built using{" "}
           <a
             href="https://astro.build/"
-            class="text-red-400 hover:text-neutral-200 transition"
+            class="text-red-400 transition hover:text-neutral-200"
           >
             Astro
           </a>
@@ -145,7 +145,7 @@ let description = "The Realm of Irvan Malik Azantha";
           The styling is provided by{" "}
           <a
             href="https://tailwindcss.com"
-            class="text-red-400 hover:text-neutral-200 transition"
+            class="text-red-400 transition hover:text-neutral-200"
           >
             Tailwind CSS
           </a>
@@ -155,7 +155,7 @@ let description = "The Realm of Irvan Malik Azantha";
           The icons are provided by{" "}
           <a
             href="https://lucide.dev"
-            class="text-red-400 hover:text-neutral-200 transition"
+            class="text-red-400 transition hover:text-neutral-200"
           >
             Lucide
           </a>
@@ -165,7 +165,7 @@ let description = "The Realm of Irvan Malik Azantha";
           The top background image is provided by{" "}
           <a
             href="https://unsplash.com/@a2eorigins"
-            class="text-red-400 hover:text-neutral-200 transition"
+            class="text-red-400 transition hover:text-neutral-200"
           >
             Alex Perez
           </a>{" "}

@@ -22,8 +22,8 @@ let description = "My song lyrics collection.";
       width={1560}
       loading="eager"
     />
-    <header class="relative px-4 text-neutral-200 gap-2 max-w-3xl w-full mx-auto flex flex-col justify-center">
-      <h1 class="font-heading font-bold text-4xl">
+    <header class="relative flex flex-col justify-center w-full max-w-3xl gap-2 px-4 mx-auto text-neutral-200">
+      <h1 class="text-4xl font-bold font-heading">
         Song Lyrics
       </h1>
       <p class="text-xl text-neutral-400">
@@ -31,8 +31,8 @@ let description = "My song lyrics collection.";
       </p>
     </header>
   </div>
-  <section class="w-full py-12 z-10 relative">
-    <div class="max-w-3xl mx-auto px-4 prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:font-heading">
+  <section class="relative z-10 w-full py-12">
+    <div class="max-w-3xl px-4 mx-auto prose prose-invert prose-p:text-neutral-400 prose-headings:text-neutral-200 prose-headings:font-bold prose-headings:font-heading">
       <h2 class="flex items-center justify-start gap-5 pb-4 border-b border-neutral-700">
         <div class="flex items-center gap-3">
           <ListMusic size={28} />
@@ -46,7 +46,7 @@ let description = "My song lyrics collection.";
       <p>
         Oh, here's your list:
       </p>
-      <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 gap-4 not-prose md:grid-cols-2">
         {allLyrics.sort((a, b) => {
           if (a.data.title < b.data.title) {
             return -1;
