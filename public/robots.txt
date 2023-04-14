@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://www.irvanma.eu.org/endpoints/sitemap.xml
+Sitemap: https://www.realmof.tech/endpoints/sitemap.xml
