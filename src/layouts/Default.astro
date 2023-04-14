@@ -19,27 +19,56 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@irvanmalik48" />
     <meta name="twitter:creator" content="@irvanmalik48" />
-    <meta name="twitter:image" content={`https://irvanma.eu.org/og${pathname.split("/")[1] === "lyrics" || pathname.split("/")[1] === "diaries" ? "/default" : pathname === "/" ? "/index" : pathname}.jpg`} />
+    <meta
+      name="twitter:image"
+      content={`https://irvanma.eu.org/og${
+        pathname.split("/")[1] === "lyrics" ||
+        pathname.split("/")[1] === "diaries"
+          ? "/default"
+          : pathname === "/"
+          ? "/index"
+          : pathname
+      }.jpg`}
+    />
     <meta property="og:url" content="https://irvanma.eu.org" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`https://irvanma.eu.org/og${pathname.split("/")[1] === "lyrics" || pathname.split("/")[1] === "diaries" ? "/default" : pathname === "/" ? "/index" : pathname}.jpg`} />
+    <meta
+      property="og:image"
+      content={`https://irvanma.eu.org/og${
+        pathname.split("/")[1] === "lyrics" ||
+        pathname.split("/")[1] === "diaries"
+          ? "/default"
+          : pathname === "/"
+          ? "/index"
+          : pathname
+      }.jpg`}
+    />
     <meta name="theme-color" content="#222222" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" href="/endpoints/rss.xml" type="application/rss+xml" title="RSS" />
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/endpoints/sitemap.xml" />
+    <link
+      rel="alternate"
+      href="/endpoints/rss.xml"
+      type="application/rss+xml"
+      title="RSS"
+    />
+    <link
+      rel="sitemap"
+      type="application/xml"
+      title="Sitemap"
+      href="/endpoints/sitemap.xml"
+    />
     <slot name="head" />
     <script>
-      import "../scripts/router.js"
+      import "../scripts/router.js";
     </script>
   </head>
-  <body class="flex flex-col w-full h-screen overflow-hidden bg-neutral-900 md:flex-row">
-    <NavRail
-      path={pathname}
-      id="navrail_realm"
-    />
-    <main 
+  <body
+    class="flex flex-col w-full h-screen overflow-hidden bg-neutral-900 md:flex-row"
+  >
+    <NavRail path={pathname} id="navrail_realm" />
+    <main
       id="main_realm"
       data-turn-enter
       data-turn-exit

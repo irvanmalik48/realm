@@ -17,6 +17,6 @@ const { pathname } = Astro.url;
 const { Content, headings } = await entry.render();
 ---
 
-<Post frontmatter={entry.data} pathname={pathname} headings={headings}>
+<Post frontmatter={entry.data} {pathname} {headings}>
   <Content />
 </Post>

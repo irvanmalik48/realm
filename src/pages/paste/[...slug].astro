@@ -1,20 +1,25 @@
 ---
 import "../../styles/globals.css";
-import { Code } from 'astro/components';
+import { Code } from "astro/components";
 import { Home, PlusCircle } from "lucide-solid";
 const { slug } = Astro.params;
 if (slug === undefined) {
   throw new Error("Slug is required");
 }
 
-const url = new URL(`/api/v2/paste?id=${slug}`, import.meta.env.DEVELOPMENT === "true" ? "http://localhost:3000" : Astro.url);
+const url = new URL(
+  `/api/v2/paste?id=${slug}`,
+  import.meta.env.DEVELOPMENT === "true" ? "http://localhost:3000" : Astro.url
+);
 
 const item = await fetch(url).catch((err) => {
   throw new Error(err);
 });
-const data = (await item.json().catch((err) => {
-  throw new Error(err);
-}))[0];
+const data = (
+  await item.json().catch((err) => {
+    throw new Error(err);
+  })
+)[0];
 ---
 
 <html>
@@ -24,18 +29,18 @@ const data = (await item.json().catch((err) => {
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <script>
-      import "../../scripts/router.js"
+      import "../../scripts/router.js";
     </script>
   </head>
   <body class="bg-[#1E1E1E]">
-    <main
-      id="main_realm"
-      data-turn-enter
-      data-turn-exit
-      class="w-full"
-    >
-      <nav class="sticky top-0 flex items-center w-full gap-3 p-4 border-b select-none bg-neutral-800 border-neutral-700">
-        <a href="/" class="flex items-center justify-center gap-0 px-3 py-3 transition border rounded min-w-fit w-fit md:gap-3 md:py-2 bg-neutral-900 border-neutral-700 hover:bg-opacity-50 text-neutral-200">
+    <main id="main_realm" data-turn-enter data-turn-exit class="w-full">
+      <nav
+        class="sticky top-0 flex items-center w-full gap-3 p-4 border-b select-none bg-neutral-800 border-neutral-700"
+      >
+        <a
+          href="/"
+          class="flex items-center justify-center gap-0 px-3 py-3 transition border rounded min-w-fit w-fit md:gap-3 md:py-2 bg-neutral-900 border-neutral-700 hover:bg-opacity-50 text-neutral-200"
+        >
           <Home size={18} />
           <span class="hidden md:block">Back to Landing</span>
         </a>
@@ -47,7 +52,10 @@ const data = (await item.json().catch((err) => {
             {data.lang}
           </span>
         </h1>
-        <a href="/paste" class="flex items-center justify-center gap-0 px-3 py-3 transition border rounded min-w-fit w-fit md:gap-3 md:py-2 bg-neutral-900 border-neutral-700 hover:bg-opacity-50 text-neutral-200">
+        <a
+          href="/paste"
+          class="flex items-center justify-center gap-0 px-3 py-3 transition border rounded min-w-fit w-fit md:gap-3 md:py-2 bg-neutral-900 border-neutral-700 hover:bg-opacity-50 text-neutral-200"
+        >
           <PlusCircle size={18} />
           <span class="hidden md:block">New Paste</span>
         </a>
