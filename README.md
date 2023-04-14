@@ -9,6 +9,7 @@ Just a simple blog. Never completed, always WIP.
 - MDX
 - Tailwind
 - Vercel
+- Supabase
 
 ## License
 
