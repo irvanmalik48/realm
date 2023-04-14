@@ -7,13 +7,13 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: frontmatter.title,
-  image: `https://irvanma.eu.org/og${pathname}.jpg`,
+  image: `https://realmof.tech/og${pathname}.jpg`,
   description: frontmatter.description,
   keywords: frontmatter.tags,
   author: {
     "@type": "Person",
     name: "Irvan Malik Azantha",
-    url: "https://irvanma.eu.org",
+    url: "https://realmof.tech",
   },
   datePublished: new Date(frontmatter.date).toISOString().substring(0, 10),
 };

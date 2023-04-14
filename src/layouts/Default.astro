@@ -21,7 +21,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:creator" content="@irvanmalik48" />
     <meta
       name="twitter:image"
-      content={`https://irvanma.eu.org/og${
+      content={`https://realmof.tech/og${
         pathname.split("/")[1] === "lyrics" ||
         pathname.split("/")[1] === "diaries"
           ? "/default"
@@ -30,12 +30,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           : pathname
       }.jpg`}
     />
-    <meta property="og:url" content="https://irvanma.eu.org" />
+    <meta property="og:url" content="https://realmof.tech" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta
       property="og:image"
-      content={`https://irvanma.eu.org/og${
+      content={`https://realmof.tech/og${
         pathname.split("/")[1] === "lyrics" ||
         pathname.split("/")[1] === "diaries"
           ? "/default"
