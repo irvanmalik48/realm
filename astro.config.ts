@@ -19,7 +19,7 @@ const shikiResourcePaths = Object.keys(
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://irvanma.eu.org",
+  site: "https://realmof.tech",
   integrations: [
     tailwind({
       config: {
