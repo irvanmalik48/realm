@@ -2,6 +2,8 @@
 
 Just a simple blog. Never completed, always WIP.
 
+![Website Image](repo/a.webp)
+
 ## Stack
 
 - Astro
