@@ -1,6 +1,5 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import partytown from "@astrojs/partytown";
 import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
@@ -27,7 +26,6 @@ export default defineConfig({
         path: "./tailwind.config.cjs",
       },
     }) as AstroIntegration,
-    partytown({}),
     mdx({
       syntaxHighlight: "shiki",
       shikiConfig: {
