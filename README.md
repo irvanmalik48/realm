@@ -12,6 +12,7 @@ Just a simple blog. Never completed, always WIP.
 - Tailwind
 - Vercel
 - Supabase
+- Cloudflare Zaraz
 
 ## License
 
