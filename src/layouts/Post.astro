@@ -20,6 +20,7 @@ const schema = {
 ---
 
 <Default title={frontmatter.title} description={frontmatter.description}>
+  <meta name="keywords" content={frontmatter.keywords} slot="head" />
   <article id="article-post" class="text-neutral-200">
     <div
       class="relative px-4 min-h-[18rem] overflow-hidden w-full border-b border-neutral-700 flex items-center"
