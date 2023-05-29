@@ -45,4 +45,7 @@ export default defineConfig({
   adapter: vercel({
     includeFiles: shikiResourcePaths,
   }) as AstroIntegration,
+  experimental: {
+    hybridOutput: true,
+  }
 });
