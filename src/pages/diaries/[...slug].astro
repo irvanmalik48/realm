@@ -1,6 +1,18 @@
 ---
-import { getEntryBySlug } from "astro:content";
+import { getEntryBySlug, getCollection } from "astro:content";
 import Diary from "../../layouts/Diary.astro";
+
+export async function getStaticPaths() {
+  const diaries = await getCollection("diaries");
+  return diaries.map((diary) => ({
+    params: {
+      slug: diary.slug,
+    },
+    props: {
+      entry
+    }
+  }));
+}
 
 const { slug } = Astro.params;
 if (slug === undefined) {
