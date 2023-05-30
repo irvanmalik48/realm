@@ -1,18 +1,6 @@
 ---
-import { getEntryBySlug, getCollection } from "astro:content";
+import { getEntryBySlug } from "astro:content";
 import Lyric from "../../layouts/Lyric.astro";
-
-export async function getStaticPaths() {
-  const lyrics = await getCollection("lyrics");
-  return lyrics.map((lyric) => ({
-    params: {
-      slug: lyric.slug,
-    },
-    props: {
-      lyric
-    }
-  }));
-}
 
 const { slug } = Astro.params;
 if (slug === undefined) {

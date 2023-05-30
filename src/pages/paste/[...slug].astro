@@ -3,8 +3,6 @@ import "../../styles/globals.css";
 import { Code } from "astro/components";
 import { Home, PlusCircle } from "lucide-solid";
 
-export const prerender = false;
-
 const { slug } = Astro.params;
 if (slug === undefined) {
   throw new Error("Slug is required");
