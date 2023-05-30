@@ -41,11 +41,8 @@ export default defineConfig({
       serviceEntryPoint: "@astrojs/image/sharp",
     }),
   ],
-  output: "hybrid",
+  output: "server",
   adapter: vercel({
     includeFiles: shikiResourcePaths,
   }) as AstroIntegration,
-  experimental: {
-    hybridOutput: true,
-  },
 });
