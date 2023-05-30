@@ -47,5 +47,5 @@ export default defineConfig({
   }) as AstroIntegration,
   experimental: {
     hybridOutput: true,
-  }
+  },
 });
