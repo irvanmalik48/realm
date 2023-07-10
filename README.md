@@ -2,16 +2,11 @@
 
 Just a simple blog. Never completed, always WIP.
 
-![Website Image](repo/a.webp)
-
 ## Stack
 
-- Astro
-- SolidJS
-- MDX
+- Qwik City
 - Tailwind
-- Vercel
-- Supabase
+- Vercel Edge
 
 ## License
 

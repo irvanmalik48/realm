@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://www.realmof.tech/endpoints/sitemap.xml

@@ -1,7 +1,8 @@
 {
-  "editor.tabSize": 2,
+  "css.lint.unknownAtRules": "ignore",
+  "material-icon-theme.activeIconPack": "qwik",
   "editor.detectIndentation": false,
-  "[mdx]": {
-    "editor.wordWrap": "on"
-  }
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
 }
