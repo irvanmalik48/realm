@@ -1,5 +1,5 @@
 import { $, component$, useOnDocument } from "@builder.io/qwik";
-import { Image } from "@unpic/qwik";
+import { Image } from "../image/image";
 
 export default component$(() => {
   useOnDocument(
@@ -40,11 +40,12 @@ export default component$(() => {
         id="interaction-canvas"
       />
       <Image
-        src="https://res.cloudinary.com/diq3ukfid/image/upload/v1688632562/realm-images/hero_g8x11q.webp"
+        src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/hero_rz1wup.jpg"
         layout="fullWidth"
         height="250"
         alt="Original wallpaper image by YoStar"
         class="w-full rounded-lg z-10 relative"
+        priority={true}
       />
     </div>
   );

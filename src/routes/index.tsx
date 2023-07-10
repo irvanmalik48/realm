@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { Link, type DocumentHead } from "@builder.io/qwik-city";
-import { Image } from "@unpic/qwik";
+import { Image } from "~/components/image/image";
 import HeaderHero from "~/components/header-hero/header-hero";
 import {
   LuNewspaper,
@@ -147,15 +147,15 @@ export default component$(() => {
         <div class="hidden flex-col xl:flex absolute top-12 left-10 items-center w-[400px] gap-5">
           <div class="absolute left-0 inset-y-0 w-56 bg-gradient-to-r from-neutral-950 to-transparent z-10" />
           <Image
-            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1688992507/realm-images/iraq-mosul_olp5df.webp"
+            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/iraq-mosul_h0zwxg.jpg"
             alt="Mosul Devastated"
             width="976"
             height="549"
             class="grayscale rounded-xl w-full object-cover brightness-50"
           />
           <Image
-            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1688992454/realm-images/chinese-amphibious-landing_babyun.webp"
-            alt="Mosul Devastated"
+            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/chinese-amphibious-landing_ujesfh.jpg"
+            alt="Just China being China"
             width="976"
             height="549"
             class="grayscale rounded-xl w-full object-cover brightness-50"
@@ -164,15 +164,15 @@ export default component$(() => {
         <div class="hidden flex-col xl:flex absolute bottom-12 right-10 items-center w-[400px] gap-5">
           <div class="absolute right-0 inset-y-0 w-56 bg-gradient-to-l from-neutral-950 to-transparent z-10" />
           <Image
-            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1688992164/realm-images/ukraine-war_iwldbz.webp"
-            alt="Mosul Devastated"
+            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/ukraine-war_vqtmtr.jpg"
+            alt="Ukraine War"
             width="976"
             height="549"
             class="grayscale rounded-xl w-full object-cover brightness-50"
           />
           <Image
-            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1688992164/realm-images/france-riots_rjlf6l.webp"
-            alt="Mosul Devastated"
+            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/france-riots_mwfiph.jpg"
+            alt="France Riots"
             width="976"
             height="549"
             class="grayscale rounded-xl w-full object-cover brightness-50"
