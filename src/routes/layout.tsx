@@ -55,36 +55,5 @@ export const head: DocumentHead = ({ head }) => {
           "No description",
       },
     ],
-    links: [
-      {
-        rel: "icon",
-        href: "/favicon-32x32.png",
-        type: "image/png",
-        sizes: "32x32",
-      },
-      {
-        rel: "icon",
-        href: "/favicon-16x16.png",
-        type: "image/png",
-        sizes: "16x16",
-      },
-      {
-        rel: "apple-touch-icon",
-        href: "/apple-touch-icon.png",
-        sizes: "180x180",
-      },
-      {
-        rel: "manifest",
-        href: "/site.webmanifest",
-      },
-      {
-        rel: "preload",
-        href: "/fonts/Hubot-Sans.woff2",
-      },
-      {
-        rel: "preload",
-        href: "/fonts/Mona-Sans.woff2",
-      },
-    ],
   };
 };
