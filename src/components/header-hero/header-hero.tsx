@@ -40,7 +40,7 @@ export default component$(() => {
         id="interaction-canvas"
       />
       <Image
-        src="https://lapprealm.imgix.net/hero_rz1wup.jpg"
+        src="https://cdn.realmof.tech/hero_rz1wup.jpg"
         layout="fullWidth"
         height="250"
         alt="Original wallpaper image by YoStar"

@@ -148,14 +148,14 @@ export default component$(() => {
         <div class="hidden flex-col xl:flex absolute top-12 left-10 items-center w-[400px] gap-5">
           <div class="absolute left-0 inset-y-0 w-56 bg-gradient-to-r from-neutral-950 to-transparent z-10" />
           <Image
-            src="https://lapprealm.imgix.net/iraq-mosul_h0zwxg.jpg"
+            src="https://cdn.realmof.tech/iraq-mosul_h0zwxg.jpg"
             alt="Mosul Devastated"
             width="976"
             height="549"
             class="grayscale rounded-xl w-full object-cover brightness-50"
           />
           <Image
-            src="https://lapprealm.imgix.net/chinese-amphibious-landing_ujesfh.jpg"
+            src="https://cdn.realmof.tech/chinese-amphibious-landing_ujesfh.jpg"
             alt="Just China being China"
             width="976"
             height="549"
@@ -165,14 +165,14 @@ export default component$(() => {
         <div class="hidden flex-col xl:flex absolute bottom-12 right-10 items-center w-[400px] gap-5">
           <div class="absolute right-0 inset-y-0 w-56 bg-gradient-to-l from-neutral-950 to-transparent z-10" />
           <Image
-            src="https://lapprealm.imgix.net/ukraine-war_vqtmtr.jpg"
+            src="https://cdn.realmof.tech/ukraine-war_vqtmtr.jpg"
             alt="Ukraine War"
             width="976"
             height="549"
             class="grayscale rounded-xl w-full object-cover brightness-50"
           />
           <Image
-            src="https://lapprealm.imgix.net/france-riots_mwfiph.jpg"
+            src="https://cdn.realmof.tech/france-riots_mwfiph.jpg"
             alt="France Riots"
             width="976"
             height="549"
