@@ -1,7 +1,6 @@
 import { vercelEdgeAdapter } from "@builder.io/qwik-city/adapters/vercel-edge/vite";
 import { extendConfig } from "@builder.io/qwik-city/vite";
 import baseConfig from "../../vite.config";
-import inject from "@rollup/plugin-inject";
 
 export default extendConfig(baseConfig, () => {
   return {
@@ -12,6 +11,6 @@ export default extendConfig(baseConfig, () => {
       },
       outDir: ".vercel/output/functions/_qwik-city.func",
     },
-    plugins: [vercelEdgeAdapter(), inject({ Buffer: ["Buffer", "Buffer"] })],
+    plugins: [vercelEdgeAdapter()],
   };
 });
