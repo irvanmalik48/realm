@@ -45,5 +45,10 @@
     "vercel": "^29.1.1",
     "vite": "4.3.9",
     "vite-tsconfig-paths": "4.2.0"
+  },
+  "dependencies": {
+    "@unpic/pixels": "^1.2.0",
+    "@unpic/placeholder": "^0.1.2",
+    "blurhash": "^2.0.5"
   }
 }
