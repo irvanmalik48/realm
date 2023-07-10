@@ -15,14 +15,14 @@ export default component$(() => {
               Made with
               <a
                 href="https://qwik.builder.io"
-                class="mx-1 text-neutral-500 hover:text-neutral-400"
+                class="mx-1 text-neutral-500 hover:text-neutral-300"
               >
                 Qwik
               </a>
               and
               <a
                 href="https://tailwindcss.com"
-                class="ml-1 text-neutral-500 hover:text-neutral-400"
+                class="ml-1 text-neutral-500 hover:text-neutral-300"
               >
                 Tailwind
               </a>
@@ -31,7 +31,7 @@ export default component$(() => {
             <span class="text-neutral-500">Hosted on</span>
             <a
               href="https://vercel.com"
-              class="mx-1 text-neutral-500 hover:text-neutral-400"
+              class="mx-1 text-neutral-500 hover:text-neutral-300"
             >
               Vercel
             </a>

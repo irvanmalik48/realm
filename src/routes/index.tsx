@@ -63,10 +63,10 @@ export default component$(() => {
         <h1 class="md:text-4xl text-2xl font-semibold text-center font-heading text-neutral-100 mt-7">
           Irvan Malik Azantha
         </h1>
-        <p class="text-center md:text-xl text-neutral-400 md:mt-1">
+        <p class="text-center md:text-xl text-neutral-300 md:mt-1">
           a weeb that just happens to know how to code
         </p>
-        <p class="w-fit mx-auto text-center text-sm text-neutral-400 mt-10 px-5 py-1 rounded-full mb-5 bg-neutral-900 bg-opacity-50">
+        <p class="w-fit mx-auto text-center text-sm text-neutral-300 mt-10 px-5 py-1 rounded-full mb-5 bg-neutral-900 bg-opacity-50">
           here's the menu:
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -88,13 +88,13 @@ export default component$(() => {
               )}
               {link.icon}
               <div class="flex flex-col" title={link.desc}>
-                <h3
+                <p
                   id={`${link.label}-icon-label`}
                   class="text-lg font-semibold text-left font-heading text-neutral-100"
                 >
                   {link.label}
-                </h3>
-                <p class="text-left text-neutral-400">{link.desc}</p>
+                </p>
+                <p class="text-left text-neutral-300">{link.desc}</p>
               </div>
             </Link>
           ))}
@@ -120,7 +120,7 @@ export default component$(() => {
               <br />
               <span class="text-cyan-500 font-semibold">Sure</span>.
             </h1>
-            <p class="md:text-xl mt-5 text-neutral-400">
+            <p class="md:text-xl mt-5 text-neutral-300">
               Hello, my name is{" "}
               <span class="text-neutral-100">Irvan Malik Azantha</span>. I'm an
               experienced programmer with 2 years of web development expertise
@@ -185,7 +185,7 @@ export default component$(() => {
             <br />
             <span class="text-red-400 font-semibold">issues</span>.
           </h1>
-          <p class="md:text-xl mt-5 text-neutral-400">
+          <p class="md:text-xl mt-5 text-neutral-300">
             Listen closely, I'm pretty much{" "}
             <span class="text-neutral-100">neutral</span> towards any retarded
             event that happens in the world. I don't care about your political
@@ -193,7 +193,7 @@ export default component$(() => {
             race, I pretty much <span class="text-neutral-100">don't care</span>
             . I made this website as a canvas. An artistic expression.
           </p>
-          <p class="md:text-xl mt-5 text-neutral-400">
+          <p class="md:text-xl mt-5 text-neutral-300">
             Try to shove your ideological and political{" "}
             <span class="text-red-400">nonsense</span> to me and I won't
             hesitate to <span class="text-red-400">fire back</span> at you.
@@ -203,7 +203,7 @@ export default component$(() => {
             </span>
             .
           </p>
-          <p class="md:text-xl mt-5 text-neutral-400">
+          <p class="md:text-xl mt-5 text-neutral-300">
             Alas, this is just a notice for everyone seeing this website. To let
             you know that there's a line that you shouldn't cross. Aside from
             anything mentioned above, I'm pretty much{" "}
@@ -214,7 +214,7 @@ export default component$(() => {
             <p class="px-8 py-2 w-fit mx-auto text-heading rounded-full bg-neutral-950">
               Ignorance is bliss.
             </p>
-            <p class="w-full px-5 py-2 text-sm text-neutral-400 text-center">
+            <p class="w-full px-5 py-2 text-sm text-neutral-300 text-center">
               <cite>Thomas Gray</cite>
             </p>
           </blockquote>
