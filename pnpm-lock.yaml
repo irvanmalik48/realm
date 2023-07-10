@@ -31,9 +31,6 @@ devDependencies:
   '@typescript-eslint/parser':
     specifier: 5.60.1
     version: 5.60.1(eslint@8.44.0)(typescript@5.1.6)
-  '@unpic/pixels':
-    specifier: ^1.2.0
-    version: 1.2.0
   '@unpic/placeholder':
     specifier: ^0.1.2
     version: 0.1.2
@@ -43,9 +40,6 @@ devDependencies:
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.24)
-  blurhash:
-    specifier: ^2.0.5
-    version: 2.0.5
   eslint:
     specifier: 8.44.0
     version: 8.44.0
@@ -2428,14 +2422,6 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.60.1
       eslint-visitor-keys: 3.4.1
-    dev: true
-
-  /@unpic/pixels@1.2.0:
-    resolution: {integrity: sha512-K2jz2oIBmeVUpO1qoNO59hg4m0/x0cw5wmzlAYDKsJHN7k5Mt6gCxUr55OyPILnAYf8P3z53z3tWoKpKvZLwGQ==}
-    dependencies:
-      jpeg-js: 0.4.4
-      pngjs: 7.0.0
-      undici: 5.22.1
     dev: true
 
   /@unpic/placeholder@0.1.2:
@@ -5504,10 +5490,6 @@ packages:
     resolution: {integrity: sha512-j8GhLiKmUAh+dsFXlX1aJCbt5KMibuKb+d7j1JaOJG6s2UjX1PQlW+OKB/sD4a/5ZYF4RcmYmLSndOoU3Lt/3g==}
     dev: true
 
-  /jpeg-js@0.4.4:
-    resolution: {integrity: sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==}
-    dev: true
-
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: true
@@ -6757,11 +6739,6 @@ packages:
       jsonc-parser: 3.2.0
       mlly: 1.4.0
       pathe: 1.1.1
-    dev: true
-
-  /pngjs@7.0.0:
-    resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
-    engines: {node: '>=14.19.0'}
     dev: true
 
   /postcss-discard-duplicates@5.1.0(postcss@8.4.24):
