@@ -1,17 +1,12 @@
 import { component$, useSignal, useTask$ } from "@builder.io/qwik";
 import { server$ } from "@builder.io/qwik-city";
-import { getPixels } from "@unpic/pixels";
 import { blurhashToCssGradientString } from "@unpic/placeholder";
 import { type ImageProps, Image as OptimizedImage } from "@unpic/qwik";
-import { encode } from "blurhash";
 
 const processImage = server$(async (imgUrl: string) => {
-  const heroData = await getPixels(imgUrl);
+  const blurhashFetch = await fetch(`${imgUrl}?fm=blurhash`).then((res) => res.text());
 
-  const data = Uint8ClampedArray.from(heroData.data);
-  const blurHash = encode(data, heroData.width, heroData.height, 4, 4);
-
-  return blurHash;
+  return blurhashFetch;
 })
 
 export const Image = component$<ImageProps>((props: ImageProps) => {
