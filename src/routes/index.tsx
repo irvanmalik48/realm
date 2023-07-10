@@ -1,6 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import { Link, type DocumentHead } from "@builder.io/qwik-city";
 import { Image } from "~/components/image/image";
+import { Image as ImageNoBlurHash } from "@unpic/qwik";
 import HeaderHero from "~/components/header-hero/header-hero";
 import {
   LuNewspaper,
@@ -50,7 +51,7 @@ export default component$(() => {
       <section class="w-full max-w-4xl px-5 py-24 mx-auto min-h-screen relative">
         <HeaderHero />
         <div class="w-36 h-36 -mt-16 rounded-full bg-neutral-900 ring-4 ring-neutral-700 overflow-hidden z-20 relative mx-auto">
-          <Image
+          <ImageNoBlurHash
             src="https://avatars.githubusercontent.com/u/71539547?v=4"
             layout="constrained"
             width="150"
@@ -147,14 +148,14 @@ export default component$(() => {
         <div class="hidden flex-col xl:flex absolute top-12 left-10 items-center w-[400px] gap-5">
           <div class="absolute left-0 inset-y-0 w-56 bg-gradient-to-r from-neutral-950 to-transparent z-10" />
           <Image
-            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/iraq-mosul_h0zwxg.jpg"
+            src="https://lapprealm.imgix.net/iraq-mosul_h0zwxg.jpg"
             alt="Mosul Devastated"
             width="976"
             height="549"
             class="grayscale rounded-xl w-full object-cover brightness-50"
           />
           <Image
-            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/chinese-amphibious-landing_ujesfh.jpg"
+            src="https://lapprealm.imgix.net/chinese-amphibious-landing_ujesfh.jpg"
             alt="Just China being China"
             width="976"
             height="549"
@@ -164,14 +165,14 @@ export default component$(() => {
         <div class="hidden flex-col xl:flex absolute bottom-12 right-10 items-center w-[400px] gap-5">
           <div class="absolute right-0 inset-y-0 w-56 bg-gradient-to-l from-neutral-950 to-transparent z-10" />
           <Image
-            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/ukraine-war_vqtmtr.jpg"
+            src="https://lapprealm.imgix.net/ukraine-war_vqtmtr.jpg"
             alt="Ukraine War"
             width="976"
             height="549"
             class="grayscale rounded-xl w-full object-cover brightness-50"
           />
           <Image
-            src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/france-riots_mwfiph.jpg"
+            src="https://lapprealm.imgix.net/france-riots_mwfiph.jpg"
             alt="France Riots"
             width="976"
             height="549"

@@ -40,7 +40,7 @@ export default component$(() => {
         id="interaction-canvas"
       />
       <Image
-        src="https://res.cloudinary.com/diq3ukfid/image/upload/v1689000231/realm-images/hero_rz1wup.jpg"
+        src="https://lapprealm.imgix.net/hero_rz1wup.jpg"
         layout="fullWidth"
         height="250"
         alt="Original wallpaper image by YoStar"
