@@ -1,8 +1,17 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useVisibleTask$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Waves } from "~/components/waves/waves";
 
+async function sleep(s: number) {
+  return new Promise((resolve) => setTimeout(resolve, s * 1000));
+}
+
 export default component$(() => {
+  useVisibleTask$(async () => {
+    await sleep(5);
+    window.location.href = "https://t.me/lapplund";
+  });
+
   return (
     <>
       <section class="w-full py-24 grid grid-cols-1 place-content-center min-h-screen relative">
@@ -49,9 +58,5 @@ export const head: DocumentHead = {
       name: "og:description",
       content: "Redirecting",
     },
-    {
-      httpEquiv: "refresh",
-      content: "5; url=https://t.me/lapplund",
-    }
   ],
 };
