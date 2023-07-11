@@ -179,7 +179,7 @@ export default component$(() => {
             class="grayscale rounded-xl w-full object-cover brightness-50"
           />
         </div>
-        <div class="mx-auto max-w-4xl w-full relative z-10 py-12 px-5">
+        <div class="mx-auto max-w-4xl w-full relative z-10 py-8 px-5 rounded-2xl bg-neutral-950 bg-opacity-30 backdrop-blur-md">
           <h1 class="text-3xl md:text-5xl lg:text-6xl font-medium font-heading">
             Stance towards geopolitical
             <br />
