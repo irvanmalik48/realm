@@ -56,7 +56,7 @@ export const NavRail = component$(() => {
           <LuHome class="w-5 h-5" />
         </Link>
         <Link
-          href="/"
+          href="/posts"
           class={`flex items-center p-3 rounded-lg transition-colors ${
             location.url.pathname === "/posts"
               ? "bg-neutral-900 hover:bg-neutral-800"
@@ -68,7 +68,7 @@ export const NavRail = component$(() => {
           <LuNewspaper class="w-5 h-5" />
         </Link>
         <Link
-          href="/"
+          href="/projects"
           class={`flex items-center p-3 rounded-lg transition-colors ${
             location.url.pathname === "/projects"
               ? "bg-neutral-900 hover:bg-neutral-800"
@@ -80,7 +80,7 @@ export const NavRail = component$(() => {
           <LuBriefcase class="w-5 h-5" />
         </Link>
         <Link
-          href="/"
+          href="/about"
           class={`flex items-center p-3 rounded-lg transition-colors ${
             location.url.pathname === "/about"
               ? "bg-neutral-900 hover:bg-neutral-800"
