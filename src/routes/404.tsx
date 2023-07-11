@@ -1,4 +1,5 @@
 import { component$ } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { Waves } from "~/components/waves/waves";
 
 export default component$(() => {
@@ -19,3 +20,21 @@ export default component$(() => {
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: "404",
+  meta: [
+    {
+      name: "description",
+      content: "Not found",
+    },
+    {
+      name: "og:title",
+      content: "404",
+    },
+    {
+      name: "og:description",
+      content: "Not found",
+    },
+  ],
+};
