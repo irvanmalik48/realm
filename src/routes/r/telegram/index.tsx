@@ -1,17 +1,6 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead, RequestEvent } from "@builder.io/qwik-city";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { Waves } from "~/components/waves/waves";
-
-async function wait(s: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, s * 1000);
-  });
-}
-
-export const onGet = async ({ redirect }: RequestEvent) => {
-  await wait(3);
-  throw redirect(302, "https://t.me/lapplund");
-};
 
 export default component$(() => {
   return (
@@ -60,5 +49,9 @@ export const head: DocumentHead = {
       name: "og:description",
       content: "Redirecting",
     },
+    {
+      httpEquiv: "refresh",
+      content: "5; url=https://t.me/lapplund",
+    }
   ],
 };
