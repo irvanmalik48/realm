@@ -58,7 +58,7 @@ export const NavRail = component$(() => {
         <Link
           href="/posts"
           class={`flex items-center p-3 rounded-lg transition-colors ${
-            location.url.pathname === "/posts"
+            location.url.pathname === "/posts/"
               ? "bg-neutral-900 hover:bg-neutral-800"
               : "hover:bg-neutral-900"
           }`}
@@ -70,7 +70,7 @@ export const NavRail = component$(() => {
         <Link
           href="/projects"
           class={`flex items-center p-3 rounded-lg transition-colors ${
-            location.url.pathname === "/projects"
+            location.url.pathname === "/projects/"
               ? "bg-neutral-900 hover:bg-neutral-800"
               : "hover:bg-neutral-900"
           }`}
@@ -82,7 +82,7 @@ export const NavRail = component$(() => {
         <Link
           href="/about"
           class={`flex items-center p-3 rounded-lg transition-colors ${
-            location.url.pathname === "/about"
+            location.url.pathname === "/about/"
               ? "bg-neutral-900 hover:bg-neutral-800"
               : "hover:bg-neutral-900"
           }`}
