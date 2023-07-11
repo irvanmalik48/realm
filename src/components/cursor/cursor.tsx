@@ -1,9 +1,4 @@
-import {
-  $,
-  component$,
-  useOnDocument,
-  useVisibleTask$,
-} from "@builder.io/qwik";
+import { $, component$, useOnDocument, useTask$ } from "@builder.io/qwik";
 import { LuArrowUpRight } from "@qwikest/icons/lucide";
 
 export default component$(() => {
@@ -112,61 +107,63 @@ export default component$(() => {
     })
   );
 
-  useVisibleTask$(() => {
-    const cursor = document.getElementById("cursor");
-    const cursorIcon = document.getElementById("cursor-icon");
+  useTask$(() => {
+    if (typeof window !== "undefined" || typeof document !== "undefined") {
+      const cursor = document.getElementById("cursor");
+      const cursorIcon = document.getElementById("cursor-icon");
 
-    if (!cursor) return;
-    if (!cursorIcon) return;
+      if (!cursor) return;
+      if (!cursorIcon) return;
 
-    // hover effect on any button or anchor
-    const hoverables = document.querySelectorAll("a, button");
+      // hover effect on any button or anchor
+      const hoverables = document.querySelectorAll("a, button");
 
-    hoverables.forEach((hoverable) => {
-      hoverable.addEventListener("mouseenter", () => {
-        cursor.animate(
-          {
-            scale: 2,
-          },
-          {
-            duration: 200,
-            fill: "forwards",
-          }
-        );
+      hoverables.forEach((hoverable) => {
+        hoverable.addEventListener("mouseenter", () => {
+          cursor.animate(
+            {
+              scale: 2,
+            },
+            {
+              duration: 200,
+              fill: "forwards",
+            }
+          );
 
-        cursorIcon.animate(
-          {
-            opacity: 1,
-          },
-          {
-            duration: 200,
-            fill: "forwards",
-          }
-        );
+          cursorIcon.animate(
+            {
+              opacity: 1,
+            },
+            {
+              duration: 200,
+              fill: "forwards",
+            }
+          );
+        });
+
+        hoverable.addEventListener("mouseleave", () => {
+          cursor.animate(
+            {
+              scale: 1,
+            },
+            {
+              duration: 200,
+              fill: "forwards",
+            }
+          );
+
+          cursorIcon.animate(
+            {
+              opacity: 0,
+            },
+            {
+              duration: 200,
+              fill: "forwards",
+            }
+          );
+        });
       });
-
-      hoverable.addEventListener("mouseleave", () => {
-        cursor.animate(
-          {
-            scale: 1,
-          },
-          {
-            duration: 200,
-            fill: "forwards",
-          }
-        );
-
-        cursorIcon.animate(
-          {
-            opacity: 0,
-          },
-          {
-            duration: 200,
-            fill: "forwards",
-          }
-        );
-      });
-    });
+    }
   });
 
   return (
