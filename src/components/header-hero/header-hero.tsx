@@ -44,7 +44,7 @@ export default component$(() => {
         layout="fullWidth"
         height="250"
         alt="Original wallpaper image by YoStar"
-        class="w-full h-[250px] rounded-lg z-10 relative"
+        class="w-full h-[250px] rounded-lg z-10 relative object-cover"
         priority={true}
       />
     </div>
