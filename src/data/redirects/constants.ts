@@ -14,6 +14,13 @@ export type KVArray = KVConstant[];
 export const REDIRECT_CONSTANTS: KVArray = [
   // My personal links
   {
+    name: "me@ko",
+    value: {
+      link: "https://keyoxide.org/irvanmalik48@gmail.com",
+      provider: "Keyoxide",
+    },
+  },
+  {
     name: "me@twt",
     value: {
       link: "https://twitter.com/irvanmalik48",
