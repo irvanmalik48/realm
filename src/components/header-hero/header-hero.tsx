@@ -8,7 +8,7 @@ export default component$(() => {
       id="header-hero"
     >
       <Image
-        src="https://cdn.realmof.tech/hero_rz1wup.jpg"
+        src="https://cdn.realmof.tech/hero_rz1wup.jpg?w=0.4"
         layout="fullWidth"
         height="250"
         alt="Original wallpaper image by YoStar"
