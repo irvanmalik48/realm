@@ -127,6 +127,7 @@ body {
 
 .view-transition-target {
   view-transition-name: root;
+  contain: layout;
 }
 
 ::view-transition-old(root) {
