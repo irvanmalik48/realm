@@ -5,6 +5,7 @@ import {
   ServiceWorkerRegister,
 } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
+import { QwikPartytown } from "./components/partytown/partytown";
 
 import "./global.css";
 
@@ -39,6 +40,13 @@ export default component$(() => {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <QwikPartytown forward={["dataLayer.push"]} />
+        <script
+          type="text/partytown"
+          data-goatcounter="https://realm-analytics.goatcounter.com/count"
+          async
+          src="//gc.zgo.at/count.js"
+        />
         <RouterHead />
       </head>
       <body
