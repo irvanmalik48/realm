@@ -52,10 +52,10 @@ export default component$(() => {
         <HeaderHero />
         <div class="w-36 h-36 -mt-16 rounded-full bg-neutral-900 ring-4 ring-neutral-700 overflow-hidden z-20 relative mx-auto">
           <ImageNoBlurHash
-            src="https://avatars.githubusercontent.com/u/71539547?v=4&size=150"
+            src="https://avatars.githubusercontent.com/u/71539547?v=4&size=250"
             layout="constrained"
-            width="150"
-            height="150"
+            width="250"
+            height="250"
             alt="GitHub avatar"
             class="w-full h-full"
           />
