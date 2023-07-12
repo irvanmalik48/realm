@@ -169,7 +169,7 @@ export default component$(() => {
   return (
     <>
       <div
-        class="fixed z-[1000] pointer-events-none md:block hidden"
+        class="fixed z-[9999] pointer-events-none md:block hidden view-transition-target-cursor"
         id="cursor"
         style={{
           opacity: 0,

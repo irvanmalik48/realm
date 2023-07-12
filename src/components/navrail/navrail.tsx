@@ -19,7 +19,7 @@ export const NavRail = component$(() => {
   const showNavRail = useSignal(false);
 
   return (
-    <section class="w-fit h-full z-50 flex flex-col items-center justify-center fixed top-0 left-0 text-neutral-100">
+    <section class="w-fit h-full z-[999] flex flex-col items-center justify-center fixed top-0 left-0 text-neutral-100">
       <button
         class="flex focus:outline-none items-center p-3 rounded-lg transition-[background-color_opacity_transform] opacity-50 hover:scale-105 active:scale-95 hover:opacity-100 hover:bg-neutral-900 fixed top-3 left-3 z-50"
         aria-label="Toggle navigation"
@@ -36,7 +36,7 @@ export const NavRail = component$(() => {
         />
       </button>
       <nav
-        class="flex p-3 rounded-r-xl bg-neutral-900 backdrop-blur-md bg-opacity-20 flex-col items-center justify-center gap-3 transition-[opacity_transform]"
+        class="flex p-3 rounded-r-xl bg-neutral-900 backdrop-blur-md bg-opacity-20 flex-col items-center justify-center gap-3 transition-[opacity_transform] view-transition-target-navrail"
         id="nav-items"
         style={{
           transform: showNavRail.value ? "translateX(0)" : "translateX(-125%)",

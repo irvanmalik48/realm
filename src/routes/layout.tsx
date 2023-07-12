@@ -24,7 +24,7 @@ export default component$(() => {
       <div class="z-20 fixed top-0 inset-x-0 h-16 pointer-events-none lg:hidden bg-gradient-to-b from-neutral-950 to-transparent" />
       <Cursor />
       <NavRail />
-      <section class="w-full mb-auto text-neutral-100">
+      <section class="w-full mb-auto text-neutral-100 view-transition-target-root">
         <Slot />
       </section>
       <Footer />
