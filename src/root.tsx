@@ -18,7 +18,7 @@ export default component$(() => {
    */
 
   return (
-    <QwikCityProvider>
+    <QwikCityProvider viewTransition>
       <head>
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#0A0A0A" />
