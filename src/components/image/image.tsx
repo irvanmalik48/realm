@@ -4,7 +4,7 @@ import { blurhashToCssGradientString } from "@unpic/placeholder";
 import { type ImageProps, Image as OptimizedImage } from "@unpic/qwik";
 
 const processImage = server$(async (imgUrl: string) => {
-  const blurhashFetch = await fetch(`${imgUrl}?fm=blurhash`).then((res) =>
+  const blurhashFetch = await fetch(`${imgUrl.split("?")[0]}?fm=blurhash`).then((res) =>
     res.text()
   );
 
