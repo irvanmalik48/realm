@@ -9,5 +9,15 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/analytics/count.js",
+      "destination": "https://gc.zgo.at/count.js"
+    },
+    {
+      "source": "/analytics/referrer",
+      "destination": "https://realm-analytics.goatcounter.com/count"
+    }
   ]
 }

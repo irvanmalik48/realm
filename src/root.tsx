@@ -43,9 +43,9 @@ export default component$(() => {
         <QwikPartytown forward={["dataLayer.push"]} />
         <script
           type="text/partytown"
-          data-goatcounter="https://realm-analytics.goatcounter.com/count"
+          data-goatcounter="https://realmof.tech/analytics/referrer"
           async
-          src="//gc.zgo.at/count.js"
+          src="//realmof.tech/analytics/count.js"
         />
         <RouterHead />
       </head>
