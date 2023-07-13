@@ -40,14 +40,6 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = ({ head }) => {
-  const getOgImageUrl = `https://realmof.tech/api/og?title=${encodeURIComponent(
-    head.title
-  )}&desc=${encodeURIComponent(
-    head.meta.find((meta) => meta.name === "description")?.content ??
-      "No description"
-  )}
-  )`;
-
   return {
     title: `realm | ${head.title}`,
     meta: [
@@ -68,10 +60,6 @@ export const head: DocumentHead = ({ head }) => {
         content:
           head.meta.find((meta) => meta.name === "og:description")?.content ??
           "No description",
-      },
-      {
-        name: "og:image",
-        content: getOgImageUrl,
       },
     ],
   };
