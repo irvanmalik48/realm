@@ -38,5 +38,14 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": ["error"],
     "@typescript-eslint/consistent-type-imports": "warn",
     "@typescript-eslint/no-unnecessary-condition": "warn",
+    "max-len": [
+      "warn",
+      {
+        code: 100,
+        ignoreComments: true,
+        ignoreTemplateLiterals: true,
+        ignorePattern: "^\\s*(https?://)?(www\\.)?.+",
+      },
+    ],
   },
 };
