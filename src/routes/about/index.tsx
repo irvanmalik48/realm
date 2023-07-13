@@ -21,8 +21,27 @@ import {
   SiPrisma,
   SiSupabase,
 } from "@qwikest/icons/simpleicons";
+import { twMerge } from "tailwind-merge";
 
 export default component$(() => {
+  const iterationClassMerged = twMerge(
+    "w-full p-5 rounded-xl flex flex-col items-center justify-center",
+    "gap-5 bg-neutral-900 bg-opacity-200 not-prose"
+  );
+
+  const proseStuff = twMerge(
+    "w-full prose max-w-full prose-invert prose-lg prose-headings:mb-6",
+    "prose-headings:font-heading prose-headings:text-neutral-100",
+    "prose-p:text-neutral-300 prose-headings:font-semibold mt-10",
+    "prose-headings:w-full prose-headings:border-b prose-headings:pb-3",
+    "prose-headings:border-neutral-700 prose-h2:text-3xl"
+  );
+
+  const iterationHeadingClasses = twMerge(
+    "text-xl font-semibold mx-auto px-5 py-1",
+    "rounded-full bg-neutral-950 font-heading"
+  );
+
   return (
     <>
       <section class="w-full max-w-4xl px-5 py-24 mx-auto min-h-screen relative">
@@ -34,7 +53,7 @@ export default component$(() => {
         <p class="mt-5 text-neutral-300 text-lg">
           Knowing me a bit doesn't hurt, right?
         </p>
-        <div class="w-full prose max-w-full prose-invert prose-lg prose-headings:mb-6 prose-headings:font-heading prose-headings:text-neutral-100 prose-p:text-neutral-300 prose-headings:font-semibold mt-10 prose-headings:w-full prose-headings:border-b prose-headings:pb-3 prose-headings:border-neutral-700 prose-h2:text-3xl">
+        <div class={proseStuff}>
           <h2 id="toc">Table of Contents</h2>
           <ul>
             <li>
@@ -154,10 +173,8 @@ export default component$(() => {
             technologies to build this website, and I'm pretty sure I'm not
             gonna stop anytime soon.
           </p>
-          <div class="w-full p-5 rounded-xl flex flex-col items-center justify-center gap-5 bg-neutral-900 bg-opacity-200 not-prose">
-            <h3 class="text-xl font-semibold mx-auto px-5 py-1 rounded-full bg-neutral-950 font-heading">
-              First iteration
-            </h3>
+          <div class={iterationClassMerged}>
+            <h3 class={iterationHeadingClasses}>First iteration</h3>
             <div class="gap-5 flex items-center justify-center flex-wrap">
               <SiJekyll class="w-16 h-16" />
               <SiGithub class="w-16 h-16" />
@@ -173,10 +190,8 @@ export default component$(() => {
             simple, fast, and easy to use. But I'm not really a fan of Ruby, so
             I decided to move on.
           </p>
-          <div class="w-full p-5 rounded-xl flex flex-col items-center justify-center gap-5 bg-neutral-900 bg-opacity-200 not-prose">
-            <h3 class="text-xl font-semibold mx-auto px-5 py-1 rounded-full bg-neutral-950 font-heading">
-              Second iteration
-            </h3>
+          <div class={iterationClassMerged}>
+            <h3 class={iterationHeadingClasses}>Second iteration</h3>
             <div class="gap-5 flex items-center justify-center flex-wrap">
               <SiNextdotjs class="w-16 h-16" />
               <SiReact class="w-16 h-16" />
@@ -212,10 +227,8 @@ export default component$(() => {
             gonna lie, it was pretty hard to learn at first. But once you get
             the hang of it, it's pretty easy to use.
           </p>
-          <div class="w-full p-5 rounded-xl flex flex-col items-center justify-center gap-5 bg-neutral-900 bg-opacity-200 not-prose">
-            <h3 class="text-xl font-semibold mx-auto px-5 py-1 rounded-full bg-neutral-950 font-heading">
-              Third iteration
-            </h3>
+          <div class={iterationClassMerged}>
+            <h3 class={iterationHeadingClasses}>Third iteration</h3>
             <div class="gap-5 flex items-center justify-center flex-wrap">
               <SiDeno class="w-16 h-16" />
               <SiPreact class="w-16 h-16" />
@@ -240,10 +253,8 @@ export default component$(() => {
             only loading the JavaScript that I need. But I got bored of it, too,
             and I decided to move on.
           </p>
-          <div class="w-full p-5 rounded-xl flex flex-col items-center justify-center gap-5 bg-neutral-900 bg-opacity-200 not-prose">
-            <h3 class="text-xl font-semibold mx-auto px-5 py-1 rounded-full bg-neutral-950 font-heading">
-              Fourth iteration
-            </h3>
+          <div class={iterationClassMerged}>
+            <h3 class={iterationHeadingClasses}>Fourth iteration</h3>
             <div class="gap-5 flex items-center justify-center flex-wrap">
               <SiAstro class="w-16 h-16" />
               <SiSolid class="w-16 h-16" />
@@ -275,10 +286,8 @@ export default component$(() => {
             blog posts. It's very easy to use, and it's very powerful. I'm very
             happy with it.
           </p>
-          <div class="w-full p-5 rounded-xl flex flex-col items-center justify-center gap-5 bg-neutral-900 bg-opacity-200 not-prose">
-            <h3 class="text-xl font-semibold mx-auto px-5 py-1 rounded-full bg-neutral-950 font-heading">
-              Fifth iteration
-            </h3>
+          <div class={iterationClassMerged}>
+            <h3 class={iterationHeadingClasses}>Fifth iteration</h3>
             <div class="gap-5 flex items-center justify-center flex-wrap">
               <svg
                 viewBox="0 0 144 152"
@@ -289,7 +298,27 @@ export default component$(() => {
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
-                  d="M140.486 53.6496L135.013 43.5496L132.158 38.3806L131.028 36.3606L130.908 36.4806L115.918 10.5166C112.17 3.98164 105.15 -0.0583616 97.5339 0.000637503L84.3899 0.357638L45.1849 0.476639C37.7499 0.536639 30.9679 4.45664 27.2199 10.8136L3.52285 57.7925C-0.910409 64.5681 -1.22471 73.7217 2.95088 80.7406L27.8169 121.973C31.6249 128.33 38.5249 132.133 45.9609 132.073L58.2759 131.953L125.616 151.738L125.434 151.556C126.38 152.102 127.644 151.113 127.042 150.074L113.122 122.686L137.392 77.8296L138.166 76.9386L138.192 76.9074C138.48 76.5609 138.768 76.2151 138.999 75.8686C143.759 69.3936 144.412 60.7186 140.486 53.6486V53.6496ZM97.9539 124.706L98.0119 124.697V124.586L97.9539 124.702V124.706ZM96.9798 116.852L97.9097 124.365L97.7881 124.245L97.8319 124.646L39.7119 66.9576L53.9889 53.1146L48.6973 21.3262L45.9055 5.30917L46.0179 5.16964L52.8668 12.6935L102.115 66.3636L101.918 66.5788L101.938 66.6006L101.404 67.1401L92.5969 76.7606L96.9798 116.852Z"
+                  d={[
+                    "M140.486 53.6496L135.013 43.5496L132.158",
+                    "38.3806L131.028 36.3606L130.908 36.4806L115.918",
+                    "10.5166C112.17 3.98164 105.15 -0.0583616 97.5339",
+                    "0.000637503L84.3899 0.357638L45.1849 0.476639C37.7499",
+                    "0.536639 30.9679 4.45664 27.2199 10.8136L3.52285",
+                    "57.7925C-0.910409 64.5681 -1.22471 73.7217 2.95088",
+                    "80.7406L27.8169 121.973C31.6249 128.33 38.5249",
+                    "132.133 45.9609 132.073L58.2759 131.953L125.616",
+                    "151.738L125.434 151.556C126.38 152.102 127.644",
+                    "151.113 127.042 150.074L113.122 122.686L137.392",
+                    "77.8296L138.166 76.9386L138.192 76.9074C138.48 76.5609",
+                    "138.768 76.2151 138.999 75.8686C143.759 69.3936 144.412",
+                    "60.7186 140.486 53.6486V53.6496ZM97.9539 124.706L98.0119",
+                    "124.697V124.586L97.9539 124.702V124.706ZM96.9798",
+                    "116.852L97.9097 124.365L97.7881 124.245L97.8319",
+                    "124.646L39.7119 66.9576L53.9889 53.1146L48.6973",
+                    "21.3262L45.9055 5.30917L46.0179 5.16964L52.8668",
+                    "12.6935L102.115 66.3636L101.918 66.5788L101.938",
+                    "66.6006L101.404 67.1401L92.5969 76.7606L96.9798 116.852Z",
+                  ].join(" ")}
                   fill="currentColor"
                 />
               </svg>
