@@ -1,5 +1,6 @@
 import { component$, Slot } from "@builder.io/qwik";
 import type { DocumentHead, RequestHandler } from "@builder.io/qwik-city";
+import { twMerge } from "tailwind-merge";
 import Cursor from "~/components/cursor/cursor";
 import Footer from "~/components/footer/footer";
 import { NavRail } from "~/components/navrail/navrail";
@@ -21,7 +22,13 @@ export default component$(() => {
       id="root"
       class="w-full bg-neutral-950 min-h-[100vh] flex flex-col relative"
     >
-      <div class="z-20 fixed top-0 inset-x-0 h-16 pointer-events-none lg:hidden bg-gradient-to-b from-neutral-950 to-transparent" />
+      <div
+        class={twMerge(
+          "z-20 fixed top-0 inset-x-0 h-16",
+          "pointer-events-none lg:hidden",
+          "bg-gradient-to-b from-neutral-950 to-transparent"
+        )}
+      />
       <Cursor />
       <NavRail />
       <section class="w-full mb-auto text-neutral-100 view-transition-target-root">
