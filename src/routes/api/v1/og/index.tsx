@@ -14,14 +14,6 @@ export const onGet: RequestHandler = async ({ query, send }) => {
   const title = query.get("title") ?? "Untitled";
   const desc = query.get("desc") ?? "No description";
 
-  const fontDataHeading = await fetch(
-    "http://localhost:5173/fonts/Hubot-Sans-Bold.ttf"
-  ).then((res) => res.arrayBuffer());
-
-  const fontDataSans = await fetch(
-    "http://localhost:5173/fonts/Mona-Sans-Regular.ttf"
-  ).then((res) => res.arrayBuffer());
-
   const image = new ImageResponse(
     (
       <div
@@ -81,40 +73,14 @@ export const onGet: RequestHandler = async ({ query, send }) => {
             "py-8 bg-neutral-900"
           )}
         >
-          <h1
-            tw="m-0 mb-3 text-5xl font-bold"
-            style={{
-              fontFamily: "Hubot Sans",
-            }}
-          >
-            {title}
-          </h1>
-          <p
-            tw="m-0 text-2xl truncate"
-            style={{
-              fontFamily: "Mona Sans",
-            }}
-          >
-            {desc}
-          </p>
+          <h1 tw="m-0 mb-3 text-5xl font-bold">{title}</h1>
+          <p tw="m-0 text-2xl truncate">{desc}</p>
         </div>
       </div>
     ),
     {
       width: 1200,
       height: 630,
-      fonts: [
-        {
-          name: "Hubot Sans",
-          data: fontDataHeading,
-          weight: 700,
-        },
-        {
-          name: "Mona Sans",
-          data: fontDataSans,
-          weight: 400,
-        },
-      ],
     }
   );
 
