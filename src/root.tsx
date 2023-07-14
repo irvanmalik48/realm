@@ -50,7 +50,7 @@ export default component$(() => {
           src="//realmof.tech/analytics/count.js"
           nonce={nonce}
         />
-        <RouterHead />
+        <RouterHead nonce={nonce} />
       </head>
       <body
         lang="en"
