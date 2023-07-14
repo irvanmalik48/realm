@@ -4,7 +4,7 @@ import { isDev } from "@builder.io/qwik/build";
 export const onRequest: RequestHandler = (event) => {
   if (isDev) return;
 
-  const nonce = atob(crypto.randomUUID().split("-").join(""));
+  const nonce = crypto.randomUUID().split("-").join("");
   event.sharedMap.set("@nonce", nonce);
   const csp = [
     `default-src 'self' 'unsafe-inline'`,
