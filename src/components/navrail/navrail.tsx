@@ -123,17 +123,18 @@ export const NavRail = component$(() => {
           if (item.key === "home") {
             isActive = loc.url.pathname === "/";
           } else {
-            isActive = loc.url.pathname === `${item.href}/`
+            isActive = loc.url.pathname === `${item.href}/`;
           }
 
           return (
             <Link
               key={item.key}
               href={item.href}
-              class={`flex items-center p-3 rounded-lg transition ${isActive
-                ? "bg-neutral-900 hover:bg-neutral-800"
-                : "hover:bg-neutral-900"
-                }`}
+              class={`flex items-center p-3 rounded-lg transition ${
+                isActive
+                  ? "bg-neutral-900 hover:bg-neutral-800"
+                  : "hover:bg-neutral-900"
+              }`}
               aria-label={item.label}
               title={item.label}
             >
