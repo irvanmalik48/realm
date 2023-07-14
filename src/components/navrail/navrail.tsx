@@ -118,9 +118,13 @@ export const NavRail = component$(() => {
         }}
       >
         {navItems.map((item) => {
-          const isActive =
-            loc.url.pathname === `${item.href}/` ||
-            loc.url.pathname === item.href.replace("/", "");
+          let isActive: boolean;
+
+          if (item.key === "home") {
+            isActive = loc.url.pathname === "/";
+          } else {
+            isActive = loc.url.pathname === `${item.href}/`
+          }
 
           return (
             <Link
@@ -135,7 +139,7 @@ export const NavRail = component$(() => {
             >
               {item.icon}
             </Link>
-          )
+          );
         })}
         <span class="w-5 h-0.5 block bg-neutral-800 rounded-full" />
         {socialLinks.map((link) => (
