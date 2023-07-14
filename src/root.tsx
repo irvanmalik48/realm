@@ -1,4 +1,4 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useServerData } from "@builder.io/qwik";
 import {
   QwikCityProvider,
   RouterOutlet,
@@ -16,6 +16,8 @@ export default component$(() => {
    *
    * Don't remove the `<head>` and `<body>` elements.
    */
+
+  const nonce = useServerData<string | undefined>("nonce");
 
   return (
     <QwikCityProvider viewTransition>
@@ -46,6 +48,7 @@ export default component$(() => {
           data-goatcounter="https://realmof.tech/analytics/referrer"
           async
           src="//realmof.tech/analytics/count.js"
+          nonce={nonce}
         />
         <RouterHead />
       </head>
@@ -54,7 +57,7 @@ export default component$(() => {
         class="scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-neutral-900"
       >
         <RouterOutlet />
-        <ServiceWorkerRegister />
+        <ServiceWorkerRegister nonce={nonce} />
       </body>
     </QwikCityProvider>
   );
