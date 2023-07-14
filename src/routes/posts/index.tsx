@@ -4,6 +4,7 @@ import {
   type DocumentHeadProps,
   type DocumentHead,
 } from "@builder.io/qwik-city";
+import { twMerge } from "tailwind-merge";
 import { asyncMap } from "~/lib/asyncmap";
 
 type PostSummary = {
@@ -50,7 +51,11 @@ export default component$(() => {
         <Resource
           value={postRes}
           onResolved={(posts) => (
-            <div class="flex flex-col mt-10 border-y border-neutral-800 divide-y divide-neutral-800">
+            <div
+              class={
+                "flex flex-col mt-10 border-y border-neutral-800 divide-y divide-neutral-800"
+              }
+            >
               {posts.map((post) => (
                 <Link
                   key={post.permalink}
@@ -67,7 +72,10 @@ export default component$(() => {
                       {post.tags.map((tag) => (
                         <span
                           key={tag}
-                          class="px-3 py-1 mr-2 bg-neutral-800 rounded-full text-neutral-300 text-xs"
+                          class={twMerge(
+                            "px-3 py-1 mr-2 bg-neutral-800",
+                            "rounded-full text-neutral-300 text-xs"
+                          )}
                         >
                           {tag}
                         </span>
