@@ -117,20 +117,26 @@ export const NavRail = component$(() => {
           opacity: showNavRail.value ? "1" : "0",
         }}
       >
-        {navItems.map((item) => (
-          <Link
-            key={item.key}
-            href={item.href}
-            class={`flex items-center p-3 rounded-lg transition ${loc.url.pathname.includes(item.href)
+        {navItems.map((item) => {
+          const isActive =
+            loc.url.pathname === `${item.href}/` ||
+            loc.url.pathname === item.href.replace("/", "");
+
+          return (
+            <Link
+              key={item.key}
+              href={item.href}
+              class={`flex items-center p-3 rounded-lg transition ${isActive
                 ? "bg-neutral-900 hover:bg-neutral-800"
                 : "hover:bg-neutral-900"
-              }`}
-            aria-label={item.label}
-            title={item.label}
-          >
-            {item.icon}
-          </Link>
-        ))}
+                }`}
+              aria-label={item.label}
+              title={item.label}
+            >
+              {item.icon}
+            </Link>
+          )
+        })}
         <span class="w-5 h-0.5 block bg-neutral-800 rounded-full" />
         {socialLinks.map((link) => (
           <a
