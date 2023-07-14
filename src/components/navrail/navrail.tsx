@@ -121,11 +121,10 @@ export const NavRail = component$(() => {
           <Link
             key={item.key}
             href={item.href}
-            class={`flex items-center p-3 rounded-lg transition ${
-              loc.url.pathname === `${item.href}/`
+            class={`flex items-center p-3 rounded-lg transition ${loc.url.pathname.includes(item.href)
                 ? "bg-neutral-900 hover:bg-neutral-800"
                 : "hover:bg-neutral-900"
-            }`}
+              }`}
             aria-label={item.label}
             title={item.label}
           >
