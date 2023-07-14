@@ -64,7 +64,7 @@ export const head: DocumentHead = ({ head }) => {
       {
         name: "og:image",
         content: "https://cdn.realmof.tech/og-image_rwqxap.jpg",
-      }
+      },
     ],
   };
 };
