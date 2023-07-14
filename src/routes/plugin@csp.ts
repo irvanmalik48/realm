@@ -9,7 +9,7 @@ export const onRequest: RequestHandler = (event) => {
   const csp = [
     `default-src 'self' 'unsafe-inline'`,
     `font-src 'self'`,
-    `img-src 'self' 'unsafe-inline' data: https://cdn.realmof.tech`,
+    `img-src 'self' 'unsafe-inline' data: https://cdn.realmof.tech https://avatars.githubusercontent.com`,
     `script-src 'self' 'unsafe-inline' https: 'nonce-${nonce}' 'strict-dynamic'`,
     `style-src 'self' 'unsafe-inline'`,
     `frame-src 'self' 'nonce-${nonce}'`,
