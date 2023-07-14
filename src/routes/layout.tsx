@@ -61,6 +61,10 @@ export const head: DocumentHead = ({ head }) => {
           head.meta.find((meta) => meta.name === "og:description")?.content ??
           "No description",
       },
+      {
+        name: "og:image",
+        content: "https://cdn.realmof.tech/og-image_rwqxap.jpg",
+      }
     ],
   };
 };
