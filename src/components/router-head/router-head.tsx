@@ -4,7 +4,7 @@ import { useDocumentHead, useLocation } from "@builder.io/qwik-city";
 /**
  * The RouterHead component is placed inside of the document `<head>` element.
  */
-export const RouterHead = component$(() => {
+export const RouterHead = component$(({ nonce }: { nonce?: string }) => {
   const head = useDocumentHead();
   const loc = useLocation();
 
@@ -25,7 +25,12 @@ export const RouterHead = component$(() => {
       ))}
 
       {head.styles.map((s) => (
-        <style key={s.key} {...s.props} dangerouslySetInnerHTML={s.style} />
+        <style
+          key={s.key}
+          {...s.props}
+          dangerouslySetInnerHTML={s.style}
+          nonce={nonce}
+        />
       ))}
     </>
   );
