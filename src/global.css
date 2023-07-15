@@ -204,3 +204,25 @@ div[data-rehype-pretty-code-title] + pre {
 div[data-rehype-pretty-code-title] {
   @apply w-fit flex items-center justify-center text-sm rounded-full px-3 py-1 bg-neutral-900 font-mono;
 }
+
+@keyframes pan-overlay {
+  from {
+    background-position: 0% 0%;
+  }
+
+  to {
+    background-position: 0% -100%;
+  }
+}
+
+.screen-overlay {
+  background: linear-gradient(
+    rgb(6 182 212 / 0.05),
+    rgb(6 182 212 / 0.05) 3px,
+    transparent 3px,
+    transparent 9px
+  );
+  background-size: 100% 9px;
+  animation: pan-overlay 22s infinite linear;
+  @apply absolute z-20 left-0 top-0 w-full h-full;
+}
