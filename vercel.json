@@ -13,34 +13,10 @@
   "rewrites": [
     {
       "source": "/analytics/count.js",
-      "has": [
-        {
-          "type": "header",
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://www.realmof.tech"
-        },
-        {
-          "type": "header",
-          "key": "Vary",
-          "value": "Origin"
-        }
-      ],
       "destination": "https://gc.zgo.at/count.js"
     },
     {
       "source": "/analytics/referrer",
-      "has": [
-        {
-          "type": "header",
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://www.realmof.tech"
-        },
-        {
-          "type": "header",
-          "key": "Vary",
-          "value": "Origin"
-        }
-      ],
       "destination": "https://realm-analytics.goatcounter.com/count"
     }
   ]
