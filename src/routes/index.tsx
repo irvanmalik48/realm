@@ -10,7 +10,6 @@ import {
   LuInfo,
   LuHeartHandshake,
   LuThumbsUp,
-  LuArrowDown,
 } from "@qwikest/icons/lucide";
 import { Waves } from "~/components/waves/waves";
 import { Marquees } from "~/components/intro-section-marquees/intro-section-marquees";
@@ -129,23 +128,6 @@ export default component$(() => {
               </div>
             </Link>
           ))}
-          <Link
-            href={"#intro"}
-            title="Scroll down to the introduction section"
-            class={twMerge(
-              "w-fit absolute bottom-10 left-1/2 -translate-x-1/2 hover:scale-125",
-              "duration-500 transition active:scale-90 bg-neutral-800",
-              "rounded-full flex items-center justify-center p-5"
-            )}
-          >
-            <div class="w-4 h-4 rounded-full absolute -bottom-1.5 bg-cyan-500" />
-            <div
-              class={
-                "w-4 h-4 rounded-full absolute -bottom-1.5 bg-cyan-500 animate-ping"
-              }
-            />
-            <LuArrowDown class="w-8 h-8" />
-          </Link>
         </div>
       </section>
       <Marquees>
@@ -172,23 +154,6 @@ export default component$(() => {
             </p>
           </div>
           <Waves />
-          <Link
-            href={"#stance"}
-            title="Stance towards the retarded events"
-            class={twMerge(
-              "w-fit absolute bottom-24 left-1/2 -translate-x-1/2 hover:scale-125",
-              "duration-500 transition active:scale-90 bg-neutral-800",
-              "rounded-full flex items-center justify-center p-5"
-            )}
-          >
-            <div class="w-4 h-4 rounded-full absolute -bottom-1.5 bg-red-400" />
-            <div
-              class={
-                "w-4 h-4 rounded-full absolute -bottom-1.5 bg-red-400 animate-ping"
-              }
-            />
-            <LuArrowDown class="w-8 h-8" />
-          </Link>
         </section>
       </Marquees>
       <section
