@@ -1,9 +1,9 @@
 import { component$, Slot } from "@builder.io/qwik";
 import type { DocumentHead, RequestHandler } from "@builder.io/qwik-city";
 import { twMerge } from "tailwind-merge";
+import BottomBar from "~/components/bottom-bar/bottom-bar";
 import Cursor from "~/components/cursor/cursor";
 import Footer from "~/components/footer/footer";
-import { NavRail } from "~/components/navrail/navrail";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -29,9 +29,12 @@ export default component$(() => {
           "bg-gradient-to-b from-neutral-950 to-transparent"
         )}
       />
+      <BottomBar />
       <Cursor />
-      <NavRail />
-      <section class="w-full mb-auto text-neutral-100 view-transition-target-root">
+      <section
+        id="main-section"
+        class="w-full z-[2] mb-auto text-neutral-100 view-transition-target-root"
+      >
         <Slot />
       </section>
       <Footer />
