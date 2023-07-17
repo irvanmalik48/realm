@@ -6,10 +6,12 @@ export default component$(() => {
     "mousemove",
     $((event) => {
       const cursor = document.getElementById("cursor");
+      const cursorPing = document.getElementById("cursor-ping");
       const cursorIcon = document.getElementById("cursor-icon");
       const mouseEvent = event as MouseEvent;
 
       if (!cursor) return;
+      if (!cursorPing) return;
       if (!cursorIcon) return;
 
       cursor.animate(
@@ -35,6 +37,48 @@ export default component$(() => {
           fill: "forwards",
         }
       );
+
+      if ((mouseEvent.target as HTMLElement).closest("a, button")) {
+        cursor.animate(
+          {
+            scale: 1.5,
+          },
+          {
+            duration: 200,
+            fill: "forwards",
+          }
+        );
+
+        cursorIcon.animate(
+          {
+            opacity: 1,
+          },
+          {
+            duration: 200,
+            fill: "forwards",
+          }
+        );
+      } else {
+        cursor.animate(
+          {
+            scale: 1,
+          },
+          {
+            duration: 200,
+            fill: "forwards",
+          }
+        );
+
+        cursorIcon.animate(
+          {
+            opacity: 0,
+          },
+          {
+            duration: 200,
+            fill: "forwards",
+          }
+        );
+      }
     })
   );
 
