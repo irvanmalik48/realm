@@ -79,10 +79,11 @@ export default component$(() => {
     <>
       <button
         id="controller"
-        class={`transition z-[21] rounded-full fixed right-5 bottom-5 md:right-10 md:bottom-10 p-5 ${isOpen.value
-          ? "bg-cyan-500 text-neutral-950"
-          : "bg-neutral-800 text-neutral-100 bg-opacity-50 backdrop-blur-lg"
-          }`}
+        class={`transition z-[21] rounded-full fixed right-5 bottom-5 md:right-10 md:bottom-10 p-5 ${
+          isOpen.value
+            ? "bg-cyan-500 text-neutral-950"
+            : "bg-neutral-800 text-neutral-100 bg-opacity-50 backdrop-blur-lg"
+        }`}
         onClick$={() => {
           isOpen.value = !isOpen.value;
         }}
