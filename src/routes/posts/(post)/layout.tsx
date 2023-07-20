@@ -14,7 +14,7 @@ export default component$(() => {
     "prose-headings:border-neutral-700 prose-h2:text-3xl",
     "prose-code:break-words prose-a:break-words prose-pre:rounded-xl",
     "prose-pre:scrollbar-thin prose-pre:scrollbar-thumb-neutral-700",
-    "prose-pre:scrollbar-track-neutral-900"
+    "prose-pre:scrollbar-track-neutral-900 prose-pre:font-mono"
   );
 
   return (
