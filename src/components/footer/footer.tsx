@@ -1,13 +1,24 @@
 import { component$ } from "@builder.io/qwik";
 import { FooterTop } from "../footer-top/footer-top";
+import { twMerge } from "tailwind-merge";
 
 export default component$(() => {
   return (
     <>
       <FooterTop class="w-full" />
-      <footer class="w-full px-5 pt-2 pb-4 bg-neutral-900 bg-opacity-20 text-neutral-100">
+      <footer
+        class={twMerge(
+          "w-full px-5 pt-2 pb-4 bg-neutral-900",
+          "bg-opacity-20 text-neutral-100"
+        )}
+      >
         <div class="mx-auto max-w-4xl flex flex-col gap-1 items-center">
-          <p class="text-center text-sm rounded-full px-5 py-1 leading-sm mb-2 bg-neutral-900 font-heading">
+          <p
+            class={twMerge(
+              "text-center text-sm rounded-full px-5 py-1",
+              "leading-sm mb-2 bg-neutral-900 font-heading"
+            )}
+          >
             <span class="text-neutral-300">© 2023 Irvan Malik Azantha</span>
           </p>
           <p class="text-center text-sm">
