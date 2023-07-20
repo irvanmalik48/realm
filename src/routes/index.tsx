@@ -192,9 +192,10 @@ export default component$(() => {
           }
         >
           <div
-            class={
-              "absolute right-0 inset-y-0 w-56 bg-gradient-to-l from-neutral-950 to-transparent z-10"
-            }
+            class={twMerge(
+              "absolute right-0 inset-y-0 w-56 bg-gradient-to-l",
+              "from-neutral-950 to-transparent z-10"
+            )}
           />
           <Image
             src="https://cdn.realmof.tech/ukraine-war_vqtmtr.jpg?w=0.75&expires=2019488400"
