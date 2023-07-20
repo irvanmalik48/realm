@@ -13,6 +13,7 @@ import {
   SiLinkedin,
   SiGithub,
 } from "@qwikest/icons/simpleicons";
+import { twMerge } from "tailwind-merge";
 
 const navItems = [
   {
@@ -79,7 +80,10 @@ export default component$(() => {
     <>
       <button
         id="controller"
-        class={`transition z-[21] rounded-full fixed right-5 bottom-5 md:right-10 md:bottom-10 p-5 ${
+        class={`${twMerge(
+          "transition z-[21] rounded-full fixed right-5",
+          "bottom-5 md:right-10 md:bottom-10 p-5"
+        )} ${
           isOpen.value
             ? "bg-cyan-500 text-neutral-950"
             : "bg-neutral-800 text-neutral-100 bg-opacity-50 backdrop-blur-lg"
@@ -101,7 +105,7 @@ export default component$(() => {
         style={{
           opacity: isOpen.value ? 1 : 0,
           backdropFilter: "blur(14px)",
-          transition: "all 500ms cubic-bezier(.33,.56,.33,.94)",
+          transition: "all 250ms cubic-bezier(.33,.56,.33,.94)",
           pointerEvents: isOpen.value ? "auto" : "none",
         }}
         onClick$={() => {
@@ -109,11 +113,15 @@ export default component$(() => {
         }}
       />
       <nav
-        class="w-full fixed bottom-0 h-[30vh] md:h-[75vh] lg:h-[50vh] bg-neutral-950 rounded-t-2xl z-20 p-5 pt-7 md:p-10"
+        class={twMerge(
+          "w-full fixed bottom-0 h-[30vh] md:h-[75vh]",
+          "lg:h-[50vh] bg-neutral-950 rounded-t-2xl",
+          "z-20 p-5 pt-7 md:p-10"
+        )}
         style={{
           transform: isOpen.value ? "translateY(0)" : "translateY(100%)",
           opacity: isOpen.value ? 1 : 0,
-          transition: "all 500ms cubic-bezier(.33,.56,.33,.94)",
+          transition: "all 250ms cubic-bezier(.33,.56,.33,.94)",
         }}
       >
         <div class="absolute w-fit left-5 bottom-5 md:left-10 md:bottom-10">
@@ -126,7 +134,11 @@ export default component$(() => {
                 key={item.key}
                 href={item.href}
                 rel={item.rel}
-                class="rounded-full bg-neutral-900 text-neutral-100 bg-opacity-50 backdrop-blur-lg flex items-center justify-center p-3"
+                class={twMerge(
+                  "rounded-full bg-neutral-900 text-neutral-100",
+                  "bg-opacity-50 backdrop-blur-lg flex items-center",
+                  "justify-center p-3"
+                )}
                 target="_blank"
                 onClick$={() => {
                   isOpen.value = false;
@@ -137,7 +149,12 @@ export default component$(() => {
             ))}
           </div>
         </div>
-        <div class="w-full text-center md:text-left grid grid-cols-2 lg:grid-cols-4 md:gap-x-10 gap-x-5 gap-y-5">
+        <div
+          class={twMerge(
+            "w-full text-center md:text-left grid grid-cols-2",
+            "lg:grid-cols-4 md:gap-x-10 gap-x-5 gap-y-5"
+          )}
+        >
           {navItems.map((item) => (
             <Link
               key={item.key}
@@ -147,11 +164,28 @@ export default component$(() => {
                 isOpen.value = false;
               }}
             >
-              <p class="w-full text-neutral-100 uppercase px-5 py-2 rounded-full bg-neutral-900 md:px-0 md:py-0 md:bg-transparent font-heading font-medium">
+              <p
+                class={twMerge(
+                  "w-full text-neutral-100 uppercase px-5 py-2 rounded-full",
+                  "bg-neutral-900 md:px-0 md:py-0 md:bg-transparent",
+                  "font-heading font-medium"
+                )}
+              >
                 {item.label}
               </p>
-              <div class="aspect-video group-hover:bg-opacity-100 transition-all hidden w-full bg-neutral-900 bg-opacity-20 md:grid grid-cols-1 place-content-center text-neutral-100 rounded-xl">
-                <div class="p-5 w-fit group-hover:bg-neutral-950 transition-all mx-auto rounded-full bg-neutral-900">
+              <div
+                class={twMerge(
+                  "aspect-video group-hover:bg-opacity-100 transition-all",
+                  "hidden w-full bg-neutral-900 bg-opacity-20 md:grid grid-cols-1",
+                  "place-content-center text-neutral-100 rounded-xl"
+                )}
+              >
+                <div
+                  class={twMerge(
+                    "p-5 w-fit group-hover:bg-neutral-950 transition-all",
+                    "mx-auto rounded-full bg-neutral-900"
+                  )}
+                >
                   {item.icon}
                 </div>
               </div>
