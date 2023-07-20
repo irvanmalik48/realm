@@ -1,4 +1,4 @@
-import { component$, useSignal } from "@builder.io/qwik";
+import { component$, useSignal, useTask$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 import {
   LuBriefcase,
@@ -14,6 +14,7 @@ import {
   SiGithub,
 } from "@qwikest/icons/simpleicons";
 import { twMerge } from "tailwind-merge";
+import { animate } from "motion";
 
 const navItems = [
   {
@@ -76,6 +77,88 @@ const socialLinks = [
 export default component$(() => {
   const isOpen = useSignal(false);
 
+  useTask$(({ track }) => {
+    const tracking = track(() => isOpen.value);
+    if (typeof window === "undefined") return;
+
+    const blockingBg = document.getElementById("blocking-bg");
+    const actualNav = document.getElementById("actual-nav");
+    const mainSection = document.getElementById("main-section");
+
+    if (!blockingBg) return;
+    if (!actualNav) return;
+    if (!mainSection) return;
+
+    if (tracking) {
+      animate(
+        blockingBg,
+        {
+          opacity: 1,
+          pointerEvents: "auto",
+        },
+        {
+          allowWebkitAcceleration: true,
+        }
+      );
+
+      animate(
+        actualNav,
+        {
+          opacity: 1,
+          transform: "translateY(0)",
+        },
+        {
+          allowWebkitAcceleration: true,
+        }
+      );
+
+      animate(
+        mainSection,
+        {
+          filter: "blur(14px)",
+          transform: `translateY(-${actualNav.offsetHeight / 3}px)`,
+        },
+        {
+          allowWebkitAcceleration: true,
+        }
+      );
+    } else {
+      animate(
+        blockingBg,
+        {
+          opacity: 0,
+          pointerEvents: "none",
+        },
+        {
+          allowWebkitAcceleration: true,
+        }
+      );
+
+      animate(
+        actualNav,
+        {
+          opacity: 0,
+          // Trick to get Chrome's GPU acceleration to work
+          transform: `translateY(${actualNav.offsetHeight}px)`,
+        },
+        {
+          allowWebkitAcceleration: true,
+        }
+      );
+
+      animate(
+        mainSection,
+        {
+          filter: "blur(0)",
+          transform: "translateY(0)",
+        },
+        {
+          allowWebkitAcceleration: true,
+        }
+      );
+    }
+  });
+
   return (
     <>
       <button
@@ -101,10 +184,11 @@ export default component$(() => {
         />
       </button>
       <div
-        class="fixed inset-0 z-10 bg-neutral-900 bg-opacity-70 focus:outline-none"
+        class="fixed inset-0 z-10 bg-neutral-800 bg-opacity-70 focus:outline-none"
+        id="blocking-bg"
         style={{
-          opacity: isOpen.value ? 1 : 0,
-          backdropFilter: "blur(14px)",
+          opacity: 0,
+          pointerEvents: "none",
         }}
         onClick$={() => {
           isOpen.value = false;
@@ -116,10 +200,10 @@ export default component$(() => {
           "lg:h-[50vh] bg-neutral-950 rounded-t-2xl",
           "z-20 p-5 pt-7 md:p-10"
         )}
+        id="actual-nav"
         style={{
-          transform: isOpen.value ? "translateY(0)" : "translateY(100%)",
-          opacity: isOpen.value ? 1 : 0,
-          transition: "all 250ms cubic-bezier(.33,.56,.33,.94)",
+          transform: `translateY(1000px)`,
+          opacity: 0,
         }}
       >
         <div class="absolute w-fit left-5 bottom-5 md:left-10 md:bottom-10">
