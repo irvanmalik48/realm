@@ -27,6 +27,27 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono.ttf") format("truetype supports variations");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+  font-variant-ligatures: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Italic.ttf")
+    format("truetype supports variations");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+  font-variant-ligatures: normal;
+  font-style: italic;
+}
+
 html,
 body {
   @apply scroll-smooth;
