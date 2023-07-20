@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         sans: ["Mona Sans", "sans-serif"],
         heading: ["Hubot Sans", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
