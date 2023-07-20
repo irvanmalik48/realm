@@ -105,8 +105,6 @@ export default component$(() => {
         style={{
           opacity: isOpen.value ? 1 : 0,
           backdropFilter: "blur(14px)",
-          transition: "all 250ms cubic-bezier(.33,.56,.33,.94)",
-          pointerEvents: isOpen.value ? "auto" : "none",
         }}
         onClick$={() => {
           isOpen.value = false;

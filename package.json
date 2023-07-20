@@ -41,6 +41,7 @@
     "eslint": "8.44.0",
     "eslint-plugin-qwik": "^1.2.6",
     "husky": "^8.0.3",
+    "motion": "^10.16.2",
     "postcss": "^8.4.26",
     "prettier": "2.8.8",
     "rehype-pretty-code": "^0.10.0",
