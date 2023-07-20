@@ -1,5 +1,6 @@
 import { $, component$, useOnDocument } from "@builder.io/qwik";
 import { LuArrowUpRight } from "@qwikest/icons/lucide";
+import { twMerge } from "tailwind-merge";
 
 export default component$(() => {
   useOnDocument(
@@ -156,7 +157,10 @@ export default component$(() => {
   return (
     <>
       <div
-        class="fixed z-[9999] pointer-events-none lg:block hidden view-transition-target-cursor"
+        class={twMerge(
+          "fixed z-[9999] pointer-events-none lg:block",
+          "hidden view-transition-target-cursor"
+        )}
         id="cursor"
         style={{
           opacity: 0,
@@ -169,7 +173,10 @@ export default component$(() => {
           id="cursor-ping"
         />
         <div
-          class="bg-neutral-100 rounded-full flex flex-col gap-1 z-10 relative justify-center items-center"
+          class={twMerge(
+            "bg-neutral-100 rounded-full flex flex-col gap-1 z-10",
+            "relative justify-center items-center"
+          )}
           style={{
             width: "2rem",
             height: "2rem",
