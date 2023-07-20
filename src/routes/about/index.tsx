@@ -414,19 +414,22 @@ export default component$(() => {
           <p>I don't like these things:</p>
           <ul>
             <li>People not using dark mode</li>
-            <li>
-              People who demands responsibility but doesn't take responsibility
-            </li>
+            <li>People who demands rights but doesn't take responsibility</li>
             <li>People who doesn't know how to use Google</li>
             <li>People who tried to argue with me about geopolitical issues</li>
+            <li>
+              People who tried to lecture me about programming and technology
+              when they don't even know how to code or use a computer properly
+            </li>
             <li>
               Computer Science/Informatics Engineering undergrads that can't
               code
             </li>
-            <li>You</li>
+            <li>TikTok</li>
+            <li>You🫵</li>
           </ul>
           <p>
-            Yeah, you. I hate all of you equally. No discrimination. Just pure
+            Yeah, you🫵. I hate all of you🫵 equally. No discrimination. Just pure
             hatred👍.
           </p>
           <h2 id="contact">Contact</h2>
