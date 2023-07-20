@@ -1,10 +1,14 @@
 import { component$ } from "@builder.io/qwik";
 import { Image } from "../image/image";
+import { twMerge } from "tailwind-merge";
 
 export default component$(() => {
   return (
     <div
-      class="w-full h-auto rounded-xl bg-neutral-900 relative overflow-hidden ring-2 ring-neutral-900"
+      class={twMerge(
+        "w-full h-auto rounded-xl bg-neutral-900 relative",
+        "overflow-hidden ring-2 ring-neutral-900"
+      )}
       id="header-hero"
     >
       <div class="screen-overlay" />
