@@ -1,15 +1,4 @@
-export type KVConstant = {
-  name: string;
-  value: RedirectObject;
-};
-
-export type RedirectObject = {
-  link: string;
-  provider: string;
-  activityPubUrl?: string;
-};
-
-export type KVArray = KVConstant[];
+import type { KVArray } from "~/types/definitions";
 
 export const REDIRECT_CONSTANTS: KVArray = [
   // My personal links
