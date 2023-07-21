@@ -28,7 +28,9 @@ export default defineConfig(async () => {
                 }
               },
               onVisitHighlightedLine(node: any) {
-                node.properties.className.push('line--highlighted');
+                node.properties = node.properties || {};
+
+                node.properties["data-is-highlighted"] = true;
               },
             }
           ]],
