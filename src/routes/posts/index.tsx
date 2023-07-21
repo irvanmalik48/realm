@@ -34,7 +34,7 @@ export default component$(() => {
     });
 
     if (searchValue !== "") {
-      return searchPost(searchValue, posts);
+      return searchPost(searchValue.toLowerCase(), posts);
     }
 
     return posts.sort((a, b) => {
