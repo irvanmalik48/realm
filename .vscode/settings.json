@@ -6,4 +6,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.rulers": [100],
+  "[mdx]": {
+    "editor.wordWrap": "on"
+  }
 }
