@@ -60,6 +60,34 @@ export const head: DocumentHead = ({ head }) => {
         name: "og:image",
         content: "https://cdn.realmof.tech/og-image_rwqxap.jpg",
       },
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:site",
+        content: "@irvanmalik48",
+      },
+      {
+        name: "twitter:creator",
+        content: "@irvanmalik48",
+      },
+      {
+        name: "twitter:title",
+        content:
+          head.meta.find((meta) => meta.name === "og:title")?.content ??
+          "Untitled",
+      },
+      {
+        name: "twitter:description",
+        content:
+          head.meta.find((meta) => meta.name === "og:description")?.content ??
+          "No description",
+      },
+      {
+        name: "twitter:image",
+        content: "https://cdn.realmof.tech/og-image_rwqxap.jpg",
+      },
     ],
   };
 };
