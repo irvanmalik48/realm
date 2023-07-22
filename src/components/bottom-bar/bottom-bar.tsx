@@ -14,7 +14,7 @@ import {
   SiGithub,
 } from "@qwikest/icons/simpleicons";
 import { twMerge } from "tailwind-merge";
-import { animate } from "motion";
+import { animate, stagger } from "motion";
 
 const navItems = [
   {
@@ -76,10 +76,13 @@ const socialLinks = [
 
 export default component$(() => {
   const isOpen = useSignal(false);
+  const windowWidth = useSignal(0);
 
   useTask$(({ track }) => {
     const tracking = track(() => isOpen.value);
     if (typeof window === "undefined") return;
+
+    windowWidth.value = window.innerWidth;
 
     const blockingBg = document.getElementById("blocking-bg");
     const actualNav = document.getElementById("actual-nav");
@@ -122,6 +125,20 @@ export default component$(() => {
           allowWebkitAcceleration: true,
         }
       );
+
+      if (windowWidth.value >= 1024) {
+        animate(
+          ".stagger-item",
+          {
+            opacity: 1,
+            transform: "translateY(0)",
+          },
+          {
+            delay: stagger(0.1, { from: 0.1 }),
+            allowWebkitAcceleration: true,
+          }
+        );
+      }
     } else {
       animate(
         blockingBg,
@@ -156,6 +173,19 @@ export default component$(() => {
           allowWebkitAcceleration: true,
         }
       );
+
+      if (windowWidth.value >= 1024) {
+        animate(
+          ".stagger-item",
+          {
+            opacity: 0,
+            transform: "translateY(200px)",
+          },
+          {
+            allowWebkitAcceleration: true,
+          }
+        );
+      }
     }
   });
 
@@ -241,7 +271,14 @@ export default component$(() => {
             <Link
               key={item.key}
               href={item.href}
-              class="w-full flex flex-col gap-1 group"
+              class="w-full flex flex-col gap-1 group stagger-item"
+              style={{
+                opacity: windowWidth.value >= 1024 ? 0 : 1,
+                transform:
+                  windowWidth.value >= 1024
+                    ? "translateY(200px)"
+                    : "translateY(0)",
+              }}
               onClick$={() => {
                 isOpen.value = false;
               }}
