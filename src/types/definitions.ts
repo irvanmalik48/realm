@@ -19,3 +19,19 @@ export type RedirectObject = {
 };
 
 export type KVArray = KVConstant[];
+
+export type ProjectLinks = {
+  github: string;
+  deployed?: string;
+};
+
+export type Project = {
+  title: string;
+  description: string;
+  image: string | null;
+  visibility: "public" | "private";
+  deployment?: string;
+  links: ProjectLinks;
+};
+
+export type ProjectArray = Project[];
