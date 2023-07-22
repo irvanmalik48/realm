@@ -4,6 +4,7 @@ import { qwikCity } from "@builder.io/qwik-city/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { partytownVite } from "@builder.io/partytown/utils";
 import { join } from "path";
+import rehypeToc from "rehype-toc";
 
 export default defineConfig(async () => {
   const { default: rehypePrettyCode } = await import("rehype-pretty-code");
@@ -33,7 +34,27 @@ export default defineConfig(async () => {
                 node.properties["data-is-highlighted"] = true;
               },
             }
-          ]],
+          ], [rehypeToc, {
+            headings: ['h2', 'h3', 'h4'],
+            cssClasses: {
+              list: 'list-disc'
+            },
+            customizeTOC: function (toc: any) {
+              toc.children.unshift({
+                type: 'element',
+                tagName: 'h2',
+                properties: {
+                  id: 'toc',
+                },
+                children: [{
+                  type: 'text',
+                  value: 'Table of Contents'
+                }]
+              });
+              
+              return toc;
+            },
+          }]],
         }
       }),
       qwikVite(),
