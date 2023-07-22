@@ -1,4 +1,4 @@
-import { Post } from "~/types/definitions";
+import type { Post, Project } from "~/types/definitions";
 
 /**
  * @param query string, the query to be searched
@@ -56,6 +56,36 @@ export function searchPost(query: string, stack: Post[]) {
   searched.forEach((searchedVar) => {
     if (searchedVar) {
       const result = stack.find((post) => post.permalink === searchedVar);
+      if (result) {
+        results.push(result);
+      }
+    }
+  });
+
+  return results;
+}
+
+export function searchProject(query: string, stack: Project[]) {
+  const results: Project[] = [];
+
+  const searchVars = stack.map((result) => {
+    const searchableObject = {
+      key: result.title,
+      value: `${result.title} ${result.description}`.toLowerCase(),
+    }
+    
+    return searchableObject;
+  });
+
+  const searched = searchVars.map((searchVar) => {
+    const { key, value } = searchVar;
+
+    return fuzzy(query, value) ? key : null;
+  });
+
+  searched.forEach((searchedVar) => {
+    if (searchedVar) {
+      const result = stack.find((project) => project.title === searchedVar);
       if (result) {
         results.push(result);
       }
