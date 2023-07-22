@@ -1,12 +1,17 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useSignal, useComputed$ } from "@builder.io/qwik";
 import { twMerge } from "tailwind-merge";
 import { Image } from "~/components/image/image";
 import { PROJECT_CONSTANTS } from "~/data/projects/constants";
 import { LuGitBranch, LuExternalLink } from "@qwikest/icons/lucide";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { searchProject } from "~/lib/fuzzy";
 
 export default component$(() => {
-  const projects = PROJECT_CONSTANTS;
+  const searchVal = useSignal("");
+  const projects = useComputed$(() => {
+    const searchValue = searchVal.value.toLowerCase();
+    return searchProject(searchValue, PROJECT_CONSTANTS);
+  });
 
   return (
     <>
@@ -24,9 +29,10 @@ export default component$(() => {
             "placeholder:italic focus:outline-none focus:ring-2",
             "focus:ring-cyan-500 transition my-5"
           )}
+          bind:value={searchVal}
         />
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {projects.map((project) => (
+          {projects.value.map((project) => (
             <div
               key={project.title}
               class="bg-neutral-900 text-neutral-300 rounded-xl overflow-hidden"
