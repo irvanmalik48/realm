@@ -23,7 +23,6 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@auth/core": "^0.7.1",
     "@builder.io/partytown": "^0.8.0",
     "@builder.io/qwik": "^1.2.6",
     "@builder.io/qwik-auth": "~0.1.0",
