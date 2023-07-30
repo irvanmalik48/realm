@@ -97,7 +97,7 @@ export default component$(() => {
   );
 });
 
-const PostCard = component$((props: Post) => {
+export const PostCard = component$((props: Post) => {
   return (
     <Link
       key={props.permalink}
