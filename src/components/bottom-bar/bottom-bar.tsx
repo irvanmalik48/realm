@@ -14,7 +14,7 @@ import {
   SiGithub,
 } from "@qwikest/icons/simpleicons";
 import { twMerge } from "tailwind-merge";
-import { animate, stagger } from "motion";
+import { animate } from "motion";
 
 const navItems = [
   {
@@ -125,20 +125,6 @@ export default component$(() => {
           allowWebkitAcceleration: true,
         }
       );
-
-      if (windowWidth.value >= 1024) {
-        animate(
-          ".stagger-item",
-          {
-            opacity: 1,
-            transform: "translateY(0)",
-          },
-          {
-            delay: stagger(0.1, { from: 0.1 }),
-            allowWebkitAcceleration: true,
-          }
-        );
-      }
     } else {
       animate(
         blockingBg,
@@ -173,19 +159,6 @@ export default component$(() => {
           allowWebkitAcceleration: true,
         }
       );
-
-      if (windowWidth.value >= 1024) {
-        animate(
-          ".stagger-item",
-          {
-            opacity: 0,
-            transform: "translateY(200px)",
-          },
-          {
-            allowWebkitAcceleration: true,
-          }
-        );
-      }
     }
   });
 
@@ -271,14 +244,7 @@ export default component$(() => {
             <Link
               key={item.key}
               href={item.href}
-              class="w-full flex flex-col gap-1 group stagger-item"
-              style={{
-                opacity: windowWidth.value >= 1024 ? 0 : 1,
-                transform:
-                  windowWidth.value >= 1024
-                    ? "translateY(200px)"
-                    : "translateY(0)",
-              }}
+              class="w-full flex flex-col gap-1 group"
               onClick$={() => {
                 isOpen.value = false;
               }}
