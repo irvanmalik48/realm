@@ -1,10 +1,41 @@
 import { Slot, component$ } from "@builder.io/qwik";
-import { type DocumentHead, useDocumentHead } from "@builder.io/qwik-city";
+import {
+  type DocumentHead,
+  useDocumentHead,
+  routeLoader$,
+} from "@builder.io/qwik-city";
 import { twMerge } from "tailwind-merge";
-import { LuMessageSquare } from "@qwikest/icons/lucide";
+import type { Post } from "~/types/definitions";
+import { PostCard } from "..";
+import { LuTornado } from "@qwikest/icons/lucide";
+
+export const usePrevNext = routeLoader$(async (req) => {
+  const parseUrl = "".concat(req.url.origin, "/api/v1/posts");
+  const posts: Post[] = await fetch(parseUrl).then((res) => res.json());
+
+  const currentPost = posts.find((post) => post.permalink === req.url.pathname);
+
+  if (!currentPost) {
+    return {
+      prev: null,
+      next: null,
+    };
+  }
+
+  const currentIndex = posts.indexOf(currentPost);
+
+  const prev = posts[currentIndex - 1] || null;
+  const next = posts[currentIndex + 1] || null;
+
+  return {
+    prev,
+    next,
+  };
+});
 
 export default component$(() => {
   const { frontmatter, title } = useDocumentHead();
+  const prevNext = usePrevNext();
 
   const proseStuff = twMerge(
     "w-full prose mt-10 max-w-full prose-invert prose-lg prose-headings:mb-6",
@@ -39,30 +70,32 @@ export default component$(() => {
         </div>
         <div class={proseStuff}>
           <Slot />
+          <h2>Read More</h2>
+          <p>If you enjoyed this post, try some other ones:</p>
         </div>
-        <h2
-          class={twMerge(
-            "text-xl rounded-full w-fit bg-neutral-900 bg-opacity-20",
-            "px-7 py-2 mt-10 mb-3 font-semibold font-heading"
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10 mb-24">
+          {prevNext.value.prev ? (
+            <PostCard {...prevNext.value.prev} />
+          ) : (
+            <NoMoreItem text="You're at the newest post already, jeez." />
           )}
-        >
-          Comments
-        </h2>
-        <div
-          class={twMerge(
-            "bg-neutral-900 bg-opacity-20 rounded-xl w-full",
-            "h-[200px] grid place-content-center px-5 gap-3"
+          {prevNext.value.next ? (
+            <PostCard {...prevNext.value.next} />
+          ) : (
+            <NoMoreItem text="You're at the oldest post already, jeez." />
           )}
-        >
-          <div class="text-neutral-300 mx-auto p-5 rounded-full bg-neutral-950">
-            <LuMessageSquare class="w-10 h-10" />
-          </div>
-          <p class="text-neutral-300 text-center">
-            Comments are not yet available.
-          </p>
         </div>
       </section>
     </>
+  );
+});
+
+export const NoMoreItem = component$((props: { text: string }) => {
+  return (
+    <div class="min-h-[160px] w-full text-sm flex flex-col gap-3 items-center justify-center p-5 bg-neutral-900/20 rounded-xl text-neutral-500">
+      <LuTornado class="w-12 h-12 mx-auto" />
+      {props.text}
+    </div>
   );
 });
 
