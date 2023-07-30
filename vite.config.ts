@@ -12,6 +12,7 @@ export default defineConfig(async () => {
   return {
     plugins: [
       qwikCity({
+        trailingSlash: false,
         mdxPlugins: {
           rehypeSyntaxHighlight: false,
           remarkGfm: true,
