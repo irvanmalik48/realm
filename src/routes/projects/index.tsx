@@ -41,7 +41,7 @@ export default component$(() => {
                 <h2
                   class={twMerge(
                     "font-mono text-neutral-100 font-medium px-5 py-2",
-                    "rounded-full bg-opacity-50 bg-neutral-950 w-fit",
+                    "rounded-full bg-neutral-950/50 w-fit",
                     "mx-auto text-center truncate"
                   )}
                 >
@@ -67,7 +67,7 @@ export default component$(() => {
               </div>
               <div
                 class={twMerge(
-                  "flex bg-neutral-950 bg-opacity-50 justify-stretch",
+                  "flex bg-neutral-950/50 justify-stretch",
                   "w-full divide-x divide-neutral-900 items-center"
                 )}
               >
@@ -103,7 +103,7 @@ export default component$(() => {
         </div>
         <p
           class={twMerge(
-            "text-neutral-300 text-opacity-80 text-sm",
+            "text-neutral-300/80 text-sm",
             "w-full mt-10 text-center font-medium"
           )}
         >
