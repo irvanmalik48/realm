@@ -83,7 +83,7 @@ export default component$(() => {
           class={twMerge(
             "w-fit mx-auto text-center text-sm",
             "text-neutral-300 mt-10 px-5 py-1",
-            "rounded-full mb-5 bg-neutral-900 bg-opacity-50"
+            "rounded-full mb-5 bg-neutral-900/50"
           )}
         >
           here's the menu:
@@ -97,10 +97,10 @@ export default component$(() => {
               aria-labelledby={`${link.label}-icon-label`}
               class={twMerge(
                 "w-full relative flex flex-col gap-3",
-                "bg-opacity-70 bg-neutral-900",
+                "bg-neutral-900/70 group active:scale-95",
                 "rounded-xl px-5 py-3 hover:bg-neutral-800",
-                "hover:scale-105 group active:scale-95",
-                "transition-[background-color_transform]"
+                "transition-[background-color_transform]",
+                "hover:scale-105"
               )}
             >
               {link.recommended && (
@@ -134,7 +134,7 @@ export default component$(() => {
         <section
           class={twMerge(
             "w-full relative text-neutral-100 py-28 min-h-screen",
-            "bg-neutral-900 bg-opacity-20"
+            "bg-neutral-900/20"
           )}
           id="intro"
         >
@@ -215,7 +215,7 @@ export default component$(() => {
         <div
           class={twMerge(
             "mx-auto max-w-4xl w-full relative z-10",
-            "py-8 px-5 rounded-2xl bg-neutral-950 bg-opacity-30",
+            "py-8 px-5 rounded-2xl bg-neutral-950/30",
             "backdrop-blur-md"
           )}
         >
