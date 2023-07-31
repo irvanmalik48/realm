@@ -49,8 +49,8 @@ export const Waves = component$<Props>(({ showText = true }) => {
         <div class="w-full py-8 bg-cyan-500">
           <p
             class={twMerge(
-              "md:text-lg text-neutral-900 italic mx-auto",
-              "text-opacity-80 w-full text-center px-5 max-w-4xl"
+              "md:text-lg text-neutral-900/80 italic mx-auto",
+              "w-full text-center px-5 max-w-4xl"
             )}
           >
             "So you are good at this!"
@@ -58,8 +58,8 @@ export const Waves = component$<Props>(({ showText = true }) => {
             <span
               class={twMerge(
                 "px-5 py-1 rounded-full not-italic inline-flex",
-                "text-opacity-100 items-center w-fit justify-center",
-                "bg-neutral-900 text-neutral-100"
+                "items-center w-fit justify-center",
+                "bg-neutral-900 text-neutral-100/100"
               )}
             >
               <span class="text-neutral-100 font-semibold">
