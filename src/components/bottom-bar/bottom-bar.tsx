@@ -1,6 +1,7 @@
 import { component$, useSignal, useTask$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 import {
+  LuArrowUp,
   LuBriefcase,
   LuHome,
   LuInfo,
@@ -88,9 +89,7 @@ export default component$(() => {
     const actualNav = document.getElementById("actual-nav");
     const mainSection = document.getElementById("main-section");
 
-    if (!blockingBg) return;
-    if (!actualNav) return;
-    if (!mainSection) return;
+    if (!blockingBg || !actualNav || !mainSection) return;
 
     if (tracking) {
       animate(
@@ -185,6 +184,22 @@ export default component$(() => {
             transition: "all 500ms cubic-bezier(.33,.56,.33,.94)",
           }}
         />
+      </button>
+      <button
+        id="to-top"
+        class={twMerge(
+          "transition z-[9] rounded-full fixed right-5",
+          "bottom-24 md:right-10 md:bottom-32 p-5",
+          "bg-neutral-800 text-neutral-100 bg-opacity-50 backdrop-blur-lg"
+        )}
+        onClick$={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        <LuArrowUp class="w-6 h-6" />
       </button>
       <div
         class="fixed inset-0 z-10 bg-neutral-800 bg-opacity-70 focus:outline-none"
