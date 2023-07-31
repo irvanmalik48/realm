@@ -106,6 +106,30 @@ const color: Color = "red"; // ✅ "red" exists in the union type
 const color2: Color = "yellow"; // ❌ "yellow" does not exist in the union type
 ```
 
+## Enums
+
+Speaking of enums, you can also create an enum type in Typescript. Let's take a look at an example.
+
+```ts
+enum Color {
+  Red, // 0
+  Green, // 1
+  Blue, // 2
+}
+
+const color: Color = Color.Red; // ✅ Correct typings
+const color2: Color = Color.Yellow; // ❌ Yellow does not exist in the enum
+
+// You can also assign a value to each enum
+enum Color {
+  Red = "#ff0000",
+  Green = "#00ff00",
+  Blue = "#0000ff",
+}
+
+const color: Color = Color.Red; // This will return "#ff0000"
+```
+
 ## Generics
 
 Generics are a way to create reusable components. They allow you to create a component that can work over a variety of types rather than a single one. Let's take a look at an example.
