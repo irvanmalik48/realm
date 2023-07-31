@@ -253,5 +253,5 @@ div[data-rehype-pretty-code-title] {
 }
 
 span[data-is-highlighted] {
-  @apply bg-cyan-500 w-auto inline-block border-l-2 rounded border-cyan-500/10;
+  @apply bg-cyan-500/10 w-auto inline-block border-l-2 rounded border-cyan-500;
 }
