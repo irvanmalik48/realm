@@ -26,7 +26,7 @@ import { twMerge } from "tailwind-merge";
 export default component$(() => {
   const iterationClassMerged = twMerge(
     "w-full p-5 rounded-xl flex flex-col items-center justify-center",
-    "gap-5 bg-neutral-900 bg-opacity-200 not-prose"
+    "gap-5 bg-neutral-900/20 not-prose"
   );
 
   const proseStuff = twMerge(
