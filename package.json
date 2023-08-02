@@ -26,7 +26,6 @@
     "@unpic/qwik": "^0.0.25",
     "@vitest/ui": "~0.32.0",
     "autoprefixer": "^10.4.14",
-    "cssnano": "^6.0.1",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-qwik": "~1.2.6",
