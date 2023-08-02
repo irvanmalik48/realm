@@ -8,7 +8,7 @@ portfolio.
 - Qwik City
 - Partytown
 - Tailwind
-- Vercel Edge Functions
+- Cloudflare Pages
 
 ## Screenshot
 
