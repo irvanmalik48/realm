@@ -171,8 +171,9 @@ export default component$(() => {
         )} ${
           isOpen.value
             ? "bg-cyan-500 text-neutral-950"
-            : "bg-neutral-800 text-neutral-100 bg-opacity-50 backdrop-blur-lg"
+            : "bg-neutral-800/50 text-neutral-100 backdrop-blur-lg"
         }`}
+        title="Open/Close Navigation Menu"
         onClick$={() => {
           isOpen.value = !isOpen.value;
         }}
@@ -190,8 +191,9 @@ export default component$(() => {
         class={twMerge(
           "transition z-[9] rounded-full fixed right-5",
           "bottom-24 md:right-10 md:bottom-32 p-5",
-          "bg-neutral-800 text-neutral-100 bg-opacity-50 backdrop-blur-lg"
+          "bg-neutral-800/50 text-neutral-100 backdrop-blur-lg"
         )}
+        title="Scroll to Top"
         onClick$={() => {
           window.scrollTo({
             top: 0,
@@ -202,7 +204,7 @@ export default component$(() => {
         <LuArrowUp class="w-6 h-6" />
       </button>
       <div
-        class="fixed inset-0 z-10 bg-neutral-800 bg-opacity-70 focus:outline-none"
+        class="fixed inset-0 z-10 bg-neutral-800/70 focus:outline-none"
         id="blocking-bg"
         style={{
           opacity: 0,
@@ -235,8 +237,8 @@ export default component$(() => {
                 href={item.href}
                 rel={item.rel}
                 class={twMerge(
-                  "rounded-full bg-neutral-900 text-neutral-100",
-                  "bg-opacity-50 backdrop-blur-lg flex items-center",
+                  "rounded-full bg-neutral-900/50 text-neutral-100",
+                  "backdrop-blur-lg flex items-center",
                   "justify-center p-3"
                 )}
                 target="_blank"
@@ -275,8 +277,8 @@ export default component$(() => {
               </p>
               <div
                 class={twMerge(
-                  "aspect-video group-hover:bg-opacity-100 transition-all",
-                  "hidden w-full bg-neutral-900 bg-opacity-20 md:grid grid-cols-1",
+                  "aspect-video group-hover:bg-neutral-900 transition-all",
+                  "hidden w-full bg-neutral-900/20 md:grid grid-cols-1",
                   "place-content-center text-neutral-100 rounded-xl"
                 )}
               >
