@@ -6,7 +6,7 @@ Nx monorepo containing all projects associated to my personal realm.
 
 - Main (`realm`): The actual realm blog.
 - Link (`links`): Shortlink & prettylink service. (WIP)
-- Bin (`bin`): Pastebin-like service.
+- Bin (`bin`): Pastebin-like service. (WIP)
 
 ## License
 
