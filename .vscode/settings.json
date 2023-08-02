@@ -8,5 +8,12 @@
   "editor.rulers": [100],
   "[mdx]": {
     "editor.wordWrap": "on"
-  }
+  },
+  "javascript.format.semicolons": "insert",
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "javascript.inlayHints.variableTypes.enabled": true,
+  "javascript.inlayHints.parameterTypes.enabled": true,
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.preferences.quoteStyle": "double"
 }
