@@ -43,7 +43,7 @@ export default component$(() => {
         <QwikPartytown forward={["dataLayer.push"]} />
         <script
           type="text/partytown"
-          data-goatcounter="https://www.realmof.tech/analytics/referrer"
+          data-goatcounter="https://analytics.realmof.tech/count"
           async
           src="//www.realmof.tech/analytics/count.js"
         />
