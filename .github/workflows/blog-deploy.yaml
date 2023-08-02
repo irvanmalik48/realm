@@ -10,6 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install dependencies
+        uses: pnpm/action-setup@v2
         run: pnpm install
       - name: Build app
         run: pnpm exec nx run realm:build-cloudflare
