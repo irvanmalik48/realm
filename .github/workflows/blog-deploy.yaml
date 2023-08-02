@@ -25,7 +25,7 @@ jobs:
       - name: Build app
         run: pnpm exec nx run realm:build-cloudflare
       - name: Deploy to Cloudflare Pages
-        uses: pnpm exec nx run realm:deploy
+        run: pnpm exec nx run realm:deploy
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
