@@ -25,10 +25,10 @@ jobs:
       - name: Build app
         run: pnpm exec nx run realm:build-cloudflare
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@1
+        uses: pnpm exec nx run realm:deploy
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: realm-blog
-          directory: dist/apps/realm
+          directory: dist/apps/realm/client
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
