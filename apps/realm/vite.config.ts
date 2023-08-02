@@ -78,7 +78,9 @@ export default defineConfig(async () => {
         },
       }),
       tsconfigPaths({ root: "../../" }),
-      partytownVite({ dest: join(__dirname, "dist", "~partytown") }),
+      partytownVite({
+        dest: join(__dirname, "../../dist/apps/realm/client", "~partytown"),
+      }),
     ],
     server: {
       fs: {
