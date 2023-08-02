@@ -7,10 +7,10 @@ jobs:
       deployments: write
     name: Deploy blog into Cloudflare Pages
     steps:
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
       - name: Install dependencies
         run: pnpm install
       - name: Build app
