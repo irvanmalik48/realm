@@ -11,7 +11,8 @@
         "outputPath": "dist/apps/bin"
       },
       "configurations": {
-        "preview": {}
+        "preview": {},
+        "production": {}
       }
     },
     "build.client": {
@@ -31,6 +32,9 @@
         "preview": {
           "ssr": "src/entry.preview.tsx",
           "mode": "production"
+        },
+        "production": {
+          "configFile": "apps/bin/adapters/netlify/vite.config.ts"
         }
       }
     },
@@ -70,6 +74,28 @@
       "options": {
         "lintFilePatterns": ["apps/bin/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "build-netlify": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx nx run bin:build:production"
+      }
+    },
+    "deploy-netlify": {
+      "executor": "qwik-nx:exec",
+      "options": {
+        "command": "npx netlify deploy --build --dir=client",
+        "cwd": "dist/apps/bin"
+      },
+      "dependsOn": ["build-netlify"]
+    },
+    "preview-netlify": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify dev --dir=client",
+        "cwd": "dist/apps/bin"
+      },
+      "dependsOn": ["build-netlify"]
     }
   },
   "tags": []
