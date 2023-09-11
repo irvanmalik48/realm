@@ -1,0 +1,98 @@
+---
+import ThemeToggle from "../ThemeToggle.astro";
+import Search from "../Search.astro";
+import { menuLinks } from "@/site-config";
+
+const url = new URL(Astro.request.url);
+---
+
+<script>
+	import { toggleClass } from "@/utils";
+	let headerEl: HTMLElement;
+	let menuButtonEl: HTMLButtonElement;
+	let menuOpen = false;
+
+	function toggleMobileMenu() {
+		toggleClass(headerEl, "menu-open");
+		menuOpen = !menuOpen;
+		menuButtonEl.setAttribute("aria-expanded", menuOpen.toString());
+	}
+
+	document.addEventListener("DOMContentLoaded", () => {
+		headerEl = document.getElementById("main-header")!;
+		menuButtonEl = document.getElementById("toggle-navigation-menu") as HTMLButtonElement;
+		menuButtonEl.addEventListener("click", toggleMobileMenu);
+	});
+
+	document.addEventListener("astro:after-swap", () => {
+		if (menuOpen) toggleMobileMenu();
+	});
+</script>
+
+<header id="main-header" class="group relative mb-16 flex items-center" transition:persist>
+	<div class="flex sm:flex-col">
+		<a
+			href="/"
+			class="inline-flex items-center grayscale hover:filter-none sm:relative sm:inline-block"
+			aria-current={url.pathname === "/" ? "page" : false}
+		>
+			<span class="text-xl font-bold sm:text-2xl">realm.</span>
+		</a>
+		<nav
+			id="navigation-menu"
+			class="absolute -inset-x-4 top-14 hidden flex-col items-end gap-y-4 rounded-md bg-bgColor/[.85] py-4 text-accent shadow backdrop-blur group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:items-center sm:divide-x sm:divide-dashed sm:divide-accent sm:rounded-none sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none"
+			aria-label="Main menu"
+		>
+			{
+				menuLinks.map((link) => (
+					<a
+						href={link.path}
+						class="w-full px-4 py-4 text-center sm:py-0 sm:hover:underline lg:w-fit"
+						aria-current={url.pathname === link.path ? "page" : false}
+						rel="prefetch"
+					>
+						{link.title}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+	<Search />
+	<ThemeToggle />
+	<button
+		id="toggle-navigation-menu"
+		class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
+		type="button"
+		aria-label="Open main menu"
+		aria-expanded="false"
+		aria-haspopup="menu"
+	>
+		<svg
+			id="line-svg"
+			class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
+			aria-hidden="true"
+			focusable="false"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+		>
+			<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"></path>
+		</svg>
+		<svg
+			id="cross-svg"
+			class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 text-accent opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
+			class="text-accent"
+			aria-hidden="true"
+			focusable="false"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+		>
+			<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+		</svg>
+	</button>
+</header>

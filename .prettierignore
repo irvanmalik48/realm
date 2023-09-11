@@ -1,4 +1,8 @@
-# Add files here to ignore them from prettier formatting
-/dist
-/coverage
-/apps/**/dist
+*.min.js
+node_modules
+
+# cache-dirs
+**/.cache
+
+pnpm-lock.yaml
+dist

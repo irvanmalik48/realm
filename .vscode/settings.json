@@ -1,19 +1,23 @@
 {
-  "css.lint.unknownAtRules": "ignore",
-  "material-icon-theme.activeIconPack": "qwik",
-  "editor.detectIndentation": false,
-  "editor.tabSize": 2,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "editor.rulers": [100],
-  "[mdx]": {
-    "editor.wordWrap": "on"
-  },
-  "javascript.format.semicolons": "insert",
-  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
-  "javascript.inlayHints.variableTypes.enabled": true,
-  "javascript.inlayHints.parameterTypes.enabled": true,
-  "javascript.inlayHints.parameterNames.enabled": "all",
-  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "javascript.preferences.quoteStyle": "double"
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"[markdown]": {
+		"editor.wordWrap": "on",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.markdownlint": true
+		}
+	},
+	"prettier.documentSelectors": ["**/*.astro"],
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"astro", // Enable .astro
+		"typescript", // Enable .ts
+		"typescriptreact"
+	],
+	"editor.detectIndentation": false,
+	"editor.tabSize": 2,
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
 }
