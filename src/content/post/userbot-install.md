@@ -2,6 +2,7 @@
 title: "How to Deploy a Telegram Userbot"
 description: "Deploy your own userbot with Heroku or deploy locally."
 publishDate: "26 Sep 2021"
+updatedDate: "11 Sep 2023"
 tags: ["telegram", "linux"]
 ---
 
