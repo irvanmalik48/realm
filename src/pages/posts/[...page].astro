@@ -8,7 +8,9 @@ import Pagination from "@/components/Paginator";
 import { getUniqueTags, sortMDByDate } from "@/utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const allPosts = await getCollection("post");
+	const allPosts = await getCollection("post", ({ data }) => {
+		return import.meta.env.DEV ? true : !data.draft;
+	});
 	const allPostsByDate = sortMDByDate(allPosts);
 	const uniqueTags = getUniqueTags(allPosts);
 	return paginate(allPostsByDate, { props: { uniqueTags }, pageSize: 10 });
@@ -19,7 +21,7 @@ interface Props {
 	uniqueTags: string[];
 }
 
-const { page, uniqueTags } = Astro.props;
+const { page, uniqueTags }: Props = Astro.props as unknown as Props;
 
 const meta = {
 	title: "Posts",
