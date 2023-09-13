@@ -6,7 +6,9 @@ import SocialList from "@/components/SocialList";
 import { sortMDByDate } from "@/utils";
 
 const MAX_POSTS = 7;
-const allPosts = await getCollection("post");
+const allPosts = await getCollection("post", ({ data }) => {
+	return import.meta.env.DEV ? true : !data.draft;
+});
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
 const cactusTech: Array<{ title: string; desc: string; href: string }> = [
