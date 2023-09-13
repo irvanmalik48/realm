@@ -29,6 +29,7 @@ const post = defineCollection({
 				.optional(),
 			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
 			ogImage: z.string().optional(),
+			draft: z.boolean().optional(),
 		}),
 });
 
