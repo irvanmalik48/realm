@@ -3,7 +3,9 @@ import PageLayout from "@/layouts/Base";
 import { getUniqueTagsWithCount } from "@/utils";
 import { getCollection } from "astro:content";
 
-const allPosts = await getCollection("post");
+const allPosts = await getCollection("post", ({ data }) => {
+	return import.meta.env.DEV ? true : !data.draft;
+});
 const allTags = getUniqueTagsWithCount(allPosts);
 
 const meta = {
