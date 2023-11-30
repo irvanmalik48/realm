@@ -108,8 +108,8 @@ export default function Home() {
             </div>
             <Separator />
             <p className="px-5 py-3 dark:text-foreground/70">
-              A 20 y'o living in Indonesia. An undergrad student majoring in
-              Computer Science at Sriwijaya University. High interest in web
+              A 20 y&apos;o living in Indonesia. An undergrad student majoring
+              in Computer Science at Sriwijaya University. High interest in web
               development and current AI trends. I like to learn new things and
               experiment. Also does music and stuffs.
             </p>

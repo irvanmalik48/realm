@@ -9,7 +9,7 @@ export default function CustomNotFound() {
             404
           </h1>
           <p className="w-full mt-1 dark:text-foreground/70 text-sm text-center">
-            The page you're looking for doesn't exist.
+            The page you&apos;re looking for doesn&apos;t exist.
           </p>
         </section>
       </div>
