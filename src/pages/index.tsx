@@ -205,7 +205,7 @@ export default function Home() {
                     Frontend
                   </span>
                   <span className="text-sm md:text-base">
-                    React, NextJS, TailwindCSS
+                    React, Next.js, TailwindCSS
                   </span>
                 </p>
                 <p className="flex flex-col md:flex-row">
@@ -213,7 +213,7 @@ export default function Home() {
                     Backend
                   </span>
                   <span className="text-sm md:text-base">
-                    NodeJS, Express, Laravel
+                    Node.js, Express, Laravel
                   </span>
                 </p>
                 <p className="flex flex-col md:flex-row">
