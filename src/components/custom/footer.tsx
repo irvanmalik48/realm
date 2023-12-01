@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="mt-auto w-full py-5 border-t border-border">
       <div className="w-full flex flex-col gap-1 max-w-3xl mx-auto px-5">
-        <div className="w-full flex gap-2 items-center">
+        <div className="w-full flex gap-3 items-center">
           <svg
             viewBox="0 0 188 188"
             fill="none"
@@ -64,7 +64,24 @@ export default function Footer() {
           Made with Next.js, shadcn/ui, and TypeScript, using my last 3
           braincells, assuming that I have at least 1 to begin with.
         </p>
+        <p className="text-xs mt-2 dark:text-foreground/50 w-3/4 lg:w-full">
+          For privacy blockheads: I DO NOT collect any data and I DO NOT need to
+          ask for your consent for the usage of cookies. All I ever use cookies
+          for in this site is ONLY to save your theme mode preference and that's
+          it.
+        </p>
         <p className="text-xs dark:text-foreground/50 w-3/4 lg:w-full">
+          For FLOSS extremists: Don't even try to yap about how I should use web
+          technologies that are more "free" and "libre". There's this thing
+          called "pragmatism" that I'm trying to achieve here and your
+          idealistic views are not helping. Go yap somewhere else.
+        </p>
+        <p className="text-xs dark:text-foreground/50 w-3/4 lg:w-full">
+          For everyone else: You can find the source code of this site in my
+          GitHub account. Feel free to fork it and make your own version of it.
+          Do let me know if you do so, I'd love to see it!
+        </p>
+        <p className="text-xs mt-2 dark:text-foreground/50 w-3/4 lg:w-full">
           &copy; 2023 Irvan Malik Azantha. Licensed in MIT.
         </p>
       </div>
