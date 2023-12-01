@@ -87,7 +87,7 @@ export default function Home() {
       <div className="w-full min-h-screen flex flex-col py-24">
         <section className="w-full max-w-3xl relative p-5 my-auto mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="absolute w-[1px] left-1/2 -translate-x-1/2 -inset-y-10 bg-primary/20 animate-pulse" />
-          <div className="absolute rounded-2xl border border-primary/20 inset-y-2 inset-x-16 md:inset-x-[17.5%] animate-pulse" />
+          <div className="absolute rounded-2xl border border-primary/20 inset-y-0 inset-x-16 md:inset-x-[17.5%] animate-pulse" />
           <div className="absolute flex flex-col items-center justify-center p-2 -top-12 left-1/2 -translate-x-1/2">
             <div className="bg-primary/20 absolute rounded-full -inset-3 animate-ping" />
             <div className="bg-background border ring-4 ring-primary/20 absolute rounded-full border-primary -inset-3" />
