@@ -71,9 +71,10 @@ export default function Footer() {
           that&apos;s it.
         </p>
         <p className="text-xs dark:text-foreground/50 w-3/4 lg:w-full">
-          For FLOSS extremists: Don't even try to yap about how I should use web
-          technologies that are more "free" and "libre". There&apos;s this thing
-          called "pragmatism" that I&apos;m trying to achieve here and your
+          For FLOSS extremists: Don&apos;t even try to yap about how I should
+          use web technologies that are more &quot;free&quot; and
+          &quot;libre&quot;. There&apos;s this thing called
+          &quot;pragmatism&quot; that I&apos;m trying to achieve here and your
           idealistic views are not helping. Go yap somewhere else.
         </p>
         <p className="text-xs dark:text-foreground/50 w-3/4 lg:w-full">
