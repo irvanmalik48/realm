@@ -20,6 +20,7 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import HeroImage from "@/assets/img/hero.webp";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
+import { cn } from "@/lib/utils";
 
 export default function FAB() {
   const links = [
@@ -60,7 +61,11 @@ export default function FAB() {
         <Button
           size="icon"
           variant="secondary"
-          className="fixed w-auto h-auto shadow-xl dark:shadow-none p-5 flex items-center justify-center bottom-5 right-5 rounded-full z-[999]"
+          className={cn(
+            "fixed w-auto h-auto shadow-xl dark:shadow-none",
+            "p-5 flex items-center justify-center bottom-5",
+            "right-5 rounded-full z-[999]"
+          )}
         >
           {!open ? (
             <HamburgerMenuIcon className="w-5 h-5" />
@@ -82,7 +87,13 @@ export default function FAB() {
             blurDataURL={HeroImage.blurDataURL}
             placeholder="blur"
           />
-          <div className="absolute bottom-1 text-xs left-1 px-3 py-1 rounded-full bg-background text-foreground">
+          <div
+            className={cn(
+              "absolute bottom-1 text-xs left-1",
+              "px-3 py-1 rounded-full bg-background",
+              "text-foreground"
+            )}
+          >
             realm. (v6.0.0-beta1)
           </div>
           <Tooltip>
@@ -91,7 +102,11 @@ export default function FAB() {
                 href="https://www.pixiv.net/en/artworks/113382570"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute block top-1 right-1 p-2 rounded-full opacity-50 hover:opacity-100 transition-opacity bg-background text-foreground"
+                className={cn(
+                  "absolute block top-1 right-1 p-2 rounded-full",
+                  "opacity-50 hover:opacity-100 transition-opacity",
+                  "bg-background text-foreground"
+                )}
               >
                 <OpenInNewWindowIcon className="w-4 h-4" />
               </a>
@@ -114,7 +129,10 @@ export default function FAB() {
           <Link
             key={index}
             href={link.href}
-            className="w-full px-5 py-3 gap-3 flex items-center hover:bg-secondary transition"
+            className={cn(
+              "w-full px-5 py-3 gap-3 flex",
+              "items-center hover:bg-secondary transition"
+            )}
           >
             <link.icon className="w-5 h-5" />
             <div className="text-sm font-medium dark:font-normal">
@@ -127,7 +145,13 @@ export default function FAB() {
           <div className="font-semibold dark:font-medium">Controls</div>
         </div>
         <Separator />
-        <div className="w-full px-5 py-3 gap-3 flex items-center hover:bg-secondary transition cursor-pointer">
+        <div
+          className={cn(
+            "w-full px-5 py-3 gap-3 flex",
+            "items-center hover:bg-secondary transition",
+            "cursor-pointer"
+          )}
+        >
           <Switch
             checked={theme === "dark"}
             onCheckedChange={() => {
