@@ -24,6 +24,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const links = [
@@ -85,13 +86,52 @@ export default function Home() {
   return (
     <DefaultLayout title="Landing Page">
       <div className="w-full min-h-screen flex flex-col py-24">
-        <section className="w-full max-w-3xl relative p-5 my-auto mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="absolute w-[1px] left-1/2 -translate-x-1/2 -inset-y-10 bg-primary/20 animate-pulse" />
-          <div className="absolute rounded-2xl border border-primary/20 inset-y-0 inset-x-16 md:inset-x-[17.5%] animate-pulse" />
-          <div className="absolute flex flex-col items-center justify-center p-2 -top-12 left-1/2 -translate-x-1/2">
-            <div className="bg-primary/20 absolute rounded-full -inset-3 animate-ping" />
-            <div className="bg-background border ring-4 ring-primary/20 absolute rounded-full border-primary -inset-3" />
-            <div className="absolute inset-0 flex items-center justify-center">
+        <section
+          className={cn(
+            "w-full max-w-3xl relative p-5",
+            "my-auto mx-auto grid grid-cols-1",
+            "md:grid-cols-3 gap-5"
+          )}
+        >
+          <div
+            className={cn(
+              "absolute w-[1px] left-1/2 -translate-x-1/2",
+              "-inset-y-10 bg-primary/20 animate-pulse"
+            )}
+          />
+          <div
+            className={cn(
+              "absolute rounded-2xl border border-primary/20",
+              "inset-y-0 inset-x-16 md:inset-x-[17.5%]",
+              "animate-pulse"
+            )}
+          />
+          <div
+            className={cn(
+              "absolute flex flex-col items-center",
+              "justify-center p-2 -top-12 left-1/2",
+              "-translate-x-1/2"
+            )}
+          >
+            <div
+              className={cn(
+                "bg-primary/20 absolute rounded-full",
+                "-inset-3 animate-ping"
+              )}
+            />
+            <div
+              className={cn(
+                "bg-background border ring-4 ring-primary/20",
+                "absolute rounded-full border-primary",
+                "-inset-3"
+              )}
+            />
+            <div
+              className={cn(
+                "absolute inset-0 flex",
+                "items-center justify-center"
+              )}
+            >
               <div className="p-2">
                 <svg
                   viewBox="0 0 250 250"
@@ -151,11 +191,33 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="absolute flex items-center justify-center -bottom-10 left-1/2 -translate-x-1/2">
-            <div className="bg-primary border-primary p-1 animate-ping rounded-full" />
-            <div className="absolute bg-primary border-primary inset-0 rounded-full" />
+          <div
+            className={cn(
+              "absolute flex items-center justify-center",
+              "-bottom-10 left-1/2 -translate-x-1/2"
+            )}
+          >
+            <div
+              className={cn(
+                "bg-primary border-primary",
+                "p-1 animate-ping rounded-full"
+              )}
+            />
+            <div
+              className={cn(
+                "absolute bg-primary border-primary",
+                "inset-0 rounded-full"
+              )}
+            />
           </div>
-          <div className="w-full relative aspect-video flex items-center justify-center md:aspect-square overflow-hidden rounded-xl border border-border bg-popover text-popover-foreground">
+          <div
+            className={cn(
+              "w-full relative aspect-video flex",
+              "items-center justify-center md:aspect-square",
+              "overflow-hidden rounded-xl border border-border",
+              "bg-popover text-popover-foreground"
+            )}
+          >
             <Image
               priority={true}
               src={ProfileImage}
@@ -164,19 +226,51 @@ export default function Home() {
               alt="Profile Image"
               className="w-full h-auto md:h-full object-cover"
             />
-            <p className="absolute bottom-2 left-2 px-3 py-1 rounded-full bg-background text-foreground text-xs">
+            <p
+              className={cn(
+                "absolute bottom-2 left-2 px-3",
+                "py-1 rounded-full bg-background",
+                "text-foreground text-xs"
+              )}
+            >
               Irvan Malik Azantha
             </p>
           </div>
-          <div className="w-full relative flex overflow-hidden rounded-xl md:col-span-2 border border-border bg-popover text-popover-foreground">
-            <div className="relative p-3 flex flex-col items-center justify-start">
-              <div className="absolute inset-y-0 right-1/2 translate-x-1/2 w-[1px] bg-border" />
-              <div className="relative p-2 bg-popover rounded-full border border-border">
+          <div
+            className={cn(
+              "w-full relative flex overflow-hidden rounded-xl",
+              "md:col-span-2 border border-border",
+              "bg-popover text-popover-foreground"
+            )}
+          >
+            <div
+              className={cn(
+                "relative p-3 flex flex-col",
+                "items-center justify-start"
+              )}
+            >
+              <div
+                className={cn(
+                  "absolute inset-y-0 right-1/2",
+                  "translate-x-1/2 w-[1px] bg-border"
+                )}
+              />
+              <div
+                className={cn(
+                  "relative p-2 bg-popover",
+                  "rounded-full border border-border"
+                )}
+              >
                 <ComponentInstanceIcon className="w-5 h-5" />
               </div>
             </div>
             <div className="flex py-3 pr-5 flex-col gap-1 flex-1">
-              <h1 className="h-10 flex items-center text-lg font-semibold dark:font-medium">
+              <h1
+                className={cn(
+                  "h-10 flex items-center text-lg",
+                  "font-semibold dark:font-medium"
+                )}
+              >
                 Brief Description
               </h1>
               <p className="dark:text-foreground/70">
@@ -188,15 +282,41 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="w-full relative flex flex-row-reverse overflow-hidden rounded-xl md:col-span-2 border border-border bg-popover text-popover-foreground">
-            <div className="relative p-3 flex flex-col items-center justify-start">
-              <div className="absolute inset-y-0 right-1/2 translate-x-1/2 w-[1px] bg-border" />
-              <div className="relative p-2 bg-popover rounded-full border border-border">
+          <div
+            className={cn(
+              "w-full relative flex flex-row-reverse",
+              "overflow-hidden rounded-xl md:col-span-2",
+              "border border-border bg-popover text-popover-foreground"
+            )}
+          >
+            <div
+              className={cn(
+                "relative p-3 flex flex-col",
+                "items-center justify-start"
+              )}
+            >
+              <div
+                className={cn(
+                  "absolute inset-y-0 right-1/2",
+                  "translate-x-1/2 w-[1px] bg-border"
+                )}
+              />
+              <div
+                className={cn(
+                  "relative p-2 bg-popover",
+                  "rounded-full border border-border"
+                )}
+              >
                 <Component1Icon className="w-5 h-5" />
               </div>
             </div>
             <div className="flex py-3 pl-5 flex-col gap-1 flex-1">
-              <h1 className="h-10 flex items-center text-lg font-semibold dark:font-medium">
+              <h1
+                className={cn(
+                  "h-10 flex items-center text-lg",
+                  "font-semibold dark:font-medium"
+                )}
+              >
                 Dark Arts
               </h1>
               <div className="space-y-3 md:space-y-0 dark:text-foreground/70">
@@ -251,13 +371,26 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="w-full relative grid grid-cols-2 gap-5 p-5 md:aspect-square overflow-hidden rounded-xl border border-border bg-popover text-popover-foreground">
+          <div
+            className={cn(
+              "w-full relative grid grid-cols-2",
+              "gap-5 p-5 md:aspect-square overflow-hidden",
+              "rounded-xl border border-border bg-popover",
+              "text-popover-foreground"
+            )}
+          >
             {navLinks.map((link, index) => (
               <Tooltip key={index}>
                 <TooltipTrigger asChild>
                   <Link
                     href={link.href}
-                    className="py-3 px-5 md:py-5 rounded-xl md:rounded-full flex-col border-border border text-secondary-foreground w-full h-full flex items-center justify-center hover:bg-secondary/80 transition"
+                    className={cn(
+                      "py-3 px-5 md:py-5 rounded-xl",
+                      "md:rounded-full flex-col border-border",
+                      "border text-secondary-foreground w-full h-full",
+                      "flex items-center justify-center",
+                      "hover:bg-secondary/80 transition"
+                    )}
                   >
                     <link.icon className="w-7 h-7" />
                     <p className="w-full text-xs text-center mt-2 md:hidden">
@@ -271,7 +404,13 @@ export default function Home() {
               </Tooltip>
             ))}
           </div>
-          <div className="w-full relative overflow-hidden rounded-xl md:col-span-3 border border-border bg-popover text-popover-foreground">
+          <div
+            className={cn(
+              "w-full relative overflow-hidden rounded-xl",
+              "md:col-span-3 border border-border",
+              "bg-popover text-popover-foreground"
+            )}
+          >
             <div className="px-5 py-3 flex items-center gap-3">
               <Component2Icon className="w-5 h-5" />
               <h1 className="text-lg font-semibold dark:font-medium">
