@@ -1,8 +1,7 @@
 import { Inter } from "next/font/google";
 import Head from "next/head";
-import FAB from "../custom/fab";
-import { Toaster } from "../ui/toaster";
 import Footer from "../custom/footer";
+import { motion } from "framer-motion";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,14 +29,16 @@ export default function DefaultLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
       </Head>
-      <Toaster />
-      <FAB />
-      <main
+      <motion.main
         className={`w-full flex flex-col min-h-screen bg-background text-foreground ${inter.className}`}
+        initial={{ opacity: 0, y: 20, scaleY: 1.02, originY: 0 }}
+        animate={{ opacity: 1, y: 0, scaleY: 1, originY: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ type: "spring", duration: 0.5, ease: "easeOut" }}
       >
         {children}
         <Footer />
-      </main>
+      </motion.main>
     </>
   );
 }
