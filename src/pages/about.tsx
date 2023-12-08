@@ -272,8 +272,8 @@ export default function About() {
                       Cause anime brings me joy. It diverts my attention into
                       something far better than being an asshole I always were
                       back then. I&apos;ve done atrocities and shit in the past
-                      and I really don't want to do it anymore. Take it as a
-                      coping mechanism if you want.
+                      and I really don&apos;t want to do it anymore. Take it as
+                      a coping mechanism if you want.
                     </CardContent>
                   </Card>
                 </div>
@@ -306,10 +306,10 @@ export default function About() {
                       being chaotic is the safest way to conceal my true
                       identity, at least in the internet. I&apos;m quite a kind
                       person in real life, even if I don&apos;t really guarantee
-                      that to be true. Let's just say that I&apos;m not a bad
-                      person, but not a good person either. I embrace pragmatism
-                      whereever I can and act accordingly based on the situation
-                      I get subjected in.
+                      that to be true. Let&apos;s just say that I&apos;m not a
+                      bad person, but not a good person either. I embrace
+                      pragmatism whereever I can and act accordingly based on
+                      the situation I get subjected in.
                     </CardContent>
                   </Card>
                 </div>
