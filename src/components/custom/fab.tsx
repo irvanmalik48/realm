@@ -22,7 +22,6 @@ import Image from "next/image";
 import HeroImage from "@/assets/img/hero.webp";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
 
 export default function FAB() {
   const links = [
@@ -55,41 +54,27 @@ export default function FAB() {
 
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
-  const [sttVisible, setSttVisible] = useState(false);
   const { theme, setTheme } = useTheme();
-  const AnimatedButton = motion(Button);
-  const [sttButtonClicked, setSttButtonClicked] = useState(false);
 
   return (
     <>
-      <AnimatePresence initial={false} mode="wait">
-        {sttVisible && (
-          <AnimatedButton
-            onClick={async (e) => {
-              setSttButtonClicked(true);
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            initial={{ opacity: 0, scale: 0.5, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.5, y: 50 }}
-            transition={{ type: "spring", duration: 0.15, ease: "easeOut" }}
-            size="icon"
-            variant="secondary"
-            className={cn(
-              "fixed w-auto h-auto shadow-xl dark:shadow-none",
-              "p-5 flex items-center justify-center bottom-5",
-              "right-24 rounded-full z-[995]"
-            )}
-          >
-            <ChevronUpIcon className="w-5 h-5" />
-          </AnimatedButton>
+      <Button
+        onClick={() => {
+          window.scrollTo({ top: 0 });
+        }}
+        size="icon"
+        variant="secondary"
+        className={cn(
+          "fixed w-auto h-auto shadow-xl dark:shadow-none",
+          "p-5 flex items-center justify-center ease-out",
+          "rounded-full z-[995] transition-all duration-200",
+          open ? "bottom-5 right-24" : "bottom-24 right-5 delay-300"
         )}
-      </AnimatePresence>
+      >
+        <ChevronUpIcon className="w-5 h-5" />
+      </Button>
       <Popover
         onOpenChange={() => {
-          setSttButtonClicked(false);
-          setSttVisible(!sttVisible);
           setOpen(!open);
         }}
       >
