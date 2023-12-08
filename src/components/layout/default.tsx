@@ -34,7 +34,7 @@ export default function DefaultLayout({
         initial={{ opacity: 0, y: 20, scaleY: 1.02, originY: 0 }}
         animate={{ opacity: 1, y: 0, scaleY: 1, originY: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ type: "spring", duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
       >
         {children}
         <Footer />
