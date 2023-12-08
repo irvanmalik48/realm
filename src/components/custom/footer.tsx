@@ -64,23 +64,10 @@ export default function Footer() {
           Made with Next.js, shadcn/ui, and TypeScript, using my last 3
           braincells, assuming that I have at least 1 to begin with.
         </p>
-        <p className="text-xs mt-2 dark:text-foreground/50 w-3/4 lg:w-full">
-          For privacy blockheads: I DO NOT collect any data and I DO NOT need to
-          ask for your consent for the usage of cookies. All I ever use cookies
-          for in this site is ONLY to save your theme mode preference and
-          that&apos;s it.
-        </p>
         <p className="text-xs dark:text-foreground/50 w-3/4 lg:w-full">
-          For FLOSS extremists: Don&apos;t even try to yap about how I should
-          use web technologies that are more &quot;free&quot; and
-          &quot;libre&quot;. There&apos;s this thing called
-          &quot;pragmatism&quot; that I&apos;m trying to achieve here and your
-          idealistic views are not helping. Go yap somewhere else.
-        </p>
-        <p className="text-xs dark:text-foreground/50 w-3/4 lg:w-full">
-          For everyone else: You can find the source code of this site in my
-          GitHub account. Feel free to fork it and make your own version of it.
-          Do let me know if you do so, I&apos;d love to see it!
+          You can find the source code of this site in my GitHub account. Feel
+          free to fork it and make your own version of it. Do let me know if you
+          do so, I&apos;d love to see it!
         </p>
         <p className="text-xs mt-2 dark:text-foreground/50 w-3/4 lg:w-full">
           &copy; 2023 Irvan Malik Azantha. Licensed in MIT.
