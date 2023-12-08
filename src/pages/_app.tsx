@@ -17,10 +17,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <Toaster />
         <FAB />
         <AnimatePresence
-          mode="wait"
           onExitComplete={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({ top: 0 });
           }}
+          mode="wait"
           initial={false}
         >
           <Component key={router.pathname} {...pageProps} />
