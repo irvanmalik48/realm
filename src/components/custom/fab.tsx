@@ -11,7 +11,7 @@ import {
 } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Separator } from "../ui/separator";
 import Link from "./link-wrapper";
 import { useToast } from "../ui/use-toast";
@@ -54,13 +54,29 @@ export default function FAB() {
 
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
+  const [showStt, setShowStt] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowStt(true);
+      } else {
+        setShowStt(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
       <Button
         onClick={() => {
-          window.scrollTo({ top: 0 });
+          setShowStt(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }}
         size="icon"
         variant="secondary"
@@ -68,7 +84,8 @@ export default function FAB() {
           "fixed w-auto h-auto shadow-xl dark:shadow-none",
           "p-5 flex items-center justify-center ease-out",
           "rounded-full z-[995] transition-all duration-200",
-          open ? "bottom-5 right-24" : "bottom-24 right-5 delay-300"
+          open ? "bottom-5 right-24" : "bottom-24 right-5 delay-300",
+          showStt ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
       >
         <ChevronUpIcon className="w-5 h-5" />
@@ -96,7 +113,7 @@ export default function FAB() {
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="p-0 overflow-hidden"
+          className="p-0 overflow-hidden z-[999]"
           align="end"
           sideOffset={16}
         >
