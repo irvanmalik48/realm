@@ -95,6 +95,7 @@ export default function About() {
                     alt="Art by 啵啵鱼 from Pixiv"
                     blurDataURL={LapplandImage.blurDataURL}
                     placeholder="blur"
+                    priority
                   />
                   <div
                     className={cn(

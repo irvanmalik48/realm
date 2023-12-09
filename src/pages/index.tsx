@@ -219,12 +219,12 @@ export default function Home() {
             )}
           >
             <Image
-              priority={true}
               src={ProfileImage}
               blurDataURL={ProfileImage.blurDataURL}
               placeholder="blur"
               alt="Profile Image"
               className="w-full h-auto md:h-full object-cover"
+              priority
             />
             <p
               className={cn(
