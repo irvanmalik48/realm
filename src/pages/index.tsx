@@ -17,7 +17,7 @@ import {
 import Image from "next/image";
 import ProfileImage from "@/assets/img/profile.webp";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
+import Link from "@/components/custom/link-wrapper";
 import {
   Tooltip,
   TooltipContent,
