@@ -54,9 +54,18 @@
     @apply border-border;
   }
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth overscroll-none;
   }
   body {
-    @apply bg-background text-foreground scroll-smooth;
+    @apply bg-background text-foreground scroll-smooth overscroll-none;
   }
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
