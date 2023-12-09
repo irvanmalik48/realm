@@ -6,9 +6,5 @@ export default function Link({
   children,
   ...rest
 }: LinkProps & HTMLProps<HTMLAnchorElement>) {
-  return (
-    <NextLink scroll={false} {...(rest as LinkProps)}>
-      {children}
-    </NextLink>
-  );
+  return <NextLink {...(rest as LinkProps)}>{children}</NextLink>;
 }
