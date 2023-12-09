@@ -16,13 +16,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <TooltipProvider>
         <Toaster />
         <FAB />
-        <AnimatePresence
-          onExitComplete={() => {
-            window.scrollTo({ top: 0 });
-          }}
-          mode="wait"
-          initial={false}
-        >
+        <AnimatePresence mode="wait" initial={false}>
           <Component key={router.pathname} {...pageProps} />
         </AnimatePresence>
       </TooltipProvider>
