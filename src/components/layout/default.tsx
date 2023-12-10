@@ -6,6 +6,7 @@ import { ScrollerMotion } from "scroller-motion";
 import ScrollProgress from "../custom/scroll-progress";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
+import { useSSToggle } from "@/hooks/atoms";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function DefaultLayout({
   description,
 }: DefaultLayoutProps) {
   const [mounted, setMounted] = useState(false);
+  const { smoothScrolling } = useSSToggle();
 
   useEffect(() => {
     setMounted(true);
@@ -50,7 +52,7 @@ export default function DefaultLayout({
           opacity: 1,
         }}
         transition={{
-          duration: 0.25,
+          duration: 0.125,
           ease: "easeOut",
         }}
       ></motion.div>
@@ -59,9 +61,9 @@ export default function DefaultLayout({
         initial={{ opacity: 0, y: 20, scaleY: 1.02, originY: 0 }}
         animate={{ opacity: 1, y: 0, scaleY: 1, originY: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
       >
-        <ScrollerMotion>
+        <ScrollerMotion disabled={!smoothScrolling}>
           {mounted && createPortal(<ScrollProgress />, document.body)}
           {children}
           <Footer />
