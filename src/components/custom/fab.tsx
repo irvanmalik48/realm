@@ -213,7 +213,7 @@ export default function FAB() {
             >
               <span className="text-sm font-medium">Dark Mode</span>
               <span className="text-xs text-foreground-50">
-                Current mode: {theme}
+                {theme === "dark" ? "Disable dark mode" : "Enable dark mode"}
               </span>
             </Label>
           </div>
