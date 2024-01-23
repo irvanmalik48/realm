@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import Head from "next/head";
 import Footer from "../custom/footer";
 import { motion } from "framer-motion";
@@ -8,9 +8,14 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { useSSToggle } from "@/hooks/atoms";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+});
 
 export type DefaultLayoutProps = {
+  templateTitle?: boolean;
   title?: string;
   description?: string;
   children?: React.ReactNode;
@@ -20,6 +25,7 @@ export default function DefaultLayout({
   children,
   title,
   description,
+  templateTitle = true,
 }: DefaultLayoutProps) {
   const [mounted, setMounted] = useState(false);
   const { smoothScrolling } = useSSToggle();
@@ -31,7 +37,9 @@ export default function DefaultLayout({
   return (
     <>
       <Head>
-        <title>{title ? `realm. | ${title}` : "realm."}</title>
+        <title>
+          {title ? `${templateTitle ? "realm. | " : ""}${title}` : "realm."}
+        </title>
         <meta
           name="description"
           content={description || "Irvan Malik's personal site."}
@@ -57,7 +65,7 @@ export default function DefaultLayout({
         }}
       ></motion.div>
       <motion.main
-        className={`w-full flex flex-col min-h-screen bg-background text-foreground ${inter.className}`}
+        className={`w-full flex flex-col min-h-screen bg-background text-foreground ${inter.variable} ${jetbrainsMono.variable}`}
         initial={{ opacity: 0, y: 20, scaleY: 1.02, originY: 0 }}
         animate={{ opacity: 1, y: 0, scaleY: 1, originY: 0 }}
         exit={{ opacity: 0, y: -20 }}
