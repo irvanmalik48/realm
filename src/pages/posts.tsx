@@ -97,18 +97,7 @@ export default function Posts({ posts }: { posts: PostMatter[] }) {
                             ))}
                         </div>
                         <div className="flex flex-row gap-3">
-                          <Badge
-                            variant={
-                              post.createdAt === post.updatedAt
-                                ? "default"
-                                : "secondary"
-                            }
-                          >
-                            {post.createdAt}
-                          </Badge>
-                          {post.createdAt !== post.updatedAt && (
-                            <Badge>{post.updatedAt}</Badge>
-                          )}
+                          <Badge>{post.updatedAt}</Badge>
                         </div>
                       </CardContent>
                     </Card>
