@@ -96,7 +96,7 @@ export default function Post({ post }: { post: PostMatter }) {
             <p className="lead mt-3 md:text-center">
               {post.frontMatter.description}
             </p>
-            <div className="flex flex-wrap gap-2 mb-4 justify-center">
+            <div className="flex flex-wrap gap-2 mb-4 md:justify-center">
               {post.frontMatter.tags.map((tag) => (
                 <Badge key={tag}>{tag}</Badge>
               ))}
