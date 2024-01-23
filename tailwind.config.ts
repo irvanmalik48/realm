@@ -16,6 +16,10 @@ module.exports = {
       },
     },
     extend: {
+      fonts: {
+        sans: ["var(--font-inter)"],
+        mono: ["var(--font-jetbrains-mono)"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -72,5 +76,18 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    require("tailwindcss/plugin")(function ({
+      addVariant,
+    }: {
+      addVariant: (name: string, selector: string) => unknown;
+    }) {
+      addVariant(
+        "prose-inline-code",
+        '&.prose :where(:not(pre)>code):not(:where([class~="not-prose"] *))'
+      );
+    }),
+  ],
 };
