@@ -35,6 +35,7 @@
     "rehype-prism-plus": "^2.0.0",
     "remark-gfm": "3.0.1",
     "scroller-motion": "^1.2.3",
+    "sharp": "^0.33.2",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7"
   },
