@@ -1,16 +1,24 @@
 import { usePBToggle } from "@/hooks/atoms";
-import { motion, useMotionTemplate, useSpring } from "framer-motion";
+import {
+  MotionValue,
+  motion,
+  useMotionTemplate,
+  useSpring,
+} from "framer-motion";
 import { useScrollerMotion } from "scroller-motion";
 
 export default function ScrollProgress() {
   const { scrollYProgress } = useScrollerMotion();
   const { progressBar } = usePBToggle();
 
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 30,
-    restDelta: 1,
-  });
+  const scaleX = useSpring(
+    scrollYProgress as unknown as number | MotionValue<any>,
+    {
+      stiffness: 50,
+      damping: 30,
+      restDelta: 1,
+    }
+  );
 
   const maxWidth = useMotionTemplate`calc(${scaleX} * 100%)`;
 
