@@ -162,9 +162,9 @@ export const getStaticProps = async ({
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [
-        rehypePrism,
+        rehypePrism as any,
         rehypeAutoLinkHeadings,
-        rehypeMdxCodeProps as unknown as typeof rehypePrism,
+        rehypeMdxCodeProps as any,
       ],
     },
     scope: data,
