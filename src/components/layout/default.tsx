@@ -48,6 +48,33 @@ export default function DefaultLayout({
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:url" content="https://irvanma.eu.org" />
+        <meta
+          name="twitter:title"
+          content={
+            title ? `${templateTitle ? "realm. | " : ""}${title}` : "realm."
+          }
+        />
+        <meta
+          name="twitter:description"
+          content={description || "Irvan Malik's personal site."}
+        />
+        <meta name="twitter:creator" content="@irvanmalik48" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content={
+            title ? `${templateTitle ? "realm. | " : ""}${title}` : "realm."
+          }
+        />
+        <meta
+          property="og:description"
+          content={description || "Irvan Malik's personal site."}
+        />
+        <meta property="og:site_name" content="realm" />
+        <meta property="og:url" content="https://irvanma.eu.org" />
       </Head>
       <motion.div
         className="fixed bg-background inset-0 z-[998] pointer-events-none"
