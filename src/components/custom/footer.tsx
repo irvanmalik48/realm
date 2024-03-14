@@ -58,7 +58,7 @@ export default function Footer() {
               fill="currentColor"
             />
           </svg>
-          <h4 className="text-lg font-semibold dark:font-medium">realm.</h4>
+          <p className="text-lg font-semibold dark:font-medium">realm.</p>
         </div>
         <p className="text-xs dark:text-foreground/50 w-3/4 lg:w-full">
           Made with Next.js, shadcn/ui, and TypeScript, using my last 3

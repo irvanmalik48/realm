@@ -91,6 +91,7 @@ export default function FAB() {
           showStt ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
       >
+        <span className="sr-only">Scroll to top</span>
         <ChevronUpIcon className="w-5 h-5" />
       </Button>
       <Popover
@@ -108,6 +109,7 @@ export default function FAB() {
               "right-5 rounded-full z-[999]"
             )}
           >
+            <span className="sr-only">Open navigation menu</span>
             {!open ? (
               <HamburgerMenuIcon className="w-5 h-5" />
             ) : (

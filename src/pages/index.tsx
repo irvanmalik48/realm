@@ -393,6 +393,9 @@ export default function Home() {
                     )}
                   >
                     <link.icon className="w-7 h-7" />
+                    <span className="sr-only">
+                      {link.text} ({link.href})
+                    </span>
                     <p className="w-full text-xs text-center mt-2 md:hidden">
                       {link.text}
                     </p>
