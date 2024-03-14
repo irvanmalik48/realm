@@ -22,18 +22,14 @@ const FAQ_DATA = [
     content: "Money. I need money. I'm broke.",
   },
   {
-    title: "Why aren't you afraid of being doxxed?",
-    description:
-      "You're literally showing your face on the internet if I may remember.",
-    content:
-      "I mean, come then if you really want to doxx me. Posting my map location on the internet without meeting me is a good recipe to get me view you without a single semblance of respect. If you know where I am and want to actually challenge on whether or not I'm afraid of you, come.",
+    title: "Are you single?",
+    description: "Just curious.",
+    content: "Yes, I am. Not for long, I hope.",
   },
   {
-    title: "Why are your website so complex?",
-    description:
-      "Next.js, React Query, Tailwind, and some more. Why not just use something simpler like HTML and CSS?",
-    content:
-      "Cause I can and it's fun. Add that to the fact that what is complex for you might be deadass simple for me. All in all, I am a programmer. I need to show what I can and am capable of including but not limited to showing what I can create with the framework I currently use.",
+    title: "What's your favorite song to listen?",
+    description: "Might've been something interesting, y'know?",
+    content: "Bury the Light by Casey Edwards.",
   },
   {
     title: "Why are you so obsessed on audio thingies?",
@@ -57,7 +53,13 @@ export default function About() {
           </h1>
           <Accordion
             type="multiple"
-            defaultValue={["description", "realm-info", "faq", "ask-me"]}
+            defaultValue={[
+              "description",
+              "realm-info",
+              "faq",
+              "ask-me",
+              "donations",
+            ]}
           >
             <AccordionItem value="description">
               <AccordionTrigger>
@@ -74,7 +76,7 @@ export default function About() {
                   has been described on the landing page, ain&apos;t it? But if
                   you want to know more about me, then sure. I&apos;m an
                   undergrad student majoring in Computer Science. Currently
-                  studying in Sriwijaya University. I&apos;m 20 y&apos;o, born
+                  studying in Sriwijaya University. I&apos;m 21 y&apos;o, born
                   at 1st of March, 2003. Has a few siblings, and live in a quite
                   okay family.
                 </p>
@@ -170,9 +172,63 @@ export default function About() {
                   </h2>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="text-foreground/70">
-                Any donations that can help me buy some stuffs and, of course,
-                coffee, are highly appreciated. You can donate to me via{" "}
+              <AccordionContent className="text-foreground/70 space-y-2">
+                <p>
+                  Any donations that can help me buy some stuffs and, of course,
+                  coffee, are highly appreciated. You can donate to me via:
+                </p>
+                <p className="text-foreground">Wallets:</p>
+                <ul className="list-disc list-inside">
+                  <li>
+                    PayPal:{" "}
+                    <a
+                      href="https://paypal.me/irvann48"
+                      className="font-mono underline"
+                    >
+                      paypal.me/irvann48
+                    </a>
+                  </li>
+                  <li>
+                    Saweria:{" "}
+                    <a
+                      href="https://saweria.co/irvanmalik48"
+                      className="font-mono underline"
+                    >
+                      @irvanmalik48
+                    </a>
+                  </li>
+                  <li>
+                    Dana: <span className="font-mono">0896-2809-0166</span>{" "}
+                    (Irvan Malik Azantha)
+                  </li>
+                </ul>
+                <p className="text-foreground">Cryptocurrency:</p>
+                <ul className="list-disc list-inside">
+                  <li>
+                    BTC:{" "}
+                    <span className="font-mono">
+                      bc1qx8eluj4tmvnkfela366dm3fluvw6hgx6knc2se
+                    </span>
+                  </li>
+                  <li>
+                    ETH:{" "}
+                    <span className="font-mono">
+                      0xFC67B43EDB988F51Af357FbdF9a66C8f99DBE9C4
+                    </span>
+                  </li>
+                  <li>
+                    USDT (ERC-20):{" "}
+                    <span className="font-mono">
+                      0xFC67B43EDB988F51Af357FbdF9a66C8f99DBE9C4
+                    </span>
+                  </li>
+                  <li>
+                    USDT (TRC-20):{" "}
+                    <span className="font-mono">
+                      TLLbcbS9zJJmWm9JTXEy5QtPoqJt6rrS71
+                    </span>
+                  </li>
+                </ul>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
