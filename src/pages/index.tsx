@@ -274,7 +274,7 @@ export default function Home() {
                 Brief Description
               </h1>
               <p className="dark:text-foreground/70">
-                A 20 y&apos;o living in Indonesia. An undergrad student majoring
+                A 21 y&apos;o living in Indonesia. An undergrad student majoring
                 in Computer Science at Sriwijaya University. High interest in
                 web development and current AI trends. Likes to learn new things
                 and experiment. Loves watching anime and playing games. Also
