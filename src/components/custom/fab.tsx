@@ -135,7 +135,7 @@ export default function FAB() {
                 "text-foreground"
               )}
             >
-              realm. (v6.0.0-beta3)
+              realm. (v6.0.1)
             </div>
             <Tooltip>
               <TooltipTrigger asChild>
