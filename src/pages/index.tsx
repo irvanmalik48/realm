@@ -15,7 +15,7 @@ import {
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 import Image from "next/image";
-import ProfileImage from "@/assets/img/profile.webp";
+import ProfileImage from "@/assets/img/new_lappland.webp";
 import { Separator } from "@/components/ui/separator";
 import Link from "@/components/custom/link-wrapper";
 import {
