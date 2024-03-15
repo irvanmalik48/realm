@@ -8,6 +8,41 @@ tags:
   - "#old"
 ---
 
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [Prerequisite](#prerequisite)
+- [Installation Process](#installation-process)
+  - [Preparing installation medium](#preparing-installation-medium)
+  - [Keymapping (Optional)](#keymapping-optional)
+  - [Connecting to the internet](#connecting-to-the-internet)
+  - [Set time](#set-time)
+  - [Partitioning](#partitioning)
+  - [Mounting the partitions](#mounting-the-partitions)
+    - [Mounting the root partition](#mounting-the-root-partition)
+    - [Creating and mounting btrfs subvolumes](#creating-and-mounting-btrfs-subvolumes)
+    - [Mounting the EFI (boot) partition](#mounting-the-efi-boot-partition)
+    - [Verify if you are doing it correctly](#verify-if-you-are-doing-it-correctly)
+  - [Base system installation](#base-system-installation)
+  - [Generating fstab](#generating-fstab)
+  - [Chroot into the root partition](#chroot-into-the-root-partition)
+    - [Setting up timezone](#setting-up-timezone)
+    - [Sync hardware and system clock](#sync-hardware-and-system-clock)
+    - [Generating system locale](#generating-system-locale)
+    - [Setting keymap](#setting-keymap)
+    - [Setting network configuration](#setting-network-configuration)
+    - [Setting up the root user](#setting-up-the-root-user)
+    - [Installing remaining essentials](#installing-remaining-essentials)
+    - [Modifying mkinitcpio](#modifying-mkinitcpio)
+    - [Installing GRUB](#installing-grub)
+    - [Creating a user](#creating-a-user)
+    - [Giving user sudo permission](#giving-user-sudo-permission)
+    - [Enabling NetworkManager](#enabling-networkmanager)
+  - [Finishing and restarting](#finishing-and-restarting)
+- [Post Installation](#post-installation)
+- [References](#references)
+
 ## Abstract
 
 So I want to show you how to install Arch Linux with btrfs dual booting with Windows. You can read about Arch here: [Arch Wiki - Arch Linux](https://wiki.archlinux.org/title/Arch_Linux).
