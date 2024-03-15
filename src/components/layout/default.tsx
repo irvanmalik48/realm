@@ -75,6 +75,7 @@ export default function DefaultLayout({
         />
         <meta property="og:site_name" content="realm" />
         <meta property="og:url" content="https://irvanma.eu.org" />
+        <meta property="og:image" content="/social-image.png" />
       </Head>
       <motion.div
         className="fixed bg-background inset-0 z-[998] pointer-events-none"

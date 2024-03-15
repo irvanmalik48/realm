@@ -15,7 +15,7 @@ export default function ShadcnProse({ children }: { children: ReactNode }) {
         "prose-p:leading-7 prose-p:[&:not(:first-child)]:mt-6",
         "prose-blockquote:mt-6 prose-blockquote:border-l-2 prose-blockquote:pl-6 prose-blockquote:italic",
         "prose-ul:list-disc prose-ol:list-decimal",
-        "prose-ul:my-6 prose-ul:ml-6 prose-ul:[&>li]:mt-2",
+        "prose-ul:my-2 prose-ul:ml-2 prose-ul:[&>li]:mt-2",
         "prose-ol:my-6 prose-ol:ml-6 prose-ol:[&>li]:mt-2",
         "prose-pre:rounded-[var(--radius)] prose-pre:border prose-pre:border-border",
         "prose-lead:text-xl prose-lead:text-muted-foreground",
