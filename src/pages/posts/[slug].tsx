@@ -15,6 +15,7 @@ import remarkGfm from "remark-gfm";
 import rehypePrism from "rehype-prism-plus";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
+import rehypeSlug from "rehype-slug";
 
 type Post = {
   title: string;
@@ -163,6 +164,7 @@ export const getStaticProps = async ({
       remarkPlugins: [remarkGfm],
       rehypePlugins: [
         rehypePrism as any,
+        rehypeSlug,
         rehypeAutoLinkHeadings,
         rehypeMdxCodeProps as any,
       ],
