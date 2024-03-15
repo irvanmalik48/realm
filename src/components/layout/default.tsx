@@ -49,7 +49,7 @@ export default function DefaultLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
 
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://irvanma.eu.org" />
         <meta
           name="twitter:title"
