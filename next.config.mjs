@@ -1,7 +1,4 @@
-import {
-  PHASE_DEVELOPMENT_SERVER,
-  PHASE_PRODUCTION_BUILD,
-} from "next/constants.js";
+import { PHASE_PRODUCTION_BUILD } from "next/constants.js";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -10,7 +7,7 @@ const nextConfig = {
 };
 
 export default async (phase) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD) {
+  if (phase === PHASE_PRODUCTION_BUILD) {
     const withSerwist = (await import("@serwist/next")).default({
       swSrc: "sw/index.ts",
       swDest: "public/sw.js",
