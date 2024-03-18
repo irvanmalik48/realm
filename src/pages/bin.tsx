@@ -58,7 +58,7 @@ export default function Bin() {
       <div className="w-full min-h-screen flex flex-col py-24">
         <section className={cn("w-full max-w-3xl relative p-5", "mx-auto")}>
           <h1 className="text-2xl pt-3 pb-1 w-full text-center font-bold dark:font-semibold">
-            Realm's Bin Service
+            Realm&apos;s Bin Service
           </h1>
           <p className="text-center text-foreground/50 pb-2">
             Paste your code and share it to others. No sign-ups required.
