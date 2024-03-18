@@ -1,6 +1,7 @@
 import DefaultLayout from "@/components/layout/default";
 import fs from "fs";
 import matter from "gray-matter";
+import Giscus from "@giscus/react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -122,7 +123,7 @@ export default function Post({ post }: { post: PostMatter }) {
                 .
               </AlertDescription>
             </Alert>
-            <Alert>
+            <Alert className="mb-5">
               <Component1Icon className="w-4 h-4" />
               <AlertTitle>Assets Copyright Notice</AlertTitle>
               <AlertDescription>
@@ -140,6 +141,20 @@ export default function Post({ post }: { post: PostMatter }) {
                 </p>
               </AlertDescription>
             </Alert>
+            <Giscus
+              repo="irvanmalik48/realm"
+              repoId="R_kgDOHpHiPg"
+              category="Comments"
+              categoryId="DIC_kwDOHpHiPs4CQsGa"
+              mapping="pathname"
+              strict="1"
+              reactionsEnabled="1"
+              emitMetadata="0"
+              inputPosition="top"
+              theme="transparent_dark"
+              lang="en"
+              loading="lazy"
+            />
           </div>
         </section>
       </div>
