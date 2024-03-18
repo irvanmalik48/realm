@@ -1,7 +1,6 @@
 import {
   ChevronUpIcon,
   Cross1Icon,
-  DownloadIcon,
   FileTextIcon,
   HamburgerMenuIcon,
   HomeIcon,
