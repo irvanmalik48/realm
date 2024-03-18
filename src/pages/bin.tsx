@@ -88,6 +88,16 @@ export default function Bin() {
               </AccordionTrigger>
               <AccordionContent className="text-foreground/70">
                 <p>
+                  The Realm&apos;s Bin Service is a pastebin-like service.
+                  That's it really. For the sake of simplicity, I don&apos;t
+                  have any plans (or at least for now) to add any features like
+                  syntax highlighting, editing, or any other fancy stuffs. Due
+                  to the free nature of Vercel KV&apos;s Hobby plan (which I am
+                  using to store the pastes), each paste has a maximum size of
+                  1MB. In order to save space, pastes will be expired and
+                  deleted after 14 days.
+                </p>
+                <p className="mt-3">
                   All pastes are publicly accessible and can be viewed by
                   anyone. Please do not paste any sensitive information such as
                   passwords, API keys, or any other confidential data. I am NOT
