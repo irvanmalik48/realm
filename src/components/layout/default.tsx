@@ -8,6 +8,7 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { useSSToggle } from "@/hooks/atoms";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({
@@ -107,6 +108,7 @@ export default function DefaultLayout({
         </ScrollerMotion>
       </motion.main>
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }
