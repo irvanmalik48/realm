@@ -1,3 +1,5 @@
+import DefaultLayout from "@/components/layout/default";
+
 type ResultProp = {
   id: string;
   text: string;
@@ -24,8 +26,10 @@ export async function getServerSideProps({
 
 export default function PasteBin({ data }: { data: ResultProp }) {
   return (
-    <div className="w-full bg-background text-foreground px-5 py-3 overflow-auto font-mono whitespace-pre">
-      {data.text}
-    </div>
+    <DefaultLayout title={data.id} description="Your pasted bin.">
+      <div className="w-full bg-background text-foreground px-5 py-3 overflow-auto font-mono whitespace-pre">
+        {data.text}
+      </div>
+    </DefaultLayout>
   );
 }
