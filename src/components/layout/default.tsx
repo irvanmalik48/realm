@@ -7,6 +7,7 @@ import ScrollProgress from "../custom/scroll-progress";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { useSSToggle } from "@/hooks/atoms";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({
@@ -105,6 +106,7 @@ export default function DefaultLayout({
           <Footer />
         </ScrollerMotion>
       </motion.main>
+      <Analytics />
     </>
   );
 }
