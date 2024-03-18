@@ -7,6 +7,7 @@ import {
   HomeIcon,
   InfoCircledIcon,
   OpenInNewWindowIcon,
+  Pencil2Icon,
   TextIcon,
 } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
@@ -47,9 +48,9 @@ export default function FAB() {
       icon: InfoCircledIcon,
     },
     {
-      href: "/resume",
-      text: "Download Resume",
-      icon: DownloadIcon,
+      href: "/bin",
+      text: "Realm Bin",
+      icon: Pencil2Icon,
     },
   ];
 
