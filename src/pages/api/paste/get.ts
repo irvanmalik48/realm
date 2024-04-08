@@ -5,7 +5,7 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const { id } = request.query;
+  const { id, raw } = request.query;
   let bintext;
 
   if (request.method !== "GET") {
@@ -30,6 +30,10 @@ export default async function handler(
     return response.status(500).json({
       message: (error as any).message,
     });
+  }
+
+  if (raw === "true") {
+    return response.status(200).send(bintext);
   }
 
   return response.status(200).json({
