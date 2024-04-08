@@ -3,9 +3,6 @@ import Head from "next/head";
 import Footer from "../custom/footer";
 import { motion } from "framer-motion";
 import { ScrollerMotion } from "scroller-motion";
-import ScrollProgress from "../custom/scroll-progress";
-import { createPortal } from "react-dom";
-import { useEffect, useState } from "react";
 import { useSSToggle } from "@/hooks/atoms";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -29,12 +26,7 @@ export default function DefaultLayout({
   description,
   templateTitle = true,
 }: DefaultLayoutProps) {
-  const [mounted, setMounted] = useState(false);
   const { smoothScrolling } = useSSToggle();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <>
@@ -102,7 +94,6 @@ export default function DefaultLayout({
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
         <ScrollerMotion disabled={!smoothScrolling}>
-          {mounted && createPortal(<ScrollProgress />, document.body)}
           {children}
           <Footer />
         </ScrollerMotion>
