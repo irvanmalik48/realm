@@ -22,7 +22,7 @@ import Image from "next/image";
 import HeroImage from "@/assets/img/hero.webp";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 import { cn } from "@/lib/utils";
-import { usePBToggle, useSSToggle } from "@/hooks/atoms";
+import { useSSToggle } from "@/hooks/atoms";
 
 export default function FAB() {
   const links = [
@@ -58,7 +58,6 @@ export default function FAB() {
   const [showStt, setShowStt] = useState(false);
   const { theme, setTheme } = useTheme();
   const { smoothScrolling, setSmoothScrolling } = useSSToggle();
-  const { progressBar, setProgressBar } = usePBToggle();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -250,37 +249,6 @@ export default function FAB() {
                 {smoothScrolling
                   ? "Disable smooth scrolling"
                   : "Enable smooth scrolling"}
-              </span>
-            </Label>
-          </div>
-          <div
-            className={cn(
-              "w-full px-5 py-2 gap-3 flex",
-              "items-center hover:bg-secondary transition",
-              "cursor-pointer"
-            )}
-          >
-            <Switch
-              checked={progressBar}
-              onCheckedChange={() => {
-                setProgressBar(!progressBar);
-                toast({
-                  title: "Progress bar preference modified!",
-                  description: `Progress bar is now ${
-                    progressBar ? "hidden" : "shown"
-                  }.`,
-                });
-              }}
-              id="progress-bar-toggle"
-              className="cursor-pointer"
-            />
-            <Label
-              htmlFor="progress-bar-toggle"
-              className="w-full flex flex-col cursor-pointer"
-            >
-              <span className="text-sm font-medium">Progress Bar</span>
-              <span className="text-xs text-foreground-50">
-                {progressBar ? "Disable progress bar" : "Enable progress bar"}
               </span>
             </Label>
           </div>
