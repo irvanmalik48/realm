@@ -2,8 +2,6 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import Head from "next/head";
 import Footer from "../custom/footer";
 import { motion } from "framer-motion";
-import { ScrollerMotion } from "scroller-motion";
-import { useSSToggle } from "@/hooks/atoms";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -26,8 +24,6 @@ export default function DefaultLayout({
   description,
   templateTitle = true,
 }: DefaultLayoutProps) {
-  const { smoothScrolling } = useSSToggle();
-
   return (
     <>
       <Head>
@@ -93,10 +89,8 @@ export default function DefaultLayout({
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
-        <ScrollerMotion disabled={!smoothScrolling}>
-          {children}
-          <Footer />
-        </ScrollerMotion>
+        {children}
+        <Footer />
       </motion.main>
       <Analytics />
       <SpeedInsights />
