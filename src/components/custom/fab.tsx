@@ -22,7 +22,6 @@ import Image from "next/image";
 import HeroImage from "@/assets/img/hero.webp";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 import { cn } from "@/lib/utils";
-import { useSSToggle } from "@/hooks/atoms";
 
 export default function FAB() {
   const links = [
@@ -57,7 +56,6 @@ export default function FAB() {
   const [open, setOpen] = useState(false);
   const [showStt, setShowStt] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { smoothScrolling, setSmoothScrolling } = useSSToggle();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -215,40 +213,6 @@ export default function FAB() {
               <span className="text-sm font-medium">Dark Mode</span>
               <span className="text-xs text-foreground-50">
                 {theme === "dark" ? "Disable dark mode" : "Enable dark mode"}
-              </span>
-            </Label>
-          </div>
-          <div
-            className={cn(
-              "w-full px-5 py-2 gap-3 flex",
-              "items-center hover:bg-secondary transition",
-              "cursor-pointer"
-            )}
-          >
-            <Switch
-              checked={smoothScrolling}
-              onCheckedChange={() => {
-                window.scrollTo({ top: 0, behavior: "auto" });
-                setSmoothScrolling(!smoothScrolling);
-                toast({
-                  title: "Scroll behavior modified!",
-                  description: `Smooth scrolling is now ${
-                    smoothScrolling ? "disabled" : "enabled"
-                  }.`,
-                });
-              }}
-              id="smooth-scrolling-toggle"
-              className="cursor-pointer"
-            />
-            <Label
-              htmlFor="smooth-scrolling-toggle"
-              className="w-full flex flex-col cursor-pointer"
-            >
-              <span className="text-sm font-medium">Smooth Scrolling</span>
-              <span className="text-xs text-foreground-50">
-                {smoothScrolling
-                  ? "Disable smooth scrolling"
-                  : "Enable smooth scrolling"}
               </span>
             </Label>
           </div>
