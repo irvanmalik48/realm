@@ -52,9 +52,9 @@ export default function PasteBin({ data }: { data: ResultProp }) {
   return (
     <DefaultLayout title={data.id} description="Your pasted bin.">
       <div className="w-full min-h-screen bg-background text-foreground p-0">
-        <div className="w-full flex justify-between items-center px-5 py-3 border-b border-border">
+        <div className="w-full flex md:flex-row gap-3 md:gap-0 flex-col justify-center md:justify-between items-center px-5 py-3 border-b border-border">
           <Badge>{data.id}</Badge>
-          <div className="flex items-center gap-3">
+          <div className="grid grid-cols-2 w-full md:w-fit md:grid-cols-none md:flex md:items-center gap-3">
             <Button
               size="sm"
               className="flex items-center gap-2"
