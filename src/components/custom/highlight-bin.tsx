@@ -12,7 +12,7 @@ function HighlightBin({ text }: { text: string }) {
 
   useEffect(() => {
     setMounted(true);
-  });
+  }, []);
 
   return (
     mounted && (
