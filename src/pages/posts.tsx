@@ -18,7 +18,7 @@ import { useThrottle } from "@/hooks/throttle";
 import { POSTS_PATH, postFilePaths } from "@/content/const";
 import path from "path";
 
-type Post = {
+export type Post = {
   title: string;
   description: string;
   slug: string;
@@ -27,7 +27,7 @@ type Post = {
   updatedAt: string;
 };
 
-interface PostMatter {
+export interface PostMatter {
   content: string;
   data: Post;
   filePath: string;
