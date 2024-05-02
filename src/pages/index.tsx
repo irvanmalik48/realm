@@ -70,7 +70,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
           </div>
           <Accordion
             type="multiple"
-            defaultValue={["brief-description", "recent-post"]}
+            defaultValue={["brief-description", "recent-post", "acks"]}
           >
             <AccordionItem value="brief-description">
               <AccordionTrigger>
@@ -146,7 +146,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                 </p>
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="brief-description">
+            <AccordionItem value="acks">
               <AccordionTrigger>
                 <div className="flex gap-3 items-center">
                   <CopyIcon className="w-5 h-5" />
