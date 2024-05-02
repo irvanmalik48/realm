@@ -25,7 +25,7 @@ function InjectCSS({ css }: InjectCSSProps) {
     if (!ready && isDOMReady()) {
       appendStyle(idCache[css], css);
     }
-  }, [css]);
+  }, [css, ready]);
 
   return null;
 }
