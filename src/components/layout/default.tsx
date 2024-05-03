@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Script from "next/script";
-import { useEffect } from "react";
 
 import Footer from "../custom/footer";
 
@@ -20,32 +18,12 @@ export type DefaultLayoutProps = {
   children?: React.ReactNode;
 };
 
-declare global {
-  interface Window {
-    goatcounter?: any;
-  }
-}
-
 export default function DefaultLayout({
   children,
   title,
   description,
   templateTitle = true,
 }: DefaultLayoutProps) {
-  const router = useRouter();
-
-  useEffect(() => {
-    const handleRouteChange = (path: unknown) => {
-      window?.goatcounter?.count?.({
-        path,
-      });
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
-
   return (
     <>
       <Head>
