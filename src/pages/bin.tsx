@@ -108,9 +108,9 @@ export default function Bin() {
                 <p className="mt-3">
                   This service uses zero cookies and does not track you in any
                   way, shape, or form. Tho, you might see some traffics being
-                  sent anonymously to Vercel for analytics purposes which is
-                  totally unrelated to this service (more like just website
-                  analytics, really).
+                  sent anonymously to my GoatCounter instance for analytics
+                  purposes which is totally unrelated to this service (more like
+                  just website analytics, really).
                 </p>
               </AccordionContent>
             </AccordionItem>
