@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import highlight from "highlight.js";
+import { useEffect, useState } from "react";
 
 const useHighlight = (text: string) => {
   const [highlighted, setHighlighted] = useState<string>("");
