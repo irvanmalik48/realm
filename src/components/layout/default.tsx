@@ -62,6 +62,7 @@ export default function DefaultLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
 
+        <meta property="twitter:image" content="/social-image-uwu.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://irvanma.eu.org" />
         <meta
@@ -88,7 +89,7 @@ export default function DefaultLayout({
         />
         <meta property="og:site_name" content="realm" />
         <meta property="og:url" content="https://irvanma.eu.org" />
-        <meta property="og:image" content="/social-image.png" />
+        <meta property="og:image" content="/social-image-uwu.png" />
       </Head>
       <motion.div
         className="fixed bg-background inset-0 z-[998] pointer-events-none"
