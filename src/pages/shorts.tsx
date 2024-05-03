@@ -1,16 +1,17 @@
-import DefaultLayout from "@/components/layout/default";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import fs from "fs";
 import matter from "gray-matter";
-import { cn } from "@/lib/utils";
-import Link from "@/components/custom/link-wrapper";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { useFuzzy } from "@/hooks/fuzzy";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { useThrottle } from "@/hooks/throttle";
-import { SHORTS_PATH, shortFilePaths } from "@/content/const";
 import path from "path";
+
+import Link from "@/components/custom/link-wrapper";
+import DefaultLayout from "@/components/layout/default";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { SHORTS_PATH, shortFilePaths } from "@/content/const";
+import { useFuzzy } from "@/hooks/fuzzy";
+import { useThrottle } from "@/hooks/throttle";
+import { cn } from "@/lib/utils";
 
 type Short = {
   slug: string;

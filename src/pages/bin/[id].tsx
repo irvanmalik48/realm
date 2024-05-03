@@ -1,10 +1,11 @@
+import { CheckIcon, CodeIcon, CopyIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
+
 import HighlightBin from "@/components/custom/highlight-bin";
 import DefaultLayout from "@/components/layout/default";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { CheckIcon, CodeIcon, CopyIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
 
 type ResultProp = {
   id: string;

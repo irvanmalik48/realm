@@ -1,9 +1,14 @@
-import DefaultLayout from "@/components/layout/default";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import { CopyIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
+
+import DefaultLayout from "@/components/layout/default";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,12 +17,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 export default function Bin() {
   const [text, setText] = useState("");

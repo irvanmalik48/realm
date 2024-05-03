@@ -1,22 +1,23 @@
-import DefaultLayout from "@/components/layout/default";
+import Giscus from "@giscus/react";
+import { Component1Icon, ReaderIcon } from "@radix-ui/react-icons";
 import fs from "fs";
 import matter from "gray-matter";
-import Giscus from "@giscus/react";
-import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import { POSTS_PATH, postFilePaths } from "@/content/const";
+import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
-import ShadcnProse from "@/components/custom/shadcn-prose";
-import { Separator } from "@/components/ui/separator";
-import { Component1Icon, ReaderIcon } from "@radix-ui/react-icons";
-import remarkGfm from "remark-gfm";
-import rehypePrism from "rehype-prism-plus";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
+import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
+
+import ShadcnProse from "@/components/custom/shadcn-prose";
+import DefaultLayout from "@/components/layout/default";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { POSTS_PATH, postFilePaths } from "@/content/const";
+import { cn } from "@/lib/utils";
 
 type Post = {
   title: string;

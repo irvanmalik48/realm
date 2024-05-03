@@ -1,8 +1,11 @@
-import DefaultLayout from "@/components/layout/default";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import fs from "fs";
 import matter from "gray-matter";
-import { cn } from "@/lib/utils";
+import path from "path";
+
 import Link from "@/components/custom/link-wrapper";
+import DefaultLayout from "@/components/layout/default";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -10,13 +13,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { useFuzzy } from "@/hooks/fuzzy";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { useThrottle } from "@/hooks/throttle";
 import { POSTS_PATH, postFilePaths } from "@/content/const";
-import path from "path";
+import { useFuzzy } from "@/hooks/fuzzy";
+import { useThrottle } from "@/hooks/throttle";
+import { cn } from "@/lib/utils";
 
 export type Post = {
   title: string;

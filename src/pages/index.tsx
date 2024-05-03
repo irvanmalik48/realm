@@ -1,15 +1,3 @@
-import DefaultLayout from "@/components/layout/default";
-import Image from "next/image";
-import NewspaperBackground from "@/assets/img/jas-min.webp";
-import VTStyleLogo from "@/components/custom/vt-style-logo";
-import { Separator } from "@/components/ui/separator";
-import Link from "@/components/custom/link-wrapper";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import {
   CopyIcon,
   CrumpledPaperIcon,
@@ -17,9 +5,22 @@ import {
 } from "@radix-ui/react-icons";
 import fs from "fs";
 import matter from "gray-matter";
+import Image from "next/image";
 import path from "path";
-import { POSTS_PATH, postFilePaths } from "@/content/const";
+
 import { Post, PostMatter } from "./posts";
+
+import NewspaperBackground from "@/assets/img/jas-min.webp";
+import Link from "@/components/custom/link-wrapper";
+import VTStyleLogo from "@/components/custom/vt-style-logo";
+import DefaultLayout from "@/components/layout/default";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -27,7 +28,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { POSTS_PATH, postFilePaths } from "@/content/const";
 
 export default function Home({ posts }: { posts: PostMatter[] }) {
   const lastTwoPosts = posts

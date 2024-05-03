@@ -1,19 +1,20 @@
-import DefaultLayout from "@/components/layout/default";
+import { ReaderIcon } from "@radix-ui/react-icons";
 import fs from "fs";
 import matter from "gray-matter";
-import { cn } from "@/lib/utils";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import { SHORTS_PATH, shortFilePaths } from "@/content/const";
+import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
-import ShadcnProse from "@/components/custom/shadcn-prose";
-import { Separator } from "@/components/ui/separator";
-import { ReaderIcon } from "@radix-ui/react-icons";
-import remarkGfm from "remark-gfm";
-import rehypePrism from "rehype-prism-plus";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
+import rehypePrism from "rehype-prism-plus";
+import remarkGfm from "remark-gfm";
+
+import ShadcnProse from "@/components/custom/shadcn-prose";
+import DefaultLayout from "@/components/layout/default";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Separator } from "@/components/ui/separator";
+import { SHORTS_PATH, shortFilePaths } from "@/content/const";
+import { cn } from "@/lib/utils";
 
 type Short = {
   title: string;

@@ -1,3 +1,11 @@
+import {
+  CookieIcon,
+  HeartIcon,
+  InfoCircledIcon,
+  QuestionMarkCircledIcon,
+  QuestionMarkIcon,
+} from "@radix-ui/react-icons";
+
 import NumberedCard from "@/components/custom/numbered-card";
 import DefaultLayout from "@/components/layout/default";
 import {
@@ -7,13 +15,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
-import {
-  CookieIcon,
-  HeartIcon,
-  InfoCircledIcon,
-  QuestionMarkCircledIcon,
-  QuestionMarkIcon,
-} from "@radix-ui/react-icons";
 
 const FAQ_DATA = [
   {
