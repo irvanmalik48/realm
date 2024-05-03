@@ -116,7 +116,7 @@ export default function DefaultLayout({
         <Footer />
         <Script
           async
-          data-goatcounter="https://irvanma.eu.org/count"
+          data-goatcounter="https://www.irvanma.eu.org/count"
           src="//gc.zgo.at/count.js"
           strategy="afterInteractive"
         />
