@@ -1,9 +1,10 @@
-import { Inter, JetBrains_Mono } from "next/font/google";
-import Head from "next/head";
-import Footer from "../custom/footer";
-import { motion } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { motion } from "framer-motion";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import Head from "next/head";
+
+import Footer from "../custom/footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({

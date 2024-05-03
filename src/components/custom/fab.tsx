@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import {
   ChevronUpIcon,
   Cross1Icon,
@@ -9,18 +12,17 @@ import {
   Pencil2Icon,
   TextIcon,
 } from "@radix-ui/react-icons";
-import { Button } from "../ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { useEffect, useState } from "react";
-import { Separator } from "../ui/separator";
+
 import Link from "./link-wrapper";
-import { useToast } from "../ui/use-toast";
-import { Switch } from "../ui/switch";
+import { Button } from "../ui/button";
 import { Label } from "../ui/label";
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import HeroImage from "@/assets/img/hero.webp";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Separator } from "../ui/separator";
+import { Switch } from "../ui/switch";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
+import { useToast } from "../ui/use-toast";
+
+import HeroImage from "@/assets/img/hero.webp";
 import { cn } from "@/lib/utils";
 
 export default function FAB() {

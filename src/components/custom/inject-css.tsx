@@ -1,4 +1,5 @@
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import { appendStyle, isDOMReady } from "@/lib/utils";
 
 const idCache: any = {};

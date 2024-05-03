@@ -1,9 +1,11 @@
-import useHighlight from "@/hooks/highlight";
-import InjectCSS from "./inject-css";
-import { cn } from "@/lib/utils";
-import { getStyleClass, getTheme } from "@/lib/style-classes";
-import { memo, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { memo, useEffect, useState } from "react";
+
+import InjectCSS from "./inject-css";
+
+import useHighlight from "@/hooks/highlight";
+import { getStyleClass, getTheme } from "@/lib/style-classes";
+import { cn } from "@/lib/utils";
 
 function HighlightBin({ text }: { text: string }) {
   const { highlighted, language } = useHighlight(text);

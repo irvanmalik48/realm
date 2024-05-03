@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import {
   Card,
   CardHeader,
@@ -6,6 +5,8 @@ import {
   CardDescription,
   CardContent,
 } from "../ui/card";
+
+import { cn } from "@/lib/utils";
 
 export default function NumberedCard({
   number,
