@@ -45,7 +45,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
   return (
     <DefaultLayout title="Landing Page">
       <div className="w-full min-h-screen flex flex-col pb-24">
-        <section className="w-full relative border-b border-border">
+        <section className="w-full dark:bg-[#161514] bg-[fdfdfd] relative border-b border-border">
           <Image
             src={NewspaperBackground}
             alt="Hero BG"
