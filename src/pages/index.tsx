@@ -49,6 +49,8 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
           <Image
             src={NewspaperBackground}
             alt="Hero BG"
+            width={730}
+            height={300}
             blurDataURL={NewspaperBackground.blurDataURL}
             placeholder="blur"
             className="absolute object-cover max-h-full opacity-5 grayscale inset-0 z-0"
