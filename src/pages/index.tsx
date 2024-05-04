@@ -48,12 +48,10 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
         <section className="w-full relative border-b border-border">
           <Image
             src={NewspaperBackground}
-            layout="fill"
-            objectFit="cover"
             alt="Hero BG"
             blurDataURL={NewspaperBackground.blurDataURL}
             placeholder="blur"
-            className="absolute opacity-[2%] grayscale inset-0 z-0"
+            className="absolute object-cover max-h-full opacity-5 grayscale inset-0 z-0"
           />
           <section className="w-full z-[1] max-w-3xl relative p-5 mx-auto">
             <VTStyleLogo className="lg:w-3/4 mx-auto w-full" />
