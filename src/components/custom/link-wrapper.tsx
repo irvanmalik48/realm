@@ -7,7 +7,7 @@ function Link(
   ref: any
 ) {
   return (
-    <NextLink ref={ref} {...(rest as LinkProps)}>
+    <NextLink ref={ref} scroll={false} {...(rest as LinkProps)}>
       {children}
     </NextLink>
   );
