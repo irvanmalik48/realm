@@ -14,12 +14,6 @@ import NewspaperBackground from "@/assets/img/jas-min.webp";
 import Link from "@/components/custom/link-wrapper";
 import VTStyleLogo from "@/components/custom/vt-style-logo";
 import DefaultLayout from "@/components/layout/default";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -49,11 +43,12 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
           <Image
             src={NewspaperBackground}
             alt="Hero BG"
-            width={730}
-            height={300}
+            width={1080}
+            height={500}
             blurDataURL={NewspaperBackground.blurDataURL}
             placeholder="blur"
-            className="absolute object-cover max-h-full opacity-5 grayscale inset-0 z-0"
+            fetchPriority="high"
+            className="absolute w-full object-cover max-h-full opacity-5 grayscale inset-0 z-0"
           />
           <section className="w-full z-[1] max-w-3xl relative p-5 mx-auto">
             <VTStyleLogo className="lg:w-3/4 mx-auto w-full" />
@@ -70,116 +65,98 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               Friedrich Nietzsche
             </p>
           </div>
-          <Accordion
-            type="multiple"
-            defaultValue={["brief-description", "recent-post", "acks"]}
-          >
-            <AccordionItem value="brief-description">
-              <AccordionTrigger>
-                <div className="flex gap-3 items-center">
-                  <InfoCircledIcon className="w-5 h-5" />
-                  <h2 className="text-lg font-semibold dark:font-medium">
-                    Brief Description
-                  </h2>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-foreground/70">
-                <p>
-                  A 21 y&apos;o living in Indonesia. An undergrad student
-                  majoring in Computer Science at Sriwijaya University. High
-                  interest in web development and current AI trends. Likes to
-                  learn new things and experiment. Loves watching anime and
-                  playing games. Also does music and stuffs.
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="recent-post">
-              <AccordionTrigger>
-                <div className="flex gap-3 items-center">
-                  <CrumpledPaperIcon className="w-5 h-5" />
-                  <h2 className="text-lg font-semibold dark:font-medium">
-                    Most Recent Posts
-                  </h2>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-foreground/70 flex flex-col gap-5">
-                <p>
-                  Here are 2 most recent posts from the blog. You can read them
-                  by clicking the subsequent cards below:
-                </p>
-                {lastTwoPosts.map((post) => (
-                  <Link
-                    key={post.slug}
-                    href={`/posts/${post.slug}`}
-                    style={{
-                      width: "100%",
-                    }}
-                  >
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>{post.title}</CardTitle>
-                        <CardDescription>{post.description}</CardDescription>
-                      </CardHeader>
-                      <CardContent className="flex justify-between flex-row-reverse flex-wrap gap-5">
-                        <div className="flex flex-row gap-3">
-                          {post.tags &&
-                            post.tags.map((tag) => (
-                              <Badge variant={"secondary"} key={tag}>
-                                {tag}
-                              </Badge>
-                            ))}
-                        </div>
-                        <div className="flex flex-row gap-3">
-                          <Badge>{post.updatedAt}</Badge>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
-                <p>
-                  You can also view all of the posts{" "}
-                  <Link
-                    href="/posts"
-                    className="text-primary hover:underline transition-all"
-                  >
-                    here
-                  </Link>
-                  .
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="acks">
-              <AccordionTrigger>
-                <div className="flex gap-3 items-center">
-                  <CopyIcon className="w-5 h-5" />
-                  <h2 className="text-lg font-semibold dark:font-medium">
-                    Acknowledgements
-                  </h2>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-foreground/70">
-                <p>
-                  The newspaper background image I used in the hero section is
-                  made by{" "}
-                  <a
-                    href="https://unsplash.com/@filmbetrachterin"
-                    className="text-primary hover:underline transition-all"
-                  >
-                    Jas Min
-                  </a>{" "}
-                  from Unsplash. You can view the original image{" "}
-                  <a
-                    href="https://unsplash.com/photos/a-piece-of-paper-with-words-written-on-it-hYaAxItJGoM"
-                    className="text-primary hover:underline transition-all"
-                  >
-                    <span className="sr-only">Jas Min original image</span>
-                    here
-                  </a>
-                  .
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <div className="flex flex-col gap-3 w-full">
+            <div className="flex gap-3 my-1 items-center">
+              <InfoCircledIcon className="w-5 h-5" />
+              <h2 className="text-lg font-semibold dark:font-medium">
+                Brief Description
+              </h2>
+            </div>
+            <p>
+              A 21 y&apos;o living in Indonesia. An undergrad student majoring
+              in Computer Science at Sriwijaya University. High interest in web
+              development and current AI trends. Likes to learn new things and
+              experiment. Loves watching anime and playing games. Also does
+              music and stuffs.
+            </p>
+            <Separator />
+            <div className="flex gap-3 my-1 items-center">
+              <CrumpledPaperIcon className="w-5 h-5" />
+              <h2 className="text-lg font-semibold dark:font-medium">
+                Most Recent Posts
+              </h2>
+            </div>
+            <p>
+              Here are 2 most recent posts from the blog. You can read them by
+              clicking the subsequent cards below:
+            </p>
+            {lastTwoPosts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/posts/${post.slug}`}
+                style={{
+                  width: "100%",
+                }}
+              >
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{post.title}</CardTitle>
+                    <CardDescription>{post.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex justify-between flex-row-reverse flex-wrap gap-5">
+                    <div className="flex flex-row gap-3">
+                      {post.tags &&
+                        post.tags.map((tag) => (
+                          <Badge variant={"secondary"} key={tag}>
+                            {tag}
+                          </Badge>
+                        ))}
+                    </div>
+                    <div className="flex flex-row gap-3">
+                      <Badge>{post.updatedAt}</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+            <p>
+              You can also view all of the posts{" "}
+              <Link
+                href="/posts"
+                className="text-primary hover:underline transition-all"
+              >
+                here
+              </Link>
+              .
+            </p>
+            <Separator />
+            <div className="flex gap-3 my-1 items-center">
+              <CopyIcon className="w-5 h-5" />
+              <h2 className="text-lg font-semibold dark:font-medium">
+                Acknowledgements
+              </h2>
+            </div>
+            <p>
+              The newspaper background image I used in the hero section is made
+              by{" "}
+              <a
+                href="https://unsplash.com/@filmbetrachterin"
+                className="text-primary hover:underline transition-all"
+              >
+                Jas Min
+              </a>{" "}
+              from Unsplash. You can view the original image{" "}
+              <a
+                href="https://unsplash.com/photos/a-piece-of-paper-with-words-written-on-it-hYaAxItJGoM"
+                className="text-primary hover:underline transition-all"
+              >
+                <span className="sr-only">Jas Min original image</span>
+                here
+              </a>
+              .
+            </p>
+            <Separator />
+          </div>
         </section>
       </div>
     </DefaultLayout>
