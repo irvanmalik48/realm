@@ -1,16 +1,16 @@
 import {
   CopyIcon,
   CrumpledPaperIcon,
+  ExternalLinkIcon,
   InfoCircledIcon,
+  Link2Icon,
 } from "@radix-ui/react-icons";
 import fs from "fs";
 import matter from "gray-matter";
-import Image from "next/image";
 import path from "path";
 
 import { Post, PostMatter } from "./posts";
 
-import NewspaperBackground from "@/assets/img/jas-min.webp";
 import Link from "@/components/custom/link-wrapper";
 import VTStyleLogo from "@/components/custom/vt-style-logo";
 import DefaultLayout from "@/components/layout/default";
@@ -24,6 +24,8 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { POSTS_PATH, postFilePaths } from "@/content/const";
+import { Button } from "@/components/ui/button";
+import BatikBackground from "@/components/custom/batik";
 
 export default function Home({ posts }: { posts: PostMatter[] }) {
   const lastTwoPosts = posts
@@ -39,17 +41,8 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
   return (
     <DefaultLayout title="Landing Page">
       <div className="w-full min-h-screen flex flex-col pb-24">
-        <section className="w-full dark:bg-[#161514] bg-[fdfdfd] relative border-b border-border">
-          <Image
-            src={NewspaperBackground}
-            alt="Hero BG"
-            width={1080}
-            height={500}
-            blurDataURL={NewspaperBackground.blurDataURL}
-            placeholder="blur"
-            fetchPriority="high"
-            className="absolute w-full object-cover max-h-full opacity-5 grayscale inset-0 z-0"
-          />
+        <section className="w-full bg-card/40 relative border-b border-border overflow-hidden">
+          <BatikBackground className="absolute w-[200%] md:w-[175%] lg:w-[150%] h-auto -top-1/2 -left-1/4 rotate-12 text-background" />
           <section className="w-full z-[1] max-w-3xl relative p-5 mx-auto">
             <VTStyleLogo className="lg:w-3/4 mx-auto w-full" />
           </section>
@@ -65,8 +58,8 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               Friedrich Nietzsche
             </p>
           </div>
-          <div className="flex flex-col gap-3 w-full">
-            <div className="flex gap-3 my-1 items-center">
+          <div className="flex flex-col gap-5 w-full">
+            <div className="flex gap-3 items-center">
               <InfoCircledIcon className="w-5 h-5" />
               <h2 className="text-lg font-semibold dark:font-medium">
                 Brief Description
@@ -80,7 +73,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               music and stuffs.
             </p>
             <Separator />
-            <div className="flex gap-3 my-1 items-center">
+            <div className="flex gap-3 items-center">
               <CrumpledPaperIcon className="w-5 h-5" />
               <h2 className="text-lg font-semibold dark:font-medium">
                 Most Recent Posts
@@ -90,71 +83,83 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               Here are 2 most recent posts from the blog. You can read them by
               clicking the subsequent cards below:
             </p>
-            {lastTwoPosts.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/posts/${post.slug}`}
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{post.title}</CardTitle>
-                    <CardDescription>{post.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex justify-between flex-row-reverse flex-wrap gap-5">
-                    <div className="flex flex-row gap-3">
-                      {post.tags &&
-                        post.tags.map((tag) => (
-                          <Badge variant={"secondary"} key={tag}>
-                            {tag}
-                          </Badge>
-                        ))}
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Badge>{post.updatedAt}</Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-            <p>
-              You can also view all of the posts{" "}
-              <Link
-                href="/posts"
-                className="text-primary hover:underline transition-all"
-              >
-                here
-              </Link>
-              .
-            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-5">
+              {lastTwoPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/posts/${post.slug}`}
+                  style={{
+                    width: "100%",
+                  }}
+                >
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{post.title}</CardTitle>
+                      <CardDescription className="line-clamp-1">
+                        {post.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex justify-between flex-row-reverse flex-wrap gap-5">
+                      <div className="flex flex-row gap-3">
+                        {post.tags &&
+                          post.tags.map((tag) => (
+                            <Badge variant={"secondary"} key={tag}>
+                              {tag}
+                            </Badge>
+                          ))}
+                      </div>
+                      <div className="flex flex-row gap-3">
+                        <Badge>{post.updatedAt}</Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+              <Button asChild>
+                <Link className="flex gap-3 lg:col-span-2" href="/posts">
+                  <Link2Icon className="w-5 h-5" />
+                  <span>View All Posts</span>
+                </Link>
+              </Button>
+            </div>
             <Separator />
-            <div className="flex gap-3 my-1 items-center">
+            <div className="flex gap-3 items-center">
               <CopyIcon className="w-5 h-5" />
               <h2 className="text-lg font-semibold dark:font-medium">
                 Acknowledgements
               </h2>
             </div>
             <p>
-              The newspaper background image I used in the hero section is made
-              by{" "}
-              <a
-                href="https://unsplash.com/@filmbetrachterin"
-                className="text-primary hover:underline transition-all"
-              >
-                Jas Min
-              </a>{" "}
-              from Unsplash. You can view the original image{" "}
-              <a
-                href="https://unsplash.com/photos/a-piece-of-paper-with-words-written-on-it-hYaAxItJGoM"
-                className="text-primary hover:underline transition-all"
-              >
-                <span className="sr-only">Jas Min original image</span>
-                here
-              </a>
-              .
+              The batik patterns used in the hero section are licensed under the
+              CC-BY-3.0 license. The patterns are created by x0n0x and Soni
+              Sokell from The Noun Project.
             </p>
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
+              <Button variant={"secondary"} asChild>
+                <a
+                  href="https://creativecommons.org/licenses/by/3.0/"
+                  className="flex gap-3"
+                >
+                  <ExternalLinkIcon className="w-5 h-5" />
+                  <span className="sr-only">
+                    View the Creative Commons Attribution 3.0 License
+                  </span>
+                  <span>View License</span>
+                </a>
+              </Button>
+              <Button asChild>
+                <a
+                  href="https://creativecommons.org/licenses/by/3.0/"
+                  className="flex gap-3"
+                >
+                  <ExternalLinkIcon className="w-5 h-5" />
+                  <span className="sr-only">
+                    View The Noun Project's Website
+                  </span>
+                  <span>The Noun Project</span>
+                </a>
+              </Button>
+            </div>
             <Separator />
           </div>
         </section>
