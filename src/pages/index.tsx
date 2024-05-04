@@ -154,7 +154,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                 >
                   <ExternalLinkIcon className="w-5 h-5" />
                   <span className="sr-only">
-                    View The Noun Project's Website
+                    View The Noun Project&apos;s Website
                   </span>
                   <span>The Noun Project</span>
                 </a>
