@@ -1,4 +1,5 @@
 import {
+  CheckIcon,
   CopyIcon,
   CrumpledPaperIcon,
   ExternalLinkIcon,
@@ -8,6 +9,7 @@ import {
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
+import { useEffect, useState } from "react";
 
 import { Post, PostMatter } from "./posts";
 
@@ -25,7 +27,20 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { POSTS_PATH, postFilePaths } from "@/content/const";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import BatikBackground from "@/components/custom/batik";
+import { cn } from "@/lib/utils";
+
+export interface MinecraftServerSApiResponse {
+  online: boolean;
+  host: string;
+  port: number;
+  ip_address?: string;
+  eula_blocked?: boolean;
+  retrieved_at?: number;
+  expires_at?: number;
+  srv_record?: any;
+}
 
 export default function Home({ posts }: { posts: PostMatter[] }) {
   const lastTwoPosts = posts
@@ -37,6 +52,82 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     })
     .slice(0, 2)
     .map((a) => a.data);
+
+  const { toast } = useToast();
+
+  const [mcServerJavaResponse, setMcServerJavaResponse] =
+    useState<MinecraftServerSApiResponse>({
+      online: false,
+      host: "mc.irvanma.eu.org",
+      port: 25565,
+    });
+  const [mcServerBedrockResponse, setMcServerBedrockResponse] =
+    useState<MinecraftServerSApiResponse>({
+      online: false,
+      host: "mc.irvanma.eu.org",
+      port: 19132,
+    });
+  const [javaServerUrlCopied, setJavaServerUrlCopied] = useState(false);
+  const [bedrockServerUrlCopied, setBedrockServerUrlCopied] = useState(false);
+
+  const checkServerStatus = async (url: string, setResponse: any) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setResponse(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    checkServerStatus(
+      "https://api.mcstatus.io/v2/status/java/mc.irvanma.eu.org",
+      setMcServerJavaResponse
+    );
+    checkServerStatus(
+      "https://api.mcstatus.io/v2/status/bedrock/mc.irvanma.eu.org",
+      setMcServerBedrockResponse
+    );
+  }, []);
+
+  const copyToClipboard = async (
+    text: string,
+    setStatus: (status: boolean) => void
+  ) => {
+    await navigator.clipboard.writeText(text);
+    setStatus(true);
+  };
+
+  const handleCopyJava = async () => {
+    await copyToClipboard(
+      `${mcServerJavaResponse?.host}:${mcServerJavaResponse?.port}`,
+      setJavaServerUrlCopied
+    );
+    toast({
+      title: "Copied to clipboard!",
+      description: "Java server URL copied to clipboard.",
+    });
+    const timeout = setTimeout(() => {
+      setJavaServerUrlCopied(false);
+      clearTimeout(timeout);
+    }, 3000);
+  };
+
+  const handleCopyBedrock = async () => {
+    await copyToClipboard(
+      `${mcServerBedrockResponse?.host}:${mcServerBedrockResponse?.port}`,
+      setBedrockServerUrlCopied
+    );
+    toast({
+      title: "Copied to clipboard!",
+      description: "Bedrock server URL copied to clipboard.",
+    });
+    const timeout = setTimeout(() => {
+      setBedrockServerUrlCopied(false);
+      clearTimeout(timeout);
+    }, 3000);
+  };
 
   return (
     <DefaultLayout title="Landing Page">
@@ -57,6 +148,88 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
             <p className="text-right font-light px-5 pt-3 text-sm dark:text-muted-foreground">
               Friedrich Nietzsche
             </p>
+          </div>
+          <div className="gap-5 grid grid-cols-1 md:grid-cols-2">
+            <div className="py-3 w-fulls rounded-lg border border-border bg-card">
+              <h2 className="px-5 mb-3 text-center font-semibold dark:font-medium">
+                Minecraft Server (Java) Status
+              </h2>
+              <Separator />
+              <p className="w-full px-5 pt-3">
+                Availability:{" "}
+                <span
+                  className={cn({
+                    "text-primary": mcServerJavaResponse?.online,
+                    "text-red-600 dark:text-red-500":
+                      !mcServerJavaResponse?.online,
+                  })}
+                >
+                  {mcServerJavaResponse?.online ? "ONLINE" : "OFFLINE"}
+                </span>
+              </p>
+              <p className="w-full px-5 pt-1">Version: 1.20.x</p>
+              <p className="w-full px-5 pt-1">
+                Server URL:{" "}
+                {`${mcServerJavaResponse?.host}:${mcServerJavaResponse?.port}`}
+              </p>
+              <div className="mt-3 px-5">
+                <Button
+                  className="flex w-full gap-3"
+                  variant={"secondary"}
+                  onClick={handleCopyJava}
+                >
+                  {javaServerUrlCopied ? (
+                    <CheckIcon className="w-5 h-5" />
+                  ) : (
+                    <CopyIcon className="w-5 h-5" />
+                  )}
+                  <span>{javaServerUrlCopied ? "Copied!" : "Copy URL"}</span>
+                  <span className="sr-only">
+                    Copy the Java server URL to clipboard
+                  </span>
+                </Button>
+              </div>
+            </div>
+            <div className="py-3 w-fulls rounded-lg border border-border bg-card">
+              <h2 className="px-5 mb-3 text-center font-semibold dark:font-medium">
+                Minecraft Server (Bedrock) Status
+              </h2>
+              <Separator />
+              <p className="w-full px-5 pt-3">
+                Availability:{" "}
+                <span
+                  className={cn({
+                    "text-primary": mcServerBedrockResponse?.online,
+                    "text-red-600 dark:text-red-500":
+                      !mcServerBedrockResponse?.online,
+                  })}
+                >
+                  {mcServerBedrockResponse?.online ? "ONLINE" : "OFFLINE"}
+                </span>
+              </p>
+              <p className="w-full px-5 pt-1">Version: 1.20.x (Geyser)</p>
+              <p className="w-full px-5 pt-1">
+                Server URL:{" "}
+                {`${mcServerBedrockResponse?.host}:${mcServerBedrockResponse?.port}`}
+              </p>
+              <div className="mt-3 px-5">
+                <Button
+                  className="flex w-full gap-3"
+                  variant={"secondary"}
+                  onClick={handleCopyBedrock}
+                >
+                  {bedrockServerUrlCopied ? (
+                    <CheckIcon className="w-5 h-5" />
+                  ) : (
+                    <CopyIcon className="w-5 h-5" />
+                  )}
+                  <span>{bedrockServerUrlCopied ? "Copied!" : "Copy URL"}</span>
+                  <span className="sr-only">
+                    Copy the Bedrock server URL to clipboard
+                  </span>
+                </Button>
+              </div>
+            </div>
           </div>
           <div className="flex flex-col gap-5 w-full">
             <div className="flex gap-3 items-center">
@@ -148,10 +321,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                 </a>
               </Button>
               <Button asChild>
-                <a
-                  href="https://creativecommons.org/licenses/by/3.0/"
-                  className="flex gap-3"
-                >
+                <a href="https://thenounproject.com/" className="flex gap-3">
                   <ExternalLinkIcon className="w-5 h-5" />
                   <span className="sr-only">
                     View The Noun Project&apos;s Website
