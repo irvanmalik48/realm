@@ -5,6 +5,7 @@ import {
   ExternalLinkIcon,
   InfoCircledIcon,
   Link2Icon,
+  ReloadIcon,
 } from "@radix-ui/react-icons";
 import fs from "fs";
 import matter from "gray-matter";
@@ -32,7 +33,7 @@ import BatikBackground from "@/components/custom/batik";
 import { cn } from "@/lib/utils";
 
 export interface MinecraftServerSApiResponse {
-  online: boolean;
+  online: boolean | string;
   host: string;
   port: number;
   ip_address?: string;
@@ -55,15 +56,17 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
 
   const { toast } = useToast();
 
+  const [refreshState, setRefreshState] = useState(false);
+
   const [mcServerJavaResponse, setMcServerJavaResponse] =
     useState<MinecraftServerSApiResponse>({
-      online: false,
+      online: "Checking...",
       host: "mc.irvanma.eu.org",
       port: 25565,
     });
   const [mcServerBedrockResponse, setMcServerBedrockResponse] =
     useState<MinecraftServerSApiResponse>({
-      online: false,
+      online: "Checking...",
       host: "mc.irvanma.eu.org",
       port: 19132,
     });
@@ -89,7 +92,17 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
       "https://api.mcstatus.io/v2/status/bedrock/mc.irvanma.eu.org",
       setMcServerBedrockResponse
     );
-  }, []);
+  }, [refreshState]);
+
+  const serverStatusCheck = (status: boolean | string) => {
+    if (status === true) {
+      return "ONLINE";
+    } else if (status === false) {
+      return "OFFLINE";
+    } else {
+      return "Checking...";
+    }
+  };
 
   const copyToClipboard = async (
     text: string,
@@ -129,6 +142,24 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     }, 3000);
   };
 
+  const handleRefresh = () => {
+    setMcServerJavaResponse({
+      online: "Checking...",
+      host: "mc.irvanma.eu.org",
+      port: 25565,
+    });
+    setMcServerBedrockResponse({
+      online: "Checking...",
+      host: "mc.irvanma.eu.org",
+      port: 19132,
+    });
+    setRefreshState(!refreshState);
+    toast({
+      title: "Refreshing server status...",
+      description: "Refreshing server status...",
+    });
+  };
+
   return (
     <DefaultLayout title="Landing Page">
       <div className="w-full min-h-screen flex flex-col pb-24">
@@ -159,12 +190,14 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                 Availability:{" "}
                 <span
                   className={cn({
-                    "text-primary": mcServerJavaResponse?.online,
+                    "text-primary": mcServerJavaResponse.online === true,
                     "text-red-600 dark:text-red-500":
-                      !mcServerJavaResponse?.online,
+                      mcServerJavaResponse?.online === false,
+                    "text-yellow-600 dark:text-yellow-500":
+                      mcServerJavaResponse?.online === "Checking...",
                   })}
                 >
-                  {mcServerJavaResponse?.online ? "ONLINE" : "OFFLINE"}
+                  {serverStatusCheck(mcServerJavaResponse?.online)}
                 </span>
               </p>
               <p className="w-full px-5 pt-1">Version: 1.20.x</p>
@@ -174,7 +207,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               </p>
               <div className="mt-3 px-5">
                 <Button
-                  className="flex w-full gap-3"
+                  className="flex items-center justify-center w-full gap-3"
                   variant={"secondary"}
                   onClick={handleCopyJava}
                 >
@@ -199,12 +232,14 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                 Availability:{" "}
                 <span
                   className={cn({
-                    "text-primary": mcServerBedrockResponse?.online,
+                    "text-primary": mcServerBedrockResponse?.online === true,
                     "text-red-600 dark:text-red-500":
-                      !mcServerBedrockResponse?.online,
+                      mcServerBedrockResponse?.online === false,
+                    "text-yellow-600 dark:text-yellow-500":
+                      mcServerBedrockResponse?.online === "Checking...",
                   })}
                 >
-                  {mcServerBedrockResponse?.online ? "ONLINE" : "OFFLINE"}
+                  {serverStatusCheck(mcServerBedrockResponse?.online)}
                 </span>
               </p>
               <p className="w-full px-5 pt-1">Version: 1.20.x (Geyser)</p>
@@ -214,7 +249,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               </p>
               <div className="mt-3 px-5">
                 <Button
-                  className="flex w-full gap-3"
+                  className="flex items-center justify-center w-full gap-3"
                   variant={"secondary"}
                   onClick={handleCopyBedrock}
                 >
@@ -231,6 +266,13 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               </div>
             </div>
           </div>
+          <Button
+            className="flex items-center justify-center gap-3"
+            onClick={handleRefresh}
+          >
+            <ReloadIcon className="w-5 h-5" />
+            <span>Refresh Server Status</span>
+          </Button>
           <div className="flex flex-col gap-5 w-full">
             <div className="flex gap-3 items-center">
               <InfoCircledIcon className="w-5 h-5" />
