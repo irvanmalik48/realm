@@ -5,6 +5,7 @@ import {
   ExternalLinkIcon,
   InfoCircledIcon,
   Link2Icon,
+  MixIcon,
   ReloadIcon,
 } from "@radix-ui/react-icons";
 import fs from "fs";
@@ -60,13 +61,13 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
 
   const [mcServerJavaResponse, setMcServerJavaResponse] =
     useState<MinecraftServerSApiResponse>({
-      online: "Checking...",
+      online: "CHECKING",
       host: "mc.irvanma.eu.org",
       port: 25565,
     });
   const [mcServerBedrockResponse, setMcServerBedrockResponse] =
     useState<MinecraftServerSApiResponse>({
-      online: "Checking...",
+      online: "CHECKING",
       host: "mc.irvanma.eu.org",
       port: 19132,
     });
@@ -100,7 +101,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     } else if (status === false) {
       return "OFFLINE";
     } else {
-      return "Checking...";
+      return "CHECKING";
     }
   };
 
@@ -144,12 +145,12 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
 
   const handleRefresh = () => {
     setMcServerJavaResponse({
-      online: "Checking...",
+      online: "CHECKING",
       host: "mc.irvanma.eu.org",
       port: 25565,
     });
     setMcServerBedrockResponse({
-      online: "Checking...",
+      online: "CHECKING",
       host: "mc.irvanma.eu.org",
       port: 19132,
     });
@@ -157,6 +158,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     toast({
       title: "Refreshing server status...",
       description: "Refreshing server status...",
+      duration: 3000,
     });
   };
 
@@ -180,99 +182,6 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               Friedrich Nietzsche
             </p>
           </div>
-          <div className="gap-5 grid grid-cols-1 md:grid-cols-2">
-            <div className="py-3 w-fulls rounded-lg border border-border bg-card">
-              <h2 className="px-5 mb-3 text-center font-semibold dark:font-medium">
-                Minecraft Server (Java) Status
-              </h2>
-              <Separator />
-              <p className="w-full px-5 pt-3">
-                Availability:{" "}
-                <span
-                  className={cn({
-                    "text-primary": mcServerJavaResponse.online === true,
-                    "text-red-600 dark:text-red-500":
-                      mcServerJavaResponse?.online === false,
-                    "text-yellow-600 dark:text-yellow-500":
-                      mcServerJavaResponse?.online === "Checking...",
-                  })}
-                >
-                  {serverStatusCheck(mcServerJavaResponse?.online)}
-                </span>
-              </p>
-              <p className="w-full px-5 pt-1">Version: 1.20.x</p>
-              <p className="w-full px-5 pt-1">
-                Server URL:{" "}
-                {`${mcServerJavaResponse?.host}:${mcServerJavaResponse?.port}`}
-              </p>
-              <div className="mt-3 px-5">
-                <Button
-                  className="flex items-center justify-center w-full gap-3"
-                  variant={"secondary"}
-                  onClick={handleCopyJava}
-                >
-                  {javaServerUrlCopied ? (
-                    <CheckIcon className="w-5 h-5" />
-                  ) : (
-                    <CopyIcon className="w-5 h-5" />
-                  )}
-                  <span>{javaServerUrlCopied ? "Copied!" : "Copy URL"}</span>
-                  <span className="sr-only">
-                    Copy the Java server URL to clipboard
-                  </span>
-                </Button>
-              </div>
-            </div>
-            <div className="py-3 w-fulls rounded-lg border border-border bg-card">
-              <h2 className="px-5 mb-3 text-center font-semibold dark:font-medium">
-                Minecraft Server (Bedrock) Status
-              </h2>
-              <Separator />
-              <p className="w-full px-5 pt-3">
-                Availability:{" "}
-                <span
-                  className={cn({
-                    "text-primary": mcServerBedrockResponse?.online === true,
-                    "text-red-600 dark:text-red-500":
-                      mcServerBedrockResponse?.online === false,
-                    "text-yellow-600 dark:text-yellow-500":
-                      mcServerBedrockResponse?.online === "Checking...",
-                  })}
-                >
-                  {serverStatusCheck(mcServerBedrockResponse?.online)}
-                </span>
-              </p>
-              <p className="w-full px-5 pt-1">Version: 1.20.x (Geyser)</p>
-              <p className="w-full px-5 pt-1">
-                Server URL:{" "}
-                {`${mcServerBedrockResponse?.host}:${mcServerBedrockResponse?.port}`}
-              </p>
-              <div className="mt-3 px-5">
-                <Button
-                  className="flex items-center justify-center w-full gap-3"
-                  variant={"secondary"}
-                  onClick={handleCopyBedrock}
-                >
-                  {bedrockServerUrlCopied ? (
-                    <CheckIcon className="w-5 h-5" />
-                  ) : (
-                    <CopyIcon className="w-5 h-5" />
-                  )}
-                  <span>{bedrockServerUrlCopied ? "Copied!" : "Copy URL"}</span>
-                  <span className="sr-only">
-                    Copy the Bedrock server URL to clipboard
-                  </span>
-                </Button>
-              </div>
-            </div>
-          </div>
-          <Button
-            className="flex items-center justify-center gap-3"
-            onClick={handleRefresh}
-          >
-            <ReloadIcon className="w-5 h-5" />
-            <span>Refresh Server Status</span>
-          </Button>
           <div className="flex flex-col gap-5 w-full">
             <div className="flex gap-3 items-center">
               <InfoCircledIcon className="w-5 h-5" />
@@ -287,6 +196,167 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               experiment. Loves watching anime and playing games. Also does
               music and stuffs.
             </p>
+            <Separator />
+            <div className="flex flex-col gap-5 w-full">
+              <div className="flex gap-3 items-center">
+                <MixIcon className="w-5 h-5" />
+                <h2 className="text-lg font-semibold dark:font-medium">
+                  Minecraft Server
+                </h2>
+              </div>
+              <p>
+                Yes, I run a Minecraft server. It is hosted in Azure with 2C/8G
+                setup in SG region. The server is running on Fabric with a few
+                mods (don't worry you don't need to install anything to join).
+                The server version is 1.20.4 but it should be compatible with
+                1.20.x clients (in theory, it would also support older clients
+                due to ViaVersion and ViaBackwards, altho untested). Here's the
+                server status:
+              </p>
+              <div className="gap-5 grid grid-cols-1 md:grid-cols-2">
+                <div className="py-3 w-fulls rounded-lg border border-border bg-card">
+                  <div className="mb-3 px-5 flex items-center gap-5 justify-between">
+                    <h2 className="font-semibold dark:font-medium w-full line-clamp-1">
+                      Java Server
+                    </h2>
+                    <div className="flex items-center justify-center px-2 py-1 gap-2 border border-border rounded-full">
+                      <div className="w-2 h-2 relative">
+                        <div
+                          className={cn(
+                            `w-2 h-2 bg-primary absolute rounded-full`,
+                            {
+                              "bg-red-600 dark:bg-red-500":
+                                mcServerJavaResponse?.online === false,
+                              "bg-yellow-600 dark:bg-yellow-500":
+                                mcServerJavaResponse?.online === "CHECKING",
+                              "bg-primary":
+                                mcServerJavaResponse?.online === true,
+                            }
+                          )}
+                        />
+                        <div
+                          className={cn(
+                            `w-2 h-2 bg-primary absolute rounded-full animate-ping`,
+                            {
+                              "bg-red-600 dark:bg-red-500":
+                                mcServerJavaResponse?.online === false,
+                              "bg-yellow-600 dark:bg-yellow-500":
+                                mcServerJavaResponse?.online === "CHECKING",
+                              "bg-primary":
+                                mcServerJavaResponse?.online === true,
+                            }
+                          )}
+                        />
+                      </div>
+                      <p className="text-xs leading-none font-mono">
+                        {serverStatusCheck(mcServerJavaResponse?.online)}
+                      </p>
+                    </div>
+                  </div>
+                  <Separator />
+                  <p className="w-full px-5 pt-3">Version: 1.20.x</p>
+                  <p className="w-full px-5 pt-1">
+                    Host Address: {mcServerJavaResponse?.host}
+                  </p>
+                  <p className="w-full px-5 pt-1">
+                    Port: {mcServerJavaResponse?.port}
+                  </p>
+                  <div className="mt-3 px-5">
+                    <Button
+                      className="flex items-center justify-center w-full gap-3"
+                      variant={"secondary"}
+                      onClick={handleCopyJava}
+                    >
+                      {javaServerUrlCopied ? (
+                        <CheckIcon className="w-5 h-5" />
+                      ) : (
+                        <CopyIcon className="w-5 h-5" />
+                      )}
+                      <span>
+                        {javaServerUrlCopied ? "Copied!" : "Copy URL"}
+                      </span>
+                      <span className="sr-only">
+                        Copy the Java server URL to clipboard
+                      </span>
+                    </Button>
+                  </div>
+                </div>
+                <div className="py-3 w-fulls rounded-lg border border-border bg-card">
+                  <div className="mb-3 px-5 flex items-center gap-5 justify-between">
+                    <h2 className="font-semibold dark:font-medium w-full line-clamp-1">
+                      Bedrock Server
+                    </h2>
+                    <div className="flex items-center justify-center px-2 py-1 gap-2 border border-border rounded-full">
+                      <div className="w-2 h-2 relative">
+                        <div
+                          className={cn(
+                            `w-2 h-2 bg-primary absolute rounded-full`,
+                            {
+                              "bg-red-600 dark:bg-red-500":
+                                mcServerBedrockResponse?.online === false,
+                              "bg-yellow-600 dark:bg-yellow-500":
+                                mcServerBedrockResponse?.online === "CHECKING",
+                              "bg-primary":
+                                mcServerBedrockResponse?.online === true,
+                            }
+                          )}
+                        />
+                        <div
+                          className={cn(
+                            `w-2 h-2 bg-primary absolute rounded-full animate-ping`,
+                            {
+                              "bg-red-600 dark:bg-red-500":
+                                mcServerBedrockResponse?.online === false,
+                              "bg-yellow-600 dark:bg-yellow-500":
+                                mcServerBedrockResponse?.online === "CHECKING",
+                              "bg-primary":
+                                mcServerBedrockResponse?.online === true,
+                            }
+                          )}
+                        />
+                      </div>
+                      <p className="text-xs leading-none font-mono">
+                        {serverStatusCheck(mcServerBedrockResponse?.online)}
+                      </p>
+                    </div>
+                  </div>
+                  <Separator />
+                  <p className="w-full px-5 pt-3">Version: 1.20.x (Geyser)</p>
+                  <p className="w-full px-5 pt-1">
+                    Host Address: {mcServerBedrockResponse?.host}
+                  </p>
+                  <p className="w-full px-5 pt-1">
+                    Port: {mcServerBedrockResponse?.port}
+                  </p>
+                  <div className="mt-3 px-5">
+                    <Button
+                      className="flex items-center justify-center w-full gap-3"
+                      variant={"secondary"}
+                      onClick={handleCopyBedrock}
+                    >
+                      {bedrockServerUrlCopied ? (
+                        <CheckIcon className="w-5 h-5" />
+                      ) : (
+                        <CopyIcon className="w-5 h-5" />
+                      )}
+                      <span>
+                        {bedrockServerUrlCopied ? "Copied!" : "Copy URL"}
+                      </span>
+                      <span className="sr-only">
+                        Copy the Bedrock server URL to clipboard
+                      </span>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              <Button
+                className="flex items-center justify-center gap-3"
+                onClick={handleRefresh}
+              >
+                <ReloadIcon className="w-5 h-5" />
+                <span>Refresh Server Status</span>
+              </Button>
+            </div>
             <Separator />
             <div className="flex gap-3 items-center">
               <CrumpledPaperIcon className="w-5 h-5" />
