@@ -38,3 +38,5 @@ next-env.d.ts
 
 # service worker
 public/sw.js
+# Million Lint
+.million
