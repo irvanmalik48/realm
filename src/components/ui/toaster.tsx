@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 
+import { jetbrainsMono, mPlus } from "../layout/default";
+
 export function Toaster() {
   const { toasts } = useToast();
 
@@ -16,7 +18,9 @@ export function Toaster() {
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
           <Toast key={id} {...props}>
-            <div className="grid gap-1">
+            <div
+              className={`grid gap-1 ${jetbrainsMono.variable} ${mPlus.variable} font-sans`}
+            >
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
                 <ToastDescription>{description}</ToastDescription>
