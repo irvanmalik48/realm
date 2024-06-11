@@ -89,7 +89,7 @@ export default function DefaultLayout({
         }}
       ></motion.div>
       <motion.main
-        className={`w-full flex flex-col min-h-screen bg-background text-foreground font-sans dark:subpixel-antialiased antialiased ${jetbrainsMono.variable} ${mPlus.variable}`}
+        className={`w-full flex flex-col min-h-screen bg-background text-foreground font-sans subpixel-antialiased ${jetbrainsMono.variable} ${mPlus.variable}`}
         initial={{ opacity: 0, y: 20, scaleY: 1.02, originY: 0 }}
         animate={{ opacity: 1, y: 0, scaleY: 1, originY: 0 }}
         exit={{ opacity: 0, y: -20 }}

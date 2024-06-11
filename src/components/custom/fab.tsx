@@ -118,7 +118,7 @@ export default function FAB() {
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className={`p-0 overflow-hidden z-[999] dark:subpixel-antialiased antialiased ${jetbrainsMono.variable} ${mPlus.variable} font-sans`}
+          className={`p-0 overflow-hidden z-[999] subpixel-antialiased ${jetbrainsMono.variable} ${mPlus.variable} font-sans`}
           align="end"
           sideOffset={16}
         >
