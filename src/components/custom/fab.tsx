@@ -134,10 +134,10 @@ export default function FAB() {
               className={cn(
                 "absolute bottom-1 text-xs left-1",
                 "px-3 py-1 rounded-full bg-background",
-                "text-foreground"
+                "text-foreground font-mono"
               )}
             >
-              realm. (v6.0.1)
+              re:6.1.0
             </div>
             <Tooltip>
               <TooltipTrigger asChild>
