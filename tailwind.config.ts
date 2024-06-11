@@ -16,7 +16,7 @@ module.exports = {
       },
     },
     extend: {
-      fonts: {
+      fontFamily: {
         sans: ["Plus Jakarta Sans", "sans-serif"],
         mono: ["Azeret Mono", "monospace"],
       },
