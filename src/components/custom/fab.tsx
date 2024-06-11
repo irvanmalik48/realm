@@ -14,6 +14,7 @@ import {
 } from "@radix-ui/react-icons";
 
 import Link from "./link-wrapper";
+import { mPlus, jetbrainsMono } from "../layout/default";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -117,7 +118,7 @@ export default function FAB() {
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="p-0 overflow-hidden z-[999]"
+          className={`p-0 overflow-hidden z-[999] ${jetbrainsMono.variable} ${mPlus.variable} font-sans`}
           align="end"
           sideOffset={16}
         >
