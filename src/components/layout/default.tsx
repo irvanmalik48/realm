@@ -1,15 +1,8 @@
 import { motion } from "framer-motion";
-import { Inter, JetBrains_Mono } from "next/font/google";
 import Head from "next/head";
 import Script from "next/script";
 
 import Footer from "../custom/footer";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-});
 
 export type DefaultLayoutProps = {
   templateTitle?: boolean;
@@ -85,7 +78,7 @@ export default function DefaultLayout({
         }}
       ></motion.div>
       <motion.main
-        className={`w-full flex flex-col min-h-screen bg-background text-foreground ${inter.variable} ${jetbrainsMono.variable}`}
+        className={`w-full flex flex-col min-h-screen bg-background text-foreground`}
         initial={{ opacity: 0, y: 20, scaleY: 1.02, originY: 0 }}
         animate={{ opacity: 1, y: 0, scaleY: 1, originY: 0 }}
         exit={{ opacity: 0, y: -20 }}
