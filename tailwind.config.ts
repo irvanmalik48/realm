@@ -17,8 +17,8 @@ module.exports = {
     },
     extend: {
       fonts: {
-        sans: ["var(--font-inter)"],
-        mono: ["var(--font-jetbrains-mono)"],
+        sans: ["Plus Jakarta Sans", "sans-serif"],
+        mono: ["Azeret Mono", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
