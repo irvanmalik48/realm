@@ -207,11 +207,11 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               <p>
                 Yes, I run a Minecraft server. It is hosted in Azure with 2C/8G
                 setup in SG region. The server is running on Fabric with a few
-                mods (don't worry you don't need to install anything to join).
-                The server version is 1.20.4 but it should be compatible with
-                1.20.x clients (in theory, it would also support older clients
-                due to ViaVersion and ViaBackwards, altho untested). Here's the
-                server status:
+                mods (don&apos;t worry you don&apos;t need to install anything
+                to join). The server version is 1.20.4 but it should be
+                compatible with 1.20.x clients (in theory, it would also support
+                older clients due to ViaVersion and ViaBackwards, altho
+                untested). Here&apos;s the server status:
               </p>
               <div className="gap-5 grid grid-cols-1 md:grid-cols-2">
                 <div className="py-3 w-fulls rounded-lg border border-border bg-card">
