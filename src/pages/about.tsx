@@ -71,8 +71,8 @@ export default function About() {
                   </h2>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="text-foreground/70">
-                <p>
+              <AccordionContent className="text-foreground/90">
+                <p className="leading-relaxed">
                   Hello, my name is Irvan Malik Azantha. Pretty sure everything
                   has been described on the landing page, ain&apos;t it? But if
                   you want to know more about me, then sure. I&apos;m an
@@ -81,7 +81,7 @@ export default function About() {
                   at 1st of March, 2003. Has a few siblings, and live in a quite
                   okay family.
                 </p>
-                <p className="mt-3">
+                <p className="mt-3 leading-relaxed">
                   I usually spend my time playing games, watching anime, or
                   reading manga. I&apos;m also a big fan of audio related
                   stuffs, mainly music. I listen to wide variety of genres
@@ -100,8 +100,8 @@ export default function About() {
                   </h2>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="text-foreground/70">
-                <p>
+              <AccordionContent className="text-foreground/90">
+                <p className="leading-relaxed">
                   This website is made using the utmost effort I can give via
                   the 3 braincells that I somehow can leverage. It&apos;s made
                   using Next.js, shadcn/ui, Typescript, Tailwind, and some more.
@@ -122,7 +122,7 @@ export default function About() {
                   </h2>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="text-foreground/70 space-y-5">
+              <AccordionContent className="text-foreground/90 space-y-5">
                 {FAQ_DATA.map((faq, index) => (
                   <NumberedCard
                     key={index}
@@ -143,8 +143,8 @@ export default function About() {
                   </h2>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="text-foreground/70">
-                <p>
+              <AccordionContent className="text-foreground/90">
+                <p className="leading-relaxed">
                   Email me at{" "}
                   <a
                     href="mailto:irvanmalik48@gmail.com"
@@ -173,13 +173,13 @@ export default function About() {
                   </h2>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="text-foreground/70 space-y-2">
-                <p>
+              <AccordionContent className="text-foreground/90 space-y-2">
+                <p className="leading-relaxed">
                   Any donations that can help me buy some stuffs and, of course,
                   coffee, are highly appreciated. You can donate to me via:
                 </p>
                 <p className="text-foreground">Wallets:</p>
-                <ul className="list-disc list-inside">
+                <ul className="list-disc list-inside leading-relaxed">
                   <li>
                     PayPal:{" "}
                     <a
