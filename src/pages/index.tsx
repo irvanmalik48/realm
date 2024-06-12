@@ -11,7 +11,7 @@ import {
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 
 import { Post, PostMatter } from "./posts";
 
@@ -32,6 +32,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import BatikBackground from "@/components/custom/batik";
 import { cn } from "@/lib/utils";
+import { useMinecraftServerStatus } from "@/reducers";
 
 export interface MinecraftServerSApiResponse {
   online: boolean | string;
@@ -57,20 +58,15 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
 
   const { toast } = useToast();
 
-  const [refreshState, setRefreshState] = useState(false);
+  const {
+    state,
+    setMcServerJavaResponse,
+    setMcServerBedrockResponse,
+    resetResponses,
+  } = useMinecraftServerStatus();
+  const { mcServerJavaResponse, mcServerBedrockResponse } = state;
 
-  const [mcServerJavaResponse, setMcServerJavaResponse] =
-    useState<MinecraftServerSApiResponse>({
-      online: "CHECKING",
-      host: "mc.irvanma.eu.org",
-      port: 25565,
-    });
-  const [mcServerBedrockResponse, setMcServerBedrockResponse] =
-    useState<MinecraftServerSApiResponse>({
-      online: "CHECKING",
-      host: "mc.irvanma.eu.org",
-      port: 19132,
-    });
+  const [refreshState, setRefreshState] = useState(false);
   const [javaServerUrlCopied, setJavaServerUrlCopied] = useState(false);
   const [bedrockServerUrlCopied, setBedrockServerUrlCopied] = useState(false);
 
@@ -84,15 +80,21 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     }
   };
 
+  const asynchrounouslyCheckBothServerStatus = async () => {
+    await Promise.all([
+      checkServerStatus(
+        "https://api.mcstatus.io/v2/status/java/mc.irvanma.eu.org",
+        setMcServerJavaResponse
+      ),
+      checkServerStatus(
+        "https://api.mcstatus.io/v2/status/bedrock/mc.irvanma.eu.org",
+        setMcServerBedrockResponse
+      ),
+    ]);
+  };
+
   useEffect(() => {
-    checkServerStatus(
-      "https://api.mcstatus.io/v2/status/java/mc.irvanma.eu.org",
-      setMcServerJavaResponse
-    );
-    checkServerStatus(
-      "https://api.mcstatus.io/v2/status/bedrock/mc.irvanma.eu.org",
-      setMcServerBedrockResponse
-    );
+    asynchrounouslyCheckBothServerStatus();
   }, [refreshState]);
 
   const serverStatusCheck = (status: boolean | string) => {
@@ -144,16 +146,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
   };
 
   const handleRefresh = () => {
-    setMcServerJavaResponse({
-      online: "CHECKING",
-      host: "mc.irvanma.eu.org",
-      port: 25565,
-    });
-    setMcServerBedrockResponse({
-      online: "CHECKING",
-      host: "mc.irvanma.eu.org",
-      port: 19132,
-    });
+    resetResponses();
     setRefreshState(!refreshState);
     toast({
       title: "Refreshing server status...",
