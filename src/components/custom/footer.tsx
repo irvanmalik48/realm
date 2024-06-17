@@ -70,7 +70,8 @@ export default function Footer() {
           do so, I&apos;d love to see it!
         </p>
         <p className="text-xs mt-2 dark:text-foreground/50 w-3/4 lg:w-full">
-          &copy; 2023 Irvan Malik Azantha. Licensed in MIT.
+          &copy; 2023 Irvan Malik Azantha. Licensed in Realm Collectives
+          Community License.
         </p>
       </div>
     </footer>
