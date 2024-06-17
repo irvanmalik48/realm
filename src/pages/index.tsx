@@ -2,7 +2,6 @@ import {
   CheckIcon,
   CopyIcon,
   CrumpledPaperIcon,
-  ExternalLinkIcon,
   InfoCircledIcon,
   Link2Icon,
   MixIcon,
@@ -11,7 +10,7 @@ import {
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react";
 
 import { Post, PostMatter } from "./posts";
 
@@ -30,7 +29,6 @@ import { Separator } from "@/components/ui/separator";
 import { POSTS_PATH, postFilePaths } from "@/content/const";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import BatikBackground from "@/components/custom/batik";
 import { cn } from "@/lib/utils";
 import { useMinecraftServerStatus } from "@/reducers";
 
@@ -158,8 +156,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
   return (
     <DefaultLayout title="Landing Page">
       <div className="w-full min-h-screen flex flex-col pb-24">
-        <section className="w-full bg-card/40 relative border-b border-border overflow-hidden">
-          <BatikBackground className="absolute w-[200%] md:w-[175%] lg:w-[150%] h-auto -top-1/2 -left-1/4 rotate-12 text-background" />
+        <section className="w-full relative border-b border-border overflow-hidden">
           <section className="w-full z-[1] max-w-3xl relative p-5 mx-auto">
             <VTStyleLogo className="lg:w-3/4 mx-auto w-full" />
           </section>
@@ -398,41 +395,6 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                   <Link2Icon className="w-5 h-5" />
                   <span>View All Posts</span>
                 </Link>
-              </Button>
-            </div>
-            <Separator />
-            <div className="flex gap-3 items-center">
-              <CopyIcon className="w-5 h-5" />
-              <h2 className="text-lg font-semibold dark:font-medium">
-                Acknowledgements
-              </h2>
-            </div>
-            <p>
-              The batik patterns used in the hero section are licensed under the
-              CC-BY-3.0 license. The patterns are created by x0n0x and Soni
-              Sokell from The Noun Project.
-            </p>
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
-              <Button variant={"secondary"} asChild>
-                <a
-                  href="https://creativecommons.org/licenses/by/3.0/"
-                  className="flex gap-3"
-                >
-                  <ExternalLinkIcon className="w-5 h-5" />
-                  <span className="sr-only">
-                    View the Creative Commons Attribution 3.0 License
-                  </span>
-                  <span>View License</span>
-                </a>
-              </Button>
-              <Button asChild>
-                <a href="https://thenounproject.com/" className="flex gap-3">
-                  <ExternalLinkIcon className="w-5 h-5" />
-                  <span className="sr-only">
-                    View The Noun Project&apos;s Website
-                  </span>
-                  <span>The Noun Project</span>
-                </a>
               </Button>
             </div>
             <Separator />
