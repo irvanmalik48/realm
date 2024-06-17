@@ -25,6 +25,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@serwist/next": "^9.0.3",
     "@tailwindcss/typography": "^0.5.13",
+    "@tanstack/react-query": "^5.45.0",
     "@vercel/kv": "^1.0.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
