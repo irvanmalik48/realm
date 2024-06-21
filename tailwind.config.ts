@@ -87,7 +87,7 @@ module.exports = {
     }) {
       addVariant(
         "prose-inline-code",
-        '&.prose :where(:not(pre)>code):not(:where([class~="not-prose"] *))'
+        '&.prose :where(:not(pre)>code):not(:where([class~="not-prose"] *))',
       );
     }),
   ],

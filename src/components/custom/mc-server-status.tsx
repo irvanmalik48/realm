@@ -37,11 +37,11 @@ function MineServerStatus() {
     await Promise.all([
       checkServerStatus(
         "https://api.mcstatus.io/v2/status/java/mc.irvanma.eu.org",
-        setMcServerJavaResponse
+        setMcServerJavaResponse,
       ),
       checkServerStatus(
         "https://api.mcstatus.io/v2/status/bedrock/mc.irvanma.eu.org",
-        setMcServerBedrockResponse
+        setMcServerBedrockResponse,
       ),
     ]);
   };
@@ -62,7 +62,7 @@ function MineServerStatus() {
 
   const copyToClipboard = async (
     text: string,
-    setStatus: (status: boolean) => void
+    setStatus: (status: boolean) => void,
   ) => {
     await navigator.clipboard.writeText(text);
     setStatus(true);
@@ -71,7 +71,7 @@ function MineServerStatus() {
   const handleCopyJava = async () => {
     await copyToClipboard(
       `${mcServerJavaResponse?.host}:${mcServerJavaResponse?.port}`,
-      setJavaServerUrlCopied
+      setJavaServerUrlCopied,
     );
     toast({
       title: "Copied to clipboard!",
@@ -86,7 +86,7 @@ function MineServerStatus() {
   const handleCopyBedrock = async () => {
     await copyToClipboard(
       `${mcServerBedrockResponse?.host}:${mcServerBedrockResponse?.port}`,
-      setBedrockServerUrlCopied
+      setBedrockServerUrlCopied,
     );
     toast({
       title: "Copied to clipboard!",
@@ -136,7 +136,7 @@ function MineServerStatus() {
                       "bg-yellow-600 dark:bg-yellow-500":
                         mcServerJavaResponse?.online === "CHECKING",
                       "bg-primary": mcServerJavaResponse?.online === true,
-                    }
+                    },
                   )}
                 />
               </div>
@@ -194,7 +194,7 @@ function MineServerStatus() {
                       "bg-yellow-600 dark:bg-yellow-500":
                         mcServerBedrockResponse?.online === "CHECKING",
                       "bg-primary": mcServerBedrockResponse?.online === true,
-                    }
+                    },
                   )}
                 />
               </div>
