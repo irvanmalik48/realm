@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   request: NextApiRequest,
-  response: NextApiResponse
+  response: NextApiResponse,
 ) {
   const { text } = request.body;
   const id = createId();

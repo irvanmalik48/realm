@@ -10,7 +10,7 @@ export interface IFuzzyClient<T> {
 
 export function useFuzzy<T>(
   data: T[],
-  options: IFuseOptions<T>
+  options: IFuseOptions<T>,
 ): IFuzzyClient<T> {
   const [keyword, setKeyword] = useState("");
   const resetSearch = () => setKeyword("");

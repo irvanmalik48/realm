@@ -88,7 +88,7 @@ export default function FAB() {
           "p-5 flex items-center justify-center ease-out",
           "rounded-full z-[995] transition-all duration-200",
           open ? "bottom-5 right-24" : "bottom-24 right-5 delay-300",
-          showStt ? "opacity-100" : "opacity-0 pointer-events-none"
+          showStt ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
       >
         <span className="sr-only">Scroll to top</span>
@@ -106,7 +106,7 @@ export default function FAB() {
             className={cn(
               "fixed w-auto h-auto shadow-xl dark:shadow-none",
               "p-5 flex items-center justify-center bottom-5",
-              "right-5 rounded-full z-[999]"
+              "right-5 rounded-full z-[999]",
             )}
           >
             <span className="sr-only">Open navigation menu</span>
@@ -134,7 +134,7 @@ export default function FAB() {
               className={cn(
                 "absolute bottom-1 text-xs left-1",
                 "px-3 py-1 rounded-full bg-background",
-                "text-foreground font-mono"
+                "text-foreground font-mono",
               )}
             >
               re:6.1.0
@@ -148,7 +148,7 @@ export default function FAB() {
                   className={cn(
                     "absolute block top-1 right-1 p-2 rounded-full",
                     "opacity-50 hover:opacity-100 transition-opacity",
-                    "bg-background text-foreground"
+                    "bg-background text-foreground",
                   )}
                 >
                   <OpenInNewWindowIcon className="w-4 h-4" />
@@ -174,7 +174,7 @@ export default function FAB() {
               href={link.href}
               className={cn(
                 "w-full px-5 py-3 gap-3 flex",
-                "items-center hover:bg-secondary transition"
+                "items-center hover:bg-secondary transition",
               )}
             >
               <link.icon className="w-5 h-5" />
@@ -192,7 +192,7 @@ export default function FAB() {
             className={cn(
               "w-full px-5 py-2 gap-3 flex",
               "items-center hover:bg-secondary transition",
-              "cursor-pointer"
+              "cursor-pointer",
             )}
           >
             <Switch

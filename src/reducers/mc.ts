@@ -30,7 +30,7 @@ type ActionType =
 
 const reducer = (
   state: MinecraftServerStatusState,
-  action: { type: ActionType; payload: any }
+  action: { type: ActionType; payload: any },
 ) => {
   switch (action.type) {
     case SET_JAVA_RESPONSE:

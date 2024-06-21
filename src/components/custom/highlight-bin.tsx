@@ -21,15 +21,15 @@ function HighlightBin({ text }: { text: string }) {
       <>
         <InjectCSS
           css={getTheme(
-            theme === "dark" ? "StackoverflowDark" : "StackoverflowLight"
+            theme === "dark" ? "StackoverflowDark" : "StackoverflowLight",
           )}
         />
         <pre
           className={cn(
             getStyleClass(
-              theme === "dark" ? "StackoverflowDark" : "StackoverflowLight"
+              theme === "dark" ? "StackoverflowDark" : "StackoverflowLight",
             ),
-            "w-full overflow-auto font-mono whitespace-pre"
+            "w-full overflow-auto font-mono whitespace-pre",
           )}
         >
           <code

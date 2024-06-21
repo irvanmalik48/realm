@@ -22,7 +22,7 @@ export default function ShadcnProse({ children }: { children: ReactNode }) {
         "prose-lead:text-xl prose-lead:text-muted-foreground",
         "prose-inline-code:break-words prose-inline-code:relative prose-inline-code:rounded prose-inline-code:bg-muted prose-inline-code:px-[0.3rem] prose-inline-code:py-[0.2rem] prose-inline-code:font-mono prose-inline-code:text-sm prose-inline-code:font-semibold",
         "prose-a:underline prose-a:break-words",
-        "prose-img:rounded-[var(--radius)] prose-img:border prose-img:border-border prose-img:my-6 prose-img:w-full"
+        "prose-img:rounded-[var(--radius)] prose-img:border prose-img:border-border prose-img:my-6 prose-img:w-full",
       )}
     >
       {children}

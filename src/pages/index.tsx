@@ -82,11 +82,11 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     await Promise.all([
       checkServerStatus(
         "https://api.mcstatus.io/v2/status/java/mc.irvanma.eu.org",
-        setMcServerJavaResponse
+        setMcServerJavaResponse,
       ),
       checkServerStatus(
         "https://api.mcstatus.io/v2/status/bedrock/mc.irvanma.eu.org",
-        setMcServerBedrockResponse
+        setMcServerBedrockResponse,
       ),
     ]);
   };
@@ -107,7 +107,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
 
   const copyToClipboard = async (
     text: string,
-    setStatus: (status: boolean) => void
+    setStatus: (status: boolean) => void,
   ) => {
     await navigator.clipboard.writeText(text);
     setStatus(true);
@@ -116,7 +116,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
   const handleCopyJava = async () => {
     await copyToClipboard(
       `${mcServerJavaResponse?.host}:${mcServerJavaResponse?.port}`,
-      setJavaServerUrlCopied
+      setJavaServerUrlCopied,
     );
     toast({
       title: "Copied to clipboard!",
@@ -131,7 +131,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
   const handleCopyBedrock = async () => {
     await copyToClipboard(
       `${mcServerBedrockResponse?.host}:${mcServerBedrockResponse?.port}`,
-      setBedrockServerUrlCopied
+      setBedrockServerUrlCopied,
     );
     toast({
       title: "Copied to clipboard!",
@@ -196,12 +196,12 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
               </div>
               <p>
                 Yes, I run a Minecraft server. It is hosted in Azure with 2C/8G
-                setup in SG region. The server is running on Fabric with a few
-                mods (don&apos;t worry you don&apos;t need to install anything
-                to join). The server version is 1.20.4 but it should be
-                compatible with 1.20.x clients (in theory, it would also support
-                older clients due to ViaVersion and ViaBackwards, altho
-                untested). Here&apos;s the server status:
+                setup in SG region. The server is running on Fabric with
+                Fabulously Optimized installed (I recommend you to use that
+                too). The server version is 1.21 but it should be compatible
+                with 1.20.x clients (in theory, it would also support older
+                clients due to ViaVersion and ViaBackwards, altho untested).
+                Here&apos;s the server status:
               </p>
               <div className="gap-5 grid grid-cols-1 md:grid-cols-2">
                 <div className="py-3 w-fulls rounded-lg border border-border bg-card">
@@ -221,7 +221,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                                 mcServerJavaResponse?.online === "CHECKING",
                               "bg-primary":
                                 mcServerJavaResponse?.online === true,
-                            }
+                            },
                           )}
                         />
                         <div
@@ -234,7 +234,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                                 mcServerJavaResponse?.online === "CHECKING",
                               "bg-primary":
                                 mcServerJavaResponse?.online === true,
-                            }
+                            },
                           )}
                         />
                       </div>
@@ -244,7 +244,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                     </div>
                   </div>
                   <Separator />
-                  <p className="w-full px-5 pt-3">Version: 1.20.x</p>
+                  <p className="w-full px-5 pt-3">Version: 1.21</p>
                   <p className="w-full px-5 pt-1">
                     Host Address: {mcServerJavaResponse?.host}
                   </p>
@@ -288,7 +288,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                                 mcServerBedrockResponse?.online === "CHECKING",
                               "bg-primary":
                                 mcServerBedrockResponse?.online === true,
-                            }
+                            },
                           )}
                         />
                         <div
@@ -301,7 +301,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                                 mcServerBedrockResponse?.online === "CHECKING",
                               "bg-primary":
                                 mcServerBedrockResponse?.online === true,
-                            }
+                            },
                           )}
                         />
                       </div>
@@ -311,7 +311,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                     </div>
                   </div>
                   <Separator />
-                  <p className="w-full px-5 pt-3">Version: 1.20.x (Geyser)</p>
+                  <p className="w-full px-5 pt-3">Version: 1.21 (Geyser)</p>
                   <p className="w-full px-5 pt-1">
                     Host Address: {mcServerBedrockResponse?.host}
                   </p>

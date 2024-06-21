@@ -4,7 +4,7 @@ import { HTMLProps, forwardRef } from "react";
 
 function Link(
   { children, ...rest }: LinkProps & HTMLProps<HTMLAnchorElement>,
-  ref: any
+  ref: any,
 ) {
   return (
     <NextLink ref={ref} scroll={false} {...(rest as LinkProps)}>

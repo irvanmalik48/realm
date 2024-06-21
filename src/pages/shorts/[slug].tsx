@@ -41,7 +41,7 @@ export default function Post({ short }: { short: ShortMatter }) {
         <section
           className={cn(
             "w-full max-w-3xl relative p-5",
-            "mx-auto flex flex-col gap-6"
+            "mx-auto flex flex-col gap-6",
           )}
         >
           <p className="text-xs md:text-sm w-full text-muted-foreground md:text-center">
@@ -55,7 +55,7 @@ export default function Post({ short }: { short: ShortMatter }) {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
-                    }
+                    },
                   )}
                 </time>
               </span>
@@ -69,7 +69,7 @@ export default function Post({ short }: { short: ShortMatter }) {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
-                    }
+                    },
                   )}
                 </time>{" "}
                 and updated on{" "}
@@ -80,7 +80,7 @@ export default function Post({ short }: { short: ShortMatter }) {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
-                    }
+                    },
                   )}
                 </time>
               </span>

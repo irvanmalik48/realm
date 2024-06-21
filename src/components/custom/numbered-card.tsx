@@ -25,14 +25,14 @@ export default function NumberedCard({
         <div
           className={cn(
             "h-[1px] w-[100px] absolute top-1/2",
-            "-translate-y-1/2 bg-border"
+            "-translate-y-1/2 bg-border",
           )}
         />
         <div
           className={cn(
             "relative flex items-center justify-center",
             "w-10 h-10 rounded-full border border-border",
-            "font-bold bg-card text-card-foreground text-sm"
+            "font-bold bg-card text-card-foreground text-sm",
           )}
         >
           {number}

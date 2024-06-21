@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   request: NextApiRequest,
-  response: NextApiResponse
+  response: NextApiResponse,
 ) {
   const { id, raw } = request.query;
   let bintext;

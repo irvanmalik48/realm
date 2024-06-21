@@ -24,7 +24,7 @@ export async function getServerSideProps({
       process.env.NODE_ENV !== "development"
         ? "https://irvanma.eu.org"
         : "http://localhost:3000"
-    }/api/paste/get?id=${params.id}`
+    }/api/paste/get?id=${params.id}`,
   );
   const data: ResultProp = await res.json();
 
