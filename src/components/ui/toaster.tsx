@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 
-import { jetbrainsMono, mPlus } from "../layout/default";
+import { jetbrainsMono, inter } from "../layout/default";
 
 export function Toaster() {
   const { toasts } = useToast();
@@ -19,7 +19,7 @@ export function Toaster() {
         return (
           <Toast key={id} {...props}>
             <div
-              className={`grid gap-1 subpixel-antialiased ${jetbrainsMono.variable} ${mPlus.variable} font-sans`}
+              className={`grid gap-1 subpixel-antialiased ${jetbrainsMono.variable} ${inter.variable} font-sans`}
             >
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Script from "next/script";
-import { JetBrains_Mono, M_PLUS_2 } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 
 import Footer from "../custom/footer";
 
@@ -17,9 +17,9 @@ export const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
-export const mPlus = M_PLUS_2({
+export const inter = Inter({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-m-plus-2",
+  variable: "--font-inter",
 });
 
 export default function DefaultLayout({
@@ -89,7 +89,7 @@ export default function DefaultLayout({
         }}
       ></motion.div>
       <motion.main
-        className={`w-full flex flex-col min-h-screen bg-background text-foreground font-sans subpixel-antialiased ${jetbrainsMono.variable} ${mPlus.variable}`}
+        className={`w-full flex flex-col min-h-screen bg-background text-foreground font-sans subpixel-antialiased ${jetbrainsMono.variable} ${inter.variable}`}
         initial={{ opacity: 0, y: 20, scaleY: 1.02, originY: 0 }}
         animate={{ opacity: 1, y: 0, scaleY: 1, originY: 0 }}
         exit={{ opacity: 0, y: -20 }}
