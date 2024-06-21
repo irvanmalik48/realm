@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Script from "next/script";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Poppins } from "next/font/google";
 
 import Footer from "../custom/footer";
 
@@ -20,6 +20,12 @@ export const jetbrainsMono = JetBrains_Mono({
 export const inter = Inter({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
+});
+
+export const poppins = Poppins({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500"],
+  variable: "--font-poppins",
 });
 
 export default function DefaultLayout({
@@ -89,7 +95,7 @@ export default function DefaultLayout({
         }}
       ></motion.div>
       <motion.main
-        className={`w-full flex flex-col min-h-screen bg-background text-foreground font-sans subpixel-antialiased ${jetbrainsMono.variable} ${inter.variable}`}
+        className={`w-full flex flex-col min-h-screen bg-background text-foreground font-sans subpixel-antialiased ${jetbrainsMono.variable} ${inter.variable} ${poppins.variable}`}
         initial={{ opacity: 0, y: 20, scaleY: 1.02, originY: 0 }}
         animate={{ opacity: 1, y: 0, scaleY: 1, originY: 0 }}
         exit={{ opacity: 0, y: -20 }}
