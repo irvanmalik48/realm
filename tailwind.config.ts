@@ -19,6 +19,7 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-jetbrains-mono)"],
+        heading: ["var(--font-poppins)"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -86,7 +87,7 @@ module.exports = {
     }) {
       addVariant(
         "prose-inline-code",
-        '&.prose :where(:not(pre)>code):not(:where([class~="not-prose"] *))',
+        '&.prose :where(:not(pre)>code):not(:where([class~="not-prose"] *))'
       );
     }),
   ],
