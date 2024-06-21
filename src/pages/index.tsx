@@ -10,6 +10,7 @@ import path from "path";
 
 import Link from "@/components/custom/link-wrapper";
 import MineServerStatus from "@/components/custom/mc-server-status";
+import VTStyleLogo from "@/components/custom/vt-style-logo";
 import DefaultLayout from "@/components/layout/default";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -23,6 +24,7 @@ import { Separator } from "@/components/ui/separator";
 import { POSTS_PATH, postFilePaths } from "@/content/const";
 import { Button } from "@/components/ui/button";
 import { Post, PostMatter } from "@/types/posts";
+import { FlipWords } from "@/components/ui/flip-words";
 
 export default function Home({ posts }: { posts: PostMatter[] }) {
   const lastTwoPosts = posts
@@ -35,11 +37,33 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     .slice(0, 2)
     .map((a) => a.data);
 
+  const words = [
+    "a web developer.",
+    "a computer science student.",
+    "a music enthusiast.",
+    "a fucking weeb.",
+    "probably racist.",
+    "a thighs cult member.",
+  ];
+
   return (
     <DefaultLayout title="Landing Page">
       <div className="w-full min-h-screen flex flex-col pb-24">
         <section className="w-full relative border-b border-border overflow-hidden">
-          <section className="w-full z-[1] max-w-3xl relative p-5 mx-auto"></section>
+          <section className="w-full z-[1] max-w-3xl relative p-5 mx-auto">
+            <div className="w-full pt-24 pb-4 flex flex-col gap-1 justify-center">
+              <h2 className="text-4xl font-heading font-medium">
+                <span className="dark:text-primary text-foreground/75">
+                  real
+                </span>
+                m.
+              </h2>
+              <div className="text-foreground/75">
+                This site owner is
+                <FlipWords className="text-foreground" words={words} />
+              </div>
+            </div>
+          </section>
         </section>
         <section className="w-full max-w-3xl flex flex-col gap-5 relative p-5 mx-auto">
           <div className="py-3 w-fulls rounded-lg border border-border bg-card">
