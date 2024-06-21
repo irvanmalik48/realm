@@ -58,12 +58,10 @@ export const FlipWords = ({
           scale: 2,
           position: "absolute",
         }}
-        className={cn(
-          "z-10 inline-block relative text-left text-neutral-900 dark:text-neutral-100 px-2",
-          className
-        )}
+        className={cn("z-10 inline-block relative text-left", className)}
         key={currentWord}
       >
+        &nbsp;
         {currentWord
           .replace(/ /g, "\u00a0")
           .split("")
