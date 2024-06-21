@@ -73,18 +73,18 @@ export default function Post({ post }: { post: PostMatter }) {
                     "en-US",
                     {
                       year: "numeric",
-                      month: "long",
+                      month: "short",
                       day: "numeric",
                     },
                   )}
                 </time>{" "}
-                and updated on{" "}
+                , updated on{" "}
                 <time dateTime={post.frontMatter.updatedAt}>
                   {new Date(post.frontMatter.updatedAt).toLocaleDateString(
                     "en-US",
                     {
                       year: "numeric",
-                      month: "long",
+                      month: "short",
                       day: "numeric",
                     },
                   )}
