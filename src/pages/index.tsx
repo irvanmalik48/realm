@@ -1,21 +1,15 @@
 import {
-  CheckIcon,
-  CopyIcon,
   CrumpledPaperIcon,
   InfoCircledIcon,
   Link2Icon,
   MixIcon,
-  ReloadIcon,
 } from "@radix-ui/react-icons";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { useEffect, useState } from "react";
-
-import { Post, PostMatter } from "./posts";
 
 import Link from "@/components/custom/link-wrapper";
-import VTStyleLogo from "@/components/custom/vt-style-logo";
+import MineServerStatus from "@/components/custom/mc-server-status";
 import DefaultLayout from "@/components/layout/default";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -28,20 +22,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { POSTS_PATH, postFilePaths } from "@/content/const";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { cn } from "@/lib/utils";
-import { useMinecraftServerStatus } from "@/reducers";
-
-export interface MinecraftServerSApiResponse {
-  online: boolean | string;
-  host: string;
-  port: number;
-  ip_address?: string;
-  eula_blocked?: boolean;
-  retrieved_at?: number;
-  expires_at?: number;
-  srv_record?: any;
-}
+import { Post, PostMatter } from "@/types/posts";
 
 export default function Home({ posts }: { posts: PostMatter[] }) {
   const lastTwoPosts = posts
@@ -54,112 +35,11 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     .slice(0, 2)
     .map((a) => a.data);
 
-  const { toast } = useToast();
-
-  const {
-    state,
-    setMcServerJavaResponse,
-    setMcServerBedrockResponse,
-    resetResponses,
-  } = useMinecraftServerStatus();
-  const { mcServerJavaResponse, mcServerBedrockResponse } = state;
-
-  const [refreshState, setRefreshState] = useState(false);
-  const [javaServerUrlCopied, setJavaServerUrlCopied] = useState(false);
-  const [bedrockServerUrlCopied, setBedrockServerUrlCopied] = useState(false);
-
-  const checkServerStatus = async (url: string, setResponse: any) => {
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setResponse(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const asynchrounouslyCheckBothServerStatus = async () => {
-    await Promise.all([
-      checkServerStatus(
-        "https://api.mcstatus.io/v2/status/java/mc.irvanma.eu.org",
-        setMcServerJavaResponse,
-      ),
-      checkServerStatus(
-        "https://api.mcstatus.io/v2/status/bedrock/mc.irvanma.eu.org",
-        setMcServerBedrockResponse,
-      ),
-    ]);
-  };
-
-  useEffect(() => {
-    asynchrounouslyCheckBothServerStatus();
-  }, [refreshState]);
-
-  const serverStatusCheck = (status: boolean | string) => {
-    if (status === true) {
-      return "ONLINE";
-    } else if (status === false) {
-      return "OFFLINE";
-    } else {
-      return "CHECKING";
-    }
-  };
-
-  const copyToClipboard = async (
-    text: string,
-    setStatus: (status: boolean) => void,
-  ) => {
-    await navigator.clipboard.writeText(text);
-    setStatus(true);
-  };
-
-  const handleCopyJava = async () => {
-    await copyToClipboard(
-      `${mcServerJavaResponse?.host}:${mcServerJavaResponse?.port}`,
-      setJavaServerUrlCopied,
-    );
-    toast({
-      title: "Copied to clipboard!",
-      description: "Java server URL copied to clipboard.",
-    });
-    const timeout = setTimeout(() => {
-      setJavaServerUrlCopied(false);
-      clearTimeout(timeout);
-    }, 3000);
-  };
-
-  const handleCopyBedrock = async () => {
-    await copyToClipboard(
-      `${mcServerBedrockResponse?.host}:${mcServerBedrockResponse?.port}`,
-      setBedrockServerUrlCopied,
-    );
-    toast({
-      title: "Copied to clipboard!",
-      description: "Bedrock server URL copied to clipboard.",
-    });
-    const timeout = setTimeout(() => {
-      setBedrockServerUrlCopied(false);
-      clearTimeout(timeout);
-    }, 3000);
-  };
-
-  const handleRefresh = () => {
-    resetResponses();
-    setRefreshState(!refreshState);
-    toast({
-      title: "Refreshing server status...",
-      description: "Refreshing server status...",
-      duration: 3000,
-    });
-  };
-
   return (
     <DefaultLayout title="Landing Page">
       <div className="w-full min-h-screen flex flex-col pb-24">
         <section className="w-full relative border-b border-border overflow-hidden">
-          <section className="w-full z-[1] max-w-3xl relative p-5 mx-auto">
-            <VTStyleLogo className="lg:w-3/4 mx-auto w-full" />
-          </section>
+          <section className="w-full z-[1] max-w-3xl relative p-5 mx-auto"></section>
         </section>
         <section className="w-full max-w-3xl flex flex-col gap-5 relative p-5 mx-auto">
           <div className="py-3 w-fulls rounded-lg border border-border bg-card">
@@ -203,149 +83,7 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
                 clients due to ViaVersion and ViaBackwards, altho untested).
                 Here&apos;s the server status:
               </p>
-              <div className="gap-5 grid grid-cols-1 md:grid-cols-2">
-                <div className="py-3 w-fulls rounded-lg border border-border bg-card">
-                  <div className="mb-3 px-5 flex items-center gap-5 justify-between">
-                    <h2 className="font-semibold dark:font-medium w-full line-clamp-1">
-                      Java Server
-                    </h2>
-                    <div className="flex items-center justify-center px-2 py-1 gap-2 border border-border rounded-full">
-                      <div className="w-2 h-2 relative">
-                        <div
-                          className={cn(
-                            `w-2 h-2 bg-primary absolute rounded-full`,
-                            {
-                              "bg-red-600 dark:bg-red-500":
-                                mcServerJavaResponse?.online === false,
-                              "bg-yellow-600 dark:bg-yellow-500":
-                                mcServerJavaResponse?.online === "CHECKING",
-                              "bg-primary":
-                                mcServerJavaResponse?.online === true,
-                            },
-                          )}
-                        />
-                        <div
-                          className={cn(
-                            `w-2 h-2 bg-primary absolute rounded-full animate-ping`,
-                            {
-                              "bg-red-600 dark:bg-red-500":
-                                mcServerJavaResponse?.online === false,
-                              "bg-yellow-600 dark:bg-yellow-500":
-                                mcServerJavaResponse?.online === "CHECKING",
-                              "bg-primary":
-                                mcServerJavaResponse?.online === true,
-                            },
-                          )}
-                        />
-                      </div>
-                      <p className="text-xs leading-none font-mono">
-                        {serverStatusCheck(mcServerJavaResponse?.online)}
-                      </p>
-                    </div>
-                  </div>
-                  <Separator />
-                  <p className="w-full px-5 pt-3">Version: 1.21</p>
-                  <p className="w-full px-5 pt-1">
-                    Host Address: {mcServerJavaResponse?.host}
-                  </p>
-                  <p className="w-full px-5 pt-1">
-                    Port: {mcServerJavaResponse?.port}
-                  </p>
-                  <div className="mt-3 px-5">
-                    <Button
-                      className="flex items-center justify-center w-full gap-3"
-                      variant={"secondary"}
-                      onClick={handleCopyJava}
-                    >
-                      {javaServerUrlCopied ? (
-                        <CheckIcon className="w-5 h-5" />
-                      ) : (
-                        <CopyIcon className="w-5 h-5" />
-                      )}
-                      <span>
-                        {javaServerUrlCopied ? "Copied!" : "Copy URL"}
-                      </span>
-                      <span className="sr-only">
-                        Copy the Java server URL to clipboard
-                      </span>
-                    </Button>
-                  </div>
-                </div>
-                <div className="py-3 w-fulls rounded-lg border border-border bg-card">
-                  <div className="mb-3 px-5 flex items-center gap-5 justify-between">
-                    <h2 className="font-semibold dark:font-medium w-full line-clamp-1">
-                      Bedrock Server
-                    </h2>
-                    <div className="flex items-center justify-center px-2 py-1 gap-2 border border-border rounded-full">
-                      <div className="w-2 h-2 relative">
-                        <div
-                          className={cn(
-                            `w-2 h-2 bg-primary absolute rounded-full`,
-                            {
-                              "bg-red-600 dark:bg-red-500":
-                                mcServerBedrockResponse?.online === false,
-                              "bg-yellow-600 dark:bg-yellow-500":
-                                mcServerBedrockResponse?.online === "CHECKING",
-                              "bg-primary":
-                                mcServerBedrockResponse?.online === true,
-                            },
-                          )}
-                        />
-                        <div
-                          className={cn(
-                            `w-2 h-2 bg-primary absolute rounded-full animate-ping`,
-                            {
-                              "bg-red-600 dark:bg-red-500":
-                                mcServerBedrockResponse?.online === false,
-                              "bg-yellow-600 dark:bg-yellow-500":
-                                mcServerBedrockResponse?.online === "CHECKING",
-                              "bg-primary":
-                                mcServerBedrockResponse?.online === true,
-                            },
-                          )}
-                        />
-                      </div>
-                      <p className="text-xs leading-none font-mono">
-                        {serverStatusCheck(mcServerBedrockResponse?.online)}
-                      </p>
-                    </div>
-                  </div>
-                  <Separator />
-                  <p className="w-full px-5 pt-3">Version: 1.21 (Geyser)</p>
-                  <p className="w-full px-5 pt-1">
-                    Host Address: {mcServerBedrockResponse?.host}
-                  </p>
-                  <p className="w-full px-5 pt-1">
-                    Port: {mcServerBedrockResponse?.port}
-                  </p>
-                  <div className="mt-3 px-5">
-                    <Button
-                      className="flex items-center justify-center w-full gap-3"
-                      variant={"secondary"}
-                      onClick={handleCopyBedrock}
-                    >
-                      {bedrockServerUrlCopied ? (
-                        <CheckIcon className="w-5 h-5" />
-                      ) : (
-                        <CopyIcon className="w-5 h-5" />
-                      )}
-                      <span>
-                        {bedrockServerUrlCopied ? "Copied!" : "Copy URL"}
-                      </span>
-                      <span className="sr-only">
-                        Copy the Bedrock server URL to clipboard
-                      </span>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <Button
-                className="flex items-center justify-center gap-3"
-                onClick={handleRefresh}
-              >
-                <ReloadIcon className="w-5 h-5" />
-                <span>Refresh Server Status</span>
-              </Button>
+              <MineServerStatus />
             </div>
             <Separator />
             <div className="flex gap-3 items-center">

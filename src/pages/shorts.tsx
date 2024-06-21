@@ -12,19 +12,7 @@ import { SHORTS_PATH, shortFilePaths } from "@/content/const";
 import { useFuzzy } from "@/hooks/fuzzy";
 import { useThrottle } from "@/hooks/throttle";
 import { cn } from "@/lib/utils";
-
-type Short = {
-  slug: string;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-interface ShortMatter {
-  content: string;
-  data: Short;
-  filePath: string;
-}
+import { Short, ShortMatter } from "@/types/shorts";
 
 export default function Posts({ shorts }: { shorts: ShortMatter[] }) {
   const sortedShorts = shorts

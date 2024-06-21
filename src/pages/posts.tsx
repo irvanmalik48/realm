@@ -18,21 +18,7 @@ import { POSTS_PATH, postFilePaths } from "@/content/const";
 import { useFuzzy } from "@/hooks/fuzzy";
 import { useThrottle } from "@/hooks/throttle";
 import { cn } from "@/lib/utils";
-
-export type Post = {
-  title: string;
-  description: string;
-  slug: string;
-  tags: string[];
-  createdAt: string;
-  updatedAt: string;
-};
-
-export interface PostMatter {
-  content: string;
-  data: Post;
-  filePath: string;
-}
+import { Post, PostMatter } from "@/types/posts";
 
 export default function Posts({ posts }: { posts: PostMatter[] }) {
   const sortedPosts = posts
