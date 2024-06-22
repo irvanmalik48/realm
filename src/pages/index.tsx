@@ -38,12 +38,11 @@ export default function Home({ posts }: { posts: PostMatter[] }) {
     .map((a) => a.data);
 
   const words = [
-    "a web developer.",
-    "a computer science student.",
-    "a music enthusiast.",
-    "a fucking weeb.",
-    "probably racist.",
-    "a thighs cult member.",
+    "a webdev.",
+    "a CS student.",
+    "a singer.",
+    "a gamer.",
+    "a weeb.",
   ];
 
   return (
