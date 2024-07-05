@@ -5,7 +5,7 @@ interface Component {
   type: "default" | "info" | "warning" | "error";
 }
 
-const { type = "default" } = Astro.props;
+const { type = "default" } = Astro.props as Component;
 ---
 
 <div class={`not-prose callout callout-${type}`}>
