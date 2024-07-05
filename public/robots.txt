@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /bin/
-Allow: /
-
-Sitemap: https://realmof.tech/sitemap-index.xml

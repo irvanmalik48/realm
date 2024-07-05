@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = CollectionEntry<"blog">["data"];
+const { title, description, date } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description: description,
+  keywords: [
+    "blog",
+    "posts",
+    "articles",
+    "programming",
+    "software",
+    "development",
+    "web",
+    "tech",
+    "technology",
+  ],
+  author: {
+    "@type": "Person",
+    name: "Irvan Malik Azantha",
+    url: "https://irvanma.eu.org",
+  },
+  datePublished: date.toISOString().substring(0, 10),
+};
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

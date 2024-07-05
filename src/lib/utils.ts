@@ -1,24 +1,21 @@
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function appendStyle(id: string, css: string) {
-  if (!document.head.querySelector("#" + id)) {
-    const node = document.createElement("style");
-    node.textContent = css;
-    node.id = id;
-
-    document.head.appendChild(node);
-  }
+export function formatDate(date: Date) {
+  return Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
 }
 
-export function isDOMReady() {
-  return (
-    typeof window !== "undefined" &&
-    typeof document !== "undefined" &&
-    document.head
-  );
+export function readingTime(html: string) {
+  const textOnly = html.replace(/<[^>]+>/g, "");
+  const wordCount = textOnly.split(/\s+/).length;
+  const readingTimeMinutes = (wordCount / 200 + 1).toFixed();
+  return `${readingTimeMinutes} min read`;
 }

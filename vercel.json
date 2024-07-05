@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/analytics",
-      "destination": "https://stats.irvanma.eu.org/count"
-    }
-  ]
-}
