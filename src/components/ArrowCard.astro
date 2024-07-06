@@ -2,11 +2,11 @@
 import type { CollectionEntry } from "astro:content";
 
 type Props = {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  entry: CollectionEntry<"blog">;
 };
 
 const { entry } = Astro.props as {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  entry: CollectionEntry<"blog">;
 };
 ---
 
@@ -14,11 +14,11 @@ const { entry } = Astro.props as {
   href={`/${entry.collection}/${entry.slug}`}
   class="not-prose group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pr-10 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
 >
-  <div class="flex flex-1 flex-col truncate">
-    <div class="font-semibold">
+  <div class="flex flex-1 flex-col">
+    <div class="line-clamp-1 font-semibold">
       {entry.data.title}
     </div>
-    <div class="text-sm">
+    <div class="line-clamp-1 text-sm">
       {entry.data.description}
     </div>
   </div>
