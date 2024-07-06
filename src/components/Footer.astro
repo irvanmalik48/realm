@@ -12,8 +12,17 @@ import BackToTop from "@components/BackToTop.astro";
       </div>
     </div>
     <div class="flex items-center justify-between">
-      <div>
-        &copy; {new Date().getFullYear()} • {SITE.TITLE}
+      <div class="flex flex-col items-start justify-center">
+        <p>
+          &copy; {new Date().getFullYear()} • {SITE.TITLE}
+        </p>
+        <p>
+          Licensed under <a
+            href="https://raw.githubusercontent.com/irvanmalik48/realm/main/LICENSE"
+            class="underline underline-offset-[3px] transition-colors duration-300 hover:text-white"
+            >RCCL</a
+          >.
+        </p>
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
         <button
