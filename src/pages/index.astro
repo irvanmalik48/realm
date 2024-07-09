@@ -14,14 +14,21 @@ const blog = (await getCollection("blog"))
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h1 class="animate font-semibold text-black dark:text-white">
+    <img
+      src="/lappland-cute.gif"
+      alt="Lappland"
+      class="animate mx-auto h-36 w-36 rounded-full border-4 border-black bg-neutral-200 dark:border-white dark:bg-neutral-800"
+    />
+    <h1
+      class="animate mt-7 text-center font-semibold text-black dark:text-white"
+    >
       Irvan Malik Azantha
     </h1>
     <div class="space-y-16">
       <section>
         <article class="space-y-4">
           <div class="animate">
-            <p>
+            <p class="w-full text-center">
               21 y'o software engineer, music enthusiast, and full-time weeb.
             </p>
           </div>
@@ -65,6 +72,20 @@ const blog = (await getCollection("blog"))
             ))
           }
         </ul>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">
+          Acknowledgements
+        </h2>
+        <article>
+          <p>
+            The GIF used above is made by <a
+              href="https://www.pixiv.net/en/users/16274829"
+              ><span class="sr-only">Go visit </span>Seseren</a
+            >.
+          </p>
+        </article>
       </section>
     </div>
   </Container>
