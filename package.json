@@ -1,37 +1,38 @@
 {
   "name": "realm",
-  "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "format": "prettier --write .",
-    "astro": "astro"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@astrojs/check": "^0.8.3",
-    "@astrojs/mdx": "^3.1.3",
-    "@astrojs/rss": "^4.0.7",
-    "@astrojs/sitemap": "^3.1.6",
-    "@astrojs/tailwind": "^5.1.0",
-    "@fontsource/geist-mono": "^5.0.3",
-    "@fontsource/geist-sans": "^5.0.3",
-    "astro": "^4.13.1",
-    "astro-pagefind": "^1.6.0",
+    "@million/lint": "1.0.0-rc.84",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-scroll-area": "^1.1.0",
+    "@radix-ui/react-select": "^2.1.1",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-astro": "^0.399.0",
-    "tailwind-merge": "^2.4.0",
-    "tailwindcss": "^3.4.7",
-    "typescript": "^5.5.4"
+    "jotai": "^2.9.3",
+    "lucide-react": "^0.427.0",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-resizable-panels": "^2.1.0",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "^1.0.7",
+    "white-matter": "^0.3.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.13",
-    "pagefind": "^1.1.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-astro": "^0.13.0",
-    "prettier-plugin-organize-imports": "^3.2.4",
-    "prettier-plugin-tailwindcss": "^0.5.14"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
