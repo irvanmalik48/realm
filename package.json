@@ -6,20 +6,27 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.4.2",
     "@million/lint": "1.0.0-rc.84",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.33.0",
     "jotai": "^2.9.3",
     "lucide-react": "^0.427.0",
     "next": "14.2.5",
+    "next-auth": "^4.24.7",
+    "postgres": "^3.4.4",
     "react": "^18",
     "react-dom": "^18",
     "react-resizable-panels": "^2.1.0",
@@ -28,9 +35,11 @@
     "white-matter": "^0.3.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "drizzle-kit": "^0.24.2",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
