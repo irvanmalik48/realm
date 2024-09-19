@@ -33,7 +33,7 @@ const webring = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
-    webringType: z.string().optional(),
+    webringKind: z.string().optional(),
     avatar: z.string().url(),
     bio: z.string().optional(),
     mail: z.string().email().optional(),
