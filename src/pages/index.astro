@@ -1,0 +1,70 @@
+---
+import { buttonVariants } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import BlogCard from '@components/BlogCard.astro'
+import Container from '@components/Container.astro'
+import Link from '@components/Link.astro'
+import { SITE } from '@consts'
+import Layout from '@layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+const blog = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
+---
+
+<Layout title="Home" description={SITE.DESCRIPTION}>
+  <Container class="flex flex-col gap-y-6">
+    <section class="relative z-0">
+      <img
+        src="/static/lappland-render.webp"
+        alt="Lappland"
+        class="absolute left-1/2 z-0 w-80 -translate-x-1/2"
+      />
+      <Card className="relative z-10 mt-52 bg-background/50 backdrop-blur-lg">
+        <CardHeader>
+          <CardTitle className="text-center text-3xl">realm</CardTitle>
+          <CardDescription className="text-center"
+            >/ɹɛlm/ &bull; <span class="font-semibold">noun</span
+            ></CardDescription
+          >
+        </CardHeader>
+        <CardContent>
+          <p class="text-center text-sm text-muted-foreground">
+            A kingdom or domain; a field or sphere; a range or extent.
+          </p>
+        </CardContent>
+      </Card>
+    </section>
+    <section class="flex flex-col gap-y-4">
+      <h2 class="text-2xl font-bold">Latest posts</h2>
+      <ul class="not-prose flex flex-col gap-y-4">
+        {
+          blog.map((post) => (
+            <li>
+              <BlogCard entry={post} />
+            </li>
+          ))
+        }
+      </ul>
+      <div class="flex justify-center">
+        <Link
+          href="/blog"
+          class={buttonVariants({ variant: 'ghost' }) + ' group'}
+        >
+          See all posts <span
+            class="ml-1.5 transition-transform group-hover:translate-x-1"
+            >&rarr;</span
+          >
+        </Link>
+      </div>
+    </section>
+  </Container>
+</Layout>

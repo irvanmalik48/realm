@@ -1,0 +1,26 @@
+---
+import Link from './Link.astro'
+import type { Heading } from './TableOfContents.astro'
+
+const { heading } = Astro.props
+---
+
+<li
+  class="mr-2 list-inside list-disc px-6 py-1.5 text-sm text-foreground/60 xl:list-none xl:p-0"
+>
+  <Link
+    href={'#' + heading.slug}
+    class="toc-link transition-colors duration-200"
+  >
+    {heading.text}
+  </Link>
+  {
+    heading.subheadings.length > 0 && (
+      <ul class="translate-x-3 xl:ml-4 xl:mt-2 xl:translate-x-0 xl:space-y-2">
+        {heading.subheadings.map((subheading: Heading) => (
+          <Astro.self heading={subheading} />
+        ))}
+      </ul>
+    )
+  }
+</li>

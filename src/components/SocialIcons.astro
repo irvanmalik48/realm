@@ -1,0 +1,57 @@
+---
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import Link from '@components/Link.astro'
+import type { Link as SocialLink } from '@consts'
+import {
+  Github,
+  Globe,
+  Linkedin,
+  Mail,
+  MessageCircleQuestion,
+  Rss,
+  Twitter,
+} from 'lucide-react'
+
+interface Props {
+  links: SocialLink[]
+  className?: string
+}
+
+const { links, className } = Astro.props
+
+const iconMap = {
+  Website: Globe,
+  GitHub: Github,
+  LinkedIn: Linkedin,
+  Twitter: Twitter,
+  Email: Mail,
+  RSS: Rss,
+}
+
+const getSocialLink = ({ href, label }: SocialLink) => ({
+  href: label === 'Email' ? `mailto:${href}` : href,
+  ariaLabel: label,
+  Icon: iconMap[label as keyof typeof iconMap] || MessageCircleQuestion,
+})
+---
+
+<ul class={cn('not-prose flex flex-wrap gap-2', className)} role="list">
+  {
+    links.map((link) => {
+      const { href, ariaLabel, Icon } = getSocialLink(link)
+      return (
+        <li>
+          <Link
+            href={href}
+            aria-label={ariaLabel}
+            title={ariaLabel}
+            class={buttonVariants({ variant: 'outline', size: 'icon' })}
+          >
+            <Icon className="size-4" />
+          </Link>
+        </li>
+      )
+    })
+  }
+</ul>

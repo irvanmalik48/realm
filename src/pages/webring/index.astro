@@ -1,0 +1,28 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import AuthorCard from '@components/AuthorCard.astro'
+import Container from '@components/Container.astro'
+import Layout from '@layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+const authors = await getCollection('webring')
+---
+
+<Layout title="Webring" description="A list of webring mates.">
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs items={[{ label: 'Webring' }]} />
+    {
+      authors.length > 0 ? (
+        <ul class="not-prose flex flex-col gap-4">
+          {authors.map((author) => (
+            <li>
+              <AuthorCard author={author} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-center text-muted-foreground">Webring not filled?</p>
+      )
+    }
+  </Container>
+</Layout>

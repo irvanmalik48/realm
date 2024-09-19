@@ -1,0 +1,43 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import AuthorCard from '@components/AuthorCard.astro'
+import Container from '@components/Container.astro'
+import Layout from '@layouts/Layout.astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const authors = await getCollection('webring')
+  return authors.map((author) => ({
+    params: { slug: author.slug },
+    props: { author },
+  }))
+}
+
+type Props = {
+  author: CollectionEntry<'authors'>
+}
+
+const { author } = Astro.props
+---
+
+<Layout
+  title={`${author.data.name}`}
+  description={author.data.bio || `Profile of ${author.data.name}.`}
+>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs
+      items={[
+        { href: '/webring', label: 'Webring' },
+        { label: author.data.name },
+      ]}
+    />
+
+    <section>
+      <AuthorCard author={author} linkDisabled />
+    </section>
+    <section class="flex flex-col gap-y-4">
+      <h2 class="text-center text-2xl font-semibold">Webring Author Profile</h2>
+      <p class="text-muted-foreground">This section is not yet implemented.</p>
+    </section>
+  </Container>
+</Layout>

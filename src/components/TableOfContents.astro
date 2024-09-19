@@ -1,0 +1,98 @@
+---
+import { ChevronDown } from 'lucide-react'
+import TableOfContentsHeading from './TableOfContentsHeading.astro'
+
+export interface Heading {
+  depth: number
+  slug: string
+  text: string
+  subheadings: Heading[]
+}
+
+const { headings } = Astro.props
+const toc = buildToc(headings)
+
+function buildToc(headings: Heading[]): Heading[] {
+  const toc: Heading[] = []
+  const stack: Heading[] = []
+
+  headings.forEach((h) => {
+    const heading = { ...h, subheadings: [] }
+
+    while (stack.length > 0 && stack[stack.length - 1].depth >= heading.depth) {
+      stack.pop()
+    }
+
+    if (stack.length === 0) {
+      toc.push(heading)
+    } else {
+      stack[stack.length - 1].subheadings.push(heading)
+    }
+
+    stack.push(heading)
+  })
+
+  return toc
+}
+---
+
+<details open class="group block rounded-xl border p-4 xl:hidden">
+  <summary
+    class="flex cursor-pointer items-center justify-between text-xl font-semibold"
+  >
+    Table of Contents
+    <ChevronDown
+      className="size-5 transition-transform group-open:rotate-180"
+    />
+  </summary>
+  <nav>
+    <ul class="pt-3">
+      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+    </ul>
+  </nav>
+</details>
+
+<nav
+  class="overflow-wrap-break-word sticky top-16 hidden h-0 w-[calc(50vw-50%-4rem)] translate-x-[calc(-100%-2em)] text-xs leading-4 xl:block"
+>
+  <div class="mr-6 flex justify-end">
+    <ul
+      class="max-h-[calc(100vh-8rem)] space-y-2 overflow-y-auto"
+      id="toc-container"
+    >
+      <li>
+        <h2 class="mb-2 text-lg font-semibold">Table of Contents</h2>
+      </li>
+      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  function setupToc() {
+    const observer = new IntersectionObserver((sections) => {
+      sections.forEach((section) => {
+        const heading = section.target.querySelector('h2, h3, h4, h5, h6')
+        if (!heading) return
+
+        const id = heading.getAttribute('id')
+        const link = document.querySelector(
+          `#toc-container li a[href="#${id}"]`,
+        )
+        if (!link) return
+
+        const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove'
+        link.classList[addRemove]('font-semibold')
+        link.classList[addRemove]('text-foreground')
+      })
+    })
+
+    const sections = document.querySelectorAll('.prose section')
+    sections.forEach((section) => {
+      observer.observe(section)
+    })
+  }
+
+  document.addEventListener('astro:page-load', setupToc)
+  document.addEventListener('astro:after-swap', setupToc)
+</script>
