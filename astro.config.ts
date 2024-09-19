@@ -16,7 +16,7 @@ import remarkMath from "remark-math";
 import remarkToc from "remark-toc";
 import sectionize from "@hbsnow/rehype-sectionize";
 
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel/static";
 
 export default defineConfig({
   site: "https://irvanma.eu.org",
