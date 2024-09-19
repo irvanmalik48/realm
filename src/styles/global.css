@@ -2,119 +2,161 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  overflow-y: auto;
-  color-scheme: light;
-  scroll-padding-top: 100px;
-}
-
-html.dark {
-  color-scheme: dark;
-}
-
-html,
-body {
-  @apply size-full;
-}
-
-body {
-  @apply font-sans antialiased;
-  @apply flex flex-col;
-  @apply bg-neutral-100 dark:bg-neutral-900;
-  @apply text-black/75 dark:text-white/75;
-}
-
-header {
-  @apply fixed left-0 right-0 top-0 z-50 py-6;
-  @apply bg-neutral-100/75 dark:bg-neutral-900/75;
-  @apply saturate-200 backdrop-blur-sm;
-}
-
-main {
-  @apply flex-1 py-32;
-}
-
-footer {
-  @apply py-6 text-sm;
-}
-
-article {
-  @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold;
-  @apply prose-headings:text-black prose-headings:dark:text-white;
-}
-
-@layer utilities {
-  article a {
-    @apply font-sans text-current underline underline-offset-[3px];
-    @apply decoration-black/30 dark:decoration-white/30;
-    @apply transition-colors duration-300 ease-in-out;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 80.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 80.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 80.1%;
+    --accent-foreground: 0 0% 9%;
+    --additive: 112 50% 36%;
+    --additive-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
   }
-  article a:hover {
-    @apply text-black dark:text-white;
-    @apply decoration-black/50 dark:decoration-white/50;
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --additive: 112 50% 36%;
+    --additive-foreground: 0 0% 9%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: light;
+    @apply bg-background text-foreground;
+
+    &.dark {
+      color-scheme: dark;
+    }
+
+    ::-webkit-scrollbar-corner {
+      @apply bg-transparent;
+    }
+  }
+
+  .disable-transitions,
+  .disable-transitions * {
+    transition: none !important;
   }
 }
 
-.animate {
-  @apply -translate-y-3 opacity-0;
-  @apply transition-all duration-300 ease-out;
-}
+@layer components {
+  article {
+    @apply prose-headings:scroll-mt-20 prose-headings:break-words prose-p:break-words;
 
-.animate.show {
-  @apply translate-y-0 opacity-100;
-}
+    .katex-display {
+      @apply overflow-x-auto overflow-y-hidden py-4;
+    }
 
-html #back-to-top {
-  @apply pointer-events-none opacity-0;
-}
+    /* Removes background from <mark> elements */
+    mark {
+      @apply bg-transparent;
+    }
 
-html.scrolled #back-to-top {
-  @apply pointer-events-auto opacity-100;
-}
+    /* Blanket syntax highlighting */
+    code[data-theme*=" "] {
+      span {
+        color: var(--shiki-light);
+      }
 
-/* shiki config */
-pre {
-  @apply border border-black/15 py-5 dark:border-white/20;
-}
+      .dark & span {
+        color: var(--shiki-dark);
+      }
+    }
 
-:root {
-  --astro-code-color-text: #09090b;
-  --astro-code-color-background: #fafafa;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #429996;
-  --astro-code-token-constant: #2b70c5;
-  --astro-code-token-parameter: #4e8fdf;
-  --astro-code-token-string-expression: #ae42a0;
-  --astro-code-token-punctuation: #8996a3;
-  --astro-code-token-link: #8d85ff;
-}
+    /* Inline code */
+    :not(pre) > code {
+      @apply relative rounded bg-muted/50 px-[0.3rem] py-[0.2rem] font-mono text-sm font-medium;
+    }
 
-.dark {
-  --astro-code-color-text: #fafafa;
-  --astro-code-color-background: #09090b;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #6eafad;
-  --astro-code-token-constant: #b3cceb;
-  --astro-code-token-parameter: #4e8fdf;
-  --astro-code-token-string-expression: #bf7db6;
-  --astro-code-token-punctuation: #8996a3;
-  --astro-code-token-link: #8d85ff;
-}
+    /* Code blocks */
+    figure[data-rehype-pretty-code-figure] {
+      @apply relative;
 
-/* copy code button on codeblocks */
-.copy-code {
-  @apply absolute right-3 top-3 grid size-9 place-content-center rounded border border-black/15 bg-neutral-100 text-center opacity-50 duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
-}
+      /* Code block titles */
+      [data-rehype-pretty-code-title] {
+        @apply break-words rounded-t-xl border-x border-t px-4 py-2 text-sm font-medium text-foreground;
 
-.copy-code:hover {
-  @apply bg-[#E9E9E9] opacity-100 transition dark:bg-[#232323];
-}
+        /* Remove top margin from code block if a title is present */
+        & + pre {
+          @apply mt-0 rounded-t-none;
+        }
+      }
 
-.copy-code:active {
-  @apply scale-90 opacity-100 transition-transform;
+      /* Code block styles */
+      pre {
+        @apply static max-h-[600px] overflow-auto rounded-xl border bg-secondary/20 py-4 text-sm leading-loose;
+
+        /* Code block content */
+        > code {
+          @apply whitespace-pre-wrap;
+          counter-reset: line;
+
+          /* For code blocks with line numbers */
+          &[data-line-numbers] {
+            > [data-line]::before {
+              counter-increment: line;
+              content: counter(line);
+              @apply mr-4 inline-block w-4 text-right text-muted-foreground;
+            }
+          }
+
+          /* For each line in the code block */
+          > [data-line] {
+            @apply px-4;
+          }
+
+          /* Highlighted lines */
+          [data-highlighted-line] {
+            @apply bg-foreground/10;
+          }
+
+          /* Highlighted characters */
+          [data-highlighted-chars] > span {
+            @apply bg-muted-foreground/40 py-[7px];
+          }
+
+          /* Diff lines */
+          .diff {
+            &.add {
+              @apply bg-additive/15;
+            }
+            &.remove {
+              @apply bg-destructive/15;
+            }
+          }
+
+          /* Copy button */
+          > button:has(> span) {
+            @apply right-0.5 top-[3px] m-0 size-8 rounded-md bg-transparent p-1 backdrop-blur-none;
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,3 +1,5 @@
-# realm.
+# realm
 
-Irvan Malik Azantha's personal website.
+Irvan Malik's personal blog.
+
+All rights reserved.

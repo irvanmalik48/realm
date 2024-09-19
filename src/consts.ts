@@ -1,43 +1,36 @@
-import type { Metadata, Site, Socials } from "@types";
+export type Site = {
+  TITLE: string;
+  DESCRIPTION: string;
+  EMAIL: string;
+  NUM_POSTS_ON_HOMEPAGE: number;
+  POSTS_PER_PAGE: number;
+  SITEURL: string;
+};
+
+export type Link = {
+  href: string;
+  label: string;
+};
 
 export const SITE: Site = {
-  TITLE: "realm.",
-  DESCRIPTION: "Irvan Malik's personal website.",
-  EMAIL: "me@irvanma.eu.org",
-  NUM_POSTS_ON_HOMEPAGE: 5,
-  NUM_PROJECTS_ON_HOMEPAGE: 3,
+  TITLE: "realm",
+  DESCRIPTION: "Irvan Malik's personal blog.",
+  EMAIL: "irvanma@gnuweeb.org",
+  NUM_POSTS_ON_HOMEPAGE: 4,
+  POSTS_PER_PAGE: 5,
+  SITEURL: "https://irvanma.eu.org",
 };
 
-export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "A homepage, I guess.",
-};
+export const NAV_LINKS: Link[] = [
+  { href: "/blog", label: "blog" },
+  { href: "/about", label: "about" },
+  { href: "/tags", label: "tags" },
+  { href: "/webring", label: "webring" },
+];
 
-export const BLOG: Metadata = {
-  TITLE: "Blog",
-  DESCRIPTION: "Articles, posts, whatever you call it.",
-};
-
-export const PROJECTS: Metadata = {
-  TITLE: "Projects",
-  DESCRIPTION: "Projects, under construction.",
-};
-
-export const SOCIALS: Socials = [
-  {
-    NAME: "GitHub",
-    HREF: "https://github.com/irvanmalik48",
-  },
-  {
-    NAME: "Telegram",
-    HREF: "https://t.me/lappv",
-  },
-  {
-    NAME: "Mastodon",
-    HREF: "https://social.gnuweeb.org/@lappland",
-  },
-  {
-    NAME: "Email",
-    HREF: `mailto:${SITE.EMAIL}`,
-  },
+export const SOCIAL_LINKS: Link[] = [
+  { href: "https://github.com/irvanmalik48", label: "GitHub" },
+  { href: "https://x.com/irvanmalik48", label: "X (Formerly Twitter)" },
+  { href: "irvanma@gnuweeb.org", label: "Email" },
+  { href: "/rss.xml", label: "RSS" },
 ];
