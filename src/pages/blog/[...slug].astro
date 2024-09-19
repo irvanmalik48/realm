@@ -1,67 +1,67 @@
 ---
-import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import { badgeVariants } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
-import Container from '@components/Container.astro'
-import Link from '@components/Link.astro'
-import PostNavigation from '@components/PostNavigation.astro'
-import TableOfContents from '@components/TableOfContents.astro'
-import Layout from '@layouts/Layout.astro'
-import { formatDate, parseAuthors, readingTime } from '@lib/utils'
-import { Image } from 'astro:assets'
-import { type CollectionEntry, getCollection } from 'astro:content'
-import { ArrowUp, Hash } from 'lucide-react'
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import { badgeVariants } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import PostNavigation from "@components/PostNavigation.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import Layout from "@layouts/Layout.astro";
+import { formatDate, parseAuthors, readingTime } from "@lib/utils";
+import { Image } from "astro:assets";
+import { type CollectionEntry, getCollection } from "astro:content";
+import { ArrowUp, Hash } from "lucide-react";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog'))
+  const posts = (await getCollection("blog"))
     .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
-  }))
+  }));
 }
-type Props = CollectionEntry<'blog'>
+type Props = CollectionEntry<"blog">;
 
-const posts = (await getCollection('blog'))
+const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 function getPostIndex(slug: string): number {
-  return posts.findIndex((post) => post.slug === slug)
+  return posts.findIndex((post) => post.slug === slug);
 }
 
 function getNextPost(slug: string): Props | null {
-  const postIndex = getPostIndex(slug)
+  const postIndex = getPostIndex(slug);
   return postIndex !== -1 && postIndex < posts.length - 1
     ? posts[postIndex + 1]
-    : null
+    : null;
 }
 
 function getPrevPost(slug: string): Props | null {
-  const postIndex = getPostIndex(slug)
-  return postIndex > 0 ? posts[postIndex - 1] : null
+  const postIndex = getPostIndex(slug);
+  return postIndex > 0 ? posts[postIndex - 1] : null;
 }
 
-const currentPostSlug = Astro.params.slug
-const nextPost = getNextPost(currentPostSlug)
-const prevPost = getPrevPost(currentPostSlug)
+const currentPostSlug = Astro.params.slug;
+const nextPost = getNextPost(currentPostSlug);
+const prevPost = getPrevPost(currentPostSlug);
 
-const post = Astro.props
-const { Content, headings } = await post.render()
+const post = Astro.props;
+const { Content, headings } = await post.render();
 
-const authors = await parseAuthors(post.data.authors ?? [])
+const authors = await parseAuthors(post.data.authors ?? []);
 ---
 
 <Layout
   title={post.data.title}
   description={post.data.description}
-  image={post.data.image?.src ?? '/static/1200x630.png'}
+  image={post.data.image?.src ?? "/static/1200x630.png"}
 >
   <Container class="flex flex-col gap-y-6">
     <Breadcrumbs
-      items={[{ href: '/blog', label: 'Blog' }, { label: post.data.title }]}
+      items={[{ href: "/blog", label: "Blog" }, { label: post.data.title }]}
     />
 
     {
@@ -100,7 +100,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
                       />
                       {author.isRegistered ? (
                         <Link
-                          href={`/authors/${author.name}`}
+                          href={`/webring/${author.name}`}
                           underline
                           class="text-foreground"
                         >
@@ -128,7 +128,7 @@ const authors = await parseAuthors(post.data.authors ?? [])
               post.data.tags.map((tag) => (
                 <a
                   href={`/tags/${tag}`}
-                  class={badgeVariants({ variant: 'secondary' })}
+                  class={badgeVariants({ variant: "secondary" })}
                 >
                   <Hash className="-translate-x-0.5 size-3" />
                   {tag}
@@ -171,25 +171,25 @@ const authors = await parseAuthors(post.data.authors ?? [])
   </Button>
 
   <script>
-    document.addEventListener('astro:page-load', () => {
-      const scrollToTopButton = document.getElementById('scroll-to-top')
-      const footer = document.querySelector('footer')
+    document.addEventListener("astro:page-load", () => {
+      const scrollToTopButton = document.getElementById("scroll-to-top");
+      const footer = document.querySelector("footer");
 
       if (scrollToTopButton && footer) {
-        scrollToTopButton.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        })
+        scrollToTopButton.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
 
-        window.addEventListener('scroll', () => {
-          const footerRect = footer.getBoundingClientRect()
-          const isFooterVisible = footerRect.top <= window.innerHeight
+        window.addEventListener("scroll", () => {
+          const footerRect = footer.getBoundingClientRect();
+          const isFooterVisible = footerRect.top <= window.innerHeight;
 
           scrollToTopButton.classList.toggle(
-            'hidden',
+            "hidden",
             window.scrollY <= 300 || isFooterVisible,
-          )
-        })
+          );
+        });
       }
-    })
+    });
   </script>
 </Layout>
