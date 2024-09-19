@@ -16,8 +16,11 @@ import remarkMath from "remark-math";
 import remarkToc from "remark-toc";
 import sectionize from "@hbsnow/rehype-sectionize";
 
+import vercel from "@astrojs/vercel/serverless";
+
 export default defineConfig({
   site: "https://irvanma.eu.org",
+
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -26,6 +29,7 @@ export default defineConfig({
     mdx(),
     react(),
   ],
+
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [
@@ -52,11 +56,16 @@ export default defineConfig({
     ],
     remarkPlugins: [remarkToc, remarkMath, remarkEmoji],
   },
+
   server: {
     port: 1234,
     host: true,
   },
+
   devToolbar: {
     enabled: false,
   },
+
+  output: "server",
+  adapter: vercel(),
 });
