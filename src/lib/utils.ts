@@ -26,7 +26,7 @@ export async function parseAuthors(authors: string[]) {
 
   const parseAuthor = async (slug: string) => {
     try {
-      const author = await getEntry("authors", slug);
+      const author = await getEntry("webring", slug);
       return {
         name: author?.data?.name || slug,
         avatar: author?.data?.avatar || "/static/logo.png",
