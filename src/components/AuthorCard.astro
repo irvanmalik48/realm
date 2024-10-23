@@ -1,16 +1,16 @@
 ---
-import AvatarComponent from '@/components/ui/avatar'
-import { cn } from '@/lib/utils'
-import Link from '@components/Link.astro'
-import type { Link as SocialLink } from '@consts'
-import type { CollectionEntry } from 'astro:content'
-import SocialIcons from './SocialIcons.astro'
+import AvatarComponent from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
+import Link from "@components/Link.astro";
+import type { Link as SocialLink } from "@consts";
+import type { CollectionEntry } from "astro:content";
+import SocialIcons from "./SocialIcons.astro";
 
 type Props = {
-  author: CollectionEntry<'webring'>
-  linkDisabled?: boolean
-}
-const { author, linkDisabled = false } = Astro.props
+  author: CollectionEntry<"webring">;
+  linkDisabled?: boolean;
+};
+const { author, linkDisabled = false } = Astro.props;
 const {
   name,
   avatar,
@@ -20,16 +20,18 @@ const {
   twitter,
   linkedin,
   website,
+  stream,
   mail,
-} = author.data
+} = author.data;
 
 const socialLinks: SocialLink[] = [
-  website && { href: website, label: 'Website' },
-  github && { href: github, label: 'GitHub' },
-  twitter && { href: twitter, label: 'Twitter' },
-  linkedin && { href: linkedin, label: 'LinkedIn' },
-  mail && { href: mail, label: 'Email' },
-].filter(Boolean) as SocialLink[]
+  website && { href: website, label: "Website" },
+  github && { href: github, label: "GitHub" },
+  twitter && { href: twitter, label: "Twitter" },
+  linkedin && { href: linkedin, label: "LinkedIn" },
+  mail && { href: mail, label: "Email" },
+  stream && { href: stream, label: "Streaming Service" },
+].filter(Boolean) as SocialLink[];
 ---
 
 <div
@@ -38,7 +40,7 @@ const socialLinks: SocialLink[] = [
   <div class="flex flex-col items-center gap-4 md:flex-row md:items-start">
     <Link
       href={`/webring/${author.slug}`}
-      class={cn('block', linkDisabled && 'pointer-events-none')}
+      class={cn("block", linkDisabled && "pointer-events-none")}
     >
       <AvatarComponent
         client:load
@@ -46,9 +48,9 @@ const socialLinks: SocialLink[] = [
         alt={`Avatar of ${name}`}
         fallback={name[0]}
         className={cn(
-          'size-32 rounded-full md:rounded-md',
+          "size-32 rounded-full md:rounded-md",
           !linkDisabled &&
-            'transition-shadow duration-300 hover:cursor-pointer hover:ring-2 hover:ring-primary',
+            "transition-shadow duration-300 hover:cursor-pointer hover:ring-2 hover:ring-primary",
         )}
       />
     </Link>
