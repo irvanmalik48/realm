@@ -1,7 +1,6 @@
 ---
 import AvatarComponent from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
-import Link from "@components/Link.astro";
 import type { Link as SocialLink } from "@consts";
 import type { CollectionEntry } from "astro:content";
 import SocialIcons from "./SocialIcons.astro";
@@ -10,7 +9,7 @@ type Props = {
   author: CollectionEntry<"webring">;
   linkDisabled?: boolean;
 };
-const { author, linkDisabled = false } = Astro.props;
+const { author } = Astro.props;
 const {
   name,
   avatar,
@@ -38,22 +37,15 @@ const socialLinks: SocialLink[] = [
   class="overflow-hidden rounded-xl border p-4 transition-colors duration-300 ease-in-out has-[a:hover]:bg-secondary/50"
 >
   <div class="flex flex-col items-center gap-4 md:flex-row md:items-start">
-    <Link
-      href={`/webring/${author.slug}`}
-      class={cn("block", linkDisabled && "pointer-events-none")}
-    >
+    <div class="block">
       <AvatarComponent
         client:load
         src={avatar}
         alt={`Avatar of ${name}`}
         fallback={name[0]}
-        className={cn(
-          "size-32 rounded-full md:rounded-md",
-          !linkDisabled &&
-            "transition-shadow duration-300 hover:cursor-pointer hover:ring-2 hover:ring-primary",
-        )}
+        className={cn("size-32 rounded-full md:rounded-md")}
       />
-    </Link>
+    </div>
     <div
       class="flex w-full flex-grow flex-col items-center justify-between gap-y-4 self-stretch md:items-start"
     >
