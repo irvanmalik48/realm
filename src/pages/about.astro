@@ -1,28 +1,87 @@
 ---
-import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import Container from '@components/Container.astro'
-import ProjectCard from '@components/ProjectCard.astro'
-import { SITE } from '@consts'
-import Layout from '@layouts/Layout.astro'
-import { getCollection } from 'astro:content'
-
-const projects = await getCollection('projects')
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Container from "@components/Container.astro";
+import { SITE } from "@consts";
+import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="About" description={SITE.DESCRIPTION}>
   <Container class="flex flex-col gap-y-6">
-    <Breadcrumbs items={[{ label: 'About' }]} />
+    <Breadcrumbs items={[{ label: "About" }]} />
 
     <section>
       <div class="min-w-full">
         <h1 class="mb-4 text-3xl font-bold">Some more about me</h1>
-        <p class="prose prose-neutral mb-8 dark:prose-invert">
-          I code. That's it really.
-        </p>
-
-        <h2 class="mb-4 text-2xl font-semibold">Our Projects</h2>
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => <ProjectCard project={project} />)}
+        <div class="prose prose-neutral mb-4 dark:prose-invert">
+          <p>
+            Detail-oriented Front End Developer with over 2 years of experience
+            in creating responsive and user-friendly web applications. Strong
+            understanding of web design principles and knows when to break best
+            practices. Passionate about leveraging the latest technologies to
+            enhance user experience and improve performance. Committed to
+            continuous learning and staying updated with industry trends.
+          </p>
+          <p>
+            ... would be my professional summary if I were to write one. Quite
+            frankly, I really don't want to write one here so lemme just say
+            that "I code, that's it really."
+          </p>
+        </div>
+        <h2 class="mb-4 text-2xl font-bold">
+          Other stuffs I host or contribute to
+        </h2>
+        <div class="prose prose-neutral mb-4 dark:prose-invert">
+          <ul>
+            <li>
+              <a href="https://stats.irvanma.eu.org">GoatCounter</a> - A simple web
+              analytics service. No tracking of personal data.
+            </li>
+            <li>
+              <a href="https://subsonic.irvanma.eu.org">Navidrome</a> - A personal
+              music server. Think of it as your own Spotify.
+            </li>
+            <li>
+              <a href="https://mc.irvanma.eu.org">Minecraft Server</a> - A Minecraft
+              server that I host for the homies (inactive).
+            </li>
+            <li>
+              <a href="https://gnuweeb.org">GNUWeeb Website</a> - A website for the
+              GNUWeeb community. I'm a contributor.
+            </li>
+          </ul>
+        </div>
+        <h2 class="mb-4 text-2xl font-bold">About politics and other stuff</h2>
+        <div class="prose prose-neutral mb-4 dark:prose-invert">
+          <p>
+            I tend to stay away and hold myself from politics and other
+            controversial topics. I'm not a fan of them and I don't want to be
+            involved in any of that, normally.
+          </p>
+          <p>
+            I'm a firm believer in the idea that everyone has their own opinions
+            and beliefs and that they should be respected. I don't want to
+            impose my beliefs on others and I expect the same from others. Tho,
+            if for some reason you force me to talk about politics, I'll warn
+            you that I'm not the best person to talk to about it.
+          </p>
+          <p>You really don't want to hear me talk about politics, trust me.</p>
+        </div>
+        <h2 class="mb-4 text-2xl font-bold">About this website</h2>
+        <div class="prose prose-neutral mb-4 dark:prose-invert">
+          <p>
+            This website is built using Astro, with Tailwind CSS and shadcn/ui
+            for styling. The website is statically generated because why would I
+            need a full blown shiny backend for a personal website? Oh, also
+            please don't mind me putting GoatCounter on this website. Absolutely
+            no tracking of personal data is done. I just want to know how many
+            people visit this website (probably none).
+          </p>
+          <p>
+            The website is hosted on Vercel and the source code is available on
+            GitHub. The website and the posts in it are licensed under the Realm
+            Collectives Community License (RCCL). Some contents may be licensed
+            under a different license.
+          </p>
         </div>
       </div>
     </section>
