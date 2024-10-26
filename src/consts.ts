@@ -30,7 +30,7 @@ export const NAV_LINKS: Link[] = [
 
 export const SOCIAL_LINKS: Link[] = [
   { href: "https://github.com/irvanmalik48", label: "GitHub" },
-  { href: "https://x.com/irvanmalik48", label: "X (Formerly Twitter)" },
+  { href: "https://x.com/irvanmalik48", label: "Twitter" },
   { href: "irvanma@gnuweeb.org", label: "Email" },
   { href: "/rss.xml", label: "RSS" },
 ];
