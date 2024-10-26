@@ -1,6 +1,7 @@
 ---
 import Container from "@components/Container.astro";
 import { SOCIAL_LINKS } from "@consts";
+import Link from "./Link.astro";
 import SocialIcons from "./SocialIcons.astro";
 ---
 
@@ -11,12 +12,12 @@ import SocialIcons from "./SocialIcons.astro";
     >
       <div class="flex items-center">
         <p class="text-center text-sm text-muted-foreground">
-          &copy; 2024 Irvan Malik Azantha. Licensed in <a
-            href="https://github.com/irvanmalik48/realm/blob/main/LICENSE"
-            class="underline"
+          &copy; 2024 Irvan Malik Azantha. Licensed in <Link
+            underline
+            href="/rccl"
           >
             RCCL
-          </a>.
+          </Link>.
         </p>
       </div>
       <SocialIcons links={SOCIAL_LINKS} />
