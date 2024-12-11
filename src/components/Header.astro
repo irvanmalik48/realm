@@ -1,13 +1,14 @@
 ---
-import { ModeToggle } from '@/components/ui/mode-toggle'
-import Container from '@components/Container.astro'
-import Link from '@components/Link.astro'
-import MobileMenu from '@components/ui/mobile-menu'
-import { NAV_LINKS, SITE } from '@consts'
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import MobileMenu from "@components/ui/mobile-menu";
+import { NAV_LINKS, SITE } from "@consts";
 ---
 
 <header
-  class="sticky top-0 z-10 bg-background/50 backdrop-blur-md"
+  class="sticky top-0 z-10 bg-background/50 backdrop-blur-md transition-all"
+  data-header
   transition:persist
 >
   <Container>
@@ -37,3 +38,28 @@ import { NAV_LINKS, SITE } from '@consts'
     </div>
   </Container>
 </header>
+
+<script is:inline>
+  const header = document.querySelector("[data-header]");
+  let headerLastScroll = 0;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll <= 0) {
+      header.classList.remove("backdrop-blur-md", "bg-background/50");
+      header.classList.add("bg-transparent");
+    } else {
+      header.classList.add("backdrop-blur-md", "bg-background/50");
+      header.classList.remove("bg-transparent");
+    }
+
+    if (currentScroll > headerLastScroll) {
+      header.classList.add("opacity-0", "-translate-y-full");
+    } else {
+      header.classList.remove("opacity-0", "-translate-y-full");
+    }
+
+    headerLastScroll = currentScroll;
+  });
+</script>
