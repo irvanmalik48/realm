@@ -7,7 +7,7 @@ import { NAV_LINKS, SITE } from "@consts";
 ---
 
 <header
-  class="sticky top-0 z-10 bg-background/50 backdrop-blur-md transition-all"
+  class="sticky top-0 z-10 bg-background/50 backdrop-blur-md"
   data-header
   transition:persist
 >
@@ -38,28 +38,3 @@ import { NAV_LINKS, SITE } from "@consts";
     </div>
   </Container>
 </header>
-
-<script is:inline>
-  const header = document.querySelector("[data-header]");
-  let headerLastScroll = 0;
-
-  window.addEventListener("scroll", () => {
-    const currentScroll = window.scrollY;
-
-    if (currentScroll <= 0) {
-      header.classList.remove("backdrop-blur-md", "bg-background/50");
-      header.classList.add("bg-transparent");
-    } else {
-      header.classList.add("backdrop-blur-md", "bg-background/50");
-      header.classList.remove("bg-transparent");
-    }
-
-    if (currentScroll > headerLastScroll) {
-      header.classList.add("opacity-0", "-translate-y-full");
-    } else {
-      header.classList.remove("opacity-0", "-translate-y-full");
-    }
-
-    headerLastScroll = currentScroll;
-  });
-</script>
