@@ -20,17 +20,195 @@ const blog = (await getCollection("blog"))
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 ---
 
+<style>
+  @keyframes marquee-one {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 0%;
+    }
+  }
+
+  @keyframes marquee-two {
+    0% {
+      left: 0%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  @keyframes marquee-one-reversed {
+    0% {
+      right: -100%;
+    }
+    100% {
+      right: 0%;
+    }
+  }
+
+  @keyframes marquee-two-reversed {
+    0% {
+      right: 0%;
+    }
+    100% {
+      right: 100%;
+    }
+  }
+
+  .marquee-container {
+    @apply absolute flex h-6 w-full items-center gap-x-12 overflow-hidden font-mono uppercase;
+  }
+
+  .marquee-position-left {
+    animation: marquee-one 60s linear infinite;
+  }
+
+  .marquee-position-right {
+    animation: marquee-two 60s linear infinite;
+  }
+
+  .marquee-position-left-reversed {
+    animation: marquee-one-reversed 60s linear infinite;
+  }
+
+  .marquee-position-right-reversed {
+    animation: marquee-two-reversed 60s linear infinite;
+  }
+</style>
+
 <Layout title="Home" description={SITE.DESCRIPTION}>
+  <section
+    class="relative hidden min-h-screen w-full flex-col border-b border-border bg-background p-5 text-foreground lg:flex"
+    slot="before-header"
+  >
+    <div class="relative flex h-6 w-full overflow-hidden">
+      <div
+        class="absolute left-0 top-0 z-[100] h-6 w-12 bg-gradient-to-r from-background to-transparent"
+      >
+      </div>
+      <div
+        class="absolute right-0 top-0 z-[100] h-6 w-12 bg-gradient-to-l from-background to-transparent"
+      >
+      </div>
+      <div class="marquee-container marquee-position-left-reversed">
+        <span>Nosce te ipsum</span>
+        <span>Acta non verba</span>
+        <span>Veritas omnia vincit</span>
+        <span>Aurea mediocritas</span>
+        <span>Ad vitam aeternam</span>
+      </div>
+      <div class="marquee-container marquee-position-right-reversed">
+        <span>Nosce te ipsum</span>
+        <span>Acta non verba</span>
+        <span>Veritas omnia vincit</span>
+        <span>Aurea mediocritas</span>
+        <span>Ad vitam aeternam</span>
+      </div>
+    </div>
+    <div class="flex flex-1 flex-col justify-between">
+      <div class="flex w-full gap-5">
+        <div class="flex flex-col gap-1 py-3 text-xs">
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Hear say the fallen lunatic
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            The weary, the innoncent
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Ones deemed unworthy and unfit
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Those who confined to none but wrath
+          </p>
+        </div>
+        <div class="flex flex-col gap-1 py-3 text-xs">
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Hear say the bearer of death
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            A beacon of awe, of evil beneath
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            The ebb and flow you've etched
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Rests in hand of the foul witch
+          </p>
+        </div>
+        <div class="flex flex-col gap-1 py-3 text-xs">
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Hear say the fury that walks
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            For spite is the answer to all the doubt
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            The seas of red and the dark skies
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Tread along as you heave asunder
+          </p>
+        </div>
+        <div class="flex flex-col gap-1 py-3 text-xs">
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Hear say the icon of malevolence
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            I entrust upon you our utmost vain
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            The elegy of sorrow and the phantom of pain
+          </p>
+          <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+            Lead us astray, lead us to fray
+          </p>
+        </div>
+      </div>
+      <div class="flex w-full flex-col items-center justify-center py-3">
+        <a
+          href="#anchor-main-flow"
+          class="block bg-background px-4 py-2 text-foreground underline underline-offset-2 transition-colors hover:bg-foreground hover:text-background"
+        >
+          CLICK HERE TO SKIP THIS SECTION
+        </a>
+      </div>
+      <div class="flex flex-col self-end py-3">
+        <p class="w-fit bg-foreground px-2 py-0.5 text-background">
+          Your friendly artistic slightly freaky neighborhood web developer,
+        </p>
+        <p class="text-8xl">Irvan Malik Azantha</p>
+      </div>
+    </div>
+    <div class="relative mt-auto flex h-6 w-full overflow-hidden">
+      <div
+        class="absolute left-0 top-0 z-[100] h-6 w-12 bg-gradient-to-r from-background to-transparent"
+      >
+      </div>
+      <div
+        class="absolute right-0 top-0 z-[100] h-6 w-12 bg-gradient-to-l from-background to-transparent"
+      >
+      </div>
+      <div class="marquee-container marquee-position-left">
+        <span>Nosce te ipsum</span>
+        <span>Acta non verba</span>
+        <span>Veritas omnia vincit</span>
+        <span>Aurea mediocritas</span>
+        <span>Ad vitam aeternam</span>
+      </div>
+      <div class="marquee-container marquee-position-right">
+        <span>Nosce te ipsum</span>
+        <span>Acta non verba</span>
+        <span>Veritas omnia vincit</span>
+        <span>Aurea mediocritas</span>
+        <span>Ad vitam aeternam</span>
+      </div>
+    </div>
+  </section>
   <Container class="flex flex-col gap-y-6">
     <section class="relative z-0">
-      <img
-        src="/static/lappland-render.webp"
-        alt="Lappland"
-        class="absolute left-1/2 z-0 w-[36rem] -translate-x-1/2 -translate-y-[80px]"
-      />
-      <Card
-        className="relative z-10 mt-48 bg-background/50 backdrop-blur-lg md:mt-80"
-      >
+      <Card className="relative z-10 bg-background/50 backdrop-blur-lg">
         <CardHeader>
           <CardTitle className="text-center text-3xl">realm</CardTitle>
           <CardDescription className="text-center"
