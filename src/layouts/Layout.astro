@@ -23,7 +23,9 @@ const { title, description, image } = Astro.props;
     />
   </head>
   <body>
+    <slot name="before-header" />
     <div
+      id="anchor-main-flow"
       class="box-border flex h-fit min-h-screen flex-col gap-y-6 font-sans antialiased"
     >
       <Header />
