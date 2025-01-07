@@ -83,7 +83,15 @@ const blog = (await getCollection("blog"))
     class="relative hidden min-h-screen w-full flex-col border-b border-border bg-background p-5 text-foreground lg:flex"
     slot="before-header"
   >
-    <div class="relative flex h-6 w-full overflow-hidden">
+    <video
+      class="absolute left-0 top-0 h-screen w-screen opacity-10"
+      autoplay
+      muted
+      loop
+    >
+      <source src="/static/white-noise.mp4" type="video/mp4" />
+    </video>
+    <div class="relative z-[98] flex h-6 w-full overflow-hidden">
       <div
         class="absolute left-0 top-0 z-[100] h-6 w-12 bg-gradient-to-r from-background to-transparent"
       >
@@ -107,7 +115,7 @@ const blog = (await getCollection("blog"))
         <span>Ad vitam aeternam</span>
       </div>
     </div>
-    <div class="flex flex-1 flex-col justify-between">
+    <div class="z-[98] flex flex-1 flex-col justify-between">
       <div class="flex w-full gap-5">
         <div class="flex flex-col gap-1 py-3 text-xs">
           <p class="w-fit bg-foreground px-2 py-0.5 text-background">
@@ -169,12 +177,12 @@ const blog = (await getCollection("blog"))
       <div class="flex w-full flex-col items-center justify-center py-3">
         <a
           href="#anchor-main-flow"
-          class="block bg-background px-4 py-2 text-foreground underline underline-offset-2 transition-colors hover:bg-foreground hover:text-background"
+          class="block bg-transparent px-4 py-2 text-foreground underline underline-offset-2 transition-colors hover:bg-foreground hover:text-background"
         >
           CLICK HERE TO SKIP THIS SECTION
         </a>
       </div>
-      <div class="flex flex-col self-end py-3">
+      <div class="flex flex-col self-end py-1">
         <p class="w-fit bg-foreground px-2 py-0.5 text-background">
           Your friendly artistic slightly freaky neighborhood web developer,
         </p>
