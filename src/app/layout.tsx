@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NODE_ENV === "production"
       ? "https://irvanma.eu.org"
-      : "http://localhost:3000"
+      : "http://localhost:3000",
   ),
   openGraph: {
     title: {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
           "/og-image.png",
           process.env.NODE_ENV === "production"
             ? "https://irvanma.eu.org"
-            : "http://localhost:3000"
+            : "http://localhost:3000",
         ).toString(),
         width: 1200,
         height: 630,
