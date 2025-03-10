@@ -1,5 +1,3 @@
-# realm
+## Realm
 
-Irvan Malik's personal blog.
-
-Licensed in RCCL.
+Always a WIP. ;D
