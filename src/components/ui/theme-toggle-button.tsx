@@ -65,6 +65,7 @@ export default function ThemeToggleButton({
     }
 
     document.startViewTransition(switchTheme);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, setTheme]);
 
   return (

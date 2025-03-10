@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import {
   Activity,
-  ChevronsLeftRightEllipsis,
   EthernetPort,
   Link2,
   Milestone,
