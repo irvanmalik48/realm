@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import {
   Apple,
   ChartNoAxesColumnIncreasing,
+  ClipboardPen,
   Link,
   LucideProps,
   Map,
@@ -23,7 +24,7 @@ export function SelfHostItem(props: {
       <div
         className={cn(
           "w-full px-5 py-3 gap-3 flex md:justify-start justify-center items-center",
-          props.leftClassName,
+          props.leftClassName
         )}
       >
         <props.icon className="size-5" />
@@ -32,7 +33,7 @@ export function SelfHostItem(props: {
       <a
         className={cn(
           "w-full px-5 py-3 bg-background text-foreground hover:bg-primary hover:text-primary-foreground transition-colors flex gap-3 items-center justify-center",
-          props.rightClassName,
+          props.rightClassName
         )}
         href={props.url}
         target="_blank"
@@ -65,6 +66,14 @@ export function SelfHostedServices() {
           title="VPS Status Page"
           url="https://stats.irvanma.eu.org"
           sr="Visit VPS Status Page"
+        />
+        <SelfHostItem
+          icon={ClipboardPen}
+          leftClassName="bg-muted/20 md:border-r border-b border-border"
+          rightClassName="border-b border-border"
+          title="Realmbin"
+          url="https://paste.irvanma.eu.org"
+          sr="Visit Realmbin"
         />
         <SelfHostItem
           icon={Map}
