@@ -30,7 +30,7 @@ export function ServerResponseItem(props: {
       <div
         className={cn(
           "w-full px-5 py-3 gap-3 flex items-center",
-          props.leftClassName,
+          props.leftClassName
         )}
       >
         <props.icon className="size-5" />
@@ -39,7 +39,7 @@ export function ServerResponseItem(props: {
       <div
         className={cn(
           "w-full px-5 py-3 flex items-center",
-          props.rightClassName,
+          props.rightClassName
         )}
       >
         <p>{props.content}</p>
@@ -80,7 +80,7 @@ export function MinecraftServer() {
             "px-3 py-1 text-sm border rounded-full",
             checkIfOnline(query.data as MinecraftServerStatusResponse)
               ? "bg-green-800/20 border-green-800 dark:bg-green-500/20 dark:border-green-500 text-foreground"
-              : "bg-red-800/20 border-red-800 dark:bg-red-500/20 dark:border-red-500 text-foreground",
+              : "bg-red-800/20 border-red-800 dark:bg-red-500/20 dark:border-red-500 text-foreground"
           )}
         >
           {checkIfOnline(query.data as MinecraftServerStatusResponse)
@@ -120,8 +120,8 @@ export function MinecraftServer() {
           title="Server Software"
           content={
             checkIfOnline(query.data as MinecraftServerStatusResponse)
-              ? ((query.data as MinecraftServerOnlineStatus).software ??
-                "Unknown")
+              ? (query.data as MinecraftServerOnlineStatus).software ??
+                "Unknown"
               : "Offline"
           }
         />

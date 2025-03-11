@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NODE_ENV === "production"
       ? "https://irvanma.eu.org"
-      : "http://localhost:3000",
+      : "http://localhost:3000"
   ),
   openGraph: {
     title: {
@@ -37,19 +37,12 @@ export const metadata: Metadata = {
     description: "Stuffs I put.",
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: new URL(
-          "/og-image.png",
-          process.env.NODE_ENV === "production"
-            ? "https://irvanma.eu.org"
-            : "http://localhost:3000",
-        ).toString(),
-        width: 1200,
-        height: 630,
-        alt: "realm. | Stuffs I put.",
-      },
-    ],
+    images: new URL(
+      "/og-image.png",
+      process.env.NODE_ENV === "production"
+        ? "https://irvanma.eu.org"
+        : "http://localhost:3000"
+    ).toString(),
   },
   twitter: {
     card: "summary_large_image",
