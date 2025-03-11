@@ -37,12 +37,6 @@ export const metadata: Metadata = {
     description: "Stuffs I put.",
     type: "website",
     locale: "en_US",
-    images: new URL(
-      "/og-image.png",
-      process.env.NODE_ENV === "production"
-        ? "https://irvanma.eu.org"
-        : "http://localhost:3000"
-    ).toString(),
   },
   twitter: {
     card: "summary_large_image",
