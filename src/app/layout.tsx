@@ -7,6 +7,7 @@ import Providers from "@/lib/provider/react-query";
 
 import "./globals.css";
 import { Footer } from "@/components/footer";
+import { FAB } from "@/components/fab";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -65,10 +66,11 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Providers>
+              <FAB />
               <Navbar />
               {children}
               <Footer />
