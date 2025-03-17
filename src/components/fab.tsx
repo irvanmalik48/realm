@@ -87,11 +87,11 @@ export function FAB() {
         </PopoverTrigger>
         <PopoverContent
           onInteractOutside={handleInteractOutside}
-          className="min-w-sm max-w-sm w-full p-0 overflow-clip"
+          className="max-w-3xs sm:max-w-xs md:max-w-sm w-full p-0 overflow-clip"
           align="end"
           sideOffset={10}
         >
-          <div className="h-[75px] overflow-clip w-full border-b border-border">
+          <div className="h-auto overflow-clip w-full border-b border-border">
             <Image
               src={Hero}
               height={120}
