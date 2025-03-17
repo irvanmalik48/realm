@@ -71,8 +71,8 @@ export function SelfHostedServices() {
           icon={ClipboardPen}
           leftClassName="bg-muted/20 md:border-r border-b border-border"
           rightClassName="border-b border-border"
-          title="Realmbin"
-          url="https://paste.irvanma.eu.org"
+          title="Realmbin (Unfinished)"
+          url="https://bin.irvanma.eu.org"
           sr="Visit Realmbin"
         />
         <SelfHostItem
