@@ -1,6 +1,7 @@
 import Container from "@/components/container";
+import { Button } from "@/components/ui/button";
 import { TextScroll } from "@/components/ui/text-scroll";
-import { Book, HandMetal, Info, Vote } from "lucide-react";
+import { Book, Eye, GitPullRequest, HandMetal, Info, Vote } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -76,6 +77,34 @@ export default function About() {
             just tickles my brain and gives me something to get out of my
             boredom.
           </p>
+        </div>
+        <div className="w-full bg-background rounded-lg border border-border">
+          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
+            <GitPullRequest className="size-4" />
+            <span className="text-sm font-mono">CONTRIBUTING.md</span>
+          </h2>
+          <p className="px-5 py-3">
+            I am open to contributions. If you want to contribute, please
+            consider opening an issue or a pull request. I will review it and
+            merge it if I think it&apos;s good. Anyways, here's the Code of
+            Conduct for this site development, I call it Code of Virtue:
+          </p>
+          <div className="px-5 pb-5">
+            <Button
+              className="w-full flex gap-3 items-center"
+              variant="outline"
+              asChild
+            >
+              <a
+                href="https://raw.githubusercontent.com/irvanmalik48/realm/refs/heads/main/CODE_OF_CONDUCT.md"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Eye className="size-4" />
+                <span>View Code of Virtue</span>
+              </a>
+            </Button>
+          </div>
         </div>
       </Container>
       <TextScroll
