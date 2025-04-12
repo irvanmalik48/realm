@@ -1,6 +1,16 @@
 import Container from "@/components/container";
 import { TextScroll } from "@/components/ui/text-scroll";
 import { Book, HandMetal, Info, Vote } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "Slice and dice!",
+  openGraph: {
+    title: "About",
+    description: "Slice and dice!",
+  },
+};
 
 export default function About() {
   return (

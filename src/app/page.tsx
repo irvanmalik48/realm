@@ -10,10 +10,10 @@ import { SelfHostedServices } from "@/components/selfhosted";
 import { TextScroll } from "@/components/ui/text-scroll";
 
 export const metadata: Metadata = {
-  title: "realm. | Index",
+  title: "Landing | realm.",
   description: "Where it all begins.",
   openGraph: {
-    title: "realm. | Index",
+    title: "Landing | realm.",
     description: "Where it all begins.",
   },
 };
