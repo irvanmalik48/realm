@@ -86,7 +86,7 @@ export default function About() {
           <p className="px-5 py-3">
             I am open to contributions. If you want to contribute, please
             consider opening an issue or a pull request. I will review it and
-            merge it if I think it&apos;s good. Anyways, here's the Code of
+            merge it if I think it&apos;s good. Anyways, here&apos;s the Code of
             Conduct for this site development, I call it Code of Virtue:
           </p>
           <div className="px-5 pb-5">
