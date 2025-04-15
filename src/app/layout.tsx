@@ -9,6 +9,8 @@ import "./globals.css";
 import { Footer } from "@/components/footer";
 import { FAB } from "@/components/fab";
 
+import OgImage from "./opengraph-image.png";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,6 +37,13 @@ export const metadata: Metadata = {
       default: "realm.",
       template: "%s | realm.",
     },
+    images: [
+      {
+        url: OgImage.src,
+        width: OgImage.width,
+        height: OgImage.height,
+      },
+    ],
     description: "Stuffs I put.",
     type: "website",
     locale: "en_US",
@@ -43,6 +52,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@irvanmalik48",
     creator: "@irvanmalik48",
+    images: [
+      {
+        url: OgImage.src,
+        width: OgImage.width,
+        height: OgImage.height,
+      },
+    ],
   },
   icons: {
     apple: "/apple-touch-icon.png",
