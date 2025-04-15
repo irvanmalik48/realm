@@ -7,7 +7,6 @@ import {
   Eye,
   GitPullRequest,
   HandMetal,
-  Info,
   ThumbsUp,
   Vote,
 } from "lucide-react";
