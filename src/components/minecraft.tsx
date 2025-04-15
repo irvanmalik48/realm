@@ -11,7 +11,6 @@ import {
   EthernetPort,
   Link2,
   Milestone,
-  Swords,
   type LucideProps,
 } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
@@ -111,17 +110,6 @@ export function MinecraftServer() {
           content={
             checkIfOnline(query.data as MinecraftServerStatusResponse)
               ? (query.data as MinecraftServerOnlineStatus).version
-              : "Offline"
-          }
-        />
-        <ServerResponseItem
-          icon={Swords}
-          leftClassName="bg-muted/20 border-b md:border-b-0 md:border-r border-border"
-          title="Server Software"
-          content={
-            checkIfOnline(query.data as MinecraftServerStatusResponse)
-              ? (query.data as MinecraftServerOnlineStatus).software ??
-                "Unknown"
               : "Offline"
           }
         />
