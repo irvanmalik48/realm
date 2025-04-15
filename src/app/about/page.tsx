@@ -1,8 +1,18 @@
 import Container from "@/components/container";
+import { ImageComponent } from "@/components/image";
 import { Button } from "@/components/ui/button";
 import { TextScroll } from "@/components/ui/text-scroll";
-import { Book, Eye, GitPullRequest, HandMetal, Info, Vote } from "lucide-react";
+import {
+  Book,
+  Eye,
+  GitPullRequest,
+  HandMetal,
+  Info,
+  ThumbsUp,
+  Vote,
+} from "lucide-react";
 import { Metadata } from "next";
+import AwooImage from "@/assets/img/awoo.jpg";
 
 export const metadata: Metadata = {
   title: "About",
@@ -16,37 +26,22 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <>
-      <TextScroll
-        className="text-3xl md:text-5xl text-foreground dark:font-semibold font-bold py-12 md:space-y-2"
-        textClassName="py-1 md:py-3"
-        default_velocity={0.66}
-        text="yeah bro this is an about page, what more do you expect.  "
-      />
       <Container>
-        <p className="text-foreground/75 text-xl md:text-2xl font-semibold dark:font-medium text-center px-5 py-3">
+        <ImageComponent
+          img={AwooImage}
+          alt="Awoo"
+          className="w-full max-h-96 rounded-lg z-10"
+          height={720}
+        />
+        <p className="w-fit relative -mt-12 z-20 mx-auto text-xl md:text-2xl dark:font-semibold font-medium text-center px-7 py-3 bg-primary text-primary-foreground rounded-full border-6 border-background">
           about me and whatnot.
         </p>
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
             <Book className="size-4" />
-            <span className="text-sm font-mono">FULL_DESCRIPTION.md</span>
+            <span className="text-sm font-mono">SHITPOSTING.md</span>
           </h2>
           <p className="px-5 py-3">
-            I am a dynamic front-end developer with over 3 years of specialized
-            experience crafting responsive, user-centric web experiences. At 22,
-            I&apos;ve established myself through advanced proficiency in
-            JavaScript frameworks like React and Vue.js, coupled with
-            expert-level knowledge of HTML5, CSS3, and modern UI/UX principles.
-            I excel at translating complex design concepts into seamless
-            interfaces that balance aesthetics with performance.
-          </p>
-          <p className="px-5 pb-3">
-            ... is what I generated from Claude 3.7 Sonnet lmao. As with the
-            previous description, I really don&apos;t know what to put here. So
-            let me just explain myself in a more human way. Let&apos;s skip the
-            stuff already mentioned in the previous description.
-          </p>
-          <p className="px-5 pb-3">
             A no-shame self-proclaimed ace of all trades, I learn things based
             on my whim and needs. A fast learner, yet a slow practitioner. Brain
             cell counts are pretty low to say the least but they&apos;re doing
@@ -59,24 +54,109 @@ export default function About() {
         </div>
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
-            <Info className="size-4" />
-            <span className="text-sm font-mono">FULL_ABOUT_SITE.md</span>
+            <ThumbsUp className="size-4" />
+            <span className="text-sm font-mono">USEFUL_CARDS.md</span>
           </h2>
-          <p className="px-5 py-3">
-            We&apos;re getting a bit into the history of this site now since the
-            ones down the landing page doesn&apos;t do justice about it.
-          </p>
-          <p className="px-5 pb-3">
-            The site was originally first made in Jekyll, as every devs first
-            know that you can host in GitHub Pages. Over the span of years I
-            rewrote this website into... well, everything I wanna use and think
-            cool at that time. Historically used frameworks includes the likes
-            of Hugo, Gatsby, React, Next.js (both Pages router and App router),
-            Deno Fresh, and Astro. Why did I use so many frameworks? Because I
-            can. I like to learn new things and I like to try new things. It
-            just tickles my brain and gives me something to get out of my
-            boredom.
-          </p>
+          <div className="w-full p-5 grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
+              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                <h3 className="text-sm text-center line-clamp-1">
+                  Typing Speed
+                </h3>
+              </div>
+              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                <p className="font-mono font-bold text-5xl">75</p>
+                <p className="text-foreground/60 font-mono text-center text-sm">
+                  WPM
+                </p>
+              </div>
+            </div>
+            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
+              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                <h3 className="text-sm text-center line-clamp-1">
+                  English Prof.
+                </h3>
+              </div>
+              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                <p className="font-mono font-bold text-5xl">C1</p>
+                <p className="text-foreground/60 font-mono text-center text-sm">
+                  TOEFL-iBT
+                </p>
+              </div>
+            </div>
+            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
+              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                <h3 className="text-sm text-center line-clamp-1">
+                  Japanese Prof.
+                </h3>
+              </div>
+              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                <p className="font-mono font-bold text-5xl">TBD</p>
+                <p className="text-foreground/60 font-mono text-center text-sm">
+                  JLPT
+                </p>
+              </div>
+            </div>
+            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
+              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                <h3 className="text-sm text-center line-clamp-1">CSE CGPA</h3>
+              </div>
+              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                <p className="font-mono font-bold text-5xl">3.9</p>
+                <p className="text-foreground/60 font-mono text-center text-sm">
+                  OUT OF 4.0
+                </p>
+              </div>
+            </div>
+            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
+              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                <h3 className="text-sm text-center line-clamp-1">Timezone</h3>
+              </div>
+              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                <p className="font-mono font-bold text-5xl">+7</p>
+                <p className="text-foreground/60 font-mono text-center text-sm">
+                  GMT/UTC
+                </p>
+              </div>
+            </div>
+            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
+              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                <h3 className="text-sm text-center line-clamp-1">
+                  Nationality
+                </h3>
+              </div>
+              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                <p className="font-mono font-bold text-5xl">IDN</p>
+                <p className="text-foreground/60 font-mono text-center text-sm">
+                  (Indonesian)
+                </p>
+              </div>
+            </div>
+            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
+              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                <h3 className="text-sm text-center line-clamp-1">
+                  Caffeine Intake
+                </h3>
+              </div>
+              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                <p className="font-mono font-bold text-5xl">500</p>
+                <p className="text-foreground/60 font-mono text-center text-sm">
+                  mg/d
+                </p>
+              </div>
+            </div>
+            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
+              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                <h3 className="text-sm text-center line-clamp-1">Favorites</h3>
+              </div>
+              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                <p className="font-mono font-bold text-5xl">Cat</p>
+                <p className="text-foreground/60 font-mono text-center text-sm">
+                  Yes
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
@@ -84,10 +164,10 @@ export default function About() {
             <span className="text-sm font-mono">CONTRIBUTING.md</span>
           </h2>
           <p className="px-5 py-3">
-            I am open to contributions. If you want to contribute, please
-            consider opening an issue or a pull request. I will review it and
-            merge it if I think it&apos;s good. Anyways, here&apos;s the Code of
-            Conduct for this site development, I call it Code of Virtue:
+            I am open to contributions for this site. If you want to contribute,
+            please consider opening an issue or a pull request. I will review it
+            and merge it if I think it&apos;s good. Anyways, here&apos;s the
+            Code of Conduct for this site development, I call it Code of Virtue:
           </p>
           <div className="px-5 pb-5">
             <Button
@@ -106,17 +186,6 @@ export default function About() {
             </Button>
           </div>
         </div>
-      </Container>
-      <TextScroll
-        className="text-3xl md:text-5xl text-foreground dark:font-semibold font-bold py-12 md:space-y-2"
-        textClassName="py-1 md:py-3"
-        default_velocity={0.66}
-        text="yay, the boring part is done!  "
-      />
-      <Container>
-        <p className="text-foreground/75 text-xl md:text-2xl font-semibold dark:font-medium text-center px-5 py-3">
-          interpret it as you wish.
-        </p>
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
             <Vote className="size-4" />
