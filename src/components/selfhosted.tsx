@@ -1,11 +1,9 @@
 import { cn } from "@/lib/utils";
 import {
-  Apple,
   ChartNoAxesColumnIncreasing,
   ClipboardPen,
   Link,
   LucideProps,
-  Map,
 } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
@@ -52,14 +50,6 @@ export function SelfHostedServices() {
     <div className="p-5">
       <div className="grid grid-cols-1 md:grid-cols-2 rounded-md border border-border overflow-clip">
         <SelfHostItem
-          icon={Apple}
-          leftClassName="bg-muted/20 md:border-r border-b border-border"
-          rightClassName="border-b border-border"
-          title="Project Arienne (WIP)"
-          url="https://arienne.irvanma.eu.org"
-          sr="Visit Project Arienne"
-        />
-        <SelfHostItem
           icon={ChartNoAxesColumnIncreasing}
           leftClassName="bg-muted/20 md:border-r border-b border-border"
           rightClassName="border-b border-border"
@@ -74,13 +64,6 @@ export function SelfHostedServices() {
           title="Realmbin (Unfinished)"
           url="https://bin.irvanma.eu.org"
           sr="Visit Realmbin"
-        />
-        <SelfHostItem
-          icon={Map}
-          leftClassName="bg-muted/20 border-b md:border-b-0 md:border-r border-border"
-          title="Minecraft Squaremap"
-          url="https://mcmap.irvanma.eu.org"
-          sr="Visit Minecraft Squaremap"
         />
       </div>
     </div>
