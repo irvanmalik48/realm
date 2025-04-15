@@ -22,7 +22,7 @@ export function SelfHostItem(props: {
       <div
         className={cn(
           "w-full px-5 py-3 gap-3 flex md:justify-start justify-center items-center",
-          props.leftClassName
+          props.leftClassName,
         )}
       >
         <props.icon className="size-5" />
@@ -31,7 +31,7 @@ export function SelfHostItem(props: {
       <a
         className={cn(
           "w-full px-5 py-3 bg-background text-foreground hover:bg-primary hover:text-primary-foreground transition-colors flex gap-3 items-center justify-center",
-          props.rightClassName
+          props.rightClassName,
         )}
         href={props.url}
         target="_blank"
