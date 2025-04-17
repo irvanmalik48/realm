@@ -111,9 +111,9 @@ export default function About() {
                   </h3>
                 </div>
                 <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                  <p className="font-mono font-bold text-5xl">{item.unit}</p>
+                  <p className="font-mono font-bold text-5xl">{item.value}</p>
                   <p className="text-foreground/60 font-mono text-center text-sm">
-                    {item.value}
+                    {item.unit}
                   </p>
                 </div>
               </div>
