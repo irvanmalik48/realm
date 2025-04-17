@@ -32,8 +32,8 @@ export function ServerStatus() {
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <div className="w-full md:col-span-2 bg-background rounded-lg border border-border">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="w-full md:col-span-3 bg-background rounded-lg border border-border">
         <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
           <Cloud className="size-4" />
           <span className="text-sm font-mono">HOST.md</span>
@@ -65,7 +65,7 @@ export function ServerStatus() {
           </div>
         </div>
       </div>
-      <div className="w-full bg-background rounded-lg border border-border">
+      <div className="w-full md:col-span-2 bg-background rounded-lg border border-border">
         <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
           <Cpu className="size-4" />
           <span className="text-sm font-mono">CPU.md</span>
@@ -206,7 +206,7 @@ export function ServerStatus() {
           />
         </div>
       </div>
-      <div className="w-full bg-background rounded-lg border border-border">
+      <div className="w-full md:col-span-2 bg-background rounded-lg border border-border">
         <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
           <Network className="size-4" />
           <span className="text-sm font-mono">NETWORK.md</span>
