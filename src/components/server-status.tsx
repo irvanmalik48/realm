@@ -44,7 +44,7 @@ export function ServerStatus() {
               OS
             </p>
             <p className="text-right truncate text-ellipsis">
-              {query.data?.host.os}
+              {query.data?.host.os ?? "Unknown"}
             </p>
           </div>
           <div className="flex items-center justify-between gap-3">
@@ -52,7 +52,7 @@ export function ServerStatus() {
               Hostname
             </p>
             <p className="text-right truncate text-ellipsis">
-              {query.data?.host.hostname}
+              {query.data?.host.hostname ?? "Unknown"}
             </p>
           </div>
           <div className="flex items-center justify-between gap-3">
@@ -76,7 +76,7 @@ export function ServerStatus() {
               CPU Model
             </p>
             <p className="text-right truncate text-ellipsis">
-              {cpuModelShorthand(query.data?.cpu.model as string)}
+              {cpuModelShorthand(query.data?.cpu.model ?? "Unknown")}
             </p>
           </div>
           <div className="flex items-center justify-between gap-3">
@@ -84,7 +84,7 @@ export function ServerStatus() {
               CPU Cores
             </p>
             <p className="text-right truncate text-ellipsis">
-              {query.data?.cpu.cores}
+              {query.data?.cpu.cores ?? "Unknown"}
             </p>
           </div>
           <div className="flex items-center justify-between gap-3">
