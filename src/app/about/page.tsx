@@ -23,6 +23,49 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
+  const infoWidgets = [
+    {
+      title: "Typing Speed",
+      value: "75",
+      unit: "WPM",
+    },
+    {
+      title: "English Prof.",
+      value: "C1",
+      unit: "TOEFL-iBT",
+    },
+    {
+      title: "Japanese Prof.",
+      value: "TBD",
+      unit: "JLPT",
+    },
+    {
+      title: "CSE CGPA",
+      value: "3.9",
+      unit: "OUT OF 4.0",
+    },
+    {
+      title: "Timezone",
+      value: "+7",
+      unit: "GMT/UTC",
+    },
+    {
+      title: "Nationality",
+      value: "IDN",
+      unit: "(Indonesian)",
+    },
+    {
+      title: "Caffeine Intake",
+      value: "500",
+      unit: "mg/d",
+    },
+    {
+      title: "Favorites",
+      value: "Cat",
+      unit: "Yes",
+    },
+  ];
+
   return (
     <>
       <Container>
@@ -57,104 +100,24 @@ export default function About() {
             <span className="text-sm font-mono">USEFUL_CARDS.md</span>
           </h2>
           <div className="w-full p-5 grid grid-cols-2 md:grid-cols-4 gap-5">
-            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
-              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
-                <h3 className="text-sm text-center line-clamp-1">
-                  Typing Speed
-                </h3>
+            {infoWidgets.map((item, i) => (
+              <div
+                key={i}
+                className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col"
+              >
+                <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
+                  <h3 className="text-sm text-center line-clamp-1">
+                    {item.title}
+                  </h3>
+                </div>
+                <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
+                  <p className="font-mono font-bold text-5xl">{item.unit}</p>
+                  <p className="text-foreground/60 font-mono text-center text-sm">
+                    {item.value}
+                  </p>
+                </div>
               </div>
-              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                <p className="font-mono font-bold text-5xl">75</p>
-                <p className="text-foreground/60 font-mono text-center text-sm">
-                  WPM
-                </p>
-              </div>
-            </div>
-            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
-              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
-                <h3 className="text-sm text-center line-clamp-1">
-                  English Prof.
-                </h3>
-              </div>
-              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                <p className="font-mono font-bold text-5xl">C1</p>
-                <p className="text-foreground/60 font-mono text-center text-sm">
-                  TOEFL-iBT
-                </p>
-              </div>
-            </div>
-            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
-              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
-                <h3 className="text-sm text-center line-clamp-1">
-                  Japanese Prof.
-                </h3>
-              </div>
-              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                <p className="font-mono font-bold text-5xl">TBD</p>
-                <p className="text-foreground/60 font-mono text-center text-sm">
-                  JLPT
-                </p>
-              </div>
-            </div>
-            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
-              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
-                <h3 className="text-sm text-center line-clamp-1">CSE CGPA</h3>
-              </div>
-              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                <p className="font-mono font-bold text-5xl">3.9</p>
-                <p className="text-foreground/60 font-mono text-center text-sm">
-                  OUT OF 4.0
-                </p>
-              </div>
-            </div>
-            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
-              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
-                <h3 className="text-sm text-center line-clamp-1">Timezone</h3>
-              </div>
-              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                <p className="font-mono font-bold text-5xl">+7</p>
-                <p className="text-foreground/60 font-mono text-center text-sm">
-                  GMT/UTC
-                </p>
-              </div>
-            </div>
-            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
-              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
-                <h3 className="text-sm text-center line-clamp-1">
-                  Nationality
-                </h3>
-              </div>
-              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                <p className="font-mono font-bold text-5xl">IDN</p>
-                <p className="text-foreground/60 font-mono text-center text-sm">
-                  (Indonesian)
-                </p>
-              </div>
-            </div>
-            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
-              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
-                <h3 className="text-sm text-center line-clamp-1">
-                  Caffeine Intake
-                </h3>
-              </div>
-              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                <p className="font-mono font-bold text-5xl">500</p>
-                <p className="text-foreground/60 font-mono text-center text-sm">
-                  mg/d
-                </p>
-              </div>
-            </div>
-            <div className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col">
-              <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
-                <h3 className="text-sm text-center line-clamp-1">Favorites</h3>
-              </div>
-              <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                <p className="font-mono font-bold text-5xl">Cat</p>
-                <p className="text-foreground/60 font-mono text-center text-sm">
-                  Yes
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className="w-full bg-background rounded-lg border border-border">
