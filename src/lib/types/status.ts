@@ -2,7 +2,6 @@ export interface SystemInfo {
   cpu: {
     model: string;
     utilisation: number;
-    temperatures: any[];
     frequencies: {
       [key: string]: {
         now: number | null;
