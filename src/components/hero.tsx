@@ -39,6 +39,7 @@ export function Hero({ img, profile }: HeroProps) {
       <div className="relative rounded-full aspect-square size-28 md:size-36 mx-auto md:mx-0 md:ml-5 -mt-18 border-6 border-background overflow-clip">
         <Image
           src={profileImg}
+          unoptimized={profileImg.src.includes("animated")}
           alt="Profile Picture"
           height={500}
           placeholder="blur"
