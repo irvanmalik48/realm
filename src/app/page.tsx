@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { Hero } from "@/components/hero";
 
 import HeroImage from "@/assets/img/hero.jpg";
-import HeroProfile from "@/assets/img/profpic.jpg";
+import HeroProfile from "@/assets/img/profpic-animated.webp";
 import { Book, Info, Pickaxe, Server } from "lucide-react";
 import { MinecraftServer } from "@/components/minecraft";
 import { SelfHostedServices } from "@/components/selfhosted";
