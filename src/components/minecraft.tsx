@@ -104,7 +104,7 @@ export function MinecraftServer() {
         />
         <ServerResponseItem
           icon={Milestone}
-          leftClassName="bg-muted/20 md:border-r border-b border-border"
+          leftClassName="bg-muted/20 md:border-r border-b md:border-b-0 border-border"
           rightClassName=""
           title="Server Version"
           content={
