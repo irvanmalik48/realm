@@ -6,7 +6,7 @@ import type { SystemInfo } from "@/lib/types/status";
 import { Progress } from "./ui/progress";
 
 function cpuModelShorthand(model: string) {
-  const words = model.split(" ");
+  const words = String(model).split(" ");
   const firstThreeWords = words.slice(0, Math.min(3, words.length)).join(" ");
   return firstThreeWords;
 }
