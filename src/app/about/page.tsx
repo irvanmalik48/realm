@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Metadata } from "next";
 import AwooImage from "@/assets/img/awoo.jpg";
+import type { WebPage, WithContext } from "schema-dts";
 
 export const metadata: Metadata = {
   title: "About",
@@ -23,6 +24,39 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
+  const jsonLd: WithContext<WebPage> = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "About",
+    alternateName: "realm. | About",
+    mainEntityOfPage: "https://irvanma.eu.org/about",
+    description: "Slice and dice!",
+    url: "https://irvanma.eu.org/about",
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Landing",
+          item: "https://irvanma.eu.org/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "About",
+          item: "https://irvanma.eu.org/about",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Server Status",
+          item: "https://irvanma.eu.org/status",
+        },
+      ],
+    },
+  };
+
   const infoWidgets = [
     {
       title: "Typing Speed",
@@ -191,6 +225,10 @@ export default function About() {
         textClassName="py-1 md:py-3"
         default_velocity={0.66}
         text="this is the end of this page, cuh.  "
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
     </>
   );

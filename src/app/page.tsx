@@ -1,6 +1,7 @@
 import Container from "@/components/container";
 import { Metadata } from "next";
 import { Hero } from "@/components/hero";
+import type { WebPage, WithContext } from "schema-dts";
 
 import HeroImage from "@/assets/img/hero.jpg";
 import HeroProfile from "@/assets/img/profpic-animated.webp";
@@ -19,6 +20,39 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const jsonLd: WithContext<WebPage> = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Irvan Malik Azantha",
+    alternateName: "realm.",
+    mainEntityOfPage: "https://irvanma.eu.org/",
+    description: "Where it all begins.",
+    url: "https://irvanma.eu.org/",
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Landing",
+          item: "https://irvanma.eu.org/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "About",
+          item: "https://irvanma.eu.org/about",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Server Status",
+          item: "https://irvanma.eu.org/status",
+        },
+      ],
+    },
+  };
+
   return (
     <>
       <Container>
@@ -127,6 +161,10 @@ export default function Home() {
         textClassName="py-1 md:py-3"
         default_velocity={0.66}
         text="i will not crash your browser.  "
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
     </>
   );
