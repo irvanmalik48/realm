@@ -15,6 +15,7 @@ import {
   Send,
   Server,
   Twitter,
+  User,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -150,9 +151,9 @@ export function FAB() {
           </Link>
           <h3 className="w-full flex items-center gap-3 bg-muted/20 px-4 py-2 border-b border-border font-semibold">
             <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
-              <Link2 className="size-4" />
+              <User className="size-4" />
             </span>
-            <span>Related Links</span>
+            <span>Social</span>
           </h3>
           <a
             className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
@@ -214,6 +215,12 @@ export function FAB() {
               <ArrowRight className="size-4" />
             </div>
           </a>
+          <h3 className="w-full flex items-center gap-3 bg-muted/20 px-4 py-2 border-b border-border font-semibold">
+            <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
+              <Link2 className="size-4" />
+            </span>
+            <span>Others</span>
+          </h3>
           <a
             className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
             href="https://gnuweeb.org"
