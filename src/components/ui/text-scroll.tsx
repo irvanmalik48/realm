@@ -108,7 +108,7 @@ export const TextScroll: React.FC<TextScrollProps> = ({
   };
 
   return (
-    <section className={cn("relative w-full", className)}>
+    <section className={cn("relative z-20 w-full", className)}>
       <div className="w-1/10 top-0 left-0 h-full absolute z-50 bg-gradient-to-r from-background to-transparent" />
       <div className="w-1/10 top-0 right-0 h-full absolute z-50 bg-gradient-to-l from-background to-transparent" />
       <ParallaxText baseVelocity={default_velocity} className={textClassName}>
