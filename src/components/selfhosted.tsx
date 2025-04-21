@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import {
   ChartNoAxesColumnIncreasing,
   ClipboardPen,
+  Compass,
   Link,
   LucideProps,
 } from "lucide-react";
@@ -56,6 +57,14 @@ export function SelfHostedServices() {
           title="VPS Status Page"
           url="https://stats.irvanma.eu.org"
           sr="Visit VPS Status Page"
+        />
+        <SelfHostItem
+          icon={Compass}
+          leftClassName="bg-muted/20 md:border-r border-b border-border"
+          rightClassName="border-b border-border"
+          title="Minecraft Bluemap"
+          url="https://mcmap.irvanma.eu.org"
+          sr="Visit Bluemap Page"
         />
         <SelfHostItem
           icon={ClipboardPen}
