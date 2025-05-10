@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Doto, Geist, Geist_Mono } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Navbar } from "@/components/navbar";
@@ -21,6 +21,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const doto = Doto({
+  variable: "--font-doto",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: {
     default: "realm.",
@@ -30,7 +35,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NODE_ENV === "production"
       ? "https://irvanma.eu.org"
-      : "http://localhost:3000",
+      : "http://localhost:3000"
   ),
   openGraph: {
     title: {
@@ -82,7 +87,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}
+          className={`${geistSans.variable} ${geistMono.variable} ${doto.variable} antialiased scroll-smooth`}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Providers>
