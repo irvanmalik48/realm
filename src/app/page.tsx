@@ -156,9 +156,9 @@ export default function Home() {
       </Container>
       <TextScroll
         className="text-5xl md:text-7xl text-muted-foreground/50 dark:font-semibold font-bold py-24 md:space-y-2"
-        textClassName="py-1 md:py-3"
+        textClassName="py-1 md:py-3 font-doto"
         default_velocity={0.66}
-        text="i will not crash your browser.  "
+        text="I WILL NOT CRASH YOUR BROWSER.  "
       />
       <script
         type="application/ld+json"

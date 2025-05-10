@@ -103,15 +103,17 @@ export default function About() {
   return (
     <>
       <Container>
-        <ImageComponent
-          img={AwooImage}
-          alt="Awoo"
-          className="w-full max-h-96 rounded-lg z-10"
-          height={720}
-        />
-        <p className="w-fit relative -mt-12 z-20 mx-auto text-xl md:text-2xl dark:font-semibold font-medium text-center px-7 py-3 bg-primary text-primary-foreground rounded-full border-6 border-background">
-          about me and whatnot.
-        </p>
+        <div className="relative rounded-lg overflow-clip">
+          <ImageComponent
+            img={AwooImage}
+            alt="Awoo"
+            className="w-full relative max-h-96 z-10 rounded-lg"
+            height={720}
+          />
+          <p className="z-20 md:w-fit w-3/4 text-center font-bold absolute bottom-3 left-1/2 rounded-full -translate-x-1/2 px-7 py-3 font-doto bg-background/80 text-foreground md:text-xl backdrop-blur-lg">
+            ABOUT ME AND STUFFS
+          </p>
+        </div>
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
             <Book className="size-4" />
@@ -145,7 +147,7 @@ export default function About() {
                   </h3>
                 </div>
                 <div className="py-3 w-full h-full grow flex flex-col gap-1 items-center justify-center">
-                  <p className="font-mono font-bold text-5xl">{item.value}</p>
+                  <p className="font-doto font-bold text-5xl">{item.value}</p>
                   <p className="text-foreground/60 font-mono text-center text-sm">
                     {item.unit}
                   </p>
@@ -222,9 +224,9 @@ export default function About() {
       </Container>
       <TextScroll
         className="text-5xl md:text-7xl text-muted-foreground/50 dark:font-semibold font-bold py-24 md:space-y-2"
-        textClassName="py-1 md:py-3"
+        textClassName="py-1 md:py-3 font-doto"
         default_velocity={0.66}
-        text="this is the end of this page, cuh.  "
+        text="THIS IS THE END OF THE PAGE, CUH.  "
       />
       <script
         type="application/ld+json"
