@@ -1,6 +1,5 @@
 "use client";
 
-import { Github, Linkedin, Mail, Send } from "lucide-react";
 import {
   StaticImageData,
   type StaticImport,
@@ -8,6 +7,10 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { GitHub } from "./logos/github";
+import { LinkedIn } from "./logos/linkedin";
+import { Telegram } from "./logos/telegram";
+import { Gmail } from "./logos/gmail";
 
 export interface HeroProps {
   img: StaticImport;
@@ -57,25 +60,25 @@ export function Hero({ img, profile }: HeroProps) {
         <div className="w-fit flex items-center justify-center gap-3">
           <Button variant="ghost" size="icon" asChild>
             <a href="https://github.com/irvanmalik48">
-              <Github className="size-5" />
+              <GitHub className="size-6" />
               <span className="sr-only">GitHub Account</span>
             </a>
           </Button>
           <Button variant="ghost" size="icon" asChild>
             <a href="https://linkedin.com/in/irvanmalik48">
-              <Linkedin className="size-5" />
+              <LinkedIn className="size-6" />
               <span className="sr-only">LinkedIn Account</span>
             </a>
           </Button>
           <Button variant="ghost" size="icon" asChild>
             <a href="https://t.me/irvanmalik48">
-              <Send className="size-5" />
+              <Telegram className="size-6" />
               <span className="sr-only">Telegram Account</span>
             </a>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <a href="mailto:irvanma@gnuweeb.org">
-              <Mail className="size-5" />
+            <a href="mailto:irvanmalik48@gmail.com">
+              <Gmail className="size-6" />
               <span className="sr-only">Send a Mail</span>
             </a>
           </Button>
