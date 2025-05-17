@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NODE_ENV === "production"
       ? "https://irvanma.eu.org"
-      : "http://localhost:3000"
+      : "http://localhost:3000",
   ),
   openGraph: {
     title: {
