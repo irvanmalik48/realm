@@ -1,15 +1,7 @@
 import Container from "@/components/container";
 import { ImageComponent } from "@/components/image";
-import { Button } from "@/components/ui/button";
 import { TextScroll } from "@/components/ui/text-scroll";
-import {
-  Book,
-  Eye,
-  GitPullRequest,
-  HandMetal,
-  ThumbsUp,
-  Vote,
-} from "lucide-react";
+import { Book, ThumbsUp } from "lucide-react";
 import { Metadata } from "next";
 import AwooImage from "@/assets/img/awoo.jpg";
 import type { WebPage, WithContext } from "schema-dts";
