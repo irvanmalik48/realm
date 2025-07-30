@@ -28,20 +28,20 @@ export function ServerResponseItem(props: {
     <>
       <div
         className={cn(
-          "w-full px-5 py-3 gap-3 flex items-center",
+          "w-full px-4 py-2 gap-3 flex items-center",
           props.leftClassName
         )}
       >
-        <props.icon className="size-5" />
-        <p>{props.title}</p>
+        <props.icon className="size-4" />
+        <p className="text-sm">{props.title}</p>
       </div>
       <div
         className={cn(
-          "w-full px-5 py-3 flex items-center",
+          "w-full px-4 py-2 flex items-center",
           props.rightClassName
         )}
       >
-        <p>{props.content}</p>
+        <p className="text-sm">{props.content}</p>
       </div>
     </>
   );
@@ -75,12 +75,12 @@ export function MinecraftServer() {
   });
 
   return (
-    <>
+    <div className="grid md:grid-cols-2 grid-cols-1">
       <div className="p-5 pt-3">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-primary font-bold dark:font-semibold flex items-center gap-3">
             <Activity className="size-5" />
-            <span>Server Status (Java)</span>
+            <span>Java</span>
           </h3>
           <p
             className={cn(
@@ -95,12 +95,12 @@ export function MinecraftServer() {
               : "Offline"}
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 rounded-md border border-border overflow-clip">
+        <div className="grid grid-cols-2 rounded-md border border-border overflow-clip">
           <ServerResponseItem
             icon={Link2}
-            leftClassName="bg-muted/20 md:border-r border-b border-border"
+            leftClassName="bg-muted/20 border-r border-b border-border"
             rightClassName="border-b border-border"
-            title="Server Hostname"
+            title="Hostname"
             content={
               query.data?.java.hostname
                 ? query.data.java.hostname
@@ -109,9 +109,9 @@ export function MinecraftServer() {
           />
           <ServerResponseItem
             icon={EthernetPort}
-            leftClassName="bg-muted/20 md:border-r border-b border-border"
+            leftClassName="bg-muted/20 border-r border-b border-border"
             rightClassName="border-b border-border"
-            title="Server Port"
+            title="Port"
             content={
               query.data?.java.port
                 ? query.data.java.port.toString()
@@ -120,9 +120,9 @@ export function MinecraftServer() {
           />
           <ServerResponseItem
             icon={Milestone}
-            leftClassName="bg-muted/20 md:border-r border-b md:border-b-0 border-border"
+            leftClassName="bg-muted/20 border-r md:border-b-0 border-border"
             rightClassName=""
-            title="Server Version"
+            title="Version"
             content={
               checkIfOnline(query.data?.java as MinecraftServerStatusResponse)
                 ? (query.data?.java as MinecraftServerOnlineStatus).version
@@ -131,11 +131,11 @@ export function MinecraftServer() {
           />
         </div>
       </div>
-      <div className="p-5 pt-3 border-t border-border">
+      <div className="p-5 pt-3 border-t md:border-t-0 md:border-l border-border">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-primary font-bold dark:font-semibold flex items-center gap-3">
             <Activity className="size-5" />
-            <span>Server Status (Bedrock)</span>
+            <span>Bedrock (Geyser)</span>
           </h3>
           <p
             className={cn(
@@ -152,12 +152,12 @@ export function MinecraftServer() {
               : "Offline"}
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 rounded-md border border-border overflow-clip">
+        <div className="grid grid-cols-2 rounded-md border border-border overflow-clip">
           <ServerResponseItem
             icon={Link2}
-            leftClassName="bg-muted/20 md:border-r border-b border-border"
+            leftClassName="bg-muted/20 border-r border-b border-border"
             rightClassName="border-b border-border"
-            title="Server Hostname"
+            title="Hostname"
             content={
               query.data?.bedrock.hostname
                 ? query.data.bedrock.hostname
@@ -166,9 +166,9 @@ export function MinecraftServer() {
           />
           <ServerResponseItem
             icon={EthernetPort}
-            leftClassName="bg-muted/20 md:border-r border-b border-border"
+            leftClassName="bg-muted/20 border-r border-b border-border"
             rightClassName="border-b border-border"
-            title="Server Port"
+            title="Port"
             content={
               query.data?.bedrock.port
                 ? query.data.bedrock.port.toString()
@@ -177,9 +177,9 @@ export function MinecraftServer() {
           />
           <ServerResponseItem
             icon={Milestone}
-            leftClassName="bg-muted/20 md:border-r border-b md:border-b-0 border-border"
+            leftClassName="bg-muted/20 border-r md:border-b-0 border-border"
             rightClassName=""
-            title="Server Version"
+            title="Version"
             content={
               checkIfOnline(
                 query.data?.bedrock as MinecraftServerStatusResponse
@@ -190,6 +190,6 @@ export function MinecraftServer() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
