@@ -5,18 +5,12 @@ import {
   ArrowUp,
   CircleDotDashed,
   GitGraph,
-  Github,
   Globe,
   Home,
   Info,
   Link2,
-  Linkedin,
-  MessageSquareMore,
   Newspaper,
-  Send,
   Server,
-  Twitter,
-  User,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -69,7 +63,7 @@ export function FAB() {
           scrollY > 10 ? "opacity-100" : "opacity-0",
           open
             ? "translate-y-15 -translate-x-15"
-            : "translate-y-0 -translate-x-0",
+            : "translate-y-0 -translate-x-0"
         )}
         onClick={handleScrollToTop}
       >
@@ -83,13 +77,13 @@ export function FAB() {
               "fixed bottom-5 md:bottom-10 flex items-center justify-center",
               "right-5 z-50 md:right-10 p-3 bg-background hover:bg-secondary rounded-lg",
               "text-foreground hover:text-secondary-foreground cursor-pointer",
-              "border border-border transition-colors outline-0",
+              "border border-border transition-colors outline-0"
             )}
           >
             <X
               className={cn(
                 "size-6 transition-transform",
-                open ? "rotate-0" : "rotate-45",
+                open ? "rotate-0" : "rotate-45"
               )}
             />
             <span className="sr-only">Open FAB menu</span>
@@ -160,72 +154,6 @@ export function FAB() {
               <ArrowRight className="size-4" />
             </div>
           </Link>
-          <h3 className="w-full flex items-center gap-3 bg-muted/20 px-4 py-2 border-b border-border font-semibold">
-            <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
-              <User className="size-4" />
-            </span>
-            <span>Social</span>
-          </h3>
-          <a
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="https://github.com/irvanmalik48"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github className="size-4" />
-            <span>GitHub</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </a>
-          <a
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="https://linkedin.com/in/irvanmalik48"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Linkedin className="size-4" />
-            <span>LinkedIn</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </a>
-          <a
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="https://t.me/lappv"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Send className="size-4" />
-            <span>Telegram</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </a>
-          <a
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="https://x.com/irvanmalik48"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Twitter className="size-4" />
-            <span>X/Twitter</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </a>
-          <a
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="https://social.gnuweeb.org/@lappland"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageSquareMore className="size-4" />
-            <span>Mastodon</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </a>
           <h3 className="w-full flex items-center gap-3 bg-muted/20 px-4 py-2 border-b border-border font-semibold">
             <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
               <Link2 className="size-4" />
