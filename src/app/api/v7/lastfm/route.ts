@@ -19,6 +19,9 @@ export async function GET(request: Request): Promise<Response> {
         status: 500,
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET",
+          "Access-Control-Allow-Headers": "Content-Type",
         },
       }
     );
@@ -34,6 +37,9 @@ export async function GET(request: Request): Promise<Response> {
         status: 400,
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET",
+          "Access-Control-Allow-Headers": "Content-Type",
         },
       }
     );
@@ -49,6 +55,9 @@ export async function GET(request: Request): Promise<Response> {
         status: 400,
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET",
+          "Access-Control-Allow-Headers": "Content-Type",
         },
       }
     );
@@ -71,6 +80,9 @@ export async function GET(request: Request): Promise<Response> {
         status: response.status,
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET",
+          "Access-Control-Allow-Headers": "Content-Type",
         },
       }
     );
@@ -81,6 +93,9 @@ export async function GET(request: Request): Promise<Response> {
     status: 200,
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET",
+      "Access-Control-Allow-Headers": "Content-Type",
     },
   });
 }
