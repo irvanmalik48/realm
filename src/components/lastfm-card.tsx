@@ -13,7 +13,7 @@ export function LastFMCard(props: LastFMCardProps) {
       ? `http://localhost:3000/api/v7/lastfm?username=${username}&limit=${limit}`
       : `https://irvanma.eu.org/api/v7/lastfm?username=${username}&limit=${limit}`;
 
-  const { data, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["lastfm"],
     queryFn: async () => {
       const res = await fetch(endpoint);
@@ -59,7 +59,9 @@ export function LastFMCard(props: LastFMCardProps) {
           </div>
         ))
       ) : (
-        <p>No recent tracks found.</p>
+        <p className="flex items-center justify-center px-5 py-3">
+          No recent tracks found.
+        </p>
       )}
     </div>
   );
