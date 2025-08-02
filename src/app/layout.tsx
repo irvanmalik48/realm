@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer";
 import { FAB } from "@/components/fab";
 
 import OgImage from "./opengraph-image.png";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NODE_ENV === "production"
       ? "https://irvanma.eu.org"
-      : "http://localhost:3000",
+      : "http://localhost:3000"
   ),
   openGraph: {
     title: {
@@ -97,6 +98,12 @@ export default function RootLayout({
               <Footer />
             </Providers>
           </ThemeProvider>
+          <Script
+            strategy="afterInteractive"
+            src="https://cloud.umami.is/script.js"
+            data-website-id="4de66c4c-8a3c-4304-819c-18e1ac1cf209"
+            defer
+          />
         </body>
       </html>
     </ViewTransitions>
