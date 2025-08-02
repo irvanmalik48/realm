@@ -68,10 +68,6 @@ export type State =
     }
   | {
       status: "playing";
-      song: Song;
-    }
-  | {
-      status: "playing";
       song: Song[];
     };
 

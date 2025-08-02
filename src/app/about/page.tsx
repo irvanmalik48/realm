@@ -135,7 +135,7 @@ export default function About() {
             <span className="text-sm font-mono">LASTFM.md</span>
           </h2>
           <p className="px-5 py-3">
-            Here's a couple of my latest LastFM scrobbles:
+            Here&apos;s a couple of my latest LastFM scrobbles:
           </p>
           <div className="w-full p-5 pt-0">
             <LastFMCard username="irvanmalik48" />
