@@ -1,10 +1,11 @@
 import Container from "@/components/container";
 import { ImageComponent } from "@/components/image";
 import { TextScroll } from "@/components/ui/text-scroll";
-import { Book, ThumbsUp } from "lucide-react";
+import { Book, Music, ThumbsUp } from "lucide-react";
 import { Metadata } from "next";
 import AwooImage from "@/assets/img/awoo.jpg";
 import type { WebPage, WithContext } from "schema-dts";
+import { LastFMCard } from "@/components/lastfm-card";
 
 export const metadata: Metadata = {
   title: "About",
@@ -127,6 +128,18 @@ export default function About() {
             really into movies and shit but if you wanna talk about anime,
             I&apos;m your man.
           </p>
+        </div>
+        <div className="w-full bg-background rounded-lg border border-border">
+          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
+            <Music className="size-4" />
+            <span className="text-sm font-mono">LASTFM.md</span>
+          </h2>
+          <p className="px-5 py-3">
+            Here's a couple of my latest LastFM scrobbles:
+          </p>
+          <div className="w-full p-5 pt-0">
+            <LastFMCard username="irvanmalik48" />
+          </div>
         </div>
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
