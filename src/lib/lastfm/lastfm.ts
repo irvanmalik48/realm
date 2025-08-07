@@ -2,7 +2,7 @@ import { LastFMResponseBody, State, TrackImage } from "@/lib/types/lastfm";
 
 function parseSongs(
   body: LastFMResponseBody | null,
-  imageSize: TrackImage["size"]
+  imageSize: TrackImage["size"],
 ): State {
   if (!body) {
     return {

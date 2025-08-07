@@ -29,7 +29,7 @@ export function ServerResponseItem(props: {
       <div
         className={cn(
           "w-full px-4 py-2 gap-3 flex items-center",
-          props.leftClassName
+          props.leftClassName,
         )}
       >
         <props.icon className="size-4" />
@@ -38,7 +38,7 @@ export function ServerResponseItem(props: {
       <div
         className={cn(
           "w-full px-4 py-2 flex items-center",
-          props.rightClassName
+          props.rightClassName,
         )}
       >
         <p className="text-sm">{props.content}</p>
@@ -50,7 +50,7 @@ export function ServerResponseItem(props: {
 async function getMinecraftServerStatus() {
   const data = await fetch(`https://api.mcsrvstat.us/3/mc.irvanma.eu.org`);
   const dataBedrock = await fetch(
-    `https://api.mcsrvstat.us/bedrock/3/mc.irvanma.eu.org`
+    `https://api.mcsrvstat.us/bedrock/3/mc.irvanma.eu.org`,
   );
   const res: MinecraftServerStatusResponse = await data.json();
   const resBedrock: MinecraftServerStatusResponse = await dataBedrock.json();
@@ -87,7 +87,7 @@ export function MinecraftServer() {
               "px-3 py-1 text-sm border rounded-full",
               checkIfOnline(query.data?.java as MinecraftServerStatusResponse)
                 ? "bg-green-800/20 border-green-800 dark:bg-green-500/20 dark:border-green-500 text-foreground"
-                : "bg-red-800/20 border-red-800 dark:bg-red-500/20 dark:border-red-500 text-foreground"
+                : "bg-red-800/20 border-red-800 dark:bg-red-500/20 dark:border-red-500 text-foreground",
             )}
           >
             {checkIfOnline(query.data?.java as MinecraftServerStatusResponse)
@@ -141,10 +141,10 @@ export function MinecraftServer() {
             className={cn(
               "px-3 py-1 text-sm border rounded-full",
               checkIfOnline(
-                query.data?.bedrock as MinecraftServerStatusResponse
+                query.data?.bedrock as MinecraftServerStatusResponse,
               )
                 ? "bg-green-800/20 border-green-800 dark:bg-green-500/20 dark:border-green-500 text-foreground"
-                : "bg-red-800/20 border-red-800 dark:bg-red-500/20 dark:border-red-500 text-foreground"
+                : "bg-red-800/20 border-red-800 dark:bg-red-500/20 dark:border-red-500 text-foreground",
             )}
           >
             {checkIfOnline(query.data?.bedrock as MinecraftServerStatusResponse)
@@ -182,7 +182,7 @@ export function MinecraftServer() {
             title="Version"
             content={
               checkIfOnline(
-                query.data?.bedrock as MinecraftServerStatusResponse
+                query.data?.bedrock as MinecraftServerStatusResponse,
               )
                 ? (query.data?.bedrock as MinecraftServerOnlineStatus).version
                 : "Offline"

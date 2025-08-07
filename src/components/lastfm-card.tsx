@@ -44,7 +44,7 @@ export function LastFMCard(props: LastFMCardProps) {
                 "flex gap-5 p-5 items-center border-border",
                 index % 2 === 0 ? "md:border-r" : "",
                 index <= 6 ? "border-b" : "",
-                index === 6 ? "md:border-b-0" : ""
+                index === 6 ? "md:border-b-0" : "",
               )}
             >
               <Skeleton className="min-w-20 min-h-20 rounded-sm border border-border" />
@@ -70,7 +70,7 @@ export function LastFMCard(props: LastFMCardProps) {
                   "flex gap-5 p-5 items-center border-border",
                   index % 2 === 0 ? "md:border-r" : "",
                   index <= data.song.length - 2 ? "border-b" : "",
-                  index === data.song.length - 2 ? "md:border-b-0" : ""
+                  index === data.song.length - 2 ? "md:border-b-0" : "",
                 )}
               >
                 <img

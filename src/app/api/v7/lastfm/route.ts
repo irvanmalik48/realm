@@ -23,7 +23,7 @@ export async function GET(request: Request): Promise<Response> {
           "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         },
-      }
+      },
     );
   }
 
@@ -41,7 +41,7 @@ export async function GET(request: Request): Promise<Response> {
           "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         },
-      }
+      },
     );
   }
 
@@ -59,7 +59,7 @@ export async function GET(request: Request): Promise<Response> {
           "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         },
-      }
+      },
     );
   }
 
@@ -84,7 +84,7 @@ export async function GET(request: Request): Promise<Response> {
           "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         },
-      }
+      },
     );
   }
   const body: LastFMResponseBody = await response.json();
