@@ -19,7 +19,7 @@ export interface Track {
   streamable: string;
   url: string;
   name: string;
-  image: TrackImage[];
+  image: Image[];
   date?: TrackDate;
 }
 
@@ -37,7 +37,7 @@ export interface TrackAlbum {
   "#text": string;
 }
 
-export interface TrackImage {
+export interface Image {
   size: "small" | "medium" | "large" | "extralarge";
   "#text": string;
 }
@@ -50,18 +50,46 @@ export interface TrackDate {
 export type Song = {
   name: Track["name"];
   artist: TrackArtist["#text"];
-  art: TrackImage["#text"];
+  art: Image["#text"];
   album: TrackAlbum["#text"];
   url: Track["url"];
   trackMbid: Track["mbid"] | null;
   albumMbid: TrackAlbum["mbid"] | null;
 };
 
-export interface LastFMResponseBody {
+export interface LastFMTrackResponseBody {
   recenttracks: RecentTracks;
 }
 
-export type State =
+export interface LastFMUserRegistered {
+  unixtime: string;
+  "#text": number;
+}
+
+export interface LastFMUser {
+  name: string;
+  age: string;
+  subscriber: string;
+  realname: string;
+  bootstrap: string;
+  playcount: string;
+  artist_count: string;
+  playlists: string;
+  track_count: string;
+  album_count: string;
+  image: Image[];
+  registered: LastFMUserRegistered;
+  country: string;
+  gender: string;
+  url: string;
+  type: string;
+}
+
+export interface LastFMUserResponseBody {
+  user: LastFMUser;
+}
+
+export type TrackState =
   | {
       status: "connecting" | "idle" | "error";
       song: null;
@@ -69,6 +97,16 @@ export type State =
   | {
       status: "playing";
       song: Song[];
+    };
+
+export type UserState =
+  | {
+      status: "connecting" | "idle" | "error";
+      user: null;
+    }
+  | {
+      status: "success";
+      user: LastFMUser;
     };
 
 export interface LastFMCardProps extends React.HTMLAttributes<HTMLDivElement> {
