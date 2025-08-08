@@ -1,13 +1,11 @@
 "use client";
 
 import { LastFMCardProps, LastFMUserResponseBody } from "@/lib/types/lastfm";
-import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "./ui/button";
-import { YouTube } from "./logos/youtube";
 import { LastFM } from "./logos/lastfm";
-import { Music2, RefreshCcw, User } from "lucide-react";
+import { RefreshCcw, User } from "lucide-react";
 import { parseUser } from "@/lib/lastfm/lastfm";
 
 export function LastFMUserCard(props: LastFMCardProps) {
