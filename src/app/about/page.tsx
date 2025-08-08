@@ -5,7 +5,8 @@ import { Book, Music, ThumbsUp } from "lucide-react";
 import { Metadata } from "next";
 import AwooImage from "@/assets/img/awoo.jpg";
 import type { WebPage, WithContext } from "schema-dts";
-import { LastFMCard } from "@/components/lastfm-card";
+import { LastFMTrackCard } from "@/components/lastfm-track-card";
+import { LastFMUserCard } from "@/components/lastfm-user-card";
 
 export const metadata: Metadata = {
   title: "About",
@@ -134,11 +135,9 @@ export default function About() {
             <Music className="size-4" />
             <span className="text-sm font-mono">LASTFM.md</span>
           </h2>
-          <p className="px-5 py-3">
-            Here&apos;s a couple of my latest LastFM scrobbles:
-          </p>
-          <div className="w-full p-5 pt-0">
-            <LastFMCard username="irvanmalik48" />
+          <div className="w-full p-5 flex flex-col gap-5">
+            <LastFMUserCard username="irvanmalik48" />
+            <LastFMTrackCard username="irvanmalik48" />
           </div>
         </div>
         <div className="w-full bg-background rounded-lg border border-border">
