@@ -1,9 +1,15 @@
-import { LastFMResponseBody, State, TrackImage } from "@/lib/types/lastfm";
+import {
+  LastFMTrackResponseBody,
+  TrackState,
+  Image,
+  LastFMUserResponseBody,
+  UserState,
+} from "@/lib/types/lastfm";
 
 function parseSongs(
-  body: LastFMResponseBody | null,
-  imageSize: TrackImage["size"],
-): State {
+  body: LastFMTrackResponseBody | null,
+  imageSize: Image["size"]
+): TrackState {
   if (!body) {
     return {
       status: "connecting",
@@ -40,4 +46,32 @@ function parseSongs(
   };
 }
 
-export { parseSongs };
+function parseUser(
+  body: LastFMUserResponseBody | null,
+  imageSize: Image["size"]
+): UserState {
+  if (!body) {
+    return {
+      status: "connecting",
+      user: null,
+    };
+  }
+  const user = body.user;
+
+  if (!user) {
+    return {
+      status: "error",
+      user: null,
+    };
+  }
+
+  return {
+    status: "success",
+    user: {
+      ...user,
+      image: [user.image.find((i) => i.size === imageSize) ?? user.image[0]],
+    },
+  };
+}
+
+export { parseSongs, parseUser };
