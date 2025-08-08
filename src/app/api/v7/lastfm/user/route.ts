@@ -1,13 +1,10 @@
-import { LastFMResponseBody } from "@/lib/types/lastfm";
+import { LastFMUserResponseBody } from "@/lib/types/lastfm";
 
 export async function GET(request: Request): Promise<Response> {
   const token = process.env.LASTFM_API_KEY;
 
   const url = new URL(request.url);
   const username = url.searchParams.get("username");
-  const limit = url.searchParams.get("limit");
-
-  const limitNumber = limit ? parseInt(limit, 10) : 1;
 
   if (!token) {
     return new Response(
@@ -23,7 +20,7 @@ export async function GET(request: Request): Promise<Response> {
           "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         },
-      },
+      }
     );
   }
 
@@ -41,29 +38,11 @@ export async function GET(request: Request): Promise<Response> {
           "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         },
-      },
+      }
     );
   }
 
-  if (limitNumber <= 0 || limitNumber > 200) {
-    return new Response(
-      JSON.stringify({
-        error: "Limit must be between 1 and 200.",
-        status: "error",
-      }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      },
-    );
-  }
-
-  const endpoint = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${token}&format=json&limit=${limit}`;
+  const endpoint = `https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=${username}&api_key=${token}&format=json`;
 
   const response = await fetch(endpoint, {
     next: {
@@ -73,7 +52,7 @@ export async function GET(request: Request): Promise<Response> {
   if (!response.ok) {
     return new Response(
       JSON.stringify({
-        error: "Failed to fetch LastFM data",
+        error: "Failed to fetch LastFM user data",
         status: "error",
       }),
       {
@@ -84,10 +63,10 @@ export async function GET(request: Request): Promise<Response> {
           "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         },
-      },
+      }
     );
   }
-  const body: LastFMResponseBody = await response.json();
+  const body: LastFMUserResponseBody = await response.json();
 
   return new Response(JSON.stringify(body), {
     status: 200,
