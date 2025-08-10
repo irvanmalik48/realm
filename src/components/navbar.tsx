@@ -28,9 +28,9 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-999 w-full">
-      <div className="absolute z-20 top-0 inset-x-0 h-16 bg-gradient-to-b from-background/80 to-transparent" />
+      <div className="lg:hidden absolute z-20 top-0 inset-x-0 h-16 bg-gradient-to-b from-background/80 to-transparent" />
       <ProgressiveBlur className="z-10" height="170%" position="top" />
-      <nav className="relative z-50 w-full max-w-3xl mx-auto px-5 py-3 flex justify-between items-center">
+      <nav className="relative z-50 w-full max-w-full mx-auto px-5 py-3 flex justify-between items-center">
         <Link
           href="/"
           className="text-xl font-bold dark:font-medium text-primary"
