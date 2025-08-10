@@ -114,7 +114,7 @@ export function LastFMUserCard(props: LastFMCardProps) {
               <div className="flex flex-col w-full items-center justify-center md:items-start">
                 <h3 className="text-lg font-semibold">@{data.user?.name}</h3>
                 <p className="text-sm text-muted-foreground">
-                  {data.user?.realname}
+                  {data.user?.realname}{" "}
                   <span className="md:inline hidden">
                     &bull; Scrobbled since{" "}
                     {new Date(
