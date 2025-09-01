@@ -10,6 +10,8 @@ import {
   useTransform,
   useVelocity,
 } from "framer-motion";
+import marqueeEnable from "@/lib/atoms/marquee";
+import { useAtom } from "jotai/react";
 
 import { cn } from "@/lib/utils";
 
@@ -37,6 +39,16 @@ export const TextScroll: React.FC<TextScrollProps> = ({
   className,
   textClassName,
 }) => {
+  const [marquee] = useAtom(marqueeEnable);
+
+  if (!marquee) {
+    return (
+      <section className={cn("relative z-20 w-full", className)}>
+        <div className={cn("text-center", textClassName)}>{text}</div>
+      </section>
+    );
+  }
+
   const ParallaxText: React.FC<ParallaxProps> = ({
     children,
     baseVelocity = 100,

@@ -61,6 +61,7 @@ export const createAnimation = (
   variant: AnimationVariant,
   start: AnimationStart,
   url?: string,
+  animationType?: "fade" | "circle-blur"
 ): Animation => {
   const svg = generateSVG(variant, start);
   const transformOrigin = getTransformOrigin(start);
@@ -181,6 +182,38 @@ export const createAnimation = (
     mask-size: 2000vmax;
   }
 }`,
+    };
+  }
+
+  if (animationType?.includes("fade")) {
+    return {
+      name: `fade`,
+      css: `
+      ::view-transition-group(root) {
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+      }
+      
+      ::view-transition-new(root) {
+        animation-name: fade-in;
+      }
+      
+      ::view-transition-old(root),
+      .dark::view-transition-old(root) {
+        animation-name: fade-out;
+        z-index: -1;
+      }
+      
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes fade-out {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+      `,
     };
   }
 

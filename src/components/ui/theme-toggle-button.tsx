@@ -3,7 +3,8 @@
 import React from "react";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
-
+import darkModeToggleAnimation from "@/lib/atoms/fade";
+import { useAtom } from "jotai/react";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -26,6 +27,7 @@ export default function ThemeToggleButton({
   url = "",
 }: ThemeToggleAnimationProps) {
   const { theme, setTheme } = useTheme();
+  const [darkModeAnim] = useAtom(darkModeToggleAnimation);
 
   const styleId = "theme-transition-styles";
 
@@ -49,7 +51,7 @@ export default function ThemeToggleButton({
   }, []);
 
   const toggleTheme = React.useCallback(() => {
-    const animation = createAnimation(variant, start, url);
+    const animation = createAnimation(variant, start, url, darkModeAnim);
 
     updateStyles(animation.css, animation.name);
 
