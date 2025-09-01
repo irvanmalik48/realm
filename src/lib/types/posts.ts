@@ -18,6 +18,8 @@ export type Scope = {
 
 export type PostWithScope = Post & Scope;
 
-export interface PostCardAuxiliaries extends React.ComponentProps<"div"> {}
+export interface PostCardAuxiliaries extends React.ComponentProps<"div"> {
+  placeholder?: boolean;
+}
 
 export type PostCardProps = PostWithScope & PostCardAuxiliaries;
