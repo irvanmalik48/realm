@@ -142,3 +142,32 @@
 .remove-blur {
   filter: blur(0px);
 }
+
+div.remark-code-title {
+  @apply text-sm text-muted-foreground bg-muted/50! dark:bg-muted/10! border border-border rounded-t-md px-5 py-2 font-mono;
+}
+
+figure[data-rehype-pretty-code-figure] {
+  @apply my-0!;
+}
+
+figure[data-rehype-pretty-code-figure] pre {
+  @apply rounded-lg border-x border-b border-t border-border py-2 px-0;
+}
+
+span[data-line] {
+  @apply rounded-lg px-5 py-0.5;
+}
+
+span[data-line][data-highlighted-line] {
+  @apply bg-blue-400/10 rounded-none relative;
+}
+
+span[data-line][data-highlighted-line]::before {
+  content: "";
+  @apply absolute left-0 top-0 h-full w-1 bg-blue-400!;
+}
+
+div.remark-code-title + figure[data-rehype-pretty-code-figure] pre {
+  @apply rounded-t-none border-t-0;
+}
