@@ -5,6 +5,8 @@ import {
   type StaticImport,
 } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+import performanceModeAtom from "@/lib/atoms/performance-mode";
+import { useAtom } from "jotai/react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { GitHub } from "./logos/github";
@@ -20,6 +22,7 @@ export interface HeroProps {
 export function Hero({ img, profile }: HeroProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [isProfileLoading, setIsProfileLoading] = useState(true);
+  const [performanceMode] = useAtom(performanceModeAtom);
 
   const image = img as StaticImageData;
   const profileImg = profile as StaticImageData;
@@ -35,7 +38,7 @@ export function Hero({ img, profile }: HeroProps) {
           blurDataURL={image.blurDataURL}
           onLoad={() => setIsImageLoading(false)}
           className={`${
-            isImageLoading ? "blur scale-150" : "remove-blur scale-100"
+            isImageLoading && !performanceMode ? "blur" : "remove-blur"
           } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500`}
         />
       </div>
@@ -49,7 +52,7 @@ export function Hero({ img, profile }: HeroProps) {
           blurDataURL={profileImg.blurDataURL}
           onLoad={() => setIsProfileLoading(false)}
           className={`${
-            isProfileLoading ? "blur scale-150" : "remove-blur scale-100"
+            isProfileLoading && !performanceMode ? "blur" : "remove-blur"
           } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500`}
         />
       </div>
