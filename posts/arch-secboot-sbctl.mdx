@@ -21,7 +21,7 @@ First, let's boot into our current Arch Linux installation and backup our curren
 In order to do that, we need to install `efitools` package. If you haven't installed it yet, do so now. (In case you're
 new and wondering what the commands are, it's `sudo pacman -S efitools` or whatever AUR helper you're using.)
 
-```bash
+```bash:Console {2}
 mkdir -p ~/.secure-boot-backup && cd ~/.secure-boot-backup
 for var in PK KEK db dbx ; do efi-readvar -v $var -o old_${var}.esl ; done
 ```
@@ -32,7 +32,7 @@ This will create a directory called `.secure-boot-backup` in your home directory
 
 Now, let's pop `pacman` into action and install `sbctl`:
 
-```bash
+```bash:Console
 sudo pacman -S sbctl
 ```
 
@@ -51,7 +51,7 @@ Disable the secure boot again and boot into your system.
 This is what you've been waiting for. Let's configure Secure Boot with `sbctl`.
 So first off, let's check for the secure boot status:
 
-```bash
+```bash:Console
 sbctl status
 ```
 
@@ -61,7 +61,7 @@ It should say `disabled` and `user mode` if you've followed the steps correctly.
 
 Let's create a new key pair and enroll it:
 
-```bash
+```bash:Console
 sudo sbctl create-keys
 sudo sbctl enroll-keys -m
 ```
@@ -71,7 +71,7 @@ So better safe than sorry.
 
 Right, let's check the status again:
 
-```bash
+```bash:Console
 sbctl status
 ```
 
@@ -82,7 +82,7 @@ sbctl status
 Yeah, I admit it, shim-lock is a pain in the ass. So let's just reinstall GRUB to use CA keys instead (you can totally
 ignore this step if you don't use GRUB):
 
-```bash
+```bash:Console {1}
 sudo grub-install --target=x86_64-efi --efi-directory=esp --bootloader-id=GRUB --modules="tpm" --disable-shim-lock
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -91,7 +91,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 You can check what files needed to be signed with:
 
-```bash
+```bash:Console
 sudo sbctl verify
 ```
 
@@ -99,7 +99,7 @@ You will need to sign the files relative to your system's layout, kernel, and bo
 For example, if you're using GRUB, you will need to sign `/boot/EFI/grub/grubx64.efi` and `/boot/vmlinuz-linux`.
 Altho, sometimes there's too many files to sign and it's a hassle. So, let's just sign everything:
 
-```bash
+```bash:Console
 sudo sbctl verify | sudo sed 's/✗ /sbctl sign -s /e'
 ```
 
@@ -111,7 +111,7 @@ sign again when you update your kernel or bootloader.
 
 You know the drill. Reboot to UEFI settings and enable secure boot. Boot into your system and check the status again:
 
-```bash
+```bash:Console
 sbctl status
 ```
 

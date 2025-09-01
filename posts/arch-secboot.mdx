@@ -24,7 +24,7 @@ Install `efitools` package as it will be needed throughout the tutorial. You als
 
 #### Backup all old stuffs
 
-```bash
+```bash:Console
 mkdir -p SB/old && cd SB
 efi-readvar -v PK -o old_PK.esl
 efi-readvar -v KEK -o old_KEK.esl
@@ -45,13 +45,13 @@ As per Arch Wiki's reference:
 
 First, create a GUID for owner identification:
 
-```bash
+```bash:Console
 uuidgen --random > GUID.txt
 ```
 
 Platform Key:
 
-```bash
+```bash:Console
 openssl req -newkey rsa:4096 -nodes -keyout PK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Platform Key/" -out PK.crt
 openssl x509 -outform DER -in PK.crt -out PK.cer
 cert-to-efi-sig-list -g "$(< GUID.txt)" PK.crt PK.esl
@@ -60,13 +60,13 @@ sign-efi-sig-list -g "$(< GUID.txt)" -k PK.key -c PK.crt PK PK.esl PK.auth
 
 Sign an empty file to allow removing Platform Key when in "User Mode":
 
-```bash
+```bash:Console
 sign-efi-sig-list -g "$(< GUID.txt)" -c PK.crt -k PK.key PK /dev/null rm_PK.auth
 ```
 
 Key Exchange Key:
 
-```bash
+```bash:Console
 openssl req -newkey rsa:4096 -nodes -keyout KEK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Key Exchange Key/" -out KEK.crt
 openssl x509 -outform DER -in KEK.crt -out KEK.cer
 cert-to-efi-sig-list -g "$(< GUID.txt)" KEK.crt KEK.esl
@@ -75,7 +75,7 @@ sign-efi-sig-list -g "$(< GUID.txt)" -k PK.key -c PK.crt KEK KEK.esl KEK.auth
 
 Signature Database Key:
 
-```bash
+```bash:Console
 openssl req -newkey rsa:4096 -nodes -keyout db.key -new -x509 -sha256 -days 3650 -subj "/CN=my Signature Database key/" -out db.crt
 openssl x509 -outform DER -in db.crt -out db.cer
 cert-to-efi-sig-list -g "$(< GUID.txt)" db.crt db.esl
@@ -93,7 +93,7 @@ Download this stuffs and copy it to the SB folder we made previously:
 
 Create EFI Signature Lists from Microsoft's DER format certificates using Microsoft's GUID (`77fa9abd-0359-4d32-bd60-28f4e78f784b`) and combine them in one file for simplicity:
 
-```bash
+```bash:Console
 sbsiglist --owner 77fa9abd-0359-4d32-bd60-28f4e78f784b --type x509 --output MS_Win_db.esl MicWinProPCA2011_2011-10-19.crt
 sbsiglist --owner 77fa9abd-0359-4d32-bd60-28f4e78f784b --type x509 --output MS_UEFI_db.esl MicCorUEFCA2011_2011-06-27.crt
 cat MS_Win_db.esl MS_UEFI_db.esl > MS_db.esl
@@ -101,7 +101,7 @@ cat MS_Win_db.esl MS_UEFI_db.esl > MS_db.esl
 
 Sign a db update with your KEK. Use `sign-efi-sig-list` with option `-a` to add not replace a db certificate:
 
-```bash
+```bash:Console
 sign-efi-sig-list -a -g 77fa9abd-0359-4d32-bd60-28f4e78f784b -k KEK.key -c KEK.crt db MS_db.esl add_MS_db.auth
 ```
 
@@ -109,7 +109,7 @@ sign-efi-sig-list -a -g 77fa9abd-0359-4d32-bd60-28f4e78f784b -k KEK.key -c KEK.c
 
 There are some issues in Arch's GRUB currently that throws `Error : verification requested but nobody cares.` and to fix that, you need to reinstall GRUB first with `tpm` module and shim lock disabled:
 
-```bash
+```bash:Console
 sudo grub-install --target=x86_64-efi --efi-directory=your-esp --bootloader-id=Arch --modules="tpm" --disable-shim-lock
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -120,7 +120,7 @@ See [references](#references) for more info.
 
 #### Signing EFI binaries
 
-```bash
+```bash:Console
 sudo sbsign --key db.key --cert db.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux # You can do others too
 sudo sbsign --key db.key --cert db.crt --output /path/to/esp/Arch/grubx64.efi /path/to/esp/EFI/Arch/grubx64.efi
 ```
@@ -129,7 +129,7 @@ sudo sbsign --key db.key --cert db.crt --output /path/to/esp/Arch/grubx64.efi /p
 
 #### Prepare pacman hook for automatic kernel signing
 
-```bash
+```bash:Console
 sudo mkdir -p /etc/pacman.d/hooks && sudo mkdir -p /usr/share/libalpm/scripts
 sudo cp /usr/share/libalpm/hooks/90-mkinitcpio-install.hook /etc/pacman.d/hooks/
 sudo cp /usr/share/libalpm/scripts/mkinitcpio-install /usr/local/share/libalpm/scripts/
@@ -137,25 +137,25 @@ sudo cp /usr/share/libalpm/scripts/mkinitcpio-install /usr/local/share/libalpm/s
 
 Edit `/etc/pacman.d/hooks/90-mkinitcpio-install.hook` and replace:
 
-```bash
+```bash:90-mkinitcpio-install.hook
 Exec = /usr/share/libalpm/scripts/mkinitcpio-install
 ```
 
 with:
 
-```bash
+```bash:90-mkinitcpio-install.hook
 Exec = /usr/local/share/libalpm/scripts/mkinitcpio-install
 ```
 
 Edit `/usr/local/share/libalpm/scripts/mkinitcpio-install` and replace:
 
-```bash
+```bash:mkinitcpio-install
 install -Dm644 "${line}" "/boot/vmlinuz-${pkgbase}"
 ```
 
 with:
 
-```bash
+```bash:mkinitcpio-install
 sbsign --key /path/to/db.key --cert /path/to/db.crt --output "/boot/vmlinuz-${pkgbase}" "${line}"
 ```
 
@@ -167,14 +167,14 @@ Go to firmware settings and erase all certificates. This will put Secure Boot in
 
 Create the necessary folders then get in to the SB directory we created previously (since you're rebooting, duh):
 
-```bash
+```bash:Console
 sudo mkdir -p /etc/secureboot/keys/{db,dbx,KEK,PK}
 cd SB
 ```
 
 Then copy all the `.auth` files into their respective directory:
 
-```bash
+```bash:Console
 sudo cp PK.auth /etc/secureboot/keys/PK/
 sudo cp KEK.auth /etc/secureboot/keys/KEK/
 sudo cp db.auth /etc/secureboot/keys/db/
@@ -185,25 +185,25 @@ sudo cp add_MS_db.auth /etc/secureboot/keys/db/
 
 See what changes will `sbkeysync` shall do to your system's UEFI keystore:
 
-```bash
+```bash:Console
 sudo sbkeysync --pk --dry-run --verbose
 ```
 
 Before enrolling, change efivars file attributes so that no write errors are present using:
 
-```bash
+```bash:Console
 sudo chattr -i /sys/firmware/efi/efivars/{PK,KEK,db}*
 ```
 
 Finally, use `sbkeysync` to enroll your keys.
 
-```bash
+```bash:Console
 sudo sbkeysync --verbose
 ```
 
 We're not enrolling the PK yet, so in order to avoid some invalid arguments issues, use `efi-updatevar` instead:
 
-```bash
+```bash:Console
 sudo efi-updatevar -f PK.auth PK
 ```
 
