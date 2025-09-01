@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import { MDXRemote, type MDXRemoteOptions } from "next-mdx-remote-client/rsc";
 import { readingTime } from "reading-time-estimator";
 
+import remarkGfm from "remark-gfm";
+import remarkFlexibleToc from "remark-flexible-toc";
+import remarkFlexibleCodeTitles from "remark-flexible-code-titles";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode, { Options } from "rehype-pretty-code";
+
 import type { Frontmatter } from "@/lib/types/posts";
 import { getMarkdownFromSlug, getMarkdownFiles } from "@/lib/fs/posts";
 import { getFrontmatter } from "next-mdx-remote-client/utils";
@@ -10,6 +20,7 @@ import { TextScroll } from "@/components/ui/text-scroll";
 import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -40,6 +51,11 @@ export default async function Post({ params }: Props) {
 
   const { source, format } = result;
 
+  const prettyCodeOptions: Options = {
+    keepBackground: false,
+    theme: "material-theme-darker",
+  };
+
   const options: MDXRemoteOptions = {
     disableImports: true,
     parseFrontmatter: true,
@@ -48,7 +64,21 @@ export default async function Post({ params }: Props) {
     },
     mdxOptions: {
       format,
+      remarkPlugins: [
+        remarkGfm,
+        remarkFlexibleToc,
+        remarkFlexibleCodeTitles,
+        remarkParse,
+        remarkRehype,
+      ],
+      rehypePlugins: [
+        rehypeSlug,
+        rehypeAutolinkHeadings,
+        [rehypePrettyCode, prettyCodeOptions],
+        rehypeStringify,
+      ],
     },
+    vfileDataIntoScope: "toc",
   };
 
   return (
@@ -76,7 +106,11 @@ export default async function Post({ params }: Props) {
             getFrontmatter<Frontmatter>(source).frontmatter.updatedAt
           ).toLocaleDateString()}
         </p>
-        <article className="prose max-w-full dark:prose-invert pt-5">
+        <article
+          className={cn(
+            "prose max-w-full dark:prose-invert prose-pre:font-mono prose-code:font-mono pt-5"
+          )}
+        >
           <MDXRemote source={source} options={options} />
         </article>
       </Container>

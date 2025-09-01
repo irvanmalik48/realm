@@ -96,9 +96,19 @@ export default function Blog() {
             <span className="text-sm font-mono">ALL_POSTS.md</span>
           </h2>
           <div className="w-full p-5 flex flex-col gap-5">
-            {posts.map((post) => (
-              <PostCard key={post.slug} {...post} />
-            ))}
+            {posts
+              .sort((a, b) => {
+                const firstPostTime = new Date(a.updatedAt);
+                const secondPostTime = new Date(b.updatedAt);
+
+                const firstPostTimeInt = firstPostTime.getTime();
+                const secondPostTimeInt = secondPostTime.getTime();
+
+                return firstPostTimeInt > secondPostTimeInt ? -1 : 1;
+              })
+              .map((post) => (
+                <PostCard key={post.slug} {...post} />
+              ))}
           </div>
         </div>
       </Container>
