@@ -1,10 +1,12 @@
 import Container from "@/components/container";
 import { ImageComponent } from "@/components/image";
 import { TextScroll } from "@/components/ui/text-scroll";
-import { Book, Info } from "lucide-react";
+import { Book, Newspaper } from "lucide-react";
 import { Metadata } from "next";
 import CuteImage from "@/assets/img/cute.jpg";
 import type { WebPage, WithContext } from "schema-dts";
+import { getPosts } from "@/lib/fs/posts";
+import { PostCard } from "@/components/post-card";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -15,7 +17,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function About() {
+export default function Blog() {
+  const posts = getPosts();
+
   const jsonLd: WithContext<WebPage> = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -78,21 +82,24 @@ export default function About() {
           <p className="px-5 py-3">
             In case you are wondering, yes, I write things. Mainly for some
             stuffs that I find interesting, or just to get my thoughts out of my
-            head. You might also find rambles, rants,{" "}
-            <span className="line-through">a couple backshots</span>, and some
-            random stuffs, maybe code or some shit like that I don&apos;t know.
+            head. You might also find rambles, rants, and some random stuffs,
+            maybe code or some shit like that I don&apos;t know.
+          </p>
+          <p className="px-5 pb-3 font-semibold">
+            This section of my website is still under development. It might
+            change later.
           </p>
         </div>
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
-            <Info className="size-4" />
-            <span className="text-sm font-mono">NOTICE.md</span>
+            <Newspaper className="size-4" />
+            <span className="text-sm font-mono">ALL_POSTS.md</span>
           </h2>
-          <p className="px-5 py-3">
-            This page is currently under heavy development. Please check again
-            later. Otherwise you can try visiting other pages since what can you
-            do anyways here.
-          </p>
+          <div className="w-full p-5 flex flex-col gap-5">
+            {posts.map((post) => (
+              <PostCard key={post.slug} {...post} />
+            ))}
+          </div>
         </div>
       </Container>
       <TextScroll
