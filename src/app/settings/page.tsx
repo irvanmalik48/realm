@@ -3,7 +3,7 @@ import { ImageComponent } from "@/components/image";
 import { TextScroll } from "@/components/ui/text-scroll";
 import { Settings } from "lucide-react";
 import { Metadata } from "next";
-import CuteImage from "@/assets/img/cute.jpg";
+import CuteImage from "@/assets/img/awoocon.jpg";
 import type { WebPage, WithContext } from "schema-dts";
 import { PerformanceModeToggle } from "@/components/performance-mode-toggle";
 import { MarqueeToggle } from "@/components/marquee-toggle";
