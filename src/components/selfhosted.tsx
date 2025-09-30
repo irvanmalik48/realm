@@ -54,7 +54,7 @@ export function SelfHostedServices() {
         />
         <SelfHostItem
           icon={HardDrive}
-          leftClassName="bg-muted/20 md:border-r border-b border-border"
+          leftClassName="bg-muted/20 md:border-r border-border"
           rightClassName="border-b border-border"
           title="Stash"
           url="https://storage.irvanma.eu.org"
