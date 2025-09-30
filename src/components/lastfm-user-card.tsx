@@ -9,7 +9,7 @@ import { RefreshCcw, User } from "lucide-react";
 import { parseUser } from "@/lib/lastfm/lastfm";
 
 export function LastFMUserCard(props: LastFMCardProps) {
-  const { username, interval = 15 * 1000 } = props;
+  const { username, interval = 60 * 60 * 1000 } = props;
 
   const endpoint =
     process.env.NEXT_PUBLIC_ENVIRONMENT === "development"

@@ -11,7 +11,7 @@ import { LastFM } from "./logos/lastfm";
 import { Music2, RefreshCcw } from "lucide-react";
 
 export function LastFMTrackCard(props: LastFMCardProps) {
-  const { username, limit = 8, interval = 15 * 1000 } = props;
+  const { username, limit = 8, interval = 60 * 60 * 1000 } = props;
 
   const endpoint =
     process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
