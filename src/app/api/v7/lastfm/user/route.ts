@@ -1,5 +1,7 @@
 import { LastFMUserResponseBody } from "@/lib/types/lastfm";
 
+export const runtime = "edge";
+
 export async function GET(request: Request): Promise<Response> {
   const token = process.env.LASTFM_API_KEY;
 
