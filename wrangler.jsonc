@@ -1,6 +1,6 @@
 {
   "main": ".open-next/worker.js",
-  "name": "realm-nextjs",
+  "name": "main-website",
   "compatibility_date": "2025-03-25",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
