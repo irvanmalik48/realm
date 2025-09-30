@@ -3,12 +3,7 @@ import path from "path";
 import { getFrontmatter } from "next-mdx-remote-client/utils";
 import { readingTime } from "reading-time-estimator";
 
-import type {
-  Frontmatter,
-  Post,
-  PostWithScope,
-  Scope,
-} from "@/lib/types/posts";
+import type { Frontmatter, PostWithScope } from "@/lib/types/posts";
 
 export function getMarkdownExtension(
   fileName: `${string}.md` | `${string}.mdx`
