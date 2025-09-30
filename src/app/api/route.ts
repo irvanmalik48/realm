@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 export function GET() {
   const response = {
     message: "Nothing to see here",
