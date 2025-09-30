@@ -14,7 +14,7 @@ export function LastFMUserCard(props: LastFMCardProps) {
   const endpoint =
     process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
       ? `http://localhost:3000/api/v7/lastfm/user?username=${username}`
-      : `https://www.irvanma.eu.org/api/v7/lastfm/user?username=${username}`;
+      : `https://irvanma.eu.org/api/v7/lastfm/user?username=${username}`;
 
   const { data, status, refetch } = useQuery({
     queryKey: ["lastfm-user"],
