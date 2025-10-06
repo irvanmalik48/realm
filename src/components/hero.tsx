@@ -13,6 +13,7 @@ import { GitHub } from "./logos/github";
 import { LinkedIn } from "./logos/linkedin";
 import { Telegram } from "./logos/telegram";
 import { Gmail } from "./logos/gmail";
+import { Lens } from "./ui/lens";
 
 export interface HeroProps {
   img: StaticImport;
@@ -22,6 +23,7 @@ export interface HeroProps {
 export function Hero({ img, profile }: HeroProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [isProfileLoading, setIsProfileLoading] = useState(true);
+  const [hovering, setHovering] = useState(false);
   const [performanceMode] = useAtom(performanceModeAtom);
 
   const image = img as StaticImageData;
@@ -30,19 +32,35 @@ export function Hero({ img, profile }: HeroProps) {
   return (
     <div className="relative">
       <div className="relative overflow-clip w-full max-h-72 rounded-lg">
-        <Image
-          src={image}
-          alt="Hero Image"
-          height={1080}
-          placeholder="blur"
-          blurDataURL={image.blurDataURL}
-          onLoad={() => setIsImageLoading(false)}
-          className={`${
-            isImageLoading && !performanceMode ? "blur" : "remove-blur"
-          } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500`}
-        />
+        {performanceMode ? (
+          <Image
+            src={image}
+            alt="Hero Image"
+            height={1080}
+            placeholder="blur"
+            blurDataURL={image.blurDataURL}
+            onLoad={() => setIsImageLoading(false)}
+            className={`${
+              isImageLoading && !performanceMode ? "blur" : "remove-blur"
+            } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500`}
+          />
+        ) : (
+          <Lens hovering={hovering} setHovering={setHovering}>
+            <Image
+              src={image}
+              alt="Hero Image"
+              height={1080}
+              placeholder="blur"
+              blurDataURL={image.blurDataURL}
+              onLoad={() => setIsImageLoading(false)}
+              className={`${
+                isImageLoading && !performanceMode ? "blur" : "remove-blur"
+              } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500`}
+            />
+          </Lens>
+        )}
       </div>
-      <div className="relative rounded-full aspect-square size-28 md:size-36 mx-auto md:mx-0 md:ml-5 -mt-18 border-6 border-background overflow-clip">
+      <div className="relative z-30 rounded-full aspect-square size-28 md:size-36 mx-auto md:mx-0 md:ml-5 -mt-18 border-6 border-background overflow-clip">
         <Image
           src={profileImg}
           unoptimized={profileImg.src.includes("animated")}
