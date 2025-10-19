@@ -1,4 +1,5 @@
 import { LastFMTrackResponseBody } from "@/lib/types/lastfm";
+import { jsonResponse, errorResponse } from "@/lib/headers/index";
 
 export async function GET(request: Request): Promise<Response> {
   const token = process.env.LASTFM_API_KEY;
@@ -10,92 +11,34 @@ export async function GET(request: Request): Promise<Response> {
   const limitNumber = limit ? parseInt(limit, 10) : 1;
 
   if (!token) {
-    return new Response(
-      JSON.stringify({
-        error: "LastFM API key is not set.",
-        status: "error",
-      }),
-      {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      }
-    );
+    return errorResponse("LastFM API key is not set.", 500);
   }
 
   if (!username) {
-    return new Response(
-      JSON.stringify({
-        error: "Username is required.",
-        status: "error",
-      }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      }
-    );
+    return errorResponse("Username is required.", 400);
   }
 
-  if (limitNumber <= 0 || limitNumber > 200) {
-    return new Response(
-      JSON.stringify({
-        error: "Limit must be between 1 and 200.",
-        status: "error",
-      }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      }
-    );
+  if (isNaN(limitNumber) || limitNumber <= 0 || limitNumber > 200) {
+    return errorResponse("Limit must be between 1 and 200.", 400);
   }
 
-  const endpoint = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${token}&format=json&limit=${limit}`;
+  const endpoint = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${encodeURIComponent(
+    username,
+  )}&api_key=${encodeURIComponent(token)}&format=json&limit=${encodeURIComponent(
+    String(limitNumber),
+  )}`;
 
   const response = await fetch(endpoint, {
     next: {
       revalidate: 60 * 15, // 15 minutes
     },
   });
+
   if (!response.ok) {
-    return new Response(
-      JSON.stringify({
-        error: "Failed to fetch LastFM data",
-        status: "error",
-      }),
-      {
-        status: response.status,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      }
-    );
+    return errorResponse("Failed to fetch LastFM data", response.status);
   }
+
   const body: LastFMTrackResponseBody = await response.json();
 
-  return new Response(JSON.stringify(body), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET",
-      "Access-Control-Allow-Headers": "Content-Type",
-    },
-  });
+  return jsonResponse(body, 200);
 }
