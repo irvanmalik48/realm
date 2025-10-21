@@ -67,7 +67,7 @@ export function FAB() {
           scrollY > 10 ? "opacity-100" : "opacity-0",
           open
             ? "translate-y-15 -translate-x-15"
-            : "translate-y-0 -translate-x-0"
+            : "translate-y-0 translate-x-0",
         )}
         onClick={handleScrollToTop}
       >
@@ -81,13 +81,13 @@ export function FAB() {
               "fixed bottom-5 md:bottom-10 flex items-center justify-center",
               "right-5 z-50 md:right-10 p-3 bg-background hover:bg-secondary rounded-lg",
               "text-foreground hover:text-secondary-foreground cursor-pointer",
-              "border border-border transition-colors outline-0"
+              "border border-border transition-colors outline-0",
             )}
           >
             <X
               className={cn(
                 "size-6 transition-transform",
-                open ? "rotate-0" : "rotate-45"
+                open ? "rotate-0" : "rotate-45",
               )}
             />
             <span className="sr-only">Open FAB menu</span>
