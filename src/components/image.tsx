@@ -44,7 +44,7 @@ export function ImageComponent({
           onLoad={() => setIsImageLoading(false)}
           className={`${
             isImageLoading && !performanceMode ? "blur" : "remove-blur"
-          } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500 ${innerClassName}`}
+          } transition-all ease-[cubic-bezier(0.22,1,0.36,1)] duration-500 ${innerClassName}`}
         />
       ) : (
         <Lens hovering={hovering} setHovering={setHovering}>
@@ -57,7 +57,7 @@ export function ImageComponent({
             onLoad={() => setIsImageLoading(false)}
             className={`${
               isImageLoading && !performanceMode ? "blur" : "remove-blur"
-            } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500 ${innerClassName}`}
+            } transition-all ease-[cubic-bezier(0.22,1,0.36,1)] duration-500 ${innerClassName}`}
           />
         </Lens>
       )}
