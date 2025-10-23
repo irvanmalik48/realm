@@ -31,13 +31,12 @@ export default function ThemeToggleButton({
 
   const styleId = "theme-transition-styles";
 
-  const updateStyles = React.useCallback((css: string, name: string) => {
+  const updateStyles = React.useCallback((css: string, name: string): void => {
     if (typeof window === "undefined") return;
 
-    let styleElement = document.getElementById(styleId) as HTMLStyleElement;
-
-    console.log("style ELement", styleElement);
-    console.log("name", name);
+    let styleElement = document.getElementById(
+      styleId,
+    ) as HTMLStyleElement | null;
 
     if (!styleElement) {
       styleElement = document.createElement("style");
@@ -46,8 +45,6 @@ export default function ThemeToggleButton({
     }
 
     styleElement.textContent = css;
-
-    console.log("content updated");
   }, []);
 
   const toggleTheme = React.useCallback(() => {

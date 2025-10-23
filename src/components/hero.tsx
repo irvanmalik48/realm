@@ -5,6 +5,7 @@ import {
   type StaticImport,
 } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai/react";
 import { useState } from "react";
@@ -40,9 +41,12 @@ export function Hero({ img, profile }: HeroProps) {
             placeholder="blur"
             blurDataURL={image.blurDataURL}
             onLoad={() => setIsImageLoading(false)}
-            className={`${
-              isImageLoading && !performanceMode ? "blur" : "remove-blur"
-            } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500`}
+            className={cn(
+              isImageLoading && !performanceMode ? "blur" : "remove-blur",
+              "transition-all",
+              "ease-[cubic-bezier(0.22,1,0.36,1)]",
+              "duration-500",
+            )}
           />
         ) : (
           <Lens hovering={hovering} setHovering={setHovering}>
@@ -53,9 +57,12 @@ export function Hero({ img, profile }: HeroProps) {
               placeholder="blur"
               blurDataURL={image.blurDataURL}
               onLoad={() => setIsImageLoading(false)}
-              className={`${
-                isImageLoading && !performanceMode ? "blur" : "remove-blur"
-              } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500`}
+              className={cn(
+                isImageLoading && !performanceMode ? "blur" : "remove-blur",
+                "transition-all",
+                "ease-[cubic-bezier(0.22,1,0.36,1)]",
+                "duration-500",
+              )}
             />
           </Lens>
         )}
@@ -69,9 +76,12 @@ export function Hero({ img, profile }: HeroProps) {
           placeholder="blur"
           blurDataURL={profileImg.blurDataURL}
           onLoad={() => setIsProfileLoading(false)}
-          className={`${
-            isProfileLoading && !performanceMode ? "blur" : "remove-blur"
-          } transition-all ease-[cubic-bezier(0.22,_1,_0.36,_1)] duration-500`}
+          className={cn(
+            isProfileLoading && !performanceMode ? "blur" : "remove-blur",
+            "transition-all",
+            "ease-[cubic-bezier(0.22,1,0.36,1)]",
+            "duration-500",
+          )}
         />
       </div>
       <div className="relative w-full py-3 md:-mt-18 justify-center flex-col md:flex-row md:justify-between flex gap-3 md:gap-5 items-center">
