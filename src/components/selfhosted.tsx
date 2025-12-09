@@ -17,7 +17,7 @@ export function SelfHostItem(props: {
       <div
         className={cn(
           "w-full px-5 py-3 gap-3 flex md:justify-start justify-center items-center",
-          props.leftClassName
+          props.leftClassName,
         )}
       >
         <props.icon className="size-5" />
@@ -26,7 +26,7 @@ export function SelfHostItem(props: {
       <a
         className={cn(
           "w-full px-5 py-3 bg-background text-foreground hover:bg-primary hover:text-primary-foreground transition-colors flex gap-3 items-center justify-center",
-          props.rightClassName
+          props.rightClassName,
         )}
         href={props.url}
         target="_blank"
@@ -48,9 +48,9 @@ export function SelfHostedServices() {
           icon={Compass}
           leftClassName="bg-muted/20 md:border-r border-b border-border"
           rightClassName="border-b border-border"
-          title="Minecraft Bluemap"
+          title="Minecraft Pl3xmap"
           url="https://mcmap.irvanma.eu.org"
-          sr="Visit Bluemap Page"
+          sr="Visit Pl3xmap Page"
         />
         <SelfHostItem
           icon={HardDrive}

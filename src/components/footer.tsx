@@ -13,7 +13,7 @@ export function Footer() {
       text: "RWHU",
     },
     { href: "#", text: "Lycoris" },
-    { href: "https://mcmap.irvanma.eu.org", text: "Realm's BlueMap" },
+    { href: "https://mcmap.irvanma.eu.org", text: "Lappcraft Pl3xmap" },
   ];
 
   const socials = [
