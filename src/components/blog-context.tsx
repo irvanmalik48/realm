@@ -33,28 +33,30 @@ export function BlogContextWrapper({
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedQuery = useDebounce(searchQuery, 300);
 
-  const filteredPosts = useMemo(() => {
-    // First sort the posts by date (newest first)
-    const sorted = [...initialPosts].sort((a, b) => {
+  const sortedPosts = useMemo(() => {
+    return [...initialPosts].sort((a, b) => {
       const firstPostTime = new Date(a.updatedAt).getTime();
       const secondPostTime = new Date(b.updatedAt).getTime();
       return firstPostTime > secondPostTime ? -1 : 1;
     });
+  }, [initialPosts]);
 
-    if (!debouncedQuery) {
-      return sorted;
-    }
-
-    const fuse = new Fuse(sorted, {
+  const fuse = useMemo(() => {
+    return new Fuse(sortedPosts, {
       keys: ["title", "description", "tags"],
       threshold: 0.3,
       ignoreLocation: true,
     });
+  }, [sortedPosts]);
+
+  const filteredPosts = useMemo(() => {
+    if (!debouncedQuery) {
+      return sortedPosts;
+    }
 
     const results = fuse.search(debouncedQuery);
-
     return results.map((result) => result.item);
-  }, [initialPosts, debouncedQuery]);
+  }, [sortedPosts, fuse, debouncedQuery]);
 
   return (
     <BlogContext.Provider

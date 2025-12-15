@@ -1,7 +1,12 @@
 import { PostCardProps } from "@/lib/types/posts";
 import { Link } from "next-view-transitions";
+import { motion, HTMLMotionProps } from "framer-motion";
 
-export function PostCard(props: PostCardProps) {
+const MotionLink = motion(Link);
+
+type MotionPostCardProps = PostCardProps & HTMLMotionProps<"a">;
+
+export function PostCard(props: MotionPostCardProps) {
   const {
     title,
     createdAt,
@@ -10,12 +15,14 @@ export function PostCard(props: PostCardProps) {
     tags,
     readingTime,
     className,
+    ...motionProps
   } = props;
 
   return (
-    <Link
+    <MotionLink
       href={`/blog/${props.slug}`}
       className={`w-full bg-secondary/20 rounded-md border border-border ${className}`}
+      {...motionProps}
     >
       <div className="w-full flex flex-col px-5 pt-3 gap-1">
         <h3 className="w-full font-semibold">{title}</h3>
@@ -46,6 +53,6 @@ export function PostCard(props: PostCardProps) {
           </span>
         ))}
       </div>
-    </Link>
+    </MotionLink>
   );
 }
