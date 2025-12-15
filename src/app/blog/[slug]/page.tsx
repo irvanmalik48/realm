@@ -21,6 +21,7 @@ import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { TableOfContents } from "@/components/table-of-contents";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -83,37 +84,44 @@ export default async function Post({ params }: Props) {
 
   return (
     <>
-      <Container className="gap-0">
-        <Button asChild variant="ghost" className="self-start mb-10">
-          <Link href="/blog" className="flex items-center gap-2">
-            <ArrowLeft className="size-4" />
-            Back to blog
-          </Link>
-        </Button>
-        <h1 className="text-4xl font-bold mb-4 text-center">
-          {getFrontmatter<Frontmatter>(source).frontmatter.title}
-        </h1>
-        <p className="text-muted-foreground mb-4 text-center">
-          {getFrontmatter<Frontmatter>(source).frontmatter.description}
-        </p>
-        <p className="text-sm text-muted-foreground mb-4 text-center">
-          Published on{" "}
-          {new Date(
-            getFrontmatter<Frontmatter>(source).frontmatter.createdAt
-          ).toLocaleDateString()}{" "}
-          | Last updated on{" "}
-          {new Date(
-            getFrontmatter<Frontmatter>(source).frontmatter.updatedAt
-          ).toLocaleDateString()}
-        </p>
-        <article
-          className={cn(
-            "prose max-w-full dark:prose-invert prose-pre:font-mono prose-code:font-mono pt-5"
-          )}
-        >
-          <MDXRemote source={source} options={options} />
-        </article>
-      </Container>
+      <div className="relative flex justify-center max-w-7xl mx-auto px-5 gap-10">
+        <div className="hidden xl:block w-64 shrink-0">
+          <div className="sticky top-24">
+            <TableOfContents />
+          </div>
+        </div>
+        <Container className="mx-0 max-w-3xl min-w-0 gap-0 relative z-10 bg-background">
+          <Button asChild variant="ghost" className="self-start mb-10">
+            <Link href="/blog" className="flex items-center gap-2">
+              <ArrowLeft className="size-4" />
+              Back to blog
+            </Link>
+          </Button>
+          <h1 className="text-4xl font-bold mb-4 text-center">
+            {getFrontmatter<Frontmatter>(source).frontmatter.title}
+          </h1>
+          <p className="text-muted-foreground mb-4 text-center">
+            {getFrontmatter<Frontmatter>(source).frontmatter.description}
+          </p>
+          <p className="text-sm text-muted-foreground mb-4 text-center">
+            Published on{" "}
+            {new Date(
+              getFrontmatter<Frontmatter>(source).frontmatter.createdAt,
+            ).toLocaleDateString()}{" "}
+            | Last updated on{" "}
+            {new Date(
+              getFrontmatter<Frontmatter>(source).frontmatter.updatedAt,
+            ).toLocaleDateString()}
+          </p>
+          <article
+            className={cn(
+              "prose max-w-full dark:prose-invert prose-pre:font-mono prose-code:font-mono prose-headings:scroll-mt-24 pt-5",
+            )}
+          >
+            <MDXRemote source={source} options={options} />
+          </article>
+        </Container>
+      </div>
       <TextScroll
         className="text-5xl md:text-7xl text-muted-foreground/50 dark:font-semibold font-bold py-24 md:space-y-2"
         textClassName="py-1 md:py-3 font-doto"
