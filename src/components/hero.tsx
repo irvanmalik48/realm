@@ -7,7 +7,7 @@ import {
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
-import { useAtom } from "jotai/react";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { GitHub } from "./logos/github";

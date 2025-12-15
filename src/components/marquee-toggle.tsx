@@ -1,7 +1,7 @@
 "use client";
 
 import marqueeEnable from "@/lib/atoms/marquee";
-import { useAtom } from "jotai/react";
+import { useAtom } from "jotai";
 import { Switch } from "./ui/switch";
 
 export function MarqueeToggle() {

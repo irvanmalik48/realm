@@ -11,7 +11,7 @@ import {
   useVelocity,
 } from "framer-motion";
 import marqueeEnable from "@/lib/atoms/marquee";
-import { useAtom } from "jotai/react";
+import { useAtom } from "jotai";
 
 import { cn } from "@/lib/utils";
 

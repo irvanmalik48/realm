@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
-import { useAtom } from "jotai/react";
+import { useAtom } from "jotai";
 
 import Image from "next/image";
 import {

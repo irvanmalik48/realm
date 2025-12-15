@@ -21,7 +21,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import Image from "next/image";
 import Hero from "@/assets/img/fab-hero.png";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
-import { useAtom } from "jotai/react";
+import { useAtom } from "jotai";
 
 export function FAB() {
   const [open, setOpen] = useState(false);

@@ -81,7 +81,8 @@ export default function Home() {
             <span className="text-sm font-mono">MINECRAFT_SERVER.md</span>
           </h2>
           <p className="px-5 py-3 border-b border-border">
-            Oh yeah, I run a Minecraft Server. Here&apos;s the details:
+            Oh yeah, I run a Minecraft Server (Java only). Here&apos;s the
+            details:
           </p>
           <MinecraftServer />
         </div>

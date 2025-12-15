@@ -4,7 +4,7 @@ import React from "react";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import darkModeToggleAnimation from "@/lib/atoms/fade";
-import { useAtom } from "jotai/react";
+import { useAtom } from "jotai";
 import { Button } from "@/components/ui/button";
 
 import {

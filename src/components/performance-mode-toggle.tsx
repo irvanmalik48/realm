@@ -1,7 +1,7 @@
 "use client";
 
 import performanceModeAtom from "@/lib/atoms/performance-mode";
-import { useAtom } from "jotai/react";
+import { useAtom } from "jotai";
 import { Switch } from "./ui/switch";
 
 export function PerformanceModeToggle() {

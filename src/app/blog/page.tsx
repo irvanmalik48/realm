@@ -6,7 +6,9 @@ import { Metadata } from "next";
 import CuteImage from "@/assets/img/cute.jpg";
 import type { WebPage, WithContext } from "schema-dts";
 import { getPosts } from "@/lib/fs/posts";
-import { PostCard } from "@/components/post-card";
+import { PostList } from "@/components/post-list";
+import { SearchBar } from "@/components/search-bar";
+import { BlogContextWrapper } from "@/components/blog-context";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -90,27 +92,21 @@ export default function Blog() {
             change later.
           </p>
         </div>
-        <div className="w-full bg-background rounded-lg border border-border">
-          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
-            <Newspaper className="size-4" />
-            <span className="text-sm font-mono">ALL_POSTS.md</span>
-          </h2>
-          <div className="w-full p-5 flex flex-col gap-5">
-            {posts
-              .sort((a, b) => {
-                const firstPostTime = new Date(a.updatedAt);
-                const secondPostTime = new Date(b.updatedAt);
 
-                const firstPostTimeInt = firstPostTime.getTime();
-                const secondPostTimeInt = secondPostTime.getTime();
+        <BlogContextWrapper initialPosts={posts}>
+          <div className="w-full bg-background rounded-lg border border-border flex flex-col overflow-hidden">
+            <div className="w-full flex flex-col md:flex-row md:items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-30">
+              <div className="flex items-center gap-3">
+                <Newspaper className="size-4" />
+                <span className="text-sm font-mono">ALL_POSTS.md</span>
+              </div>
 
-                return firstPostTimeInt > secondPostTimeInt ? -1 : 1;
-              })
-              .map((post) => (
-                <PostCard key={post.slug} {...post} />
-              ))}
+              <SearchBar />
+            </div>
+
+            <PostList />
           </div>
-        </div>
+        </BlogContextWrapper>
       </Container>
       <TextScroll
         className="text-5xl md:text-7xl text-muted-foreground/50 dark:font-semibold font-bold py-24 md:space-y-2"

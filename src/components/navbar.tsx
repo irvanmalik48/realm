@@ -4,7 +4,7 @@ import ProgressiveBlur from "./ui/progressive-blur";
 import ThemeToggleButton from "./ui/theme-toggle-button";
 import { Link } from "next-view-transitions";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
-import { useAtom } from "jotai/react";
+import { useAtom } from "jotai";
 
 export interface FlatNavLinkProps {
   href: string;
