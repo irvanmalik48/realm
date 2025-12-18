@@ -262,7 +262,8 @@ function CommentItem({
       localStorage.removeItem(`comment_reaction_${comment.id}`);
     } else {
       if (prevReaction === "likes") newLikes = Math.max(0, newLikes - 1);
-      else newDislikes = Math.max(0, newDislikes - 1);
+      else if (prevReaction === "dislikes")
+        newDislikes = Math.max(0, newDislikes - 1);
       if (type === "likes") newLikes++;
       else newDislikes++;
       setUserReaction(type);
