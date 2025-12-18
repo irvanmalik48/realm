@@ -262,16 +262,13 @@ function CommentItem({
       let newDislikes = current.dislikes || 0;
 
       if (isSame) {
-        // remove vote
         if (type === "likes") newLikes = Math.max(0, newLikes - 1);
         else newDislikes = Math.max(0, newDislikes - 1);
       } else {
-        // remove prev if exists
         if (prevReaction === "likes") newLikes = Math.max(0, newLikes - 1);
         else if (prevReaction === "dislikes")
           newDislikes = Math.max(0, newDislikes - 1);
 
-        // add new
         if (type === "likes") newLikes++;
         else newDislikes++;
       }
@@ -282,7 +279,6 @@ function CommentItem({
       });
     } catch (err) {
       console.error("Failed to react", err);
-      // Revert optimistic update logic could go here, but omitted for brevity
     }
   };
 
