@@ -319,7 +319,7 @@ function CommentItem({
               <span className="text-xs">{localDislikes}</span>
             </Button>
 
-            {level < 3 && (
+            {level < 2 && (
               <Button
                 variant="ghost"
                 size="sm"
