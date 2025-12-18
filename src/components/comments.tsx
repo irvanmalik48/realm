@@ -86,7 +86,9 @@ export default function Comments({ slug }: { slug: string }) {
 
   return (
     <div className="mt-16 w-full space-y-8">
-      <h2 className="text-2xl font-bold">Comments</h2>
+      <h2 id="comments" className="text-2xl font-bold">
+        Comments
+      </h2>
 
       <form
         onSubmit={handleSubmit}
