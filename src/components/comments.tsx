@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import md5 from "blueimp-md5";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { motion, AnimatePresence } from "framer-motion";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 type Comment = {
   id: string;
@@ -24,15 +25,14 @@ type Comment = {
 };
 
 export default function Comments({ slug }: { slug: string }) {
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [content, setContent] = useState("");
-  const [submitting, setSubmitting] = useState(false);
 
-  const fetchComments = async () => {
-    try {
+  const { data: comments = [], isLoading } = useQuery({
+    queryKey: ["comments", slug],
+    queryFn: async () => {
       const records = await pb.collection("comments").getList<Comment>(1, 200, {
         filter: `slug = "${slug}"`,
         sort: "-created",
@@ -55,40 +55,34 @@ export default function Comments({ slug }: { slug: string }) {
         }
       });
 
-      setComments(rootComments);
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+      return rootComments;
+    },
+  });
 
-  useEffect(() => {
-    fetchComments();
-  }, [slug]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !content.trim()) return;
-
-    setSubmitting(true);
-    try {
+  const createCommentMutation = useMutation({
+    mutationFn: async () => {
       await pb.collection("comments").create({
         slug,
         name,
         email,
         content,
       });
+    },
+    onSuccess: () => {
       setName("");
       setEmail("");
       setContent("");
-      await fetchComments();
-    } catch (error) {
-      console.error("Error submitting comment:", error);
-    } finally {
-      setSubmitting(false);
-    }
+      queryClient.invalidateQueries({ queryKey: ["comments", slug] });
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !content.trim()) return;
+    createCommentMutation.mutate();
   };
+
+  const isSubmitting = createCommentMutation.isPending;
 
   return (
     <div className="mt-16 w-full space-y-8">
@@ -105,7 +99,7 @@ export default function Comments({ slug }: { slug: string }) {
               placeholder="Your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              disabled={submitting}
+              disabled={isSubmitting}
               required
               className="pl-9 bg-background"
             />
@@ -117,7 +111,7 @@ export default function Comments({ slug }: { slug: string }) {
               placeholder="Email (for Gravatar)"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={submitting}
+              disabled={isSubmitting}
               className="pl-9 bg-background"
             />
           </div>
@@ -127,13 +121,13 @@ export default function Comments({ slug }: { slug: string }) {
             placeholder="Share your thoughts..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            disabled={submitting}
+            disabled={isSubmitting}
             required
             className="resize-none min-h-[100px] bg-background"
           />
         </div>
-        <Button type="submit" disabled={submitting}>
-          {submitting ? (
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Posting...
@@ -145,7 +139,7 @@ export default function Comments({ slug }: { slug: string }) {
       </form>
 
       <div className="space-y-4">
-        {loading ? (
+        {isLoading ? (
           <div className="flex justify-center py-8">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           </div>
@@ -156,12 +150,7 @@ export default function Comments({ slug }: { slug: string }) {
         ) : (
           <AnimatePresence mode="popLayout">
             {comments.map((comment) => (
-              <CommentItem
-                key={comment.id}
-                comment={comment}
-                slug={slug}
-                onRefresh={fetchComments}
-              />
+              <CommentItem key={comment.id} comment={comment} slug={slug} />
             ))}
           </AnimatePresence>
         )}
@@ -173,23 +162,21 @@ export default function Comments({ slug }: { slug: string }) {
 function CommentItem({
   comment,
   slug,
-  onRefresh,
   level = 0,
   isLast = true,
   hasFriend = false,
 }: {
   comment: Comment;
   slug: string;
-  onRefresh: () => void;
   level?: number;
   isLast?: boolean;
   hasFriend?: boolean;
 }) {
+  const queryClient = useQueryClient();
   const [replying, setReplying] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [content, setContent] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [localLikes, setLocalLikes] = useState(comment.likes || 0);
   const [localDislikes, setLocalDislikes] = useState(comment.dislikes || 0);
   const [userReaction, setUserReaction] = useState<"likes" | "dislikes" | null>(
@@ -203,12 +190,8 @@ function CommentItem({
     }
   }, [comment.id]);
 
-  const handleReply = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !content.trim()) return;
-
-    setSubmitting(true);
-    try {
+  const replyMutation = useMutation({
+    mutationFn: async () => {
       await pb.collection("comments").create({
         slug,
         name,
@@ -216,44 +199,29 @@ function CommentItem({
         content,
         parent: comment.id,
       });
+    },
+    onSuccess: () => {
       setName("");
       setEmail("");
       setContent("");
       setReplying(false);
-      onRefresh();
-    } catch (error) {
-      console.error("Error submitting reply:", error);
-    } finally {
-      setSubmitting(false);
-    }
+      queryClient.invalidateQueries({ queryKey: ["comments", slug] });
+    },
+  });
+
+  const handleReply = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !content.trim()) return;
+    replyMutation.mutate();
   };
 
-  const updateReaction = async (type: "likes" | "dislikes") => {
-    const prevReaction = userReaction;
-    const isSame = prevReaction === type;
-
-    // Optimistic Update
-    if (isSame) {
-      // Toggle off
-      if (type === "likes") setLocalLikes((p) => Math.max(0, p - 1));
-      else setLocalDislikes((p) => Math.max(0, p - 1));
-      setUserReaction(null);
-      localStorage.removeItem(`comment_reaction_${comment.id}`);
-    } else {
-      // Toggle on or Switch
-      if (prevReaction) {
-        // Remove previous
-        if (prevReaction === "likes") setLocalLikes((p) => Math.max(0, p - 1));
-        else setLocalDislikes((p) => Math.max(0, p - 1));
-      }
-      // Add new
-      if (type === "likes") setLocalLikes((p) => p + 1);
-      else setLocalDislikes((p) => p + 1);
-      setUserReaction(type);
-      localStorage.setItem(`comment_reaction_${comment.id}`, type);
-    }
-
-    try {
+  const smartReactionMutation = useMutation({
+    mutationFn: async (vars: {
+      type: "likes" | "dislikes";
+      isSame: boolean;
+      prevReaction: string | null;
+    }) => {
+      const { type, isSame, prevReaction } = vars;
       const current = await pb
         .collection("comments")
         .getOne<Comment>(comment.id);
@@ -277,9 +245,33 @@ function CommentItem({
         likes: newLikes,
         dislikes: newDislikes,
       });
-    } catch (err) {
-      console.error("Failed to react", err);
+    },
+  });
+
+  const handleReactionClick = (type: "likes" | "dislikes") => {
+    const prevReaction = userReaction;
+    const isSame = prevReaction === type;
+
+    let newLikes = localLikes;
+    let newDislikes = localDislikes;
+
+    if (isSame) {
+      if (type === "likes") newLikes = Math.max(0, newLikes - 1);
+      else newDislikes = Math.max(0, newDislikes - 1);
+      setUserReaction(null);
+      localStorage.removeItem(`comment_reaction_${comment.id}`);
+    } else {
+      if (prevReaction === "likes") newLikes = Math.max(0, newLikes - 1);
+      else newDislikes = Math.max(0, newDislikes - 1);
+      if (type === "likes") newLikes++;
+      else newDislikes++;
+      setUserReaction(type);
+      localStorage.setItem(`comment_reaction_${comment.id}`, type);
     }
+    setLocalLikes(newLikes);
+    setLocalDislikes(newDislikes);
+
+    smartReactionMutation.mutate({ type, isSame, prevReaction });
   };
 
   const gravatarUrl = comment.email
@@ -352,7 +344,7 @@ function CommentItem({
                 "h-auto p-0 hover:bg-transparent hover:text-primary gap-1.5 text-muted-foreground",
                 userReaction === "likes" && "text-primary font-medium",
               )}
-              onClick={() => updateReaction("likes")}
+              onClick={() => handleReactionClick("likes")}
             >
               <ThumbsUp
                 className={cn(
@@ -370,7 +362,7 @@ function CommentItem({
                 "h-auto p-0 hover:bg-transparent hover:text-primary gap-1.5 text-muted-foreground",
                 userReaction === "dislikes" && "text-destructive font-medium",
               )}
-              onClick={() => updateReaction("dislikes")}
+              onClick={() => handleReactionClick("dislikes")}
             >
               <ThumbsDown
                 className={cn(
@@ -381,7 +373,7 @@ function CommentItem({
               <span className="text-xs">{localDislikes}</span>
             </Button>
 
-            {level < 1 && (
+            {level < 3 && (
               <Button
                 variant="ghost"
                 size="sm"
@@ -412,7 +404,7 @@ function CommentItem({
                         placeholder="Your name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        disabled={submitting}
+                        disabled={replyMutation.isPending}
                         required
                         className="pl-9 h-9"
                       />
@@ -424,7 +416,7 @@ function CommentItem({
                         placeholder="Email (optional)"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        disabled={submitting}
+                        disabled={replyMutation.isPending}
                         className="pl-9 h-9"
                       />
                     </div>
@@ -433,13 +425,17 @@ function CommentItem({
                     placeholder="Write a reply..."
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    disabled={submitting}
+                    disabled={replyMutation.isPending}
                     required
                     className="resize-none h-20"
                   />
                   <div className="flex gap-2">
-                    <Button type="submit" size="sm" disabled={submitting}>
-                      {submitting ? "Replying..." : "Post Reply"}
+                    <Button
+                      type="submit"
+                      size="sm"
+                      disabled={replyMutation.isPending}
+                    >
+                      {replyMutation.isPending ? "Replying..." : "Post Reply"}
                     </Button>
                     <Button
                       type="button"
@@ -463,7 +459,6 @@ function CommentItem({
                 key={child.id}
                 comment={child}
                 slug={slug}
-                onRefresh={onRefresh}
                 level={level + 1}
                 isLast={index === comment.children!.length - 1}
                 hasFriend={comment.children!.length > 1}
