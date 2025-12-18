@@ -86,7 +86,7 @@ export default function Comments({ slug }: { slug: string }) {
 
   return (
     <div className="mt-16 w-full space-y-8">
-      <h2 id="comments" className="text-2xl font-bold">
+      <h2 id="comments" className="text-2xl font-bold scroll-mt-24">
         Comments
       </h2>
 
@@ -98,6 +98,8 @@ export default function Comments({ slug }: { slug: string }) {
           <div className="space-y-2 relative">
             <User className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
+              id="name"
+              name="name"
               placeholder="Your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -109,6 +111,8 @@ export default function Comments({ slug }: { slug: string }) {
           <div className="space-y-2 relative">
             <Mail className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
+              id="email"
+              name="email"
               type="email"
               placeholder="Email (for Gravatar)"
               value={email}
@@ -120,6 +124,8 @@ export default function Comments({ slug }: { slug: string }) {
         </div>
         <div className="space-y-2">
           <Textarea
+            id="content"
+            name="content"
             placeholder="Share your thoughts..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -404,6 +410,8 @@ function CommentItem({
                     <div className="space-y-2 relative">
                       <User className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                       <Input
+                        id={`name-${comment.id}`}
+                        name="name"
                         placeholder="Your name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -415,6 +423,8 @@ function CommentItem({
                     <div className="space-y-2 relative">
                       <Mail className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                       <Input
+                        id={`email-${comment.id}`}
+                        name="email"
                         type="email"
                         placeholder="Email (optional)"
                         value={email}
@@ -425,6 +435,8 @@ function CommentItem({
                     </div>
                   </div>
                   <Textarea
+                    id={`content-${comment.id}`}
+                    name="content"
                     placeholder="Write a reply..."
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
