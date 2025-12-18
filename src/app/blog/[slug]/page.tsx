@@ -90,7 +90,10 @@ export default async function Post({ params }: Props) {
             <TableOfContents />
           </div>
         </div>
-        <Container className="mx-0 max-w-3xl min-w-0 gap-0 relative z-10 bg-background">
+        <Container
+          noPadding={true}
+          className="mx-0 max-w-3xl min-w-0 gap-0 relative z-10 bg-background"
+        >
           <Button asChild variant="ghost" className="self-start mb-10">
             <Link href="/blog" className="flex items-center gap-2">
               <ArrowLeft className="size-4" />
