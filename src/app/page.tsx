@@ -1,11 +1,13 @@
 import Container from "@/components/container";
 import { Metadata } from "next";
 import { Hero } from "@/components/hero";
+import { Link } from "next-view-transitions";
+import { Button } from "@/components/ui/button";
 import type { WebPage, WithContext } from "schema-dts";
 
 import HeroImage from "@/assets/img/hero.jpg";
 import HeroProfile from "@/assets/img/profpic-animated.webp";
-import { Book, Info, Pickaxe, Server } from "lucide-react";
+import { Book, HelpCircle, Info, Pickaxe, Server } from "lucide-react";
 import { MinecraftServer } from "@/components/minecraft";
 import { SelfHostedServices } from "@/components/selfhosted";
 import { TextScroll } from "@/components/ui/text-scroll";
@@ -85,6 +87,18 @@ export default function Home() {
             details:
           </p>
           <MinecraftServer />
+          <div className="p-5 pt-0">
+            <Button
+              asChild
+              className="w-full flex items-center justify-center"
+              variant="secondary"
+            >
+              <Link href="/blog/enter-lappcraft">
+                <HelpCircle className="size-4" />
+                <span>A little help on joining?</span>
+              </Link>
+            </Button>
+          </div>
         </div>
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
