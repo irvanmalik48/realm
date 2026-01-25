@@ -1,39 +1,108 @@
 REALM COLLECTIVES COMMUNITY LICENSE
-Version 1.0
+Version 2.0
 
 Copyright © 2024 Irvan Malik Azantha.
 
-A. TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION, AND MODIFICATION
+----------------------------------------------------------------------
+1. DEFINITIONS
+----------------------------------------------------------------------
 
-1. A copy of this License must accompany any redistribution of
-   the Work or any Derivative Works.
-2. All copyright, patent, trademark, and attribution notices
-   from the original Source must be preserved in the Source form
-   of any Derivative Works you distribute.
-3. The original author's rights must be respected in any form of
-   distribution.
+* "The Work" refers to the original software, documentation, source
+  code, or creative content provided under the terms of this License.
 
-You may include your own copyright notice on your modifications
-and set additional or different licensing terms for the use,
-reproduction, or distribution of your modifications or any
-Derivative Works as a whole, as long as your activities comply
-with the conditions set forth in this License.
+* "Derivative Works" means any work, whether in Source or Object form,
+  that is based upon (or derived from) the Work and for which the
+  editorial revisions, annotations, or other modifications represent,
+  as a whole, an original work of authorship.
 
-B. DISCLAIMER OF WARRANTY
+* "Commercial and Industrial Application" refers to the deployment,
+  integration, or utilization of the Work for any purpose intended 
+  for economic gain, business operations, or industrial production. 
+  This includes, but is not limited to, using the Work to facilitate
+  paid services, or incorporating the Work into proprietary products.
 
-THIS SOFTWARE IS PROVIDED BY THE OWNERS AND CONTRIBUTORS "AS IS"
-WITHOUT ANY WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT
-NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE. THE OWNERS OR CONTRIBUTORS SHALL NOT BE
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
-OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO THE COST OF
-SUBSTITUTE GOODS OR SERVICES, LOSS OF USE, DATA, OR PROFITS, OR
-BUSINESS INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
+* "Royalty-Free" means that the Licensee is granted the right to use
+  the Work without the obligation to pay any ongoing fees, shares 
+  of revenue, or "per-unit" costs to the Original Author.
 
-C. ACKNOWLEDGEMENTS
+* "Sublicense" refers to the legal right of a user to grant further
+  permissions to third parties to use, modify, or distribute their
+  own implementations of the Work, provided the original portions
+  of the Work remain subject to this License.
 
-This license is derived from Raphielscape Public License Version 1.b,
-slightly modified to better suit the needs of Realm Collectives.
+----------------------------------------------------------------------
+2. GRANT OF PERMISSIVE RIGHTS
+----------------------------------------------------------------------
+
+Subject to the terms and conditions set forth herein, the Original
+Author hereby grants to any person or entity obtaining a copy of the
+Work a perpetual, worldwide, non-exclusive, no-charge, royalty-free,
+and irrevocable license to:
+
+* Reproduce and Utilize: You may make, use, and run as many copies
+  of the Work as necessary for any project, spanning personal,
+  academic, or professional environments.
+
+* Modify and Adapt: You may alter the source code, change function-
+  ality, or combine the Work with other software or assets to create
+  Derivative Works tailored to your specific needs.
+
+* Commercial and Industrial Application: You are explicitly author-
+  ized to use the Work for-profit. You may include the Work in
+  commercial software packages, use it to power commercial web
+  services, or embed it within hardware products.
+
+* Patent License: Each contributor grants you a perpetual, world-
+  wide, non-exclusive, no-charge, royalty-free, irrevocable patent
+  license to make, have made, use, sell, and offer for sale the Work.
+
+----------------------------------------------------------------------
+3. COMMUNITY PROTECTION CLAUSE
+----------------------------------------------------------------------
+
+To protect the integrity of the Realm Collectives community and the
+reputation of the Original Author:
+
+1. No Endorsement: This License does not grant permission to use the
+   trade names, trademarks, service marks, or product names of the
+   Original Author or "Realm Collectives", except as required for 
+   reasonable and customary use in describing the origin of the Work.
+
+2. Patent Retaliation: If you institute patent litigation against any
+   entity (including a cross-claim or counterclaim in a lawsuit) 
+   alleging that the Work constitutes direct or contributory patent
+   infringement, then any patent licenses granted to you under this
+   License for that Work shall terminate as of the date such 
+   litigation is filed.
+
+3. Non-Association: You may not use the Original Author's name to 
+   promote or endorse your Derivative Works without prior written
+   consent.
+
+----------------------------------------------------------------------
+4. REDISTRIBUTION REQUIREMENTS
+----------------------------------------------------------------------
+
+1. Inclusion of License: A copy of this full License text must be
+   included in any distribution of the Work or Derivative Works.
+
+2. Preservation of Notices: You must retain all original copyright,
+   patent, trademark, and attribution notices found within the 
+   Source form of the Work.
+
+3. Attribution: Reasonable credit must be given to the Original
+   Author (e.g., in a "Credits" screen or a "legal.txt" file).
+
+----------------------------------------------------------------------
+5. DISCLAIMER OF WARRANTY & LIMITATION OF LIABILITY
+----------------------------------------------------------------------
+
+5.1 NO WARRANTY: THE WORK IS PROVIDED ON AN "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+THE USER ASSUMES ALL RISK REGARDING THE QUALITY AND PERFORMANCE.
+
+5.2 LIMITATION OF LIABILITY: UNDER NO CIRCUMSTANCES SHALL THE 
+ORIGINAL AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOSS OF 
+USE, DATA, OR PROFITS) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

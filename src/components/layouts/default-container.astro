@@ -1,0 +1,9 @@
+---
+import { cn } from "../../libs/helpers/cn";
+
+const { class: className } = Astro.props;
+---
+
+<main data-container-id="default" class={cn`w-full min-h-screen ${className}`}>
+  <slot />
+</main>
