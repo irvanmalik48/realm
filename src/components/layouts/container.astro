@@ -4,6 +4,6 @@ import { cn } from "../../libs/helpers/cn";
 const { class: className, containerId } = Astro.props;
 ---
 
-<section data-container-id={containerId} class={cn`${className}`}>
+<section data-container-id={containerId} id={containerId} class={cn`${className}`}>
   <slot />
 </section>
