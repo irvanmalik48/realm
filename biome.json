@@ -8,6 +8,11 @@
   "files": {
     "ignoreUnknown": false
   },
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "tab"

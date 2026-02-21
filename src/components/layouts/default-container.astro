@@ -1,9 +1,52 @@
 ---
-import { cn } from "../../libs/helpers/cn";
-
-const { class: className } = Astro.props;
+import { Head } from "@felixicaza/astro-capo";
+import { SEO } from "astro-seo";
+import config from "@/config";
+import "@/styles/global.css";
 ---
 
-<main data-container-id="default" class={cn`w-full min-h-screen ${className}`}>
-  <slot />
-</main>
+<html lang="en">
+	<Head>
+    <SEO
+      title={config.siteName}
+      description={config.siteDescription}
+      openGraph={{
+        basic: {
+          title: config.siteName,
+          type: "website",
+          image: config.siteImage
+        },
+        optional: {
+          description: config.siteDescription,
+          siteName: config.siteName,
+          locale: config.siteLocale,
+        }
+      }}
+      twitter={{
+        creator: "@irvanmalik48",
+        card: "summary_large_image"
+      }}
+      extend={{
+        link: [{rel: "icon", href: "/favicon.svg"}],
+        meta: [{
+          name: "twitter:image",
+          content: config.siteImage
+        }, {
+          name: "twitter:title",
+          content: config.siteName
+        }, {
+          name: "twitter:description",
+          content: config.siteDescription
+        },
+        {
+          name: "generator",
+          content: Astro.generator
+        }
+      ]
+      }}
+    />
+	</Head>
+	<body data-container-id="default" class="antialiased scroll-smooth font-sans">
+		<slot />
+	</body>
+</html>

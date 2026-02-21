@@ -4,6 +4,12 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "jsx": "preserve",
-    "jsxImportSource": "solid-js"
+    "jsxImportSource": "solid-js",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "lodash": ["node_modules/es-toolkit/compat"],
+      "lodash-es": ["node_modules/es-toolkit/compat"]
+    }
   }
 }
