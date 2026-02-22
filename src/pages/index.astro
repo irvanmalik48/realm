@@ -1,7 +1,31 @@
 ---
+import { ArrowDown } from "@lucide/astro";
+import Container from "@/components/layouts/container.astro";
 import DefaultContainer from "@/components/layouts/default-container.astro";
+import { Button } from "@/components/ui/button";
 ---
 
 <DefaultContainer>
-	
+  <!-- Quote Hero -->
+	<Container containerId="hero" class="w-full min-h-screen mx-auto flex flex-col items-center justify-center bg-sidebar">
+    <div class="max-w-4xl w-full gap-5 flex flex-col items-center justify-center px-5 py-3">
+      <blockquote class="flex flex-col w-full items-center justify-center gap-5">
+        <p class="md:text-4xl text-xl font-header">"And those who were seen dancing were thought to be <span class="text-destructive">insane</span> by those who could not hear the music."</p>
+        <footer class="md:text-xl text-muted-foreground w-full text-right">&mdash; <cite>Friedrich Nietzsche</cite></footer>
+      </blockquote>
+      <div class="relative mt-5">
+        <div class="absolute inset-0 rounded-full animate-ping bg-primary opacity-50"></div>
+        <Button as="a" href="#main-section" variant="solid" size="icon" class="relative rounded-full!">
+          <ArrowDown />
+        </Button>
+      </div>
+    </div>
+	</Container>
+
+  <!-- Main Section -->
+  <Container containerId="main-section" class="gap-5 w-full min-h-screen max-w-4xl mx-auto px-5 py-3 flex flex-col items-center justify-center">
+    <h1 class="text-4xl font-header"></h1>
+    <p class="text-xl text-muted-foreground">Enough talk, take me in.</p>
+  </Container>
+
 </DefaultContainer>
