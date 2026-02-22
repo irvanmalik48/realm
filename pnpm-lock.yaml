@@ -29,6 +29,9 @@ importers:
       '@kobalte/core':
         specifier: ^0.13.11
         version: 0.13.11(solid-js@1.9.11)
+      '@lucide/astro':
+        specifier: ^0.575.0
+        version: 0.575.0(astro@5.17.3(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.58.0)(typescript@5.9.3)(yaml@2.8.2))
       astro:
         specifier: ^5.17.3
         version: 5.17.3(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.58.0)(typescript@5.9.3)(yaml@2.8.2)
@@ -47,6 +50,9 @@ importers:
       es-toolkit:
         specifier: ^1.44.0
         version: 1.44.0
+      lucide-solid:
+        specifier: ^0.575.0
+        version: 0.575.0(solid-js@1.9.11)
       solid-js:
         specifier: ^1.9.11
         version: 1.9.11
@@ -832,6 +838,11 @@ packages:
     resolution: {integrity: sha512-eeU60A3kprIiBDAfv9gUJX1tXGLuZiKMajUfSQURAF2pk4ZoMYiqIzmrMBvzcxP39xnYttgTyQEVLwiTZnrV4w==}
     peerDependencies:
       solid-js: ^1.8.8
+
+  '@lucide/astro@0.575.0':
+    resolution: {integrity: sha512-hU47BbgApVR473CxSk6C4OBxqO0P91ZrY9uYvQB7xqW9f5mqmkz1RJ4jl2iK2LovntrrfAZix5ce+r7v2+2gHg==}
+    peerDependencies:
+      astro: ^4 || ^5
 
   '@mapbox/node-pre-gyp@2.0.3':
     resolution: {integrity: sha512-uwPAhccfFJlsfCxMYTwOdVfOz3xqyj8xYL3zJj8f0pb30tLohnnFPhLuqp4/qoEz8sNxe4SESZedcBojRefIzg==}
@@ -1989,6 +2000,11 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-solid@0.575.0:
+    resolution: {integrity: sha512-EGdV4Kql+N/SpEJnLlgeUpTQPtarUJ8DpRWc8LpiymVCqcb2QffKMwrrG1ECY2omP+gVTZOu/5mJ3WmIj93kDg==}
+    peerDependencies:
+      solid-js: ^1.4.7
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -3651,6 +3667,10 @@ snapshots:
       '@solid-primitives/utils': 6.3.2(solid-js@1.9.11)
       solid-js: 1.9.11
 
+  '@lucide/astro@0.575.0(astro@5.17.3(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.58.0)(typescript@5.9.3)(yaml@2.8.2))':
+    dependencies:
+      astro: 5.17.3(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.58.0)(typescript@5.9.3)(yaml@2.8.2)
+
   '@mapbox/node-pre-gyp@2.0.3':
     dependencies:
       consola: 3.4.2
@@ -4942,6 +4962,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-solid@0.575.0(solid-js@1.9.11):
+    dependencies:
+      solid-js: 1.9.11
 
   magic-string@0.30.21:
     dependencies:
