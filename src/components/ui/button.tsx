@@ -1,8 +1,8 @@
 import { Polymorphic } from "@kobalte/core/polymorphic";
 import { cva } from "class-variance-authority";
+import { children } from "solid-js";
 import { cn } from "@/libs/helpers/cn";
 import type { ButtonAttributes } from "@/libs/types/ui";
-import { children } from "solid-js";
 
 const buttonVariants = cva(
   cn(
