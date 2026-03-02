@@ -8,3 +8,14 @@ export interface ButtonAttributes
   class?: string;
   children: string | Element;
 }
+
+export interface StandardAttributes {
+  class?: string;
+  children?: string | Element;
+}
+
+export interface NavLinkAttributes extends StandardAttributes {
+  href: string;
+}
+
+export interface SVGIconAttributes extends StandardAttributes {}

@@ -2,6 +2,8 @@
 import { Head } from "@felixicaza/astro-capo";
 import { SEO } from "astro-seo";
 import config from "@/config";
+import DesktopNavLinks from "../ui/desktop-nav-links";
+import CustomCursor from "../ui/custom-cursor";
 import "@/styles/global.css";
 ---
 
@@ -51,6 +53,21 @@ import "@/styles/global.css";
     />
 	</Head>
 	<body data-container-id="default" class="dark bg-background text-foreground antialiased scroll-smooth font-sans w-full min-h-screen">
+		<DesktopNavLinks />
+		<CustomCursor client:only="solid-js" />
 		<slot />
+		
+		<script>
+			import Lenis from 'lenis';
+		
+			const lenis = new Lenis();
+		
+			function raf(time: number) {
+				lenis.raf(time);
+				requestAnimationFrame(raf);
+			}
+		
+			requestAnimationFrame(raf);
+		</script>
 	</body>
 </html>

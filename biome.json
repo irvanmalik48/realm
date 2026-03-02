@@ -28,6 +28,9 @@
       "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
       "linter": {
         "rules": {
+          "a11y": {
+            "noSvgWithoutTitle": "off"
+          },
           "style": {
             "useConst": "off",
             "useImportType": "off"

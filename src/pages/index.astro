@@ -1,72 +1,69 @@
 ---
-import { ArrowDown } from "@lucide/astro";
 import Container from "@/components/layouts/container.astro";
 import DefaultContainer from "@/components/layouts/default-container.astro";
-import { Button } from "@/components/ui/button";
+import FluidBackground from "@/components/ui/fluid-background";
+import TextSlideUp from "@/components/ui/text-slide-up";
 import { cn } from "@/libs/helpers/cn";
 ---
 
 <DefaultContainer>
   <!-- Quote Hero -->
-  <Container
-    containerId="hero"
+  <div
     class={cn(
-      "w-full min-h-screen mx-auto flex flex-col",
-      "items-center justify-center bg-sidebar"
+      "w-full min-h-screen mx-auto flex flex-col relative overflow-hidden",
+      "items-center justify-center bg-sidebar",
+      "sticky top-0 z-0"
     )}
   >
-    <div
-      class={cn(
-        "max-w-4xl w-full gap-5 flex flex-col",
-        "items-center justify-center px-5 py-3"
-      )}
+  <div
+  class={cn(
+    "max-w-4xl min-w-full gap-5 flex flex-col z-20 pointer-events-none",
+    "items-center justify-center px-5 py-3",
+    "mx-auto"
+  )}
     >
-      <blockquote
-        class={cn(
-          "flex flex-col w-full items-center",
-          "justify-center gap-5"
-        )}
+    <div
+    class={cn(
+      "w-full mx-auto max-w-4xl flex flex-col gap-0 pointer-events-none",
+      "leading-none tracking-tight uppercase font-bold",
+      "items-center justify-center"
+    )}
       >
-        <p class={cn("md:text-4xl text-xl font-header")}>
-          "And those who were seen dancing were thought to be
-          <span class={cn("text-destructive")}>insane</span>
-          by those who could not hear the music."
-        </p>
-        <footer
-          class={cn(
-            "md:text-xl text-muted-foreground",
-            "w-full text-right"
-          )}
-        >
-          &mdash; <cite>Friedrich Nietzsche</cite>
-        </footer>
-      </blockquote>
-      <div class={cn("relative mt-5")}>
-        <div
-          class={cn(
-            "absolute inset-0 rounded-full animate-ping",
-            "bg-primary opacity-50"
-          )}
-        ></div>
-        <Button
-          as="a"
-          href="#main-section"
-          variant="solid"
-          size="icon"
-          class={cn("relative rounded-full!")}
-        >
-          <ArrowDown />
-        </Button>
+      <FluidBackground
+        client:only="solid-js"
+        class="absolute w-full mb-6 rounded-xl overflow-clip aspect-[21/5] z-0 opacity-100 pointer-events-auto"
+        SPLAT_RADIUS={0.5}
+        SPLAT_FORCE={4000}
+        CURL={20}
+        PRESSURE={0.5}
+        COLORFUL={true}
+        HOVER={true}
+        BACK_COLOR="#000000"
+      />
+        <TextSlideUp
+          client:load
+          text="Thrive Through Chaos"
+          class="text-5xl text-foreground pointer-events-none"
+          duration={1600}
+        />
+        <TextSlideUp
+          client:load
+          text="to indulge in technology is to dive into the uncertainty"
+          class="text-primary font-normal lowercase text-lg pointer-events-none"
+          duration={1600}
+          delay={400}
+        />
       </div>
     </div>
-  </Container>
+  </div>
 
   <!-- Main Section -->
   <Container
     containerId="main-section"
     class={cn(
-      "gap-5 w-full min-h-screen max-w-4xl mx-auto px-5 py-3",
-      "flex flex-col items-center justify-center"
+      "gap-5 w-full min-h-screen mx-auto px-5 py-3",
+      "flex flex-col items-center justify-center",
+      "bg-background relative z-10 shadow-2xl"
     )}
   >
     <h1 class={cn("text-4xl font-header")}>TBD</h1>
