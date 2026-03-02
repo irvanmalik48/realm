@@ -15,41 +15,47 @@ import { cn } from "@/libs/helpers/cn";
       "sticky top-0 z-0"
     )}
   >
+  <FluidBackground
+    client:only="solid-js"
+    class="absolute w-full overflow-clip z-0 opacity-100 pointer-events-auto"
+    SPLAT_RADIUS={0.5}
+    SIM_RESOLUTION={256}
+    DYE_RESOLUTION={512}
+    CAPTURE_RESOLUTION={512}
+    DENSITY_DISSIPATION={1}
+    VELOCITY_DISSIPATION={0.2}
+    PRESSURE={0.8}
+    PRESSURE_ITERATIONS={20}
+    CURL={30}
+    SPLAT_FORCE={4000}
+    COLORFUL={true}
+    HOVER={true}
+    BACK_COLOR="#000000"
+  />
   <div
   class={cn(
-    "max-w-4xl min-w-full gap-5 flex flex-col z-20 pointer-events-none",
+    "max-w-4xl min-w-full gap-5 absolute inset-0 flex flex-col z-20 pointer-events-none",
     "items-center justify-center px-5 py-3",
     "mx-auto"
   )}
     >
     <div
     class={cn(
-      "w-full mx-auto max-w-4xl flex flex-col gap-0 pointer-events-none",
-      "leading-none tracking-tight uppercase font-bold",
+      "w-full mx-auto max-w-4xl flex flex-col gap-1 pointer-events-none",
+      "leading-none tracking-tight",
       "items-center justify-center"
     )}
       >
-      <FluidBackground
-        client:only="solid-js"
-        class="absolute w-full mb-6 rounded-xl overflow-clip aspect-[21/5] z-0 opacity-100 pointer-events-auto"
-        SPLAT_RADIUS={0.5}
-        SPLAT_FORCE={4000}
-        CURL={20}
-        PRESSURE={0.5}
-        COLORFUL={true}
-        HOVER={true}
-        BACK_COLOR="#000000"
-      />
         <TextSlideUp
           client:load
-          text="Thrive Through Chaos"
-          class="text-5xl text-foreground pointer-events-none"
+          text="Irvan Malik Azantha"
+          class="text-4xl text-foreground font-header pointer-events-none"
           duration={1600}
         />
         <TextSlideUp
           client:load
-          text="to indulge in technology is to dive into the uncertainty"
-          class="text-primary font-normal lowercase text-lg pointer-events-none"
+          text="i don't have time for ts dawg, so don't expect much from this site"
+          class="text-primary pointer-events-none"
           duration={1600}
           delay={400}
         />

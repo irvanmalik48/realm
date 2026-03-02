@@ -1,37 +1,7 @@
 import { onMount } from "solid-js";
 import WebGLFluidEnhanced from "webgl-fluid-enhanced";
 import { cn } from "@/libs/helpers/cn";
-
-export interface FluidBackgroundProps {
-  class?: string;
-  IMMEDIATE?: boolean;
-  HOVER?: boolean;
-  SIM_RESOLUTION?: number;
-  DYE_RESOLUTION?: number;
-  CAPTURE_RESOLUTION?: number;
-  DENSITY_DISSIPATION?: number;
-  VELOCITY_DISSIPATION?: number;
-  PRESSURE?: number;
-  PRESSURE_ITERATIONS?: number;
-  CURL?: number;
-  SPLAT_RADIUS?: number;
-  SPLAT_FORCE?: number;
-  SHADING?: boolean;
-  COLORFUL?: boolean;
-  COLOR_UPDATE_SPEED?: number;
-  PAUSED?: boolean;
-  BACK_COLOR?: string;
-  TRANSPARENT?: boolean;
-  BLOOM?: boolean;
-  BLOOM_ITERATIONS?: number;
-  BLOOM_RESOLUTION?: number;
-  BLOOM_INTENSITY?: number;
-  BLOOM_THRESHOLD?: number;
-  BLOOM_SOFT_KNEE?: number;
-  SUNRAYS?: boolean;
-  SUNRAYS_RESOLUTION?: number;
-  SUNRAYS_WEIGHT?: number;
-}
+import type { FluidBackgroundProps } from "@/libs/types/ui";
 
 export default function FluidBackground(props: FluidBackgroundProps) {
   let containerRef!: HTMLDivElement;

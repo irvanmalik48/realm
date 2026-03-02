@@ -13,10 +13,10 @@ export default function CustomCursor() {
   let cursorY = 0;
   let targetX = 0;
   let targetY = 0;
+  let currentScale = 1;
   let animationFrameId: number;
 
   onMount(() => {
-    // Check if device supports hover
     if (window.matchMedia("(pointer: coarse)").matches) {
       return;
     }
@@ -56,8 +56,11 @@ export default function CustomCursor() {
       cursorX += (targetX - cursorX) * 0.15;
       cursorY += (targetY - cursorY) * 0.15;
 
+      const targetScale = isClicking() ? 0.85 : 1;
+      currentScale += (targetScale - currentScale) * 0.2;
+
       if (outerCursorRef) {
-        outerCursorRef.style.transform = `translate3d(calc(${cursorX}px - 50%), calc(${cursorY}px - 50%), 0)`;
+        outerCursorRef.style.transform = `translate3d(calc(${cursorX}px - 50%), calc(${cursorY}px - 50%), 0) scale(${currentScale})`;
       }
 
       checkPointer();
@@ -101,14 +104,16 @@ export default function CustomCursor() {
         ref={(el) => {
           outerCursorRef = el;
         }}
+        style={{
+          "transition-property":
+            "width, height, background-color, border-color, opacity, filter"
+        }}
         class={cn(
           "fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-primary mix-blend-difference",
-          "transition-[width,height,opacity,background-color] duration-300 ease-out",
+          "duration-300 ease-out",
           isHidden() ? "opacity-0" : "opacity-100",
-          isPointer()
-            ? "w-12 h-12 bg-primary/20 backdrop-blur-sm"
-            : "w-8 h-8",
-          isClicking() ? "scale-90 bg-primary/40" : "scale-100",
+          isPointer() ? "w-12 h-12 bg-background invert" : "w-8 h-8",
+          isClicking() ? "bg-primary/40" : "",
           "will-change-transform"
         )}
       />
@@ -116,9 +121,13 @@ export default function CustomCursor() {
         ref={(el) => {
           innerCursorRef = el;
         }}
+        style={{
+          "transition-property":
+            "width, height, background-color, opacity, filter"
+        }}
         class={cn(
           "fixed top-0 left-0 pointer-events-none z-[10000] rounded-full bg-primary mix-blend-difference",
-          "transition-[width,height,opacity] duration-200 ease-out",
+          "duration-200 ease-out",
           isHidden() ? "opacity-0" : "opacity-100",
           isPointer() ? "w-0 h-0 opacity-0" : "w-2 h-2",
           "will-change-transform"
