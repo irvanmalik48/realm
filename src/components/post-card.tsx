@@ -2,7 +2,7 @@ import { PostCardProps } from "@/lib/types/posts";
 import { Link } from "next-view-transitions";
 import { motion, HTMLMotionProps } from "framer-motion";
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 type MotionPostCardProps = PostCardProps & HTMLMotionProps<"a">;
 
