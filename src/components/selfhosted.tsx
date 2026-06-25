@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Compass, HardDrive, Link, LucideProps } from "lucide-react";
+import { HardDrive, Link, LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export function SelfHostItem(props: {
@@ -41,14 +41,6 @@ export function SelfHostItem(props: {
 }
 
 const selfHostItems = [
-  {
-    icon: Compass,
-    leftClassName: "bg-muted/20 md:border-r border-b border-border",
-    rightClassName: "border-b border-border",
-    title: "Minecraft Pl3xmap",
-    url: "https://mcmap.irvanma.eu.org",
-    sr: "Visit Pl3xmap Page",
-  },
   {
     icon: HardDrive,
     leftClassName: "bg-muted/20 md:border-r border-b md:border-b-0 border-border",

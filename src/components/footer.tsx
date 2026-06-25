@@ -20,8 +20,6 @@ export function Footer() {
       href: "https://rwhu.helluvaos.com/",
       text: "RWHU",
     },
-    { href: "#", text: "Lycoris" },
-    { href: "https://mcmap.irvanma.eu.org", text: "Lappcraft Pl3xmap" },
   ];
 
   const socials = [
@@ -30,7 +28,6 @@ export function Footer() {
     { href: "https://social.gnuweeb.org/@lappland", text: "Mastodon" },
     { href: "https://discord.com/users/652539226990051338", text: "Discord" },
     { href: "https://t.me/lappv", text: "Telegram" },
-    { href: "https://t.me/lappvi", text: "Telegram (2nd)" },
   ];
 
   return (
