@@ -45,12 +45,6 @@ export default function SettingsPage() {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Server Status",
-          item: "https://irvanma.eu.org/status",
-        },
-        {
-          "@type": "ListItem",
-          position: 4,
           name: "Blog",
           item: "https://irvanma.eu.org/blog",
         },
