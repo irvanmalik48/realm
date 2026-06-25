@@ -7,8 +7,7 @@ import type { WebPage, WithContext } from "schema-dts";
 
 import HeroImage from "@/assets/img/hero.jpg";
 import HeroProfile from "@/assets/img/profpic-animated.webp";
-import { Book, HelpCircle, Info, Pickaxe, Server } from "lucide-react";
-import { MinecraftServer } from "@/components/minecraft";
+import { Book, Info, Server } from "lucide-react";
 import { SelfHostedServices } from "@/components/selfhosted";
 import { TextScroll } from "@/components/ui/text-scroll";
 
@@ -71,29 +70,7 @@ export default function Home() {
             inquiries, please contact me through my work mail.
           </p>
         </div>
-        <div className="w-full bg-background rounded-lg border border-border">
-          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
-            <Pickaxe className="size-4" />
-            <span className="text-sm font-mono">MINECRAFT_SERVER.md</span>
-          </h2>
-          <p className="px-5 py-3 border-b border-border">
-            Oh yeah, I run a Minecraft Server (Java only). Here&apos;s the
-            details:
-          </p>
-          <MinecraftServer />
-          <div className="p-5 pt-0">
-            <Button
-              asChild
-              className="w-full flex items-center justify-center"
-              variant="secondary"
-            >
-              <Link href="/blog/enter-lappcraft">
-                <HelpCircle className="size-4" />
-                <span>A little help on joining?</span>
-              </Link>
-            </Button>
-          </div>
-        </div>
+
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
             <Server className="size-4" />
