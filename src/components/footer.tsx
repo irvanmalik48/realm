@@ -1,7 +1,15 @@
-import { ArrowDownRight } from "lucide-react";
+import { ArrowDownRight, Mail } from "lucide-react";
 import { Button } from "./ui/button";
-import { GoogleForms } from "./logos/google-forms";
 import { RealmStylized } from "./realm-stylized";
+import { ContactForm } from "./contact-form";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 
 export function Footer() {
   const usefulLinks = [
@@ -39,33 +47,36 @@ export function Footer() {
             describe a monarchical or dynastic state. It may also be a
             subdivision within an empire, if it has its own hierarch.
           </p>
-          <div className="w-full lg:w-3/4 xl:w-1/2 px-5 pt-3 pb-5 flex flex-col gap-3 border border-border rounded-md">
+          <div className="w-full lg:w-3/4 xl:w-1/2 px-5 pt-3 pb-5 flex flex-col gap-3 border border-border rounded-md bg-card/30">
             <p className="text-lg font-bold text-primary flex gap-3 items-center">
               <ArrowDownRight className="size-6" />
               <span>Contact</span>
             </p>
             <p>
               If you have any questions, suggestions, or just want to say hi,
-              feel free to fill out the contact form below. I&apos;ll try to
+              feel free to open the contact form below. I&apos;ll try to
               respond as soon as possible.
             </p>
-            <p className="text-sm text-muted-foreground">
-              (I&apos;m too lazy to implement my own form system, so I&apos;m
-              using Google Forms for now)
-            </p>
-            <Button variant={"secondary"} asChild>
-              <a
-                href="https://forms.gle/FjepjDkk3kM5DiFt9"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="flex items-center gap-2">
-                  <GoogleForms className="size-4" />
-                  Fill out the form here
-                  <span className="sr-only">Contact form for realm</span>
-                </span>
-              </a>
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="secondary" className="w-full flex items-center justify-center gap-2">
+                  <Mail className="size-4" />
+                  <span>Open Contact Form</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[550px]">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-2">
+                    <Mail className="size-5 text-primary" />
+                    <span>Contact Me</span>
+                  </DialogTitle>
+                  <DialogDescription>
+                    Fill out the form below to get in touch.
+                  </DialogDescription>
+                </DialogHeader>
+                <ContactForm />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
         <div className="grid md:grid-cols-2 grid-cols-1 gap-5">

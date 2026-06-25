@@ -40,26 +40,42 @@ export function SelfHostItem(props: {
   );
 }
 
+const selfHostItems = [
+  {
+    icon: Compass,
+    leftClassName: "bg-muted/20 md:border-r border-b border-border",
+    rightClassName: "border-b border-border",
+    title: "Minecraft Pl3xmap",
+    url: "https://mcmap.irvanma.eu.org",
+    sr: "Visit Pl3xmap Page",
+  },
+  {
+    icon: HardDrive,
+    leftClassName: "bg-muted/20 md:border-r border-b md:border-b-0 border-border",
+    rightClassName: "",
+    title: "Stash",
+    url: "https://storage.irvanma.eu.org",
+    sr: "Visit Stash",
+  },
+];
+
 export function SelfHostedServices() {
+  const isVpsActive = process.env.NEXT_PUBLIC_VPS_ACTIVE === "true";
+
+  if (!isVpsActive) {
+    return (
+      <div className="p-5 text-muted-foreground text-sm font-mono text-center">
+        I need to renew my VPS plan, smh
+      </div>
+    );
+  }
+
   return (
     <div className="p-5">
       <div className="grid grid-cols-1 md:grid-cols-2 rounded-md border border-border overflow-clip">
-        <SelfHostItem
-          icon={Compass}
-          leftClassName="bg-muted/20 md:border-r border-b border-border"
-          rightClassName="border-b border-border"
-          title="Minecraft Pl3xmap"
-          url="https://mcmap.irvanma.eu.org"
-          sr="Visit Pl3xmap Page"
-        />
-        <SelfHostItem
-          icon={HardDrive}
-          leftClassName="bg-muted/20 md:border-r border-b md:border-b-0 border-border"
-          rightClassName=""
-          title="Stash"
-          url="https://storage.irvanma.eu.org"
-          sr="Visit Stash"
-        />
+        {selfHostItems.map((item, index) => (
+          <SelfHostItem key={index} {...item} />
+        ))}
       </div>
     </div>
   );
