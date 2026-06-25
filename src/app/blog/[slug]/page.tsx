@@ -22,7 +22,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TableOfContents } from "@/components/table-of-contents";
-import Comments from "@/components/comments";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -124,7 +123,6 @@ export default async function Post({ params }: Props) {
           >
             <MDXRemote source={source} options={options} />
           </article>
-          <Comments slug={slug} />
         </Container>
       </div>
       <TextScroll
