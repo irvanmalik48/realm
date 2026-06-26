@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAtomValue } from "jotai";
 import { cursorEnabledAtom, cursorSpeedAtom, cursorHoverScaleAtom, cursorSizeAtom, cursorPointerSizeAtom } from "@/lib/atoms/cursor";
 
@@ -10,6 +10,21 @@ export function CustomCursor() {
   const hoverScale = useAtomValue(cursorHoverScaleAtom);
   const baseSize = useAtomValue(cursorSizeAtom);
   const pointerSize = useAtomValue(cursorPointerSizeAtom);
+
+  const [hasPointer, setHasPointer] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia("(any-pointer: fine)");
+    setHasPointer(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setHasPointer(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   const mousePos = useRef({ x: 0, y: 0 });
   const cursorPos = useRef({ x: 0, y: 0 });
@@ -21,7 +36,7 @@ export function CustomCursor() {
   const pointerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!isEnabled) return;
+    if (!isEnabled || !hasPointer) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
@@ -73,10 +88,10 @@ export function CustomCursor() {
       window.removeEventListener("click", handleClick, true);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isEnabled]);
+  }, [isEnabled, hasPointer]);
 
   useEffect(() => {
-    if (!isEnabled) return;
+    if (!isEnabled || !hasPointer) return;
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
@@ -87,10 +102,10 @@ export function CustomCursor() {
 
     window.addEventListener("mouseover", handleMouseOver);
     return () => window.removeEventListener("mouseover", handleMouseOver);
-  }, [isEnabled]);
+  }, [isEnabled, hasPointer]);
 
   useEffect(() => {
-    if (!isEnabled) {
+    if (!isEnabled || !hasPointer) {
       document.documentElement.style.cursor = "";
       document.getElementById("custom-cursor-style")?.remove();
       return;
@@ -106,10 +121,10 @@ export function CustomCursor() {
       document.documentElement.style.cursor = "";
       document.getElementById("custom-cursor-style")?.remove();
     };
-  }, [isEnabled]);
+  }, [isEnabled, hasPointer]);
 
   useEffect(() => {
-    if (!isEnabled) return;
+    if (!isEnabled || !hasPointer) return;
 
     let rafId: number;
 
@@ -146,9 +161,9 @@ export function CustomCursor() {
     return () => {
       cancelAnimationFrame(rafId);
     };
-  }, [isEnabled, speed, hoverScale]);
+  }, [isEnabled, hasPointer, speed, hoverScale]);
 
-  if (!isEnabled) return null;
+  if (!isEnabled || !hasPointer) return null;
 
 
   return (
