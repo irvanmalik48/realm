@@ -9,6 +9,7 @@ import { PerformanceModeToggle } from "@/components/performance-mode-toggle";
 import { MarqueeToggle } from "@/components/marquee-toggle";
 import { DarkModeAnimationToggle } from "@/components/fade-dark-mode-toggle";
 import { ScrollSettingsToggle } from "@/components/scroll-settings-toggle";
+import { CursorSettingsToggle } from "@/components/cursor-settings-toggle";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -78,6 +79,7 @@ export default function SettingsPage() {
             <DarkModeAnimationToggle />
             <MarqueeToggle />
             <ScrollSettingsToggle />
+            <CursorSettingsToggle />
           </div>
         </div>
       </Container>

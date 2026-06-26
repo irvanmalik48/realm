@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Navbar } from "@/components/navbar";
 import Providers from "@/lib/provider/react-query";
 import { LenisProvider } from "@/components/lenis-provider";
+import { CustomCursor } from "@/components/custom-cursor";
 
 import "./globals.css";
 import { Footer } from "@/components/footer";
@@ -94,6 +95,7 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Providers>
               <LenisProvider>
+                <CustomCursor />
                 <FAB />
                 <Navbar />
                 {children}
