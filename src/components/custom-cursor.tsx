@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useAtomValue } from "jotai";
 import { cursorEnabledAtom, cursorSpeedAtom, cursorHoverScaleAtom, cursorSizeAtom } from "@/lib/atoms/cursor";
 
@@ -10,11 +10,11 @@ export function CustomCursor() {
   const hoverScale = useAtomValue(cursorHoverScaleAtom);
   const baseSize = useAtomValue(cursorSizeAtom);
 
-  const [isHovering, setIsHovering] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-
   const mousePos = useRef({ x: 0, y: 0 });
   const cursorPos = useRef({ x: 0, y: 0 });
+  const currentScale = useRef(1);
+  const isHoveringRef = useRef(false);
+  const isVisibleRef = useRef(false);
   const cursorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -22,11 +22,13 @@ export function CustomCursor() {
 
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+      }
     };
 
     const handleMouseLeave = () => {
-      setIsVisible(false);
+      isVisibleRef.current = false;
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -36,7 +38,7 @@ export function CustomCursor() {
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isEnabled, isVisible]);
+  }, [isEnabled]);
 
   useEffect(() => {
     if (!isEnabled) return;
@@ -45,7 +47,7 @@ export function CustomCursor() {
       const target = e.target as HTMLElement | null;
       if (!target) return;
       const isInteractive = target.closest("a, button, [role='button'], input, select, label, [data-state]");
-      setIsHovering(!!isInteractive);
+      isHoveringRef.current = !!isInteractive;
     };
 
     window.addEventListener("mouseover", handleMouseOver);
@@ -83,8 +85,14 @@ export function CustomCursor() {
       cursorPos.current.x += (targetX - cursorPos.current.x) * speed;
       cursorPos.current.y += (targetY - cursorPos.current.y) * speed;
 
+      const targetScale = isHoveringRef.current ? hoverScale : 1;
+      currentScale.current += (targetScale - currentScale.current) * 0.15;
+
+      const targetOpacity = isVisibleRef.current ? 0.35 : 0;
+
       if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0)`;
+        cursorRef.current.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0) scale(${currentScale.current})`;
+        cursorRef.current.style.opacity = String(targetOpacity);
       }
 
       rafId = requestAnimationFrame(updatePosition);
@@ -95,12 +103,9 @@ export function CustomCursor() {
     return () => {
       cancelAnimationFrame(rafId);
     };
-  }, [isEnabled, speed]);
+  }, [isEnabled, speed, hoverScale]);
 
   if (!isEnabled) return null;
-
-  const currentScale = isHovering ? hoverScale : 1;
-  const currentSize = baseSize;
 
   return (
     <div
@@ -109,20 +114,18 @@ export function CustomCursor() {
         position: "fixed",
         top: 0,
         left: 0,
-        width: `${currentSize}px`,
-        height: `${currentSize}px`,
-        marginLeft: `-${currentSize / 2}px`,
-        marginTop: `-${currentSize / 2}px`,
+        width: `${baseSize}px`,
+        height: `${baseSize}px`,
+        marginLeft: `-${baseSize / 2}px`,
+        marginTop: `-${baseSize / 2}px`,
         borderRadius: "50%",
         backgroundColor: "var(--primary)",
-        opacity: isVisible ? 0.35 : 0,
+        opacity: 0,
         pointerEvents: "none",
         zIndex: 99999,
         mixBlendMode: "difference",
-        transform: "translate3d(0, 0, 0)",
-        transition: "width 0.2s ease, height 0.2s ease, margin 0.2s ease, opacity 0.2s ease, scale 0.2s ease",
-        scale: currentScale,
         boxShadow: "0 0 12px var(--primary)",
+        transition: "width 0.2s ease, height 0.2s ease, margin 0.2s ease",
       }}
       className="hidden md:block"
     />
