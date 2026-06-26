@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { cursorEnabledAtom, cursorSpeedAtom, cursorHoverScaleAtom, cursorSizeAtom, cursorPointerSizeAtom } from "@/lib/atoms/cursor";
 import { Switch } from "./ui/switch";
@@ -11,9 +12,24 @@ export function CursorSettingsToggle() {
   const [cursorSize, setCursorSize] = useAtom(cursorSizeAtom);
   const [cursorPointerSize, setCursorPointerSize] = useAtom(cursorPointerSizeAtom);
 
+  const [hasPointer, setHasPointer] = useState(true);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia("(any-pointer: fine)");
+    setHasPointer(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setHasPointer(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   return (
     <div className="w-full text-sm text-muted-foreground px-5 py-5 flex flex-col gap-4">
-      <div className="flex gap-5 md:items-center items-start justify-between">
+      <div className={`flex gap-5 md:items-center items-start justify-between ${!hasPointer ? "opacity-50" : ""}`}>
         <div className="flex flex-col gap-1">
           <p className="text-foreground text-base font-semibold flex items-center gap-2">
             Custom Cursor (Orb)
@@ -26,11 +42,12 @@ export function CursorSettingsToggle() {
           checked={cursorEnabled}
           onCheckedChange={(checked) => setCursorEnabled(checked as boolean)}
           aria-label="Toggle custom cursor"
+          disabled={!hasPointer}
         />
       </div>
 
       {cursorEnabled && (
-        <div className="mt-2 flex flex-col gap-4 pl-4 border-l-2 border-border/60">
+        <div className={`mt-2 flex flex-col gap-4 pl-4 border-l-2 border-border/60 ${!hasPointer ? "opacity-40 pointer-events-none select-none" : ""}`}>
           <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center text-sm">
               <span className="font-semibold text-foreground">Follow-up Speed</span>
@@ -48,7 +65,8 @@ export function CursorSettingsToggle() {
               step="0.01"
               value={cursorSpeed}
               onChange={(e) => setCursorSpeed(parseFloat(e.target.value))}
-              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden"
+              disabled={!hasPointer}
+              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden disabled:cursor-not-allowed"
             />
           </div>
 
@@ -69,7 +87,8 @@ export function CursorSettingsToggle() {
               step="0.05"
               value={cursorHoverScale}
               onChange={(e) => setCursorHoverScale(parseFloat(e.target.value))}
-              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden"
+              disabled={!hasPointer}
+              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden disabled:cursor-not-allowed"
             />
           </div>
 
@@ -90,7 +109,8 @@ export function CursorSettingsToggle() {
               step="1"
               value={cursorPointerSize}
               onChange={(e) => setCursorPointerSize(parseInt(e.target.value, 10))}
-              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden"
+              disabled={!hasPointer}
+              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden disabled:cursor-not-allowed"
             />
           </div>
 
@@ -111,9 +131,16 @@ export function CursorSettingsToggle() {
               step="1"
               value={cursorSize}
               onChange={(e) => setCursorSize(parseInt(e.target.value, 10))}
-              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden"
+              disabled={!hasPointer}
+              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden disabled:cursor-not-allowed"
             />
           </div>
+        </div>
+      )}
+
+      {!hasPointer && (
+        <div className="mt-1 text-xs text-amber-500 bg-amber-500/10 border border-amber-500/20 px-3 py-2 rounded-md font-medium">
+          Custom cursor settings are disabled on this device because it does not support cursor (mouse/pointer) input.
         </div>
       )}
     </div>
