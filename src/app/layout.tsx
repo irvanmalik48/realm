@@ -4,6 +4,7 @@ import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Navbar } from "@/components/navbar";
 import Providers from "@/lib/provider/react-query";
+import { LenisProvider } from "@/components/lenis-provider";
 
 import "./globals.css";
 import { Footer } from "@/components/footer";
@@ -88,14 +89,16 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} ${doto.variable} antialiased scroll-smooth`}
+          className={`${geistSans.variable} ${geistMono.variable} ${doto.variable} antialiased`}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Providers>
-              <FAB />
-              <Navbar />
-              {children}
-              <Footer />
+              <LenisProvider>
+                <FAB />
+                <Navbar />
+                {children}
+                <Footer />
+              </LenisProvider>
             </Providers>
           </ThemeProvider>
           <Script

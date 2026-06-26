@@ -8,6 +8,7 @@ import type { WebPage, WithContext } from "schema-dts";
 import { PerformanceModeToggle } from "@/components/performance-mode-toggle";
 import { MarqueeToggle } from "@/components/marquee-toggle";
 import { DarkModeAnimationToggle } from "@/components/fade-dark-mode-toggle";
+import { ScrollSettingsToggle } from "@/components/scroll-settings-toggle";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -76,6 +77,7 @@ export default function SettingsPage() {
             <PerformanceModeToggle />
             <DarkModeAnimationToggle />
             <MarqueeToggle />
+            <ScrollSettingsToggle />
           </div>
         </div>
       </Container>
