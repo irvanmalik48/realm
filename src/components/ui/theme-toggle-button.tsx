@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { flushSync } from "react-dom";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import darkModeToggleAnimation from "@/lib/atoms/fade";
@@ -56,7 +57,9 @@ export default function ThemeToggleButton({
 
     const switchTheme = () => {
       const isDark = theme === "light";
-      setTheme(isDark ? "dark" : "light");
+      flushSync(() => {
+        setTheme(isDark ? "dark" : "light");
+      });
       const root = document.documentElement;
       if (isDark) {
         root.classList.add("dark");
