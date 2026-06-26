@@ -182,16 +182,38 @@ export function CustomCursor() {
           marginLeft: `-${baseSize / 2}px`,
           marginTop: `-${baseSize / 2}px`,
           borderRadius: "50%",
-          backgroundColor: "#ffffff",
+          backgroundColor: "rgba(255, 255, 255, 0.05)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          backdropFilter: "blur(4px) url(#glass-refract)",
           opacity: 0,
           pointerEvents: "none",
           zIndex: 99999,
-          mixBlendMode: "difference",
-          boxShadow: "0 0 16px rgba(255, 255, 255, 0.2)",
+          boxShadow: "inset 0 4px 12px rgba(255, 255, 255, 0.15), inset 0 -4px 12px rgba(0, 0, 0, 0.25), 0 8px 32px rgba(0, 0, 0, 0.15)",
           transition: "width 0.2s ease, height 0.2s ease, margin 0.2s ease",
         }}
         className="hidden md:block"
-      />
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "10%",
+            left: "10%",
+            width: "30%",
+            height: "30%",
+            background: "radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 70%)",
+            borderRadius: "50%",
+            pointerEvents: "none",
+          }}
+        />
+      </div>
+      <svg style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }}>
+        <defs>
+          <filter id="glass-refract">
+            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
     </>
   );
 }
