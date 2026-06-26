@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { cursorEnabledAtom, cursorSpeedAtom, cursorHoverScaleAtom, cursorSizeAtom } from "@/lib/atoms/cursor";
+import { cursorEnabledAtom, cursorSpeedAtom, cursorHoverScaleAtom, cursorSizeAtom, cursorPointerSizeAtom } from "@/lib/atoms/cursor";
 import { Switch } from "./ui/switch";
 
 export function CursorSettingsToggle() {
@@ -9,6 +9,7 @@ export function CursorSettingsToggle() {
   const [cursorSpeed, setCursorSpeed] = useAtom(cursorSpeedAtom);
   const [cursorHoverScale, setCursorHoverScale] = useAtom(cursorHoverScaleAtom);
   const [cursorSize, setCursorSize] = useAtom(cursorSizeAtom);
+  const [cursorPointerSize, setCursorPointerSize] = useAtom(cursorPointerSizeAtom);
 
   return (
     <div className="w-full text-sm text-muted-foreground px-5 py-5 flex flex-col gap-4">
@@ -74,18 +75,39 @@ export function CursorSettingsToggle() {
 
           <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center text-sm">
-              <span className="font-semibold text-foreground">Base Orb Size</span>
+              <span className="font-semibold text-foreground">Pointer Orb Size</span>
+              <span className="font-mono text-xs bg-muted px-2 py-0.5 rounded text-primary">
+                {cursorPointerSize}px
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              The baseline diameter of the leading pointer orb.
+            </p>
+            <input
+              type="range"
+              min="4"
+              max="40"
+              step="1"
+              value={cursorPointerSize}
+              onChange={(e) => setCursorPointerSize(parseInt(e.target.value, 10))}
+              className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-between items-center text-sm">
+              <span className="font-semibold text-foreground">Trail Orb Size (Delayed)</span>
               <span className="font-mono text-xs bg-muted px-2 py-0.5 rounded text-primary">
                 {cursorSize}px
               </span>
             </div>
             <p className="text-xs text-muted-foreground">
-              The baseline diameter of the cursor orb.
+              The baseline diameter of the trailing delayed orb.
             </p>
             <input
               type="range"
               min="8"
-              max="50"
+              max="80"
               step="1"
               value={cursorSize}
               onChange={(e) => setCursorSize(parseInt(e.target.value, 10))}
