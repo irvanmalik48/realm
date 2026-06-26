@@ -55,7 +55,16 @@ export default function ThemeToggleButton({
     if (typeof window === "undefined") return;
 
     const switchTheme = () => {
-      setTheme(theme === "light" ? "dark" : "light");
+      const isDark = theme === "light";
+      setTheme(isDark ? "dark" : "light");
+      const root = document.documentElement;
+      if (isDark) {
+        root.classList.add("dark");
+        root.style.colorScheme = "dark";
+      } else {
+        root.classList.remove("dark");
+        root.style.colorScheme = "light";
+      }
     };
 
     if (!document.startViewTransition) {
