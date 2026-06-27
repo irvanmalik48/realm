@@ -55,7 +55,7 @@ export default function ThemeToggleButton({
 
     if (typeof window === "undefined") return;
 
-    const switchTheme = () => {
+    const switchTheme = async () => {
       const isDark = theme === "light";
       const root = document.documentElement;
       if (isDark) {
@@ -68,11 +68,13 @@ export default function ThemeToggleButton({
       flushSync(() => {
         setTheme(isDark ? "dark" : "light");
       });
+      await new Promise<void>((resolve) => setTimeout(resolve, 150));
     };
 
     if (!document.startViewTransition) {
-      switchTheme();
-      document.getElementById(styleId)?.remove();
+      switchTheme().then(() => {
+        document.getElementById(styleId)?.remove();
+      });
       return;
     }
 
