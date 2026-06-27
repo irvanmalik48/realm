@@ -171,15 +171,19 @@ export const createAnimation = (
 
 @keyframes scale {
   0% {
-    mask-size: 0;
+    -webkit-mask-size: 0px;
+    mask-size: 0px;
   }
   10% {
+    -webkit-mask-size: 50vmax;
     mask-size: 50vmax;
   }
   90% {
+    -webkit-mask-size: 50vmax;
     mask-size: 50vmax;
   }
   100% {
+    -webkit-mask-size: 2000vmax;
     mask-size: 2000vmax;
   }
 }`,
@@ -239,7 +243,12 @@ export const createAnimation = (
         z-index: -1;
       }
       @keyframes scale-${start} {
+        from {
+          -webkit-mask-size: 0px;
+          mask-size: 0px;
+        }
         to {
+          -webkit-mask-size: 350vmax;
           mask-size: 350vmax;
         }
       }
