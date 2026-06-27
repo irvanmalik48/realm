@@ -72,10 +72,15 @@ export default function ThemeToggleButton({
 
     if (!document.startViewTransition) {
       switchTheme();
+      document.getElementById(styleId)?.remove();
       return;
     }
 
-    document.startViewTransition(switchTheme);
+    const transition = document.startViewTransition(switchTheme);
+    const cleanup = () => {
+      document.getElementById(styleId)?.remove();
+    };
+    transition.finished.then(cleanup).catch(cleanup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, setTheme]);
 
