@@ -1,0 +1,79 @@
+---
+title: "Markdown Capabilities Test"
+createdAt: "2026-06-28"
+updatedAt: "2026-06-28"
+description: "A comprehensive test page showcasing the markdown rendering capabilities, including titles, math, and code blocks."
+tags:
+  - "Test"
+  - "Markdown"
+  - "KaTeX"
+---
+
+## Typography and Prose
+
+This is a paragraph demonstrating standard prose formatting. We can write text in **bold**, *italics*, or ~~strikethrough~~. We can also include `inline code` snippets easily.
+
+Here is a blockquote showing styled quotes:
+> "Mathematics is the language in which God has written the universe." — Galileo Galilei
+
+## Lists and Tables
+
+Here is an ordered list:
+1. First item
+2. Second item
+3. Third item
+
+And a table comparing Markdown features:
+
+| Feature | Syntax | Rendered |
+| :--- | :--- | :--- |
+| Bold | `**bold**` | **bold** |
+| Math | `$E=mc^2$` | $E=mc^2$ |
+| Code | ` ```js ` | Syntax Highlighting |
+
+---
+
+## Math Equations (KaTeX)
+
+We now support LaTeX/KaTeX math equations! 
+
+### Inline Math
+The classic Einstein equation is $E = mc^2$. You can also write fractions like $\frac{a}{b}$ inline within your text.
+
+### Block Math
+For larger, standalone equations, display block math can be used:
+
+$$
+f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi)\,e^{2 \pi i \xi x}\,d\xi
+$$
+
+Another example showing summations:
+
+$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$
+
+---
+
+## Code Blocks with Copy Button
+
+Here is a code block showcasing custom file title rendering (`remark-flexible-code-titles`) and our new copy-to-clipboard button:
+
+```javascript:Fibonacci.js
+// Function to generate the Fibonacci sequence up to N terms
+function generateFibonacci(n) {
+  let seq = [0, 1];
+  for (let i = seq.length; i < n; i++) {
+    seq.push(seq[i - 1] + seq[i - 2]);
+  }
+  return seq;
+}
+
+console.log(generateFibonacci(10));
+```
+
+And another code block without a title to test layout consistency:
+
+```bash
+pnpm install rehype-katex remark-math katex
+```

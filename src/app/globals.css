@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "katex/dist/katex.min.css";
 
 @plugin "tailwindcss-animate";
 @plugin "@tailwindcss/typography";
@@ -169,7 +170,7 @@ span[data-line][data-highlighted-line]::before {
 }
 
 div.remark-code-title + figure[data-rehype-pretty-code-figure] pre {
-  @apply rounded-t-none border-t-0;
+  @apply rounded-t-none border-t-0 mt-0!;
 }
 
 /* Lenis scroll resets and styling rules */

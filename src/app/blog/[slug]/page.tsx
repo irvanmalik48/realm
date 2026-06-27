@@ -11,6 +11,8 @@ import rehypeStringify from "rehype-stringify";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode, { Options } from "rehype-pretty-code";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 import type { Frontmatter } from "@/lib/types/posts";
 import { getMarkdownFromSlug, getMarkdownFiles } from "@/lib/fs/posts";
@@ -22,6 +24,32 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TableOfContents } from "@/components/table-of-contents";
+import type { ComponentPropsWithoutRef } from "react";
+import { CopyButton } from "@/components/copy-button";
+
+function rehypeExtractRawCode() {
+  return (tree: any) => {
+    function traverse(node: any) {
+      if (node.type === "element" && node.tagName === "pre") {
+        const codeNode = node.children?.find((c: any) => c.tagName === "code");
+        if (codeNode) {
+          const extractText = (n: any): string => {
+            if (n.type === "text") return n.value;
+            if (n.children) return n.children.map(extractText).join("");
+            return "";
+          };
+          const rawText = extractText(codeNode);
+          node.properties = node.properties || {};
+          node.properties["data-raw-code"] = rawText;
+        }
+      }
+      if (node.children) {
+        node.children.forEach(traverse);
+      }
+    }
+    traverse(tree);
+  };
+}
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -66,6 +94,7 @@ export default async function Post({ params }: Props) {
     mdxOptions: {
       format,
       remarkPlugins: [
+        remarkMath,
         remarkGfm,
         remarkFlexibleToc,
         remarkFlexibleCodeTitles,
@@ -73,9 +102,11 @@ export default async function Post({ params }: Props) {
         remarkRehype,
       ],
       rehypePlugins: [
+        rehypeKatex,
         rehypeSlug,
         rehypeAutolinkHeadings,
         [rehypePrettyCode, prettyCodeOptions],
+        rehypeExtractRawCode,
         rehypeStringify,
       ],
     },
@@ -121,7 +152,23 @@ export default async function Post({ params }: Props) {
               "prose max-w-full dark:prose-invert prose-pre:font-mono prose-code:font-mono prose-headings:scroll-mt-24 pt-5",
             )}
           >
-            <MDXRemote source={source} options={options} />
+            <MDXRemote
+              source={source}
+              options={options}
+              components={{
+                pre: ({ children, style, ...props }: ComponentPropsWithoutRef<"pre">) => {
+                  const rawCode = (props as any)["data-raw-code"] || "";
+                  return (
+                    <div className="relative group">
+                      <pre style={style as any} {...props}>
+                        {children}
+                      </pre>
+                      <CopyButton code={rawCode} />
+                    </div>
+                  );
+                },
+              }}
+            />
           </article>
         </Container>
       </div>
