@@ -21,6 +21,12 @@ interface ThemeToggleAnimationProps {
   url?: string;
 }
 
+declare global {
+  interface Window {
+    __targetTheme?: string;
+  }
+}
+
 export default function ThemeToggleButton({
   variant = "circle-blur",
   start = "top-left",
@@ -32,6 +38,21 @@ export default function ThemeToggleButton({
   const [isTransitioning, setIsTransitioning] = React.useState(false);
 
   const styleId = "theme-transition-styles";
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const root = document.documentElement;
+    const originalRemove = root.classList.remove.bind(root.classList);
+
+    root.classList.remove = (...classes) => {
+      const activeTheme = window.__targetTheme || (root.classList.contains("dark") ? "dark" : "light");
+      const filtered = classes.filter((c) => c !== activeTheme);
+      if (filtered.length > 0) {
+        originalRemove(...filtered);
+      }
+    };
+  }, []);
 
   const updateStyles = React.useCallback((css: string, name: string): void => {
     if (typeof window === "undefined") return;
@@ -66,6 +87,7 @@ export default function ThemeToggleButton({
 
     const currentTheme = resolvedTheme || theme;
     const targetTheme = currentTheme === "dark" ? "light" : "dark";
+    window.__targetTheme = targetTheme;
 
     const switchTheme = () => {
       const root = document.documentElement;
