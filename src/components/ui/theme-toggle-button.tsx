@@ -59,28 +59,49 @@ export default function ThemeToggleButton({
     disableTransitions.textContent = `*, *::before, *::after { transition: none !important; }`;
     document.head.appendChild(disableTransitions);
 
-    const switchTheme = () => {
-      const currentTheme = resolvedTheme || theme;
-      const targetTheme = currentTheme === "dark" ? "light" : "dark";
-      flushSync(() => {
-        setTheme(targetTheme);
-      });
-      const root = document.documentElement;
-      if (targetTheme === "dark") {
-        root.classList.add("dark");
-        root.style.colorScheme = "dark";
-      } else {
-        root.classList.remove("dark");
-        root.style.colorScheme = "light";
+    const currentTheme = resolvedTheme || theme;
+    const targetTheme = currentTheme === "dark" ? "light" : "dark";
+
+    const switchTheme = async () => {
+      setTheme(targetTheme);
+
+      const checkTheme = () => {
+        const hasDark = document.documentElement.classList.contains("dark");
+        return (hasDark ? "dark" : "light") === targetTheme;
+      };
+
+      if (checkTheme()) {
+        document.documentElement.style.colorScheme = targetTheme;
+        return;
       }
+
+      await new Promise<void>((resolve) => {
+        const observer = new MutationObserver(() => {
+          if (checkTheme()) {
+            observer.disconnect();
+            resolve();
+          }
+        });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+        setTimeout(() => {
+          observer.disconnect();
+          resolve();
+        }, 150);
+      });
+
+      document.documentElement.style.colorScheme = targetTheme;
     };
 
     if (!document.startViewTransition) {
-      switchTheme();
-      requestAnimationFrame(() => {
+      switchTheme().then(() => {
         requestAnimationFrame(() => {
-          disableTransitions.remove();
-          document.getElementById(styleId)?.remove();
+          requestAnimationFrame(() => {
+            disableTransitions.remove();
+            document.getElementById(styleId)?.remove();
+          });
         });
       });
       return;
