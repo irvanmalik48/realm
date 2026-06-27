@@ -59,7 +59,7 @@ export function Navbar() {
                   {link.text}
                 </FlatNavLink>
               ))}
-            <ThemeToggleButton variant="circle-blur" start="top-right" />
+            <ThemeToggleButton />
           </div>
         </nav>
       </section>
