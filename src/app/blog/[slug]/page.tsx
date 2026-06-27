@@ -89,7 +89,7 @@ export default async function Post({ params }: Props) {
     disableImports: true,
     parseFrontmatter: true,
     scope: {
-      readingTime: readingTime(source, 100).text,
+      readingTime: readingTime(source, { wordsPerMinute: 100 }).text,
     },
     mdxOptions: {
       format,

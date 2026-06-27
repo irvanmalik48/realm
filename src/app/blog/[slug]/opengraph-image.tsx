@@ -42,7 +42,7 @@ export default async function Image({
   }
 
   const { frontmatter } = getFrontmatter<Frontmatter>(post.source);
-  const timeText = readingTime(post.source, 100).text;
+  const timeText = readingTime(post.source, { wordsPerMinute: 100 }).text;
   const dateText = frontmatter.createdAt
     ? new Date(frontmatter.createdAt).toLocaleDateString("en-US", {
         month: "long",
