@@ -21,16 +21,31 @@ interface ThemeToggleAnimationProps {
   url?: string;
 }
 
+const useLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 export default function ThemeToggleButton({
   variant = "circle-blur",
   start = "top-left",
   showLabel = false,
   url = "",
 }: ThemeToggleAnimationProps) {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [darkModeAnim] = useAtom(darkModeToggleAnimation);
 
   const styleId = "theme-transition-styles";
+
+  useLayoutEffect(() => {
+    const currentTheme = resolvedTheme || theme;
+    if (!currentTheme) return;
+    const root = document.documentElement;
+    if (currentTheme === "dark") {
+      root.classList.add("dark");
+      root.style.colorScheme = "dark";
+    } else {
+      root.classList.remove("dark");
+      root.style.colorScheme = "light";
+    }
+  }, [theme, resolvedTheme]);
 
   const updateStyles = React.useCallback((css: string, name: string): void => {
     if (typeof window === "undefined") return;
@@ -56,18 +71,11 @@ export default function ThemeToggleButton({
     if (typeof window === "undefined") return;
 
     const switchTheme = () => {
-      const isDark = theme === "light";
+      const currentTheme = resolvedTheme || theme;
+      const targetTheme = currentTheme === "dark" ? "light" : "dark";
       flushSync(() => {
-        setTheme(isDark ? "dark" : "light");
+        setTheme(targetTheme);
       });
-      const root = document.documentElement;
-      if (isDark) {
-        root.classList.add("dark");
-        root.style.colorScheme = "dark";
-      } else {
-        root.classList.remove("dark");
-        root.style.colorScheme = "light";
-      }
     };
 
     if (!document.startViewTransition) {
@@ -82,7 +90,7 @@ export default function ThemeToggleButton({
     };
     transition.finished.then(cleanup).catch(cleanup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [theme, setTheme]);
+  }, [theme, resolvedTheme, setTheme, darkModeAnim, variant, start, url, updateStyles]);
 
   return (
     <Button
