@@ -21,37 +21,16 @@ interface ThemeToggleAnimationProps {
   url?: string;
 }
 
-declare global {
-  interface Window {
-    __targetTheme?: string;
-  }
-}
-
-const useLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
-
 export default function ThemeToggleButton({
   variant = "circle-blur",
   start = "top-left",
   showLabel = false,
   url = "",
 }: ThemeToggleAnimationProps) {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [darkModeAnim] = useAtom(darkModeToggleAnimation);
 
   const styleId = "theme-transition-styles";
-
-  useLayoutEffect(() => {
-    const currentTheme = resolvedTheme || theme;
-    if (!currentTheme) return;
-    const root = document.documentElement;
-    if (currentTheme === "dark") {
-      root.classList.add("dark");
-      root.style.colorScheme = "dark";
-    } else {
-      root.classList.remove("dark");
-      root.style.colorScheme = "light";
-    }
-  }, [theme, resolvedTheme]);
 
   const updateStyles = React.useCallback((css: string, name: string): void => {
     if (typeof window === "undefined") return;
@@ -76,47 +55,34 @@ export default function ThemeToggleButton({
 
     if (typeof window === "undefined") return;
 
-    const currentTheme = resolvedTheme || theme;
-    const targetTheme = currentTheme === "dark" ? "light" : "dark";
-    window.__targetTheme = targetTheme;
-
-    const root = document.documentElement;
-    const originalRemove = root.classList.remove.bind(root.classList);
-    const originalAdd = root.classList.add.bind(root.classList);
-
-    root.classList.remove = (...classes) => {
-      const filtered = classes.filter((c) => c !== targetTheme);
-      if (filtered.length > 0) {
-        originalRemove(...filtered);
-      }
-    };
-
-    root.classList.add = (...classes) => {
-      originalAdd(...classes);
-    };
-
     const switchTheme = () => {
+      const isDark = theme === "light";
+      const root = document.documentElement;
+      if (isDark) {
+        root.classList.add("dark");
+        root.style.colorScheme = "dark";
+      } else {
+        root.classList.remove("dark");
+        root.style.colorScheme = "light";
+      }
       flushSync(() => {
-        setTheme(targetTheme);
+        setTheme(isDark ? "dark" : "light");
       });
-    };
-
-    const cleanup = () => {
-      root.classList.remove = originalRemove;
-      root.classList.add = originalAdd;
-      document.getElementById(styleId)?.remove();
     };
 
     if (!document.startViewTransition) {
       switchTheme();
-      cleanup();
+      document.getElementById(styleId)?.remove();
       return;
     }
 
     const transition = document.startViewTransition(switchTheme);
+    const cleanup = () => {
+      document.getElementById(styleId)?.remove();
+    };
     transition.finished.then(cleanup).catch(cleanup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [theme, resolvedTheme, setTheme, darkModeAnim, variant, start, url, updateStyles]);
+  }, [theme, setTheme]);
 
   return (
     <Button
