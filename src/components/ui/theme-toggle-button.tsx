@@ -1,83 +1,83 @@
 "use client";
 
 import React from "react";
+import { flushSync } from "react-dom";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
+import darkModeToggleAnimation from "@/lib/atoms/fade";
+import { useAtom } from "jotai";
 import { Button } from "@/components/ui/button";
 
-export interface ThemeToggleAnimationProps {
-  variant?: string;
-  start?: string;
+import {
+  AnimationStart,
+  AnimationVariant,
+  createAnimation,
+} from "./theme-animations";
+
+interface ThemeToggleAnimationProps {
+  variant?: AnimationVariant;
+  start?: AnimationStart;
   showLabel?: boolean;
   url?: string;
 }
 
 export default function ThemeToggleButton({
-  variant,
-  start,
+  variant = "circle-blur",
+  start = "top-left",
   showLabel = false,
   url = "",
-}: ThemeToggleAnimationProps = {}) {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const [isTransitioning, setIsTransitioning] = React.useState(false);
+}: ThemeToggleAnimationProps) {
+  const { theme, setTheme } = useTheme();
+  const [darkModeAnim] = useAtom(darkModeToggleAnimation);
 
-  const toggleTheme = React.useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    if (isTransitioning || typeof window === "undefined") return;
+  const styleId = "theme-transition-styles";
 
-    setIsTransitioning(true);
+  const updateStyles = React.useCallback((css: string, name: string): void => {
+    if (typeof window === "undefined") return;
 
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX || rect.left + rect.width / 2;
-    const y = e.clientY || rect.top + rect.height / 2;
+    let styleElement = document.getElementById(
+      styleId,
+    ) as HTMLStyleElement | null;
 
-    const currentTheme = resolvedTheme || theme;
-    const targetTheme = currentTheme === "dark" ? "light" : "dark";
+    if (!styleElement) {
+      styleElement = document.createElement("style");
+      styleElement.id = styleId;
+      document.head.appendChild(styleElement);
+    }
 
-    const overlay = document.createElement("div");
-    overlay.style.position = "fixed";
-    overlay.style.top = `${y}px`;
-    overlay.style.left = `${x}px`;
-    overlay.style.width = "0px";
-    overlay.style.height = "0px";
-    overlay.style.borderRadius = "50%";
-    overlay.style.backgroundColor = targetTheme === "dark" ? "#09090b" : "#ffffff";
-    overlay.style.transform = "translate(-50%, -50%)";
-    overlay.style.zIndex = "999999";
-    overlay.style.pointerEvents = "none";
-    overlay.style.filter = "blur(15px)";
-    overlay.style.transition = "width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)";
+    styleElement.textContent = css;
+  }, []);
 
-    document.body.appendChild(overlay);
+  const toggleTheme = React.useCallback(() => {
+    const animation = createAnimation(variant, start, url, darkModeAnim);
 
-    // Force layout reflow
-    overlay.offsetWidth;
+    updateStyles(animation.css, animation.name);
 
-    const maxRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    ) * 2.2;
+    if (typeof window === "undefined") return;
 
-    overlay.style.width = `${maxRadius}px`;
-    overlay.style.height = `${maxRadius}px`;
+    const switchTheme = () => {
+      const isDark = theme === "light";
+      flushSync(() => {
+        setTheme(isDark ? "dark" : "light");
+      });
+      const root = document.documentElement;
+      if (isDark) {
+        root.classList.add("dark");
+        root.style.colorScheme = "dark";
+      } else {
+        root.classList.remove("dark");
+        root.style.colorScheme = "light";
+      }
+    };
 
-    const root = document.documentElement;
-    root.classList.add("theme-transitioning");
+    if (!document.startViewTransition) {
+      switchTheme();
+      return;
+    }
 
-    setTimeout(() => {
-      setTheme(targetTheme);
-    }, 250);
-
-    setTimeout(() => {
-      overlay.style.transition = "opacity 0.4s ease";
-      overlay.style.opacity = "0";
-    }, 600);
-
-    setTimeout(() => {
-      overlay.remove();
-      root.classList.remove("theme-transitioning");
-      setIsTransitioning(false);
-    }, 1000);
-  }, [theme, resolvedTheme, setTheme, isTransitioning]);
+    document.startViewTransition(switchTheme);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme, setTheme]);
 
   return (
     <Button
@@ -89,7 +89,7 @@ export default function ThemeToggleButton({
     >
       <SunIcon className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <MoonIcon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Theme Toggle</span>
+      <span className="sr-only">Theme Toggle </span>
       {showLabel && (
         <>
           <span className="hidden group-hover:block border rounded-full px-2 absolute -top-10">
