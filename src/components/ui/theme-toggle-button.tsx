@@ -81,12 +81,30 @@ export default function ThemeToggleButton({
     const cleanup = () => {
       setTheme(targetTheme);
       setIsTransitioning(false);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          disableTransitions.remove();
-          document.getElementById(styleId)?.remove();
-        });
+
+      const observer = new MutationObserver(() => {
+        const hasDark = document.documentElement.classList.contains("dark");
+        const currentResolved = hasDark ? "dark" : "light";
+        if (currentResolved === targetTheme) {
+          observer.disconnect();
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              disableTransitions.remove();
+              document.getElementById(styleId)?.remove();
+            });
+          });
+        }
       });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+
+      setTimeout(() => {
+        observer.disconnect();
+        disableTransitions.remove();
+        document.getElementById(styleId)?.remove();
+      }, 500);
     };
 
     if (!document.startViewTransition) {
