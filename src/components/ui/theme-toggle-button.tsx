@@ -29,6 +29,7 @@ export default function ThemeToggleButton({
 }: ThemeToggleAnimationProps) {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [darkModeAnim] = useAtom(darkModeToggleAnimation);
+  const [isTransitioning, setIsTransitioning] = React.useState(false);
 
   const styleId = "theme-transition-styles";
 
@@ -49,11 +50,15 @@ export default function ThemeToggleButton({
   }, []);
 
   const toggleTheme = React.useCallback(() => {
+    if (isTransitioning) return;
+
     const animation = createAnimation(variant, start, url, darkModeAnim);
 
     updateStyles(animation.css, animation.name);
 
     if (typeof window === "undefined") return;
+
+    setIsTransitioning(true);
 
     const disableTransitions = document.createElement("style");
     disableTransitions.textContent = `*, *::before, *::after { transition: none !important; }`;
@@ -62,73 +67,20 @@ export default function ThemeToggleButton({
     const currentTheme = resolvedTheme || theme;
     const targetTheme = currentTheme === "dark" ? "light" : "dark";
 
-    const root = document.documentElement;
-    const originalRemove = root.classList.remove.bind(root.classList);
-    const originalAdd = root.classList.add.bind(root.classList);
-
-    root.classList.remove = (...classes) => {
-      const filtered = classes.filter((c) => c !== targetTheme);
-      if (filtered.length > 0) {
-        originalRemove(...filtered);
+    const switchTheme = () => {
+      const root = document.documentElement;
+      if (targetTheme === "dark") {
+        root.classList.add("dark");
+        root.style.colorScheme = "dark";
+      } else {
+        root.classList.remove("dark");
+        root.style.colorScheme = "light";
       }
     };
-
-    root.classList.add = (...classes) => {
-      originalAdd(...classes);
-    };
-
-    const switchTheme = async () => {
-      setTheme(targetTheme);
-
-      const checkTheme = () => {
-        const hasDark = document.documentElement.classList.contains("dark");
-        return (hasDark ? "dark" : "light") === targetTheme;
-      };
-
-      if (checkTheme()) {
-        document.documentElement.style.colorScheme = targetTheme;
-        return;
-      }
-
-      await new Promise<void>((resolve) => {
-        const observer = new MutationObserver(() => {
-          if (checkTheme()) {
-            observer.disconnect();
-            resolve();
-          }
-        });
-        observer.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ["class"],
-        });
-        setTimeout(() => {
-          observer.disconnect();
-          resolve();
-        }, 150);
-      });
-
-      document.documentElement.style.colorScheme = targetTheme;
-    };
-
-    if (!document.startViewTransition) {
-      switchTheme().then(() => {
-        root.classList.remove = originalRemove;
-        root.classList.add = originalAdd;
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            disableTransitions.remove();
-            document.getElementById(styleId)?.remove();
-          });
-        });
-      });
-      return;
-    }
-
-    const transition = document.startViewTransition(switchTheme);
 
     const cleanup = () => {
-      root.classList.remove = originalRemove;
-      root.classList.add = originalAdd;
+      setTheme(targetTheme);
+      setIsTransitioning(false);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           disableTransitions.remove();
@@ -136,8 +88,16 @@ export default function ThemeToggleButton({
         });
       });
     };
+
+    if (!document.startViewTransition) {
+      switchTheme();
+      cleanup();
+      return;
+    }
+
+    const transition = document.startViewTransition(switchTheme);
     transition.finished.then(cleanup).catch(cleanup);
-  }, [theme, resolvedTheme, setTheme, darkModeAnim, variant, start, url, updateStyles]);
+  }, [theme, resolvedTheme, setTheme, darkModeAnim, variant, start, url, updateStyles, isTransitioning]);
 
   return (
     <Button
