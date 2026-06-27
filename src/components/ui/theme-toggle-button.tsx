@@ -3,7 +3,7 @@
 import React from "react";
 import { flushSync } from "react-dom";
 import { MoonIcon, SunIcon } from "lucide-react";
-import { useTheme } from "next-themes";
+import { useTheme } from "@wrksz/themes/client";
 import darkModeToggleAnimation from "@/lib/atoms/fade";
 import { useAtom } from "jotai";
 import { Button } from "@/components/ui/button";

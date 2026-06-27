@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Doto, Geist, Geist_Mono } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ThemeProvider } from "@wrksz/themes/next";
 import { Navbar } from "@/components/navbar";
 import Providers from "@/lib/provider/react-query";
 import { LenisProvider } from "@/components/lenis-provider";
@@ -92,7 +92,7 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${doto.variable} antialiased`}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storage="cookie">
             <Providers>
               <LenisProvider>
                 <CustomCursor />
