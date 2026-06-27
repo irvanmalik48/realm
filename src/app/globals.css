@@ -127,6 +127,10 @@
   --moe-bg-japanese: oklch(0.28 0 0);
 }
 
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
