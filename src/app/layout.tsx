@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Doto, Geist, Geist_Mono } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
-import { ThemeProvider } from "@wrksz/themes/next";
+import { ThemeProvider, getTheme } from "@wrksz/themes/next";
 import { Navbar } from "@/components/navbar";
 import Providers from "@/lib/provider/react-query";
 import { LenisProvider } from "@/components/lenis-provider";
@@ -81,14 +81,16 @@ export const viewport: Viewport = {
   width: "device-width",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = await getTheme();
+
   return (
     <ViewTransitions>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" className={theme} suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${doto.variable} antialiased`}
         >
