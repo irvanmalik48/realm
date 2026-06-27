@@ -21,23 +21,62 @@ export default function ThemeToggleButton({
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [isTransitioning, setIsTransitioning] = React.useState(false);
 
-  const toggleTheme = React.useCallback(() => {
+  const toggleTheme = React.useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     if (isTransitioning || typeof window === "undefined") return;
 
     setIsTransitioning(true);
 
-    const root = document.documentElement;
-    root.classList.add("theme-transitioning");
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX || rect.left + rect.width / 2;
+    const y = e.clientY || rect.top + rect.height / 2;
 
     const currentTheme = resolvedTheme || theme;
     const targetTheme = currentTheme === "dark" ? "light" : "dark";
 
-    setTheme(targetTheme);
+    const overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.top = `${y}px`;
+    overlay.style.left = `${x}px`;
+    overlay.style.width = "0px";
+    overlay.style.height = "0px";
+    overlay.style.borderRadius = "50%";
+    overlay.style.backgroundColor = targetTheme === "dark" ? "#09090b" : "#ffffff";
+    overlay.style.transform = "translate(-50%, -50%)";
+    overlay.style.zIndex = "999999";
+    overlay.style.pointerEvents = "none";
+    overlay.style.filter = "blur(15px)";
+    overlay.style.transition = "width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)";
+
+    document.body.appendChild(overlay);
+
+    // Force layout reflow
+    overlay.offsetWidth;
+
+    const maxRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    ) * 2.2;
+
+    overlay.style.width = `${maxRadius}px`;
+    overlay.style.height = `${maxRadius}px`;
+
+    const root = document.documentElement;
+    root.classList.add("theme-transitioning");
 
     setTimeout(() => {
+      setTheme(targetTheme);
+    }, 250);
+
+    setTimeout(() => {
+      overlay.style.transition = "opacity 0.4s ease";
+      overlay.style.opacity = "0";
+    }, 600);
+
+    setTimeout(() => {
+      overlay.remove();
       root.classList.remove("theme-transitioning");
       setIsTransitioning(false);
-    }, 300);
+    }, 1000);
   }, [theme, resolvedTheme, setTheme, isTransitioning]);
 
   return (
