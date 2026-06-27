@@ -21,6 +21,12 @@ interface ThemeToggleAnimationProps {
   url?: string;
 }
 
+declare global {
+  interface Window {
+    __targetTheme?: string;
+  }
+}
+
 const useLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
 export default function ThemeToggleButton({
@@ -70,24 +76,44 @@ export default function ThemeToggleButton({
 
     if (typeof window === "undefined") return;
 
+    const currentTheme = resolvedTheme || theme;
+    const targetTheme = currentTheme === "dark" ? "light" : "dark";
+    window.__targetTheme = targetTheme;
+
+    const root = document.documentElement;
+    const originalRemove = root.classList.remove.bind(root.classList);
+    const originalAdd = root.classList.add.bind(root.classList);
+
+    root.classList.remove = (...classes) => {
+      const filtered = classes.filter((c) => c !== targetTheme);
+      if (filtered.length > 0) {
+        originalRemove(...filtered);
+      }
+    };
+
+    root.classList.add = (...classes) => {
+      originalAdd(...classes);
+    };
+
     const switchTheme = () => {
-      const currentTheme = resolvedTheme || theme;
-      const targetTheme = currentTheme === "dark" ? "light" : "dark";
       flushSync(() => {
         setTheme(targetTheme);
       });
     };
 
+    const cleanup = () => {
+      root.classList.remove = originalRemove;
+      root.classList.add = originalAdd;
+      document.getElementById(styleId)?.remove();
+    };
+
     if (!document.startViewTransition) {
       switchTheme();
-      document.getElementById(styleId)?.remove();
+      cleanup();
       return;
     }
 
     const transition = document.startViewTransition(switchTheme);
-    const cleanup = () => {
-      document.getElementById(styleId)?.remove();
-    };
     transition.finished.then(cleanup).catch(cleanup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, resolvedTheme, setTheme, darkModeAnim, variant, start, url, updateStyles]);
