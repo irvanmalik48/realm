@@ -62,6 +62,21 @@ export default function ThemeToggleButton({
     const currentTheme = resolvedTheme || theme;
     const targetTheme = currentTheme === "dark" ? "light" : "dark";
 
+    const root = document.documentElement;
+    const originalRemove = root.classList.remove.bind(root.classList);
+    const originalAdd = root.classList.add.bind(root.classList);
+
+    root.classList.remove = (...classes) => {
+      const filtered = classes.filter((c) => c !== targetTheme);
+      if (filtered.length > 0) {
+        originalRemove(...filtered);
+      }
+    };
+
+    root.classList.add = (...classes) => {
+      originalAdd(...classes);
+    };
+
     const switchTheme = async () => {
       setTheme(targetTheme);
 
@@ -97,6 +112,8 @@ export default function ThemeToggleButton({
 
     if (!document.startViewTransition) {
       switchTheme().then(() => {
+        root.classList.remove = originalRemove;
+        root.classList.add = originalAdd;
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             disableTransitions.remove();
@@ -110,6 +127,8 @@ export default function ThemeToggleButton({
     const transition = document.startViewTransition(switchTheme);
 
     const cleanup = () => {
+      root.classList.remove = originalRemove;
+      root.classList.add = originalAdd;
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           disableTransitions.remove();
