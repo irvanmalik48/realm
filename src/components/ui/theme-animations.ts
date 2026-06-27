@@ -159,7 +159,8 @@ export const createAnimation = (
 }
 
 ::view-transition-new(root) {
-  mask: url('${url}') center / 0 no-repeat;
+  -webkit-mask: url('${url}') center / 0px no-repeat;
+  mask: url('${url}') center / 0px no-repeat;
   animation: scale 3s;
 }
 
@@ -224,7 +225,9 @@ export const createAnimation = (
         animation-timing-function: var(--expo-out);
       }
       ::view-transition-new(root) {
-        mask: url('${svg}') ${start.replace("-", " ")} / 0 no-repeat;
+        -webkit-mask: url('${svg}') ${start.replace("-", " ")} / 0px no-repeat;
+        mask: url('${svg}') ${start.replace("-", " ")} / 0px no-repeat;
+        -webkit-mask-origin: content-box;
         mask-origin: content-box;
         animation: scale-${start} 1s;
         transform-origin: ${transformOrigin};
