@@ -224,19 +224,30 @@ export const createAnimation = (
         animation-timing-function: var(--expo-out);
       }
       ::view-transition-new(root) {
-        mask: url('${svg}') ${start.replace("-", " ")} / 0 no-repeat;
+        -webkit-mask: url('${svg}') ${start.replace("-", " ")} / 0px no-repeat;
+        mask: url('${svg}') ${start.replace("-", " ")} / 0px no-repeat;
+        -webkit-mask-origin: content-box;
         mask-origin: content-box;
-        animation: scale-${start} 1s;
+        animation: scale-${start} 1.3s;
         transform-origin: ${transformOrigin};
       }
       ::view-transition-old(root),
       .dark::view-transition-old(root) {
-        animation: scale-${start} 1s;
+        animation: scale-${start} 1.3s;
         transform-origin: ${transformOrigin};
         z-index: -1;
       }
       @keyframes scale-${start} {
-        to {
+        0% {
+          -webkit-mask-size: 0px;
+          mask-size: 0px;
+        }
+        75% {
+          -webkit-mask-size: 350vmax;
+          mask-size: 350vmax;
+        }
+        100% {
+          -webkit-mask-size: 350vmax;
           mask-size: 350vmax;
         }
       }
