@@ -159,8 +159,14 @@ export const createAnimation = (
 }
 
 ::view-transition-new(root) {
-  -webkit-mask: url('${url}') center / 0px no-repeat;
-  mask: url('${url}') center / 0px no-repeat;
+  -webkit-mask-image: url('${url}');
+  mask-image: url('${url}');
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 0px;
+  mask-size: 0px;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   animation: scale 3s;
 }
 
@@ -229,8 +235,14 @@ export const createAnimation = (
         animation-timing-function: var(--expo-out);
       }
       ::view-transition-new(root) {
-        -webkit-mask: url('${svg}') ${start.replace("-", " ")} / 0px no-repeat;
-        mask: url('${svg}') ${start.replace("-", " ")} / 0px no-repeat;
+        -webkit-mask-image: url('${svg}');
+        mask-image: url('${svg}');
+        -webkit-mask-position: ${start.replace("-", " ")};
+        mask-position: ${start.replace("-", " ")};
+        -webkit-mask-size: 0px;
+        mask-size: 0px;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
         -webkit-mask-origin: content-box;
         mask-origin: content-box;
         animation: scale-${start} 1s;
