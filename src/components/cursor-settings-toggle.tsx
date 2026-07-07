@@ -73,6 +73,7 @@ export function CursorSettingsToggle() {
               value={cursorSpeed}
               onChange={(e) => setCursorSpeed(parseFloat(e.target.value))}
               disabled={!hasPointer}
+              aria-label="Follow-up Speed"
               className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden disabled:cursor-not-allowed"
             />
           </div>
@@ -95,6 +96,7 @@ export function CursorSettingsToggle() {
               value={cursorHoverScale}
               onChange={(e) => setCursorHoverScale(parseFloat(e.target.value))}
               disabled={!hasPointer}
+              aria-label="Hover Scale"
               className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden disabled:cursor-not-allowed"
             />
           </div>
@@ -117,6 +119,7 @@ export function CursorSettingsToggle() {
               value={cursorPointerSize}
               onChange={(e) => setCursorPointerSize(parseInt(e.target.value, 10))}
               disabled={!hasPointer}
+              aria-label="Pointer Orb Size"
               className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden disabled:cursor-not-allowed"
             />
           </div>
@@ -139,6 +142,7 @@ export function CursorSettingsToggle() {
               value={cursorSize}
               onChange={(e) => setCursorSize(parseInt(e.target.value, 10))}
               disabled={!hasPointer}
+              aria-label="Trail Orb Size (Delayed)"
               className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden disabled:cursor-not-allowed"
             />
           </div>
