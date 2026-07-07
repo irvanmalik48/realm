@@ -1,14 +1,7 @@
-import Container from "@/components/container";
-import { ImageComponent } from "@/components/image";
 import { TextScroll } from "@/components/ui/text-scroll";
-import { Settings } from "lucide-react";
 import { Metadata } from "next";
-import CuteImage from "@/assets/img/awoocon.jpg";
 import type { WebPage, WithContext } from "schema-dts";
-import { PerformanceModeToggle } from "@/components/performance-mode-toggle";
-import { MarqueeToggle } from "@/components/marquee-toggle";
-import { ScrollSettingsToggle } from "@/components/scroll-settings-toggle";
-import { CursorSettingsToggle } from "@/components/cursor-settings-toggle";
+import { SettingsClientPage } from "@/components/settings-client-page";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -55,32 +48,7 @@ export default function SettingsPage() {
 
   return (
     <>
-      <Container>
-        <div className="relative rounded-lg overflow-clip">
-          <ImageComponent
-            img={CuteImage}
-            alt="Awoo"
-            className="w-full relative max-h-96 z-10 rounded-lg"
-            innerClassName="md:-translate-y-8"
-            height={720}
-          />
-          <p className="z-20 md:w-fit w-3/4 text-center font-bold absolute bottom-3 left-1/2 rounded-full -translate-x-1/2 px-7 py-3 font-doto bg-background/80 text-foreground md:text-xl backdrop-blur-lg">
-            SETTINGS
-          </p>
-        </div>
-        <div className="w-full bg-background rounded-lg border border-border">
-          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
-            <Settings className="size-4" />
-            <span className="text-sm font-mono">CONFIGURE_SITE.md</span>
-          </h2>
-          <div className="w-full divide-y divide-border/50">
-            <PerformanceModeToggle />
-            <MarqueeToggle />
-            <ScrollSettingsToggle />
-            <CursorSettingsToggle />
-          </div>
-        </div>
-      </Container>
+      <SettingsClientPage />
       <TextScroll
         className="text-5xl md:text-7xl text-muted-foreground/50 dark:font-semibold font-bold py-24 md:space-y-2"
         textClassName="py-1 md:py-3 font-doto"
