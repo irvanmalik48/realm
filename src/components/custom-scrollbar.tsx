@@ -72,9 +72,7 @@ export function CustomScrollbar() {
   };
 
   const updateScrollbarRef = useRef(updateScrollbar);
-  useEffect(() => {
-    updateScrollbarRef.current = updateScrollbar;
-  }, [updateScrollbar]);
+  updateScrollbarRef.current = updateScrollbar;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -102,7 +100,9 @@ export function CustomScrollbar() {
       }
     };
 
-    updateScrollbar();
+    requestAnimationFrame(() => {
+      updateScrollbar();
+    });
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
 
