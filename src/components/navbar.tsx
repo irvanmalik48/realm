@@ -37,6 +37,7 @@ export function Navbar() {
       className={`sticky top-0 z-999 w-full border-b ${
         performanceMode ? "bg-background border-border" : "border-transparent"
       }`}
+      style={{ viewTransitionName: "navbar" }}
     >
       <section className="relative w-full">
         {!performanceMode && (
