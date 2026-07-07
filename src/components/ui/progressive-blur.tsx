@@ -40,6 +40,7 @@ export function ProgressiveBlur({
         className="absolute inset-0"
         style={{
           zIndex: 1,
+          backgroundColor: "rgba(255, 255, 255, 0.01)",
           backdropFilter: `blur(${blurLevels[0]}px)`,
           WebkitBackdropFilter: `blur(${blurLevels[0]}px)`,
           maskImage:
@@ -77,6 +78,7 @@ export function ProgressiveBlur({
             className="absolute inset-0"
             style={{
               zIndex: index + 2,
+              backgroundColor: "rgba(255, 255, 255, 0.01)",
               backdropFilter: `blur(${blurLevels[blurIndex]}px)`,
               WebkitBackdropFilter: `blur(${blurLevels[blurIndex]}px)`,
               maskImage: maskGradient,
@@ -91,6 +93,7 @@ export function ProgressiveBlur({
         className="absolute inset-0"
         style={{
           zIndex: blurLevels.length,
+          backgroundColor: "rgba(255, 255, 255, 0.01)",
           backdropFilter: `blur(${blurLevels[blurLevels.length - 1]}px)`,
           WebkitBackdropFilter: `blur(${blurLevels[blurLevels.length - 1]}px)`,
           maskImage:
