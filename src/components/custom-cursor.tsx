@@ -1,8 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useAtomValue } from "jotai";
 import { cursorEnabledAtom, cursorSpeedAtom, cursorHoverScaleAtom, cursorSizeAtom, cursorPointerSizeAtom } from "@/lib/atoms/cursor";
+
+const pointerStore = {
+  subscribe(callback: () => void) {
+    if (typeof window === "undefined") return () => {};
+    const mediaQuery = window.matchMedia("(any-pointer: fine)");
+    mediaQuery.addEventListener("change", callback);
+    return () => mediaQuery.removeEventListener("change", callback);
+  },
+  getSnapshot() {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(any-pointer: fine)").matches;
+  },
+  getServerSnapshot() {
+    return false;
+  }
+};
 
 export function CustomCursor() {
   const isEnabled = useAtomValue(cursorEnabledAtom);
@@ -11,20 +27,11 @@ export function CustomCursor() {
   const baseSize = useAtomValue(cursorSizeAtom);
   const pointerSize = useAtomValue(cursorPointerSizeAtom);
 
-  const [hasPointer, setHasPointer] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(any-pointer: fine)");
-    setHasPointer(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setHasPointer(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
+  const hasPointer = useSyncExternalStore(
+    pointerStore.subscribe,
+    pointerStore.getSnapshot,
+    pointerStore.getServerSnapshot
+  );
 
   const mousePos = useRef({ x: 0, y: 0 });
   const cursorPos = useRef({ x: 0, y: 0 });
