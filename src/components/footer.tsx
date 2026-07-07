@@ -31,7 +31,10 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative w-full min-h-[85vh] border-t border-border max-w-full mb-30 md:mb-0 mx-auto p-5 gap-8 flex flex-col items-center">
+    <footer
+      className="relative w-full min-h-[85vh] border-t border-border max-w-full mb-30 md:mb-0 mx-auto p-5 gap-8 flex flex-col items-center"
+      style={{ viewTransitionName: "footer" }}
+    >
       <div className="w-full md:grid-cols-2 grid grid-cols-1 gap-5">
         <div className="flex flex-col gap-5">
           <div className="flex flex-col">
