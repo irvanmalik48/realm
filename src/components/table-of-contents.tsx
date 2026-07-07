@@ -23,7 +23,9 @@ export function TableOfContents() {
       text: elem.textContent || "",
       level: Number(elem.tagName.substring(1)),
     }));
-    setHeadings(mapped);
+    requestAnimationFrame(() => {
+      setHeadings(mapped);
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
