@@ -6,6 +6,7 @@ import { Navbar } from "@/components/navbar";
 import Providers from "@/lib/provider/react-query";
 import { LenisProvider } from "@/components/lenis-provider";
 import { CustomCursor } from "@/components/custom-cursor";
+import { CustomScrollbar } from "@/components/custom-scrollbar";
 
 import "./globals.css";
 import { Footer } from "@/components/footer";
@@ -97,6 +98,7 @@ export default async function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storage="cookie">
             <Providers>
               <LenisProvider>
+                <CustomScrollbar />
                 <CustomCursor />
                 <FAB />
                 <Navbar />
