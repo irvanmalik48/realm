@@ -184,7 +184,7 @@ export function CustomCursor() {
           pointerEvents: "none",
           zIndex: 99998,
         }}
-        className="hidden md:block"
+        className="hidden md:block custom-cursor-pointer"
       />
       <div
         ref={trailRef}
@@ -205,7 +205,7 @@ export function CustomCursor() {
           boxShadow: "0 0 16px rgba(255, 255, 255, 0.2)",
           transition: "width 0.2s ease, height 0.2s ease, margin 0.2s ease",
         }}
-        className="hidden md:block"
+        className="hidden md:block custom-cursor-trail"
       />
     </>
   );
