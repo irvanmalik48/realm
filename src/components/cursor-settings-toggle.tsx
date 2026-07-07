@@ -1,9 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useAtom } from "jotai";
 import { cursorEnabledAtom, cursorSpeedAtom, cursorHoverScaleAtom, cursorSizeAtom, cursorPointerSizeAtom } from "@/lib/atoms/cursor";
 import { Switch } from "./ui/switch";
+
+const pointerStore = {
+  subscribe(callback: () => void) {
+    if (typeof window === "undefined") return () => {};
+    const mediaQuery = window.matchMedia("(any-pointer: fine)");
+    mediaQuery.addEventListener("change", callback);
+    return () => mediaQuery.removeEventListener("change", callback);
+  },
+  getSnapshot() {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(any-pointer: fine)").matches;
+  },
+  getServerSnapshot() {
+    return false;
+  }
+};
 
 export function CursorSettingsToggle() {
   const [cursorEnabled, setCursorEnabled] = useAtom(cursorEnabledAtom);
@@ -12,20 +28,11 @@ export function CursorSettingsToggle() {
   const [cursorSize, setCursorSize] = useAtom(cursorSizeAtom);
   const [cursorPointerSize, setCursorPointerSize] = useAtom(cursorPointerSizeAtom);
 
-  const [hasPointer, setHasPointer] = useState(true);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(any-pointer: fine)");
-    setHasPointer(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setHasPointer(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
+  const hasPointer = useSyncExternalStore(
+    pointerStore.subscribe,
+    pointerStore.getSnapshot,
+    pointerStore.getServerSnapshot
+  );
 
   return (
     <div className="w-full text-sm text-muted-foreground px-5 py-5 flex flex-col gap-4">
