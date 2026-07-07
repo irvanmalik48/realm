@@ -14,8 +14,8 @@ export function PostList() {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <PostCard
-              key={post.slug}
               {...post}
+              key={post.slug}
               layout
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}

@@ -66,7 +66,7 @@ export function SelfHostedServices() {
     <div className="p-5">
       <div className="grid grid-cols-1 md:grid-cols-2 rounded-md border border-border overflow-clip">
         {selfHostItems.map((item, index) => (
-          <SelfHostItem key={item.url} {...item} />
+          <SelfHostItem {...item} key={item.url} />
         ))}
       </div>
     </div>
