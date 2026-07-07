@@ -42,7 +42,7 @@ export function Navbar() {
       <section className="relative w-full">
         {!performanceMode && (
           <>
-            <div className="lg:hidden absolute z-20 top-0 inset-x-0 h-16 bg-linear-to-b from-background/80 to-transparent" />
+            <div className="absolute z-20 top-0 inset-x-0 h-16 bg-linear-to-b from-background/80 to-transparent" />
             <ProgressiveBlur className="z-10" height="170%" position="top" />
           </>
         )}
