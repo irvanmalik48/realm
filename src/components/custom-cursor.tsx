@@ -214,41 +214,22 @@ export function CustomCursor() {
       <div
         ref={pointerRef}
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
           width: `${pointerSize}px`,
           height: `${pointerSize}px`,
           marginLeft: `-${pointerSize / 2}px`,
           marginTop: `-${pointerSize / 2}px`,
-          borderRadius: "50%",
-          backgroundColor: "var(--foreground)",
-          opacity: 0,
-          pointerEvents: "none",
-          zIndex: 99998,
         }}
-        className="hidden md:block custom-cursor-pointer"
+        className="hidden md:block custom-cursor-pointer fixed top-0 left-0 rounded-full bg-foreground opacity-0 pointer-events-none z-99998"
       />
       <div
         ref={trailRef}
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
           width: `${baseSize}px`,
           height: `${baseSize}px`,
           marginLeft: `-${baseSize / 2}px`,
           marginTop: `-${baseSize / 2}px`,
-          borderRadius: "50%",
-          backgroundColor: "#ffffff",
-          opacity: 0,
-          pointerEvents: "none",
-          zIndex: 99999,
-          mixBlendMode: "difference",
-          boxShadow: "0 0 16px rgba(255, 255, 255, 0.2)",
-          transition: "width 0.2s ease, height 0.2s ease, margin 0.2s ease",
         }}
-        className="hidden md:block custom-cursor-trail"
+        className="hidden md:block custom-cursor-trail fixed top-0 left-0 rounded-full bg-white opacity-0 pointer-events-none z-99999 mix-blend-difference shadow-[0_0_16px_rgba(255,255,255,0.2)]"
       />
     </>
   );
