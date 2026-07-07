@@ -47,6 +47,7 @@ export function ScrollSettingsToggle() {
               step="0.01"
               value={scrollLerp}
               onChange={(e) => setScrollLerp(parseFloat(e.target.value))}
+              aria-label="Scroll Velocity (Lerp)"
               className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden"
             />
           </div>
@@ -68,6 +69,7 @@ export function ScrollSettingsToggle() {
               step="0.1"
               value={scrollDuration}
               onChange={(e) => setScrollDuration(parseFloat(e.target.value))}
+              aria-label="Scroll Duration (Acceleration)"
               className="w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary focus:outline-hidden"
             />
           </div>
