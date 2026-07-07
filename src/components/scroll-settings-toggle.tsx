@@ -1,13 +1,14 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { smoothScrollAtom, scrollLerpAtom, scrollDurationAtom } from "@/lib/atoms/scroll";
+import { smoothScrollAtom, scrollLerpAtom, scrollDurationAtom, customScrollbarEnabledAtom } from "@/lib/atoms/scroll";
 import { Switch } from "./ui/switch";
 
 export function ScrollSettingsToggle() {
   const [smoothScroll, setSmoothScroll] = useAtom(smoothScrollAtom);
   const [scrollLerp, setScrollLerp] = useAtom(scrollLerpAtom);
   const [scrollDuration, setScrollDuration] = useAtom(scrollDurationAtom);
+  const [customScrollbar, setCustomScrollbar] = useAtom(customScrollbarEnabledAtom);
 
   return (
     <div className="w-full text-sm text-muted-foreground px-5 py-5 flex flex-col gap-4">
@@ -72,6 +73,24 @@ export function ScrollSettingsToggle() {
           </div>
         </div>
       )}
+
+      <div className="border-t border-border/40 my-2" />
+
+      <div className="flex gap-5 md:items-center items-start justify-between">
+        <div className="flex flex-col gap-1">
+          <p className="text-foreground text-base font-semibold flex items-center gap-2">
+            Custom Scrollbar
+          </p>
+          <p>
+            Enable custom stylized React scrollbar instead of the browser native one.
+          </p>
+        </div>
+        <Switch
+          checked={customScrollbar}
+          onCheckedChange={(checked) => setCustomScrollbar(checked as boolean)}
+          aria-label="Toggle custom scrollbar"
+        />
+      </div>
     </div>
   );
 }
