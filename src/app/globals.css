@@ -134,6 +134,12 @@
   body {
     @apply bg-background text-foreground;
   }
+  .custom-scrollbar-active {
+    scrollbar-width: none;
+  }
+  .custom-scrollbar-active::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .blur {
@@ -192,4 +198,56 @@ html.lenis, html.lenis body {
 
 .lenis.lenis-smooth iframe {
   pointer-events: none;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: 120ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+  }
+  ::view-transition-new(root) {
+    animation: 180ms cubic-bezier(0, 0, 0.2, 1) 40ms both fade-in;
+  }
+
+  .custom-cursor-pointer {
+    view-transition-name: custom-cursor-pointer;
+  }
+  .custom-cursor-trail {
+    view-transition-name: custom-cursor-trail;
+  }
+
+  ::view-transition-group(navbar),
+  ::view-transition-group(footer),
+  ::view-transition-group(fab),
+  ::view-transition-group(fab-scroll-top),
+  ::view-transition-group(fab-menu),
+  ::view-transition-group(custom-cursor-pointer),
+  ::view-transition-group(custom-cursor-trail) {
+    animation-duration: 0s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
