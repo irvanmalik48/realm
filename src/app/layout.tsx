@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Doto, Geist, Geist_Mono } from "next/font/google";
-import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider, getTheme } from "@wrksz/themes/next";
 import { Navbar } from "@/components/navbar";
 import Providers from "@/lib/provider/react-query";
@@ -90,31 +89,29 @@ export default async function RootLayout({
   const theme = await getTheme();
 
   return (
-    <ViewTransitions>
-      <html lang="en" className={theme} suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} ${doto.variable} antialiased`}
-        >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storage="cookie">
-            <Providers>
-              <LenisProvider>
-                <CustomScrollbar />
-                <CustomCursor />
-                <FAB />
-                <Navbar />
-                {children}
-                <Footer />
-              </LenisProvider>
-            </Providers>
-          </ThemeProvider>
-          <Script
-            strategy="afterInteractive"
-            src="https://cloud.umami.is/script.js"
-            data-website-id="4de66c4c-8a3c-4304-819c-18e1ac1cf209"
-            defer
-          />
-        </body>
-      </html>
-    </ViewTransitions>
+    <html lang="en" className={theme} suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${doto.variable} antialiased`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storage="cookie">
+          <Providers>
+            <LenisProvider>
+              <CustomScrollbar />
+              <CustomCursor />
+              <FAB />
+              <Navbar />
+              {children}
+              <Footer />
+            </LenisProvider>
+          </Providers>
+        </ThemeProvider>
+        <Script
+          strategy="afterInteractive"
+          src="https://cloud.umami.is/script.js"
+          data-website-id="4de66c4c-8a3c-4304-819c-18e1ac1cf209"
+          defer
+        />
+      </body>
+    </html>
   );
 }

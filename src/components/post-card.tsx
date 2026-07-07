@@ -1,5 +1,5 @@
 import { PostCardProps } from "@/lib/types/posts";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { motion, HTMLMotionProps } from "framer-motion";
 
 const MotionLink = motion.create(Link);

@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   experimental: {
     webpackMemoryOptimizations: true,
     serverSourceMaps: false,
+    viewTransition: true,
   },
   productionBrowserSourceMaps: false,
 };

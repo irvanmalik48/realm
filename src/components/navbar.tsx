@@ -1,7 +1,7 @@
 "use client";
 
 import ThemeToggleButton from "./ui/theme-toggle-button";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai";
 

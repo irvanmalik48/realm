@@ -19,7 +19,7 @@ import { getMarkdownFromSlug, getMarkdownFiles } from "@/lib/fs/posts";
 import { getFrontmatter } from "next-mdx-remote-client/utils";
 import Container from "@/components/container";
 import { TextScroll } from "@/components/ui/text-scroll";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";

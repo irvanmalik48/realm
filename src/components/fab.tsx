@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import Image from "next/image";
 import Hero from "@/assets/img/fab-hero.png";

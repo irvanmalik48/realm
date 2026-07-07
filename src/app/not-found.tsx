@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Undo } from "lucide-react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
