@@ -64,7 +64,7 @@ export function Footer() {
                   <span>Open Contact Form</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[550px]">
+              <DialogContent className="sm:max-w-137.5">
                 <DialogHeader>
                   <DialogTitle className="flex items-center gap-2">
                     <Mail className="size-5 text-primary" />
