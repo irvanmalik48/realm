@@ -38,15 +38,97 @@ export function CustomCursor() {
   useEffect(() => {
     if (!isEnabled || !hasPointer) return;
 
+    let rafId: number;
+    let isLooping = false;
+
+    const updatePosition = () => {
+      const targetX = mousePos.current.x;
+      const targetY = mousePos.current.y;
+
+      const dx = targetX - cursorPos.current.x;
+      const dy = targetY - cursorPos.current.y;
+
+      const targetScale = isHoveringRef.current ? hoverScale : 1;
+      const dScale = targetScale - currentScale.current;
+
+      const targetPointerScale = isHoveringRef.current ? 0.3 : 1;
+      const dPointerScale = targetPointerScale - pointerScale.current;
+
+      const targetOpacity = isVisibleRef.current ? 1 : 0;
+
+      if (
+        Math.abs(dx) < 0.05 &&
+        Math.abs(dy) < 0.05 &&
+        Math.abs(dScale) < 0.005 &&
+        Math.abs(dPointerScale) < 0.005
+      ) {
+        cursorPos.current.x = targetX;
+        cursorPos.current.y = targetY;
+        currentScale.current = targetScale;
+        pointerScale.current = targetPointerScale;
+
+        if (trailRef.current) {
+          trailRef.current.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) scale(${targetScale})`;
+          trailRef.current.style.opacity = String(targetOpacity * 0.85);
+        }
+        if (pointerRef.current) {
+          pointerRef.current.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) scale(${targetPointerScale})`;
+          pointerRef.current.style.opacity = String(targetOpacity);
+        }
+
+        isLooping = false;
+        return;
+      }
+
+      cursorPos.current.x += dx * speed;
+      cursorPos.current.y += dy * speed;
+      currentScale.current += dScale * 0.15;
+      pointerScale.current += dPointerScale * 0.15;
+
+      if (trailRef.current) {
+        trailRef.current.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0) scale(${currentScale.current})`;
+        trailRef.current.style.opacity = String(targetOpacity * 0.85);
+      }
+
+      if (pointerRef.current) {
+        pointerRef.current.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) scale(${pointerScale.current})`;
+        pointerRef.current.style.opacity = String(targetOpacity);
+      }
+
+      rafId = requestAnimationFrame(updatePosition);
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
       if (!isVisibleRef.current) {
         isVisibleRef.current = true;
       }
+      if (!isLooping) {
+        isLooping = true;
+        rafId = requestAnimationFrame(updatePosition);
+      }
     };
 
     const handleMouseLeave = () => {
       isVisibleRef.current = false;
+      if (!isLooping) {
+        isLooping = true;
+        rafId = requestAnimationFrame(updatePosition);
+      }
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      const isInteractive = target.closest("a, button, [role='button'], input, select, label, [data-state]");
+      const newHover = !!isInteractive;
+      if (newHover !== isHoveringRef.current) {
+        isHoveringRef.current = newHover;
+        if (!isLooping) {
+          isLooping = true;
+          rafId = requestAnimationFrame(updatePosition);
+        }
+      }
     };
 
     const handleClick = (e: MouseEvent) => {
@@ -82,27 +164,19 @@ export function CustomCursor() {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("click", handleClick, true);
     document.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("mouseover", handleMouseOver);
+
+    isLooping = true;
+    rafId = requestAnimationFrame(updatePosition);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("click", handleClick, true);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("mouseover", handleMouseOver);
+      cancelAnimationFrame(rafId);
     };
-  }, [isEnabled, hasPointer]);
-
-  useEffect(() => {
-    if (!isEnabled || !hasPointer) return;
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-      const isInteractive = target.closest("a, button, [role='button'], input, select, label, [data-state]");
-      isHoveringRef.current = !!isInteractive;
-    };
-
-    window.addEventListener("mouseover", handleMouseOver);
-    return () => window.removeEventListener("mouseover", handleMouseOver);
-  }, [isEnabled, hasPointer]);
+  }, [isEnabled, hasPointer, speed, hoverScale]);
 
   useEffect(() => {
     if (!isEnabled || !hasPointer) {
@@ -123,45 +197,7 @@ export function CustomCursor() {
     };
   }, [isEnabled, hasPointer]);
 
-  useEffect(() => {
-    if (!isEnabled || !hasPointer) return;
 
-    let rafId: number;
-
-    const updatePosition = () => {
-      const targetX = mousePos.current.x;
-      const targetY = mousePos.current.y;
-
-      cursorPos.current.x += (targetX - cursorPos.current.x) * speed;
-      cursorPos.current.y += (targetY - cursorPos.current.y) * speed;
-
-      const targetScale = isHoveringRef.current ? hoverScale : 1;
-      currentScale.current += (targetScale - currentScale.current) * 0.15;
-
-      const targetPointerScale = isHoveringRef.current ? 0.3 : 1;
-      pointerScale.current += (targetPointerScale - pointerScale.current) * 0.15;
-
-      const targetOpacity = isVisibleRef.current ? 1 : 0;
-
-      if (trailRef.current) {
-        trailRef.current.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0) scale(${currentScale.current})`;
-        trailRef.current.style.opacity = String(targetOpacity * 0.85);
-      }
-
-      if (pointerRef.current) {
-        pointerRef.current.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) scale(${pointerScale.current})`;
-        pointerRef.current.style.opacity = String(targetOpacity);
-      }
-
-      rafId = requestAnimationFrame(updatePosition);
-    };
-
-    rafId = requestAnimationFrame(updatePosition);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-    };
-  }, [isEnabled, hasPointer, speed, hoverScale]);
 
   if (!isEnabled || !hasPointer) return null;
 
