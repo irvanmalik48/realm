@@ -4,6 +4,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAtomValue } from "jotai";
 import { customScrollbarEnabledAtom } from "@/lib/atoms/scroll";
 
+const handleTrackClick = (e: React.MouseEvent) => {
+  if (e.target === e.currentTarget) {
+    const clickY = e.clientY;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = window.innerHeight;
+    const clickRatio = clickY / clientHeight;
+
+    window.scrollTo({
+      top: clickRatio * scrollHeight - clientHeight / 2,
+      behavior: "smooth",
+    });
+  }
+};
+
 export function CustomScrollbar() {
   const isEnabled = useAtomValue(customScrollbarEnabledAtom);
   const [thumbHeight, setThumbHeight] = useState(0);
@@ -148,20 +162,7 @@ export function CustomScrollbar() {
     };
   }, [isDragging, thumbHeight]);
 
-  const handleTrackClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      const clickY = e.clientY;
-      const scrollHeight = document.documentElement.scrollHeight;
-      const clientHeight = window.innerHeight;
-      const maxScroll = scrollHeight - clientHeight;
-      const clickRatio = clickY / clientHeight;
 
-      window.scrollTo({
-        top: clickRatio * scrollHeight - clientHeight / 2,
-        behavior: "smooth",
-      });
-    }
-  };
 
   if (!isEnabled || thumbHeight === 0) return null;
 
