@@ -99,21 +99,23 @@ export function SettingsClientPage() {
   };
 
   return (
-    <Container>
-      <div className="relative rounded-lg overflow-clip mb-6">
-        <ImageComponent
-          img={CuteImage}
-          alt="Awoo"
-          className="w-full relative max-h-96 z-10 rounded-lg"
-          innerClassName="md:-translate-y-8"
-          height={720}
-        />
-        <p className="z-20 md:w-fit w-3/4 text-center font-bold absolute bottom-3 left-1/2 rounded-full -translate-x-1/2 px-7 py-3 font-doto bg-background/80 text-foreground md:text-xl backdrop-blur-lg">
-          SETTINGS
-        </p>
+    <main className="w-full flex flex-col gap-5 py-5">
+      <div className="w-full max-w-3xl mx-auto px-5">
+        <div className="relative rounded-lg overflow-clip mb-6">
+          <ImageComponent
+            img={CuteImage}
+            alt="Awoo"
+            className="w-full relative max-h-96 z-10 rounded-lg"
+            innerClassName="md:-translate-y-8"
+            height={720}
+          />
+          <p className="z-20 md:w-fit w-3/4 text-center font-bold absolute bottom-3 left-1/2 rounded-full -translate-x-1/2 px-7 py-3 font-doto bg-background/80 text-foreground md:text-xl backdrop-blur-lg">
+            SETTINGS
+          </p>
+        </div>
       </div>
 
-      <div className="w-full flex flex-col md:flex-row gap-6 items-start">
+      <div className="w-full max-w-5xl mx-auto px-5 flex flex-col md:flex-row gap-6 items-start">
         {/* Sidenav Sidebar Column */}
         {visibleCategories.length > 0 && (
           <aside className="w-full md:w-64 shrink-0 sticky top-18 z-30 hidden md:block">
@@ -212,6 +214,6 @@ export function SettingsClientPage() {
           </div>
         </div>
       </div>
-    </Container>
+    </main>
   );
 }
