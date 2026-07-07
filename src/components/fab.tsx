@@ -69,6 +69,7 @@ export function FAB() {
             : "translate-y-0 translate-x-0",
         )}
         onClick={handleScrollToTop}
+        style={{ viewTransitionName: "fab-scroll-top" }}
       >
         <ArrowUp className="size-6" />
         <span className="sr-only">Scroll to top</span>
@@ -82,6 +83,7 @@ export function FAB() {
               "text-foreground hover:text-secondary-foreground cursor-pointer",
               "border border-border transition-colors outline-0",
             )}
+            style={{ viewTransitionName: "fab" }}
           >
             <X
               className={cn(
@@ -97,6 +99,7 @@ export function FAB() {
           className="max-w-3xs sm:max-w-xs md:max-w-sm w-full p-0 overflow-clip"
           align="end"
           sideOffset={10}
+          style={{ viewTransitionName: "fab-menu" }}
         >
           <div className="h-auto overflow-clip w-full border-b border-border">
             <Image
