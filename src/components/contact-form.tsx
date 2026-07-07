@@ -46,13 +46,15 @@ export function ContactForm() {
     );
   }
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    form.handleSubmit();
+  };
+
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        form.handleSubmit();
-      }}
+      onSubmit={handleSubmit}
       className="flex flex-col gap-4 py-2"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
