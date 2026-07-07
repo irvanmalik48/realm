@@ -82,8 +82,23 @@ export const TextScroll: React.FC<TextScrollProps> = ({
 
       calculateRepetitions();
 
-      window.addEventListener("resize", calculateRepetitions);
-      return () => window.removeEventListener("resize", calculateRepetitions);
+      let resizeRaf: number | null = null;
+      const handleResize = () => {
+        if (resizeRaf === null) {
+          resizeRaf = requestAnimationFrame(() => {
+            calculateRepetitions();
+            resizeRaf = null;
+          });
+        }
+      };
+
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        if (resizeRaf !== null) {
+          cancelAnimationFrame(resizeRaf);
+        }
+      };
     }, [children]);
 
     const x = useTransform(baseX, (v) => `${wrap(-100 / repetitions, 0, v)}%`);
