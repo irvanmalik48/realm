@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useAtomValue } from "jotai";
 import { customScrollbarEnabledAtom } from "@/lib/atoms/scroll";
 
@@ -39,7 +39,7 @@ export function CustomScrollbar() {
     isDraggingRef.current = isDragging;
   }, [isHovered, isDragging]);
 
-  const updateScrollbar = () => {
+  const updateScrollbar = useCallback(() => {
     if (typeof window === "undefined") return;
 
     const scrollHeight = document.documentElement.scrollHeight;
@@ -69,10 +69,7 @@ export function CustomScrollbar() {
         setIsVisible(false);
       }, 1500);
     }
-  };
-
-  const updateScrollbarRef = useRef(updateScrollbar);
-  updateScrollbarRef.current = updateScrollbar;
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -94,7 +91,7 @@ export function CustomScrollbar() {
     const handleScroll = () => {
       if (rafRef.current === null) {
         rafRef.current = requestAnimationFrame(() => {
-          updateScrollbarRef.current();
+          updateScrollbar();
           rafRef.current = null;
         });
       }
@@ -116,7 +113,7 @@ export function CustomScrollbar() {
         clearTimeout(hideTimeoutRef.current);
       }
     };
-  }, [isEnabled]);
+  }, [isEnabled, updateScrollbar]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -175,6 +172,14 @@ export function CustomScrollbar() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleTrackClick}
+      role="button"
+      tabIndex={-1}
+      aria-label="Custom scrollbar track"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleTrackClick(e as any);
+        }
+      }}
     >
       <div
         className={`w-full transition-opacity duration-200 cursor-grab active:cursor-grabbing bg-secondary ${
@@ -186,6 +191,16 @@ export function CustomScrollbar() {
           top: `${thumbTop}px`,
         }}
         onMouseDown={handleMouseDown}
+        role="button"
+        tabIndex={-1}
+        aria-label="Custom scrollbar thumb"
+        onKeyDown={(e) => {
+          if (e.key === "ArrowDown") {
+            window.scrollBy({ top: 40 });
+          } else if (e.key === "ArrowUp") {
+            window.scrollBy({ top: -40 });
+          }
+        }}
       />
     </div>
   );
