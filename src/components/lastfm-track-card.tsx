@@ -109,7 +109,7 @@ export function LastFMTrackCard(props: LastFMCardProps) {
           {data && data.song ? (
             data.song.map((s, index) => (
               <div
-                key={index}
+                key={s.url}
                 className={cn(
                   "flex flex-col border-border",
                   index % 2 === 0 ? "md:border-r" : "",

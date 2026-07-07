@@ -142,7 +142,7 @@ export default function About() {
           <div className="w-full p-5 grid grid-cols-2 md:grid-cols-4 gap-5">
             {infoWidgets.map((item, i) => (
               <div
-                key={i}
+                key={item.title}
                 className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col"
               >
                 <div className="w-full bg-muted/20 px-4 py-2 border-b border-border">
