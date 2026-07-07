@@ -22,25 +22,25 @@ import Hero from "@/assets/img/fab-hero.png";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai";
 
+const handleInteractOutside = (e: Event) => {
+  e.preventDefault();
+};
+
+const handleScrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 export function FAB() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [performanceMode] = useAtom(performanceModeAtom);
 
-  const handleInteractOutside = (e: Event) => {
-    e.preventDefault();
-  };
-
   const handleOpen = () => {
     setOpen((prev) => !prev);
-  };
-
-  const handleScrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   };
 
   useEffect(() => {
@@ -58,6 +58,7 @@ export function FAB() {
   return (
     <>
       <button
+        type="button"
         className={cn(
           "fixed bottom-20 md:bottom-25 flex items-center justify-center",
           "right-5 md:right-10 z-50 p-3 bg-background hover:bg-secondary rounded-lg",
@@ -77,6 +78,7 @@ export function FAB() {
       <Popover onOpenChange={handleOpen}>
         <PopoverTrigger asChild>
           <button
+            type="button"
             className={cn(
               "fixed bottom-5 md:bottom-10 flex items-center justify-center",
               "right-5 z-50 md:right-10 p-3 bg-background hover:bg-secondary rounded-lg",
