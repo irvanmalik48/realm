@@ -24,7 +24,7 @@ import { useAtom } from "jotai";
 
 export function FAB() {
   const [open, setOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [performanceMode] = useAtom(performanceModeAtom);
 
@@ -45,10 +45,10 @@ export function FAB() {
 
   useEffect(() => {
     const trackScroll = () => {
-      setScrollY(window.scrollY);
+      setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener("scroll", trackScroll);
+    window.addEventListener("scroll", trackScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", trackScroll);
@@ -63,7 +63,7 @@ export function FAB() {
           "right-5 md:right-10 z-50 p-3 bg-background hover:bg-secondary rounded-lg",
           "text-foreground hover:text-secondary-foreground cursor-pointer",
           "border border-border transition-all outline-0",
-          scrollY > 10 ? "opacity-100" : "opacity-0",
+          isScrolled ? "opacity-100" : "opacity-0",
           open
             ? "translate-y-15 -translate-x-15"
             : "translate-y-0 translate-x-0",
