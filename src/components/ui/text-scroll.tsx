@@ -33,6 +33,91 @@ export const wrap = (min: number, max: number, v: number) => {
   return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
 };
 
+const ParallaxText: React.FC<ParallaxProps> = ({
+  children,
+  baseVelocity = 100,
+  className,
+}) => {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false,
+  });
+
+  const [repetitions, setRepetitions] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const calculateRepetitions = () => {
+      if (containerRef.current && textRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const textWidth = textRef.current.offsetWidth;
+        const newRepetitions = Math.ceil(containerWidth / textWidth) + 2;
+        setRepetitions(newRepetitions);
+      }
+    };
+
+    calculateRepetitions();
+
+    let resizeRaf: number | null = null;
+    const handleResize = () => {
+      if (resizeRaf === null) {
+        resizeRaf = requestAnimationFrame(() => {
+          calculateRepetitions();
+          resizeRaf = null;
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (resizeRaf !== null) {
+        cancelAnimationFrame(resizeRaf);
+      }
+    };
+  }, []);
+
+  const x = useTransform(baseX, (v) => `${wrap(-100 / repetitions, 0, v)}%`);
+
+  const directionFactor = useRef<number>(1);
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+    if (velocityFactor.get() < 0) {
+      directionFactor.current = -1;
+    } else if (velocityFactor.get() > 0) {
+      directionFactor.current = 1;
+    }
+
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  return (
+    <div
+      className="w-full overflow-hidden whitespace-nowrap"
+      ref={containerRef}
+    >
+      <motion.div className={cn("inline-block", className)} style={{ x }}>
+        {Array.from({ length: repetitions }).map((_, i) => (
+          <span key={i} ref={i === 0 ? textRef : null}>
+            {children}{" "}
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
 export const TextScroll: React.FC<TextScrollProps> = ({
   text,
   default_velocity = 5,
@@ -49,99 +134,14 @@ export const TextScroll: React.FC<TextScrollProps> = ({
     );
   }
 
-  const ParallaxText: React.FC<ParallaxProps> = ({
-    children,
-    baseVelocity = 100,
-    className,
-  }) => {
-    const baseX = useMotionValue(0);
-    const { scrollY } = useScroll();
-    const scrollVelocity = useVelocity(scrollY);
-    const smoothVelocity = useSpring(scrollVelocity, {
-      damping: 50,
-      stiffness: 400,
-    });
-
-    const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-      clamp: false,
-    });
-
-    const [repetitions, setRepetitions] = useState(1);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLSpanElement>(null);
-
-    useEffect(() => {
-      const calculateRepetitions = () => {
-        if (containerRef.current && textRef.current) {
-          const containerWidth = containerRef.current.offsetWidth;
-          const textWidth = textRef.current.offsetWidth;
-          const newRepetitions = Math.ceil(containerWidth / textWidth) + 2;
-          setRepetitions(newRepetitions);
-        }
-      };
-
-      calculateRepetitions();
-
-      let resizeRaf: number | null = null;
-      const handleResize = () => {
-        if (resizeRaf === null) {
-          resizeRaf = requestAnimationFrame(() => {
-            calculateRepetitions();
-            resizeRaf = null;
-          });
-        }
-      };
-
-      window.addEventListener("resize", handleResize);
-      return () => {
-        window.removeEventListener("resize", handleResize);
-        if (resizeRaf !== null) {
-          cancelAnimationFrame(resizeRaf);
-        }
-      };
-    }, [children]);
-
-    const x = useTransform(baseX, (v) => `${wrap(-100 / repetitions, 0, v)}%`);
-
-    const directionFactor = useRef<number>(1);
-    useAnimationFrame((t, delta) => {
-      let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-
-      if (velocityFactor.get() < 0) {
-        directionFactor.current = -1;
-      } else if (velocityFactor.get() > 0) {
-        directionFactor.current = 1;
-      }
-
-      moveBy += directionFactor.current * moveBy * velocityFactor.get();
-
-      baseX.set(baseX.get() + moveBy);
-    });
-
-    return (
-      <div
-        className="w-full overflow-hidden whitespace-nowrap"
-        ref={containerRef}
-      >
-        <motion.div className={cn("inline-block", className)} style={{ x }}>
-          {Array.from({ length: repetitions }).map((_, i) => (
-            <span key={i} ref={i === 0 ? textRef : null}>
-              {children}{" "}
-            </span>
-          ))}
-        </motion.div>
-      </div>
-    );
-  };
-
   return (
     <section className={cn("relative z-20 w-full", className)}>
       <div className="w-1/10 top-0 left-0 h-full absolute z-50 bg-linear-to-r from-background to-transparent" />
       <div className="w-1/10 top-0 right-0 h-full absolute z-50 bg-linear-to-l from-background to-transparent" />
-      <ParallaxText baseVelocity={default_velocity} className={textClassName}>
+      <ParallaxText key={`pos-${text}`} baseVelocity={default_velocity} className={textClassName}>
         {text}
       </ParallaxText>
-      <ParallaxText baseVelocity={-default_velocity} className={textClassName}>
+      <ParallaxText key={`neg-${text}`} baseVelocity={-default_velocity} className={textClassName}>
         {text}
       </ParallaxText>
     </section>
