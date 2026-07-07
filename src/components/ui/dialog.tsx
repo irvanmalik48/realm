@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { use } from "react"
 import { XIcon } from "lucide-react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 import { motion, AnimatePresence } from "framer-motion"
@@ -9,7 +10,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
 const DialogContext = React.createContext<{ open: boolean }>({ open: false })
-const useDialog = () => React.useContext(DialogContext)
+const useDialog = () => use(DialogContext)
 
 function Dialog({
   children,
@@ -19,12 +20,12 @@ function Dialog({
   const isControlled = props.open !== undefined
   const activeOpen = isControlled ? (props.open ?? false) : open
 
-  const handleOpenChange = React.useCallback((val: boolean) => {
+  const handleOpenChange = (val: boolean) => {
     if (!isControlled) {
       setOpen(val)
     }
     props.onOpenChange?.(val)
-  }, [isControlled, props.onOpenChange])
+  }
 
   return (
     <DialogContext.Provider value={{ open: activeOpen }}>
@@ -110,13 +111,13 @@ function DialogContent({
             {...props}
           >
             <motion.div
-              initial={{ y: "100vh", opacity: 0, scale: 0.95, filter: "blur(8px)" }}
+              initial={{ y: "100vh", opacity: 0, scale: 0.95, filter: "blur(4px)" }}
               animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
               exit={{ 
                 y: "30px", 
                 opacity: 0, 
                 scale: 0.92, 
-                filter: "blur(16px)",
+                filter: "blur(8px)",
                 transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } 
               }}
               transition={{ duration: 0.8, ease: [0.08, 0.82, 0.17, 1] }}
