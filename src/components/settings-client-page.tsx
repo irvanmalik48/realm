@@ -54,13 +54,19 @@ export function SettingsClientPage() {
     matchQuery("Trail Orb Size (Delayed)") ||
     matchQuery("custom cursor cursor orb mouse pointer follow-up speed speed latency hover scale cursor hover hover size pointer size leading orb trail size trailing orb");
 
-  const visibleCategories = categories.filter((cat) => {
-    if (cat.id === "performance") return hasPerformanceMatch;
-    if (cat.id === "behavior") return hasBehaviorMatch;
-    if (cat.id === "scrolling") return hasScrollingMatch;
-    if (cat.id === "cursor") return hasCursorMatch;
+  const hasMatch = (id: string) => {
+    if (id === "performance") return hasPerformanceMatch;
+    if (id === "behavior") return hasBehaviorMatch;
+    if (id === "scrolling") return hasScrollingMatch;
+    if (id === "cursor") return hasCursorMatch;
     return true;
-  });
+  };
+
+  const totalMatches =
+    (hasPerformanceMatch ? 1 : 0) +
+    (hasBehaviorMatch ? 1 : 0) +
+    (hasScrollingMatch ? 1 : 0) +
+    (hasCursorMatch ? 1 : 0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -77,18 +83,20 @@ export function SettingsClientPage() {
       }
     );
 
-    visibleCategories.forEach((cat) => {
+    const activeSections = categories.filter((cat) => hasMatch(cat.id));
+
+    activeSections.forEach((cat) => {
       const el = document.getElementById(cat.id);
       if (el) observer.observe(el);
     });
 
     return () => {
-      visibleCategories.forEach((cat) => {
+      activeSections.forEach((cat) => {
         const el = document.getElementById(cat.id);
         if (el) observer.unobserve(el);
       });
     };
-  }, [searchQuery, visibleCategories.length]);
+  }, [searchQuery, hasPerformanceMatch, hasBehaviorMatch, hasScrollingMatch, hasCursorMatch]);
 
   const handleCategoryClick = (id: string) => {
     const el = document.getElementById(id);
@@ -117,33 +125,35 @@ export function SettingsClientPage() {
 
       <div className="w-full max-w-5xl mx-auto px-5 flex flex-col md:flex-row gap-6 items-start">
         {/* Sidenav Sidebar Column */}
-        {visibleCategories.length > 0 && (
-          <aside className="w-full md:w-64 shrink-0 sticky top-18 z-30 hidden md:block">
-            <div className="bg-background rounded-lg border border-border p-4 flex flex-col gap-1">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-3">
-                Categories
-              </p>
-              {visibleCategories.map((cat) => {
-                const IconComponent = cat.icon;
-                const isActive = activeCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => handleCategoryClick(cat.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-all cursor-pointer text-left ${
-                      isActive
-                        ? "bg-primary text-primary-foreground font-medium shadow-xs"
-                        : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
-                    }`}
-                  >
-                    <IconComponent className="size-4" />
-                    <span>{cat.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </aside>
-        )}
+        <aside className="w-full md:w-64 shrink-0 sticky top-18 z-30 hidden md:block">
+          <div className="bg-background rounded-lg border border-border p-4 flex flex-col gap-1">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-3">
+              Categories
+            </p>
+            {categories.map((cat) => {
+              const IconComponent = cat.icon;
+              const isActive = activeCategory === cat.id;
+              const matches = hasMatch(cat.id);
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => handleCategoryClick(cat.id)}
+                  disabled={!matches}
+                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-all text-left ${
+                    !matches
+                      ? "opacity-35 cursor-not-allowed pointer-events-none"
+                      : isActive
+                      ? "bg-primary text-primary-foreground font-medium shadow-xs cursor-pointer"
+                      : "text-muted-foreground hover:bg-muted/50 hover:text-foreground cursor-pointer"
+                  }`}
+                >
+                  <IconComponent className="size-4" />
+                  <span>{cat.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </aside>
 
         {/* Main Content Column */}
         <div className="flex-1 w-full flex flex-col gap-6">
@@ -172,7 +182,7 @@ export function SettingsClientPage() {
 
           {/* Settings Section Group */}
           <div className="w-full flex flex-col gap-6">
-            {visibleCategories.length === 0 ? (
+            {totalMatches === 0 ? (
               <div className="w-full text-center py-12 border border-dashed border-border rounded-lg bg-muted/10">
                 <Settings className="size-8 text-muted-foreground/60 mx-auto mb-3" />
                 <p className="text-muted-foreground font-medium">No matching settings found.</p>
@@ -181,7 +191,8 @@ export function SettingsClientPage() {
                 </p>
               </div>
             ) : (
-              visibleCategories.map((cat) => {
+              categories.map((cat) => {
+                if (!hasMatch(cat.id)) return null;
                 const IconComponent = cat.icon;
                 return (
                   <section
