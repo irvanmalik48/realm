@@ -7,7 +7,6 @@ import CuteImage from "@/assets/img/awoocon.jpg";
 import type { WebPage, WithContext } from "schema-dts";
 import { PerformanceModeToggle } from "@/components/performance-mode-toggle";
 import { MarqueeToggle } from "@/components/marquee-toggle";
-import { DarkModeAnimationToggle } from "@/components/fade-dark-mode-toggle";
 import { ScrollSettingsToggle } from "@/components/scroll-settings-toggle";
 import { CursorSettingsToggle } from "@/components/cursor-settings-toggle";
 
@@ -76,7 +75,6 @@ export default function SettingsPage() {
           </h2>
           <div className="w-full divide-y divide-border/50">
             <PerformanceModeToggle />
-            <DarkModeAnimationToggle />
             <MarqueeToggle />
             <ScrollSettingsToggle />
             <CursorSettingsToggle />
