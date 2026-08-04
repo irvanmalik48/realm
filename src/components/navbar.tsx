@@ -38,11 +38,12 @@ export function Navbar() {
           ? "bg-background border-border"
           : "bg-background/80 backdrop-blur-md border-border/50"
       }`}
-      style={{ viewTransitionName: "navbar" }}
+      style={{ viewTransitionName: "site-navbar" }}
     >
       <nav className="w-full max-w-full mx-auto px-5 py-3 flex justify-between items-center">
         <Link
           href="/"
+          transitionTypes={["nav-back"]}
           className="text-xl font-bold dark:font-medium text-primary"
         >
           realm.
