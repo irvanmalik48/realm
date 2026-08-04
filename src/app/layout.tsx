@@ -14,6 +14,8 @@ import { FAB } from "@/components/fab";
 import OgImage from "./opengraph-image.png";
 import Script from "next/script";
 
+import { env } from "@/env";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
   },
   description: "Stuffs I put.",
   metadataBase: new URL(
-    process.env.NODE_ENV === "production"
+    env.NODE_ENV === "production"
       ? "https://irvanma.eu.org"
       : "http://localhost:3000",
   ),
