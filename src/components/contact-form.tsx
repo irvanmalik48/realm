@@ -18,7 +18,6 @@ export function ContactForm() {
       message: "",
     },
     onSubmit: async ({ value }) => {
-      // Simulate API submission
       await new Promise((resolve) => setTimeout(resolve, 1500));
       console.log("Form submitted successfully:", value);
       setIsSuccess(true);
@@ -58,7 +57,6 @@ export function ContactForm() {
       className="flex flex-col gap-4 py-2"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Name Field */}
         <form.Field
           name="name"
           validators={{
@@ -95,7 +93,6 @@ export function ContactForm() {
           )}
         </form.Field>
 
-        {/* Email Field */}
         <form.Field
           name="email"
           validators={{
@@ -135,7 +132,6 @@ export function ContactForm() {
         </form.Field>
       </div>
 
-      {/* Subject Field */}
       <form.Field
         name="subject"
         validators={{
@@ -172,7 +168,6 @@ export function ContactForm() {
         )}
       </form.Field>
 
-      {/* Message Field */}
       <form.Field
         name="message"
         validators={{
