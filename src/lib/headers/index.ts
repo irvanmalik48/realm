@@ -8,10 +8,20 @@ export const JSON_HEADERS: HeadersInit = {
   "Access-Control-Allow-Headers": "Content-Type",
 };
 
-export function jsonResponse(body: unknown, status = 200): Response {
+export function jsonResponse(
+  body: unknown,
+  status = 200,
+  revalidateSeconds = 900
+): Response {
+  const headers = new Headers(JSON_HEADERS);
+  headers.set(
+    "Cache-Control",
+    `public, s-maxage=${revalidateSeconds}, stale-while-revalidate=${revalidateSeconds * 2}`
+  );
+
   return new Response(JSON.stringify(body), {
     status,
-    headers: JSON_HEADERS,
+    headers,
   });
 }
 
