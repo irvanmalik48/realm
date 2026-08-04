@@ -179,7 +179,6 @@ div.remark-code-title + figure[data-rehype-pretty-code-figure] pre {
   @apply rounded-t-none border-t-0 mt-0!;
 }
 
-/* Lenis scroll resets and styling rules */
 html.lenis, html.lenis body {
   height: auto;
 }
