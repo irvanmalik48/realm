@@ -1,5 +1,7 @@
+import { env } from "@/env";
+
 const ALLOWED_ORIGIN =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://irvanma.eu.org";
+  env.NEXT_PUBLIC_SITE_URL || "https://irvanma.eu.org";
 
 export const JSON_HEADERS: HeadersInit = {
   "Content-Type": "application/json",
