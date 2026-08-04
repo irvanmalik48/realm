@@ -1,8 +1,9 @@
 import { LastFMUserResponseBody } from "@/lib/types/lastfm";
 import { jsonResponse, errorResponse } from "@/lib/headers/index";
+import { env } from "@/env";
 
 export async function GET(request: Request): Promise<Response> {
-  const token = process.env.LASTFM_API_KEY;
+  const token = env.LASTFM_API_KEY;
 
   const url = new URL(request.url);
   const username = url.searchParams.get("username");
