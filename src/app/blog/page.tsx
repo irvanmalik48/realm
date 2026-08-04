@@ -9,6 +9,7 @@ import { getPosts } from "@/lib/fs/posts";
 import { PostList } from "@/components/post-list";
 import { SearchBar } from "@/components/search-bar";
 import { BlogContextWrapper } from "@/components/blog-context";
+import { DirectionalTransition } from "@/components/directional-transition";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -56,7 +57,7 @@ export default function Blog() {
   };
 
   return (
-    <>
+    <DirectionalTransition>
       <Container>
         <div className="relative rounded-lg overflow-clip">
           <ImageComponent
@@ -112,6 +113,6 @@ export default function Blog() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </>
+    </DirectionalTransition>
   );
 }
