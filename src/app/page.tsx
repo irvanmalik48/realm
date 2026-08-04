@@ -4,6 +4,7 @@ import { Hero } from "@/components/hero";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { WebPage, WithContext } from "schema-dts";
+import { DirectionalTransition } from "@/components/directional-transition";
 
 import HeroImage from "@/assets/img/hero.jpg";
 import HeroProfile from "@/assets/img/profpic-animated.webp";
@@ -55,7 +56,7 @@ export default function Home() {
   };
 
   return (
-    <>
+    <DirectionalTransition>
       <Container>
         <Hero img={HeroImage} profile={HeroProfile} />
         <div className="w-full bg-background rounded-lg border border-border">
@@ -156,6 +157,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </>
+    </DirectionalTransition>
   );
 }
