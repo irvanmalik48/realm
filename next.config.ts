@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
     webpackMemoryOptimizations: true,
     serverSourceMaps: false,
     viewTransition: true,
+    turbopackRustReactCompiler: true,
   },
   productionBrowserSourceMaps: false,
   async headers() {
