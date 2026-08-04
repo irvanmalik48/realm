@@ -46,7 +46,17 @@ export function PostCard(props: MotionPostCardProps) {
           )}
         </p>
       </div>
-      <p className="w-full px-5 py-3 text-sm line-clamp-2 overflow-hidden">{description}</p>
+      <p
+        className="w-full px-5 py-3 text-sm line-clamp-2 overflow-hidden"
+        style={{
+          display: "-webkit-box",
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+        }}
+      >
+        {description}
+      </p>
       <div className="w-full px-5 pb-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
         {tags.map((tag) => (
           <span
