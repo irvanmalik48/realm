@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { LastFMCardProps, LastFMTrackResponseBody } from "@/lib/types/lastfm";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
@@ -120,12 +121,13 @@ export function LastFMTrackCard(props: LastFMCardProps) {
                 )}
               >
                 <div className="flex gap-5 px-5 pt-5 pb-3">
-                  <img
+                  <Image
                     src={s.art}
                     alt={s.name}
                     className="min-w-20 min-h-20 rounded-sm border border-border"
                     width={80}
                     height={80}
+                    unoptimized
                   />
                   <div className="w-full flex flex-col gap-1">
                     <h3 className="line-clamp-1">{s.name}</h3>
