@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { HardDrive, Link, LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
@@ -52,7 +53,7 @@ const selfHostItems = [
 ];
 
 export function SelfHostedServices() {
-  const isVpsActive = process.env.NEXT_PUBLIC_VPS_ACTIVE === "true";
+  const isVpsActive = env.NEXT_PUBLIC_VPS_ACTIVE === "true";
 
   if (!isVpsActive) {
     return (
