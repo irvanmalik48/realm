@@ -29,7 +29,6 @@ const nextConfig: NextConfig = {
   experimental: {
     webpackMemoryOptimizations: true,
     serverSourceMaps: false,
-    viewTransition: true,
     turbopackRustReactCompiler: true,
   },
   productionBrowserSourceMaps: false,
