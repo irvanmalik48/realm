@@ -34,7 +34,7 @@
     "lenis": "^1.3.24",
     "lucide-react": "^1.21.0",
     "motion": "^12.41.0",
-    "next": "16.2.9",
+    "next": "16.2.11",
     "next-mdx-remote-client": "^2.1.11",
     "radix-ui": "^1.6.0",
     "react": "19.2.7",
