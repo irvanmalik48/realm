@@ -8,7 +8,8 @@ export async function GET(request: Request): Promise<Response> {
   const username = url.searchParams.get("username");
 
   if (!token) {
-    return errorResponse("LastFM API key is not set.", 500);
+    console.error("Missing LASTFM_API_KEY environment variable");
+    return errorResponse("Internal server error", 500);
   }
 
   if (!username) {
