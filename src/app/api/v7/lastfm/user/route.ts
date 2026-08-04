@@ -21,7 +21,7 @@ export async function GET(request: Request): Promise<Response> {
 
   const response = await fetch(endpoint, {
     next: {
-      revalidate: 60 * 15, // 15 minutes
+      revalidate: 60 * 15,
     },
   });
 
