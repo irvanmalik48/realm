@@ -25,7 +25,6 @@ import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TableOfContents } from "@/components/table-of-contents";
 import type { ComponentPropsWithoutRef } from "react";
-import { ViewTransition } from "react";
 import { CopyButton } from "@/components/copy-button";
 import { DirectionalTransition } from "@/components/directional-transition";
 
@@ -134,11 +133,9 @@ export default async function Post({ params }: Props) {
               Back to blog
             </Link>
           </Button>
-          <ViewTransition name={`post-title-${slug}`} share="text-morph">
-            <h1 className="text-4xl font-bold mb-4 text-center">
-              {frontmatter.title}
-            </h1>
-          </ViewTransition>
+          <h1 className="text-4xl font-bold mb-4 text-center">
+            {frontmatter.title}
+          </h1>
           <p className="text-muted-foreground mb-4 text-center">
             {frontmatter.description}
           </p>
