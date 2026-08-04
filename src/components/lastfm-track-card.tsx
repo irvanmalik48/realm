@@ -11,13 +11,15 @@ import { YouTube } from "./logos/youtube";
 import { LastFM } from "./logos/lastfm";
 import { Music2, RefreshCcw } from "lucide-react";
 
+import { env } from "@/env";
+
 const DEFAULT_INTERVAL = 60 * 60 * 1000;
 
 export function LastFMTrackCard(props: LastFMCardProps) {
   const { username, limit = 8, interval = DEFAULT_INTERVAL } = props;
 
   const endpoint =
-    process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
+    env.NEXT_PUBLIC_ENVIRONMENT === "development"
       ? `http://localhost:3000/api/v7/lastfm/track?username=${username}&limit=${limit}`
       : `https://irvanma.eu.org/api/v7/lastfm/track?username=${username}&limit=${limit}`;
 
