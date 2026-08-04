@@ -79,6 +79,7 @@ export default async function Post({ params }: Props) {
   }
 
   const { source, format } = result;
+  const { frontmatter } = getFrontmatter<Frontmatter>(source);
 
   const prettyCodeOptions: Options = {
     keepBackground: false,
@@ -132,20 +133,16 @@ export default async function Post({ params }: Props) {
             </Link>
           </Button>
           <h1 className="text-4xl font-bold mb-4 text-center">
-            {getFrontmatter<Frontmatter>(source).frontmatter.title}
+            {frontmatter.title}
           </h1>
           <p className="text-muted-foreground mb-4 text-center">
-            {getFrontmatter<Frontmatter>(source).frontmatter.description}
+            {frontmatter.description}
           </p>
           <p className="text-sm text-muted-foreground mb-4 text-center">
             Published on{" "}
-            {new Date(
-              getFrontmatter<Frontmatter>(source).frontmatter.createdAt,
-            ).toLocaleDateString()}{" "}
+            {new Date(frontmatter.createdAt).toLocaleDateString()}{" "}
             | Last updated on{" "}
-            {new Date(
-              getFrontmatter<Frontmatter>(source).frontmatter.updatedAt,
-            ).toLocaleDateString()}
+            {new Date(frontmatter.updatedAt).toLocaleDateString()}
           </p>
           <article
             className={cn(
