@@ -5,10 +5,24 @@ import Container from "@/components/container";
 import { ImageComponent } from "@/components/image";
 import { Settings, Search, Sliders, PlayCircle, MousePointer, Activity, X } from "lucide-react";
 import CuteImage from "@/assets/img/awoocon.jpg";
-import { PerformanceModeToggle } from "@/components/performance-mode-toggle";
-import { MarqueeToggle } from "@/components/marquee-toggle";
-import { ScrollSettingsToggle } from "@/components/scroll-settings-toggle";
-import { CursorSettingsToggle } from "@/components/cursor-settings-toggle";
+import dynamic from "next/dynamic";
+
+const PerformanceModeToggle = dynamic(
+  () => import("@/components/performance-mode-toggle").then((m) => m.PerformanceModeToggle),
+  { ssr: false }
+);
+const MarqueeToggle = dynamic(
+  () => import("@/components/marquee-toggle").then((m) => m.MarqueeToggle),
+  { ssr: false }
+);
+const ScrollSettingsToggle = dynamic(
+  () => import("@/components/scroll-settings-toggle").then((m) => m.ScrollSettingsToggle),
+  { ssr: false }
+);
+const CursorSettingsToggle = dynamic(
+  () => import("@/components/cursor-settings-toggle").then((m) => m.CursorSettingsToggle),
+  { ssr: false }
+);
 
 interface Category {
   id: string;
