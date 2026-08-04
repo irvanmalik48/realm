@@ -82,10 +82,6 @@ export default function Blog() {
             head. You might also find rambles, rants, and some random stuffs,
             maybe code or some shit like that I don&apos;t know.
           </p>
-          <p className="px-5 pb-3 font-semibold">
-            This section of my website is still under development. It might
-            change later.
-          </p>
         </div>
 
         <BlogContextWrapper initialPosts={posts}>
