@@ -124,7 +124,6 @@ export function SettingsClientPage() {
       </div>
 
       <div className="w-full max-w-5xl mx-auto px-5 flex flex-col md:flex-row gap-6 items-start">
-        {/* Sidenav Sidebar Column */}
         <aside className="w-full md:w-64 shrink-0 sticky top-18 z-30 hidden md:block">
           <div className="bg-background rounded-lg border border-border p-4 flex flex-col gap-1">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-3">
@@ -155,9 +154,7 @@ export function SettingsClientPage() {
           </div>
         </aside>
 
-        {/* Main Content Column */}
         <div className="flex-1 w-full flex flex-col gap-6">
-          {/* Search bar widget */}
           <div className="w-full sticky top-18 z-40 bg-background/95 backdrop-blur-md py-2 border-b border-border/40 md:border md:rounded-lg md:px-4 md:py-3 md:shadow-xs">
             <div className="relative w-full flex items-center">
               <Search className="absolute left-3 size-4 text-muted-foreground pointer-events-none" />
@@ -180,7 +177,6 @@ export function SettingsClientPage() {
             </div>
           </div>
 
-          {/* Settings Section Group */}
           <div className="w-full flex flex-col gap-6">
             {totalMatches === 0 ? (
               <div className="w-full text-center py-12 border border-dashed border-border rounded-lg bg-muted/10">
