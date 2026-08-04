@@ -1,3 +1,4 @@
+import "server-only";
 import fs from "fs";
 import path from "path";
 import { getFrontmatter } from "next-mdx-remote-client/utils";
@@ -18,13 +19,19 @@ export const RE = /\.mdx?$/;
 export const getSource = async (
   filename: string
 ): Promise<string | undefined> => {
-  const sourcePath = path.join(process.cwd(), "posts", filename);
+  const postsDir = path.join(process.cwd(), "posts");
+  const sourcePath = path.resolve(postsDir, filename);
+
+  if (!sourcePath.startsWith(postsDir)) return;
   if (!fs.existsSync(sourcePath)) return;
   return await fs.promises.readFile(sourcePath, "utf8");
 };
 
 export const getSourceSync = (filename: string): string | undefined => {
-  const sourcePath = path.join(process.cwd(), "posts", filename);
+  const postsDir = path.join(process.cwd(), "posts");
+  const sourcePath = path.resolve(postsDir, filename);
+
+  if (!sourcePath.startsWith(postsDir)) return;
   if (!fs.existsSync(sourcePath)) return;
   return fs.readFileSync(sourcePath, "utf8");
 };
@@ -44,9 +51,13 @@ export const getMarkdownFromSlug = async (
     }
   | undefined
 > => {
-  const filename = `${slug}.mdx` as const;
+  const sanitizedSlug = path.basename(slug);
+  const filename = `${sanitizedSlug}.mdx` as const;
 
-  const fullPath = path.join(process.cwd(), "posts", filename);
+  const postsDir = path.join(process.cwd(), "posts");
+  const fullPath = path.resolve(postsDir, filename);
+
+  if (!fullPath.startsWith(postsDir)) return;
 
   if (fs.existsSync(fullPath)) {
     const source = await getSource(filename);
