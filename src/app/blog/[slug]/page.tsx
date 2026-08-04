@@ -25,7 +25,9 @@ import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TableOfContents } from "@/components/table-of-contents";
 import type { ComponentPropsWithoutRef } from "react";
+import { ViewTransition } from "react";
 import { CopyButton } from "@/components/copy-button";
+import { DirectionalTransition } from "@/components/directional-transition";
 
 function rehypeExtractRawCode() {
   return (tree: any) => {
@@ -115,7 +117,7 @@ export default async function Post({ params }: Props) {
   };
 
   return (
-    <>
+    <DirectionalTransition>
       <div className="relative flex justify-center max-w-7xl mx-auto px-5 gap-10">
         <div className="hidden xl:block w-64 shrink-0">
           <div className="sticky top-24">
@@ -127,14 +129,16 @@ export default async function Post({ params }: Props) {
           className="mx-0 max-w-3xl min-w-0 gap-0 relative z-10 bg-background"
         >
           <Button asChild variant="ghost" className="self-start mb-10">
-            <Link href="/blog" className="flex items-center gap-2">
+            <Link href="/blog" transitionTypes={["nav-back"]} className="flex items-center gap-2">
               <ArrowLeft className="size-4" />
               Back to blog
             </Link>
           </Button>
-          <h1 className="text-4xl font-bold mb-4 text-center">
-            {frontmatter.title}
-          </h1>
+          <ViewTransition name={`post-title-${slug}`} share="text-morph">
+            <h1 className="text-4xl font-bold mb-4 text-center">
+              {frontmatter.title}
+            </h1>
+          </ViewTransition>
           <p className="text-muted-foreground mb-4 text-center">
             {frontmatter.description}
           </p>
@@ -175,7 +179,7 @@ export default async function Post({ params }: Props) {
         default_velocity={0.66}
         text="YOU'VE REACHED THE END, CUH.  "
       />
-    </>
+    </DirectionalTransition>
   );
 }
 
