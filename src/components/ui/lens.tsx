@@ -33,7 +33,6 @@ export const Lens: React.FC<LensProps> = ({
   const isHovering = hovering !== undefined ? hovering : localIsHovering;
   const setIsHovering = setHovering || setLocalIsHovering;
 
-  // const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 100, y: 100 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
