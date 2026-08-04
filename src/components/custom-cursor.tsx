@@ -219,7 +219,7 @@ export function CustomCursor() {
           marginLeft: `-${pointerSize / 2}px`,
           marginTop: `-${pointerSize / 2}px`,
         }}
-        className="hidden md:block custom-cursor-pointer fixed top-0 left-0 rounded-full bg-foreground opacity-0 pointer-events-none z-99998"
+        className="hidden md:block custom-cursor-pointer fixed top-0 left-0 rounded-full bg-foreground opacity-0 mix-blend-difference pointer-events-none z-99998"
       />
       <div
         ref={trailRef}
