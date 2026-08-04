@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { LastFMCardProps, LastFMUserResponseBody } from "@/lib/types/lastfm";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -106,12 +107,13 @@ export function LastFMUserCard(props: LastFMCardProps) {
           </div>
           <div className="w-full p-5 flex flex-col gap-5">
             <div className="flex flex-col md:flex-row items-center gap-5">
-              <img
-                src={data.user?.image[0]["#text"]}
+              <Image
+                src={data.user?.image[0]["#text"] || ""}
                 width={96}
                 height={96}
-                alt={data.user?.name}
+                alt={data.user?.name || "User Avatar"}
                 className="md:min-w-24 md:min-h-24 min-w-30 min-h-30 rounded-full object-cover border border-border"
+                unoptimized
               />
               <div className="flex flex-col w-full items-center justify-center md:items-start">
                 <h3 className="text-lg font-semibold">@{data.user?.name}</h3>
