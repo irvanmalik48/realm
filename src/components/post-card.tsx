@@ -1,7 +1,6 @@
 import { PostCardProps } from "@/lib/types/posts";
 import Link from "next/link";
 import { motion, HTMLMotionProps } from "framer-motion";
-import { ViewTransition } from "react";
 
 const MotionLink = motion.create(Link);
 
@@ -27,9 +26,7 @@ export function PostCard(props: MotionPostCardProps) {
       {...motionProps}
     >
       <div className="w-full flex flex-col px-5 pt-3 gap-1">
-        <ViewTransition name={`post-title-${props.slug}`} share="text-morph" default="none">
-          <h3 className="w-full font-semibold">{title}</h3>
-        </ViewTransition>
+        <h3 className="w-full font-semibold">{title}</h3>
         <p className="text-sm text-muted-foreground">
           {createdAt === updatedAt && (
             <span>
