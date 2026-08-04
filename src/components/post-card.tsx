@@ -21,7 +21,7 @@ export function PostCard(props: MotionPostCardProps) {
   return (
     <MotionLink
       href={`/blog/${props.slug}`}
-      className={`w-full bg-secondary/20 rounded-md border border-border ${className}`}
+      className={`flex flex-col w-full bg-secondary/20 rounded-md border border-border ${className}`}
       {...motionProps}
     >
       <div className="w-full flex flex-col px-5 pt-3 gap-1">
@@ -42,7 +42,7 @@ export function PostCard(props: MotionPostCardProps) {
           )}
         </p>
       </div>
-      <p className="w-full px-5 py-3 text-sm line-clamp-2">{description}</p>
+      <p className="w-full px-5 py-3 text-sm line-clamp-2 overflow-hidden">{description}</p>
       <div className="w-full px-5 pb-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
         {tags.map((tag) => (
           <span
