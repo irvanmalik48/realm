@@ -2,6 +2,7 @@ import { TextScroll } from "@/components/ui/text-scroll";
 import { Metadata } from "next";
 import type { WebPage, WithContext } from "schema-dts";
 import { SettingsClientPage } from "@/components/settings-client-page";
+import { DirectionalTransition } from "@/components/directional-transition";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -47,7 +48,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <>
+    <DirectionalTransition>
       <SettingsClientPage />
       <TextScroll
         className="text-5xl md:text-7xl text-muted-foreground/50 dark:font-semibold font-bold py-24 md:space-y-2"
@@ -59,6 +60,6 @@ export default function SettingsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </>
+    </DirectionalTransition>
   );
 }
