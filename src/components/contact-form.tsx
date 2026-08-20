@@ -5,10 +5,12 @@ import { useForm } from "@tanstack/react-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, CheckCircle2 } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { env } from "@/env";
 
 export function ContactForm() {
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   const form = useForm({
     defaultValues: {
@@ -18,9 +20,33 @@ export function ContactForm() {
       message: "",
     },
     onSubmit: async ({ value }) => {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form submitted successfully:", value);
-      setIsSuccess(true);
+      setErrorMessage(null);
+
+      const apiBase =
+        env.NEXT_PUBLIC_API_URL ||
+        (env.NEXT_PUBLIC_ENVIRONMENT === "development"
+          ? "http://localhost:8080"
+          : "https://api.irvanma.eu.org");
+
+      try {
+        const response = await fetch(`${apiBase}/v1/contact`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(value),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to send message");
+        }
+
+        setIsSuccess(true);
+      } catch (err: any) {
+        setErrorMessage(err.message || "An unexpected error occurred. Please try again.");
+      }
     },
   });
 
@@ -56,6 +82,13 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 py-2"
     >
+      {errorMessage ? (
+        <div className="flex items-center gap-2 p-3 text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-md">
+          <AlertCircle className="size-4 shrink-0" />
+          <span>{errorMessage}</span>
+        </div>
+      ) : null}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <form.Field
           name="name"
@@ -192,7 +225,9 @@ export function ContactForm() {
               placeholder="Your Message..."
               value={field.state.value}
               onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                field.handleChange(e.target.value)
+              }
               aria-invalid={field.state.meta.isTouched && !!field.state.meta.errors?.length}
             />
             {field.state.meta.isTouched && field.state.meta.errors?.length ? (
