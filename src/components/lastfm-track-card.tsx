@@ -185,6 +185,22 @@ export function LastFMTrackCard(props: LastFMCardProps) {
           )}
         </div>
       )}
+      {status === "error" && (
+        <div className="border border-border rounded-md p-5 flex flex-col items-center justify-center gap-3 text-center">
+          <p className="text-sm text-muted-foreground">
+            Unable to load LastFM recent tracks.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => refetch()}
+            className="cursor-pointer gap-2"
+          >
+            <RefreshCcw className="size-4" />
+            <span>Try Again</span>
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
