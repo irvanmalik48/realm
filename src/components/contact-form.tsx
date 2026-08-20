@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
-import { env } from "@/env";
+import { submitContactFormAction } from "@/actions/contact";
 
 export function ContactForm() {
   const [isSuccess, setIsSuccess] = React.useState(false);
@@ -23,29 +23,11 @@ export function ContactForm() {
     onSubmit: async ({ value }) => {
       setErrorMessage(null);
 
-      const apiBase =
-        env.NEXT_PUBLIC_API_URL ||
-        (env.NEXT_PUBLIC_ENVIRONMENT === "development"
-          ? "http://localhost:8080"
-          : "https://api.irvanma.eu.org");
-
       try {
-        const response = await fetch(`${apiBase}/v1/contact`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Realm-Request": "1",
-          },
-          body: JSON.stringify(value),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "Failed to send message");
+        const result = await submitContactFormAction(value);
+        if (result.success) {
+          setIsSuccess(true);
         }
-
-        setIsSuccess(true);
       } catch (err: any) {
         setErrorMessage(err.message || "An unexpected error occurred. Please try again.");
       }
