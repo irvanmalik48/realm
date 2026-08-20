@@ -16,7 +16,18 @@ import {
   Fingerprint,
   ChevronDown,
   Lock,
+  Eye,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { submitContactFormAction } from "@/actions/contact";
 import { cn } from "@/lib/utils";
 
@@ -63,7 +74,6 @@ export function ContactForm() {
     },
     onSubmit: async ({ value }) => {
       setErrorMessage(null);
-
       if (!value.disclaimerAccepted) {
         setErrorMessage("You must accept the telemetry and data processing disclaimer to send a message.");
         return;
@@ -313,30 +323,170 @@ export function ContactForm() {
         {showTelemetryDetails && (
           <div className="px-3.5 pb-3 pt-1 border-t border-border/50 flex flex-col gap-2 text-xs animate-in fade-in duration-150">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 font-mono text-[11px]">
-              <div className="p-1.5 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
-                <span className="text-[10px] text-muted-foreground font-sans">User Agent</span>
-                <span className="truncate text-foreground/90" title={telemetry.userAgent}>
-                  {telemetry.userAgent}
-                </span>
+              {/* User Agent with Show Dialog */}
+              <div className="p-1.5 rounded bg-background/60 border border-border/40 flex items-center justify-between gap-2">
+                <div className="flex flex-col gap-0.5 min-w-0">
+                  <span className="text-[10px] text-muted-foreground font-sans flex items-center gap-1">
+                    <Monitor className="size-3 text-muted-foreground" />
+                    User Agent
+                  </span>
+                  <span className="text-muted-foreground/60 text-[10px] tracking-widest font-mono">
+                    ••••••••••••••••
+                  </span>
+                </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button
+                      type="button"
+                      className="px-2 py-0.5 text-[10px] font-sans font-medium rounded border border-border/60 bg-secondary/80 hover:bg-secondary text-secondary-foreground transition-colors cursor-pointer shrink-0 flex items-center gap-1"
+                    >
+                      <Eye className="size-2.5" />
+                      Show
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle className="flex items-center gap-2 text-base">
+                        <Monitor className="size-4 text-primary" />
+                        User Agent Telemetry
+                      </DialogTitle>
+                      <DialogDescription className="text-xs">
+                        Information transmitted by your client browser for device identification and security.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-3 py-2 text-xs">
+                      <div className="flex flex-col gap-1">
+                        <span className="text-[11px] font-medium text-muted-foreground">Raw User-Agent Header</span>
+                        <div className="p-2.5 rounded-md bg-muted/40 border border-border/60 font-mono text-[11px] break-all select-all leading-relaxed text-foreground/90">
+                          {telemetry.userAgent}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-[11px]">
+                        <div className="p-2 rounded bg-muted/30 border border-border/40 flex flex-col gap-0.5">
+                          <span className="text-[10px] text-muted-foreground">Platform</span>
+                          <span className="font-mono text-foreground">{telemetry.platform}</span>
+                        </div>
+                        <div className="p-2 rounded bg-muted/30 border border-border/40 flex flex-col gap-0.5">
+                          <span className="text-[10px] text-muted-foreground">Language</span>
+                          <span className="font-mono text-foreground">{telemetry.language}</span>
+                        </div>
+                        <div className="p-2 rounded bg-muted/30 border border-border/40 flex flex-col gap-0.5 col-span-2">
+                          <span className="text-[10px] text-muted-foreground">Screen Resolution</span>
+                          <span className="font-mono text-foreground">{telemetry.screenResolution}</span>
+                        </div>
+                      </div>
+                      <p className="text-[11px] text-muted-foreground leading-normal">
+                        This header is transmitted with standard HTTP requests and logged alongside form submissions to verify authentic browser traffic and prevent automated spam bots.
+                      </p>
+                    </div>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button type="button" variant="secondary" size="sm">
+                          Close
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
 
-              <div className="p-1.5 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
-                <span className="text-[10px] text-muted-foreground font-sans">IP & Security</span>
-                <span className="text-foreground/90">
-                  Client IPv4/IPv6 · CSRF Verified
-                </span>
+              {/* IP & Security with Show Dialog */}
+              <div className="p-1.5 rounded bg-background/60 border border-border/40 flex items-center justify-between gap-2">
+                <div className="flex flex-col gap-0.5 min-w-0">
+                  <span className="text-[10px] text-muted-foreground font-sans flex items-center gap-1">
+                    <ShieldAlert className="size-3 text-muted-foreground" />
+                    IP & Security
+                  </span>
+                  <span className="text-muted-foreground/60 text-[10px] tracking-widest font-mono">
+                    ••••••••••••••••
+                  </span>
+                </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button
+                      type="button"
+                      className="px-2 py-0.5 text-[10px] font-sans font-medium rounded border border-border/60 bg-secondary/80 hover:bg-secondary text-secondary-foreground transition-colors cursor-pointer shrink-0 flex items-center gap-1"
+                    >
+                      <Eye className="size-2.5" />
+                      Show
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle className="flex items-center gap-2 text-base">
+                        <ShieldAlert className="size-4 text-primary" />
+                        IP & Security Details
+                      </DialogTitle>
+                      <DialogDescription className="text-xs">
+                        Server-side network information and cryptographic security checks applied during submission.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-3 py-2 text-xs">
+                      <div className="flex flex-col gap-1.5">
+                        <div className="p-2.5 rounded-md bg-muted/30 border border-border/40 flex flex-col gap-1">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-medium text-foreground">Client IP Address</span>
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono">Server Resolved</span>
+                          </div>
+                          <p className="text-[11px] text-muted-foreground">
+                            Extracted on the server via trusted reverse proxy headers (<code className="text-[10px] bg-muted px-1 py-0.5 rounded font-mono">CF-Connecting-IP</code> / <code className="text-[10px] bg-muted px-1 py-0.5 rounded font-mono">X-Forwarded-For</code>) to ensure accurate origin tracking.
+                          </p>
+                        </div>
+
+                        <div className="p-2.5 rounded-md bg-muted/30 border border-border/40 flex flex-col gap-1">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-medium text-foreground">CSRF & Origin Verification</span>
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">Active</span>
+                          </div>
+                          <p className="text-[11px] text-muted-foreground">
+                            Requests are validated against Cross-Site Request Forgery tokens and origin-header policies to guarantee submission integrity.
+                          </p>
+                        </div>
+
+                        <div className="p-2.5 rounded-md bg-muted/30 border border-border/40 flex flex-col gap-1">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-medium text-foreground">Bot Protection & Honeypot</span>
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">Active</span>
+                          </div>
+                          <p className="text-[11px] text-muted-foreground">
+                            Hidden anti-bot form traps and client-side interaction timestamps are verified to reject automated spam submission scripts.
+                          </p>
+                        </div>
+                      </div>
+
+                      <p className="text-[11px] text-muted-foreground leading-normal">
+                        Telemetry and network records are stored strictly for rate-limiting, security auditing, and spam filtering in accordance with privacy disclosures.
+                      </p>
+                    </div>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button type="button" variant="secondary" size="sm">
+                          Close
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
 
+              {/* Timezone */}
               <div className="p-1.5 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
-                <span className="text-[10px] text-muted-foreground font-sans">Timezone</span>
-                <span className="text-foreground/90">
+                <span className="text-[10px] text-muted-foreground font-sans flex items-center gap-1">
+                  <Globe className="size-3 text-muted-foreground" />
+                  Timezone
+                </span>
+                <span className="text-foreground/90 truncate">
                   {telemetry.timezone}
                 </span>
               </div>
 
+              {/* Timestamp */}
               <div className="p-1.5 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
-                <span className="text-[10px] text-muted-foreground font-sans">Timestamp</span>
-                <span className="text-foreground/90">
+                <span className="text-[10px] text-muted-foreground font-sans flex items-center gap-1">
+                  <Clock className="size-3 text-muted-foreground" />
+                  Timestamp
+                </span>
+                <span className="text-foreground/90 truncate text-[10px]">
                   {new Date().toISOString()}
                 </span>
               </div>
