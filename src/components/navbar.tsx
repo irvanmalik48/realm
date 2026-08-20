@@ -33,7 +33,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-999 w-full border-b ${
+      className={`sticky top-0 z-998 w-full border-b ${
         performanceMode
           ? "bg-background border-border"
           : "bg-background/80 backdrop-blur-md border-border/50"

@@ -52,7 +52,7 @@ function DialogPortal({
 }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
   return (
     <DialogPrimitive.Portal data-slot="dialog-portal" {...props}>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+      <div className="fixed inset-0 z-999 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
         {children}
       </div>
     </DialogPrimitive.Portal>
@@ -72,7 +72,7 @@ function DialogOverlay({
   return (
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
-      className={cn("fixed inset-0 z-50 bg-black/50", className)}
+      className={cn("fixed inset-0 z-999 bg-black/50", className)}
       {...props}
     />
   )
@@ -105,7 +105,7 @@ function DialogContent({
             forceMount
             data-slot="dialog-content"
             className={cn(
-              "relative z-50 grid w-full max-w-lg gap-4 rounded-lg border bg-background p-4 sm:p-6 shadow-lg outline-none max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] overflow-y-auto overscroll-contain my-auto",
+              "relative z-999 grid w-full max-w-lg gap-4 rounded-lg border bg-background p-4 sm:p-6 shadow-lg outline-none max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] overflow-y-auto overscroll-contain my-auto",
               className
             )}
             {...props}
