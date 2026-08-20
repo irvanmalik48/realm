@@ -11,6 +11,7 @@ import HeroProfile from "@/assets/img/profpic-animated.webp";
 import { Book, Info, Server } from "lucide-react";
 import { SelfHostedServices } from "@/components/selfhosted";
 import { TextScroll } from "@/components/ui/text-scroll";
+import { APIStatusPulse } from "@/components/api-status-pulse";
 
 export const metadata: Metadata = {
   title: "Landing | realm.",
@@ -59,6 +60,7 @@ export default function Home() {
     <DirectionalTransition>
       <Container>
         <Hero img={HeroImage} profile={HeroProfile} />
+        <APIStatusPulse />
         <div className="w-full bg-background rounded-lg border border-border">
           <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
             <Book className="size-4" />
