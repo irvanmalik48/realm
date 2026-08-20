@@ -171,7 +171,16 @@ export function APIStatusPulse() {
                       )}
                     />
                     {/* Floating Tooltip */}
-                    <div className="absolute bottom-full mb-1.5 hidden group-hover:flex flex-col items-center pointer-events-none z-30">
+                    <div
+                      className={cn(
+                        "absolute bottom-full mb-1.5 hidden group-hover:flex flex-col pointer-events-none z-30",
+                        idx < 12
+                          ? "left-0 items-start"
+                          : idx >= TOTAL_BARS - 12
+                            ? "right-0 items-end"
+                            : "left-1/2 -translate-x-1/2 items-center",
+                      )}
+                    >
                       <div className="bg-popover text-popover-foreground border border-border text-[10px] font-mono px-2 py-1 rounded shadow-lg whitespace-nowrap">
                         {item.latency_ms}ms · {new Date(item.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
                       </div>
