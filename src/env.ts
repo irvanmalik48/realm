@@ -13,10 +13,12 @@ export const env = createEnv({
       .default("development"),
     NEXT_PUBLIC_SITE_URL: z.string().optional(),
     NEXT_PUBLIC_VPS_ACTIVE: z.string().optional(),
+    NEXT_PUBLIC_API_URL: z.string().optional(),
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_VPS_ACTIVE: process.env.NEXT_PUBLIC_VPS_ACTIVE,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
 });
