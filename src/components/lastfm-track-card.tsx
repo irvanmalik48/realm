@@ -1,46 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import { LastFMCardProps, LastFMTrackResponseBody } from "@/lib/types/lastfm";
+import { LastFMCardProps } from "@/lib/types/lastfm";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
-import { parseSongs } from "@/lib/lastfm/lastfm";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "./ui/button";
 import { YouTube } from "./logos/youtube";
 import { LastFM } from "./logos/lastfm";
 import { Music2, RefreshCcw } from "lucide-react";
-
-import { env } from "@/env";
+import { getRecentTracksAction } from "@/actions/lastfm";
 
 const DEFAULT_INTERVAL = 60 * 60 * 1000;
 
 export function LastFMTrackCard(props: LastFMCardProps) {
   const { username, limit = 8, interval = DEFAULT_INTERVAL } = props;
 
-  const apiBase =
-    env.NEXT_PUBLIC_API_URL ||
-    (env.NEXT_PUBLIC_ENVIRONMENT === "development"
-      ? "http://localhost:8080"
-      : "https://api.irvanma.eu.org");
-
-  const endpoint = `${apiBase}/v1/lastfm/track?username=${encodeURIComponent(
-    username
-  )}&limit=${encodeURIComponent(String(limit))}`;
-
   const { data, status, refetch } = useQuery({
-    queryKey: ["lastfm-track"],
-    queryFn: async () => {
-      const res = await fetch(endpoint);
-      if (!res.ok) {
-        throw new Error("Failed to fetch LastFM data");
-      }
-      const body: LastFMTrackResponseBody = await res.json();
-
-      return parseSongs(body, "large");
-    },
+    queryKey: ["lastfm-track", username, limit],
+    queryFn: () => getRecentTracksAction(username, limit),
     retryDelay: 5000,
-    retry: 5,
+    retry: 3,
     refetchInterval: interval,
   });
 
