@@ -1,44 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { LastFMCardProps, LastFMUserResponseBody } from "@/lib/types/lastfm";
+import { LastFMCardProps } from "@/lib/types/lastfm";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "./ui/button";
 import { LastFM } from "./logos/lastfm";
 import { RefreshCcw, User } from "lucide-react";
-import { parseUser } from "@/lib/lastfm/lastfm";
-
-import { env } from "@/env";
+import { getUserInfoAction } from "@/actions/lastfm";
 
 const DEFAULT_INTERVAL = 60 * 60 * 1000;
 
 export function LastFMUserCard(props: LastFMCardProps) {
   const { username, interval = DEFAULT_INTERVAL } = props;
 
-  const apiBase =
-    env.NEXT_PUBLIC_API_URL ||
-    (env.NEXT_PUBLIC_ENVIRONMENT === "development"
-      ? "http://localhost:8080"
-      : "https://api.irvanma.eu.org");
-
-  const endpoint = `${apiBase}/v1/lastfm/user?username=${encodeURIComponent(
-    username
-  )}`;
-
   const { data, status, refetch } = useQuery({
-    queryKey: ["lastfm-user"],
-    queryFn: async () => {
-      const res = await fetch(endpoint);
-      if (!res.ok) {
-        throw new Error("Failed to fetch LastFM data");
-      }
-      const body: LastFMUserResponseBody = await res.json();
-
-      return parseUser(body, "large");
-    },
+    queryKey: ["lastfm-user", username],
+    queryFn: () => getUserInfoAction(username),
     retryDelay: 5000,
-    retry: 5,
+    retry: 3,
     refetchInterval: interval,
   });
 
