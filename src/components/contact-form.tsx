@@ -298,70 +298,53 @@ export function ContactForm() {
         <button
           type="button"
           onClick={() => setShowTelemetryDetails(!showTelemetryDetails)}
-          className="w-full px-3.5 py-2.5 flex items-center justify-between hover:bg-muted/40 transition-colors text-left"
+          className="w-full px-3.5 py-2 flex items-center justify-between hover:bg-muted/40 transition-colors text-left"
         >
           <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-            <ShieldAlert className="size-4 text-primary shrink-0" />
-            <span>Telemetry & Ingestion Data Disclosure</span>
+            <ShieldAlert className="size-3.5 text-primary shrink-0" />
+            <span>Captured Telemetry</span>
           </div>
-          <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground/70 font-mono">
-            <span>{showTelemetryDetails ? "Hide details" : "View captured telemetry"}</span>
+          <div className="flex items-center gap-1 text-[11px] text-muted-foreground/70 font-mono">
+            <span>{showTelemetryDetails ? "Hide" : "Details"}</span>
             <ChevronDown className={cn("size-3.5 transition-transform duration-200", showTelemetryDetails && "rotate-180")} />
           </div>
         </button>
 
         {showTelemetryDetails && (
-          <div className="px-3.5 pb-3.5 pt-1 border-t border-border/50 flex flex-col gap-2 text-xs animate-in fade-in duration-150">
-            <p className="text-[11px] text-muted-foreground leading-relaxed">
-              When you submit this form, the backend collects essential transmission telemetry to mitigate automated spam, enforce rate limits (5 msgs / 10m), and secure communications.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1 font-mono text-[11px]">
-              <div className="p-2 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Fingerprint className="size-3.5 text-primary" />
-                  <span className="font-sans font-semibold">User Agent:</span>
-                </div>
+          <div className="px-3.5 pb-3 pt-1 border-t border-border/50 flex flex-col gap-2 text-xs animate-in fade-in duration-150">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 font-mono text-[11px]">
+              <div className="p-1.5 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
+                <span className="text-[10px] text-muted-foreground font-sans">User Agent</span>
                 <span className="truncate text-foreground/90" title={telemetry.userAgent}>
                   {telemetry.userAgent}
                 </span>
               </div>
 
-              <div className="p-2 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Globe className="size-3.5 text-primary" />
-                  <span className="font-sans font-semibold">IP Address & Security:</span>
-                </div>
+              <div className="p-1.5 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
+                <span className="text-[10px] text-muted-foreground font-sans">IP & Security</span>
                 <span className="text-foreground/90">
-                  Client IPv4/IPv6 · CSRF Verified · OpenTelemetry Traced
+                  Client IPv4/IPv6 · CSRF Verified
                 </span>
               </div>
 
-              <div className="p-2 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Clock className="size-3.5 text-primary" />
-                  <span className="font-sans font-semibold">Timezone & Timestamp:</span>
-                </div>
+              <div className="p-1.5 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
+                <span className="text-[10px] text-muted-foreground font-sans">Timezone</span>
                 <span className="text-foreground/90">
-                  {telemetry.timezone} ({telemetry.language})
+                  {telemetry.timezone}
                 </span>
               </div>
 
-              <div className="p-2 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Monitor className="size-3.5 text-primary" />
-                  <span className="font-sans font-semibold">Display & Context:</span>
-                </div>
+              <div className="p-1.5 rounded bg-background/60 border border-border/40 flex flex-col gap-0.5">
+                <span className="text-[10px] text-muted-foreground font-sans">Timestamp</span>
                 <span className="text-foreground/90">
-                  {telemetry.screenResolution} · {telemetry.platform}
+                  {new Date().toISOString()}
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground/80 mt-1">
-              <Lock className="size-3 shrink-0" />
-              <span>Data is stored securely in PostgreSQL and is never sold or shared with third-party advertisers.</span>
-            </div>
+            <span className="text-[10px] text-muted-foreground/70">
+              Stored in PostgreSQL solely for rate limiting and spam prevention.
+            </span>
           </div>
         )}
       </div>
@@ -380,9 +363,9 @@ export function ContactForm() {
           <div className="flex flex-col gap-1 mt-1">
             <label
               htmlFor="disclaimer-checkbox"
-              className="flex items-start gap-2.5 cursor-pointer select-none group"
+              className="flex items-center gap-2.5 cursor-pointer select-none group"
             >
-              <div className="relative flex items-center justify-center mt-0.5">
+              <div className="relative flex items-center justify-center">
                 <input
                   id="disclaimer-checkbox"
                   type="checkbox"
@@ -391,7 +374,7 @@ export function ContactForm() {
                   onBlur={field.handleBlur}
                   className="sr-only peer"
                 />
-                <div className="size-4 rounded border border-border bg-background peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-checked:bg-primary peer-checked:border-primary transition-all flex items-center justify-center">
+                <div className="size-4 rounded border border-border bg-background peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-checked:bg-primary peer-checked:border-primary transition-all flex items-center justify-center shrink-0">
                   {field.state.value && (
                     <svg
                       className="size-3 text-primary-foreground stroke-current stroke-2 fill-none"
@@ -402,8 +385,8 @@ export function ContactForm() {
                   )}
                 </div>
               </div>
-              <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
-                I understand and consent to the transmission of my IP address, user-agent, and message content for spam prevention, security verification, and communication.
+              <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors leading-tight">
+                I agree to the collection of transmission telemetry (IP & user-agent) for spam protection.
               </span>
             </label>
             {field.state.meta.isTouched && field.state.meta.errors?.length ? (
