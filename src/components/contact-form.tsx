@@ -276,7 +276,7 @@ export function ContactForm() {
               id={field.name}
               name={field.name}
               placeholder="Your Message..."
-              rows={4}
+              rows={3}
               value={field.state.value}
               onBlur={field.handleBlur}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
