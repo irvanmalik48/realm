@@ -18,10 +18,15 @@ const DEFAULT_INTERVAL = 60 * 60 * 1000;
 export function LastFMTrackCard(props: LastFMCardProps) {
   const { username, limit = 8, interval = DEFAULT_INTERVAL } = props;
 
-  const endpoint =
-    env.NEXT_PUBLIC_ENVIRONMENT === "development"
-      ? `http://localhost:3000/api/v7/lastfm/track?username=${username}&limit=${limit}`
-      : `https://irvanma.eu.org/api/v7/lastfm/track?username=${username}&limit=${limit}`;
+  const apiBase =
+    env.NEXT_PUBLIC_API_URL ||
+    (env.NEXT_PUBLIC_ENVIRONMENT === "development"
+      ? "http://localhost:8080"
+      : "https://api.irvanma.eu.org");
+
+  const endpoint = `${apiBase}/v1/lastfm/track?username=${encodeURIComponent(
+    username
+  )}&limit=${encodeURIComponent(String(limit))}`;
 
   const { data, status, refetch } = useQuery({
     queryKey: ["lastfm-track"],
