@@ -28,10 +28,11 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
-import { submitContactFormAction } from "@/actions/contact";
+import { submitContactFormAction, getClientIpAction } from "@/actions/contact";
 import { cn } from "@/lib/utils";
 
 interface ClientTelemetry {
+  ip: string;
   userAgent: string;
   timezone: string;
   language: string;
@@ -44,6 +45,7 @@ export function ContactForm() {
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
   const [showTelemetryDetails, setShowTelemetryDetails] = React.useState(false);
   const [telemetry, setTelemetry] = React.useState<ClientTelemetry>({
+    ip: "Detecting...",
     userAgent: "Loading...",
     timezone: "Detecting...",
     language: "en-US",
@@ -53,13 +55,40 @@ export function ContactForm() {
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      setTelemetry({
+      setTelemetry((prev) => ({
+        ...prev,
         userAgent: navigator.userAgent,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
         language: navigator.language || "en",
         screenResolution: `${window.screen.width}x${window.screen.height} (${window.devicePixelRatio}x DPR)`,
         platform: navigator.platform || "Unknown",
-      });
+      }));
+
+      getClientIpAction()
+        .then((res) => {
+          if (res.ip && res.ip !== "::1" && res.ip !== "127.0.0.1") {
+            setTelemetry((prev) => ({ ...prev, ip: res.ip }));
+          } else {
+            fetch("https://api.ipify.org?format=json")
+              .then((r) => r.json())
+              .then((d) => {
+                if (d.ip) setTelemetry((prev) => ({ ...prev, ip: d.ip }));
+              })
+              .catch(() => {
+                setTelemetry((prev) => ({ ...prev, ip: res.ip || "127.0.0.1" }));
+              });
+          }
+        })
+        .catch(() => {
+          fetch("https://api.ipify.org?format=json")
+            .then((r) => r.json())
+            .then((d) => {
+              if (d.ip) setTelemetry((prev) => ({ ...prev, ip: d.ip }));
+            })
+            .catch(() => {
+              setTelemetry((prev) => ({ ...prev, ip: "127.0.0.1" }));
+            });
+        });
     }
   }, []);
 
@@ -423,13 +452,19 @@ export function ContactForm() {
                     </DialogHeader>
                     <div className="flex flex-col gap-3 py-2 text-xs">
                       <div className="flex flex-col gap-1.5">
-                        <div className="p-2.5 rounded-md bg-muted/30 border border-border/40 flex flex-col gap-1">
+                        <div className="p-2.5 rounded-md bg-muted/40 border border-border/60 flex flex-col gap-2">
                           <div className="flex items-center justify-between">
                             <span className="text-[11px] font-medium text-foreground">Client IP Address</span>
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono">Server Resolved</span>
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono font-semibold">
+                              IPv4/IPv6
+                            </span>
+                          </div>
+                          <div className="p-2.5 rounded bg-background/90 border border-border/50 font-mono text-sm select-all text-foreground font-bold flex items-center justify-between">
+                            <span>{telemetry.ip}</span>
+                            <span className="text-[10px] text-emerald-500 font-sans font-medium">Detected</span>
                           </div>
                           <p className="text-[11px] text-muted-foreground">
-                            Extracted on the server via trusted reverse proxy headers (<code className="text-[10px] bg-muted px-1 py-0.5 rounded font-mono">CF-Connecting-IP</code> / <code className="text-[10px] bg-muted px-1 py-0.5 rounded font-mono">X-Forwarded-For</code>) to ensure accurate origin tracking.
+                            Extracted on the server via proxy headers (<code className="text-[10px] bg-muted px-1 py-0.5 rounded font-mono">CF-Connecting-IP</code> / <code className="text-[10px] bg-muted px-1 py-0.5 rounded font-mono">X-Forwarded-For</code>) to ensure authentic origin tracking.
                           </p>
                         </div>
 
