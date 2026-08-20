@@ -67,7 +67,7 @@ export default function Home() {
           <p className="px-5 py-3">
             I ain&apos;t tryna be fancy here. I don&apos;t know what to put so I
             will just say welcome to my personal site. I&apos;m Irvan Malik
-            Azantha. Domicile is Palembang, Indonesia. Age 22. For job
+            Azantha. Domicile is Palembang, Indonesia. Age 23. For job
             inquiries, please contact me through my work mail.
           </p>
         </div>
