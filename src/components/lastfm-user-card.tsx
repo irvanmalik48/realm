@@ -198,6 +198,22 @@ export function LastFMUserCard(props: LastFMCardProps) {
           </div>
         </div>
       )}
+      {status === "error" && (
+        <div className="border border-border rounded-md p-5 flex flex-col items-center justify-center gap-3 text-center">
+          <p className="text-sm text-muted-foreground">
+            Unable to load LastFM user profile.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => refetch()}
+            className="cursor-pointer gap-2"
+          >
+            <RefreshCcw className="size-4" />
+            <span>Try Again</span>
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
