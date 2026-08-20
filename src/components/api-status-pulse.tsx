@@ -44,12 +44,12 @@ export function APIStatusPulse() {
   return (
     <div className="w-full bg-background rounded-lg border border-border overflow-hidden transition-all duration-300">
       <div
-        className="w-full px-5 py-3 flex items-center justify-between cursor-pointer select-none hover:bg-muted/10 transition-colors"
+        className="w-full px-3.5 py-2.5 sm:px-5 sm:py-3 flex items-center justify-between cursor-pointer select-none hover:bg-muted/10 transition-colors gap-2"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
           {/* Status Indicator with Radar Pulse Animation */}
-          <div className="relative flex items-center justify-center size-3">
+          <div className="relative flex items-center justify-center size-3 shrink-0">
             {isHealthy && (
               <>
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -70,19 +70,19 @@ export function APIStatusPulse() {
             )}
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold tracking-tight">
+          <div className="flex items-center gap-1.5 sm:gap-2 truncate">
+            <span className="text-xs sm:text-sm font-semibold tracking-tight whitespace-nowrap">
               {isHealthy ? "API Operational" : isDegraded ? "API Degraded" : "API Offline"}
             </span>
-            <span className="text-xs text-muted-foreground font-mono">
+            <span className="text-[11px] text-muted-foreground font-mono hidden sm:inline whitespace-nowrap">
               (20s heartbeat)
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {health.latency_ms > 0 && (
-            <span className="text-xs font-mono px-2 py-0.5 rounded bg-muted/40 text-muted-foreground border border-border">
+            <span className="text-[11px] sm:text-xs font-mono px-1.5 sm:px-2 py-0.5 rounded bg-muted/40 text-muted-foreground border border-border">
               {health.latency_ms}ms
             </span>
           )}
@@ -93,7 +93,7 @@ export function APIStatusPulse() {
               refetch();
             }}
             title="Refresh status now"
-            className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded hover:bg-muted/30"
+            className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded hover:bg-muted/30 flex items-center justify-center"
           >
             <RefreshCw className={cn("size-3.5", isFetching && "animate-spin text-primary")} />
           </button>
@@ -101,18 +101,18 @@ export function APIStatusPulse() {
       </div>
 
       {isExpanded && (
-        <div className="px-5 pb-4 pt-1 border-t border-border/60 bg-muted/5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-          <div className="flex flex-col gap-1 p-2.5 rounded border border-border/50 bg-background/50">
+        <div className="px-3.5 pb-3.5 sm:px-5 sm:pb-4 pt-1 border-t border-border/60 bg-muted/5 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-xs">
+          <div className="flex flex-col gap-1 p-2 sm:p-2.5 rounded border border-border/50 bg-background/50">
             <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Server className="size-3.5" />
+              <Server className="size-3.5 shrink-0" />
               <span>Service</span>
             </div>
-            <span className="font-mono font-medium">{health.service} v{health.version}</span>
+            <span className="font-mono font-medium truncate">{health.service} v{health.version}</span>
           </div>
 
-          <div className="flex flex-col gap-1 p-2.5 rounded border border-border/50 bg-background/50">
+          <div className="flex flex-col gap-1 p-2 sm:p-2.5 rounded border border-border/50 bg-background/50">
             <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Database className="size-3.5" />
+              <Database className="size-3.5 shrink-0" />
               <span>Database</span>
             </div>
             <span className={cn("font-mono font-medium capitalize", health.database === "connected" ? "text-emerald-500" : "text-rose-500")}>
@@ -120,9 +120,9 @@ export function APIStatusPulse() {
             </span>
           </div>
 
-          <div className="flex flex-col gap-1 p-2.5 rounded border border-border/50 bg-background/50">
+          <div className="flex flex-col gap-1 p-2 sm:p-2.5 rounded border border-border/50 bg-background/50">
             <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Activity className="size-3.5" />
+              <Activity className="size-3.5 shrink-0" />
               <span>Uptime</span>
             </div>
             <span className="font-mono font-medium">
@@ -130,9 +130,9 @@ export function APIStatusPulse() {
             </span>
           </div>
 
-          <div className="flex flex-col gap-1 p-2.5 rounded border border-border/50 bg-background/50">
+          <div className="flex flex-col gap-1 p-2 sm:p-2.5 rounded border border-border/50 bg-background/50">
             <div className="flex items-center gap-1.5 text-muted-foreground">
-              <RefreshCw className="size-3.5" />
+              <RefreshCw className="size-3.5 shrink-0" />
               <span>Checked</span>
             </div>
             <span className="font-mono font-medium">
