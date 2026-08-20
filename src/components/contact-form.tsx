@@ -343,7 +343,7 @@ export function ContactForm() {
             </div>
 
             <span className="text-[10px] text-muted-foreground/70">
-              Stored in PostgreSQL solely for rate limiting and spam prevention.
+              Stored in database solely for rate limiting and spam prevention.
             </span>
           </div>
         )}
