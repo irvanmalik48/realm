@@ -16,10 +16,15 @@ const DEFAULT_INTERVAL = 60 * 60 * 1000;
 export function LastFMUserCard(props: LastFMCardProps) {
   const { username, interval = DEFAULT_INTERVAL } = props;
 
-  const endpoint =
-    env.NEXT_PUBLIC_ENVIRONMENT === "development"
-      ? `http://localhost:3000/api/v7/lastfm/user?username=${username}`
-      : `https://irvanma.eu.org/api/v7/lastfm/user?username=${username}`;
+  const apiBase =
+    env.NEXT_PUBLIC_API_URL ||
+    (env.NEXT_PUBLIC_ENVIRONMENT === "development"
+      ? "http://localhost:8080"
+      : "https://api.irvanma.eu.org");
+
+  const endpoint = `${apiBase}/v1/lastfm/user?username=${encodeURIComponent(
+    username
+  )}`;
 
   const { data, status, refetch } = useQuery({
     queryKey: ["lastfm-user"],
