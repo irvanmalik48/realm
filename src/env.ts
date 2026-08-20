@@ -3,6 +3,8 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
+    API_URL: z.string().optional(),
+    API_TOKEN: z.string().optional(),
     LASTFM_API_KEY: z.string().optional(),
     LASTFM_API_SECRET: z.string().optional(),
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
