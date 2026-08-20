@@ -18,6 +18,7 @@ export function ContactForm() {
       email: "",
       subject: "",
       message: "",
+      _gotcha: "",
     },
     onSubmit: async ({ value }) => {
       setErrorMessage(null);
@@ -33,6 +34,7 @@ export function ContactForm() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "X-Realm-Request": "1",
           },
           body: JSON.stringify(value),
         });
@@ -82,6 +84,22 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 py-2"
     >
+      {/* Honeypot field for bot/forgery detection */}
+      <form.Field name="_gotcha">
+        {(field) => (
+          <input
+            type="text"
+            name={field.name}
+            tabIndex={-1}
+            autoComplete="off"
+            value={field.state.value}
+            onChange={(e) => field.handleChange(e.target.value)}
+            className="hidden"
+            aria-hidden="true"
+          />
+        )}
+      </form.Field>
+
       {errorMessage ? (
         <div className="flex items-center gap-2 p-3 text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-md">
           <AlertCircle className="size-4 shrink-0" />
