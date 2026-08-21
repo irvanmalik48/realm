@@ -18,6 +18,7 @@ import {
   Lock,
   Eye,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Dialog,
   DialogContent,
@@ -174,12 +175,22 @@ export function ContactForm() {
         )}
       </form.Field>
 
-      {errorMessage ? (
-        <div className="flex items-center gap-2 p-3 text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-md">
-          <AlertCircle className="size-4 shrink-0" />
-          <span>{errorMessage}</span>
-        </div>
-      ) : null}
+      <AnimatePresence mode="wait">
+        {errorMessage && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
+            animate={{ opacity: 1, height: "auto", scale: 1, y: 0 }}
+            exit={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="flex items-center gap-2 p-3 text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-md">
+              <AlertCircle className="size-4 shrink-0" />
+              <span>{errorMessage}</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <form.Field
