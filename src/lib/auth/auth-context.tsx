@@ -2,6 +2,12 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 
+export interface ConnectedAccount {
+  provider: string;
+  email?: string | null;
+  avatar_url?: string | null;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -11,6 +17,7 @@ export interface User {
   provider: string;
   has_password: boolean;
   connected_providers: string[];
+  connected_accounts?: ConnectedAccount[];
   created_at: string;
 }
 
@@ -27,6 +34,7 @@ export interface AuthContextType {
   }) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   updateProfile: (data: { full_name?: string; avatar_url?: string }) => Promise<{ success: boolean; error?: string }>;
+  uploadAvatar: (file: File) => Promise<{ success: boolean; url?: string; error?: string }>;
   setPassword: (data: { current_password?: string; new_password: string }) => Promise<{ success: boolean; error?: string }>;
   unlinkOAuth: (provider: string) => Promise<{ success: boolean; error?: string }>;
   refresh: () => Promise<void>;
@@ -127,6 +135,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const uploadAvatar = async (file: File) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/auth/storage/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const resData = await res.json();
+      if (!res.ok) {
+        return { success: false, error: resData.error || "Avatar upload failed" };
+      }
+
+      const fileUrl = resData.file?.url;
+      if (!fileUrl) {
+        return { success: false, error: "Missing avatar URL from response" };
+      }
+
+      // Automatically update profile with newly uploaded avatar URL
+      const profileRes = await updateProfile({ avatar_url: fileUrl });
+      if (!profileRes.success) {
+        return { success: false, error: profileRes.error || "Failed to link uploaded avatar to profile" };
+      }
+
+      return { success: true, url: fileUrl };
+    } catch {
+      return { success: false, error: "Network error during avatar upload" };
+    }
+  };
+
   const setPassword = async (data: { current_password?: string; new_password: string }) => {
     try {
       const res = await fetch("/api/auth/password", {
@@ -172,6 +212,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         register,
         logout,
         updateProfile,
+        uploadAvatar,
         setPassword,
         unlinkOAuth,
         refresh,
