@@ -1,7 +1,6 @@
 "use client";
 
 import ThemeToggleButton from "./ui/theme-toggle-button";
-import { UserNav } from "./user-nav";
 import Link from "next/link";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai";
@@ -57,7 +56,6 @@ export function Navbar() {
               </FlatNavLink>
             ))}
           <ThemeToggleButton />
-          <UserNav />
         </div>
       </nav>
     </header>
