@@ -14,3 +14,6 @@ export function GitHub(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export const GithubLogo = GitHub;
+
