@@ -118,168 +118,184 @@ export function AvatarCropDialog({
     onClose();
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 10 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 10 }}
-        className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-border/60">
-          <div className="flex items-center gap-2">
-            <div className="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-              <ImageIcon className="size-4" />
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-foreground">
-                {imageSrc ? "Crop & Adjust Avatar" : "Upload Profile Picture"}
-              </h3>
-              <p className="text-[11px] text-muted-foreground">
-                {imageSrc ? "Drag to reposition and adjust zoom." : "Drag & drop your image or browse files."}
-              </p>
-            </div>
-          </div>
-          <button
-            onClick={handleClose}
-            className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="avatar-crop-dialog-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !isUploading) handleClose();
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
+        >
+          <motion.div
+            key="avatar-crop-dialog-modal"
+            initial={{ opacity: 0, scale: 0.95, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
           >
-            <X className="size-4" />
-          </button>
-        </div>
-
-        {/* Content Body */}
-        <div className="p-5">
-          {!imageSrc ? (
-            /* Drag and Drop Upload Area */
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-              className={`relative flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed rounded-xl text-center cursor-pointer transition-all duration-200 ${
-                isDraggingOver
-                  ? "border-primary bg-primary/10 scale-[1.01]"
-                  : "border-border/80 bg-muted/20 hover:border-primary/60 hover:bg-muted/40"
-              }`}
-            >
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleInputChange}
-                accept="image/png,image/jpeg,image/webp,image/gif"
-                className="hidden"
-              />
-              <div className="size-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shadow-xs">
-                <UploadCloud className="size-6" />
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-border/60">
+              <div className="flex items-center gap-2">
+                <div className="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                  <ImageIcon className="size-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground">
+                    {imageSrc ? "Crop & Adjust Avatar" : "Upload Profile Picture"}
+                  </h3>
+                  <p className="text-[11px] text-muted-foreground">
+                    {imageSrc ? "Drag to reposition and adjust zoom." : "Drag & drop your image or browse files."}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-semibold text-foreground">
-                  Click to browse or drag and drop an image
-                </p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">
-                  Supports PNG, JPG, WebP, GIF (up to 50MB)
-                </p>
-              </div>
-            </div>
-          ) : (
-            /* Interactive Cropper Area */
-            <div className="space-y-4">
-              <div className="relative w-full h-64 sm:h-72 rounded-xl overflow-hidden bg-black/90">
-                <Cropper
-                  image={imageSrc}
-                  crop={crop}
-                  zoom={zoom}
-                  aspect={1}
-                  cropShape="round"
-                  showGrid={false}
-                  onCropChange={onCropChange}
-                  onCropComplete={onCropCompleteCallback}
-                  onZoomChange={onZoomChange}
-                />
-              </div>
-
-              {/* Zoom & Reset Controls */}
-              <div className="flex items-center gap-3 px-1">
-                <ZoomOut className="size-4 text-muted-foreground shrink-0" />
-                <input
-                  type="range"
-                  min={1}
-                  max={3}
-                  step={0.05}
-                  value={zoom}
-                  onChange={(e) => setZoom(Number(e.target.value))}
-                  className="w-full accent-primary h-1.5 bg-muted rounded-lg appearance-none cursor-pointer"
-                />
-                <ZoomIn className="size-4 text-muted-foreground shrink-0" />
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    setZoom(1);
-                    setCrop({ x: 0, y: 0 });
-                  }}
-                  className="text-xs h-7 px-2 shrink-0 cursor-pointer text-muted-foreground hover:text-foreground"
-                >
-                  <RotateCcw className="size-3.5" />
-                </Button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Footer Actions */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-t border-border/60 bg-muted/20">
-          {imageSrc ? (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              disabled={isUploading}
-              className="text-xs cursor-pointer"
-            >
-              Choose another
-            </Button>
-          ) : (
-            <div />
-          )}
-
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleClose}
-              disabled={isUploading}
-              className="text-xs cursor-pointer"
-            >
-              Cancel
-            </Button>
-            {imageSrc && (
-              <Button
-                size="sm"
-                onClick={handleSave}
+              <button
+                type="button"
+                onClick={handleClose}
                 disabled={isUploading}
-                className="text-xs flex items-center gap-1.5 cursor-pointer"
+                className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
               >
-                {isUploading ? (
-                  <>
-                    <Loader2 className="size-3.5 animate-spin" />
-                    <span>Uploading...</span>
-                  </>
-                ) : (
-                  <>
-                    <Check className="size-3.5" />
-                    <span>Crop & Save</span>
-                  </>
+                <X className="size-4" />
+              </button>
+            </div>
+
+            {/* Content Body */}
+            <div className="p-5">
+              {!imageSrc ? (
+                /* Drag and Drop Upload Area */
+                <div
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  onClick={() => fileInputRef.current?.click()}
+                  className={`relative flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed rounded-xl text-center cursor-pointer transition-all duration-200 ${
+                    isDraggingOver
+                      ? "border-primary bg-primary/10 scale-[1.01]"
+                      : "border-border/80 bg-muted/20 hover:border-primary/60 hover:bg-muted/40"
+                  }`}
+                >
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleInputChange}
+                    accept="image/png,image/jpeg,image/webp,image/gif"
+                    className="hidden"
+                  />
+                  <div className="size-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shadow-xs">
+                    <UploadCloud className="size-6" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-foreground">
+                      Click to browse or drag and drop an image
+                    </p>
+                    <p className="text-[11px] text-muted-foreground mt-0.5">
+                      Supports PNG, JPG, WebP, GIF (up to 50MB)
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                /* Interactive Cropper Area */
+                <div className="space-y-4">
+                  <div className="relative w-full h-64 sm:h-72 rounded-xl overflow-hidden bg-black/90">
+                    <Cropper
+                      image={imageSrc}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={1}
+                      cropShape="round"
+                      showGrid={false}
+                      onCropChange={onCropChange}
+                      onCropComplete={onCropCompleteCallback}
+                      onZoomChange={onZoomChange}
+                    />
+                  </div>
+
+                  {/* Zoom & Reset Controls */}
+                  <div className="flex items-center gap-3 px-1">
+                    <ZoomOut className="size-4 text-muted-foreground shrink-0" />
+                    <input
+                      type="range"
+                      min={1}
+                      max={3}
+                      step={0.05}
+                      value={zoom}
+                      onChange={(e) => setZoom(Number(e.target.value))}
+                      className="w-full accent-primary h-1.5 bg-muted rounded-lg appearance-none cursor-pointer"
+                    />
+                    <ZoomIn className="size-4 text-muted-foreground shrink-0" />
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setZoom(1);
+                        setCrop({ x: 0, y: 0 });
+                      }}
+                      className="text-xs h-7 px-2 shrink-0 cursor-pointer text-muted-foreground hover:text-foreground"
+                    >
+                      <RotateCcw className="size-3.5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Footer Actions */}
+            <div className="flex items-center justify-between px-5 py-3.5 border-t border-border/60 bg-muted/20">
+              {imageSrc ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleReset}
+                  disabled={isUploading}
+                  className="text-xs cursor-pointer"
+                >
+                  Choose another
+                </Button>
+              ) : (
+                <div />
+              )}
+
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleClose}
+                  disabled={isUploading}
+                  className="text-xs cursor-pointer"
+                >
+                  Cancel
+                </Button>
+                {imageSrc && (
+                  <Button
+                    size="sm"
+                    onClick={handleSave}
+                    disabled={isUploading}
+                    className="text-xs flex items-center gap-1.5 cursor-pointer"
+                  >
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="size-3.5 animate-spin" />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Check className="size-3.5" />
+                        <span>Crop & Save</span>
+                      </>
+                    )}
+                  </Button>
                 )}
-              </Button>
-            )}
-          </div>
-        </div>
-      </motion.div>
-    </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
