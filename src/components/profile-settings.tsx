@@ -25,6 +25,8 @@ import {
   Globe,
   Crop,
   Shield,
+  XCircle,
+  AtSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -43,6 +45,17 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const [isSavingName, setIsSavingName] = useState(false);
   const [nameSuccess, setNameSuccess] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
+
+  // Username Editing State
+  const [isEditingUsername, setIsEditingUsername] = useState(false);
+  const [usernameInput, setUsernameInput] = useState("");
+  const [usernameStatus, setUsernameStatus] = useState<
+    "idle" | "checking" | "available" | "taken" | "invalid"
+  >("idle");
+  const [usernameMessage, setUsernameMessage] = useState<string>("");
+  const [isSavingUsername, setIsSavingUsername] = useState(false);
+  const [usernameSuccess, setUsernameSuccess] = useState(false);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
 
   // Dialog States
   const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
@@ -63,8 +76,69 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   useEffect(() => {
     if (user) {
       setFullName(user.full_name || "");
+      setUsernameInput(user.username || "");
     }
   }, [user]);
+
+  // Debounced username availability check
+  useEffect(() => {
+    if (!isEditingUsername) return;
+
+    const candidate = usernameInput.trim().toLowerCase();
+    if (!candidate) {
+      setUsernameStatus("idle");
+      setUsernameMessage("");
+      return;
+    }
+
+    // Same as current username
+    if (user && candidate === user.username.toLowerCase()) {
+      setUsernameStatus("available");
+      setUsernameMessage("Current username");
+      return;
+    }
+
+    if (candidate.length < 3) {
+      setUsernameStatus("invalid");
+      setUsernameMessage("Username must be at least 3 characters");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9_]{3,30}$/.test(candidate)) {
+      setUsernameStatus("invalid");
+      setUsernameMessage("Alphanumeric and underscores only (max 30)");
+      return;
+    }
+
+    setUsernameStatus("checking");
+    setUsernameMessage("Checking availability...");
+
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `/api/auth/check?username=${encodeURIComponent(candidate)}`
+        );
+        if (!res.ok) {
+          setUsernameStatus("idle");
+          setUsernameMessage("");
+          return;
+        }
+        const data = await res.json();
+        if (data.username_available === false) {
+          setUsernameStatus("taken");
+          setUsernameMessage(data.username_reason || "Username is already taken");
+        } else {
+          setUsernameStatus("available");
+          setUsernameMessage("Username is available!");
+        }
+      } catch {
+        setUsernameStatus("idle");
+        setUsernameMessage("");
+      }
+    }, 350);
+
+    return () => clearTimeout(timer);
+  }, [usernameInput, isEditingUsername, user]);
 
   // Handle URL query parameters for OAuth linking feedback
   useEffect(() => {
@@ -155,6 +229,38 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
       setNameError("Network error occurred");
     } finally {
       setIsSavingName(false);
+    }
+  };
+
+  const handleSaveUsername = async () => {
+    const clean = usernameInput.trim().toLowerCase();
+    if (!clean) return;
+    if (clean === user.username.toLowerCase()) {
+      setIsEditingUsername(false);
+      return;
+    }
+
+    if (usernameStatus === "taken" || usernameStatus === "invalid" || usernameStatus === "checking") {
+      return;
+    }
+
+    setIsSavingUsername(true);
+    setUsernameError(null);
+    setUsernameSuccess(false);
+
+    try {
+      const res = await updateProfile({ username: clean });
+      if (!res.success) {
+        setUsernameError(res.error || "Failed to update username");
+      } else {
+        setUsernameSuccess(true);
+        setIsEditingUsername(false);
+        setTimeout(() => setUsernameSuccess(false), 3000);
+      }
+    } catch {
+      setUsernameError("Network error occurred");
+    } finally {
+      setIsSavingUsername(false);
     }
   };
 
@@ -605,6 +711,107 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
           {nameError && <p className="text-[11px] text-destructive">{nameError}</p>}
         </div>
 
+        {/* Username field (with Debounced Availability Check) */}
+        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+              <AtSign className="size-3.5" />
+              Username
+            </span>
+            {!isEditingUsername ? (
+              <button
+                onClick={() => {
+                  setIsEditingUsername(true);
+                  setUsernameInput(user.username);
+                  setUsernameStatus("idle");
+                  setUsernameMessage("");
+                }}
+                className="text-xs text-primary hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <Edit2 className="size-3" />
+                Edit
+              </button>
+            ) : null}
+          </div>
+
+          {isEditingUsername ? (
+            <div className="space-y-2 mt-1">
+              <div className="relative">
+                <Input
+                  type="text"
+                  value={usernameInput}
+                  onChange={(e) => setUsernameInput(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))}
+                  className="text-xs pr-8"
+                  placeholder="username"
+                  autoFocus
+                />
+                <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+                  {usernameStatus === "checking" && (
+                    <Loader2 className="size-3.5 animate-spin text-muted-foreground" />
+                  )}
+                  {usernameStatus === "available" && (
+                    <Check className="size-3.5 text-emerald-500" />
+                  )}
+                  {(usernameStatus === "taken" || usernameStatus === "invalid") && (
+                    <XCircle className="size-3.5 text-destructive" />
+                  )}
+                </div>
+              </div>
+
+              {usernameMessage && (
+                <p
+                  className={`text-[11px] font-medium ${
+                    usernameStatus === "available"
+                      ? "text-emerald-500"
+                      : usernameStatus === "checking"
+                      ? "text-muted-foreground"
+                      : "text-destructive"
+                  }`}
+                >
+                  {usernameMessage}
+                </p>
+              )}
+
+              <div className="flex items-center gap-2">
+                <Button
+                  onClick={handleSaveUsername}
+                  disabled={
+                    isSavingUsername ||
+                    usernameStatus === "taken" ||
+                    usernameStatus === "invalid" ||
+                    usernameStatus === "checking" ||
+                    !usernameInput.trim()
+                  }
+                  size="sm"
+                  className="cursor-pointer"
+                >
+                  {isSavingUsername ? <Loader2 className="size-3 animate-spin" /> : <Check className="size-3" />}
+                  Save
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setIsEditingUsername(false);
+                    setUsernameInput(user.username);
+                    setUsernameStatus("idle");
+                    setUsernameMessage("");
+                  }}
+                  className="cursor-pointer"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <p className="text-sm font-medium text-foreground">@{user.username}</p>
+          )}
+          {usernameSuccess && (
+            <p className="text-[11px] text-emerald-500 font-medium">Username updated successfully!</p>
+          )}
+          {usernameError && <p className="text-[11px] text-destructive">{usernameError}</p>}
+        </div>
+
         {/* Email field */}
         <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-1">
           <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
@@ -612,15 +819,6 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
             Email Address
           </span>
           <p className="text-sm font-medium text-foreground truncate">{user.email}</p>
-        </div>
-
-        {/* Username field */}
-        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-1">
-          <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-            <User className="size-3.5" />
-            Username
-          </span>
-          <p className="text-sm font-medium text-foreground">@{user.username}</p>
         </div>
 
         {/* Member Since field */}
