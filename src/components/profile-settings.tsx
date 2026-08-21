@@ -16,28 +16,25 @@ import {
   Loader2,
   LogIn,
   Key,
-  Lock,
-  Eye,
-  EyeOff,
   AlertCircle,
   Unlink,
   Link as LinkIcon,
-  Sparkles,
   ShieldAlert,
   Camera,
-  Upload,
   Trash2,
   Globe,
   Crop,
+  Shield,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { AvatarCropDialog } from "@/components/avatar-crop-dialog";
+import { PasswordDialog } from "@/components/password-dialog";
 
 export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
-  const { user, isLoading, updateProfile, uploadAvatar, setPassword, unlinkOAuth, refresh } = useAuth();
+  const { user, isLoading, updateProfile, uploadAvatar, unlinkOAuth, refresh } = useAuth();
   const searchParams = useSearchParams();
 
   // Full Name Editing State
@@ -47,23 +44,16 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const [nameSuccess, setNameSuccess] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
 
-  // Avatar Management State
+  // Dialog States
   const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
+  const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
   const [isAvatarOptionsOpen, setIsAvatarOptionsOpen] = useState(false);
+
+  // Avatar Direct URL / Sync State
   const [customAvatarUrl, setCustomAvatarUrl] = useState("");
   const [isSavingAvatar, setIsSavingAvatar] = useState(false);
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [avatarSuccess, setAvatarSuccess] = useState<string | null>(null);
-
-  // Password Management State
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [isSavingPassword, setIsSavingPassword] = useState(false);
-  const [passwordSuccess, setPasswordSuccess] = useState(false);
-  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   // OAuth Linking/Unlinking State
   const [unlinkingProvider, setUnlinkingProvider] = useState<string | null>(null);
@@ -256,59 +246,6 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     }
   };
 
-  const getPasswordStrength = (pwd: string) => {
-    if (!pwd) return 0;
-    let score = 0;
-    if (pwd.length >= 8) score++;
-    if (/[A-Z]/.test(pwd)) score++;
-    if (/[0-9]/.test(pwd)) score++;
-    if (/[^A-Za-z0-9]/.test(pwd)) score++;
-    return score;
-  };
-
-  const strength = getPasswordStrength(newPassword);
-  const strengthLabels = ["Weak", "Fair", "Good", "Strong"];
-  const strengthColors = ["bg-destructive", "bg-yellow-500", "bg-blue-500", "bg-emerald-500"];
-
-  const handlePasswordSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setPasswordError(null);
-    setPasswordSuccess(false);
-
-    if (newPassword.length < 8) {
-      setPasswordError("New password must be at least 8 characters long.");
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      setPasswordError("New passwords do not match.");
-      return;
-    }
-
-    setIsSavingPassword(true);
-
-    try {
-      const res = await setPassword({
-        current_password: user.has_password ? currentPassword : undefined,
-        new_password: newPassword,
-      });
-
-      if (!res.success) {
-        setPasswordError(res.error || "Failed to update password.");
-      } else {
-        setPasswordSuccess(true);
-        setCurrentPassword("");
-        setNewPassword("");
-        setConfirmPassword("");
-        setTimeout(() => setPasswordSuccess(false), 4000);
-      }
-    } catch {
-      setPasswordError("An unexpected error occurred. Please try again.");
-    } finally {
-      setIsSavingPassword(false);
-    }
-  };
-
   const handleUnlink = async (provider: string) => {
     setUnlinkingProvider(provider);
     setOauthError(null);
@@ -358,7 +295,14 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         isUploading={isSavingAvatar}
       />
 
-      {/* Post-OAuth Password Setup Notice */}
+      {/* Password Setup/Change Modal Dialog */}
+      <PasswordDialog
+        isOpen={isPasswordDialogOpen}
+        onClose={() => setIsPasswordDialogOpen(false)}
+        hasPassword={user.has_password}
+      />
+
+      {/* Elegant Post-OAuth Password Setup Banner */}
       <AnimatePresence>
         {!user.has_password && (
           <motion.div
@@ -367,9 +311,11 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
             exit={{ opacity: 0, height: 0, y: -6 }}
             className="overflow-hidden"
           >
-            <div className="p-4 rounded-lg border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
-              <div className="flex items-start gap-3">
-                <ShieldAlert className="size-5 shrink-0 mt-0.5" />
+            <div className="p-3.5 sm:p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 dark:bg-amber-500/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+              <div className="flex items-center gap-3">
+                <div className="size-8 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
+                  <ShieldAlert className="size-4" />
+                </div>
                 <div>
                   <h4 className="text-xs font-semibold text-foreground">
                     Set up your account password
@@ -379,12 +325,14 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                   </p>
                 </div>
               </div>
-              <a
-                href="#password-section"
-                className="shrink-0 px-3 py-1.5 text-xs font-medium rounded-md bg-amber-500 hover:bg-amber-600 text-white transition-colors cursor-pointer"
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsPasswordDialogOpen(true)}
+                className="shrink-0 text-xs border-amber-500/30 text-amber-600 dark:text-amber-400 hover:bg-amber-500/10 cursor-pointer"
               >
                 Set Password
-              </a>
+              </Button>
             </div>
           </motion.div>
         )}
@@ -438,7 +386,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
           </div>
           <p className="text-xs text-muted-foreground mt-0.5">@{user.username}</p>
 
-          <div className="flex flex-wrap items-center gap-2 mt-2">
+          <div className="flex flex-wrap items-center gap-2 mt-2.5">
             <Button
               variant="default"
               size="sm"
@@ -685,6 +633,56 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         </div>
       </div>
 
+      {/* Security & Password Section */}
+      <div className="pt-4 border-t border-border/50 space-y-3">
+        <div>
+          <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
+            <Shield className="size-4 text-primary" />
+            Security & Authentication
+          </h4>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            Manage your account login credentials and security methods.
+          </p>
+        </div>
+
+        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="size-9 rounded-lg bg-background border border-border flex items-center justify-center text-primary shrink-0 shadow-2xs">
+              <Key className="size-4" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <p className="text-xs font-semibold text-foreground">Account Password</p>
+                {user.has_password ? (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+                    <Check className="size-2.5" />
+                    Active
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">
+                    Not Set
+                  </span>
+                )}
+              </div>
+              <p className="text-[11px] text-muted-foreground mt-0.5">
+                {user.has_password
+                  ? "Used to log in directly with your email or username."
+                  : "Set a password to enable email & username sign-in alongside social login."}
+              </p>
+            </div>
+          </div>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsPasswordDialogOpen(true)}
+            className="text-xs shrink-0 cursor-pointer"
+          >
+            {user.has_password ? "Change Password" : "Set Password"}
+          </Button>
+        </div>
+      </div>
+
       {/* Connected Accounts Section */}
       <div className="pt-4 border-t border-border/50 space-y-3">
         <div>
@@ -806,188 +804,6 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
             )}
           </div>
         </div>
-      </div>
-
-      {/* Password Management Section */}
-      <div id="password-section" className="pt-4 border-t border-border/50 space-y-4">
-        <div>
-          <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Key className="size-4 text-primary" />
-            {user.has_password ? "Change Password" : "Set Up Password"}
-          </h4>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {user.has_password
-              ? "Update your existing account password."
-              : "Create a password to enable logging in via username or email."}
-          </p>
-        </div>
-
-        {/* Animated Error/Success notices */}
-        <AnimatePresence>
-          {passwordError && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, y: -6 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -6 }}
-              className="overflow-hidden"
-            >
-              <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
-                <AlertCircle className="size-4 shrink-0" />
-                <span>{passwordError}</span>
-              </div>
-            </motion.div>
-          )}
-
-          {passwordSuccess && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, y: -6 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -6 }}
-              className="overflow-hidden"
-            >
-              <div className="p-3 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
-                <Check className="size-4 shrink-0" />
-                <span>Password updated successfully!</span>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <form onSubmit={handlePasswordSubmit} className="space-y-3.5 max-w-md">
-          {/* Current Password (only required if user already has a password) */}
-          {user.has_password && (
-            <div className="space-y-1.5">
-              <label
-                htmlFor="currentPassword"
-                className="block text-xs font-medium text-foreground/80"
-              >
-                Current Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
-                  <Lock className="size-4" />
-                </div>
-                <Input
-                  id="currentPassword"
-                  name="currentPassword"
-                  type={showCurrentPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  required
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="pl-9 pr-9 text-xs"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                >
-                  {showCurrentPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* New Password */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="newPassword"
-                className="block text-xs font-medium text-foreground/80"
-              >
-                {user.has_password ? "New Password" : "Password"}
-              </label>
-              {newPassword && (
-                <span className="text-[11px] font-medium text-muted-foreground">
-                  {strengthLabels[strength - 1] || "Too short"}
-                </span>
-              )}
-            </div>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
-                <Lock className="size-4" />
-              </div>
-              <Input
-                id="newPassword"
-                name="newPassword"
-                type={showNewPassword ? "text" : "password"}
-                autoComplete="new-password"
-                required
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="At least 8 characters"
-                className="pl-9 pr-9 text-xs"
-              />
-              <button
-                type="button"
-                onClick={() => setShowNewPassword(!showNewPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-              >
-                {showNewPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-              </button>
-            </div>
-
-            {/* Password Strength Meter */}
-            {newPassword && (
-              <div className="grid grid-cols-4 gap-1.5 pt-1">
-                {[0, 1, 2, 3].map((step) => (
-                  <div
-                    key={step}
-                    className={`h-1 rounded-sm transition-all duration-300 ${
-                      strength > step ? strengthColors[strength - 1] : "bg-muted"
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Confirm New Password */}
-          <div className="space-y-1.5">
-            <label
-              htmlFor="confirmPassword"
-              className="block text-xs font-medium text-foreground/80"
-            >
-              Confirm {user.has_password ? "New Password" : "Password"}
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
-                <Lock className="size-4" />
-              </div>
-              <Input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                autoComplete="new-password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="••••••••"
-                className="pl-9 text-xs"
-              />
-            </div>
-          </div>
-
-          <Button
-            type="submit"
-            disabled={isSavingPassword}
-            size="sm"
-            className="mt-2 cursor-pointer"
-          >
-            {isSavingPassword ? (
-              <>
-                <Loader2 className="size-4 animate-spin" />
-                <span>Saving password...</span>
-              </>
-            ) : (
-              <>
-                <Sparkles className="size-4" />
-                <span>{user.has_password ? "Change Password" : "Set Password"}</span>
-              </>
-            )}
-          </Button>
-        </form>
       </div>
     </div>
   );
