@@ -1,16 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import Container from "@/components/container";
 import { GoogleLogo } from "@/components/logos/google";
 import { GithubLogo } from "@/components/logos/github";
-import { Eye, EyeOff, Lock, User, Mail, Sparkles, AlertCircle, ArrowRight, Loader2, UserPlus } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Lock,
+  User,
+  Mail,
+  Sparkles,
+  AlertCircle,
+  ArrowRight,
+  Loader2,
+  UserPlus,
+  CheckCircle2,
+  XCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DirectionalTransition } from "@/components/directional-transition";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -24,12 +38,113 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Username availability state
+  const [usernameStatus, setUsernameStatus] = useState<
+    "idle" | "checking" | "available" | "taken" | "invalid"
+  >("idle");
+  const [usernameMessage, setUsernameMessage] = useState<string>("");
+
+  // Email availability state
+  const [emailStatus, setEmailStatus] = useState<
+    "idle" | "checking" | "available" | "taken" | "invalid"
+  >("idle");
+  const [emailMessage, setEmailMessage] = useState<string>("");
+
   // If already logged in, redirect to home or settings
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       router.push("/settings");
     }
   }, [user, router]);
+
+  // Debounced username check
+  useEffect(() => {
+    const trimmed = username.trim().toLowerCase();
+    if (!trimmed) {
+      setUsernameStatus("idle");
+      setUsernameMessage("");
+      return;
+    }
+
+    if (trimmed.length < 3) {
+      setUsernameStatus("invalid");
+      setUsernameMessage("Username must be at least 3 characters");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9_]{3,30}$/.test(trimmed)) {
+      setUsernameStatus("invalid");
+      setUsernameMessage("Alphanumeric and underscores only (max 30)");
+      return;
+    }
+
+    setUsernameStatus("checking");
+    setUsernameMessage("");
+
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/auth/check?username=${encodeURIComponent(trimmed)}`);
+        if (!res.ok) throw new Error("Failed to check username");
+        const data = await res.json();
+
+        if (data.username_available === true) {
+          setUsernameStatus("available");
+          setUsernameMessage("Username is available");
+        } else if (data.username_available === false) {
+          setUsernameStatus("taken");
+          setUsernameMessage(data.username_reason || "Username is already taken");
+        } else {
+          setUsernameStatus("idle");
+        }
+      } catch {
+        setUsernameStatus("idle");
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [username]);
+
+  // Debounced email check
+  useEffect(() => {
+    const trimmed = email.trim().toLowerCase();
+    if (!trimmed) {
+      setEmailStatus("idle");
+      setEmailMessage("");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmed)) {
+      setEmailStatus("idle");
+      setEmailMessage("");
+      return;
+    }
+
+    setEmailStatus("checking");
+    setEmailMessage("");
+
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/auth/check?email=${encodeURIComponent(trimmed)}`);
+        if (!res.ok) throw new Error("Failed to check email");
+        const data = await res.json();
+
+        if (data.email_available === true) {
+          setEmailStatus("available");
+          setEmailMessage("Email is available");
+        } else if (data.email_available === false) {
+          setEmailStatus("taken");
+          setEmailMessage(data.email_reason || "Email is already registered");
+        } else {
+          setEmailStatus("idle");
+        }
+      } catch {
+        setEmailStatus("idle");
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [email]);
 
   // Calculate password strength score (0-4)
   const getPasswordStrength = (pwd: string) => {
@@ -49,6 +164,16 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+
+    if (usernameStatus === "taken" || usernameStatus === "invalid") {
+      setError(usernameMessage || "Please choose an available username.");
+      return;
+    }
+
+    if (emailStatus === "taken") {
+      setError(emailMessage || "An account with this email already exists.");
+      return;
+    }
 
     if (password.length < 8) {
       setError("Password must be at least 8 characters long.");
@@ -76,6 +201,13 @@ export default function RegisterPage() {
     }
   };
 
+  const isFormBlocked =
+    usernameStatus === "checking" ||
+    emailStatus === "checking" ||
+    usernameStatus === "taken" ||
+    usernameStatus === "invalid" ||
+    emailStatus === "taken";
+
   return (
     <DirectionalTransition>
       <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
@@ -96,13 +228,23 @@ export default function RegisterPage() {
                 </p>
               </div>
 
-              {/* Error Alert */}
-              {error && (
-                <div className="mb-5 flex items-center gap-2 p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs">
-                  <AlertCircle className="size-4 shrink-0" />
-                  <span>{error}</span>
-                </div>
-              )}
+              {/* Animated Error Alert */}
+              <AnimatePresence mode="wait">
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
+                    animate={{ opacity: 1, height: "auto", scale: 1, y: 0 }}
+                    exit={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
+                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden mb-5"
+                  >
+                    <div className="flex items-center gap-2 p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs">
+                      <AlertCircle className="size-4 shrink-0" />
+                      <span>{error}</span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Social OIDC Logins */}
               <div className="grid grid-cols-2 gap-3 mb-6">
@@ -158,14 +300,16 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                {/* Username */}
+                {/* Username with Live Debounced Availability */}
                 <div className="space-y-1.5">
-                  <label
-                    htmlFor="username"
-                    className="block text-xs font-medium text-foreground/80"
-                  >
-                    Username
-                  </label>
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="username"
+                      className="block text-xs font-medium text-foreground/80"
+                    >
+                      Username
+                    </label>
+                  </div>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
                       <User className="size-4" />
@@ -177,14 +321,56 @@ export default function RegisterPage() {
                       autoComplete="username"
                       required
                       value={username}
-                      onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))}
+                      onChange={(e) =>
+                        setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))
+                      }
                       placeholder="irvan"
-                      className="pl-9 text-xs"
+                      className={`pl-9 pr-9 text-xs ${
+                        usernameStatus === "available"
+                          ? "border-emerald-500/50 focus-visible:ring-emerald-500/30"
+                          : usernameStatus === "taken" || usernameStatus === "invalid"
+                          ? "border-destructive/60 focus-visible:ring-destructive/30"
+                          : ""
+                      }`}
                     />
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      {usernameStatus === "checking" && (
+                        <Loader2 className="size-3.5 animate-spin text-muted-foreground" />
+                      )}
+                      {usernameStatus === "available" && (
+                        <CheckCircle2 className="size-3.5 text-emerald-500" />
+                      )}
+                      {(usernameStatus === "taken" || usernameStatus === "invalid") && (
+                        <XCircle className="size-3.5 text-destructive" />
+                      )}
+                    </div>
                   </div>
+
+                  {/* Animated Helper Message for Username */}
+                  <AnimatePresence>
+                    {usernameMessage && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, y: -4 }}
+                        animate={{ opacity: 1, height: "auto", y: 0 }}
+                        exit={{ opacity: 0, height: 0, y: -4 }}
+                        transition={{ duration: 0.18 }}
+                        className="overflow-hidden"
+                      >
+                        <p
+                          className={`text-[11px] flex items-center gap-1 font-medium mt-0.5 ${
+                            usernameStatus === "available"
+                              ? "text-emerald-500"
+                              : "text-destructive"
+                          }`}
+                        >
+                          <span>{usernameMessage}</span>
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
-                {/* Email */}
+                {/* Email with Live Debounced Availability */}
                 <div className="space-y-1.5">
                   <label
                     htmlFor="email"
@@ -205,9 +391,49 @@ export default function RegisterPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="irvan@example.com"
-                      className="pl-9 text-xs"
+                      className={`pl-9 pr-9 text-xs ${
+                        emailStatus === "available"
+                          ? "border-emerald-500/50 focus-visible:ring-emerald-500/30"
+                          : emailStatus === "taken"
+                          ? "border-destructive/60 focus-visible:ring-destructive/30"
+                          : ""
+                      }`}
                     />
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      {emailStatus === "checking" && (
+                        <Loader2 className="size-3.5 animate-spin text-muted-foreground" />
+                      )}
+                      {emailStatus === "available" && (
+                        <CheckCircle2 className="size-3.5 text-emerald-500" />
+                      )}
+                      {emailStatus === "taken" && (
+                        <XCircle className="size-3.5 text-destructive" />
+                      )}
+                    </div>
                   </div>
+
+                  {/* Animated Helper Message for Email */}
+                  <AnimatePresence>
+                    {emailMessage && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, y: -4 }}
+                        animate={{ opacity: 1, height: "auto", y: 0 }}
+                        exit={{ opacity: 0, height: 0, y: -4 }}
+                        transition={{ duration: 0.18 }}
+                        className="overflow-hidden"
+                      >
+                        <p
+                          className={`text-[11px] flex items-center gap-1 font-medium mt-0.5 ${
+                            emailStatus === "available"
+                              ? "text-emerald-500"
+                              : "text-destructive"
+                          }`}
+                        >
+                          <span>{emailMessage}</span>
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* Password */}
@@ -274,7 +500,7 @@ export default function RegisterPage() {
                 {/* Submit Button */}
                 <Button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={isLoading || isFormBlocked}
                   className="w-full mt-3 cursor-pointer"
                 >
                   {isLoading ? (
