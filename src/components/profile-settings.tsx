@@ -25,7 +25,6 @@ import {
   Globe,
   Crop,
   Shield,
-  XCircle,
   AtSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -34,33 +33,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { AvatarCropDialog } from "@/components/avatar-crop-dialog";
 import { PasswordDialog } from "@/components/password-dialog";
+import { EditProfileDialog } from "@/components/edit-profile-dialog";
 
 export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const { user, isLoading, updateProfile, uploadAvatar, unlinkOAuth, refresh } = useAuth();
   const searchParams = useSearchParams();
 
-  // Full Name Editing State
-  const [isEditingName, setIsEditingName] = useState(false);
-  const [fullName, setFullName] = useState("");
-  const [isSavingName, setIsSavingName] = useState(false);
-  const [nameSuccess, setNameSuccess] = useState(false);
-  const [nameError, setNameError] = useState<string | null>(null);
-
-  // Username Editing State
-  const [isEditingUsername, setIsEditingUsername] = useState(false);
-  const [usernameInput, setUsernameInput] = useState("");
-  const [usernameStatus, setUsernameStatus] = useState<
-    "idle" | "checking" | "available" | "taken" | "invalid"
-  >("idle");
-  const [usernameMessage, setUsernameMessage] = useState<string>("");
-  const [isSavingUsername, setIsSavingUsername] = useState(false);
-  const [usernameSuccess, setUsernameSuccess] = useState(false);
-  const [usernameError, setUsernameError] = useState<string | null>(null);
-
   // Dialog States
   const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
   const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
   const [isAvatarOptionsOpen, setIsAvatarOptionsOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editTargetField, setEditTargetField] = useState<"name" | "username" | "both">("both");
 
   // Avatar Direct URL / Sync State
   const [customAvatarUrl, setCustomAvatarUrl] = useState("");
@@ -72,73 +56,6 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const [unlinkingProvider, setUnlinkingProvider] = useState<string | null>(null);
   const [oauthError, setOauthError] = useState<string | null>(null);
   const [oauthSuccess, setOauthSuccess] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (user) {
-      setFullName(user.full_name || "");
-      setUsernameInput(user.username || "");
-    }
-  }, [user]);
-
-  // Debounced username availability check
-  useEffect(() => {
-    if (!isEditingUsername) return;
-
-    const candidate = usernameInput.trim().toLowerCase();
-    if (!candidate) {
-      setUsernameStatus("idle");
-      setUsernameMessage("");
-      return;
-    }
-
-    // Same as current username
-    if (user && candidate === user.username.toLowerCase()) {
-      setUsernameStatus("available");
-      setUsernameMessage("Current username");
-      return;
-    }
-
-    if (candidate.length < 3) {
-      setUsernameStatus("invalid");
-      setUsernameMessage("Username must be at least 3 characters");
-      return;
-    }
-
-    if (!/^[a-zA-Z0-9_]{3,30}$/.test(candidate)) {
-      setUsernameStatus("invalid");
-      setUsernameMessage("Alphanumeric and underscores only (max 30)");
-      return;
-    }
-
-    setUsernameStatus("checking");
-    setUsernameMessage("Checking availability...");
-
-    const timer = setTimeout(async () => {
-      try {
-        const res = await fetch(
-          `/api/auth/check?username=${encodeURIComponent(candidate)}`
-        );
-        if (!res.ok) {
-          setUsernameStatus("idle");
-          setUsernameMessage("");
-          return;
-        }
-        const data = await res.json();
-        if (data.username_available === false) {
-          setUsernameStatus("taken");
-          setUsernameMessage(data.username_reason || "Username is already taken");
-        } else {
-          setUsernameStatus("available");
-          setUsernameMessage("Username is available!");
-        }
-      } catch {
-        setUsernameStatus("idle");
-        setUsernameMessage("");
-      }
-    }, 350);
-
-    return () => clearTimeout(timer);
-  }, [usernameInput, isEditingUsername, user]);
 
   // Handle URL query parameters for OAuth linking feedback
   useEffect(() => {
@@ -209,60 +126,6 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         .join("")
         .toUpperCase()
     : user.username.slice(0, 2).toUpperCase();
-
-  const handleSaveName = async () => {
-    if (!fullName.trim()) return;
-    setIsSavingName(true);
-    setNameError(null);
-    setNameSuccess(false);
-
-    try {
-      const res = await updateProfile({ full_name: fullName.trim() });
-      if (!res.success) {
-        setNameError(res.error || "Failed to update full name");
-      } else {
-        setNameSuccess(true);
-        setIsEditingName(false);
-        setTimeout(() => setNameSuccess(false), 3000);
-      }
-    } catch {
-      setNameError("Network error occurred");
-    } finally {
-      setIsSavingName(false);
-    }
-  };
-
-  const handleSaveUsername = async () => {
-    const clean = usernameInput.trim().toLowerCase();
-    if (!clean) return;
-    if (clean === user.username.toLowerCase()) {
-      setIsEditingUsername(false);
-      return;
-    }
-
-    if (usernameStatus === "taken" || usernameStatus === "invalid" || usernameStatus === "checking") {
-      return;
-    }
-
-    setIsSavingUsername(true);
-    setUsernameError(null);
-    setUsernameSuccess(false);
-
-    try {
-      const res = await updateProfile({ username: clean });
-      if (!res.success) {
-        setUsernameError(res.error || "Failed to update username");
-      } else {
-        setUsernameSuccess(true);
-        setIsEditingUsername(false);
-        setTimeout(() => setUsernameSuccess(false), 3000);
-      }
-    } catch {
-      setUsernameError("Network error occurred");
-    } finally {
-      setIsSavingUsername(false);
-    }
-  };
 
   const handleCropComplete = async (croppedFile: File) => {
     setIsSavingAvatar(true);
@@ -406,6 +269,13 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         isOpen={isPasswordDialogOpen}
         onClose={() => setIsPasswordDialogOpen(false)}
         hasPassword={user.has_password}
+      />
+
+      {/* Full Name & Username Edit Modal Dialog */}
+      <EditProfileDialog
+        isOpen={isEditDialogOpen}
+        onClose={() => setIsEditDialogOpen(false)}
+        targetField={editTargetField}
       />
 
       {/* Elegant Post-OAuth Password Setup Banner */}
@@ -650,170 +520,51 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
       {/* Account Details Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Full Name field */}
-        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-2">
+        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-1.5">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
               <User className="size-3.5" />
               Full Name
             </span>
-            {!isEditingName ? (
-              <button
-                onClick={() => setIsEditingName(true)}
-                className="text-xs text-primary hover:underline flex items-center gap-1 cursor-pointer"
-              >
-                <Edit2 className="size-3" />
-                Edit
-              </button>
-            ) : null}
+            <button
+              onClick={() => {
+                setEditTargetField("name");
+                setIsEditDialogOpen(true);
+              }}
+              className="text-xs text-primary hover:underline flex items-center gap-1 cursor-pointer"
+            >
+              <Edit2 className="size-3" />
+              Edit
+            </button>
           </div>
-
-          {isEditingName ? (
-            <div className="space-y-2 mt-1">
-              <Input
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="text-xs"
-                placeholder="Your full name"
-                autoFocus
-              />
-              <div className="flex items-center gap-2">
-                <Button
-                  onClick={handleSaveName}
-                  disabled={isSavingName}
-                  size="sm"
-                  className="cursor-pointer"
-                >
-                  {isSavingName ? <Loader2 className="size-3 animate-spin" /> : <Check className="size-3" />}
-                  Save
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    setIsEditingName(false);
-                    setFullName(user.full_name || "");
-                  }}
-                  className="cursor-pointer"
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <p className="text-sm font-medium text-foreground">
-              {user.full_name || "Not specified"}
-            </p>
-          )}
-          {nameSuccess && (
-            <p className="text-[11px] text-emerald-500 font-medium">Updated successfully!</p>
-          )}
-          {nameError && <p className="text-[11px] text-destructive">{nameError}</p>}
+          <p className="text-sm font-medium text-foreground">
+            {user.full_name || "Not specified"}
+          </p>
         </div>
 
-        {/* Username field (with Debounced Availability Check) */}
-        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-2">
+        {/* Username field */}
+        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-1.5">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
               <AtSign className="size-3.5" />
               Username
             </span>
-            {!isEditingUsername ? (
-              <button
-                onClick={() => {
-                  setIsEditingUsername(true);
-                  setUsernameInput(user.username);
-                  setUsernameStatus("idle");
-                  setUsernameMessage("");
-                }}
-                className="text-xs text-primary hover:underline flex items-center gap-1 cursor-pointer"
-              >
-                <Edit2 className="size-3" />
-                Edit
-              </button>
-            ) : null}
+            <button
+              onClick={() => {
+                setEditTargetField("username");
+                setIsEditDialogOpen(true);
+              }}
+              className="text-xs text-primary hover:underline flex items-center gap-1 cursor-pointer"
+            >
+              <Edit2 className="size-3" />
+              Edit
+            </button>
           </div>
-
-          {isEditingUsername ? (
-            <div className="space-y-2 mt-1">
-              <div className="relative">
-                <Input
-                  type="text"
-                  value={usernameInput}
-                  onChange={(e) => setUsernameInput(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))}
-                  className="text-xs pr-8"
-                  placeholder="username"
-                  autoFocus
-                />
-                <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
-                  {usernameStatus === "checking" && (
-                    <Loader2 className="size-3.5 animate-spin text-muted-foreground" />
-                  )}
-                  {usernameStatus === "available" && (
-                    <Check className="size-3.5 text-emerald-500" />
-                  )}
-                  {(usernameStatus === "taken" || usernameStatus === "invalid") && (
-                    <XCircle className="size-3.5 text-destructive" />
-                  )}
-                </div>
-              </div>
-
-              {usernameMessage && (
-                <p
-                  className={`text-[11px] font-medium ${
-                    usernameStatus === "available"
-                      ? "text-emerald-500"
-                      : usernameStatus === "checking"
-                      ? "text-muted-foreground"
-                      : "text-destructive"
-                  }`}
-                >
-                  {usernameMessage}
-                </p>
-              )}
-
-              <div className="flex items-center gap-2">
-                <Button
-                  onClick={handleSaveUsername}
-                  disabled={
-                    isSavingUsername ||
-                    usernameStatus === "taken" ||
-                    usernameStatus === "invalid" ||
-                    usernameStatus === "checking" ||
-                    !usernameInput.trim()
-                  }
-                  size="sm"
-                  className="cursor-pointer"
-                >
-                  {isSavingUsername ? <Loader2 className="size-3 animate-spin" /> : <Check className="size-3" />}
-                  Save
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    setIsEditingUsername(false);
-                    setUsernameInput(user.username);
-                    setUsernameStatus("idle");
-                    setUsernameMessage("");
-                  }}
-                  className="cursor-pointer"
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <p className="text-sm font-medium text-foreground">@{user.username}</p>
-          )}
-          {usernameSuccess && (
-            <p className="text-[11px] text-emerald-500 font-medium">Username updated successfully!</p>
-          )}
-          {usernameError && <p className="text-[11px] text-destructive">{usernameError}</p>}
+          <p className="text-sm font-medium text-foreground">@{user.username}</p>
         </div>
 
         {/* Email field */}
-        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-1">
+        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-1.5">
           <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
             <Mail className="size-3.5" />
             Email Address
@@ -822,7 +573,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         </div>
 
         {/* Member Since field */}
-        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-1">
+        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-1.5">
           <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
             <Calendar className="size-3.5" />
             Member Since
