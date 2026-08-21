@@ -1,6 +1,7 @@
 "use client";
 
 import ThemeToggleButton from "./ui/theme-toggle-button";
+import { UserNav } from "./user-nav";
 import Link from "next/link";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai";
@@ -48,7 +49,7 @@ export function Navbar() {
         >
           realm.
         </Link>
-        <div className="flex gap-5 items-center">
+        <div className="flex gap-3 sm:gap-4 items-center">
           {links.length > 0 &&
             links.map((link) => (
               <FlatNavLink key={link.href} href={link.href}>
@@ -56,6 +57,7 @@ export function Navbar() {
               </FlatNavLink>
             ))}
           <ThemeToggleButton />
+          <UserNav />
         </div>
       </nav>
     </header>
