@@ -7,7 +7,9 @@ import { useAuth } from "@/hooks/use-auth";
 import Container from "@/components/container";
 import { GoogleLogo } from "@/components/logos/google";
 import { GithubLogo } from "@/components/logos/github";
-import { Eye, EyeOff, Lock, User, AlertCircle, ArrowRight, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Lock, User, AlertCircle, ArrowRight, Loader2, LogIn } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -46,25 +48,25 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4">
+    <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
       <Container className="max-w-md" noPadding>
         <div className="w-full mx-auto">
           {/* Card Container */}
-          <div className="rounded-3xl border border-border/80 bg-card/60 backdrop-blur-xl p-6 sm:p-8 shadow-2xl transition-all duration-300">
+          <div className="rounded-lg border border-border bg-background p-6 sm:p-8 shadow-xs">
             {/* Header */}
-            <div className="text-center mb-8">
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+            <div className="text-center mb-6">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">
                 Welcome back
               </h1>
-              <p className="text-sm text-muted-foreground mt-2">
+              <p className="text-xs text-muted-foreground mt-1.5">
                 Sign in with your social account or credentials
               </p>
             </div>
 
             {/* Error Alert */}
             {error && (
-              <div className="mb-6 flex items-center gap-2.5 p-3.5 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-xs sm:text-sm animate-in fade-in slide-in-from-top-1">
-                <AlertCircle className="w-4 h-4 shrink-0" />
+              <div className="mb-5 flex items-center gap-2 p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs">
+                <AlertCircle className="size-4 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
@@ -73,24 +75,24 @@ export default function LoginPage() {
             <div className="grid grid-cols-2 gap-3 mb-6">
               <a
                 href="/api/auth/google"
-                className="flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl border border-border/80 bg-background/60 hover:bg-muted/80 text-foreground font-medium text-xs sm:text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-sm"
+                className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
               >
-                <GoogleLogo className="w-4 h-4 shrink-0" />
+                <GoogleLogo className="size-4 shrink-0" />
                 <span>Google</span>
               </a>
               <a
                 href="/api/auth/github"
-                className="flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl border border-border/80 bg-background/60 hover:bg-muted/80 text-foreground font-medium text-xs sm:text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-sm"
+                className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
               >
-                <GithubLogo className="w-4 h-4 shrink-0" />
+                <GithubLogo className="size-4 shrink-0" />
                 <span>GitHub</span>
               </a>
             </div>
 
             {/* Divider */}
             <div className="relative flex items-center justify-center mb-6">
-              <div className="w-full border-t border-border/60" />
-              <span className="absolute px-3 bg-card/90 backdrop-blur-md text-[11px] text-muted-foreground uppercase tracking-wider font-medium">
+              <div className="w-full border-t border-border" />
+              <span className="absolute px-3 bg-background text-[11px] text-muted-foreground uppercase tracking-wider font-medium">
                 Or with credentials
               </span>
             </div>
@@ -106,10 +108,10 @@ export default function LoginPage() {
                   Username or Email
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted-foreground">
-                    <User className="w-4 h-4" />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
+                    <User className="size-4" />
                   </div>
-                  <input
+                  <Input
                     id="identifier"
                     name="identifier"
                     type="text"
@@ -118,7 +120,7 @@ export default function LoginPage() {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     placeholder="irvan or you@example.com"
-                    className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-border/80 bg-background/70 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-all"
+                    className="pl-9 text-xs"
                   />
                 </div>
               </div>
@@ -134,10 +136,10 @@ export default function LoginPage() {
                   </label>
                 </div>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted-foreground">
-                    <Lock className="w-4 h-4" />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
+                    <Lock className="size-4" />
                   </div>
-                  <input
+                  <Input
                     id="password"
                     name="password"
                     type={showPassword ? "text" : "password"}
@@ -146,49 +148,50 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-10 py-2.5 text-sm rounded-xl border border-border/80 bg-background/70 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-all"
+                    className="pl-9 pr-9 text-xs"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? (
-                      <EyeOff className="w-4 h-4" />
+                      <EyeOff className="size-4" />
                     ) : (
-                      <Eye className="w-4 h-4" />
+                      <Eye className="size-4" />
                     )}
                   </button>
                 </div>
               </div>
 
               {/* Submit Button */}
-              <button
+              <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer shadow-md"
+                className="w-full mt-2 cursor-pointer"
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="size-4 animate-spin" />
                     <span>Signing in...</span>
                   </>
                 ) : (
                   <>
+                    <LogIn className="size-4" />
                     <span>Sign In</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="size-4 ml-auto" />
                   </>
                 )}
-              </button>
+              </Button>
             </form>
 
             {/* Footer / Switch to Register */}
-            <div className="mt-8 pt-6 border-t border-border/50 text-center text-xs text-muted-foreground">
+            <div className="mt-6 pt-5 border-t border-border text-center text-xs text-muted-foreground">
               Don&apos;t have an account?{" "}
               <Link
                 href="/register"
-                className="font-semibold text-primary hover:underline transition-colors"
+                className="font-medium text-foreground hover:underline transition-colors"
               >
                 Create an account
               </Link>
