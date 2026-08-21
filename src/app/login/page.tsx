@@ -11,6 +11,7 @@ import { Eye, EyeOff, Lock, User, AlertCircle, ArrowRight, Loader2, LogIn } from
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DirectionalTransition } from "@/components/directional-transition";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -68,13 +69,23 @@ export default function LoginPage() {
                 </p>
               </div>
 
-              {/* Error Alert */}
-              {error && (
-                <div className="mb-5 flex items-center gap-2 p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs">
-                  <AlertCircle className="size-4 shrink-0" />
-                  <span>{error}</span>
-                </div>
-              )}
+              {/* Animated Error Alert */}
+              <AnimatePresence mode="wait">
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
+                    animate={{ opacity: 1, height: "auto", scale: 1, y: 0 }}
+                    exit={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
+                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden mb-5"
+                  >
+                    <div className="flex items-center gap-2 p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs">
+                      <AlertCircle className="size-4 shrink-0" />
+                      <span>{error}</span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Social OIDC Logins */}
               <div className="grid grid-cols-2 gap-3 mb-6">
