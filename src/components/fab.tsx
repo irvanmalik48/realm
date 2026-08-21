@@ -9,8 +9,11 @@ import {
   Home,
   Info,
   Link2,
+  LogIn,
+  LogOut,
   Newspaper,
   Settings,
+  User as UserIcon,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -21,6 +24,8 @@ import Image from "next/image";
 import Hero from "@/assets/img/fab-hero.png";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai";
+import { useAuth } from "@/hooks/use-auth";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const handleInteractOutside = (e: Event) => {
   e.preventDefault();
@@ -38,6 +43,7 @@ export function FAB() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [performanceMode] = useAtom(performanceModeAtom);
+  const { user, logout } = useAuth();
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
@@ -54,6 +60,17 @@ export function FAB() {
       window.removeEventListener("scroll", trackScroll);
     };
   }, []);
+
+  const initials = user
+    ? user.full_name
+      ? user.full_name
+          .split(" ")
+          .map((n) => n[0])
+          .slice(0, 2)
+          .join("")
+          .toUpperCase()
+      : user.username.slice(0, 2).toUpperCase()
+    : "";
 
   return (
     <>
@@ -185,7 +202,7 @@ export function FAB() {
             </div>
           </a>
           <a
-            className="group relative text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
+            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
             href="https://webri.ng/webring/chads"
             target="_blank"
             rel="noopener noreferrer"
@@ -196,6 +213,64 @@ export function FAB() {
               <ArrowRight className="size-4" />
             </div>
           </a>
+
+          {/* Account & Profile Section */}
+          <h3 className="w-full flex items-center gap-3 bg-muted/20 px-4 py-2 border-b border-border font-semibold">
+            <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
+              <UserIcon className="size-4" />
+            </span>
+            <span>Account</span>
+          </h3>
+
+          {user ? (
+            <div className="flex items-center justify-between gap-3 px-4 py-2.5 bg-background hover:bg-secondary/40 transition-colors">
+              <Link
+                href="/settings"
+                className="flex items-center gap-2.5 min-w-0 flex-1 group cursor-pointer"
+              >
+                <Avatar className="size-7 border border-border shrink-0">
+                  {user.avatar_url ? (
+                    <AvatarImage
+                      src={user.avatar_url}
+                      alt={user.full_name || user.username}
+                    />
+                  ) : null}
+                  <AvatarFallback className="text-[10px] font-semibold bg-primary/10 text-primary">
+                    {initials}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-xs font-semibold text-foreground truncate group-hover:text-primary transition-colors">
+                    {user.full_name || user.username}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground truncate">
+                    @{user.username}
+                  </span>
+                </div>
+              </Link>
+              <button
+                type="button"
+                onClick={() => logout()}
+                className="text-muted-foreground hover:text-destructive p-1.5 rounded-md hover:bg-muted/80 transition-colors cursor-pointer shrink-0"
+                title="Sign out"
+                aria-label="Sign out"
+              >
+                <LogOut className="size-4" />
+              </button>
+            </div>
+          ) : (
+            <Link
+              className="group relative text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
+              href="/login"
+              transitionTypes={["nav-forward"]}
+            >
+              <LogIn className="size-4" />
+              <span>Sign in</span>
+              <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                <ArrowRight className="size-4" />
+              </div>
+            </Link>
+          )}
         </PopoverContent>
       </Popover>
     </>
