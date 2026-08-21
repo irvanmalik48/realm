@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { env } from "@/env";
 
 function getBackendUrl(): string {
@@ -9,7 +9,17 @@ function getBackendUrl(): string {
     : "https://api.irvanma.eu.org";
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const token =
+    req.cookies.get("realm_auth_token")?.value ||
+    req.headers.get("authorization")?.replace("Bearer ", "");
+
   const backendUrl = getBackendUrl();
-  return NextResponse.redirect(`${backendUrl}/v1/auth/github`);
+  const url = new URL(`${backendUrl}/v1/auth/github`);
+
+  if (token) {
+    url.searchParams.set("token", token);
+  }
+
+  return NextResponse.redirect(url.toString());
 }
