@@ -3,6 +3,7 @@ import { Doto, Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider, getTheme } from "@wrksz/themes/next";
 import { Navbar } from "@/components/navbar";
 import Providers from "@/lib/provider/react-query";
+import { AuthProvider } from "@/lib/auth/auth-context";
 import { LenisProvider } from "@/components/lenis-provider";
 import { CustomCursor } from "@/components/custom-cursor";
 import { CustomScrollbar } from "@/components/custom-scrollbar";
@@ -97,14 +98,16 @@ export default async function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storage="cookie">
           <Providers>
-            <LenisProvider>
-              <CustomScrollbar />
-              <CustomCursor />
-              <FAB />
-              <Navbar />
-              {children}
-              <Footer />
-            </LenisProvider>
+            <AuthProvider>
+              <LenisProvider>
+                <CustomScrollbar />
+                <CustomCursor />
+                <FAB />
+                <Navbar />
+                {children}
+                <Footer />
+              </LenisProvider>
+            </AuthProvider>
           </Providers>
         </ThemeProvider>
         <Script
