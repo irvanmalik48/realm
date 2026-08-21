@@ -3,10 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Container from "@/components/container";
 import { ImageComponent } from "@/components/image";
-import { Settings, Search, Sliders, PlayCircle, MousePointer, Activity, X } from "lucide-react";
+import { Settings, Search, Sliders, PlayCircle, MousePointer, Activity, User, X } from "lucide-react";
 import CuteImage from "@/assets/img/awoocon.jpg";
 import dynamic from "next/dynamic";
 
+const ProfileSettings = dynamic(
+  () => import("@/components/profile-settings").then((m) => m.ProfileSettings),
+  { ssr: false }
+);
 const PerformanceModeToggle = dynamic(
   () => import("@/components/performance-mode-toggle").then((m) => m.PerformanceModeToggle),
   { ssr: false }
@@ -31,6 +35,7 @@ interface Category {
 }
 
 const categories: Category[] = [
+  { id: "profile", label: "Profile", icon: User },
   { id: "performance", label: "Performance", icon: Activity },
   { id: "behavior", label: "Behavior", icon: PlayCircle },
   { id: "scrolling", label: "Scrolling", icon: Sliders },
@@ -39,12 +44,20 @@ const categories: Category[] = [
 
 export function SettingsClientPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("performance");
+  const [activeCategory, setActiveCategory] = useState("profile");
 
   const matchQuery = (text: string) => {
     if (!searchQuery) return true;
     return text.toLowerCase().includes(searchQuery.toLowerCase());
   };
+
+  const hasProfileMatch = matchQuery("Profile") ||
+    matchQuery("Account") ||
+    matchQuery("User") ||
+    matchQuery("Full Name") ||
+    matchQuery("Email") ||
+    matchQuery("Username") ||
+    matchQuery("Avatar");
 
   const hasPerformanceMatch = matchQuery("Performance Mode") || 
     matchQuery("Turn off unneccessary effects to improve performance on lower-end devices.") ||
@@ -69,6 +82,7 @@ export function SettingsClientPage() {
     matchQuery("custom cursor cursor orb mouse pointer follow-up speed speed latency hover scale cursor hover hover size pointer size leading orb trail size trailing orb");
 
   const hasMatch = (id: string) => {
+    if (id === "profile") return hasProfileMatch;
     if (id === "performance") return hasPerformanceMatch;
     if (id === "behavior") return hasBehaviorMatch;
     if (id === "scrolling") return hasScrollingMatch;
@@ -77,6 +91,7 @@ export function SettingsClientPage() {
   };
 
   const totalMatches =
+    (hasProfileMatch ? 1 : 0) +
     (hasPerformanceMatch ? 1 : 0) +
     (hasBehaviorMatch ? 1 : 0) +
     (hasScrollingMatch ? 1 : 0) +
@@ -215,6 +230,9 @@ export function SettingsClientPage() {
                       <span>{cat.label} Settings</span>
                     </h2>
                     <div className="w-full divide-y divide-border/50 bg-background">
+                      {cat.id === "profile" && (
+                        <ProfileSettings searchQuery={searchQuery} />
+                      )}
                       {cat.id === "performance" && (
                         <PerformanceModeToggle searchQuery={searchQuery} />
                       )}
