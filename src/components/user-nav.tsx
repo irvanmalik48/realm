@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, Settings, User as UserIcon } from "lucide-react";
+import { LogIn, LogOut, Settings, User as UserIcon } from "lucide-react";
 import { GoogleLogo } from "@/components/logos/google";
 import { GithubLogo } from "@/components/logos/github";
 
@@ -35,9 +35,10 @@ export function UserNav() {
       <div className="flex items-center gap-2">
         <Link
           href="/login"
-          className="text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-lg border border-border/60 bg-background/50 hover:bg-muted/80 text-foreground transition-all duration-200"
+          className="text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-md border border-border/60 bg-background/50 hover:bg-muted/80 text-foreground transition-all duration-200 flex items-center gap-1.5"
         >
-          Sign in
+          <LogIn className="size-3.5" />
+          <span>Sign in</span>
         </Link>
       </div>
     );
