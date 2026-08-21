@@ -9,6 +9,8 @@ export interface User {
   full_name: string;
   avatar_url?: string | null;
   provider: string;
+  has_password: boolean;
+  connected_providers: string[];
   created_at: string;
 }
 
@@ -25,6 +27,8 @@ export interface AuthContextType {
   }) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   updateProfile: (data: { full_name?: string; avatar_url?: string }) => Promise<{ success: boolean; error?: string }>;
+  setPassword: (data: { current_password?: string; new_password: string }) => Promise<{ success: boolean; error?: string }>;
+  unlinkOAuth: (provider: string) => Promise<{ success: boolean; error?: string }>;
   refresh: () => Promise<void>;
 }
 
@@ -67,7 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       setUser(data.user);
       return { success: true };
-    } catch (err) {
+    } catch {
       return { success: false, error: "Network error during login" };
     }
   };
@@ -91,7 +95,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       setUser(resData.user);
       return { success: true };
-    } catch (err) {
+    } catch {
       return { success: false, error: "Network error during registration" };
     }
   };
@@ -118,8 +122,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       setUser(resData.user);
       return { success: true };
-    } catch (err) {
+    } catch {
       return { success: false, error: "Network error during profile update" };
+    }
+  };
+
+  const setPassword = async (data: { current_password?: string; new_password: string }) => {
+    try {
+      const res = await fetch("/api/auth/password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const resData = await res.json();
+      if (!res.ok) {
+        return { success: false, error: resData.error || "Failed to update password" };
+      }
+      // Refresh user profile so has_password becomes true
+      await refresh();
+      return { success: true };
+    } catch {
+      return { success: false, error: "Network error during password update" };
+    }
+  };
+
+  const unlinkOAuth = async (provider: string) => {
+    try {
+      const res = await fetch(`/api/auth/oauth/${provider}`, {
+        method: "DELETE",
+      });
+      const resData = await res.json();
+      if (!res.ok) {
+        return { success: false, error: resData.error || `Failed to disconnect ${provider}` };
+      }
+      // Refresh user profile
+      await refresh();
+      return { success: true };
+    } catch {
+      return { success: false, error: `Network error disconnecting ${provider}` };
     }
   };
 
@@ -132,6 +172,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         register,
         logout,
         updateProfile,
+        setPassword,
+        unlinkOAuth,
         refresh,
       }}
     >
