@@ -28,9 +28,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 
 export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
-  const { user, isLoading, updateProfile, setPassword, unlinkOAuth } = useAuth();
+  const { user, isLoading, updateProfile, setPassword, unlinkOAuth, refresh } = useAuth();
+  const searchParams = useSearchParams();
   const [isEditing, setIsEditing] = useState(false);
   const [fullName, setFullName] = useState("");
   const [isSaving, setIsSaving] = useState(false);
@@ -47,7 +49,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const [passwordSuccess, setPasswordSuccess] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
 
-  // OAuth Unlinking State
+  // OAuth Linking/Unlinking State
   const [unlinkingProvider, setUnlinkingProvider] = useState<string | null>(null);
   const [oauthError, setOauthError] = useState<string | null>(null);
   const [oauthSuccess, setOauthSuccess] = useState<string | null>(null);
@@ -57,6 +59,28 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
       setFullName(user.full_name || "");
     }
   }, [user]);
+
+  // Handle URL query parameters for OAuth linking feedback
+  useEffect(() => {
+    const linked = searchParams.get("linked");
+    const err = searchParams.get("error");
+
+    if (linked) {
+      const providerName = linked === "google" ? "Google" : linked === "github" ? "GitHub" : linked;
+      setOauthSuccess(`${providerName} account linked successfully!`);
+      refresh();
+      window.history.replaceState({}, "", window.location.pathname);
+      const timer = setTimeout(() => setOauthSuccess(null), 4000);
+      return () => clearTimeout(timer);
+    }
+
+    if (err) {
+      setOauthError(err.replace(/\+/g, " "));
+      window.history.replaceState({}, "", window.location.pathname);
+      const timer = setTimeout(() => setOauthError(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams, refresh]);
 
   if (isLoading) {
     return (
@@ -394,19 +418,35 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
           </p>
         </div>
 
-        {oauthError && (
-          <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
-            <AlertCircle className="size-4 shrink-0" />
-            <span>{oauthError}</span>
-          </div>
-        )}
+        <AnimatePresence>
+          {oauthError && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, y: -6 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -6 }}
+              className="overflow-hidden"
+            >
+              <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
+                <AlertCircle className="size-4 shrink-0" />
+                <span>{oauthError}</span>
+              </div>
+            </motion.div>
+          )}
 
-        {oauthSuccess && (
-          <div className="p-3 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
-            <Check className="size-4 shrink-0" />
-            <span>{oauthSuccess}</span>
-          </div>
-        )}
+          {oauthSuccess && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, y: -6 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -6 }}
+              className="overflow-hidden"
+            >
+              <div className="p-3 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
+                <Check className="size-4 shrink-0" />
+                <span>{oauthSuccess}</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* Google Connection Card */}
