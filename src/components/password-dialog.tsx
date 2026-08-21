@@ -101,7 +101,7 @@ export function PasswordDialog({
         setSuccess(true);
         setTimeout(() => {
           handleClose();
-        }, 1500);
+        }, 1200);
       }
     } catch {
       setError("An unexpected error occurred. Please try again.");
@@ -110,230 +110,245 @@ export function PasswordDialog({
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 10 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 10 }}
-        className="relative w-full max-w-md overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-border/60">
-          <div className="flex items-center gap-2.5">
-            <div className="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
-              <Key className="size-4" />
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-foreground">
-                {hasPassword ? "Change Password" : "Set Up Password"}
-              </h3>
-              <p className="text-[11px] text-muted-foreground">
-                {hasPassword
-                  ? "Update your existing account password"
-                  : "Create a password to enable email & username login"}
-              </p>
-            </div>
-          </div>
-          <button
-            onClick={handleClose}
-            className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="password-dialog-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleClose();
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
+        >
+          <motion.div
+            key="password-dialog-modal"
+            initial={{ opacity: 0, scale: 0.95, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
           >
-            <X className="size-4" />
-          </button>
-        </div>
-
-        {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-5 space-y-4">
-          <AnimatePresence>
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, y: -6 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -6 }}
-                className="overflow-hidden"
-              >
-                <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
-                  <AlertCircle className="size-4 shrink-0" />
-                  <span>{error}</span>
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-border/60">
+              <div className="flex items-center gap-2.5">
+                <div className="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <Key className="size-4" />
                 </div>
-              </motion.div>
-            )}
-
-            {success && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, y: -6 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -6 }}
-                className="overflow-hidden"
-              >
-                <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
-                  <ShieldCheck className="size-4 shrink-0" />
-                  <span>Password saved successfully!</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground">
+                    {hasPassword ? "Change Password" : "Set Up Password"}
+                  </h3>
+                  <p className="text-[11px] text-muted-foreground">
+                    {hasPassword
+                      ? "Update your existing account password"
+                      : "Create a password to enable email & username login"}
+                  </p>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Current Password (if already set) */}
-          {hasPassword && (
-            <div className="space-y-1.5">
-              <label
-                htmlFor="currentPassword"
-                className="block text-xs font-medium text-foreground/80"
-              >
-                Current Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
-                  <Lock className="size-4" />
-                </div>
-                <Input
-                  id="currentPassword"
-                  type={showCurrentPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  required
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="pl-9 pr-9 text-xs"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                >
-                  {showCurrentPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                </button>
               </div>
-            </div>
-          )}
-
-          {/* New Password */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="newPassword"
-                className="block text-xs font-medium text-foreground/80"
-              >
-                {hasPassword ? "New Password" : "Password"}
-              </label>
-              {newPassword && (
-                <span className="text-[11px] font-medium text-muted-foreground">
-                  {strengthLabels[strength - 1] || "Too short"}
-                </span>
-              )}
-            </div>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
-                <Lock className="size-4" />
-              </div>
-              <Input
-                id="newPassword"
-                type={showNewPassword ? "text" : "password"}
-                autoComplete="new-password"
-                required
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="At least 8 characters"
-                className="pl-9 pr-9 text-xs"
-              />
               <button
                 type="button"
-                onClick={() => setShowNewPassword(!showNewPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                onClick={handleClose}
+                className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
               >
-                {showNewPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                <X className="size-4" />
               </button>
             </div>
 
-            {/* Password Strength Meter */}
-            {newPassword && (
-              <div className="grid grid-cols-4 gap-1.5 pt-1">
-                {[0, 1, 2, 3].map((step) => (
-                  <div
-                    key={step}
-                    className={`h-1 rounded-sm transition-all duration-300 ${
-                      strength > step ? strengthColors[strength - 1] : "bg-muted"
-                    }`}
+            {/* Form Body */}
+            <form onSubmit={handleSubmit} className="p-5 space-y-4">
+              <AnimatePresence>
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, y: -6 }}
+                    animate={{ opacity: 1, height: "auto", y: 0 }}
+                    exit={{ opacity: 0, height: 0, y: -6 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
+                      <AlertCircle className="size-4 shrink-0" />
+                      <span>{error}</span>
+                    </div>
+                  </motion.div>
+                )}
+
+                {success && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, y: -6 }}
+                    animate={{ opacity: 1, height: "auto", y: 0 }}
+                    exit={{ opacity: 0, height: 0, y: -6 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
+                      <ShieldCheck className="size-4 shrink-0" />
+                      <span>Password saved successfully!</span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Current Password (if already set) */}
+              {hasPassword && (
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="currentPassword"
+                    className="block text-xs font-medium text-foreground/80"
+                  >
+                    Current Password
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
+                      <Lock className="size-4" />
+                    </div>
+                    <Input
+                      id="currentPassword"
+                      type={showCurrentPassword ? "text" : "password"}
+                      autoComplete="current-password"
+                      required
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="pl-9 pr-9 text-xs"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
+                      {showCurrentPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* New Password */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="newPassword"
+                    className="block text-xs font-medium text-foreground/80"
+                  >
+                    {hasPassword ? "New Password" : "Password"}
+                  </label>
+                  {newPassword && (
+                    <span className="text-[11px] font-medium text-muted-foreground">
+                      {strengthLabels[strength - 1] || "Too short"}
+                    </span>
+                  )}
+                </div>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
+                    <Lock className="size-4" />
+                  </div>
+                  <Input
+                    id="newPassword"
+                    type={showNewPassword ? "text" : "password"}
+                    autoComplete="new-password"
+                    required
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="At least 8 characters"
+                    className="pl-9 pr-9 text-xs"
                   />
-                ))}
-              </div>
-            )}
-          </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                  >
+                    {showNewPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                  </button>
+                </div>
 
-          {/* Confirm Password */}
-          <div className="space-y-1.5">
-            <label
-              htmlFor="confirmPassword"
-              className="block text-xs font-medium text-foreground/80"
-            >
-              Confirm {hasPassword ? "New Password" : "Password"}
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
-                <Lock className="size-4" />
+                {/* Password Strength Meter */}
+                {newPassword && (
+                  <div className="grid grid-cols-4 gap-1.5 pt-1">
+                    {[0, 1, 2, 3].map((step) => (
+                      <div
+                        key={step}
+                        className={`h-1 rounded-sm transition-all duration-300 ${
+                          strength > step ? strengthColors[strength - 1] : "bg-muted"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
-              <Input
-                id="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
-                autoComplete="new-password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="••••••••"
-                className="pl-9 pr-9 text-xs"
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-              >
-                {showConfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-              </button>
-            </div>
-          </div>
 
-          {/* Actions */}
-          <div className="flex items-center justify-end gap-2 pt-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={handleClose}
-              disabled={isSaving}
-              className="text-xs cursor-pointer"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              size="sm"
-              disabled={isSaving}
-              className="text-xs flex items-center gap-1.5 cursor-pointer"
-            >
-              {isSaving ? (
-                <>
-                  <Loader2 className="size-3.5 animate-spin" />
-                  <span>Saving...</span>
-                </>
-              ) : success ? (
-                <>
-                  <Check className="size-3.5" />
-                  <span>Saved</span>
-                </>
-              ) : (
-                <>
-                  <Sparkles className="size-3.5" />
-                  <span>{hasPassword ? "Update Password" : "Set Password"}</span>
-                </>
-              )}
-            </Button>
-          </div>
-        </form>
-      </motion.div>
-    </div>
+              {/* Confirm Password */}
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-xs font-medium text-foreground/80"
+                >
+                  Confirm {hasPassword ? "New Password" : "Password"}
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
+                    <Lock className="size-4" />
+                  </div>
+                  <Input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    autoComplete="new-password"
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="pl-9 pr-9 text-xs"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                  >
+                    {showConfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-border/40">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleClose}
+                  disabled={isSaving}
+                  className="text-xs cursor-pointer"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  size="sm"
+                  disabled={isSaving}
+                  className="text-xs flex items-center gap-1.5 cursor-pointer"
+                >
+                  {isSaving ? (
+                    <>
+                      <Loader2 className="size-3.5 animate-spin" />
+                      <span>Saving...</span>
+                    </>
+                  ) : success ? (
+                    <>
+                      <Check className="size-3.5" />
+                      <span>Saved</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="size-3.5" />
+                      <span>{hasPassword ? "Update Password" : "Set Password"}</span>
+                    </>
+                  )}
+                </Button>
+              </div>
+            </form>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
