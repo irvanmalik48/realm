@@ -24,20 +24,36 @@ import {
   Link as LinkIcon,
   Sparkles,
   ShieldAlert,
+  Camera,
+  Upload,
+  Trash2,
+  Globe,
+  Crop,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
+import { AvatarCropDialog } from "@/components/avatar-crop-dialog";
 
 export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
-  const { user, isLoading, updateProfile, setPassword, unlinkOAuth, refresh } = useAuth();
+  const { user, isLoading, updateProfile, uploadAvatar, setPassword, unlinkOAuth, refresh } = useAuth();
   const searchParams = useSearchParams();
-  const [isEditing, setIsEditing] = useState(false);
+
+  // Full Name Editing State
+  const [isEditingName, setIsEditingName] = useState(false);
   const [fullName, setFullName] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isSavingName, setIsSavingName] = useState(false);
+  const [nameSuccess, setNameSuccess] = useState(false);
+  const [nameError, setNameError] = useState<string | null>(null);
+
+  // Avatar Management State
+  const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
+  const [isAvatarOptionsOpen, setIsAvatarOptionsOpen] = useState(false);
+  const [customAvatarUrl, setCustomAvatarUrl] = useState("");
+  const [isSavingAvatar, setIsSavingAvatar] = useState(false);
+  const [avatarError, setAvatarError] = useState<string | null>(null);
+  const [avatarSuccess, setAvatarSuccess] = useState<string | null>(null);
 
   // Password Management State
   const [currentPassword, setCurrentPassword] = useState("");
@@ -130,25 +146,113 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         .toUpperCase()
     : user.username.slice(0, 2).toUpperCase();
 
-  const handleSaveProfile = async () => {
+  const handleSaveName = async () => {
     if (!fullName.trim()) return;
-    setIsSaving(true);
-    setError(null);
-    setSaveSuccess(false);
+    setIsSavingName(true);
+    setNameError(null);
+    setNameSuccess(false);
 
     try {
       const res = await updateProfile({ full_name: fullName.trim() });
       if (!res.success) {
-        setError(res.error || "Failed to update profile");
+        setNameError(res.error || "Failed to update full name");
       } else {
-        setSaveSuccess(true);
-        setIsEditing(false);
-        setTimeout(() => setSaveSuccess(false), 3000);
+        setNameSuccess(true);
+        setIsEditingName(false);
+        setTimeout(() => setNameSuccess(false), 3000);
       }
     } catch {
-      setError("Network error occurred");
+      setNameError("Network error occurred");
     } finally {
-      setIsSaving(false);
+      setIsSavingName(false);
+    }
+  };
+
+  const handleCropComplete = async (croppedFile: File) => {
+    setIsSavingAvatar(true);
+    setAvatarError(null);
+    setAvatarSuccess(null);
+
+    try {
+      const res = await uploadAvatar(croppedFile);
+      if (!res.success) {
+        setAvatarError(res.error || "Failed to upload avatar");
+      } else {
+        setAvatarSuccess("Profile picture updated successfully!");
+        setIsCropDialogOpen(false);
+        setTimeout(() => setAvatarSuccess(null), 3000);
+      }
+    } catch {
+      setAvatarError("Network error during avatar upload");
+    } finally {
+      setIsSavingAvatar(false);
+    }
+  };
+
+  const handleSyncAvatar = async (avatarUrl: string, providerName: string) => {
+    setIsSavingAvatar(true);
+    setAvatarError(null);
+    setAvatarSuccess(null);
+
+    try {
+      const res = await updateProfile({ avatar_url: avatarUrl });
+      if (!res.success) {
+        setAvatarError(res.error || `Failed to sync avatar from ${providerName}`);
+      } else {
+        setAvatarSuccess(`Profile picture synced with ${providerName}!`);
+        setIsAvatarOptionsOpen(false);
+        setTimeout(() => setAvatarSuccess(null), 3000);
+      }
+    } catch {
+      setAvatarError("Network error during avatar sync");
+    } finally {
+      setIsSavingAvatar(false);
+    }
+  };
+
+  const handleSetCustomUrl = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!customAvatarUrl.trim()) return;
+
+    setIsSavingAvatar(true);
+    setAvatarError(null);
+    setAvatarSuccess(null);
+
+    try {
+      const res = await updateProfile({ avatar_url: customAvatarUrl.trim() });
+      if (!res.success) {
+        setAvatarError(res.error || "Failed to set avatar URL");
+      } else {
+        setAvatarSuccess("Profile picture updated successfully!");
+        setCustomAvatarUrl("");
+        setIsAvatarOptionsOpen(false);
+        setTimeout(() => setAvatarSuccess(null), 3000);
+      }
+    } catch {
+      setAvatarError("Network error setting avatar URL");
+    } finally {
+      setIsSavingAvatar(false);
+    }
+  };
+
+  const handleRemoveAvatar = async () => {
+    setIsSavingAvatar(true);
+    setAvatarError(null);
+    setAvatarSuccess(null);
+
+    try {
+      const res = await updateProfile({ avatar_url: "" });
+      if (!res.success) {
+        setAvatarError(res.error || "Failed to remove avatar");
+      } else {
+        setAvatarSuccess("Profile picture removed. Reverted to default initials.");
+        setIsAvatarOptionsOpen(false);
+        setTimeout(() => setAvatarSuccess(null), 3000);
+      }
+    } catch {
+      setAvatarError("Network error removing avatar");
+    } finally {
+      setIsSavingAvatar(false);
     }
   };
 
@@ -241,8 +345,19 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     user.provider === "github" ||
     (user.connected_providers && user.connected_providers.includes("github"));
 
+  const googleAccount = user.connected_accounts?.find((a) => a.provider === "google");
+  const githubAccount = user.connected_accounts?.find((a) => a.provider === "github");
+
   return (
     <div className="p-5 sm:p-6 space-y-6">
+      {/* Cropper Modal with Drag and Drop */}
+      <AvatarCropDialog
+        isOpen={isCropDialogOpen}
+        onClose={() => setIsCropDialogOpen(false)}
+        onCropComplete={handleCropComplete}
+        isUploading={isSavingAvatar}
+      />
+
       {/* Post-OAuth Password Setup Notice */}
       <AnimatePresence>
         {!user.has_password && (
@@ -275,16 +390,27 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         )}
       </AnimatePresence>
 
-      {/* Profile Overview */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pb-4 border-b border-border/50">
-        <Avatar className="size-16 border-2 border-border/80 ring-2 ring-primary/20 shadow-md">
-          {user.avatar_url ? (
-            <AvatarImage src={user.avatar_url} alt={user.full_name || user.username} />
-          ) : null}
-          <AvatarFallback className="text-lg font-bold bg-primary/10 text-primary">
-            {initials}
-          </AvatarFallback>
-        </Avatar>
+      {/* Profile Overview with Interactive Avatar */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-5 border-b border-border/50">
+        <div className="relative group">
+          <Avatar className="size-20 border-2 border-border/80 ring-2 ring-primary/20 shadow-md transition-transform group-hover:scale-102">
+            {user.avatar_url ? (
+              <AvatarImage src={user.avatar_url} alt={user.full_name || user.username} />
+            ) : null}
+            <AvatarFallback className="text-xl font-bold bg-primary/10 text-primary">
+              {initials}
+            </AvatarFallback>
+          </Avatar>
+          <button
+            type="button"
+            onClick={() => setIsCropDialogOpen(true)}
+            aria-label="Change profile picture"
+            className="absolute inset-0 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 cursor-pointer"
+          >
+            <Camera className="size-5" />
+            <span className="text-[10px] font-medium">Edit</span>
+          </button>
+        </div>
 
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
@@ -311,8 +437,161 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
             )}
           </div>
           <p className="text-xs text-muted-foreground mt-0.5">@{user.username}</p>
+
+          <div className="flex flex-wrap items-center gap-2 mt-2">
+            <Button
+              variant="default"
+              size="sm"
+              onClick={() => setIsCropDialogOpen(true)}
+              className="text-xs h-7 px-2.5 flex items-center gap-1.5 cursor-pointer shadow-xs"
+            >
+              <Crop className="size-3.5" />
+              <span>Upload & Crop</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsAvatarOptionsOpen(!isAvatarOptionsOpen)}
+              className="text-xs h-7 px-2.5 flex items-center gap-1.5 cursor-pointer"
+            >
+              <Camera className="size-3.5" />
+              <span>More Options</span>
+            </Button>
+          </div>
         </div>
       </div>
+
+      {/* Avatar Options Drawer/Panel */}
+      <AnimatePresence>
+        {isAvatarOptionsOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, y: -6 }}
+            animate={{ opacity: 1, height: "auto", y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -6 }}
+            className="overflow-hidden"
+          >
+            <div className="p-4 rounded-xl border border-primary/30 bg-muted/30 space-y-4">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                  <Camera className="size-3.5 text-primary" />
+                  Additional Avatar Options
+                </h4>
+                <button
+                  type="button"
+                  onClick={() => setIsAvatarOptionsOpen(false)}
+                  className="text-xs text-muted-foreground hover:text-foreground cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+
+              {avatarError && (
+                <div className="p-2.5 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
+                  <AlertCircle className="size-3.5 shrink-0" />
+                  <span>{avatarError}</span>
+                </div>
+              )}
+
+              {avatarSuccess && (
+                <div className="p-2.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
+                  <Check className="size-3.5 shrink-0" />
+                  <span>{avatarSuccess}</span>
+                </div>
+              )}
+
+              {/* Sync and Action Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {/* Sync from Google */}
+                {isGoogleConnected && googleAccount?.avatar_url && (
+                  <button
+                    type="button"
+                    onClick={() => handleSyncAvatar(googleAccount.avatar_url!, "Google")}
+                    disabled={isSavingAvatar}
+                    className="p-3 rounded-lg border border-blue-500/30 bg-blue-500/5 hover:bg-blue-500/10 text-foreground transition-all flex items-center gap-3 text-left cursor-pointer group"
+                  >
+                    <Avatar className="size-8 shrink-0 border border-blue-500/30">
+                      <AvatarImage src={googleAccount.avatar_url} />
+                      <AvatarFallback>G</AvatarFallback>
+                    </Avatar>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-medium flex items-center gap-1">
+                        <GoogleLogo className="size-3" />
+                        Sync Google
+                      </p>
+                      <p className="text-[10px] text-muted-foreground truncate">Use Google avatar</p>
+                    </div>
+                  </button>
+                )}
+
+                {/* Sync from GitHub */}
+                {isGithubConnected && githubAccount?.avatar_url && (
+                  <button
+                    type="button"
+                    onClick={() => handleSyncAvatar(githubAccount.avatar_url!, "GitHub")}
+                    disabled={isSavingAvatar}
+                    className="p-3 rounded-lg border border-neutral-500/30 bg-neutral-500/5 hover:bg-neutral-500/10 text-foreground transition-all flex items-center gap-3 text-left cursor-pointer group"
+                  >
+                    <Avatar className="size-8 shrink-0 border border-neutral-500/30">
+                      <AvatarImage src={githubAccount.avatar_url} />
+                      <AvatarFallback>GH</AvatarFallback>
+                    </Avatar>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-medium flex items-center gap-1">
+                        <GithubLogo className="size-3" />
+                        Sync GitHub
+                      </p>
+                      <p className="text-[10px] text-muted-foreground truncate">Use GitHub avatar</p>
+                    </div>
+                  </button>
+                )}
+
+                {/* Remove Picture */}
+                {user.avatar_url && (
+                  <button
+                    type="button"
+                    onClick={handleRemoveAvatar}
+                    disabled={isSavingAvatar}
+                    className="p-3 rounded-lg border border-destructive/30 bg-destructive/5 hover:bg-destructive/10 text-destructive transition-all flex items-center gap-3 text-left cursor-pointer group"
+                  >
+                    <div className="size-8 rounded-full bg-destructive/10 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <Trash2 className="size-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-medium">Remove Picture</p>
+                      <p className="text-[10px] text-muted-foreground">Revert back to initials</p>
+                    </div>
+                  </button>
+                )}
+              </div>
+
+              {/* Custom Image URL Input */}
+              <form onSubmit={handleSetCustomUrl} className="pt-2 border-t border-border/40 space-y-2">
+                <label className="text-[11px] font-medium text-muted-foreground flex items-center gap-1">
+                  <Globe className="size-3" />
+                  Or enter direct Image URL:
+                </label>
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="url"
+                    value={customAvatarUrl}
+                    onChange={(e) => setCustomAvatarUrl(e.target.value)}
+                    placeholder="https://example.com/your-avatar.png"
+                    className="text-xs h-8"
+                  />
+                  <Button
+                    type="submit"
+                    size="sm"
+                    disabled={isSavingAvatar || !customAvatarUrl.trim()}
+                    className="h-8 text-xs cursor-pointer shrink-0"
+                  >
+                    {isSavingAvatar ? <Loader2 className="size-3.5 animate-spin" /> : "Apply URL"}
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Account Details Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -323,9 +602,9 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
               <User className="size-3.5" />
               Full Name
             </span>
-            {!isEditing ? (
+            {!isEditingName ? (
               <button
-                onClick={() => setIsEditing(true)}
+                onClick={() => setIsEditingName(true)}
                 className="text-xs text-primary hover:underline flex items-center gap-1 cursor-pointer"
               >
                 <Edit2 className="size-3" />
@@ -334,7 +613,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
             ) : null}
           </div>
 
-          {isEditing ? (
+          {isEditingName ? (
             <div className="space-y-2 mt-1">
               <Input
                 type="text"
@@ -346,19 +625,19 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
               />
               <div className="flex items-center gap-2">
                 <Button
-                  onClick={handleSaveProfile}
-                  disabled={isSaving}
+                  onClick={handleSaveName}
+                  disabled={isSavingName}
                   size="sm"
                   className="cursor-pointer"
                 >
-                  {isSaving ? <Loader2 className="size-3 animate-spin" /> : <Check className="size-3" />}
+                  {isSavingName ? <Loader2 className="size-3 animate-spin" /> : <Check className="size-3" />}
                   Save
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    setIsEditing(false);
+                    setIsEditingName(false);
                     setFullName(user.full_name || "");
                   }}
                   className="cursor-pointer"
@@ -372,10 +651,10 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
               {user.full_name || "Not specified"}
             </p>
           )}
-          {saveSuccess && (
+          {nameSuccess && (
             <p className="text-[11px] text-emerald-500 font-medium">Updated successfully!</p>
           )}
-          {error && <p className="text-[11px] text-destructive">{error}</p>}
+          {nameError && <p className="text-[11px] text-destructive">{nameError}</p>}
         </div>
 
         {/* Email field */}
