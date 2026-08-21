@@ -33,7 +33,7 @@ export interface AuthContextType {
     avatar_url?: string;
   }) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
-  updateProfile: (data: { full_name?: string; avatar_url?: string }) => Promise<{ success: boolean; error?: string }>;
+  updateProfile: (data: { full_name?: string; username?: string; avatar_url?: string }) => Promise<{ success: boolean; error?: string }>;
   uploadAvatar: (file: File) => Promise<{ success: boolean; url?: string; error?: string }>;
   setPassword: (data: { current_password?: string; new_password: string }) => Promise<{ success: boolean; error?: string }>;
   unlinkOAuth: (provider: string) => Promise<{ success: boolean; error?: string }>;
@@ -117,7 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const updateProfile = async (data: { full_name?: string; avatar_url?: string }) => {
+  const updateProfile = async (data: { full_name?: string; username?: string; avatar_url?: string }) => {
     try {
       const res = await fetch("/api/auth/profile", {
         method: "PATCH",
