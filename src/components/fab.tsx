@@ -78,7 +78,7 @@ export function FAB() {
         type="button"
         className={cn(
           "fixed bottom-20 md:bottom-25 flex items-center justify-center",
-          "right-5 md:right-10 z-50 p-3 bg-background hover:bg-secondary rounded-lg",
+          "right-5 md:right-10 z-998 p-3 bg-background hover:bg-secondary rounded-lg",
           "text-foreground hover:text-secondary-foreground cursor-pointer",
           "border border-border transition-all outline-0",
           isScrolled ? "opacity-100" : "opacity-0",
@@ -98,7 +98,7 @@ export function FAB() {
             type="button"
             className={cn(
               "fixed bottom-5 md:bottom-10 flex items-center justify-center",
-              "right-5 z-50 md:right-10 p-3 bg-background hover:bg-secondary rounded-lg",
+              "right-5 z-998 md:right-10 p-3 bg-background hover:bg-secondary rounded-lg",
               "text-foreground hover:text-secondary-foreground cursor-pointer",
               "border border-border transition-colors outline-0",
             )}
@@ -115,7 +115,7 @@ export function FAB() {
         </PopoverTrigger>
         <PopoverContent
           onInteractOutside={handleInteractOutside}
-          className="max-w-3xs sm:max-w-xs md:max-w-sm w-full p-0 overflow-clip"
+          className="z-998 max-w-3xs sm:max-w-xs md:max-w-sm w-full p-0 overflow-clip"
           align="end"
           sideOffset={10}
         >
