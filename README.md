@@ -7,6 +7,7 @@ A modern, high-performance personal portfolio and digital garden built with **Ne
 ## Features
 
 - **Framework & Engine**: [Next.js 16](https://nextjs.org/) with Turbopack and [React 19](https://react.dev/).
+- **Authentication & OIDC (PASETO)**: Complete authentication system supporting **Google OIDC** and **GitHub OAuth2** social login, plus traditional credentials (Email/Username + bcrypt), with tamper-proof **PASETO** tokens managed securely through Next.js BFF proxy routes and `httpOnly` session cookies.
 - **Server Actions Data Fetching**: All external API interactions (`LastFM`, `Contact`, and `Health`) run server-side via Next.js Server Actions with zero browser CORS/CSP overhead and secure credential isolation.
 - **Live Heartbeat Status Pulse**: Homepage real-time API status indicator polling backend `/health` every 20 seconds with animated radar pulses and latency metrics.
 - **Design & Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with custom typography, fluid theme switching via `@wrksz/themes`, and glassmorphic UI elements.
@@ -38,13 +39,16 @@ realm/
 │   ├── actions/                # Next.js Server Actions (lastfm, contact, health)
 │   ├── app/                    # Next.js App Router
 │   │   ├── about/              # About page
+│   │   ├── api/auth/           # Auth BFF proxy handlers (login, register, oauth, me)
 │   │   ├── blog/               # Blog index & dynamic [slug] post pages
-│   │   ├── settings/           # Interactive site settings & preferences
+│   │   ├── login/              # Sign in page with OIDC & credentials
+│   │   ├── register/           # Create account page
+│   │   ├── settings/           # Profile & site preferences
 │   │   ├── globals.css         # Theme tokens, transitions, and root styles
 │   │   └── layout.tsx          # Root layout with providers & metadata
 │   ├── components/             # Reusable UI components & interactive widgets
-│   ├── hooks/                  # Custom React hooks
-│   ├── lib/                    # Utilities, types, and integrations
+│   ├── hooks/                  # Custom React hooks (useAuth, etc.)
+│   ├── lib/                    # Utilities, types, auth context, and integrations
 │   └── env.ts                  # Type-safe environment schema
 ├── .env.example                # Environment variables template
 ├── next.config.ts              # Next.js configuration
