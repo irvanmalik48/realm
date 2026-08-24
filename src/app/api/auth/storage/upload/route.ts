@@ -32,11 +32,13 @@ export async function POST(req: NextRequest) {
     const uploadFormData = new FormData();
     uploadFormData.append("file", file);
 
-    const res = await fetch(`${backendUrl}/v1/storage`, {
+    const headers: Record<string, string> = {
+      Authorization: env.API_TOKEN ? `Bearer ${env.API_TOKEN}` : `Bearer ${token}`,
+    };
+
+    const res = await fetch(`${backendUrl}/v1/storage/upload`, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
       body: uploadFormData,
       cache: "no-store",
     });
