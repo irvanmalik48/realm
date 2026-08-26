@@ -3,6 +3,7 @@
 import marqueeEnable from "@/lib/atoms/marquee";
 import { useAtom } from "jotai";
 import { Switch } from "./ui/switch";
+import { toast } from "@/hooks/use-toast";
 
 export function MarqueeToggle({ searchQuery }: { searchQuery?: string }) {
   const [marquee, setMarquee] = useAtom(marqueeEnable);
@@ -28,7 +29,16 @@ export function MarqueeToggle({ searchQuery }: { searchQuery?: string }) {
         </div>
         <Switch
           checked={marquee}
-          onCheckedChange={(checked) => setMarquee(checked as boolean)}
+          onCheckedChange={(checked) => {
+            const isChecked = checked as boolean;
+            setMarquee(isChecked);
+            toast({
+              title: isChecked ? "Marquee Enabled" : "Marquee Disabled",
+              description: isChecked
+                ? "Footer scrolling marquee animation is active."
+                : "Footer scrolling marquee animation is disabled.",
+            });
+          }}
           aria-label="Toggle marquee"
           disabled={false}
         />
