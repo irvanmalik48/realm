@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DirectionalTransition } from "@/components/directional-transition";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "@/hooks/use-toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,12 +39,29 @@ export default function LoginPage() {
     try {
       const res = await login({ identifier, password });
       if (!res.success) {
-        setError(res.error || "Invalid username/email or password.");
+        const err = res.error || "Invalid username/email or password.";
+        setError(err);
+        toast({
+          variant: "destructive",
+          title: "Sign in failed",
+          description: err,
+        });
       } else {
+        toast({
+          variant: "success",
+          title: "Welcome back!",
+          description: "Signed in successfully.",
+        });
         router.push("/");
       }
     } catch {
-      setError("An unexpected error occurred. Please try again.");
+      const err = "An unexpected error occurred. Please try again.";
+      setError(err);
+      toast({
+        variant: "destructive",
+        title: "Sign in failed",
+        description: err,
+      });
     } finally {
       setIsLoading(false);
     }
