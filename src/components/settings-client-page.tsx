@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import Container from "@/components/container";
 import { ImageComponent } from "@/components/image";
-import { Settings, Search, Sliders, PlayCircle, MousePointer, Activity, User, X, LayoutDashboard } from "lucide-react";
+import { Settings, Search, Sliders, PlayCircle, MousePointer, Activity, User, X } from "lucide-react";
 import CuteImage from "@/assets/img/awoocon.jpg";
 import dynamic from "next/dynamic";
 
@@ -181,16 +180,6 @@ export function SettingsClientPage() {
                 </button>
               );
             })}
-            <div className="pt-2 mt-2 border-t border-border/40">
-              <Link
-                href="/dashboard"
-                prefetch={true}
-                className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md text-muted-foreground hover:bg-muted/50 hover:text-foreground cursor-pointer transition-all"
-              >
-                <LayoutDashboard className="size-4 text-primary" />
-                <span>Dashboard</span>
-              </Link>
-            </div>
           </div>
         </aside>
 
