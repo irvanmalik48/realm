@@ -40,6 +40,20 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    const backendUrl =
+      process.env.API_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      (process.env.NODE_ENV === "development"
+        ? "http://localhost:8080"
+        : "https://api.irvanma.eu.org");
+    return [
+      {
+        source: "/v1/storage/:path*",
+        destination: `${backendUrl}/v1/storage/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
