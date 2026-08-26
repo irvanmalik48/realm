@@ -22,7 +22,10 @@ export async function GET(request: NextRequest) {
 
     const data = await res.json();
     return NextResponse.json(data, { status: res.status });
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.digest === "NEXT_PRERENDER_INTERRUPTED" || error?.message?.includes("bail out of prerendering")) {
+      throw error;
+    }
     console.error("Availability check proxy error:", error);
     return NextResponse.json(
       { error: "Failed to check availability" },
