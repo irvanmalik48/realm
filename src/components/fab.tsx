@@ -142,6 +142,7 @@ export function FAB() {
           <Link
             className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
             href="/"
+            prefetch={true}
             transitionTypes={["nav-back"]}
           >
             <Home className="size-4" />
@@ -153,6 +154,7 @@ export function FAB() {
           <Link
             className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
             href="/blog"
+            prefetch={true}
             transitionTypes={["nav-forward"]}
           >
             <Newspaper className="size-4" />
@@ -165,6 +167,7 @@ export function FAB() {
           <Link
             className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
             href="/settings"
+            prefetch={true}
             transitionTypes={["nav-forward"]}
           >
             <Settings className="size-4" />
@@ -176,6 +179,7 @@ export function FAB() {
           <Link
             className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
             href="/about"
+            prefetch={true}
             transitionTypes={["nav-forward"]}
           >
             <Info className="size-4" />
@@ -227,6 +231,7 @@ export function FAB() {
             <div className="flex items-center justify-between gap-3 px-4 py-2.5 bg-background hover:bg-secondary/40 transition-colors">
               <Link
                 href="/settings"
+                prefetch={true}
                 className="flex items-center gap-2.5 min-w-0 flex-1 group cursor-pointer"
               >
                 <Avatar className="size-7 border border-border shrink-0">
@@ -269,6 +274,7 @@ export function FAB() {
             <Link
               className="group relative text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
               href="/login"
+              prefetch={true}
               transitionTypes={["nav-forward"]}
             >
               <LogIn className="size-4" />
