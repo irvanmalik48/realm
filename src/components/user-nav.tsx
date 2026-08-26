@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogIn, LogOut, Settings, User as UserIcon, LayoutDashboard } from "lucide-react";
+import { LogIn, LogOut, Settings, User as UserIcon } from "lucide-react";
 import { GoogleLogo } from "@/components/logos/google";
 import { GithubLogo } from "@/components/logos/github";
 import { toast } from "@/hooks/use-toast";
@@ -27,62 +27,49 @@ export function UserNav() {
 
   if (isLoading) {
     return (
-      <div className="w-8 h-8 rounded-full bg-muted/60 animate-pulse border border-border/50" />
+      <div className="w-8 h-8 rounded-full bg-muted/60 animate-pulse border border-border" />
     );
   }
 
   if (!user) {
     return (
-      <div className="flex items-center gap-2">
-        <Link
-          href="/login"
-          className="text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-md border border-border/60 bg-background/50 hover:bg-muted/80 text-foreground transition-all duration-200 flex items-center gap-1.5"
-        >
-          <LogIn className="size-3.5" />
-          <span>Sign in</span>
-        </Link>
-      </div>
+      <Link
+        href="/login"
+        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full border border-border/80 transition-all cursor-pointer"
+      >
+        <LogIn className="w-3.5 h-3.5" />
+        <span>Sign in</span>
+      </Link>
     );
   }
 
-  const initials = user.full_name
-    ? user.full_name
-        .split(" ")
-        .map((n) => n[0])
-        .slice(0, 2)
-        .join("")
-        .toUpperCase()
-    : user.username.slice(0, 2).toUpperCase();
+  const initials = (user.full_name || user.username || "U")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-full p-0.5 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-transform active:scale-95"
-        aria-label="User profile menu"
+        className="flex items-center gap-2 p-0.5 rounded-full hover:ring-2 hover:ring-primary/40 transition-all focus:outline-hidden cursor-pointer"
+        aria-label="User navigation menu"
       >
-        <Avatar className="w-8 h-8 border border-border/80 ring-1 ring-primary/20 shadow-sm cursor-pointer">
-          {user.avatar_url ? (
-            <AvatarImage src={user.avatar_url} alt={user.full_name || user.username} />
-          ) : null}
-          <AvatarFallback className="text-xs font-semibold bg-primary/10 text-primary">
+        <Avatar className="w-8 h-8 border border-border">
+          <AvatarImage src={user.avatar_url || undefined} alt={user.full_name || user.username} />
+          <AvatarFallback className="text-xs font-medium bg-primary/10 text-primary">
             {initials}
           </AvatarFallback>
         </Avatar>
       </button>
 
       {isOpen && (
-        <div
-          className="absolute right-0 mt-2 w-64 rounded-2xl bg-background/95 backdrop-blur-xl border border-border shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150"
-        >
+        <div className="absolute right-0 mt-2 w-64 p-1.5 bg-popover text-popover-foreground border border-border rounded-xl shadow-xl z-50 animate-in fade-in zoom-in-95 duration-150">
           {/* User Info Header */}
           <div className="px-3 py-2.5 border-b border-border/50">
-            <div className="flex items-center gap-3">
-              <Avatar className="w-10 h-10 border border-border/60">
-                {user.avatar_url ? (
-                  <AvatarImage src={user.avatar_url} alt={user.full_name || user.username} />
-                ) : null}
-                <AvatarFallback className="text-sm font-semibold bg-primary/15 text-primary">
+            <div className="flex items-center gap-2.5">
+              <Avatar className="w-9 h-9 border border-border shrink-0">
+                <AvatarImage src={user.avatar_url || undefined} alt={user.full_name || user.username} />
+                <AvatarFallback className="text-xs font-medium bg-primary/10 text-primary">
                   {initials}
                 </AvatarFallback>
               </Avatar>
@@ -108,15 +95,6 @@ export function UserNav() {
 
           {/* Navigation Links */}
           <div className="py-1">
-            <Link
-              href="/dashboard"
-              prefetch={true}
-              onClick={() => setIsOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 text-xs text-foreground/90 hover:text-foreground hover:bg-muted/80 rounded-lg transition-colors"
-            >
-              <LayoutDashboard className="w-4 h-4 text-muted-foreground" />
-              <span>Dashboard</span>
-            </Link>
             <Link
               href="/settings"
               onClick={() => setIsOpen(false)}
