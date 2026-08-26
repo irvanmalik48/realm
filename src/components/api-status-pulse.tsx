@@ -26,17 +26,28 @@ function formatUptime(seconds: number): string {
   return `${days}d ${hours % 24}h`;
 }
 
+const initialHistory: HeartbeatPoint[] = Array.from({ length: TOTAL_BARS }, (_, i) => ({
+  id: i,
+  status: "healthy",
+  latency_ms: 18 + Math.floor(Math.sin(i * 0.5) * 8),
+  timestamp: "2026-01-01T00:00:00.000Z",
+}));
+
 export function APIStatusPulse() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [history, setHistory] = useState<HeartbeatPoint[]>(() => {
+  const [history, setHistory] = useState<HeartbeatPoint[]>(initialHistory);
+
+  useEffect(() => {
     const now = Date.now();
-    return Array.from({ length: TOTAL_BARS }, (_, i) => ({
-      id: i,
-      status: "healthy",
-      latency_ms: 18 + Math.floor(Math.sin(i * 0.5) * 8),
-      timestamp: new Date(now - (TOTAL_BARS - i) * 20000).toISOString(),
-    }));
-  });
+    setHistory(
+      Array.from({ length: TOTAL_BARS }, (_, i) => ({
+        id: i,
+        status: "healthy",
+        latency_ms: 18 + Math.floor(Math.sin(i * 0.5) * 8),
+        timestamp: new Date(now - (TOTAL_BARS - i) * 20000).toISOString(),
+      }))
+    );
+  }, []);
 
   const { data, isFetching, refetch } = useQuery({
     queryKey: ["api-health"],
@@ -67,7 +78,7 @@ export function APIStatusPulse() {
     service: "realm-api",
     version: "1.0.0",
     uptime_seconds: 0,
-    timestamp: new Date().toISOString(),
+    timestamp: "2026-01-01T00:00:00.000Z",
     database: "connected",
     latency_ms: 0,
   };
