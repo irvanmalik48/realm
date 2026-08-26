@@ -21,6 +21,7 @@ export function PostCard(props: MotionPostCardProps) {
   return (
     <MotionLink
       href={`/blog/${props.slug}`}
+      prefetch={true}
       transitionTypes={["nav-forward"]}
       className={`flex flex-col w-full bg-secondary/20 rounded-md border border-border ${className}`}
       {...motionProps}
