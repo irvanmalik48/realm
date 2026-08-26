@@ -34,6 +34,7 @@ import { useSearchParams } from "next/navigation";
 import { AvatarCropDialog } from "@/components/avatar-crop-dialog";
 import { PasswordDialog } from "@/components/password-dialog";
 import { EditProfileDialog } from "@/components/edit-profile-dialog";
+import { toast } from "@/hooks/use-toast";
 
 export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const { user, isLoading, updateProfile, uploadAvatar, unlinkOAuth, refresh } = useAuth();
@@ -65,6 +66,11 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     if (linked) {
       const providerName = linked === "google" ? "Google" : linked === "github" ? "GitHub" : linked;
       setOauthSuccess(`${providerName} account linked successfully!`);
+      toast({
+        variant: "success",
+        title: "Account linked",
+        description: `${providerName} account linked successfully!`,
+      });
       refresh();
       window.history.replaceState({}, "", window.location.pathname);
       const timer = setTimeout(() => setOauthSuccess(null), 4000);
@@ -72,7 +78,13 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     }
 
     if (err) {
-      setOauthError(err.replace(/\+/g, " "));
+      const errMsg = err.replace(/\+/g, " ");
+      setOauthError(errMsg);
+      toast({
+        variant: "destructive",
+        title: "OAuth connection error",
+        description: errMsg,
+      });
       window.history.replaceState({}, "", window.location.pathname);
       const timer = setTimeout(() => setOauthError(null), 5000);
       return () => clearTimeout(timer);
@@ -135,14 +147,30 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     try {
       const res = await uploadAvatar(croppedFile);
       if (!res.success) {
-        setAvatarError(res.error || "Failed to upload avatar");
+        const err = res.error || "Failed to upload avatar";
+        setAvatarError(err);
+        toast({
+          variant: "destructive",
+          title: "Upload failed",
+          description: err,
+        });
       } else {
         setAvatarSuccess("Profile picture updated successfully!");
+        toast({
+          variant: "success",
+          title: "Avatar updated",
+          description: "Your profile picture has been updated.",
+        });
         setIsCropDialogOpen(false);
         setTimeout(() => setAvatarSuccess(null), 3000);
       }
     } catch {
       setAvatarError("Network error during avatar upload");
+      toast({
+        variant: "destructive",
+        title: "Upload failed",
+        description: "Network error during avatar upload.",
+      });
     } finally {
       setIsSavingAvatar(false);
     }
@@ -156,14 +184,30 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     try {
       const res = await updateProfile({ avatar_url: avatarUrl });
       if (!res.success) {
-        setAvatarError(res.error || `Failed to sync avatar from ${providerName}`);
+        const err = res.error || `Failed to sync avatar from ${providerName}`;
+        setAvatarError(err);
+        toast({
+          variant: "destructive",
+          title: "Sync failed",
+          description: err,
+        });
       } else {
         setAvatarSuccess(`Profile picture synced with ${providerName}!`);
+        toast({
+          variant: "success",
+          title: "Avatar synced",
+          description: `Profile picture synced with ${providerName}.`,
+        });
         setIsAvatarOptionsOpen(false);
         setTimeout(() => setAvatarSuccess(null), 3000);
       }
     } catch {
       setAvatarError("Network error during avatar sync");
+      toast({
+        variant: "destructive",
+        title: "Sync failed",
+        description: "Network error during avatar sync.",
+      });
     } finally {
       setIsSavingAvatar(false);
     }
@@ -180,15 +224,31 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     try {
       const res = await updateProfile({ avatar_url: customAvatarUrl.trim() });
       if (!res.success) {
-        setAvatarError(res.error || "Failed to set avatar URL");
+        const err = res.error || "Failed to set avatar URL";
+        setAvatarError(err);
+        toast({
+          variant: "destructive",
+          title: "Update failed",
+          description: err,
+        });
       } else {
         setAvatarSuccess("Profile picture updated successfully!");
+        toast({
+          variant: "success",
+          title: "Avatar updated",
+          description: "Profile picture URL applied successfully.",
+        });
         setCustomAvatarUrl("");
         setIsAvatarOptionsOpen(false);
         setTimeout(() => setAvatarSuccess(null), 3000);
       }
     } catch {
       setAvatarError("Network error setting avatar URL");
+      toast({
+        variant: "destructive",
+        title: "Update failed",
+        description: "Network error setting avatar URL.",
+      });
     } finally {
       setIsSavingAvatar(false);
     }
@@ -202,14 +262,29 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     try {
       const res = await updateProfile({ avatar_url: "" });
       if (!res.success) {
-        setAvatarError(res.error || "Failed to remove avatar");
+        const err = res.error || "Failed to remove avatar";
+        setAvatarError(err);
+        toast({
+          variant: "destructive",
+          title: "Removal failed",
+          description: err,
+        });
       } else {
         setAvatarSuccess("Profile picture removed. Reverted to default initials.");
+        toast({
+          title: "Avatar removed",
+          description: "Reverted to default initials.",
+        });
         setIsAvatarOptionsOpen(false);
         setTimeout(() => setAvatarSuccess(null), 3000);
       }
     } catch {
       setAvatarError("Network error removing avatar");
+      toast({
+        variant: "destructive",
+        title: "Removal failed",
+        description: "Network error removing avatar.",
+      });
     } finally {
       setIsSavingAvatar(false);
     }
@@ -223,13 +298,30 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
     try {
       const res = await unlinkOAuth(provider);
       if (!res.success) {
-        setOauthError(res.error || `Failed to disconnect ${provider}`);
+        const err = res.error || `Failed to disconnect ${provider}`;
+        setOauthError(err);
+        toast({
+          variant: "destructive",
+          title: "Disconnection failed",
+          description: err,
+        });
       } else {
-        setOauthSuccess(`${provider.charAt(0).toUpperCase() + provider.slice(1)} disconnected successfully.`);
+        const msg = `${provider.charAt(0).toUpperCase() + provider.slice(1)} disconnected successfully.`;
+        setOauthSuccess(msg);
+        toast({
+          variant: "success",
+          title: "Account disconnected",
+          description: msg,
+        });
         setTimeout(() => setOauthSuccess(null), 3000);
       }
     } catch {
       setOauthError("Network error occurred");
+      toast({
+        variant: "destructive",
+        title: "Disconnection failed",
+        description: "Network error occurred.",
+      });
     } finally {
       setUnlinkingProvider(null);
     }
