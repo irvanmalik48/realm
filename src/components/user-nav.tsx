@@ -35,6 +35,7 @@ export function UserNav() {
     return (
       <Link
         href="/login"
+        prefetch={true}
         className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full border border-border/80 transition-all cursor-pointer"
       >
         <LogIn className="w-3.5 h-3.5" />
@@ -97,6 +98,7 @@ export function UserNav() {
           <div className="py-1">
             <Link
               href="/settings"
+              prefetch={true}
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-2.5 px-3 py-2 text-xs text-foreground/90 hover:text-foreground hover:bg-muted/80 rounded-lg transition-colors"
             >
