@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dialog";
 import { submitContactFormAction, getClientIpAction } from "@/actions/contact";
 import { cn } from "@/lib/utils";
+import { toast } from "@/hooks/use-toast";
 
 interface ClientTelemetry {
   ip: string;
@@ -120,9 +121,20 @@ export function ContactForm() {
 
         if (result.success) {
           setIsSuccess(true);
+          toast({
+            variant: "success",
+            title: "Message Sent!",
+            description: "Your message has been received successfully.",
+          });
         }
       } catch (err: any) {
-        setErrorMessage(err.message || "An unexpected error occurred. Please try again.");
+        const msg = err.message || "An unexpected error occurred. Please try again.";
+        setErrorMessage(msg);
+        toast({
+          variant: "destructive",
+          title: "Submission failed",
+          description: msg,
+        });
       }
     },
   });
