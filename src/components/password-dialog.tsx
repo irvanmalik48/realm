@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import { Portal } from "@/components/ui/portal";
+import { toast } from "@/hooks/use-toast";
 
 interface PasswordDialogProps {
   isOpen: boolean;
@@ -97,15 +98,34 @@ export function PasswordDialog({
       });
 
       if (!res.success) {
-        setError(res.error || "Failed to update password.");
+        const err = res.error || "Failed to update password.";
+        setError(err);
+        toast({
+          variant: "destructive",
+          title: "Password update failed",
+          description: err,
+        });
       } else {
         setSuccess(true);
+        toast({
+          variant: "success",
+          title: "Password saved",
+          description: hasPassword
+            ? "Your password has been changed successfully."
+            : "Your password has been set successfully.",
+        });
         setTimeout(() => {
           handleClose();
         }, 1200);
       }
     } catch {
-      setError("An unexpected error occurred. Please try again.");
+      const err = "An unexpected error occurred. Please try again.";
+      setError(err);
+      toast({
+        variant: "destructive",
+        title: "Password update failed",
+        description: err,
+      });
     } finally {
       setIsSaving(false);
     }
