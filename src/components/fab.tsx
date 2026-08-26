@@ -26,6 +26,7 @@ import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai";
 import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { toast } from "@/hooks/use-toast";
 
 const handleInteractOutside = (e: Event) => {
   e.preventDefault();
@@ -250,7 +251,13 @@ export function FAB() {
               </Link>
               <button
                 type="button"
-                onClick={() => logout()}
+                onClick={async () => {
+                  toast({
+                    title: "Signed out",
+                    description: "You have been signed out.",
+                  });
+                  await logout();
+                }}
                 className="text-muted-foreground hover:text-destructive p-1.5 rounded-md hover:bg-muted/80 transition-colors cursor-pointer shrink-0"
                 title="Sign out"
                 aria-label="Sign out"
