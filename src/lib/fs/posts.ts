@@ -51,6 +51,7 @@ export const getMarkdownFromSlug = async (
     }
   | undefined
 > => {
+  "use cache";
   const sanitizedSlug = path.basename(slug);
   const filename = `${sanitizedSlug}.mdx` as const;
 
