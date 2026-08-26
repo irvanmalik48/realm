@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import { Portal } from "@/components/ui/portal";
+import { toast } from "@/hooks/use-toast";
 
 interface EditProfileDialogProps {
   isOpen: boolean;
@@ -156,15 +157,32 @@ export function EditProfileDialog({
 
       const res = await updateProfile(updateData);
       if (!res.success) {
-        setError(res.error || "Failed to update profile details.");
+        const err = res.error || "Failed to update profile details.";
+        setError(err);
+        toast({
+          variant: "destructive",
+          title: "Update failed",
+          description: err,
+        });
       } else {
         setSuccess(true);
+        toast({
+          variant: "success",
+          title: "Profile updated",
+          description: "Your profile details have been saved successfully.",
+        });
         setTimeout(() => {
           onClose();
         }, 1200);
       }
     } catch {
-      setError("An unexpected error occurred. Please try again.");
+      const err = "An unexpected error occurred. Please try again.";
+      setError(err);
+      toast({
+        variant: "destructive",
+        title: "Update failed",
+        description: err,
+      });
     } finally {
       setIsSaving(false);
     }
