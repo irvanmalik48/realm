@@ -225,6 +225,7 @@ export default function LoginPage() {
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
+                  prefetch={true}
                   transitionTypes={["nav-forward"]}
                   className="font-medium text-foreground hover:underline transition-colors"
                 >
