@@ -19,6 +19,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import Image from "next/image";
 import Hero from "@/assets/img/fab-hero.png";
@@ -39,16 +40,20 @@ const handleScrollToTop = () => {
   });
 };
 
+const mainNavItems = [
+  { href: "/", label: "Home", icon: Home, transitionType: "nav-back" },
+  { href: "/blog", label: "Blog", icon: Newspaper, transitionType: "nav-forward" },
+  { href: "/settings", label: "Settings", icon: Settings, transitionType: "nav-forward" },
+  { href: "/about", label: "About", icon: Info, transitionType: "nav-forward" },
+];
+
 export function FAB() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [performanceMode] = useAtom(performanceModeAtom);
   const { user, logout } = useAuth();
-
-  const handleOpen = () => {
-    setOpen((prev) => !prev);
-  };
+  const pathname = usePathname();
 
   useEffect(() => {
     const trackScroll = () => {
@@ -56,11 +61,13 @@ export function FAB() {
     };
 
     window.addEventListener("scroll", trackScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", trackScroll);
-    };
+    return () => window.removeEventListener("scroll", trackScroll);
   }, []);
+
+  // Close popover when pathname changes
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   const initials = user
     ? user.full_name
@@ -82,18 +89,20 @@ export function FAB() {
           "right-5 md:right-10 z-998 p-3 bg-background hover:bg-secondary rounded-lg",
           "text-foreground hover:text-secondary-foreground cursor-pointer",
           "border border-border transition-all outline-0",
-          isScrolled ? "opacity-100" : "opacity-0",
+          isScrolled ? "opacity-100" : "opacity-0 pointer-events-none",
           open
             ? "translate-y-15 -translate-x-15"
             : "translate-y-0 translate-x-0",
         )}
         onClick={handleScrollToTop}
         style={{ viewTransitionName: "site-fab-scroll-top" }}
+        aria-label="Scroll to top"
       >
         <ArrowUp className="size-6" />
         <span className="sr-only">Scroll to top</span>
       </button>
-      <Popover onOpenChange={handleOpen}>
+
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <button
             type="button"
@@ -104,19 +113,21 @@ export function FAB() {
               "border border-border transition-colors outline-0",
             )}
             style={{ viewTransitionName: "site-fab" }}
+            aria-label="Open navigation menu"
+            aria-expanded={open}
           >
             <X
               className={cn(
-                "size-6 transition-transform",
+                "size-6 transition-transform duration-200",
                 open ? "rotate-0" : "rotate-45",
               )}
             />
-            <span className="sr-only">Open FAB menu</span>
+            <span className="sr-only">Toggle FAB menu</span>
           </button>
         </PopoverTrigger>
         <PopoverContent
           onInteractOutside={handleInteractOutside}
-          className="z-998 max-w-3xs sm:max-w-xs md:max-w-sm w-full p-0 overflow-clip"
+          className="z-998 max-w-3xs sm:max-w-xs md:max-w-sm w-full p-0 overflow-clip rounded-xl shadow-2xl border-border/80"
           align="end"
           sideOffset={10}
         >
@@ -133,86 +144,76 @@ export function FAB() {
               } transition-all ease-[cubic-bezier(0.22,1,0.36,1)] duration-500`}
             />
           </div>
-          <h3 className="w-full flex items-center gap-3 bg-muted/20 px-4 py-2 border-b border-border font-bold">
-            <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
-              <GitGraph className="size-4" />
-            </span>
-            <span>realm. (v9.0.0)</span>
-          </h3>
-          <Link
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="/"
-            prefetch={true}
-            transitionTypes={["nav-back"]}
-          >
-            <Home className="size-4" />
-            <span>Home</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </Link>
-          <Link
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="/blog"
-            prefetch={true}
-            transitionTypes={["nav-forward"]}
-          >
-            <Newspaper className="size-4" />
-            <span>Blog</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </Link>
 
-          <Link
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="/settings"
-            prefetch={true}
-            transitionTypes={["nav-forward"]}
-          >
-            <Settings className="size-4" />
-            <span>Settings</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </Link>
-          <Link
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
-            href="/about"
-            prefetch={true}
-            transitionTypes={["nav-forward"]}
-          >
-            <Info className="size-4" />
-            <span>About</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-              <ArrowRight className="size-4" />
-            </div>
-          </Link>
-          <h3 className="w-full flex items-center gap-3 bg-muted/20 px-4 py-2 border-b border-border font-semibold">
-            <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
-              <Link2 className="size-4" />
+          <h3 className="w-full flex items-center gap-2.5 bg-muted/20 px-4 py-2 border-b border-border font-bold text-xs uppercase tracking-wider text-muted-foreground">
+            <span className="size-fit p-1 rounded-md bg-secondary text-secondary-foreground">
+              <GitGraph className="size-3.5" />
             </span>
-            <span>Others</span>
+            <span className="text-foreground font-semibold">realm. (v9.0.0)</span>
+          </h3>
+
+          <nav className="flex flex-col">
+            {mainNavItems.map((item) => {
+              const Icon = item.icon;
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(item.href);
+
+              return (
+                <Link
+                  key={item.href}
+                  className={cn(
+                    "group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2.5 transition-colors",
+                    isActive
+                      ? "bg-primary/10 text-primary font-medium"
+                      : "text-foreground/90 hover:bg-secondary hover:text-secondary-foreground"
+                  )}
+                  href={item.href}
+                  prefetch={true}
+                  transitionTypes={[item.transitionType]}
+                  onClick={() => setOpen(false)}
+                >
+                  <Icon className={cn("size-4", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+                  <span>{item.label}</span>
+                  {isActive && (
+                    <span className="ml-auto mr-5 size-1.5 rounded-full bg-primary" />
+                  )}
+                  <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                    <ArrowRight className="size-4" />
+                  </div>
+                </Link>
+              );
+            })}
+          </nav>
+
+          <h3 className="w-full flex items-center gap-2.5 bg-muted/20 px-4 py-2 border-b border-border font-semibold text-xs text-muted-foreground uppercase tracking-wider">
+            <span className="size-fit p-1 rounded-md bg-secondary text-secondary-foreground">
+              <Link2 className="size-3.5" />
+            </span>
+            <span className="text-foreground font-medium">Others</span>
           </h3>
           <a
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
+            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2.5 text-foreground/90 hover:bg-secondary hover:text-secondary-foreground transition-colors"
             href="https://gnuweeb.org"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
           >
-            <Globe className="size-4" />
+            <Globe className="size-4 text-muted-foreground group-hover:text-foreground" />
             <span>GNU/Weeb</span>
             <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
               <ArrowRight className="size-4" />
             </div>
           </a>
           <a
-            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
+            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2.5 text-foreground/90 hover:bg-secondary hover:text-secondary-foreground transition-colors"
             href="https://webri.ng/webring/chads"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
           >
-            <CircleDotDashed className="size-4" />
+            <CircleDotDashed className="size-4 text-muted-foreground group-hover:text-foreground" />
             <span>webri.ng</span>
             <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
               <ArrowRight className="size-4" />
@@ -220,11 +221,11 @@ export function FAB() {
           </a>
 
           {/* Account & Profile Section */}
-          <h3 className="w-full flex items-center gap-3 bg-muted/20 px-4 py-2 border-b border-border font-semibold">
-            <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
-              <UserIcon className="size-4" />
+          <h3 className="w-full flex items-center gap-2.5 bg-muted/20 px-4 py-2 border-b border-border font-semibold text-xs text-muted-foreground uppercase tracking-wider">
+            <span className="size-fit p-1 rounded-md bg-secondary text-secondary-foreground">
+              <UserIcon className="size-3.5" />
             </span>
-            <span>Account</span>
+            <span className="text-foreground font-medium">Account</span>
           </h3>
 
           {user ? (
@@ -232,6 +233,7 @@ export function FAB() {
               <Link
                 href="/settings"
                 prefetch={true}
+                onClick={() => setOpen(false)}
                 className="flex items-center gap-2.5 min-w-0 flex-1 group cursor-pointer"
               >
                 <Avatar className="size-7 border border-border shrink-0">
@@ -257,6 +259,7 @@ export function FAB() {
               <button
                 type="button"
                 onClick={async () => {
+                  setOpen(false);
                   toast({
                     title: "Signed out",
                     description: "You have been signed out.",
@@ -272,12 +275,13 @@ export function FAB() {
             </div>
           ) : (
             <Link
-              className="group relative text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
+              className="group relative text-sm cursor-pointer flex items-center gap-3 px-4 py-2.5 text-foreground/90 hover:bg-secondary hover:text-secondary-foreground transition-colors"
               href="/login"
               prefetch={true}
               transitionTypes={["nav-forward"]}
+              onClick={() => setOpen(false)}
             >
-              <LogIn className="size-4" />
+              <LogIn className="size-4 text-muted-foreground group-hover:text-foreground" />
               <span>Sign in</span>
               <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                 <ArrowRight className="size-4" />
