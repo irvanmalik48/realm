@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DirectionalTransition } from "@/components/directional-transition";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "@/hooks/use-toast";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -190,12 +191,29 @@ export default function RegisterPage() {
         password,
       });
       if (!res.success) {
-        setError(res.error || "Registration failed. Please check your details.");
+        const err = res.error || "Registration failed. Please check your details.";
+        setError(err);
+        toast({
+          variant: "destructive",
+          title: "Registration failed",
+          description: err,
+        });
       } else {
+        toast({
+          variant: "success",
+          title: "Account created!",
+          description: "Welcome to Realm.",
+        });
         router.push("/");
       }
     } catch {
-      setError("An unexpected error occurred. Please try again.");
+      const err = "An unexpected error occurred. Please try again.";
+      setError(err);
+      toast({
+        variant: "destructive",
+        title: "Registration failed",
+        description: err,
+      });
     } finally {
       setIsLoading(false);
     }
