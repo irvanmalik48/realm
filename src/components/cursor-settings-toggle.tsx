@@ -4,6 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { useAtom } from "jotai";
 import { cursorEnabledAtom, cursorSpeedAtom, cursorHoverScaleAtom, cursorSizeAtom, cursorPointerSizeAtom } from "@/lib/atoms/cursor";
 import { Switch } from "./ui/switch";
+import { toast } from "@/hooks/use-toast";
 
 const pointerStore = {
   subscribe(callback: () => void) {
@@ -62,7 +63,16 @@ export function CursorSettingsToggle({ searchQuery }: { searchQuery?: string }) 
           </div>
           <Switch
             checked={cursorEnabled}
-            onCheckedChange={(checked) => setCursorEnabled(checked as boolean)}
+            onCheckedChange={(checked) => {
+              const isChecked = checked as boolean;
+              setCursorEnabled(isChecked);
+              toast({
+                title: isChecked ? "Custom Cursor Enabled" : "Custom Cursor Disabled",
+                description: isChecked
+                  ? "Interactive orb following pointer active."
+                  : "Standard system cursor restored.",
+              });
+            }}
             aria-label="Toggle custom cursor"
             disabled={!hasPointer}
           />
