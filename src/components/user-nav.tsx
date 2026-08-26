@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogIn, LogOut, Settings, User as UserIcon } from "lucide-react";
 import { GoogleLogo } from "@/components/logos/google";
 import { GithubLogo } from "@/components/logos/github";
+import { toast } from "@/hooks/use-toast";
 
 export function UserNav() {
   const { user, isLoading, logout } = useAuth();
@@ -120,9 +121,13 @@ export function UserNav() {
           {/* Logout Action */}
           <div className="pt-1 border-t border-border/50">
             <button
-              onClick={() => {
+              onClick={async () => {
                 setIsOpen(false);
-                logout();
+                toast({
+                  title: "Signed out",
+                  description: "You have been signed out.",
+                });
+                await logout();
               }}
               className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-destructive/90 hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors cursor-pointer"
             >
