@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Doto, Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider, getTheme } from "@wrksz/themes/next";
+import { ClientThemeProvider as ThemeProvider } from "@wrksz/themes/client";
 import { Navbar } from "@/components/navbar";
 import Providers from "@/lib/provider/react-query";
 import { AuthProvider } from "@/lib/auth/auth-context";
@@ -85,19 +85,17 @@ export const viewport: Viewport = {
   width: "device-width",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const theme = await getTheme();
-
   return (
-    <html lang="en" className={theme} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${doto.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storage="cookie">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Providers>
             <AuthProvider>
               <LenisProvider>
