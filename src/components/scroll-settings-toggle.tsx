@@ -3,6 +3,7 @@
 import { useAtom } from "jotai";
 import { smoothScrollAtom, scrollLerpAtom, scrollDurationAtom, customScrollbarEnabledAtom } from "@/lib/atoms/scroll";
 import { Switch } from "./ui/switch";
+import { toast } from "@/hooks/use-toast";
 
 export function ScrollSettingsToggle({ searchQuery }: { searchQuery?: string }) {
   const [smoothScroll, setSmoothScroll] = useAtom(smoothScrollAtom);
@@ -37,7 +38,16 @@ export function ScrollSettingsToggle({ searchQuery }: { searchQuery?: string }) 
           </div>
           <Switch
             checked={smoothScroll}
-            onCheckedChange={(checked) => setSmoothScroll(checked as boolean)}
+            onCheckedChange={(checked) => {
+              const isChecked = checked as boolean;
+              setSmoothScroll(isChecked);
+              toast({
+                title: isChecked ? "Smooth Scrolling Enabled" : "Smooth Scrolling Disabled",
+                description: isChecked
+                  ? "Inertia-based smooth scrolling active."
+                  : "Native browser scrolling restored.",
+              });
+            }}
             aria-label="Toggle smooth scrolling"
           />
         </div>
@@ -111,7 +121,16 @@ export function ScrollSettingsToggle({ searchQuery }: { searchQuery?: string }) 
             </div>
             <Switch
               checked={customScrollbar}
-              onCheckedChange={(checked) => setCustomScrollbar(checked as boolean)}
+              onCheckedChange={(checked) => {
+                const isChecked = checked as boolean;
+                setCustomScrollbar(isChecked);
+                toast({
+                  title: isChecked ? "Custom Scrollbar Enabled" : "Custom Scrollbar Disabled",
+                  description: isChecked
+                    ? "Stylized floating scrollbar active."
+                    : "Native scrollbar active.",
+                });
+              }}
               aria-label="Toggle custom scrollbar"
             />
           </div>
