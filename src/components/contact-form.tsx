@@ -40,6 +40,7 @@ interface ClientTelemetry {
   language: string;
   screenResolution: string;
   platform: string;
+  timestamp: string;
 }
 
 export function ContactForm() {
@@ -53,6 +54,7 @@ export function ContactForm() {
     language: "en-US",
     screenResolution: "Detecting...",
     platform: "Detecting...",
+    timestamp: "Detecting...",
   });
 
   React.useEffect(() => {
@@ -64,6 +66,7 @@ export function ContactForm() {
         language: navigator.language || "en",
         screenResolution: `${window.screen.width}x${window.screen.height} (${window.devicePixelRatio}x DPR)`,
         platform: navigator.platform || "Unknown",
+        timestamp: new Date().toISOString(),
       }));
 
       getClientIpAction()
@@ -545,7 +548,7 @@ export function ContactForm() {
                   Timestamp
                 </span>
                 <span className="text-foreground/90 truncate text-[10px]">
-                  {new Date().toISOString()}
+                  {telemetry.timestamp}
                 </span>
               </div>
             </div>
