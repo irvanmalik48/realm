@@ -14,6 +14,7 @@ import {
   Newspaper,
   Settings,
   User as UserIcon,
+  LayoutDashboard,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -137,7 +138,7 @@ export function FAB() {
             <span className="size-fit px-2 py-1 rounded-3xl bg-secondary text-secondary-foreground">
               <GitGraph className="size-4" />
             </span>
-            <span>realm. (v8.0.0-rev3)</span>
+            <span>realm. (v9.0.0)</span>
           </h3>
           <Link
             className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
@@ -146,6 +147,17 @@ export function FAB() {
           >
             <Home className="size-4" />
             <span>Home</span>
+            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+              <ArrowRight className="size-4" />
+            </div>
+          </Link>
+          <Link
+            className="group relative border-b border-border text-sm cursor-pointer flex items-center gap-3 px-4 py-2 hover:bg-secondary hover:text-secondary-foreground transition-colors"
+            href="/dashboard"
+            transitionTypes={["nav-forward"]}
+          >
+            <LayoutDashboard className="size-4" />
+            <span>Dashboard</span>
             <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
               <ArrowRight className="size-4" />
             </div>
