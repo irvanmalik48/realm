@@ -3,6 +3,7 @@
 import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai";
 import { Switch } from "./ui/switch";
+import { toast } from "@/hooks/use-toast";
 
 export function PerformanceModeToggle({ searchQuery }: { searchQuery?: string }) {
   const [performanceMode, setPerformanceMode] = useAtom(performanceModeAtom);
@@ -28,7 +29,16 @@ export function PerformanceModeToggle({ searchQuery }: { searchQuery?: string })
         </div>
         <Switch
           checked={performanceMode}
-          onCheckedChange={(checked) => setPerformanceMode(checked as boolean)}
+          onCheckedChange={(checked) => {
+            const isChecked = checked as boolean;
+            setPerformanceMode(isChecked);
+            toast({
+              title: isChecked ? "Performance Mode Enabled" : "Performance Mode Disabled",
+              description: isChecked
+                ? "Reduced blur and heavy effects for optimal performance."
+                : "Full visual effects and animations enabled.",
+            });
+          }}
           aria-label="Toggle performance mode"
           disabled={false}
         />
