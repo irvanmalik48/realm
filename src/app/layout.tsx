@@ -11,6 +11,7 @@ import { CustomScrollbar } from "@/components/custom-scrollbar";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { FAB } from "@/components/fab";
+import { Toaster } from "@/components/ui/toaster";
 
 import OgImage from "./opengraph-image.png";
 import Script from "next/script";
@@ -106,6 +107,7 @@ export default async function RootLayout({
                 <Navbar />
                 {children}
                 <Footer />
+                <Toaster />
               </LenisProvider>
             </AuthProvider>
           </Providers>
