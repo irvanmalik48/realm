@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogIn, LogOut, Settings, User as UserIcon } from "lucide-react";
+import { LogIn, LogOut, Settings, User as UserIcon, LayoutDashboard } from "lucide-react";
 import { GoogleLogo } from "@/components/logos/google";
 import { GithubLogo } from "@/components/logos/github";
 import { toast } from "@/hooks/use-toast";
@@ -108,6 +108,15 @@ export function UserNav() {
 
           {/* Navigation Links */}
           <div className="py-1">
+            <Link
+              href="/dashboard"
+              prefetch={true}
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2 text-xs text-foreground/90 hover:text-foreground hover:bg-muted/80 rounded-lg transition-colors"
+            >
+              <LayoutDashboard className="w-4 h-4 text-muted-foreground" />
+              <span>Dashboard</span>
+            </Link>
             <Link
               href="/settings"
               onClick={() => setIsOpen(false)}
