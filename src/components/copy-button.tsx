@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { toast } from "@/hooks/use-toast";
 
 interface CopyButtonProps {
   code: string;
@@ -17,9 +18,18 @@ export function CopyButton({ code, className }: CopyButtonProps) {
     try {
       await navigator.clipboard.writeText(code);
       setCopied(true);
+      toast({
+        title: "Copied to clipboard",
+        description: "Code snippet copied successfully.",
+      });
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy code: ", err);
+      toast({
+        variant: "destructive",
+        title: "Failed to copy",
+        description: "Could not copy code to clipboard.",
+      });
     }
   };
 
