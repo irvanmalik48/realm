@@ -4,6 +4,7 @@ import ThemeToggleButton from "./ui/theme-toggle-button";
 import Link from "next/link";
 import performanceModeAtom from "@/lib/atoms/performance-mode";
 import { useAtom } from "jotai";
+import { UserNav } from "@/components/user-nav";
 
 export interface FlatNavLinkProps {
   href: string;
@@ -19,7 +20,8 @@ export function FlatNavLink({ href, children }: FlatNavLinkProps) {
   return (
     <Link
       href={href}
-      className="text-primary/75 hover:text-primary transition-colors"
+      prefetch={true}
+      className="text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-muted/40"
     >
       {children}
     </Link>
@@ -27,7 +29,11 @@ export function FlatNavLink({ href, children }: FlatNavLinkProps) {
 }
 
 export function Navbar() {
-  const links: FlatNavLinkData[] = [];
+  const links: FlatNavLinkData[] = [
+    { href: "/blog", text: "Blog" },
+    { href: "/about", text: "About" },
+    { href: "/settings", text: "Settings" },
+  ];
 
   const [performanceMode] = useAtom(performanceModeAtom);
 
@@ -43,19 +49,21 @@ export function Navbar() {
       <nav className="w-full max-w-full mx-auto px-5 py-3 flex justify-between items-center">
         <Link
           href="/"
+          prefetch={true}
           transitionTypes={["nav-back"]}
-          className="text-xl font-bold dark:font-medium text-primary"
+          className="text-xl font-bold dark:font-medium text-primary hover:opacity-90 transition-opacity"
         >
           realm.
         </Link>
-        <div className="flex gap-3 sm:gap-4 items-center">
-          {links.length > 0 &&
-            links.map((link) => (
-              <FlatNavLink key={link.href} href={link.href}>
-                {link.text}
-              </FlatNavLink>
-            ))}
+        <div className="flex gap-2 sm:gap-3 items-center">
+          {links.map((link) => (
+            <FlatNavLink key={link.href} href={link.href}>
+              {link.text}
+            </FlatNavLink>
+          ))}
+          <div className="h-4 w-px bg-border/60 mx-1 hidden xs:block" />
           <ThemeToggleButton />
+          <UserNav />
         </div>
       </nav>
     </header>
