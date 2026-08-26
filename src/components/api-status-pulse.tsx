@@ -5,6 +5,7 @@ import { getHealthStatusAction, HealthData } from "@/actions/health";
 import { Activity, ChevronDown, Database, RefreshCw, Server } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 interface HeartbeatPoint {
   id: number;
@@ -123,9 +124,21 @@ export function APIStatusPulse() {
           )}
           <button
             type="button"
-            onClick={(e) => {
+            onClick={async (e) => {
               e.stopPropagation();
-              refetch();
+              const res = await refetch();
+              if (res.data?.ok) {
+                toast({
+                  title: "API Status Refreshed",
+                  description: `Status: ${res.data.data.status} · Latency: ${res.data.data.latency_ms}ms`,
+                });
+              } else {
+                toast({
+                  variant: "destructive",
+                  title: "API Check Failed",
+                  description: "Could not connect to backend API.",
+                });
+              }
             }}
             title="Check status now"
             className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded hover:bg-muted/30 flex items-center justify-center cursor-pointer"
