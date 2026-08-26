@@ -541,6 +541,7 @@ export default function RegisterPage() {
                 Already have an account?{" "}
                 <Link
                   href="/login"
+                  prefetch={true}
                   transitionTypes={["nav-back"]}
                   className="font-medium text-foreground hover:underline transition-colors"
                 >
