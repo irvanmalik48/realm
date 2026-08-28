@@ -10,7 +10,6 @@ import {
   User,
   Mail,
   Calendar,
-  ShieldCheck,
   Check,
   Edit2,
   Loader2,
@@ -44,11 +43,7 @@ export function ProfileSettingsSkeleton() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-5 border-b border-border/50">
         <Skeleton className="size-20 rounded-full shrink-0 border-2 border-border/80" />
         <div className="flex-1 space-y-2.5 w-full">
-          <div className="flex flex-wrap items-center gap-2">
-            <Skeleton className="h-6 w-36 rounded-md" />
-            <Skeleton className="h-5 w-24 rounded-full" />
-            <Skeleton className="h-5 w-20 rounded-full" />
-          </div>
+          <Skeleton className="h-6 w-36 rounded-md" />
           <Skeleton className="h-3.5 w-24 rounded-md" />
           <div className="flex flex-wrap items-center gap-2 pt-1">
             <Skeleton className="h-7 w-28 rounded-md" />
@@ -508,29 +503,9 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-lg font-bold text-foreground truncate">
-              {user.full_name || user.username}
-            </h3>
-            {user.has_password && (
-              <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
-                <ShieldCheck className="size-3" />
-                Password Set
-              </span>
-            )}
-            {isGoogleConnected && (
-              <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">
-                <GoogleLogo className="size-3" />
-                Google
-              </span>
-            )}
-            {isGithubConnected && (
-              <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full bg-neutral-500/10 text-foreground border border-neutral-500/20">
-                <GithubLogo className="size-3" />
-                GitHub
-              </span>
-            )}
-          </div>
+          <h3 className="text-lg font-bold text-foreground truncate">
+            {user.full_name || user.username}
+          </h3>
           <p className="text-xs text-muted-foreground mt-0.5">@{user.username}</p>
 
           <div className="flex flex-wrap items-center gap-2 mt-2.5">
