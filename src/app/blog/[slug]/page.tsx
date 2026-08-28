@@ -24,7 +24,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { Heading } from "@/components/table-of-contents";
 import { TableOfContents } from "@/components/table-of-contents";
+import type { TocItem } from "remark-flexible-toc";
 import type { ComponentPropsWithoutRef } from "react";
 import { CopyButton } from "@/components/copy-button";
 import { DirectionalTransition } from "@/components/directional-transition";
@@ -72,15 +74,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-async function MDXContent({
-  source,
-  format,
-}: {
-  source: string;
-  format: "md" | "mdx";
-}) {
+async function renderMDX(
+  source: string,
+  format: "md" | "mdx",
+): Promise<{
+  content: React.ReactNode;
+  headings: Heading[];
+}> {
   "use cache";
 
+  const toc: TocItem[] = [];
   const prettyCodeOptions: Options = {
     keepBackground: false,
     theme: "material-theme-darker",
@@ -97,7 +100,7 @@ async function MDXContent({
       remarkPlugins: [
         remarkMath,
         remarkGfm,
-        remarkFlexibleToc,
+        [remarkFlexibleToc, { tocRef: toc, maxDepth: 3 }],
         remarkFlexibleCodeTitles,
         remarkParse,
         remarkRehype,
@@ -111,10 +114,9 @@ async function MDXContent({
         rehypeStringify,
       ],
     },
-    vfileDataIntoScope: "toc",
   };
 
-  return (
+  const content = (
     <MDXRemote
       source={source}
       options={options}
@@ -133,6 +135,14 @@ async function MDXContent({
       }}
     />
   );
+
+  const headings: Heading[] = toc.map((item) => ({
+    id: item.href.replace(/^#/, ""),
+    text: item.value,
+    level: item.depth,
+  }));
+
+  return { content, headings };
 }
 
 export default async function Post({ params }: Props) {
@@ -146,13 +156,14 @@ export default async function Post({ params }: Props) {
 
   const { source, format } = result;
   const { frontmatter } = getFrontmatter<Frontmatter>(source);
+  const { content, headings } = await renderMDX(source, format);
 
   return (
     <DirectionalTransition>
       <div className="relative flex justify-center max-w-7xl mx-auto px-5 gap-10">
         <div className="hidden xl:block w-64 shrink-0">
           <div className="sticky top-24">
-            <TableOfContents />
+            <TableOfContents headings={headings} />
           </div>
         </div>
         <Container
@@ -182,7 +193,7 @@ export default async function Post({ params }: Props) {
               "prose max-w-full dark:prose-invert prose-pre:font-mono prose-code:font-mono prose-headings:scroll-mt-24 pt-5",
             )}
           >
-            <MDXContent source={source} format={format} />
+            {content}
           </article>
         </Container>
       </div>
