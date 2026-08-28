@@ -34,7 +34,90 @@ import { useSearchParams } from "next/navigation";
 import { AvatarCropDialog } from "@/components/avatar-crop-dialog";
 import { PasswordDialog } from "@/components/password-dialog";
 import { EditProfileDialog } from "@/components/edit-profile-dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
+
+export function ProfileSettingsSkeleton() {
+  return (
+    <div className="p-5 sm:p-6 space-y-6">
+      {/* Profile Overview Header Skeleton */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-5 border-b border-border/50">
+        <Skeleton className="size-20 rounded-full shrink-0 border-2 border-border/80" />
+        <div className="flex-1 space-y-2.5 w-full">
+          <div className="flex flex-wrap items-center gap-2">
+            <Skeleton className="h-6 w-36 rounded-md" />
+            <Skeleton className="h-5 w-24 rounded-full" />
+            <Skeleton className="h-5 w-20 rounded-full" />
+          </div>
+          <Skeleton className="h-3.5 w-24 rounded-md" />
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <Skeleton className="h-7 w-28 rounded-md" />
+            <Skeleton className="h-7 w-24 rounded-md" />
+          </div>
+        </div>
+      </div>
+
+      {/* Account Details Grid Skeleton */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div
+            key={i}
+            className="p-4 rounded-lg border border-border/60 bg-muted/20 space-y-2"
+          >
+            <div className="flex items-center justify-between">
+              <Skeleton className="h-3.5 w-20 rounded-md" />
+              {i < 2 && <Skeleton className="h-3.5 w-10 rounded-md" />}
+            </div>
+            <Skeleton className="h-4 w-32 rounded-md" />
+          </div>
+        ))}
+      </div>
+
+      {/* Security & Password Section Skeleton */}
+      <div className="pt-4 border-t border-border/50 space-y-3">
+        <div className="space-y-1">
+          <Skeleton className="h-4 w-44 rounded-md" />
+          <Skeleton className="h-3 w-64 rounded-md" />
+        </div>
+        <div className="p-4 rounded-lg border border-border/60 bg-muted/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <Skeleton className="size-9 rounded-lg shrink-0" />
+            <div className="space-y-1.5">
+              <Skeleton className="h-4 w-32 rounded-md" />
+              <Skeleton className="h-3 w-56 rounded-md" />
+            </div>
+          </div>
+          <Skeleton className="h-8 w-28 rounded-md shrink-0" />
+        </div>
+      </div>
+
+      {/* Connected Accounts Section Skeleton */}
+      <div className="pt-4 border-t border-border/50 space-y-3">
+        <div className="space-y-1">
+          <Skeleton className="h-4 w-36 rounded-md" />
+          <Skeleton className="h-3 w-60 rounded-md" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div
+              key={i}
+              className="p-3.5 rounded-lg border border-border/60 bg-muted/20 flex items-center justify-between gap-3"
+            >
+              <div className="flex items-center gap-2.5">
+                <Skeleton className="size-5 rounded-full shrink-0" />
+                <div className="space-y-1">
+                  <Skeleton className="h-3.5 w-16 rounded-md" />
+                  <Skeleton className="h-2.5 w-20 rounded-md" />
+                </div>
+              </div>
+              <Skeleton className="h-7 w-20 rounded-md shrink-0" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const { user, isLoading, updateProfile, uploadAvatar, unlinkOAuth, refresh } = useAuth();
@@ -92,11 +175,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   }, [searchParams, refresh]);
 
   if (isLoading) {
-    return (
-      <div className="p-6 flex items-center justify-center">
-        <Loader2 className="size-6 animate-spin text-muted-foreground" />
-      </div>
-    );
+    return <ProfileSettingsSkeleton />;
   }
 
   if (!user) {
