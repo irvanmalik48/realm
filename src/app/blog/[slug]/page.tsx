@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { MDXRemote, type MDXRemoteOptions } from "next-mdx-remote-client/rsc";
 import { readingTime } from "reading-time-estimator";
 
@@ -67,20 +68,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: frontmatter.title ?? "Article",
+    description: frontmatter.description,
   };
 }
 
-export default async function Post({ params }: Props) {
-  const { slug } = await params;
-
-  const result = await getMarkdownFromSlug(slug);
-
-  if (!result) {
-    return <p>Post not found</p>;
-  }
-
-  const { source, format } = result;
-  const { frontmatter } = getFrontmatter<Frontmatter>(source);
+async function MDXContent({
+  source,
+  format,
+}: {
+  source: string;
+  format: "md" | "mdx";
+}) {
+  "use cache";
 
   const prettyCodeOptions: Options = {
     keepBackground: false,
@@ -114,6 +113,39 @@ export default async function Post({ params }: Props) {
     },
     vfileDataIntoScope: "toc",
   };
+
+  return (
+    <MDXRemote
+      source={source}
+      options={options}
+      components={{
+        pre: ({ children, style, ...props }: ComponentPropsWithoutRef<"pre">) => {
+          const rawCode = (props as any)["data-raw-code"] || "";
+          return (
+            <div className="relative group">
+              <pre style={style as any} {...props}>
+                {children}
+              </pre>
+              <CopyButton code={rawCode} />
+            </div>
+          );
+        },
+      }}
+    />
+  );
+}
+
+export default async function Post({ params }: Props) {
+  const { slug } = await params;
+
+  const result = await getMarkdownFromSlug(slug);
+
+  if (!result) {
+    notFound();
+  }
+
+  const { source, format } = result;
+  const { frontmatter } = getFrontmatter<Frontmatter>(source);
 
   return (
     <DirectionalTransition>
@@ -150,23 +182,7 @@ export default async function Post({ params }: Props) {
               "prose max-w-full dark:prose-invert prose-pre:font-mono prose-code:font-mono prose-headings:scroll-mt-24 pt-5",
             )}
           >
-            <MDXRemote
-              source={source}
-              options={options}
-              components={{
-                pre: ({ children, style, ...props }: ComponentPropsWithoutRef<"pre">) => {
-                  const rawCode = (props as any)["data-raw-code"] || "";
-                  return (
-                    <div className="relative group">
-                      <pre style={style as any} {...props}>
-                        {children}
-                      </pre>
-                      <CopyButton code={rawCode} />
-                    </div>
-                  );
-                },
-              }}
-            />
+            <MDXContent source={source} format={format} />
           </article>
         </Container>
       </div>
@@ -184,6 +200,6 @@ export async function generateStaticParams() {
   const files = getMarkdownFiles();
 
   return files.map((filename) => ({
-    slug: filename.replace(/\.(?=[^.]*$)/, "-"),
+    slug: filename.replace(/\.mdx?$/, ""),
   }));
 }
