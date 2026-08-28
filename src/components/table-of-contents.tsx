@@ -4,28 +4,29 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface Heading {
+export interface Heading {
   id: string;
   text: string;
   level: number;
 }
 
-export function TableOfContents() {
-  const [headings, setHeadings] = useState<Heading[]>([]);
+interface TableOfContentsProps {
+  headings?: Heading[];
+}
+
+export function TableOfContents({ headings = [] }: TableOfContentsProps) {
   const [activeIds, setActiveIds] = useState<string[]>([]);
 
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll("article h2, article h3")).filter(
-      (elem) => elem.id
-    );
-    const mapped: Heading[] = elements.map((elem) => ({
-      id: elem.id,
-      text: elem.textContent || "",
-      level: Number(elem.tagName.substring(1)),
-    }));
-    requestAnimationFrame(() => {
-      setHeadings(mapped);
-    });
+    // Reset scroll to 0 when entering the post page
+    if (!window.location.hash) {
+      if ((window as any).__lenis) {
+        (window as any).__lenis.scrollTo(0, { immediate: true });
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+
+    if (headings.length === 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -44,10 +45,13 @@ export function TableOfContents() {
       { rootMargin: "0px 0px -40% 0px" },
     );
 
-    elements.forEach((elem) => observer.observe(elem));
+    headings.forEach((heading) => {
+      const el = document.getElementById(heading.id);
+      if (el) observer.observe(el);
+    });
 
     return () => observer.disconnect();
-  }, []);
+  }, [headings]);
 
   if (headings.length === 0) return null;
 
@@ -72,9 +76,17 @@ export function TableOfContents() {
             }}
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector(`#${heading.id}`)?.scrollIntoView({
-                behavior: "smooth",
-              });
+              const target = document.getElementById(heading.id);
+              if (target) {
+                if ((window as any).__lenis) {
+                  (window as any).__lenis.scrollTo(target);
+                } else {
+                  target.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }
+                window.history.pushState(null, "", `#${heading.id}`);
+              }
             }}
           >
             {activeIds.includes(heading.id) && (
