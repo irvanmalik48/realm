@@ -7,11 +7,11 @@ import { readingTime } from "reading-time-estimator";
 import type { Frontmatter, PostWithScope } from "@/lib/types/posts";
 
 export function getMarkdownExtension(
-  fileName: `${string}.md` | `${string}.mdx`
-): "mdx" {
+  fileName: `${string}.md` | `${string}.mdx` | string
+): "md" | "mdx" {
   const match = fileName.match(/\.mdx?$/);
 
-  return match![0].substring(1) as "mdx";
+  return (match ? match[0].substring(1) : "mdx") as "md" | "mdx";
 }
 
 export const RE = /\.mdx?$/;
@@ -47,28 +47,28 @@ export const getMarkdownFromSlug = async (
 ): Promise<
   | {
       source: string;
-      format: "mdx";
+      format: "md" | "mdx";
     }
   | undefined
 > => {
   "use cache";
   const sanitizedSlug = path.basename(slug);
-  const filename = `${sanitizedSlug}.mdx` as const;
-
   const postsDir = path.join(process.cwd(), "posts");
-  const fullPath = path.resolve(postsDir, filename);
 
-  if (!fullPath.startsWith(postsDir)) return;
+  for (const ext of ["mdx", "md"] as const) {
+    const filename = `${sanitizedSlug}.${ext}`;
+    const fullPath = path.resolve(postsDir, filename);
 
-  if (fs.existsSync(fullPath)) {
-    const source = await getSource(filename);
+    if (fullPath.startsWith(postsDir) && fs.existsSync(fullPath)) {
+      const source = await getSource(filename);
 
-    if (!source) return;
+      if (!source) return;
 
-    return {
-      source,
-      format: getMarkdownExtension(filename),
-    };
+      return {
+        source,
+        format: ext,
+      };
+    }
   }
 };
 
@@ -86,7 +86,7 @@ export const getPostInformation = (
 
   const post: PostWithScope = {
     ...frontmatter,
-    slug: filename.replace(/\.(?=[^.]*$)/, "-").replace("-mdx", ""),
+    slug: filename.replace(/\.mdx?$/, ""),
     readingTime: readingTime(content).text,
   };
 
