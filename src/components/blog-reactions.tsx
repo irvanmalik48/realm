@@ -6,12 +6,16 @@ import {
   ThumbsUp,
   Heart,
   Flame,
-  Rocket,
-  Sparkles,
-  PartyPopper,
-  LucideIcon,
+  ThumbsDown,
+  Frown,
+  Skull,
+  type LucideIcon,
+  LogIn,
 } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/use-auth";
+import { toast } from "@/hooks/use-toast";
 
 interface ReactionConfig {
   id: string;
@@ -24,13 +28,14 @@ interface ReactionConfig {
 }
 
 const REACTION_CONFIGS: ReactionConfig[] = [
+  // 3 Positive Reactions
   {
     id: "like",
     label: "Like",
     icon: ThumbsUp,
     colorClass: "hover:text-blue-500",
-    activeBgClass: "bg-blue-500/10 dark:bg-blue-500/15",
-    activeBorderClass: "border-blue-500/40 dark:border-blue-500/50",
+    activeBgClass: "bg-blue-500/10 dark:bg-blue-500/20",
+    activeBorderClass: "border-blue-500/50",
     activeTextClass: "text-blue-500 dark:text-blue-400",
   },
   {
@@ -38,125 +43,137 @@ const REACTION_CONFIGS: ReactionConfig[] = [
     label: "Love",
     icon: Heart,
     colorClass: "hover:text-rose-500",
-    activeBgClass: "bg-rose-500/10 dark:bg-rose-500/15",
-    activeBorderClass: "border-rose-500/40 dark:border-rose-500/50",
+    activeBgClass: "bg-rose-500/10 dark:bg-rose-500/20",
+    activeBorderClass: "border-rose-500/50",
     activeTextClass: "text-rose-500 dark:text-rose-400",
   },
   {
     id: "fire",
-    label: "Awesome",
+    label: "Fire",
     icon: Flame,
     colorClass: "hover:text-orange-500",
-    activeBgClass: "bg-orange-500/10 dark:bg-orange-500/15",
-    activeBorderClass: "border-orange-500/40 dark:border-orange-500/50",
+    activeBgClass: "bg-orange-500/10 dark:bg-orange-500/20",
+    activeBorderClass: "border-orange-500/50",
     activeTextClass: "text-orange-500 dark:text-orange-400",
   },
+  // 3 Negative / Critical Reactions
   {
-    id: "rocket",
-    label: "Inspiring",
-    icon: Rocket,
-    colorClass: "hover:text-indigo-500",
-    activeBgClass: "bg-indigo-500/10 dark:bg-indigo-500/15",
-    activeBorderClass: "border-indigo-500/40 dark:border-indigo-500/50",
-    activeTextClass: "text-indigo-500 dark:text-indigo-400",
+    id: "dislike",
+    label: "Dislike",
+    icon: ThumbsDown,
+    colorClass: "hover:text-slate-400",
+    activeBgClass: "bg-slate-500/10 dark:bg-slate-500/20",
+    activeBorderClass: "border-slate-500/50",
+    activeTextClass: "text-slate-400 dark:text-slate-300",
   },
   {
-    id: "mindblown",
-    label: "Mind Blown",
-    icon: Sparkles,
-    colorClass: "hover:text-emerald-500",
-    activeBgClass: "bg-emerald-500/10 dark:bg-emerald-500/15",
-    activeBorderClass: "border-emerald-500/40 dark:border-emerald-500/50",
-    activeTextClass: "text-emerald-500 dark:text-emerald-400",
-  },
-  {
-    id: "party",
-    label: "Cheers",
-    icon: PartyPopper,
+    id: "frown",
+    label: "Meh",
+    icon: Frown,
     colorClass: "hover:text-amber-500",
-    activeBgClass: "bg-amber-500/10 dark:bg-amber-500/15",
-    activeBorderClass: "border-amber-500/40 dark:border-amber-500/50",
+    activeBgClass: "bg-amber-500/10 dark:bg-amber-500/20",
+    activeBorderClass: "border-amber-500/50",
     activeTextClass: "text-amber-500 dark:text-amber-400",
+  },
+  {
+    id: "skull",
+    label: "Dead",
+    icon: Skull,
+    colorClass: "hover:text-purple-500",
+    activeBgClass: "bg-purple-500/10 dark:bg-purple-500/20",
+    activeBorderClass: "border-purple-500/50",
+    activeTextClass: "text-purple-500 dark:text-purple-400",
   },
 ];
 
-function getOrCreateClientId(): string {
-  if (typeof window === "undefined") return "";
-  let id = localStorage.getItem("realm_reaction_client_id");
-  if (!id) {
-    id = "client_" + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
-    localStorage.setItem("realm_reaction_client_id", id);
-  }
-  return id;
-}
-
 export function BlogReactions({ slug }: { slug: string }) {
+  const { user } = useAuth();
   const [counts, setCounts] = useState<Record<string, number>>({
     like: 0,
     love: 0,
     fire: 0,
-    rocket: 0,
-    mindblown: 0,
-    party: 0,
+    dislike: 0,
+    frown: 0,
+    skull: 0,
   });
-  const [userReactions, setUserReactions] = useState<string[]>([]);
+  const [userReaction, setUserReaction] = useState<string | null>(null);
   const [animatingId, setAnimatingId] = useState<string | null>(null);
   const [totalCount, setTotalCount] = useState<number>(0);
 
   const fetchReactions = useCallback(async () => {
     try {
-      const clientId = getOrCreateClientId();
-      const res = await fetch(`/api/reactions/${encodeURIComponent(slug)}`, {
-        headers: {
-          "X-Client-ID": clientId,
-        },
-      });
+      const res = await fetch(`/api/reactions/${encodeURIComponent(slug)}`);
       if (res.ok) {
         const data = await res.json();
         if (data.reactions) {
           setCounts((prev) => ({ ...prev, ...data.reactions }));
         }
-        if (Array.isArray(data.user_reactions)) {
-          setUserReactions(data.user_reactions);
+        if (typeof data.user_reaction !== "undefined") {
+          setUserReaction(data.user_reaction);
+        } else if (Array.isArray(data.user_reactions) && data.user_reactions.length > 0) {
+          setUserReaction(data.user_reactions[0]);
+        } else {
+          setUserReaction(null);
         }
         if (typeof data.total_count === "number") {
           setTotalCount(data.total_count);
         }
       }
     } catch {
-      // Ignore network errors on fetch
+      // Ignore network errors on initial fetch
     }
   }, [slug]);
 
   useEffect(() => {
     fetchReactions();
-  }, [fetchReactions]);
+  }, [fetchReactions, user]);
 
   const handleToggle = async (reactionId: string) => {
-    const isCurrentlyActive = userReactions.includes(reactionId);
-    const clientId = getOrCreateClientId();
+    if (!user) {
+      toast({
+        variant: "destructive",
+        title: "Sign in required",
+        description: "You must be signed in to react to posts.",
+      });
+      return;
+    }
 
-    // Optimistic UI Update
+    const previousReaction = userReaction;
+    const isUnsetting = previousReaction === reactionId;
+
+    // Optimistic UI Update (one reaction per account per post)
     setAnimatingId(reactionId);
     setTimeout(() => setAnimatingId(null), 700);
 
-    setUserReactions((prev) =>
-      isCurrentlyActive ? prev.filter((id) => id !== reactionId) : [...prev, reactionId],
-    );
-
-    setCounts((prev) => ({
-      ...prev,
-      [reactionId]: Math.max(0, (prev[reactionId] || 0) + (isCurrentlyActive ? -1 : 1)),
-    }));
-
-    setTotalCount((prev) => Math.max(0, prev + (isCurrentlyActive ? -1 : 1)));
+    if (isUnsetting) {
+      // Toggle off current reaction
+      setUserReaction(null);
+      setCounts((prev) => ({
+        ...prev,
+        [reactionId]: Math.max(0, (prev[reactionId] || 0) - 1),
+      }));
+      setTotalCount((prev) => Math.max(0, prev - 1));
+    } else {
+      // Set or switch to new reaction
+      setUserReaction(reactionId);
+      setCounts((prev) => {
+        const updated = { ...prev };
+        if (previousReaction && updated[previousReaction] > 0) {
+          updated[previousReaction] -= 1;
+        }
+        updated[reactionId] = (updated[reactionId] || 0) + 1;
+        return updated;
+      });
+      if (!previousReaction) {
+        setTotalCount((prev) => prev + 1);
+      }
+    }
 
     try {
       const res = await fetch(`/api/reactions/${encodeURIComponent(slug)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Client-ID": clientId,
         },
         body: JSON.stringify({ reaction: reactionId }),
       });
@@ -166,15 +183,31 @@ export function BlogReactions({ slug }: { slug: string }) {
         if (data.reactions) {
           setCounts(data.reactions);
         }
-        if (Array.isArray(data.user_reactions)) {
-          setUserReactions(data.user_reactions);
+        if (typeof data.user_reaction !== "undefined") {
+          setUserReaction(data.user_reaction);
+        } else if (data.active) {
+          setUserReaction(data.reaction);
+        } else {
+          setUserReaction(null);
         }
         if (typeof data.total_count === "number") {
           setTotalCount(data.total_count);
         }
+      } else {
+        const err = await res.json().catch(() => ({}));
+        toast({
+          variant: "destructive",
+          title: "Reaction failed",
+          description: err.error || "Could not update reaction.",
+        });
+        fetchReactions();
       }
     } catch {
-      // Revert on failure
+      toast({
+        variant: "destructive",
+        title: "Network error",
+        description: "Failed to connect to reaction service.",
+      });
       fetchReactions();
     }
   };
@@ -182,17 +215,19 @@ export function BlogReactions({ slug }: { slug: string }) {
   return (
     <div className="w-full my-8 p-5 sm:p-6 rounded-xl border border-border/70 bg-card/50 backdrop-blur-xs flex flex-col items-center gap-4 text-center">
       <div className="space-y-1">
-        <p className="text-sm font-semibold text-foreground">What did you think?</p>
+        <p className="text-sm font-semibold text-foreground">How did you find this article?</p>
         <p className="text-xs text-muted-foreground">
-          Leave a reaction to let the author know how you liked this post!
-          {totalCount > 0 && ` (${totalCount} reaction${totalCount === 1 ? "" : "s"})`}
+          {user
+            ? "Leave a reaction below (1 reaction per account)"
+            : "Sign in to leave a reaction on this post"}
+          {totalCount > 0 && ` • ${totalCount} reaction${totalCount === 1 ? "" : "s"}`}
         </p>
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-1">
         {REACTION_CONFIGS.map((config) => {
           const Icon = config.icon;
-          const isActive = userReactions.includes(config.id);
+          const isActive = userReaction === config.id;
           const count = counts[config.id] || 0;
           const isAnimating = animatingId === config.id;
 
@@ -215,9 +250,9 @@ export function BlogReactions({ slug }: { slug: string }) {
                   : "border-border/60 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground",
               )}
             >
-              {/* Floating +1 / Sparkle Particle Effect */}
+              {/* Floating +1 Particle Effect */}
               <AnimatePresence>
-                {isAnimating && !isActive && (
+                {isAnimating && isActive && (
                   <motion.div
                     initial={{ opacity: 0, y: 0, scale: 0.5 }}
                     animate={{ opacity: 1, y: -24, scale: 1.2 }}
@@ -245,6 +280,18 @@ export function BlogReactions({ slug }: { slug: string }) {
           );
         })}
       </div>
+
+      {!user && (
+        <div className="pt-2">
+          <Link
+            href="/login"
+            className="inline-flex items-center gap-1.5 text-xs text-primary hover:underline font-medium"
+          >
+            <LogIn className="size-3.5" />
+            <span>Sign in to react</span>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
