@@ -6,26 +6,38 @@ import { ImageComponent } from "@/components/image";
 import { Settings, Search, Sliders, PlayCircle, MousePointer, Activity, User, X } from "lucide-react";
 import CuteImage from "@/assets/img/awoocon.jpg";
 import dynamic from "next/dynamic";
+import { ProfileSettingsSkeleton } from "@/components/profile-settings";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const ToggleSkeleton = () => (
+  <div className="w-full text-sm text-muted-foreground px-5 py-4 flex items-center justify-between">
+    <div className="space-y-1.5">
+      <Skeleton className="h-4 w-36" />
+      <Skeleton className="h-3 w-64" />
+    </div>
+    <Skeleton className="h-5 w-9 rounded-full shrink-0" />
+  </div>
+);
 
 const ProfileSettings = dynamic(
   () => import("@/components/profile-settings").then((m) => m.ProfileSettings),
-  { ssr: false }
+  { ssr: false, loading: () => <ProfileSettingsSkeleton /> }
 );
 const PerformanceModeToggle = dynamic(
   () => import("@/components/performance-mode-toggle").then((m) => m.PerformanceModeToggle),
-  { ssr: false }
+  { ssr: false, loading: () => <ToggleSkeleton /> }
 );
 const MarqueeToggle = dynamic(
   () => import("@/components/marquee-toggle").then((m) => m.MarqueeToggle),
-  { ssr: false }
+  { ssr: false, loading: () => <ToggleSkeleton /> }
 );
 const ScrollSettingsToggle = dynamic(
   () => import("@/components/scroll-settings-toggle").then((m) => m.ScrollSettingsToggle),
-  { ssr: false }
+  { ssr: false, loading: () => <ToggleSkeleton /> }
 );
 const CursorSettingsToggle = dynamic(
   () => import("@/components/cursor-settings-toggle").then((m) => m.CursorSettingsToggle),
-  { ssr: false }
+  { ssr: false, loading: () => <ToggleSkeleton /> }
 );
 
 interface Category {
