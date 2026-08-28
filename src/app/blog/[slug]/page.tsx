@@ -31,6 +31,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import { CopyButton } from "@/components/copy-button";
 import { DirectionalTransition } from "@/components/directional-transition";
 import { BlogReactions } from "@/components/blog-reactions";
+import { BlogComments } from "@/components/blog-comments";
 
 function rehypeExtractRawCode() {
   return (tree: any) => {
@@ -199,6 +200,7 @@ export default async function Post({ params }: Props) {
             {content}
           </article>
           <BlogReactions slug={slug} />
+          <BlogComments slug={slug} />
         </Container>
       </div>
       <TextScroll
