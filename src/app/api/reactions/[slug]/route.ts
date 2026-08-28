@@ -52,10 +52,11 @@ export async function GET(
       like: 0,
       love: 0,
       fire: 0,
-      rocket: 0,
-      mindblown: 0,
-      party: 0,
+      dislike: 0,
+      frown: 0,
+      skull: 0,
     },
+    user_reaction: null,
     user_reactions: [],
   });
 }
