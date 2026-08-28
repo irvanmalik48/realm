@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { MDXRemote, type MDXRemoteOptions } from "next-mdx-remote-client/rsc";
+import { evaluate, type EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { readingTime } from "reading-time-estimator";
 
 import remarkGfm from "remark-gfm";
@@ -89,7 +89,7 @@ async function renderMDX(
     theme: "material-theme-darker",
   };
 
-  const options: MDXRemoteOptions = {
+  const options: EvaluateOptions = {
     disableImports: true,
     parseFrontmatter: true,
     scope: {
@@ -116,25 +116,27 @@ async function renderMDX(
     },
   };
 
-  const content = (
-    <MDXRemote
-      source={source}
-      options={options}
-      components={{
-        pre: ({ children, style, ...props }: ComponentPropsWithoutRef<"pre">) => {
-          const rawCode = (props as any)["data-raw-code"] || "";
-          return (
-            <div className="relative group">
-              <pre style={style as any} {...props}>
-                {children}
-              </pre>
-              <CopyButton code={rawCode} />
-            </div>
-          );
-        },
-      }}
-    />
-  );
+  const { content, error } = await evaluate({
+    source,
+    options,
+    components: {
+      pre: ({ children, style, ...props }: ComponentPropsWithoutRef<"pre">) => {
+        const rawCode = (props as any)["data-raw-code"] || "";
+        return (
+          <div className="relative group">
+            <pre style={style as any} {...props}>
+              {children}
+            </pre>
+            <CopyButton code={rawCode} />
+          </div>
+        );
+      },
+    },
+  });
+
+  if (error) {
+    throw error;
+  }
 
   const headings: Heading[] = toc.map((item) => ({
     id: item.href.replace(/^#/, ""),
