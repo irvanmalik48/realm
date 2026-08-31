@@ -59,10 +59,27 @@ export async function getRecentTracksAction(username: string, limit: number = 8)
         return parseSongs(body, "large");
       }
     } catch {
-      // Fallback failed, throw original error
+      // Fallback failed
     }
 
-    throw new Error(err.details || err.message || "Failed to fetch tracks");
+    // Direct LastFM API fallback if key is configured in Next.js environment
+    const directKey = env.LASTFM_API_KEY || process.env.LASTFM_API_KEY;
+    if (directKey) {
+      try {
+        const directUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${encodeURIComponent(
+          username
+        )}&api_key=${directKey}&format=json&limit=${limit}`;
+        const res = await fetch(directUrl, { next: { revalidate: 60 } });
+        if (res.ok) {
+          const body: LastFMTrackResponseBody = await res.json();
+          return parseSongs(body, "large");
+        }
+      } catch {
+        // Direct call failed
+      }
+    }
+
+    return parseSongs(null, "large");
   }
 }
 
@@ -106,9 +123,26 @@ export async function getUserInfoAction(username: string) {
         return parseUser(body, "large");
       }
     } catch {
-      // Fallback failed, throw original error
+      // Fallback failed
     }
 
-    throw new Error(err.details || err.message || "Failed to fetch user");
+    // Direct LastFM API fallback if key is configured in Next.js environment
+    const directKey = env.LASTFM_API_KEY || process.env.LASTFM_API_KEY;
+    if (directKey) {
+      try {
+        const directUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=${encodeURIComponent(
+          username
+        )}&api_key=${directKey}&format=json`;
+        const res = await fetch(directUrl, { next: { revalidate: 300 } });
+        if (res.ok) {
+          const body: LastFMUserResponseBody = await res.json();
+          return parseUser(body, "large");
+        }
+      } catch {
+        // Direct call failed
+      }
+    }
+
+    return parseUser(null, "large");
   }
 }
