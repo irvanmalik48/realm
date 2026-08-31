@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getReactionClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { getReactionClient, promisifyUnary, createMetadata, getApiBaseUrl } from "@/lib/grpc/client";
 import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function GET(
@@ -43,7 +43,27 @@ export async function GET(
       user_reactions: data.user_reactions || [],
     });
   } catch {
-    // Fallback if backend is offline or uninitialized
+    // Fallback to HTTP REST endpoint
+    try {
+      const baseUrl = getApiBaseUrl();
+      const headers: Record<string, string> = {};
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+      if (forwardedFor) headers["X-Forwarded-For"] = forwardedFor;
+
+      const restRes = await fetch(`${baseUrl}/v1/posts/${encodeURIComponent(slug)}/reactions`, {
+        headers,
+        cache: "no-store",
+      });
+
+      if (restRes.ok) {
+        const restData = await restRes.json();
+        return NextResponse.json(restData);
+      }
+    } catch {
+      // Fallback failed
+    }
+
+    // Default fallback if backend is offline or uninitialized
     return NextResponse.json({
       slug,
       total_count: 0,
@@ -70,14 +90,14 @@ export async function POST(
     return NextResponse.json({ error: "Missing slug" }, { status: 400 });
   }
 
-  try {
-    const body = await req.json();
-    const token =
-      req.cookies.get("realm_auth_token")?.value ||
-      req.headers.get("authorization")?.replace("Bearer ", "");
-    const forwardedFor =
-      req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "";
+  const body = await req.json();
+  const token =
+    req.cookies.get("realm_auth_token")?.value ||
+    req.headers.get("authorization")?.replace("Bearer ", "");
+  const forwardedFor =
+    req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "";
 
+  try {
     const client = getReactionClient();
     const metadata = createMetadata({ token, ip: forwardedFor });
 
@@ -100,9 +120,35 @@ export async function POST(
       user_reaction: data.user_reaction || null,
       user_reactions: data.user_reactions || [],
     });
-  } catch (err: any) {
-    const { message, status } = formatGrpcError(err);
-    return NextResponse.json({ error: message }, { status });
+  } catch (grpcError: any) {
+    // Attempt REST fallback
+    try {
+      const baseUrl = getApiBaseUrl();
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+      if (forwardedFor) headers["X-Forwarded-For"] = forwardedFor;
+
+      const restRes = await fetch(`${baseUrl}/v1/posts/${encodeURIComponent(slug)}/reactions`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      });
+
+      const restData = await restRes.json();
+      if (restRes.ok) {
+        return NextResponse.json(restData);
+      }
+
+      return NextResponse.json(
+        { error: restData.error || "Failed to toggle reaction" },
+        { status: restRes.status }
+      );
+    } catch {
+      const { message, status } = formatGrpcError(grpcError);
+      return NextResponse.json({ error: message }, { status });
+    }
   }
 }
 
