@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCommentClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { getCommentClient, promisifyUnary, createMetadata, getApiBaseUrl } from "@/lib/grpc/client";
 import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function GET(
@@ -32,7 +32,26 @@ export async function GET(
       comments: data.comments || [],
     });
   } catch {
-    // Fallback if backend is unreachable
+    // Fallback to HTTP REST endpoint
+    try {
+      const baseUrl = getApiBaseUrl();
+      const headers: Record<string, string> = {};
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+
+      const restRes = await fetch(`${baseUrl}/v1/posts/${encodeURIComponent(slug)}/comments`, {
+        headers,
+        cache: "no-store",
+      });
+
+      if (restRes.ok) {
+        const restData = await restRes.json();
+        return NextResponse.json(restData);
+      }
+    } catch {
+      // Fallback failed
+    }
+
+    // Default fallback if backend is unreachable
     return NextResponse.json({
       slug,
       total_count: 0,
@@ -50,19 +69,19 @@ export async function POST(
     return NextResponse.json({ error: "Missing slug" }, { status: 400 });
   }
 
+  const body = await req.json();
+  const token =
+    req.cookies.get("realm_auth_token")?.value ||
+    req.headers.get("authorization")?.replace("Bearer ", "");
+
+  if (!token) {
+    return NextResponse.json(
+      { error: "Unauthorized: login required to post a comment" },
+      { status: 401 },
+    );
+  }
+
   try {
-    const body = await req.json();
-    const token =
-      req.cookies.get("realm_auth_token")?.value ||
-      req.headers.get("authorization")?.replace("Bearer ", "");
-
-    if (!token) {
-      return NextResponse.json(
-        { error: "Unauthorized: login required to post a comment" },
-        { status: 401 },
-      );
-    }
-
     const client = getCommentClient();
     const metadata = createMetadata({ token });
 
@@ -84,9 +103,32 @@ export async function POST(
       },
       { status: 201 }
     );
-  } catch (err: any) {
-    const { message, status } = formatGrpcError(err);
-    return NextResponse.json({ error: message }, { status });
+  } catch (grpcError: any) {
+    // Attempt REST fallback
+    try {
+      const baseUrl = getApiBaseUrl();
+      const restRes = await fetch(`${baseUrl}/v1/posts/${encodeURIComponent(slug)}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+
+      const restData = await restRes.json();
+      if (restRes.ok) {
+        return NextResponse.json(restData, { status: 201 });
+      }
+
+      return NextResponse.json(
+        { error: restData.error || "Failed to post comment" },
+        { status: restRes.status }
+      );
+    } catch {
+      const { message, status } = formatGrpcError(grpcError);
+      return NextResponse.json({ error: message }, { status });
+    }
   }
 }
 
