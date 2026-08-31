@@ -4,17 +4,27 @@ import { env } from "@/env";
 import { parseSongs, parseUser } from "@/lib/lastfm/lastfm";
 import { LastFMTrackResponseBody, LastFMUserResponseBody } from "@/lib/types/lastfm";
 
-import { getLastFMClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { getLastFMClient, promisifyUnary, createMetadata, getApiBaseUrl } from "@/lib/grpc/client";
+
+function getAuthHeaders(): HeadersInit {
+  const headers: Record<string, string> = {
+    Accept: "application/json",
+  };
+  if (env.API_TOKEN) {
+    headers["Authorization"] = `Bearer ${env.API_TOKEN}`;
+  }
+  return headers;
+}
 
 export async function getRecentTracksAction(username: string, limit: number = 8) {
   if (!username) {
     throw new Error("Username is required");
   }
 
-  const client = getLastFMClient();
-  const metadata = createMetadata();
-
   try {
+    const client = getLastFMClient();
+    const metadata = createMetadata();
+
     const res: any = await promisifyUnary(
       client,
       "GetRecentTracks",
@@ -32,6 +42,26 @@ export async function getRecentTracksAction(username: string, limit: number = 8)
 
     return parseSongs(null, "large");
   } catch (err: any) {
+    // Fallback to HTTP REST endpoint
+    try {
+      const baseUrl = getApiBaseUrl();
+      const endpoint = `${baseUrl}/v1/lastfm/track?username=${encodeURIComponent(
+        username
+      )}&limit=${encodeURIComponent(String(limit))}`;
+
+      const res = await fetch(endpoint, {
+        headers: getAuthHeaders(),
+        next: { revalidate: 60 },
+      });
+
+      if (res.ok) {
+        const body: LastFMTrackResponseBody = await res.json();
+        return parseSongs(body, "large");
+      }
+    } catch {
+      // Fallback failed, throw original error
+    }
+
     throw new Error(err.details || err.message || "Failed to fetch tracks");
   }
 }
@@ -41,10 +71,10 @@ export async function getUserInfoAction(username: string) {
     throw new Error("Username is required");
   }
 
-  const client = getLastFMClient();
-  const metadata = createMetadata();
-
   try {
+    const client = getLastFMClient();
+    const metadata = createMetadata();
+
     const res: any = await promisifyUnary(
       client,
       "GetUserInfo",
@@ -61,6 +91,24 @@ export async function getUserInfoAction(username: string) {
 
     return parseUser(null, "large");
   } catch (err: any) {
+    // Fallback to HTTP REST endpoint
+    try {
+      const baseUrl = getApiBaseUrl();
+      const endpoint = `${baseUrl}/v1/lastfm/user?username=${encodeURIComponent(username)}`;
+
+      const res = await fetch(endpoint, {
+        headers: getAuthHeaders(),
+        next: { revalidate: 300 },
+      });
+
+      if (res.ok) {
+        const body: LastFMUserResponseBody = await res.json();
+        return parseUser(body, "large");
+      }
+    } catch {
+      // Fallback failed, throw original error
+    }
+
     throw new Error(err.details || err.message || "Failed to fetch user");
   }
 }
