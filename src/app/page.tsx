@@ -11,7 +11,6 @@ import HeroProfile from "@/assets/img/profpic-animated.webp";
 import { Book, Info, Server } from "lucide-react";
 import { SelfHostedServices } from "@/components/selfhosted";
 import { AboutSite } from "@/components/about-site";
-import { Badge } from "@/components/ui/badge";
 import { TextScroll } from "@/components/ui/text-scroll";
 import { APIStatusPulse } from "@/components/api-status-pulse";
 
@@ -87,15 +86,10 @@ export default function Home() {
           </p>
           <SelfHostedServices />
         </div>
-        <div className="w-full bg-background rounded-lg border border-border overflow-hidden">
-          <h2 className="w-full flex items-center justify-between text-muted-foreground px-5 py-3 border-b border-border">
-            <div className="flex items-center gap-3">
-              <Info className="size-4 text-primary" />
-              <span className="text-sm font-mono text-foreground font-medium">ABOUT_SITE.md</span>
-            </div>
-            <Badge variant="outline" className="font-mono text-[10px] uppercase">
-              Specs & Tech
-            </Badge>
+        <div className="w-full bg-background rounded-lg border border-border">
+          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
+            <Info className="size-4" />
+            <span className="text-sm font-mono">ABOUT_SITE.md</span>
           </h2>
           <AboutSite />
         </div>
