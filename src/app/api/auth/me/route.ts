@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { env } from "@/env";
-
-function getBackendUrl(): string {
-  if (env.API_URL) return env.API_URL;
-  if (env.NEXT_PUBLIC_API_URL) return env.NEXT_PUBLIC_API_URL;
-  return env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : "https://api.irvanma.eu.org";
-}
+import { getAuthClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
 
 export async function GET(req: NextRequest) {
   try {
@@ -19,15 +12,16 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ user: null });
     }
 
-    const backendUrl = getBackendUrl();
-    const response = await fetch(`${backendUrl}/v1/auth/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    });
+    const client = getAuthClient();
+    const metadata = createMetadata({ token });
 
-    if (!response.ok) {
+    try {
+      const data: any = await promisifyUnary(client, "GetProfile", {}, metadata);
+      return NextResponse.json({
+        status: "success",
+        user: data.user,
+      });
+    } catch {
       const res = NextResponse.json({ user: null });
       res.cookies.set("realm_auth_token", "", {
         httpOnly: true,
@@ -38,13 +32,8 @@ export async function GET(req: NextRequest) {
       });
       return res;
     }
-
-    const data = await response.json();
-    return NextResponse.json({
-      status: "success",
-      user: data.user,
-    });
   } catch (error) {
     return NextResponse.json({ user: null });
   }
 }
+

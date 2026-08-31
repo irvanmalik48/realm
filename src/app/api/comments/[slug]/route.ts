@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { env } from "@/env";
-
-function getBackendUrl(): string {
-  if (env.API_URL) return env.API_URL;
-  if (env.NEXT_PUBLIC_API_URL) return env.NEXT_PUBLIC_API_URL;
-  return env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : "https://api.irvanma.eu.org";
-}
+import { getCommentClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function GET(
   req: NextRequest,
@@ -22,29 +15,30 @@ export async function GET(
     req.cookies.get("realm_auth_token")?.value ||
     req.headers.get("authorization")?.replace("Bearer ", "");
 
-  const headers: Record<string, string> = {};
-  if (token) headers["Authorization"] = `Bearer ${token}`;
-
   try {
-    const backendUrl = getBackendUrl();
-    const res = await fetch(`${backendUrl}/v1/posts/${encodeURIComponent(slug)}/comments`, {
-      headers,
-      cache: "no-store",
-    });
+    const client = getCommentClient();
+    const metadata = createMetadata({ token });
 
-    if (res.ok) {
-      const data = await res.json();
-      return NextResponse.json(data);
-    }
+    const data: any = await promisifyUnary(
+      client,
+      "GetComments",
+      { slug },
+      metadata
+    );
+
+    return NextResponse.json({
+      slug: data.slug,
+      total_count: data.total_count || 0,
+      comments: data.comments || [],
+    });
   } catch {
     // Fallback if backend is unreachable
+    return NextResponse.json({
+      slug,
+      total_count: 0,
+      comments: [],
+    });
   }
-
-  return NextResponse.json({
-    slug,
-    total_count: 0,
-    comments: [],
-  });
 }
 
 export async function POST(
@@ -69,30 +63,30 @@ export async function POST(
       );
     }
 
-    const backendUrl = getBackendUrl();
-    const res = await fetch(`${backendUrl}/v1/posts/${encodeURIComponent(slug)}/comments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const client = getCommentClient();
+    const metadata = createMetadata({ token });
+
+    const data: any = await promisifyUnary(
+      client,
+      "CreateComment",
+      {
+        slug,
+        content: body.content || "",
+        parent_id: body.parent_id || undefined,
       },
-      body: JSON.stringify(body),
-    });
+      metadata
+    );
 
-    if (res.ok) {
-      const data = await res.json();
-      return NextResponse.json(data, { status: 201 });
-    }
-
-    const err = await res.json().catch(() => ({}));
     return NextResponse.json(
-      { error: err.error || "Failed to post comment" },
-      { status: res.status },
+      {
+        status: "success",
+        comment: data.comment,
+      },
+      { status: 201 }
     );
   } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || "Failed to connect to comment service" },
-      { status: 500 },
-    );
+    const { message, status } = formatGrpcError(err);
+    return NextResponse.json({ error: message }, { status });
   }
 }
+

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package realm.v1;
+
+message HealthRequest {}
+
+message HealthResponse {
+  string status = 1;
+  string service = 2;
+  string version = 3;
+  int64 uptime_seconds = 4;
+  string timestamp = 5;
+  string database = 6;
+}
+
+service HealthService {
+  rpc GetHealth(HealthRequest) returns (HealthResponse);
+}

@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { env } from "@/env";
-
-function getBackendUrl(): string {
-  if (env.API_URL) return env.API_URL;
-  if (env.NEXT_PUBLIC_API_URL) return env.NEXT_PUBLIC_API_URL;
-  return env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : "https://api.irvanma.eu.org";
-}
+import { getReactionClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function GET(
   req: NextRequest,
@@ -21,44 +14,51 @@ export async function GET(
   const token =
     req.cookies.get("realm_auth_token")?.value ||
     req.headers.get("authorization")?.replace("Bearer ", "");
-  const clientID = req.headers.get("x-client-id") || "";
   const forwardedFor =
     req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "";
 
-  const headers: Record<string, string> = {};
-  if (token) headers["Authorization"] = `Bearer ${token}`;
-  if (clientID) headers["X-Client-ID"] = clientID;
-  if (forwardedFor) headers["X-Forwarded-For"] = forwardedFor;
-
   try {
-    const backendUrl = getBackendUrl();
-    const res = await fetch(`${backendUrl}/v1/posts/${encodeURIComponent(slug)}/reactions`, {
-      headers,
-      cache: "no-store",
+    const client = getReactionClient();
+    const metadata = createMetadata({ token, ip: forwardedFor });
+
+    const data: any = await promisifyUnary(
+      client,
+      "GetReactions",
+      { slug },
+      metadata
+    );
+
+    return NextResponse.json({
+      slug: data.slug,
+      total_count: data.total_count || 0,
+      reactions: data.reactions || {
+        like: 0,
+        love: 0,
+        fire: 0,
+        dislike: 0,
+        frown: 0,
+        skull: 0,
+      },
+      user_reaction: data.user_reaction || null,
+      user_reactions: data.user_reactions || [],
     });
-
-    if (res.ok) {
-      const data = await res.json();
-      return NextResponse.json(data);
-    }
   } catch {
-    // Fallback if backend is offline
+    // Fallback if backend is offline or uninitialized
+    return NextResponse.json({
+      slug,
+      total_count: 0,
+      reactions: {
+        like: 0,
+        love: 0,
+        fire: 0,
+        dislike: 0,
+        frown: 0,
+        skull: 0,
+      },
+      user_reaction: null,
+      user_reactions: [],
+    });
   }
-
-  return NextResponse.json({
-    slug,
-    total_count: 0,
-    reactions: {
-      like: 0,
-      love: 0,
-      fire: 0,
-      dislike: 0,
-      frown: 0,
-      skull: 0,
-    },
-    user_reaction: null,
-    user_reactions: [],
-  });
 }
 
 export async function POST(
@@ -75,38 +75,34 @@ export async function POST(
     const token =
       req.cookies.get("realm_auth_token")?.value ||
       req.headers.get("authorization")?.replace("Bearer ", "");
-    const clientID = req.headers.get("x-client-id") || "";
     const forwardedFor =
       req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "";
 
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-    };
-    if (token) headers["Authorization"] = `Bearer ${token}`;
-    if (clientID) headers["X-Client-ID"] = clientID;
-    if (forwardedFor) headers["X-Forwarded-For"] = forwardedFor;
+    const client = getReactionClient();
+    const metadata = createMetadata({ token, ip: forwardedFor });
 
-    const backendUrl = getBackendUrl();
-    const res = await fetch(`${backendUrl}/v1/posts/${encodeURIComponent(slug)}/reactions`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body),
+    const data: any = await promisifyUnary(
+      client,
+      "ToggleReaction",
+      {
+        slug,
+        reaction: body.reaction || "",
+      },
+      metadata
+    );
+
+    return NextResponse.json({
+      slug: data.slug,
+      reaction: data.reaction,
+      active: data.active,
+      total_count: data.total_count || 0,
+      reactions: data.reactions || {},
+      user_reaction: data.user_reaction || null,
+      user_reactions: data.user_reactions || [],
     });
-
-    if (res.ok) {
-      const data = await res.json();
-      return NextResponse.json(data);
-    }
-
-    const err = await res.json().catch(() => ({}));
-    return NextResponse.json(
-      { error: err.error || "Failed to toggle reaction" },
-      { status: res.status },
-    );
   } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || "Failed to connect to reaction service" },
-      { status: 500 },
-    );
+    const { message, status } = formatGrpcError(err);
+    return NextResponse.json({ error: message }, { status });
   }
 }
+

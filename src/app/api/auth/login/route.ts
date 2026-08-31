@@ -1,36 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { env } from "@/env";
-
-function getBackendUrl(): string {
-  if (env.API_URL) return env.API_URL;
-  if (env.NEXT_PUBLIC_API_URL) return env.NEXT_PUBLIC_API_URL;
-  return env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : "https://api.irvanma.eu.org";
-}
+import { getAuthClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const backendUrl = getBackendUrl();
+    const client = getAuthClient();
+    const metadata = createMetadata();
 
-    const response = await fetch(`${backendUrl}/v1/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const data: any = await promisifyUnary(
+      client,
+      "Login",
+      {
+        identifier: body.identifier || "",
+        password: body.password || "",
       },
-      body: JSON.stringify(body),
-      cache: "no-store",
-    });
-
-    const data = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: data.error || "Invalid credentials" },
-        { status: response.status }
-      );
-    }
+      metadata
+    );
 
     const token = data.token;
     const user = data.user;
@@ -52,10 +39,9 @@ export async function POST(req: NextRequest) {
     }
 
     return res;
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Authentication service unavailable" },
-      { status: 500 }
-    );
+  } catch (error: any) {
+    const { message, status } = formatGrpcError(error);
+    return NextResponse.json({ error: message }, { status });
   }
 }
+

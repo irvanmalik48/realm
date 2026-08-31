@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package realm.v1;
+
+message GetReactionsRequest {
+  string slug = 1;
+}
+
+message ReactionsResponse {
+  string slug = 1;
+  int32 total_count = 2;
+  map<string, int32> reactions = 3;
+  optional string user_reaction = 4;
+  repeated string user_reactions = 5;
+}
+
+message ToggleReactionRequest {
+  string slug = 1;
+  string reaction = 2;
+}
+
+message ToggleReactionResponse {
+  string slug = 1;
+  string reaction = 2;
+  bool active = 3;
+  int32 total_count = 4;
+  map<string, int32> reactions = 5;
+  optional string user_reaction = 6;
+  repeated string user_reactions = 7;
+}
+
+service ReactionService {
+  rpc GetReactions(GetReactionsRequest) returns (ReactionsResponse);
+  rpc ToggleReaction(ToggleReactionRequest) returns (ToggleReactionResponse);
+}

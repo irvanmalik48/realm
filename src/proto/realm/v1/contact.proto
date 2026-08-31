@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package realm.v1;
+
+message SendMessageRequest {
+  string name = 1;
+  string email = 2;
+  string subject = 3;
+  string message = 4;
+  string gotcha = 5;
+  string ip_address = 6;
+  string user_agent = 7;
+}
+
+message SendMessageResponse {
+  string status = 1;
+  string message = 2;
+}
+
+service ContactService {
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+}

@@ -1,35 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
-import { env } from "@/env";
+import { getAuthClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const username = searchParams.get("username") || "";
-    const email = searchParams.get("email") || "";
+    const username = searchParams.get("username") || undefined;
+    const email = searchParams.get("email") || undefined;
 
-    const backendUrl = env.API_URL || "http://localhost:8080";
-    const query = new URLSearchParams();
-    if (username) query.set("username", username);
-    if (email) query.set("email", email);
+    const client = getAuthClient();
+    const metadata = createMetadata();
 
-    const res = await fetch(`${backendUrl}/v1/auth/check?${query.toString()}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
+    const data: any = await promisifyUnary(
+      client,
+      "CheckAvailability",
+      {
+        username,
+        email,
       },
-      cache: "no-store",
-    });
+      metadata
+    );
 
-    const data = await res.json();
-    return NextResponse.json(data, { status: res.status });
+    return NextResponse.json(data);
   } catch (error: any) {
     if (error?.digest === "NEXT_PRERENDER_INTERRUPTED" || error?.message?.includes("bail out of prerendering")) {
       throw error;
     }
-    console.error("Availability check proxy error:", error);
-    return NextResponse.json(
-      { error: "Failed to check availability" },
-      { status: 500 }
-    );
+    const { message, status } = formatGrpcError(error);
+    return NextResponse.json({ error: message }, { status });
   }
 }
+

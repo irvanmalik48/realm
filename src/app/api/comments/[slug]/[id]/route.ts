@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { env } from "@/env";
-
-function getBackendUrl(): string {
-  if (env.API_URL) return env.API_URL;
-  if (env.NEXT_PUBLIC_API_URL) return env.NEXT_PUBLIC_API_URL;
-  return env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : "https://api.irvanma.eu.org";
-}
+import { getCommentClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function PATCH(
   req: NextRequest,
@@ -31,34 +24,26 @@ export async function PATCH(
       );
     }
 
-    const backendUrl = getBackendUrl();
-    const res = await fetch(
-      `${backendUrl}/v1/posts/${encodeURIComponent(slug)}/comments/${encodeURIComponent(id)}`,
+    const client = getCommentClient();
+    const metadata = createMetadata({ token });
+
+    const data: any = await promisifyUnary(
+      client,
+      "UpdateComment",
       {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(body),
+        id,
+        content: body.content || "",
       },
+      metadata
     );
 
-    if (res.ok) {
-      const data = await res.json();
-      return NextResponse.json(data);
-    }
-
-    const err = await res.json().catch(() => ({}));
-    return NextResponse.json(
-      { error: err.error || "Failed to update comment" },
-      { status: res.status },
-    );
+    return NextResponse.json({
+      status: "success",
+      comment: data.comment,
+    });
   } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || "Failed to connect to comment service" },
-      { status: 500 },
-    );
+    const { message, status } = formatGrpcError(err);
+    return NextResponse.json({ error: message }, { status });
   }
 }
 
@@ -83,31 +68,23 @@ export async function DELETE(
       );
     }
 
-    const backendUrl = getBackendUrl();
-    const res = await fetch(
-      `${backendUrl}/v1/posts/${encodeURIComponent(slug)}/comments/${encodeURIComponent(id)}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
+    const client = getCommentClient();
+    const metadata = createMetadata({ token });
+
+    const data: any = await promisifyUnary(
+      client,
+      "DeleteComment",
+      { id },
+      metadata
     );
 
-    if (res.ok) {
-      const data = await res.json();
-      return NextResponse.json(data);
-    }
-
-    const err = await res.json().catch(() => ({}));
-    return NextResponse.json(
-      { error: err.error || "Failed to delete comment" },
-      { status: res.status },
-    );
+    return NextResponse.json({
+      status: "success",
+      message: data.message || "Comment deleted",
+    });
   } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || "Failed to connect to comment service" },
-      { status: 500 },
-    );
+    const { message, status } = formatGrpcError(err);
+    return NextResponse.json({ error: message }, { status });
   }
 }
+

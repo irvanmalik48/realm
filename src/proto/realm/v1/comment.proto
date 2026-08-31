@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package realm.v1;
+
+message CommentAuthor {
+  string id = 1;
+  string username = 2;
+  string full_name = 3;
+  optional string avatar_url = 4;
+}
+
+message Comment {
+  string id = 1;
+  string post_slug = 2;
+  optional string parent_id = 3;
+  string content = 4;
+  bool is_edited = 5;
+  bool is_author = 6;
+  CommentAuthor author = 7;
+  repeated Comment replies = 8;
+  string created_at = 9;
+  string updated_at = 10;
+}
+
+message GetCommentsRequest {
+  string slug = 1;
+}
+
+message GetCommentsResponse {
+  string slug = 1;
+  int32 total_count = 2;
+  repeated Comment comments = 3;
+}
+
+message CreateCommentRequest {
+  string slug = 1;
+  string content = 2;
+  optional string parent_id = 3;
+}
+
+message UpdateCommentRequest {
+  string id = 1;
+  string content = 2;
+}
+
+message DeleteCommentRequest {
+  string id = 1;
+}
+
+message CommentResponse {
+  string status = 1;
+  optional string message = 2;
+  Comment comment = 3;
+}
+
+message DeleteCommentResponse {
+  string status = 1;
+  string message = 2;
+}
+
+service CommentService {
+  rpc GetComments(GetCommentsRequest) returns (GetCommentsResponse);
+  rpc CreateComment(CreateCommentRequest) returns (CommentResponse);
+  rpc UpdateComment(UpdateCommentRequest) returns (CommentResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse);
+}

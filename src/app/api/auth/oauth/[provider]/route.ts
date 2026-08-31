@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { env } from "@/env";
-
-function getBackendUrl(): string {
-  if (env.API_URL) return env.API_URL;
-  if (env.NEXT_PUBLIC_API_URL) return env.NEXT_PUBLIC_API_URL;
-  return env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : "https://api.irvanma.eu.org";
-}
+import { getAuthClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function DELETE(
   req: NextRequest,
@@ -23,30 +16,25 @@ export async function DELETE(
     }
 
     const { provider } = await params;
-    const backendUrl = getBackendUrl();
+    const client = getAuthClient();
+    const metadata = createMetadata({ token });
 
-    const res = await fetch(`${backendUrl}/v1/auth/oauth/${provider}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const data: any = await promisifyUnary(
+      client,
+      "UnlinkOAuth",
+      {
+        provider,
       },
-      cache: "no-store",
-    });
-
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) {
-      return NextResponse.json(
-        { error: data.error || data.message || `Failed to disconnect ${provider}` },
-        { status: res.status }
-      );
-    }
-
-    return NextResponse.json(data, { status: res.status });
-  } catch (error) {
-    console.error("OAuth unlink proxy error:", error);
-    return NextResponse.json(
-      { error: "OAuth unlink service unavailable" },
-      { status: 500 }
+      metadata
     );
+
+    return NextResponse.json({
+      status: "success",
+      message: data.message || `${provider} account unlinked successfully`,
+    });
+  } catch (error: any) {
+    const { message, status } = formatGrpcError(error);
+    return NextResponse.json({ error: message }, { status });
   }
 }
+

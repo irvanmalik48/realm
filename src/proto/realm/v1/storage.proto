@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package realm.v1;
+
+message FileMetadata {
+  string id = 1;
+  string filename = 2;
+  string content_type = 3;
+  int64 original_size = 4;
+  int64 compressed_size = 5;
+  double savings_percent = 6;
+  string sha256 = 7;
+  optional string blurhash = 8;
+  optional int32 width = 9;
+  optional int32 height = 10;
+  string url = 11;
+  optional string webp_url = 12;
+  string created_at = 13;
+}
+
+message UploadFileRequest {
+  string filename = 1;
+  string content_type = 2;
+  bytes data = 3;
+}
+
+message UploadFileResponse {
+  string status = 1;
+  string message = 2;
+  FileMetadata file = 3;
+}
+
+message GetFileInfoRequest {
+  string id = 1;
+}
+
+message GetFileInfoResponse {
+  string status = 1;
+  FileMetadata file = 2;
+}
+
+message DeleteFileRequest {
+  string id = 1;
+}
+
+message DeleteFileResponse {
+  string status = 1;
+  string message = 2;
+}
+
+message GetFileRequest {
+  string id = 1;
+  optional string format = 2;
+}
+
+message FileChunkResponse {
+  bytes chunk = 1;
+  string content_type = 2;
+  string filename = 3;
+}
+
+service StorageService {
+  rpc UploadFile(UploadFileRequest) returns (UploadFileResponse);
+  rpc GetFileInfo(GetFileInfoRequest) returns (GetFileInfoResponse);
+  rpc DeleteFile(DeleteFileRequest) returns (DeleteFileResponse);
+  rpc GetFile(GetFileRequest) returns (stream FileChunkResponse);
+}

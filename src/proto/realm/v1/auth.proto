@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package realm.v1;
+
+message OAuthAccount {
+  string provider = 1;
+  optional string email = 2;
+  optional string avatar_url = 3;
+  string created_at = 4;
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+  string username = 3;
+  string full_name = 4;
+  optional string avatar_url = 5;
+  string provider = 6;
+  string created_at = 7;
+  string updated_at = 8;
+  repeated OAuthAccount connected_accounts = 9;
+}
+
+message RegisterRequest {
+  string email = 1;
+  string username = 2;
+  string password = 3;
+  string full_name = 4;
+  optional string avatar_url = 5;
+}
+
+message LoginRequest {
+  string identifier = 1;
+  string password = 2;
+}
+
+message AuthResponse {
+  string status = 1;
+  string message = 2;
+  string token = 3;
+  User user = 4;
+}
+
+message GetProfileRequest {}
+
+message ProfileResponse {
+  string status = 1;
+  optional string message = 2;
+  User user = 3;
+}
+
+message UpdateProfileRequest {
+  optional string full_name = 1;
+  optional string username = 2;
+  optional string avatar_url = 3;
+}
+
+message SetPasswordRequest {
+  optional string current_password = 1;
+  string new_password = 2;
+}
+
+message SetPasswordResponse {
+  string status = 1;
+  string message = 2;
+}
+
+message CheckAvailabilityRequest {
+  optional string username = 1;
+  optional string email = 2;
+}
+
+message CheckAvailabilityResponse {
+  optional bool username_available = 1;
+  optional string username_reason = 2;
+  optional bool email_available = 3;
+  optional string email_reason = 4;
+}
+
+message UnlinkOAuthRequest {
+  string provider = 1;
+}
+
+message UnlinkOAuthResponse {
+  string status = 1;
+  string message = 2;
+}
+
+service AuthService {
+  rpc Register(RegisterRequest) returns (AuthResponse);
+  rpc Login(LoginRequest) returns (AuthResponse);
+  rpc GetProfile(GetProfileRequest) returns (ProfileResponse);
+  rpc UpdateProfile(UpdateProfileRequest) returns (ProfileResponse);
+  rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
+  rpc CheckAvailability(CheckAvailabilityRequest) returns (CheckAvailabilityResponse);
+  rpc UnlinkOAuth(UnlinkOAuthRequest) returns (UnlinkOAuthResponse);
+}

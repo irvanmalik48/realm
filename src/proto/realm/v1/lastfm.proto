@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package realm.v1;
+
+message LastFMImage {
+  string size = 1;
+  string url = 2;
+}
+
+message LastFMTrackArtist {
+  string mbid = 1;
+  string name = 2;
+}
+
+message LastFMTrackAlbum {
+  string mbid = 1;
+  string title = 2;
+}
+
+message LastFMTrackDate {
+  string uts = 1;
+  string text = 2;
+}
+
+message LastFMTrack {
+  string name = 1;
+  string mbid = 2;
+  string url = 3;
+  string streamable = 4;
+  LastFMTrackArtist artist = 5;
+  LastFMTrackAlbum album = 6;
+  repeated LastFMImage images = 7;
+  optional LastFMTrackDate date = 8;
+  bool now_playing = 9;
+}
+
+message LastFMRecentTracksAttr {
+  string page = 1;
+  string total = 2;
+  string user = 3;
+  string per_page = 4;
+  string total_pages = 5;
+}
+
+message GetRecentTracksRequest {
+  string username = 1;
+  int32 limit = 2;
+}
+
+message RecentTracksResponse {
+  LastFMRecentTracksAttr attr = 1;
+  repeated LastFMTrack tracks = 2;
+  string raw_json = 3;
+}
+
+message GetUserInfoRequest {
+  string username = 1;
+}
+
+message LastFMUserRegistered {
+  string unix_time = 1;
+  string text = 2;
+}
+
+message LastFMUser {
+  string name = 1;
+  string real_name = 2;
+  string country = 3;
+  string age = 4;
+  string gender = 5;
+  string subscriber = 6;
+  string play_count = 7;
+  string artist_count = 8;
+  string track_count = 9;
+  string album_count = 10;
+  string playlists = 11;
+  string url = 12;
+  string type = 13;
+  repeated LastFMImage images = 14;
+  LastFMUserRegistered registered = 15;
+}
+
+message UserInfoResponse {
+  LastFMUser user = 1;
+  string raw_json = 2;
+}
+
+service LastFMService {
+  rpc GetRecentTracks(GetRecentTracksRequest) returns (RecentTracksResponse);
+  rpc GetUserInfo(GetUserInfoRequest) returns (UserInfoResponse);
+}
