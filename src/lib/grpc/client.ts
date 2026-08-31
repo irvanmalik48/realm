@@ -1,3 +1,4 @@
+import fs from "fs";
 import path from "path";
 import * as grpc from "@grpc/grpc-js";
 import * as protoLoader from "@grpc/proto-loader";
@@ -20,6 +21,17 @@ const protoOptions: protoLoader.Options = {
 };
 
 function getProtoDir(): string {
+  const possiblePaths = [
+    path.join(process.cwd(), "src", "proto", "realm", "v1"),
+    path.join(__dirname, "src", "proto", "realm", "v1"),
+    path.join(process.cwd(), "proto", "realm", "v1"),
+    path.resolve("./src/proto/realm/v1"),
+  ];
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      return p;
+    }
+  }
   return path.join(process.cwd(), "src", "proto", "realm", "v1");
 }
 
@@ -41,8 +53,21 @@ function createClient(protoFile: string, serviceName: string) {
   if (!ServiceConstructor) {
     throw new Error(`Service ${serviceName} not found in ${protoFile}`);
   }
-  const target = getGrpcTarget();
-  return new ServiceConstructor(target, grpc.credentials.createInsecure());
+  const rawTarget = getGrpcTarget().trim();
+  const isSecure =
+    rawTarget.startsWith("https://") ||
+    rawTarget.endsWith(":443") ||
+    (!rawTarget.includes(":") &&
+      !rawTarget.includes("localhost") &&
+      !rawTarget.includes("127.0.0.1") &&
+      !rawTarget.includes("realm-api"));
+
+  const target = rawTarget.replace(/^https?:\/\//, "");
+  const credentials = isSecure
+    ? grpc.credentials.createSsl()
+    : grpc.credentials.createInsecure();
+
+  return new ServiceConstructor(target, credentials);
 }
 
 export function getHealthClient() {
