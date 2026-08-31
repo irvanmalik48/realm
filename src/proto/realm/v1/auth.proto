@@ -19,6 +19,8 @@ message User {
   string created_at = 7;
   string updated_at = 8;
   repeated OAuthAccount connected_accounts = 9;
+  bool has_password = 10;
+  repeated string connected_providers = 11;
 }
 
 message RegisterRequest {
