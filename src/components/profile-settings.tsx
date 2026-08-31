@@ -188,6 +188,8 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         <div className="flex gap-3 mt-2">
           <Link
             href="/login"
+            prefetch={true}
+            transitionTypes={["nav-forward"]}
             className="flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
           >
             <LogIn className="size-3.5" />
@@ -195,6 +197,8 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
           </Link>
           <Link
             href="/register"
+            prefetch={true}
+            transitionTypes={["nav-forward"]}
             className="px-4 py-2 text-xs font-medium rounded-md border border-border bg-background hover:bg-muted/80 text-foreground transition-colors"
           >
             Create Account
