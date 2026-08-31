@@ -198,41 +198,11 @@ const HIGHLIGHT_FEATURES = [
 ];
 
 const QUICK_BADGES = [
-  {
-    icon: Terminal,
-    label: "Next.js 16.3",
-    subtitle: "React Framework",
-    details:
-      "App Router, Turbopack, Cache Components, and Partial Prerendering on React 19.",
-  },
-  {
-    icon: Cpu,
-    label: "React 19.2",
-    subtitle: "UI Runtime",
-    details:
-      "React 19 Server Components, Actions, and compiler-level memoization.",
-  },
-  {
-    icon: Palette,
-    label: "Tailwind v4",
-    subtitle: "CSS Engine",
-    details:
-      "Next-generation styling using modern CSS variables with OKLCH color palettes.",
-  },
-  {
-    icon: Layers,
-    label: "shadcn/ui",
-    subtitle: "Component Primitives",
-    details:
-      "Accessible, unstyled primitives based on Radix UI styled with design tokens.",
-  },
-  {
-    icon: Server,
-    label: "Go API",
-    subtitle: "realm-api",
-    details:
-      "High-throughput standalone REST microservice handling comments, reactions, and auth.",
-  },
+  { icon: Terminal, label: "Next.js 16.3" },
+  { icon: Cpu, label: "React 19.2" },
+  { icon: Palette, label: "Tailwind v4" },
+  { icon: Layers, label: "shadcn/ui" },
+  { icon: Server, label: "Go API" },
 ];
 
 export function AboutSite() {
@@ -249,45 +219,19 @@ export function AboutSite() {
             service.
           </p>
 
-          {/* Quick Tech Badges with HoverCards */}
+          {/* Quick Tech Badges */}
           <div className="flex flex-wrap items-center gap-2 pt-1">
             {QUICK_BADGES.map((badge) => {
               const Icon = badge.icon;
               return (
-                <HoverCard key={badge.label} openDelay={100} closeDelay={150}>
-                  <HoverCardTrigger asChild>
-                    <span className="inline-flex cursor-help">
-                      <Badge
-                        variant="secondary"
-                        className="font-mono text-xs gap-1.5 py-0.5 hover:bg-muted/80 transition-colors"
-                      >
-                        <Icon className="size-3 text-primary" />
-                        <span>{badge.label}</span>
-                      </Badge>
-                    </span>
-                  </HoverCardTrigger>
-                  <HoverCardContent align="start" className="w-72 p-3.5 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="size-6 rounded-md bg-primary/10 text-primary flex items-center justify-center">
-                          <Icon className="size-3.5" />
-                        </div>
-                        <span className="font-semibold text-xs text-foreground">
-                          {badge.label}
-                        </span>
-                      </div>
-                      <Badge
-                        variant="outline"
-                        className="text-[10px] font-mono px-1.5 py-0"
-                      >
-                        {badge.subtitle}
-                      </Badge>
-                    </div>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {badge.details}
-                    </p>
-                  </HoverCardContent>
-                </HoverCard>
+                <Badge
+                  key={badge.label}
+                  variant="secondary"
+                  className="font-mono text-xs gap-1.5 py-0.5"
+                >
+                  <Icon className="size-3 text-primary" />
+                  <span>{badge.label}</span>
+                </Badge>
               );
             })}
           </div>
