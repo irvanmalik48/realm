@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthClient, promisifyUnary, createMetadata, getApiBaseUrl } from "@/lib/grpc/client";
+import { getAuthClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
 import { formatGrpcError } from "@/lib/grpc/errors";
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const username = searchParams.get("username") || undefined;
-  const email = searchParams.get("email") || undefined;
-
   try {
+    const searchParams = request.nextUrl.searchParams;
+    const username = searchParams.get("username") || undefined;
+    const email = searchParams.get("email") || undefined;
+
     const client = getAuthClient();
     const metadata = createMetadata();
 
@@ -22,31 +22,11 @@ export async function GET(request: NextRequest) {
     );
 
     return NextResponse.json(data);
-  } catch (grpcError: any) {
-    if (grpcError?.digest === "NEXT_PRERENDER_INTERRUPTED" || grpcError?.message?.includes("bail out of prerendering")) {
-      throw grpcError;
+  } catch (error: any) {
+    if (error?.digest === "NEXT_PRERENDER_INTERRUPTED" || error?.message?.includes("bail out of prerendering")) {
+      throw error;
     }
-
-    // Attempt REST fallback
-    try {
-      const baseUrl = getApiBaseUrl();
-      const params = new URLSearchParams();
-      if (username) params.set("username", username);
-      if (email) params.set("email", email);
-
-      const restRes = await fetch(`${baseUrl}/v1/auth/check?${params.toString()}`, {
-        cache: "no-store",
-      });
-
-      if (restRes.ok) {
-        const restData = await restRes.json();
-        return NextResponse.json(restData);
-      }
-    } catch {
-      // Fallback failed
-    }
-
-    const { message, status } = formatGrpcError(grpcError);
+    const { message, status } = formatGrpcError(error);
     return NextResponse.json({ error: message }, { status });
   }
 }
