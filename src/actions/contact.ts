@@ -36,14 +36,14 @@ export interface ContactActionResult {
   message: string;
 }
 
-import { getContactClient, promisifyUnary, createMetadata } from "@/lib/grpc/client";
+import { getContactClient, promisifyUnary, createMetadata, getApiBaseUrl } from "@/lib/grpc/client";
 
 export async function submitContactFormAction(payload: ContactPayload): Promise<ContactActionResult> {
-  try {
-    const { ip } = await getClientIpAction();
-    const headersList = await headers();
-    const userAgent = headersList.get("user-agent") || "";
+  const { ip } = await getClientIpAction();
+  const headersList = await headers();
+  const userAgent = headersList.get("user-agent") || "";
 
+  try {
     const client = getContactClient();
     const metadata = createMetadata({ ip, userAgent });
 
@@ -67,6 +67,39 @@ export async function submitContactFormAction(payload: ContactPayload): Promise<
       message: res.message || "Your message has been sent successfully.",
     };
   } catch (err: any) {
+    // Fallback to HTTP REST endpoint
+    try {
+      const baseUrl = getApiBaseUrl();
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+        "X-Realm-Request": "1",
+        "X-Forwarded-For": ip,
+        "User-Agent": userAgent,
+      };
+      if (env.API_TOKEN) {
+        headers["Authorization"] = `Bearer ${env.API_TOKEN}`;
+      }
+
+      const res = await fetch(`${baseUrl}/v1/contact`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(payload),
+      });
+
+      const body = await res.json();
+      if (res.ok) {
+        return {
+          success: true,
+          message: body.message || "Your message has been sent successfully.",
+        };
+      }
+      throw new Error(body.error || body.message || "Failed to send message.");
+    } catch (fallbackErr: any) {
+      if (fallbackErr.message && !fallbackErr.message.includes("fetch failed")) {
+        throw fallbackErr;
+      }
+    }
+
     throw new Error(err.details || err.message || "Failed to send message. Please try again later.");
   }
 }
