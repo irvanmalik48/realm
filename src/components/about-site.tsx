@@ -16,6 +16,7 @@ import {
   Activity,
   Workflow,
   BookOpen,
+  Network,
 } from "lucide-react";
 import {
   NextjsIcon,
@@ -132,14 +133,14 @@ const TECH_STACK: TechItem[] = [
     icon: MdxIcon,
   },
   {
-    name: "Go REST API",
+    name: "Go gRPC Service",
     category: "Backend",
-    desc: "High-performance microservice for auth, reactions, and comments",
+    desc: "High-performance microservice with gRPC, Protobuf & HTTP/2",
     url: "https://github.com/irvanmalik48/realm-api",
     docsUrl: "https://github.com/irvanmalik48/realm-api#readme",
     badge: "realm-api",
     details:
-      "Dedicated backend service built with Go handling authenticated comment threads, multi-emoji reactions, and OAuth session tokens.",
+      "Dedicated backend service built with Go delivering typed RPC endpoints for auth, comments, reactions, storage, and Last.fm sync over HTTP/2.",
     version: "Go 1.24",
     icon: GoIcon,
   },
@@ -188,10 +189,10 @@ const HIGHLIGHT_FEATURES = [
       "Optimistic emoji reactions with physics particles and threaded discussion tree hierarchy.",
   },
   {
-    icon: ShieldCheck,
-    title: "OAuth 2.0 & Session Security",
+    icon: Network,
+    title: "gRPC & Protocol Buffers",
     description:
-      "Multi-provider authentication (GitHub and Google) with secure Argon2 password hashing.",
+      "Type-safe, binary-serialized RPC microservice communication over HTTP/2 cleartext/TLS with sub-millisecond overhead.",
   },
 ];
 
@@ -200,7 +201,7 @@ const QUICK_BADGES = [
   { icon: Cpu, label: "React 19.2" },
   { icon: Palette, label: "Tailwind v4" },
   { icon: Layers, label: "shadcn/ui" },
-  { icon: Server, label: "Go API" },
+  { icon: Server, label: "gRPC & Go" },
 ];
 
 export function AboutSite() {
@@ -212,7 +213,7 @@ export function AboutSite() {
           <strong className="font-semibold text-foreground">realm.</strong> is a
           carefully crafted digital garden and portfolio engineered for speed,
           aesthetics, and technical transparency. Built with a modern full-stack
-          architecture combining React 19 Server Components and a dedicated Go backend
+          architecture combining React 19 Server Components and a dedicated Go gRPC backend
           service.
         </p>
 
@@ -412,8 +413,8 @@ export function AboutSite() {
                 </Badge>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Go REST backend microservice with SQLite/PostgreSQL storage, Argon2
-                auth, and blog comment API endpoints.
+                Go gRPC backend microservice with PostgreSQL storage, Argon2
+                auth, and Protobuf RPC endpoints.
               </p>
             </HoverCardContent>
           </HoverCard>
