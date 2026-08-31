@@ -235,8 +235,17 @@ export function APIStatusPulse() {
                 <Database className="size-3.5 shrink-0" />
                 <span>Database</span>
               </div>
-              <span className={cn("font-mono font-medium capitalize", health.database === "connected" ? "text-emerald-500" : "text-rose-500")}>
-                {health.database}
+              <span
+                className={cn(
+                  "font-mono font-medium capitalize",
+                  health.database === "connected"
+                    ? "text-emerald-500"
+                    : health.database === "not_configured"
+                      ? "text-amber-500"
+                      : "text-rose-500",
+                )}
+              >
+                {health.database.replace(/_/g, " ")}
               </span>
             </div>
 
