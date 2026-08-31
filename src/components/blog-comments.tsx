@@ -1042,16 +1042,6 @@ function CommentCard({
               {comment.author.full_name || comment.author.username}
             </span>
 
-            {/* Author Badge */}
-            {comment.is_author && (
-              <Badge
-                variant="outline"
-                className="text-[10px] h-4 px-1.5 font-mono text-primary border-primary/30 bg-primary/5"
-              >
-                Author
-              </Badge>
-            )}
-
             <span className="text-xs text-muted-foreground truncate">
               @{comment.author.username}
             </span>
