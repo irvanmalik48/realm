@@ -12,7 +12,7 @@ export default function NotFound() {
         className="transition-colors flex gap-3 items-center"
         asChild
       >
-        <Link href="/">
+        <Link href="/" transitionTypes={["nav-back"]}>
           <Undo className="size-5" />
           <span>Return to Homepage</span>
         </Link>
