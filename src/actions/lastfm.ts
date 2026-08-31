@@ -29,8 +29,8 @@ export async function getRecentTracksAction(username: string, limit: number = 8)
     }
 
     return parseSongs(null, "large");
-  } catch (err: any) {
-    throw new Error(err.details || err.message || "Failed to fetch tracks");
+  } catch {
+    return parseSongs(null, "large");
   }
 }
 
@@ -58,7 +58,7 @@ export async function getUserInfoAction(username: string) {
     }
 
     return parseUser(null, "large");
-  } catch (err: any) {
-    throw new Error(err.details || err.message || "Failed to fetch user");
+  } catch {
+    return parseUser(null, "large");
   }
 }
