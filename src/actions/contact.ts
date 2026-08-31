@@ -67,6 +67,9 @@ export async function submitContactFormAction(payload: ContactPayload): Promise<
       message: res.message || "Your message has been sent successfully.",
     };
   } catch (err: any) {
-    throw new Error(err.details || err.message || "Failed to send message. Please try again later.");
+    return {
+      success: false,
+      message: err.details || err.message || "Failed to send message. Please try again later.",
+    };
   }
 }
