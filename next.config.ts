@@ -28,6 +28,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  outputFileTracingIncludes: {
+    "/**": ["./src/proto/**/*"],
+  },
   experimental: {
     webpackMemoryOptimizations: true,
     serverSourceMaps: false,
