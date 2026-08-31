@@ -15,6 +15,7 @@ import {
   Terminal,
   Activity,
   Workflow,
+  BookOpen,
 } from "lucide-react";
 import {
   NextjsIcon,
@@ -41,6 +42,7 @@ interface TechItem {
   category: string;
   desc: string;
   url: string;
+  docsUrl: string;
   badge?: string;
   details: string;
   version?: string;
@@ -53,6 +55,7 @@ const TECH_STACK: TechItem[] = [
     category: "Framework",
     desc: "App Router, Turbopack, React 19, Server Components & PPR",
     url: "https://nextjs.org",
+    docsUrl: "https://nextjs.org/docs",
     badge: "Core",
     details:
       "Modern React framework leveraging Partial Prerendering (PPR), Turbopack bundler, and streaming server components for instant initial page loads.",
@@ -64,6 +67,7 @@ const TECH_STACK: TechItem[] = [
     category: "Language",
     desc: "Strict type checking across frontend and API models",
     url: "https://www.typescriptlang.org",
+    docsUrl: "https://www.typescriptlang.org/docs/",
     badge: "Strict",
     details:
       "End-to-end type safety guaranteeing interface contracts between the Next.js frontend and Go backend DTOs.",
@@ -75,6 +79,7 @@ const TECH_STACK: TechItem[] = [
     category: "Styling",
     desc: "Next-generation CSS engine with @theme inline variables",
     url: "https://tailwindcss.com",
+    docsUrl: "https://tailwindcss.com/docs",
     badge: "v4.x",
     details:
       "High-speed CSS parser utilizing CSS native cascade layers, modern oklch color gamut, and dynamic theme switching.",
@@ -86,6 +91,7 @@ const TECH_STACK: TechItem[] = [
     category: "UI System",
     desc: "Accessible components built on top of Radix UI primitives",
     url: "https://ui.shadcn.com",
+    docsUrl: "https://ui.shadcn.com/docs",
     badge: "New York",
     details:
       "Composable, accessible primitives styled with Tailwind CSS tokens and full keyboard navigation support.",
@@ -97,6 +103,7 @@ const TECH_STACK: TechItem[] = [
     category: "Animation",
     desc: "Directional navigation, micro-interactions, and transitions",
     url: "https://motion.dev",
+    docsUrl: "https://motion.dev/docs",
     details:
       "Declarative physics-based animations powering route-level view transitions, particle bursts, and smooth layout changes.",
     version: "v12.43.0",
@@ -107,6 +114,7 @@ const TECH_STACK: TechItem[] = [
     category: "Scroll",
     desc: "Smooth momentum-based scrolling with configurable physics",
     url: "https://lenis.darkroom.engineering",
+    docsUrl: "https://github.com/darkroomengineering/lenis#readme",
     details:
       "Lightweight smooth scrolling library that synchronizes hardware scroll events while preserving accessibility standards.",
     version: "v1.3.25",
@@ -117,6 +125,7 @@ const TECH_STACK: TechItem[] = [
     category: "Content",
     desc: "Interactive Markdown engine with Rehype Pretty Code & KaTeX",
     url: "https://github.com/lucashogberg/next-mdx-remote-client",
+    docsUrl: "https://github.com/lucashogberg/next-mdx-remote-client#readme",
     details:
       "High-performance MDX renderer compiling Markdown with syntax highlighting, auto-linked headings, and LaTeX math equations.",
     version: "Client v2",
@@ -127,6 +136,7 @@ const TECH_STACK: TechItem[] = [
     category: "Backend",
     desc: "High-performance microservice for auth, reactions, and comments",
     url: "https://github.com/irvanmalik48/realm-api",
+    docsUrl: "https://github.com/irvanmalik48/realm-api#readme",
     badge: "realm-api",
     details:
       "Dedicated backend service built with Go handling authenticated comment threads, multi-emoji reactions, and OAuth session tokens.",
@@ -138,6 +148,7 @@ const TECH_STACK: TechItem[] = [
     category: "Data Fetching",
     desc: "Declarative server-state caching and synchronization",
     url: "https://tanstack.com/query",
+    docsUrl: "https://tanstack.com/query/latest/docs/framework/react/overview",
     details:
       "Robust state management library providing caching, optimistic updates, and background refetching for remote resources.",
     version: "v5.101.4",
@@ -148,6 +159,7 @@ const TECH_STACK: TechItem[] = [
     category: "Hosting",
     desc: "Global Edge delivery and continuous deployments",
     url: "https://vercel.com",
+    docsUrl: "https://vercel.com/docs",
     badge: "Edge",
     details:
       "Global edge deployment platform providing low-latency asset caching, serverless compute, and automated preview builds.",
@@ -250,7 +262,7 @@ export function AboutSite() {
         </div>
       </div>
 
-      {/* Detailed Tech Stack Grid with Authentic Icons */}
+      {/* Detailed Tech Stack Grid with Authentic Icons & Direct Documentation Links */}
       <div className="p-5 border-b border-border/80 flex flex-col gap-3">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground font-mono flex items-center gap-2">
           <Code2 className="size-3.5 text-primary" />
@@ -264,7 +276,7 @@ export function AboutSite() {
               <HoverCard key={item.name} openDelay={100} closeDelay={150}>
                 <HoverCardTrigger asChild>
                   <a
-                    href={item.url}
+                    href={item.docsUrl || item.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-start justify-between p-3 rounded-lg border border-border/60 bg-muted/20 hover:bg-muted/50 hover:border-border transition-all duration-150"
@@ -292,7 +304,7 @@ export function AboutSite() {
                     <ExternalLink className="size-3.5 text-muted-foreground/50 group-hover:text-foreground shrink-0 mt-0.5 transition-colors" />
                   </a>
                 </HoverCardTrigger>
-                <HoverCardContent className="w-80 p-3.5 space-y-2">
+                <HoverCardContent className="w-80 p-3.5 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="size-5 rounded bg-muted/60 flex items-center justify-center text-foreground">
@@ -311,11 +323,18 @@ export function AboutSite() {
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     {item.details}
                   </p>
-                  <div className="pt-1 flex items-center justify-between text-[10px] text-muted-foreground/70 font-mono border-t border-border/60">
+                  <div className="pt-1.5 flex items-center justify-between text-[11px] text-muted-foreground font-mono border-t border-border/60">
                     <span>Category: {item.category}</span>
-                    <span className="text-primary hover:underline flex items-center gap-1">
-                      Docs <ExternalLink className="size-2.5" />
-                    </span>
+                    <a
+                      href={item.docsUrl || item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline flex items-center gap-1 font-medium transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <BookOpen className="size-3" />
+                      <span>Documentation</span>
+                    </a>
                   </div>
                 </HoverCardContent>
               </HoverCard>
