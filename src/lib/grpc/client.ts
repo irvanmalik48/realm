@@ -11,16 +11,6 @@ export function getGrpcTarget(): string {
     : "realm-api:50051";
 }
 
-export function getApiBaseUrl(): string {
-  if (env.API_URL) return env.API_URL;
-  if (process.env.API_URL) return process.env.API_URL;
-  if (env.NEXT_PUBLIC_API_URL) return env.NEXT_PUBLIC_API_URL;
-  if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL;
-  return env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : "https://api.irvanma.eu.org";
-}
-
 const protoOptions: protoLoader.Options = {
   keepCase: true,
   longs: String,
