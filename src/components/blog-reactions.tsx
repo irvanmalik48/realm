@@ -271,7 +271,7 @@ export function BlogReactions({ slug }: { slug: string }) {
               <Icon
                 className={cn(
                   "size-4 transition-transform duration-200 group-hover:scale-110",
-                  isActive && "fill-current",
+                  isActive && "fill-current/20",
                 )}
               />
 
