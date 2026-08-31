@@ -240,10 +240,10 @@ export function AboutSite() {
             </div>
             <div className="flex flex-col gap-0.5">
               <p className="text-xs font-semibold text-foreground">
-                Open Source & Fully Transparent
+                Open Source & Community Driven
               </p>
               <p className="text-[11px] text-muted-foreground">
-                Licensed under MIT. Feel free to inspect, fork, or learn from the code.
+                Licensed under RCCL (Realm Collectives Community License) v1.0.
               </p>
             </div>
           </div>
