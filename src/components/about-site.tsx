@@ -1,10 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import {
   Code2,
   Cpu,
   Layers,
-  Globe,
   Sparkles,
   GitBranch,
   ExternalLink,
@@ -14,17 +12,10 @@ import {
   Palette,
   Terminal,
   Activity,
-  FileText,
   Workflow,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 interface TechItem {
   name: string;
@@ -132,8 +123,7 @@ const HIGHLIGHT_FEATURES = [
 
 export function AboutSite() {
   return (
-    <TooltipProvider>
-      <div className="flex flex-col">
+    <div className="flex flex-col">
         {/* Philosophy Intro */}
         <div className="p-5 border-b border-border/80 bg-muted/10 flex flex-col gap-3">
           <p className="text-sm text-foreground/90 leading-relaxed">
@@ -284,6 +274,5 @@ export function AboutSite() {
           </div>
         </div>
       </div>
-    </TooltipProvider>
   );
 }
