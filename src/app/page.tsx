@@ -10,6 +10,8 @@ import HeroImage from "@/assets/img/hero.jpg";
 import HeroProfile from "@/assets/img/profpic-animated.webp";
 import { Book, Info, Server } from "lucide-react";
 import { SelfHostedServices } from "@/components/selfhosted";
+import { AboutSite } from "@/components/about-site";
+import { Badge } from "@/components/ui/badge";
 import { TextScroll } from "@/components/ui/text-scroll";
 import { APIStatusPulse } from "@/components/api-status-pulse";
 
@@ -85,68 +87,17 @@ export default function Home() {
           </p>
           <SelfHostedServices />
         </div>
-        <div className="w-full bg-background rounded-lg border border-border">
-          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
-            <Info className="size-4" />
-            <span className="text-sm font-mono">ABOUT_SITE.md</span>
+        <div className="w-full bg-background rounded-lg border border-border overflow-hidden">
+          <h2 className="w-full flex items-center justify-between text-muted-foreground px-5 py-3 border-b border-border">
+            <div className="flex items-center gap-3">
+              <Info className="size-4 text-primary" />
+              <span className="text-sm font-mono text-foreground font-medium">ABOUT_SITE.md</span>
+            </div>
+            <Badge variant="outline" className="font-mono text-[10px] uppercase">
+              Specs & Tech
+            </Badge>
           </h2>
-          <p className="px-5 py-3">
-            This site is built using{" "}
-            <a
-              href="https://nextjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              Next.js
-            </a>
-            ,{" "}
-            <a
-              href="https://tailwindcss.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              TailwindCSS
-            </a>
-            ,{" "}
-            <a
-              href="https://ui.shadcn.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              shadcn/ui
-            </a>
-            , and{" "}
-            <a
-              href="https://tanstack.com/query"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              Tanstack Query
-            </a>
-            . It is hosted on{" "}
-            <a
-              href="https://vercel.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              Vercel
-            </a>
-            . The source code is available on{" "}
-            <a
-              href="https://github.com/irvanmalik48/realm"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              GitHub
-            </a>
-            .
-          </p>
+          <AboutSite />
         </div>
       </Container>
       <TextScroll
