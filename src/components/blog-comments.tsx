@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import {
   MessageSquare,
   CornerDownRight,
@@ -217,6 +217,20 @@ function CommentBody({ content }: { content: string }) {
   );
 }
 
+function isSafeUrl(rawUrl: string): boolean {
+  const trimmed = rawUrl.trim();
+  if (/^(?:javascript|data|vbscript):/i.test(trimmed)) {
+    return false;
+  }
+  if (/^(?:https?:\/\/|mailto:)/i.test(trimmed)) {
+    return true;
+  }
+  if (trimmed.startsWith("/") && !trimmed.startsWith("//") && !trimmed.startsWith("/\\")) {
+    return true;
+  }
+  return false;
+}
+
 function renderFormattedInline(text: string): React.ReactNode {
   const tokens = text.split(/(`[^`]+`|\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g);
 
@@ -245,12 +259,17 @@ function renderFormattedInline(text: string): React.ReactNode {
         </em>
       );
     }
+
     const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (linkMatch) {
+      const rawUrl = linkMatch[2];
+      if (!isSafeUrl(rawUrl)) {
+        return linkMatch[1];
+      }
       return (
         <a
           key={i}
-          href={linkMatch[2]}
+          href={rawUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="text-primary font-medium underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors inline-flex items-center gap-0.5"
