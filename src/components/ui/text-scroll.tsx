@@ -9,7 +9,7 @@ import {
   useSpring,
   useTransform,
   useVelocity,
-} from "framer-motion";
+} from "motion/react";
 import marqueeEnable from "@/lib/atoms/marquee";
 import { useAtom } from "jotai";
 
