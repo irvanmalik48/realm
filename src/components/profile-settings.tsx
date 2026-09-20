@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import { AvatarCropDialog } from "@/components/avatar-crop-dialog";
 import { PasswordDialog } from "@/components/password-dialog";
