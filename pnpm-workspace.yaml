@@ -1,5 +1,5 @@
 allowBuilds:
-  protobufjs: set this to true or false
+  protobufjs: true
   sharp: true
   unrs-resolver: true
 
