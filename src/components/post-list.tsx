@@ -1,7 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { PostCard } from "@/components/post-card";
 import { useBlogContext } from "@/components/blog-context";
 
