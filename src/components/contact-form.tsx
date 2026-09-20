@@ -18,7 +18,7 @@ import {
   Lock,
   Eye,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Dialog,
   DialogContent,
