@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, use, useState, ReactNode } from "react";
+import { createContext, use, useState, useMemo, ReactNode } from "react";
 import Fuse from "fuse.js";
 import { PostWithScope } from "@/lib/types/posts";
 import { useDebounce } from "@/hooks/use-debounce";
@@ -33,21 +33,27 @@ export function BlogContextWrapper({
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedQuery = useDebounce(searchQuery, 300);
 
-  const sortedPosts = initialPosts.toSorted((a, b) => {
-    const firstPostTime = new Date(a.updatedAt).getTime();
-    const secondPostTime = new Date(b.updatedAt).getTime();
-    return firstPostTime > secondPostTime ? -1 : 1;
-  });
+  const sortedPosts = useMemo(() => {
+    return initialPosts.toSorted((a, b) => {
+      const firstPostTime = new Date(a.updatedAt).getTime();
+      const secondPostTime = new Date(b.updatedAt).getTime();
+      return firstPostTime > secondPostTime ? -1 : 1;
+    });
+  }, [initialPosts]);
 
-  const fuse = new Fuse(sortedPosts, {
-    keys: ["title", "description", "tags"],
-    threshold: 0.3,
-    ignoreLocation: true,
-  });
+  const fuse = useMemo(() => {
+    return new Fuse(sortedPosts, {
+      keys: ["title", "description", "tags"],
+      threshold: 0.3,
+      ignoreLocation: true,
+    });
+  }, [sortedPosts]);
 
-  const filteredPosts = debouncedQuery
-    ? fuse.search(debouncedQuery).map((result) => result.item)
-    : sortedPosts;
+  const filteredPosts = useMemo(() => {
+    return debouncedQuery
+      ? fuse.search(debouncedQuery).map((result) => result.item)
+      : sortedPosts;
+  }, [debouncedQuery, fuse, sortedPosts]);
 
   return (
     <BlogContext.Provider
