@@ -20,13 +20,13 @@ const handleTrackClick = (e: React.MouseEvent) => {
 
 export function CustomScrollbar() {
   const isEnabled = useAtomValue(customScrollbarEnabledAtom);
-  const [thumbHeight, setThumbHeight] = useState(0);
-  const [thumbTop, setThumbTop] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const [hasThumb, setHasThumb] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
   const scrollbarRef = useRef<HTMLDivElement>(null);
+  const thumbRef = useRef<HTMLDivElement>(null);
+  const thumbHeightRef = useRef(0);
   const dragStartRef = useRef({ mouseStart: 0, scrollStart: 0, maxScroll: 0, scrollableTrack: 0 });
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -37,6 +37,9 @@ export function CustomScrollbar() {
   useEffect(() => {
     isHoveredRef.current = isHovered;
     isDraggingRef.current = isDragging;
+    if (thumbRef.current && (isHovered || isDragging)) {
+      thumbRef.current.style.opacity = "1";
+    }
   }, [isHovered, isDragging]);
 
   const updateScrollbar = useCallback(() => {
@@ -47,34 +50,42 @@ export function CustomScrollbar() {
     const scrollTop = window.scrollY;
 
     if (scrollHeight <= clientHeight) {
-      setThumbHeight(0);
+      if (hasThumb) setHasThumb(false);
       return;
     }
 
+    if (!hasThumb) setHasThumb(true);
+
     const visibleRatio = clientHeight / scrollHeight;
     const calculatedHeight = Math.max(visibleRatio * clientHeight, 40);
-    setThumbHeight(calculatedHeight);
-
     const maxScroll = scrollHeight - clientHeight;
-    const scrollProgress = scrollTop / maxScroll;
+    const scrollProgress = maxScroll > 0 ? scrollTop / maxScroll : 0;
     const calculatedTop = scrollProgress * (clientHeight - calculatedHeight);
-    setThumbTop(calculatedTop);
 
-    setIsVisible(true);
+    thumbHeightRef.current = calculatedHeight;
+
+    if (thumbRef.current) {
+      thumbRef.current.style.height = `${calculatedHeight}px`;
+      thumbRef.current.style.transform = `translate3d(0, ${calculatedTop}px, 0)`;
+      thumbRef.current.style.opacity = "1";
+    }
+
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
     }
     if (!isHoveredRef.current && !isDraggingRef.current) {
       hideTimeoutRef.current = setTimeout(() => {
-        setIsVisible(false);
+        if (thumbRef.current && !isHoveredRef.current && !isDraggingRef.current) {
+          thumbRef.current.style.opacity = "0";
+        }
       }, 1500);
     }
-  }, []);
+  }, [hasThumb]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (isEnabled && thumbHeight > 0) {
+    if (isEnabled && hasThumb) {
       document.documentElement.classList.add("custom-scrollbar-active");
     } else {
       document.documentElement.classList.remove("custom-scrollbar-active");
@@ -83,7 +94,7 @@ export function CustomScrollbar() {
     return () => {
       document.documentElement.classList.remove("custom-scrollbar-active");
     };
-  }, [isEnabled, thumbHeight]);
+  }, [isEnabled, hasThumb]);
 
   useEffect(() => {
     if (!isEnabled) return;
@@ -119,11 +130,12 @@ export function CustomScrollbar() {
     e.preventDefault();
     const scrollHeight = document.documentElement.scrollHeight;
     const clientHeight = window.innerHeight;
+    const currentThumbHeight = thumbHeightRef.current || 40;
     dragStartRef.current = {
       mouseStart: e.clientY,
       scrollStart: window.scrollY,
       maxScroll: scrollHeight - clientHeight,
-      scrollableTrack: clientHeight - thumbHeight,
+      scrollableTrack: clientHeight - currentThumbHeight,
     };
     setIsDragging(true);
   };
@@ -157,11 +169,9 @@ export function CustomScrollbar() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging, thumbHeight]);
+  }, [isDragging]);
 
-
-
-  if (!isEnabled || thumbHeight === 0) return null;
+  if (!isEnabled || !hasThumb) return null;
 
   return (
     <div
@@ -182,14 +192,8 @@ export function CustomScrollbar() {
       }}
     >
       <div
-        className={`w-full transition-opacity duration-200 cursor-grab active:cursor-grabbing bg-secondary ${
-          isVisible || isHovered || isDragging ? "opacity-100" : "opacity-0"
-        }`}
-        style={{
-          position: "absolute",
-          height: `${thumbHeight}px`,
-          top: `${thumbTop}px`,
-        }}
+        ref={thumbRef}
+        className="w-full transition-opacity duration-200 cursor-grab active:cursor-grabbing bg-secondary absolute top-0 left-0 opacity-0 will-change-transform"
         onMouseDown={handleMouseDown}
         role="button"
         tabIndex={-1}
