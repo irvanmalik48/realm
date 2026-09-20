@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "motion/react";
 
 export function RealmStylized(props: React.SVGProps<SVGSVGElement>) {
   const scale = useMotionValue(0);
