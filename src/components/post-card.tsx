@@ -1,6 +1,6 @@
 import { PostCardProps } from "@/lib/types/posts";
 import Link from "next/link";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion, HTMLMotionProps } from "motion/react";
 
 const MotionLink = motion.create(Link);
 
