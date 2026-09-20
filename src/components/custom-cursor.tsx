@@ -41,6 +41,7 @@ export function CustomCursor() {
   const isVisibleRef = useRef(false);
   const trailRef = useRef<HTMLDivElement | null>(null);
   const pointerRef = useRef<HTMLDivElement | null>(null);
+  const pulseRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!isEnabled || !hasPointer) return;
@@ -139,33 +140,19 @@ export function CustomCursor() {
     };
 
     const handleClick = (e: MouseEvent) => {
-      const pulse = document.createElement("div");
-      pulse.style.position = "fixed";
-      pulse.style.top = "0";
-      pulse.style.left = "0";
-      pulse.style.width = "40px";
-      pulse.style.height = "40px";
-      pulse.style.marginLeft = "-20px";
-      pulse.style.marginTop = "-20px";
-      pulse.style.borderRadius = "50%";
-      pulse.style.border = "1.5px solid #ffffff";
-      pulse.style.pointerEvents = "none";
-      pulse.style.zIndex = "99997";
-      pulse.style.mixBlendMode = "difference";
+      const pulse = pulseRef.current;
+      if (!pulse) return;
+
+      pulse.style.transition = "none";
       pulse.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) scale(0.5)`;
       pulse.style.opacity = "0.8";
-      pulse.style.transition = "transform 0.4s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 0.4s cubic-bezier(0.1, 0.8, 0.3, 1)";
-
-      document.body.appendChild(pulse);
 
       requestAnimationFrame(() => {
+        pulse.style.transition =
+          "transform 0.4s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 0.4s cubic-bezier(0.1, 0.8, 0.3, 1)";
         pulse.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) scale(2.5)`;
         pulse.style.opacity = "0";
       });
-
-      setTimeout(() => {
-        pulse.remove();
-      }, 400);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -230,6 +217,10 @@ export function CustomCursor() {
           marginTop: `-${baseSize / 2}px`,
         }}
         className="hidden md:block custom-cursor-trail fixed top-0 left-0 rounded-full bg-white opacity-0 pointer-events-none z-99999 mix-blend-difference shadow-[0_0_16px_rgba(255,255,255,0.2)]"
+      />
+      <div
+        ref={pulseRef}
+        className="hidden md:block fixed top-0 left-0 w-10 h-10 -ml-5 -mt-5 rounded-full border-[1.5px] border-white pointer-events-none z-99997 mix-blend-difference opacity-0 will-change-transform"
       />
     </>
   );
