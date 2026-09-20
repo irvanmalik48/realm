@@ -4,15 +4,21 @@ import { env } from "@/env";
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const token = searchParams.get("token");
-  const redirectPath = searchParams.get("redirect") || "/";
+  const rawRedirect = searchParams.get("redirect") || "/";
+  const safeRedirect =
+    rawRedirect.startsWith("/") &&
+    !rawRedirect.startsWith("//") &&
+    !rawRedirect.startsWith("/\\")
+      ? rawRedirect
+      : "/";
 
   const baseUrl = req.nextUrl.origin;
 
   if (!token) {
-    return NextResponse.redirect(`${baseUrl}/login?error=oauth_failed`);
+    return NextResponse.redirect(new URL("/login?error=oauth_failed", baseUrl));
   }
 
-  const response = NextResponse.redirect(`${baseUrl}${redirectPath.startsWith("/") ? redirectPath : "/"}`);
+  const response = NextResponse.redirect(new URL(safeRedirect, baseUrl));
 
   response.cookies.set("realm_auth_token", token, {
     httpOnly: true,
