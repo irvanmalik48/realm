@@ -28,7 +28,7 @@ function getProtoDir(): string {
     path.resolve("./src/proto/realm/v1"),
   ];
   for (const p of possiblePaths) {
-    if (fs.existsSync(p)) {
+    if (fs.existsSync(/*turbopackIgnore: true*/ p)) {
       return p;
     }
   }
@@ -46,7 +46,7 @@ let cachedClients: {
 } = {};
 
 function createClient(protoFile: string, serviceName: string) {
-  const filePath = path.join(getProtoDir(), protoFile);
+  const filePath = path.join(/*turbopackIgnore: true*/ getProtoDir(), protoFile);
   const packageDef = protoLoader.loadSync(filePath, protoOptions);
   const proto = grpc.loadPackageDefinition(packageDef) as any;
   const ServiceConstructor = proto.realm.v1[serviceName];
@@ -67,7 +67,15 @@ function createClient(protoFile: string, serviceName: string) {
     ? grpc.credentials.createSsl()
     : grpc.credentials.createInsecure();
 
-  return new ServiceConstructor(target, credentials);
+  const channelOptions: grpc.ChannelOptions = {
+    "grpc.keepalive_time_ms": 30000,
+    "grpc.keepalive_timeout_ms": 10000,
+    "grpc.keepalive_permit_without_calls": 1,
+    "grpc.http2.min_time_between_pings_ms": 10000,
+    "grpc.http2.max_pings_without_data": 0,
+  };
+
+  return new ServiceConstructor(target, credentials, channelOptions);
 }
 
 export function getHealthClient() {
