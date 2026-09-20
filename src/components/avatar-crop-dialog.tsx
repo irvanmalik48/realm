@@ -15,7 +15,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Portal } from "@/components/ui/portal";
 
 interface AvatarCropDialogProps {
