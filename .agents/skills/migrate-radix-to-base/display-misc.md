@@ -399,7 +399,7 @@ Use a native `<label htmlFor="...">`, or `Field.Label` when inside a `Field.Root
 
 ## AspectRatio (radix `AspectRatio.Root`: `asChild`, `ratio` default `1`)
 
-Use the CSS `aspect-ratio` property, which is what the prop mapped to: `ratio={16 / 9}` → `aspect-video` or `aspect-[16/9]` (`aspect-ratio: 16 / 9`), plus `w-full` and `object-cover` on the media child.
+Use the CSS `aspect-ratio` property, which is what the prop mapped to: `ratio={16 / 9}` → `aspect-video` or `aspect-video` (`aspect-ratio: 16 / 9`), plus `w-full` and `object-cover` on the media child.
 
 ## VisuallyHidden (radix `VisuallyHidden.Root`: `asChild`)
 
