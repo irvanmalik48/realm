@@ -157,8 +157,9 @@ function insertFormatting(
 }
 
 /** Custom Markdown inline and block formatter for rich readability */
-function CommentBody({ content }: { content: string }) {
-  const blocks = content.split(/(```[\s\S]*?```)/g);
+function CommentBody({ content }: { content?: string }) {
+  const safeContent = content || "";
+  const blocks = safeContent.split(/(```[\s\S]*?```)/g);
 
   return (
     <div className="text-[13px] leading-relaxed text-foreground/90 flex flex-col gap-2.5 break-words">
@@ -356,9 +357,18 @@ export function BlogComments({ slug }: { slug: string }) {
       });
 
       if (res.ok) {
-        const newComment = await res.json();
-        setComments((prev) => [...prev, newComment]);
-        setTotalCount((prev) => prev + 1);
+        const data = await res.json();
+        const commentData = data.comment || data;
+        if (commentData && commentData.id) {
+          const formattedComment: CommentItem = {
+            ...commentData,
+            replies: Array.isArray(commentData.replies) ? commentData.replies : [],
+          };
+          setComments((prev) => [...prev, formattedComment]);
+          setTotalCount((prev) => prev + 1);
+        } else {
+          await fetchComments();
+        }
         setNewCommentContent("");
         setIsComposerFocused(false);
         toast({
@@ -406,16 +416,25 @@ export function BlogComments({ slug }: { slug: string }) {
       });
 
       if (res.ok) {
-        const newReply = await res.json();
-        setComments((prev) =>
-          prev.map((c) => {
-            if (c.id === parentId) {
-              return { ...c, replies: [...(c.replies || []), newReply] };
-            }
-            return c;
-          }),
-        );
-        setTotalCount((prev) => prev + 1);
+        const data = await res.json();
+        const replyData = data.comment || data;
+        if (replyData && replyData.id) {
+          const formattedReply: CommentItem = {
+            ...replyData,
+            replies: Array.isArray(replyData.replies) ? replyData.replies : [],
+          };
+          setComments((prev) =>
+            prev.map((c) => {
+              if (c.id === parentId) {
+                return { ...c, replies: [...(c.replies || []), formattedReply] };
+              }
+              return c;
+            }),
+          );
+          setTotalCount((prev) => prev + 1);
+        } else {
+          await fetchComments();
+        }
         setReplyContent("");
         setReplyingToId(null);
         toast({
@@ -457,15 +476,18 @@ export function BlogComments({ slug }: { slug: string }) {
       );
 
       if (res.ok) {
-        const updated = await res.json();
+        const data = await res.json();
+        const updated = data.comment || data;
+        const newContent = updated.content ?? trimmed;
+        const newUpdatedAt = updated.updated_at ?? new Date().toISOString();
         setComments((prev) =>
           prev.map((c) => {
             if (c.id === commentId) {
               return {
                 ...c,
-                content: updated.content,
+                content: newContent,
                 is_edited: true,
-                updated_at: updated.updated_at,
+                updated_at: newUpdatedAt,
               };
             }
             return {
@@ -474,9 +496,9 @@ export function BlogComments({ slug }: { slug: string }) {
                 r.id === commentId
                   ? {
                       ...r,
-                      content: updated.content,
+                      content: newContent,
                       is_edited: true,
-                      updated_at: updated.updated_at,
+                      updated_at: newUpdatedAt,
                     }
                   : r,
               ),
@@ -1005,8 +1027,16 @@ function CommentCard({
 
   const isEditing = editingId === comment.id;
   const isReplying = replyingToId === comment.id;
-  const initials = getInitials(comment.author.full_name, comment.author.username);
-  const replyCount = comment.replies?.length || 0;
+  const author = comment?.author || {
+    id: "",
+    username: "anonymous",
+    full_name: "Anonymous",
+    avatar_url: null,
+  };
+  const authorName = author.full_name || author.username || "Anonymous";
+  const authorUsername = author.username || "anonymous";
+  const initials = getInitials(authorName, authorUsername);
+  const replyCount = comment?.replies?.length || 0;
 
   const handleCopyComment = () => {
     navigator.clipboard.writeText(comment.content);
@@ -1045,10 +1075,10 @@ function CommentCard({
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5 min-w-0">
           <Avatar className={cn(isReply ? "size-7" : "size-8", "shrink-0 ring-1 ring-border/70")}>
-            {comment.author.avatar_url ? (
+            {author.avatar_url ? (
               <AvatarImage
-                src={comment.author.avatar_url}
-                alt={comment.author.full_name || comment.author.username}
+                src={author.avatar_url}
+                alt={authorName}
               />
             ) : null}
             <AvatarFallback className="text-[11px] font-bold bg-primary/10 text-primary">
@@ -1058,11 +1088,11 @@ function CommentCard({
 
           <div className="flex items-center gap-1.5 flex-wrap min-w-0">
             <span className="text-xs sm:text-sm font-semibold text-foreground truncate">
-              {comment.author.full_name || comment.author.username}
+              {authorName}
             </span>
 
             <span className="text-xs text-muted-foreground truncate">
-              @{comment.author.username}
+              @{authorUsername}
             </span>
 
             <span className="text-xs text-muted-foreground/40">•</span>
@@ -1293,7 +1323,7 @@ function CommentCard({
             <div className="rounded-xl border border-primary/40 bg-muted/30 p-3.5 flex flex-col gap-2.5">
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span className="font-medium text-foreground">
-                  Replying to @{comment.author.username}
+                  Replying to @{authorUsername}
                 </span>
                 <button
                   type="button"
@@ -1308,7 +1338,7 @@ function CommentCard({
                 ref={replyTextareaRef}
                 value={replyContent}
                 onChange={(e) => onReplyChange(e.target.value)}
-                placeholder={`Write your reply to @${comment.author.username}...`}
+                placeholder={`Write your reply to @${authorUsername}...`}
                 maxLength={2000}
                 rows={2}
                 onKeyDown={(e) => {
@@ -1362,7 +1392,7 @@ function CommentCard({
       {/* Nested Replies with Threading Tree Line */}
       {!isReply && replyCount > 0 && showReplies && (
         <div className="relative ml-2 sm:ml-4 pl-3.5 sm:pl-5 pt-2 flex flex-col gap-3 before:absolute before:left-0 before:top-0 before:bottom-3 before:w-[2px] before:bg-border/70 before:rounded-full">
-          {comment.replies.map((reply) => (
+          {(comment.replies || []).map((reply) => (
             <div
               key={reply.id}
               className="relative before:absolute before:-left-3.5 sm:before:-left-5 before:top-4 before:w-3.5 sm:before:w-5 before:h-3 before:border-b-2 before:border-l-2 before:border-border/70 before:rounded-bl-lg"
