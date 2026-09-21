@@ -52,9 +52,7 @@ function DialogPortal({
 }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
   return (
     <DialogPrimitive.Portal data-slot="dialog-portal" {...props}>
-      <div className="fixed inset-0 z-999 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-        {children}
-      </div>
+      {children}
     </DialogPrimitive.Portal>
   )
 }
@@ -72,7 +70,7 @@ function DialogOverlay({
   return (
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
-      className={cn("fixed inset-0 z-999 bg-black/50", className)}
+      className={cn("fixed inset-0 z-999 bg-black/60 backdrop-blur-xs", className)}
       {...props}
     />
   )
@@ -94,46 +92,47 @@ function DialogContent({
         <DialogPortal data-slot="dialog-portal" forceMount>
           <DialogOverlay forceMount asChild>
             <motion.div
-              initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-              animate={{ opacity: 1, backdropFilter: "blur(4px)" }}
-              exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
             />
           </DialogOverlay>
-          <DialogPrimitive.Content
-            asChild
-            forceMount
-            data-slot="dialog-content"
-            className={cn(
-              "relative z-999 grid w-full max-w-lg gap-4 rounded-lg border bg-background p-4 sm:p-6 shadow-lg outline-none max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] overflow-y-auto overscroll-contain my-auto",
-              className
-            )}
-            {...props}
-          >
-            <motion.div
-              initial={{ y: "100vh", opacity: 0, scale: 0.95, filter: "blur(4px)" }}
-              animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ 
-                y: "30px", 
-                opacity: 0, 
-                scale: 0.92, 
-                filter: "blur(8px)",
-                transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } 
-              }}
-              transition={{ duration: 0.8, ease: [0.08, 0.82, 0.17, 1] }}
-            >
-              {children}
-              {showCloseButton && (
-                <DialogPrimitive.Close
-                  data-slot="dialog-close"
-                  className="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-                >
-                  <XIcon />
-                  <span className="sr-only">Close</span>
-                </DialogPrimitive.Close>
+          <div className="fixed inset-0 z-999 flex items-center justify-center p-3 sm:p-4 overflow-hidden pointer-events-none">
+            <DialogPrimitive.Content
+              asChild
+              forceMount
+              data-slot="dialog-content"
+              className={cn(
+                "pointer-events-auto relative z-999 grid w-full max-w-lg gap-4 rounded-xl border bg-background p-4 sm:p-6 shadow-2xl outline-none max-h-[min(calc(100dvh-2rem),calc(100vh-2rem))] overflow-y-auto overscroll-contain my-auto",
+                className
               )}
-            </motion.div>
-          </DialogPrimitive.Content>
+              {...props}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ 
+                  opacity: 0, 
+                  scale: 0.96, 
+                  y: 10,
+                  transition: { duration: 0.15, ease: "easeIn" } 
+                }}
+                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {children}
+                {showCloseButton && (
+                  <DialogPrimitive.Close
+                    data-slot="dialog-close"
+                    className="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+                  >
+                    <XIcon />
+                    <span className="sr-only">Close</span>
+                  </DialogPrimitive.Close>
+                )}
+              </motion.div>
+            </DialogPrimitive.Content>
+          </div>
         </DialogPortal>
       )}
     </AnimatePresence>
