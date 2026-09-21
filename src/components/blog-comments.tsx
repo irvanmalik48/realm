@@ -162,7 +162,7 @@ function CommentBody({ content }: { content?: string }) {
   const blocks = safeContent.split(/(```[\s\S]*?```)/g);
 
   return (
-    <div className="text-[13px] leading-relaxed text-foreground/90 flex flex-col gap-2.5 break-words">
+    <div className="text-[13px] leading-relaxed text-foreground/90 flex flex-col gap-2.5 wrap-break-word">
       {blocks.map((block, idx) => {
         if (block.startsWith("```") && block.endsWith("```")) {
           const match = block.match(/```(\w*)\n?([\s\S]*?)```/);
