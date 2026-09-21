@@ -12,6 +12,7 @@ import "./globals.css";
 import { Footer } from "@/components/footer";
 import { FAB } from "@/components/fab";
 import { Toaster } from "@/components/ui/toaster";
+import { CookieConsent } from "@/components/cookie-consent";
 
 import OgImage from "./opengraph-image.png";
 import Script from "next/script";
@@ -111,6 +112,7 @@ export default function RootLayout({
                 {children}
                 <Footer />
                 <Toaster />
+                <CookieConsent />
               </LenisProvider>
             </AuthProvider>
           </Providers>
