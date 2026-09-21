@@ -176,7 +176,7 @@ export function CustomScrollbar() {
   return (
     <div
       ref={scrollbarRef}
-      className={`fixed top-0 right-0 h-full z-99999 transition-all duration-200 ${
+      className={`hidden md:block fixed top-0 right-0 h-full z-99999 transition-all duration-200 ${
         isHovered || isDragging ? "w-3 bg-secondary/20" : "w-1.5 bg-transparent"
       }`}
       onMouseEnter={() => setIsHovered(true)}
