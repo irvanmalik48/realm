@@ -5,9 +5,6 @@ import { ContactForm } from "./contact-form";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
 
@@ -59,21 +56,12 @@ export function Footer() {
             </p>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="secondary" className="w-full flex items-center justify-center gap-2">
+                <Button variant="secondary" className="w-full flex items-center justify-center gap-2 cursor-pointer">
                   <Mail className="size-4" />
                   <span>Open Contact Form</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-137.5">
-                <DialogHeader>
-                  <DialogTitle className="flex items-center gap-2">
-                    <Mail className="size-5 text-primary" />
-                    <span>Contact Me</span>
-                  </DialogTitle>
-                  <DialogDescription>
-                    Fill out the form below to get in touch.
-                  </DialogDescription>
-                </DialogHeader>
+              <DialogContent className="sm:max-w-[550px]">
                 <ContactForm />
               </DialogContent>
             </Dialog>
