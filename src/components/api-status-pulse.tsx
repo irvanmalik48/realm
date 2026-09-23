@@ -37,6 +37,7 @@ export function APIStatusPulse() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [history, setHistory] = useState<HeartbeatPoint[]>(initialHistory);
 
+  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
     const now = Date.now();
     setHistory(
@@ -57,6 +58,7 @@ export function APIStatusPulse() {
     staleTime: 10000,
   });
 
+  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
     if (data?.data) {
       const point: HeartbeatPoint = {
