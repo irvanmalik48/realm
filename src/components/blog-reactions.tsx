@@ -124,6 +124,7 @@ export function BlogReactions({ slug }: { slug: string }) {
     }
   }, [slug]);
 
+  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
     fetchReactions();
   }, [fetchReactions, user]);
