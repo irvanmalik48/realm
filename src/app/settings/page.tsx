@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import type { WebPage, WithContext } from "schema-dts";
 import { SettingsClientPage } from "@/components/settings-client-page";
 import { DirectionalTransition } from "@/components/directional-transition";
+import { safeJsonLd } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -58,7 +59,7 @@ export default function SettingsPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
     </DirectionalTransition>
   );
