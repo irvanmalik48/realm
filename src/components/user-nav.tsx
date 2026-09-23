@@ -37,7 +37,7 @@ export function UserNav() {
         href="/login"
         prefetch={true}
         transitionTypes={["nav-forward"]}
-        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full border border-border/80 transition-all cursor-pointer"
+        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full border border-border/80 transition-colors cursor-pointer"
       >
         <LogIn className="w-3.5 h-3.5" />
         <span>Sign in</span>
@@ -53,7 +53,7 @@ export function UserNav() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 p-0.5 rounded-full hover:ring-2 hover:ring-primary/40 transition-all focus:outline-hidden cursor-pointer"
+        className="flex items-center gap-2 p-0.5 rounded-full hover:ring-2 hover:ring-primary/40 transition-[box-shadow] focus:outline-hidden cursor-pointer"
         aria-label="User navigation menu"
       >
         <Avatar className="w-8 h-8 border border-border">
