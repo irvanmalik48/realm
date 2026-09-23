@@ -220,7 +220,7 @@ export function CustomCursor() {
       />
       <div
         ref={pulseRef}
-        className="hidden md:block fixed top-0 left-0 w-10 h-10 -ml-5 -mt-5 rounded-full border-[1.5px] border-white pointer-events-none z-99997 mix-blend-difference opacity-0 will-change-transform"
+        className="hidden md:block fixed top-0 left-0 w-10 h-10 -ml-5 -mt-5 rounded-full border-[1.5px] border-white pointer-events-none z-99997 mix-blend-difference opacity-0"
       />
     </>
   );
