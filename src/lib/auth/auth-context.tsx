@@ -63,6 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
     refresh();
   }, [refresh]);
