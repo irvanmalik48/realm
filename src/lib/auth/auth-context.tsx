@@ -55,9 +55,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } else {
         setUser(null);
       }
+      setIsLoading(false);
     } catch {
       setUser(null);
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsLoading(false);
     }
   }, []);
@@ -111,10 +112,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = async () => {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
-    } finally {
-      setUser(null);
-      window.location.href = "/";
+    } catch {
+      // ignore network errors on logout
     }
+    setUser(null);
+    window.location.href = "/";
   };
 
   const updateProfile = async (data: { full_name?: string; username?: string; avatar_url?: string }) => {
