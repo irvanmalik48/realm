@@ -96,20 +96,25 @@ export function CustomScrollbar() {
     };
   }, [isEnabled, hasThumb]);
 
+  const updateScrollbarRef = useRef(updateScrollbar);
+  useEffect(() => {
+    updateScrollbarRef.current = updateScrollbar;
+  });
+
   useEffect(() => {
     if (!isEnabled) return;
 
     const handleScroll = () => {
       if (rafRef.current === null) {
         rafRef.current = requestAnimationFrame(() => {
-          updateScrollbar();
+          updateScrollbarRef.current();
           rafRef.current = null;
         });
       }
     };
 
     requestAnimationFrame(() => {
-      updateScrollbar();
+      updateScrollbarRef.current();
     });
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
@@ -124,7 +129,7 @@ export function CustomScrollbar() {
         clearTimeout(hideTimeoutRef.current);
       }
     };
-  }, [isEnabled, updateScrollbar]);
+  }, [isEnabled]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -174,16 +179,18 @@ export function CustomScrollbar() {
   if (!isEnabled || !hasThumb) return null;
 
   return (
+    // react-doctor-disable-next-line react-doctor/no-static-element-interactions
     <div
       ref={scrollbarRef}
       aria-hidden="true"
-      className={`hidden md:block fixed top-0 right-0 h-full z-99999 transition-all duration-200 ${
+      className={`hidden md:block fixed top-0 right-0 h-full z-99999 transition-[width,background-color] duration-200 ${
         isHovered || isDragging ? "w-3 bg-secondary/20" : "w-1.5 bg-transparent"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleTrackClick}
     >
+      {/* react-doctor-disable-next-line react-doctor/no-static-element-interactions */}
       <div
         ref={thumbRef}
         className="w-full transition-opacity duration-200 cursor-grab active:cursor-grabbing bg-secondary absolute top-0 left-0 opacity-0"
