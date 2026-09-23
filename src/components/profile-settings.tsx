@@ -137,6 +137,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const [oauthSuccess, setOauthSuccess] = useState<string | null>(null);
 
   // Handle URL query parameters for OAuth linking feedback
+  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
     const linked = searchParams.get("linked");
     const err = searchParams.get("error");
@@ -587,7 +588,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                     type="button"
                     onClick={() => handleSyncAvatar(googleAccount.avatar_url!, "Google")}
                     disabled={isSavingAvatar}
-                    className="p-3 rounded-lg border border-blue-500/30 bg-blue-500/5 hover:bg-blue-500/10 text-foreground transition-all flex items-center gap-3 text-left cursor-pointer group"
+                    className="p-3 rounded-lg border border-blue-500/30 bg-blue-500/5 hover:bg-blue-500/10 text-foreground transition-colors flex items-center gap-3 text-left cursor-pointer group"
                   >
                     <Avatar className="size-8 shrink-0 border border-blue-500/30">
                       <AvatarImage src={googleAccount.avatar_url} />
@@ -609,7 +610,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                     type="button"
                     onClick={() => handleSyncAvatar(githubAccount.avatar_url!, "GitHub")}
                     disabled={isSavingAvatar}
-                    className="p-3 rounded-lg border border-neutral-500/30 bg-neutral-500/5 hover:bg-neutral-500/10 text-foreground transition-all flex items-center gap-3 text-left cursor-pointer group"
+                    className="p-3 rounded-lg border border-neutral-500/30 bg-neutral-500/5 hover:bg-neutral-500/10 text-foreground transition-colors flex items-center gap-3 text-left cursor-pointer group"
                   >
                     <Avatar className="size-8 shrink-0 border border-neutral-500/30">
                       <AvatarImage src={githubAccount.avatar_url} />
@@ -631,7 +632,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                     type="button"
                     onClick={handleRemoveAvatar}
                     disabled={isSavingAvatar}
-                    className="p-3 rounded-lg border border-destructive/30 bg-destructive/5 hover:bg-destructive/10 text-destructive transition-all flex items-center gap-3 text-left cursor-pointer group"
+                    className="p-3 rounded-lg border border-destructive/30 bg-destructive/5 hover:bg-destructive/10 text-destructive transition-colors flex items-center gap-3 text-left cursor-pointer group"
                   >
                     <div className="size-8 rounded-full bg-destructive/10 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                       <Trash2 className="size-4" />
