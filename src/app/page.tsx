@@ -13,6 +13,7 @@ import { SelfHostedServices } from "@/components/selfhosted";
 import { AboutSite } from "@/components/about-site";
 import { TextScroll } from "@/components/ui/text-scroll";
 import { APIStatusPulse } from "@/components/api-status-pulse";
+import { safeJsonLd } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Landing | realm.",
@@ -102,7 +103,7 @@ export default function Home() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
     </DirectionalTransition>
   );
