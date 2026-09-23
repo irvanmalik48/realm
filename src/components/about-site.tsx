@@ -280,7 +280,7 @@ export function AboutSite() {
                     href={item.docsUrl || item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-start justify-between p-3 rounded-lg border border-border/60 bg-muted/20 hover:bg-muted/50 hover:border-border transition-all duration-150"
+                    className="group flex items-start justify-between p-3 rounded-lg border border-border/60 bg-muted/20 hover:bg-muted/50 hover:border-border transition-colors duration-150"
                   >
                     <div className="flex items-start gap-2.5 min-w-0 pr-2">
                       <div className="size-7 rounded-md bg-background border border-border/70 flex items-center justify-center shrink-0 text-foreground group-hover:border-primary/50 group-hover:text-primary transition-colors">
