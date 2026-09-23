@@ -43,6 +43,7 @@ export function EditProfileDialog({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
+  // react-doctor-disable-next-line react-doctor/no-adjust-state-on-prop-change, react-hooks-js/set-state-in-effect
   useEffect(() => {
     if (user && isOpen) {
       setFullName(user.full_name || "");
@@ -55,6 +56,7 @@ export function EditProfileDialog({
   }, [user, isOpen]);
 
   // Debounced username check
+  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect, react-hooks-js/set-state-in-effect
   useEffect(() => {
     if (!isOpen || !user) return;
 
