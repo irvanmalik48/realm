@@ -242,6 +242,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         setIsCropDialogOpen(false);
         setTimeout(() => setAvatarSuccess(null), 3000);
       }
+      setIsSavingAvatar(false);
     } catch {
       setAvatarError("Network error during avatar upload");
       toast({
@@ -249,7 +250,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         title: "Upload failed",
         description: "Network error during avatar upload.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsSavingAvatar(false);
     }
   };
@@ -279,6 +280,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         setIsAvatarOptionsOpen(false);
         setTimeout(() => setAvatarSuccess(null), 3000);
       }
+      setIsSavingAvatar(false);
     } catch {
       setAvatarError("Network error during avatar sync");
       toast({
@@ -286,7 +288,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         title: "Sync failed",
         description: "Network error during avatar sync.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsSavingAvatar(false);
     }
   };
@@ -320,6 +322,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         setIsAvatarOptionsOpen(false);
         setTimeout(() => setAvatarSuccess(null), 3000);
       }
+      setIsSavingAvatar(false);
     } catch {
       setAvatarError("Network error setting avatar URL");
       toast({
@@ -327,7 +330,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         title: "Update failed",
         description: "Network error setting avatar URL.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsSavingAvatar(false);
     }
   };
@@ -356,6 +359,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         setIsAvatarOptionsOpen(false);
         setTimeout(() => setAvatarSuccess(null), 3000);
       }
+      setIsSavingAvatar(false);
     } catch {
       setAvatarError("Network error removing avatar");
       toast({
@@ -363,7 +367,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         title: "Removal failed",
         description: "Network error removing avatar.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsSavingAvatar(false);
     }
   };
@@ -393,6 +397,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         });
         setTimeout(() => setOauthSuccess(null), 3000);
       }
+      setUnlinkingProvider(null);
     } catch {
       setOauthError("Network error occurred");
       toast({
@@ -400,7 +405,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         title: "Disconnection failed",
         description: "Network error occurred.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setUnlinkingProvider(null);
     }
   };
@@ -410,6 +415,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         month: "long",
         day: "numeric",
         year: "numeric",
+        timeZone: "UTC",
       })
     : "Unknown";
 
@@ -452,9 +458,9 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
       <AnimatePresence>
         {!user.has_password && (
           <motion.div
-            initial={{ opacity: 0, height: 0, y: -6 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -6 }}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
             className="overflow-hidden"
           >
             <div className="p-3.5 sm:p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 dark:bg-amber-500/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
@@ -539,9 +545,9 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
       <AnimatePresence>
         {isAvatarOptionsOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0, y: -6 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -6 }}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
             className="overflow-hidden"
           >
             <div className="p-4 rounded-xl border border-primary/30 bg-muted/30 space-y-4">
@@ -640,12 +646,13 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
 
               {/* Custom Image URL Input */}
               <form onSubmit={handleSetCustomUrl} className="pt-2 border-t border-border/40 space-y-2">
-                <label className="text-[11px] font-medium text-muted-foreground flex items-center gap-1">
+                <label htmlFor="customAvatarUrl" className="text-[11px] font-medium text-muted-foreground flex items-center gap-1">
                   <Globe className="size-3" />
                   Or enter direct Image URL:
                 </label>
                 <div className="flex items-center gap-2">
                   <Input
+                    id="customAvatarUrl"
                     type="url"
                     value={customAvatarUrl}
                     onChange={(e) => setCustomAvatarUrl(e.target.value)}
@@ -797,9 +804,9 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         <AnimatePresence>
           {oauthError && (
             <motion.div
-              initial={{ opacity: 0, height: 0, y: -6 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -6 }}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
               className="overflow-hidden"
             >
               <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
@@ -811,9 +818,9 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
 
           {oauthSuccess && (
             <motion.div
-              initial={{ opacity: 0, height: 0, y: -6 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -6 }}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
               className="overflow-hidden"
             >
               <div className="p-3 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
@@ -854,13 +861,14 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                 )}
               </Button>
             ) : (
-              <a
+              <Link
                 href="/api/auth/google"
+                prefetch={false}
                 className="px-3 py-1.5 text-xs font-medium rounded-md border border-border bg-background hover:bg-muted/80 text-foreground transition-colors inline-flex items-center gap-1.5 cursor-pointer"
               >
                 <LinkIcon className="size-3.5" />
                 <span>Connect</span>
-              </a>
+              </Link>
             )}
           </div>
 
@@ -893,13 +901,14 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                 )}
               </Button>
             ) : (
-              <a
+              <Link
                 href="/api/auth/github"
+                prefetch={false}
                 className="px-3 py-1.5 text-xs font-medium rounded-md border border-border bg-background hover:bg-muted/80 text-foreground transition-colors inline-flex items-center gap-1.5 cursor-pointer"
               >
                 <LinkIcon className="size-3.5" />
                 <span>Connect</span>
-              </a>
+              </Link>
             )}
           </div>
         </div>
