@@ -132,12 +132,16 @@ export function SettingsClientPage() {
     });
 
     return () => {
-      activeSections.forEach((cat) => {
-        const el = document.getElementById(cat.id);
-        if (el) observer.unobserve(el);
-      });
+      observer.disconnect();
     };
-  }, [searchQuery, hasPerformanceMatch, hasBehaviorMatch, hasScrollingMatch, hasCursorMatch]);
+  }, [
+    searchQuery,
+    hasProfileMatch,
+    hasPerformanceMatch,
+    hasBehaviorMatch,
+    hasScrollingMatch,
+    hasCursorMatch,
+  ]);
 
   const handleCategoryClick = (id: string) => {
     const el = document.getElementById(id);
@@ -201,16 +205,18 @@ export function SettingsClientPage() {
               <Search className="absolute left-3 size-4 text-muted-foreground pointer-events-none" />
               <input
                 type="text"
+                aria-label="Search settings"
                 placeholder="Search settings (e.g. cursor, scroll, lerp...)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-8 py-2 bg-muted/30 border border-border rounded-md text-sm outline-none focus:border-primary transition-all placeholder:text-muted-foreground"
+                className="w-full pl-9 pr-8 py-2 bg-muted/30 border border-border rounded-md text-sm outline-none focus:border-primary transition-colors placeholder:text-muted-foreground"
               />
               {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 p-0.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
+                  type="button"
                   aria-label="Clear search"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 text-muted-foreground hover:text-foreground p-1 cursor-pointer transition-colors"
                 >
                   <X className="size-3.5" />
                 </button>
