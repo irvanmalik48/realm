@@ -354,7 +354,7 @@ export function AboutSite() {
             <p className="text-xs font-semibold text-foreground">
               Open Source & Community Driven
             </p>
-            <p className="text-[11px] text-muted-foreground">
+            <div className="text-[11px] text-muted-foreground">
               Licensed under{" "}
               <HoverCard openDelay={100} closeDelay={150}>
                 <HoverCardTrigger asChild>
@@ -379,7 +379,7 @@ export function AboutSite() {
                 </HoverCardContent>
               </HoverCard>
               . Inspect, fork, or learn from the code.
-            </p>
+            </div>
           </div>
         </div>
 
