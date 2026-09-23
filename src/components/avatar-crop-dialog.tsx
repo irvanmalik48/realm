@@ -34,7 +34,7 @@ export function AvatarCropDialog({
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
+  const croppedAreaPixelsRef = useRef<Area | null>(null);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -48,7 +48,7 @@ export function AvatarCropDialog({
 
   const onCropCompleteCallback = useCallback(
     (_croppedArea: Area, currentCroppedAreaPixels: Area) => {
-      setCroppedAreaPixels(currentCroppedAreaPixels);
+      croppedAreaPixelsRef.current = currentCroppedAreaPixels;
     },
     []
   );
@@ -58,11 +58,14 @@ export function AvatarCropDialog({
       return;
     }
     const reader = new FileReader();
-    reader.addEventListener("load", () => {
+    reader.onload = () => {
       setImageSrc(reader.result?.toString() || null);
       setZoom(1);
       setCrop({ x: 0, y: 0 });
-    });
+    };
+    reader.onerror = () => {
+      console.error("Failed to read file");
+    };
     reader.readAsDataURL(file);
   };
 
@@ -95,10 +98,11 @@ export function AvatarCropDialog({
   };
 
   const handleSave = async () => {
-    if (!imageSrc || !croppedAreaPixels) return;
+    const pixels = croppedAreaPixelsRef.current;
+    if (!imageSrc || !pixels) return;
 
     try {
-      const croppedFile = await getCroppedImg(imageSrc, croppedAreaPixels);
+      const croppedFile = await getCroppedImg(imageSrc, pixels);
       await onCropComplete(croppedFile);
       handleReset();
     } catch (err) {
@@ -110,7 +114,7 @@ export function AvatarCropDialog({
     setImageSrc(null);
     setCrop({ x: 0, y: 0 });
     setZoom(1);
-    setCroppedAreaPixels(null);
+    croppedAreaPixelsRef.current = null;
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -159,6 +163,7 @@ export function AvatarCropDialog({
                 </div>
                 <button
                   type="button"
+                  aria-label="Close dialog"
                   onClick={handleClose}
                   disabled={isUploading}
                   className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
@@ -172,6 +177,15 @@ export function AvatarCropDialog({
                 {!imageSrc ? (
                   /* Drag and Drop Upload Area */
                   <div
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Upload profile image"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        fileInputRef.current?.click();
+                      }
+                    }}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
@@ -223,6 +237,7 @@ export function AvatarCropDialog({
                       <ZoomOut className="size-4 text-muted-foreground shrink-0" />
                       <input
                         type="range"
+                        aria-label="Zoom level"
                         min={1}
                         max={3}
                         step={0.05}
