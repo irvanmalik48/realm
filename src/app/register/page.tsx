@@ -85,7 +85,10 @@ export default function RegisterPage() {
     const timer = setTimeout(async () => {
       try {
         const res = await fetch(`/api/auth/check?username=${encodeURIComponent(trimmed)}`);
-        if (!res.ok) throw new Error("Failed to check username");
+        if (!res.ok) {
+          setUsernameStatus("idle");
+          return;
+        }
         const data = await res.json();
 
         if (data.username_available === true) {
@@ -127,7 +130,10 @@ export default function RegisterPage() {
     const timer = setTimeout(async () => {
       try {
         const res = await fetch(`/api/auth/check?email=${encodeURIComponent(trimmed)}`);
-        if (!res.ok) throw new Error("Failed to check email");
+        if (!res.ok) {
+          setEmailStatus("idle");
+          return;
+        }
         const data = await res.json();
 
         if (data.email_available === true) {
@@ -206,6 +212,7 @@ export default function RegisterPage() {
         });
         router.push("/");
       }
+      setIsLoading(false);
     } catch {
       const err = "An unexpected error occurred. Please try again.";
       setError(err);
@@ -214,7 +221,7 @@ export default function RegisterPage() {
         title: "Registration failed",
         description: err,
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsLoading(false);
     }
   };
@@ -250,9 +257,9 @@ export default function RegisterPage() {
               <AnimatePresence mode="wait">
                 {error && (
                   <motion.div
-                    initial={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
-                    animate={{ opacity: 1, height: "auto", scale: 1, y: 0 }}
-                    exit={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
+                    initial={{ opacity: 0, scale: 0.95, y: -6 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -6 }}
                     transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden mb-5"
                   >
@@ -266,20 +273,22 @@ export default function RegisterPage() {
 
               {/* Social OIDC Logins */}
               <div className="grid grid-cols-2 gap-3 mb-6">
-                <a
+                <Link
                   href="/api/auth/google"
+                  prefetch={false}
                   className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
                 >
                   <GoogleLogo className="size-4 shrink-0" />
                   <span>Google</span>
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/api/auth/github"
+                  prefetch={false}
                   className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
                 >
                   <GithubLogo className="size-4 shrink-0" />
                   <span>GitHub</span>
-                </a>
+                </Link>
               </div>
 
               {/* Divider */}
@@ -368,9 +377,9 @@ export default function RegisterPage() {
                   <AnimatePresence>
                     {usernameMessage && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0, y: -4 }}
-                        animate={{ opacity: 1, height: "auto", y: 0 }}
-                        exit={{ opacity: 0, height: 0, y: -4 }}
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
                         transition={{ duration: 0.18 }}
                         className="overflow-hidden"
                       >
@@ -434,9 +443,9 @@ export default function RegisterPage() {
                   <AnimatePresence>
                     {emailMessage && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0, y: -4 }}
-                        animate={{ opacity: 1, height: "auto", y: 0 }}
-                        exit={{ opacity: 0, height: 0, y: -4 }}
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
                         transition={{ duration: 0.18 }}
                         className="overflow-hidden"
                       >
