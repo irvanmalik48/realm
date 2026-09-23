@@ -176,35 +176,18 @@ export function CustomScrollbar() {
   return (
     <div
       ref={scrollbarRef}
+      aria-hidden="true"
       className={`hidden md:block fixed top-0 right-0 h-full z-99999 transition-all duration-200 ${
         isHovered || isDragging ? "w-3 bg-secondary/20" : "w-1.5 bg-transparent"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleTrackClick}
-      role="button"
-      tabIndex={-1}
-      aria-label="Custom scrollbar track"
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          handleTrackClick(e as any);
-        }
-      }}
     >
       <div
         ref={thumbRef}
-        className="w-full transition-opacity duration-200 cursor-grab active:cursor-grabbing bg-secondary absolute top-0 left-0 opacity-0 will-change-transform"
+        className="w-full transition-opacity duration-200 cursor-grab active:cursor-grabbing bg-secondary absolute top-0 left-0 opacity-0"
         onMouseDown={handleMouseDown}
-        role="button"
-        tabIndex={-1}
-        aria-label="Custom scrollbar thumb"
-        onKeyDown={(e) => {
-          if (e.key === "ArrowDown") {
-            window.scrollBy({ top: 40 });
-          } else if (e.key === "ArrowUp") {
-            window.scrollBy({ top: -40 });
-          }
-        }}
       />
     </div>
   );
