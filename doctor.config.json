@@ -1,0 +1,15 @@
+{
+  "$schema": "https://react.doctor/schema/config.json",
+  "projects": ["realm"],
+  "rules": {
+    "react-doctor/use-lazy-motion": "off",
+    "react-doctor/no-giant-component": "off",
+    "react-doctor/no-high-complexity-react-function": "off",
+    "react-doctor/require-pnpm-hardening": "off",
+    "require-pnpm-hardening": "off",
+    "react-doctor/no-array-index-as-key": "off",
+    "react-hooks-js/set-state-in-effect": "off",
+    "react-doctor/no-adjust-state-on-prop-change": "off",
+    "react-doctor/only-export-components": "off"
+  }
+}
