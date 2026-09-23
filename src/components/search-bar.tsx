@@ -14,7 +14,7 @@ export function SearchBar() {
         placeholder="Search posts..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="pl-9 h-9 bg-secondary/50 border-transparent focus-visible:border-ring focus-visible:bg-background transition-all"
+        className="pl-9 h-9 bg-secondary/50 border-transparent focus-visible:border-ring focus-visible:bg-background transition-colors"
       />
     </div>
   );
