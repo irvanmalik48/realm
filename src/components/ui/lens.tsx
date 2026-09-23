@@ -54,9 +54,10 @@ export const Lens: React.FC<LensProps> = ({
     >
       {children}
 
-      {isStatic ? (
-        <div>
+      <AnimatePresence>
+        {isStatic ? (
           <motion.div
+            key="lens-static"
             initial={{ opacity: 0, scale: 0.58 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
@@ -82,57 +83,59 @@ export const Lens: React.FC<LensProps> = ({
               {children}
             </div>
           </motion.div>
-        </div>
-      ) : (
-        <AnimatePresence>
-          {isHovering && (
-            <div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="absolute inset-0 bg-transparent"
+        ) : isHovering ? (
+          <motion.div
+            key="lens-hover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 pointer-events-none"
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="absolute inset-0 bg-transparent"
+              style={{
+                zIndex: 40,
+                backgroundColor: "rgba(0, 0, 0, 0.25)",
+                backdropFilter: "blur(2px)",
+                WebkitBackdropFilter: "blur(2px)",
+              }}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.58 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="absolute inset-0 overflow-hidden"
+              style={{
+                maskImage: `radial-gradient(circle ${lensSize / 2}px at ${
+                  mousePosition.x
+                }px ${mousePosition.y}px, black 80%, transparent 100%)`,
+                WebkitMaskImage: `radial-gradient(circle ${
+                  lensSize / 2
+                }px at ${mousePosition.x}px ${
+                  mousePosition.y
+                }px, black 80%, transparent 100%)`,
+                transformOrigin: `${mousePosition.x}px ${mousePosition.y}px`,
+                zIndex: 50,
+              }}
+            >
+              <div
+                className="absolute inset-0"
                 style={{
-                  zIndex: 40,
-                  backgroundColor: "rgba(0, 0, 0, 0.25)",
-                  backdropFilter: "blur(2px)",
-                  WebkitBackdropFilter: "blur(2px)",
-                }}
-              ></motion.div>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.58 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="absolute inset-0 overflow-hidden"
-                style={{
-                  maskImage: `radial-gradient(circle ${lensSize / 2}px at ${
-                    mousePosition.x
-                  }px ${mousePosition.y}px, black 80%, transparent 100%)`,
-                  WebkitMaskImage: `radial-gradient(circle ${
-                    lensSize / 2
-                  }px at ${mousePosition.x}px ${
-                    mousePosition.y
-                  }px, black 80%, transparent 100%)`,
+                  transform: `scale(${zoomFactor})`,
                   transformOrigin: `${mousePosition.x}px ${mousePosition.y}px`,
-                  zIndex: 50,
                 }}
               >
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    transform: `scale(${zoomFactor})`,
-                    transformOrigin: `${mousePosition.x}px ${mousePosition.y}px`,
-                  }}
-                >
-                  {children}
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
-      )}
+                {children}
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 };
