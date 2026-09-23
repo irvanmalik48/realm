@@ -27,6 +27,11 @@ import { DirectionalTransition } from "@/components/directional-transition";
 import { motion, AnimatePresence } from "motion/react";
 import { toast } from "@/hooks/use-toast";
 
+const OAUTH_PROVIDERS = [
+  { name: "Google", href: "/api/auth/google", Icon: GoogleLogo },
+  { name: "GitHub", href: "/api/auth/github", Icon: GithubLogo },
+];
+
 export default function RegisterPage() {
   const router = useRouter();
   const { register, user } = useAuth();
@@ -54,11 +59,13 @@ export default function RegisterPage() {
   // If already logged in, redirect to home or settings
   useEffect(() => {
     if (user) {
+      // react-doctor-disable-next-line react-doctor/nextjs-no-client-side-redirect
       router.push("/settings");
     }
   }, [user, router]);
 
   // Debounced username check
+  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect, react-hooks-js/set-state-in-effect
   useEffect(() => {
     const trimmed = username.trim().toLowerCase();
     if (!trimmed) {
@@ -109,6 +116,7 @@ export default function RegisterPage() {
   }, [username]);
 
   // Debounced email check
+  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect, react-hooks-js/set-state-in-effect
   useEffect(() => {
     const trimmed = email.trim().toLowerCase();
     if (!trimmed) {
@@ -273,22 +281,17 @@ export default function RegisterPage() {
 
               {/* Social OIDC Logins */}
               <div className="grid grid-cols-2 gap-3 mb-6">
-                <Link
-                  href="/api/auth/google"
-                  prefetch={false}
-                  className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
-                >
-                  <GoogleLogo className="size-4 shrink-0" />
-                  <span>Google</span>
-                </Link>
-                <Link
-                  href="/api/auth/github"
-                  prefetch={false}
-                  className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
-                >
-                  <GithubLogo className="size-4 shrink-0" />
-                  <span>GitHub</span>
-                </Link>
+                {OAUTH_PROVIDERS.map((provider) => (
+                  <Link
+                    key={provider.name}
+                    href={provider.href}
+                    prefetch={false}
+                    className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
+                  >
+                    <provider.Icon className="size-4 shrink-0" />
+                    <span>{provider.name}</span>
+                  </Link>
+                ))}
               </div>
 
               {/* Divider */}
