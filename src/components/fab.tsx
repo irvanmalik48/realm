@@ -65,9 +65,11 @@ export function FAB() {
   }, []);
 
   // Close popover when pathname changes
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   const initials = user
     ? user.full_name
@@ -179,7 +181,7 @@ export function FAB() {
                   {isActive && (
                     <span className="ml-auto mr-5 size-1.5 rounded-full bg-primary" />
                   )}
-                  <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                  <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform]">
                     <ArrowRight className="size-4" />
                   </div>
                 </Link>
@@ -202,7 +204,7 @@ export function FAB() {
           >
             <Globe className="size-4 text-muted-foreground group-hover:text-foreground" />
             <span>GNU/Weeb</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform]">
               <ArrowRight className="size-4" />
             </div>
           </a>
@@ -215,7 +217,7 @@ export function FAB() {
           >
             <CircleDotDashed className="size-4 text-muted-foreground group-hover:text-foreground" />
             <span>webri.ng</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform]">
               <ArrowRight className="size-4" />
             </div>
           </a>
@@ -283,7 +285,7 @@ export function FAB() {
             >
               <LogIn className="size-4 text-muted-foreground group-hover:text-foreground" />
               <span>Sign in</span>
-              <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+              <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform]">
                 <ArrowRight className="size-4" />
               </div>
             </Link>
