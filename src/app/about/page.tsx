@@ -8,6 +8,7 @@ import type { WebPage, WithContext } from "schema-dts";
 import { LastFMTrackCard } from "@/components/lastfm-track-card";
 import { LastFMUserCard } from "@/components/lastfm-user-card";
 import { DirectionalTransition } from "@/components/directional-transition";
+import { safeJsonLd } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "About",
@@ -171,7 +172,7 @@ export default function About() {
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       </div>
     </DirectionalTransition>
