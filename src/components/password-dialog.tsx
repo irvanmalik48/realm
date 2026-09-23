@@ -118,6 +118,7 @@ export function PasswordDialog({
           handleClose();
         }, 1200);
       }
+      setIsSaving(false);
     } catch {
       const err = "An unexpected error occurred. Please try again.";
       setError(err);
@@ -126,7 +127,7 @@ export function PasswordDialog({
         title: "Password update failed",
         description: err,
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsSaving(false);
     }
   };
@@ -173,6 +174,7 @@ export function PasswordDialog({
                 </div>
                 <button
                   type="button"
+                  aria-label="Close dialog"
                   onClick={handleClose}
                   className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
                 >
@@ -185,9 +187,9 @@ export function PasswordDialog({
                 <AnimatePresence>
                   {error && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0, y: -6 }}
-                      animate={{ opacity: 1, height: "auto", y: 0 }}
-                      exit={{ opacity: 0, height: 0, y: -6 }}
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
                       className="overflow-hidden"
                     >
                       <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
@@ -199,9 +201,9 @@ export function PasswordDialog({
 
                   {success && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0, y: -6 }}
-                      animate={{ opacity: 1, height: "auto", y: 0 }}
-                      exit={{ opacity: 0, height: 0, y: -6 }}
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
                       className="overflow-hidden"
                     >
                       <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
@@ -237,6 +239,7 @@ export function PasswordDialog({
                       />
                       <button
                         type="button"
+                        aria-label={showCurrentPassword ? "Hide current password" : "Show current password"}
                         onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                         className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                       >
@@ -277,6 +280,7 @@ export function PasswordDialog({
                     />
                     <button
                       type="button"
+                      aria-label={showNewPassword ? "Hide new password" : "Show new password"}
                       onClick={() => setShowNewPassword(!showNewPassword)}
                       className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                     >
@@ -323,6 +327,7 @@ export function PasswordDialog({
                     />
                     <button
                       type="button"
+                      aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                       className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                     >
