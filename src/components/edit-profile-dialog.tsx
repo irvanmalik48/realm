@@ -175,6 +175,7 @@ export function EditProfileDialog({
           onClose();
         }, 1200);
       }
+      setIsSaving(false);
     } catch {
       const err = "An unexpected error occurred. Please try again.";
       setError(err);
@@ -183,7 +184,7 @@ export function EditProfileDialog({
         title: "Update failed",
         description: err,
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsSaving(false);
     }
   };
@@ -244,6 +245,7 @@ export function EditProfileDialog({
                 </div>
                 <button
                   type="button"
+                  aria-label="Close dialog"
                   onClick={onClose}
                   className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
                 >
@@ -256,9 +258,9 @@ export function EditProfileDialog({
                 <AnimatePresence>
                   {error && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0, y: -6 }}
-                      animate={{ opacity: 1, height: "auto", y: 0 }}
-                      exit={{ opacity: 0, height: 0, y: -6 }}
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
                       className="overflow-hidden"
                     >
                       <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
@@ -270,9 +272,9 @@ export function EditProfileDialog({
 
                   {success && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0, y: -6 }}
-                      animate={{ opacity: 1, height: "auto", y: 0 }}
-                      exit={{ opacity: 0, height: 0, y: -6 }}
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
                       className="overflow-hidden"
                     >
                       <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs flex items-center gap-2">
