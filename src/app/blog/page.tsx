@@ -10,6 +10,7 @@ import { PostList } from "@/components/post-list";
 import { SearchBar } from "@/components/search-bar";
 import { BlogContextWrapper } from "@/components/blog-context";
 import { DirectionalTransition } from "@/components/directional-transition";
+import { safeJsonLd } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -107,7 +108,7 @@ export default function Blog() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
     </DirectionalTransition>
   );
