@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Image from "next/image";
 import { LastFMCardProps } from "@/lib/types/lastfm";
 import { useQuery } from "@tanstack/react-query";
@@ -21,6 +22,17 @@ export function LastFMUserCard(props: LastFMCardProps) {
     retry: 3,
     refetchInterval: interval,
   });
+
+  const registeredDate = useMemo(() => {
+    const raw = data?.user?.registered?.["#text"];
+    if (!raw) return null;
+    return new Date(Number(raw) * 1000).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "UTC",
+    });
+  }, [data?.user?.registered]);
 
   return (
     <div className="w-full">
@@ -106,19 +118,17 @@ export function LastFMUserCard(props: LastFMCardProps) {
                 <h3 className="text-lg font-semibold">@{data.user?.name}</h3>
                 <p className="text-sm text-muted-foreground">
                   {data.user?.realname}{" "}
-                  <span className="md:inline hidden">
-                    &bull; Scrobbled since{" "}
-                    {new Date(
-                      (data.user?.registered?.["#text"] as number) * 1000
-                    ).toLocaleDateString()}
-                  </span>
+                  {registeredDate && (
+                    <span className="md:inline hidden">
+                      &bull; Scrobbled since {registeredDate}
+                    </span>
+                  )}
                 </p>
-                <p className="md:hidden text-sm text-muted-foreground">
-                  Scrobbled since{" "}
-                  {new Date(
-                    (data.user?.registered?.["#text"] as number) * 1000
-                  ).toLocaleDateString()}
-                </p>
+                {registeredDate && (
+                  <p className="md:hidden text-sm text-muted-foreground">
+                    Scrobbled since {registeredDate}
+                  </p>
+                )}
                 <Button
                   variant="secondary"
                   size="sm"
