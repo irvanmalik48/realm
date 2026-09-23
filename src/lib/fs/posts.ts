@@ -16,13 +16,18 @@ export function getMarkdownExtension(
 
 export const RE = /\.mdx?$/;
 
+const isPathInsideDir = (parentDir: string, targetPath: string): boolean => {
+  const rel = path.relative(parentDir, targetPath);
+  return !rel.startsWith("..") && !path.isAbsolute(rel);
+};
+
 export const getSource = async (
   filename: string
 ): Promise<string | undefined> => {
   const postsDir = path.join(process.cwd(), "posts");
   const sourcePath = path.resolve(postsDir, filename);
 
-  if (!sourcePath.startsWith(postsDir)) return;
+  if (!isPathInsideDir(postsDir, sourcePath)) return;
   if (!fs.existsSync(sourcePath)) return;
   return await fs.promises.readFile(sourcePath, "utf8");
 };
@@ -31,7 +36,7 @@ export const getSourceSync = (filename: string): string | undefined => {
   const postsDir = path.join(process.cwd(), "posts");
   const sourcePath = path.resolve(postsDir, filename);
 
-  if (!sourcePath.startsWith(postsDir)) return;
+  if (!isPathInsideDir(postsDir, sourcePath)) return;
   if (!fs.existsSync(sourcePath)) return;
   return fs.readFileSync(sourcePath, "utf8");
 };
@@ -59,7 +64,7 @@ export const getMarkdownFromSlug = async (
     const filename = `${sanitizedSlug}.${ext}`;
     const fullPath = path.resolve(postsDir, filename);
 
-    if (fullPath.startsWith(postsDir) && fs.existsSync(fullPath)) {
+    if (isPathInsideDir(postsDir, fullPath) && fs.existsSync(fullPath)) {
       const source = await getSource(filename);
 
       if (!source) return;
