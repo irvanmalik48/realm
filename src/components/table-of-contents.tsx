@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -53,10 +53,12 @@ export function TableOfContents({ headings = [] }: TableOfContentsProps) {
     return () => observer.disconnect();
   }, [headings]);
 
+  const activeIdSet = useMemo(() => new Set(activeIds), [activeIds]);
+
   if (headings.length === 0) return null;
 
   return (
-    <nav className="w-64 flex flex-col gap-2">
+    <nav aria-label="Table of contents" className="relative">
       <p className="font-semibold mb-2 text-sm text-foreground/80">
         On this page
       </p>
@@ -67,7 +69,7 @@ export function TableOfContents({ headings = [] }: TableOfContentsProps) {
             href={`#${heading.id}`}
             className={cn(
               "relative pr-4 py-1.5 transition-colors hover:text-foreground",
-              activeIds.includes(heading.id)
+              activeIdSet.has(heading.id)
                 ? "text-foreground font-medium"
                 : "text-muted-foreground",
             )}
@@ -89,7 +91,7 @@ export function TableOfContents({ headings = [] }: TableOfContentsProps) {
               }
             }}
           >
-            {activeIds.includes(heading.id) && (
+            {activeIdSet.has(heading.id) && (
               <motion.div
                 className="absolute right-0 top-0 bottom-0 w-0.5 bg-foreground rounded-l-full"
                 initial={{ opacity: 0 }}
