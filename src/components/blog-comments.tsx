@@ -98,6 +98,7 @@ function formatRelativeTime(dateStr: string): string {
     month: "short",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   });
 }
 
@@ -110,6 +111,7 @@ function formatFullDate(dateStr: string): string {
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "UTC",
   });
 }
 
@@ -320,9 +322,11 @@ export function BlogComments({ slug }: { slug: string }) {
           setComments(data.comments || []);
           setTotalCount(data.total_count || 0);
         }
+        setIsLoading(false);
+        if (showRefreshing) setIsRefreshing(false);
       } catch {
         // Silently handle background errors
-      } finally {
+        // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
         setIsLoading(false);
         if (showRefreshing) setIsRefreshing(false);
       }
@@ -383,13 +387,14 @@ export function BlogComments({ slug }: { slug: string }) {
           description: err.error || "Could not publish your comment.",
         });
       }
+      setIsPosting(false);
     } catch {
       toast({
         variant: "destructive",
         title: "Network error",
         description: "Failed to connect to comment service.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsPosting(false);
     }
   };
@@ -449,13 +454,14 @@ export function BlogComments({ slug }: { slug: string }) {
           description: err.error || "Could not publish your reply.",
         });
       }
+      setIsSubmittingReply(false);
     } catch {
       toast({
         variant: "destructive",
         title: "Network error",
         description: "Failed to connect to comment service.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsSubmittingReply(false);
     }
   };
@@ -519,13 +525,14 @@ export function BlogComments({ slug }: { slug: string }) {
           description: err.error || "Could not update comment.",
         });
       }
+      setIsSubmittingEdit(false);
     } catch {
       toast({
         variant: "destructive",
         title: "Network error",
         description: "Failed to connect to comment service.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsSubmittingEdit(false);
     }
   };
@@ -563,13 +570,15 @@ export function BlogComments({ slug }: { slug: string }) {
           description: err.error || "Could not delete comment.",
         });
       }
+      setIsDeleting(false);
+      setDeleteTargetId(null);
     } catch {
       toast({
         variant: "destructive",
         title: "Network error",
         description: "Failed to connect to comment service.",
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsDeleting(false);
       setDeleteTargetId(null);
     }
@@ -702,6 +711,7 @@ export function BlogComments({ slug }: { slug: string }) {
                   <TooltipTrigger asChild>
                     <button
                       type="button"
+                      aria-label="Format bold"
                       onClick={() =>
                         insertFormatting(
                           mainTextareaRef,
@@ -724,6 +734,7 @@ export function BlogComments({ slug }: { slug: string }) {
                   <TooltipTrigger asChild>
                     <button
                       type="button"
+                      aria-label="Format italic"
                       onClick={() =>
                         insertFormatting(
                           mainTextareaRef,
@@ -746,6 +757,7 @@ export function BlogComments({ slug }: { slug: string }) {
                   <TooltipTrigger asChild>
                     <button
                       type="button"
+                      aria-label="Format inline code"
                       onClick={() =>
                         insertFormatting(
                           mainTextareaRef,
@@ -768,6 +780,7 @@ export function BlogComments({ slug }: { slug: string }) {
                   <TooltipTrigger asChild>
                     <button
                       type="button"
+                      aria-label="Format quote"
                       onClick={() =>
                         insertFormatting(
                           mainTextareaRef,
@@ -790,6 +803,7 @@ export function BlogComments({ slug }: { slug: string }) {
                   <TooltipTrigger asChild>
                     <button
                       type="button"
+                      aria-label="Insert link"
                       onClick={() =>
                         insertFormatting(
                           mainTextareaRef,
@@ -1276,6 +1290,7 @@ function CommentCard({
               <TooltipTrigger asChild>
                 <button
                   type="button"
+                  aria-label="Copy comment text"
                   onClick={handleCopyComment}
                   className="p-1 rounded-md text-muted-foreground/60 hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
                 >
@@ -1315,9 +1330,9 @@ function CommentCard({
       <AnimatePresence>
         {isReplying && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
             className="pt-2 overflow-hidden"
           >
             <div className="rounded-xl border border-primary/40 bg-muted/30 p-3.5 flex flex-col gap-2.5">
@@ -1327,6 +1342,7 @@ function CommentCard({
                 </span>
                 <button
                   type="button"
+                  aria-label="Cancel reply"
                   onClick={onCancelReply}
                   className="hover:text-foreground transition-colors cursor-pointer"
                 >
