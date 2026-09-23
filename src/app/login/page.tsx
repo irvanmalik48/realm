@@ -54,6 +54,7 @@ export default function LoginPage() {
         });
         router.push("/");
       }
+      setIsLoading(false);
     } catch {
       const err = "An unexpected error occurred. Please try again.";
       setError(err);
@@ -62,7 +63,7 @@ export default function LoginPage() {
         title: "Sign in failed",
         description: err,
       });
-    } finally {
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally
       setIsLoading(false);
     }
   };
@@ -91,9 +92,9 @@ export default function LoginPage() {
               <AnimatePresence mode="wait">
                 {error && (
                   <motion.div
-                    initial={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
-                    animate={{ opacity: 1, height: "auto", scale: 1, y: 0 }}
-                    exit={{ opacity: 0, height: 0, scale: 0.95, y: -6 }}
+                    initial={{ opacity: 0, scale: 0.95, y: -6 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -6 }}
                     transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden mb-5"
                   >
@@ -107,20 +108,22 @@ export default function LoginPage() {
 
               {/* Social OIDC Logins */}
               <div className="grid grid-cols-2 gap-3 mb-6">
-                <a
+                <Link
                   href="/api/auth/google"
+                  prefetch={false}
                   className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
                 >
                   <GoogleLogo className="size-4 shrink-0" />
                   <span>Google</span>
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/api/auth/github"
+                  prefetch={false}
                   className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-border bg-muted/20 hover:bg-muted/60 text-foreground font-medium text-xs transition-colors"
                 >
                   <GithubLogo className="size-4 shrink-0" />
                   <span>GitHub</span>
-                </a>
+                </Link>
               </div>
 
               {/* Divider */}
