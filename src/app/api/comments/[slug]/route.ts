@@ -19,7 +19,10 @@ export async function GET(
     const client = getCommentClient();
     const metadata = createMetadata({ token });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { slug: string },
+      { slug?: string; total_count?: number; comments?: unknown[] }
+    >(
       client,
       "GetComments",
       { slug },
@@ -66,7 +69,10 @@ export async function POST(
     const client = getCommentClient();
     const metadata = createMetadata({ token });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { slug: string; content: string; parent_id?: string },
+      { comment?: unknown }
+    >(
       client,
       "CreateComment",
       {
@@ -84,7 +90,7 @@ export async function POST(
       },
       { status: 201 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     const { message, status } = formatGrpcError(err);
     return NextResponse.json({ error: message }, { status });
   }
