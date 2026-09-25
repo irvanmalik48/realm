@@ -16,8 +16,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Flame, Trophy, RefreshCcw, GitCommit, GitPullRequest, AlertCircle, Lock } from "lucide-react";
-import { ContributionScrollbar, useGrabToPan } from "@/components/github/contribution-scrollbar";
+import { ContributionScrollbar } from "@/components/github/contribution-scrollbar";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+
+function formatContributionDate(dateStr: string): string {
+  if (!dateStr) return "";
+  const [year, month, day] = dateStr.split("-").map(Number);
+  const date = new Date(year, month - 1, day);
+  return date.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
 
 export interface GitHubContributionGraphProps {
   username?: string;
@@ -55,7 +68,6 @@ export function GitHubContributionGraph({
   });
 
   const calendarRef = useRef<HTMLDivElement>(null);
-  useGrabToPan(calendarRef);
 
   const activeData: TransformedContributionsResult | undefined = initialData || data;
 
@@ -202,21 +214,28 @@ export function GitHubContributionGraph({
             data={activities}
             labels={{ totalCount: "{{count}} contributions in the past year" }}
           >
-            <ContributionGraphCalendar
-              ref={calendarRef}
-              className="cursor-grab active:cursor-grabbing"
-            >
+            <ContributionGraphCalendar ref={calendarRef}>
               {({ activity, dayIndex, weekIndex }) => (
-                <ContributionGraphBlock
-                  activity={activity}
-                  dayIndex={dayIndex}
-                  weekIndex={weekIndex}
-                  className="transition-colors hover:stroke-foreground hover:stroke-[1.5px]"
-                >
-                  <title>
-                    {`${activity.count === 0 ? "No" : activity.count} contribution${activity.count === 1 ? "" : "s"} on ${activity.date}`}
-                  </title>
-                </ContributionGraphBlock>
+                <Tooltip key={activity.date} delayDuration={50}>
+                  <TooltipTrigger asChild>
+                    <ContributionGraphBlock
+                      activity={activity}
+                      dayIndex={dayIndex}
+                      weekIndex={weekIndex}
+                      className="transition-colors hover:stroke-foreground hover:stroke-[1.5px]"
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent side="top" sideOffset={6} className="text-xs font-mono py-1.5 px-2.5">
+                    <span className="font-semibold">
+                      {activity.count === 0
+                        ? "No contributions"
+                        : `${activity.count.toLocaleString()} contribution${activity.count === 1 ? "" : "s"}`}
+                    </span>{" "}
+                    <span className="opacity-80">
+                      on {formatContributionDate(activity.date)}
+                    </span>
+                  </TooltipContent>
+                </Tooltip>
               )}
             </ContributionGraphCalendar>
 
