@@ -16,7 +16,10 @@ export async function PATCH(req: NextRequest) {
     const client = getAuthClient();
     const metadata = createMetadata({ token });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { full_name?: string; username?: string; avatar_url?: string },
+      { message?: string; user?: unknown }
+    >(
       client,
       "UpdateProfile",
       {
@@ -32,7 +35,7 @@ export async function PATCH(req: NextRequest) {
       message: data.message || "Profile updated successfully",
       user: data.user,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     const { message, status } = formatGrpcError(error);
     return NextResponse.json({ error: message }, { status });
   }
