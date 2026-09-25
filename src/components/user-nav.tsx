@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogIn, LogOut, Settings, User as UserIcon } from "lucide-react";
+import { LogIn, LogOut, Settings } from "lucide-react";
 import { GoogleLogo } from "@/components/logos/google";
 import { GithubLogo } from "@/components/logos/github";
 import { toast } from "@/hooks/use-toast";
