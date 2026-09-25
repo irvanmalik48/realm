@@ -76,7 +76,14 @@ export async function getGitHubContributions(
       variables
     );
 
-    if (!data.user) {
+    // Prefer viewer data if the authenticated user matches the requested username.
+    // This ensures private repository contributions and restricted counts are fully included.
+    const isViewer =
+      data.viewer &&
+      data.viewer.login.toLowerCase() === username.toLowerCase();
+    const targetUser = isViewer ? data.viewer : data.user;
+
+    if (!targetUser) {
       const fallback = generateMockContributions(username);
       return {
         ...fallback,
@@ -85,7 +92,7 @@ export async function getGitHubContributions(
       };
     }
 
-    const transformed = transformContributionsResponse(data.user);
+    const transformed = transformContributionsResponse(targetUser);
     return {
       ...transformed,
       isFallback: false,
