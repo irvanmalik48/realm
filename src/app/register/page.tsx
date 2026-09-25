@@ -65,31 +65,31 @@ export default function RegisterPage() {
   }, [user, router]);
 
   // Debounced username check
-  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect, react-hooks-js/set-state-in-effect
   useEffect(() => {
     const trimmed = username.trim().toLowerCase();
-    if (!trimmed) {
-      setUsernameStatus("idle");
-      setUsernameMessage("");
-      return;
-    }
-
-    if (trimmed.length < 3) {
-      setUsernameStatus("invalid");
-      setUsernameMessage("Username must be at least 3 characters");
-      return;
-    }
-
-    if (!/^[a-zA-Z0-9_]{3,30}$/.test(trimmed)) {
-      setUsernameStatus("invalid");
-      setUsernameMessage("Alphanumeric and underscores only (max 30)");
-      return;
-    }
-
-    setUsernameStatus("checking");
-    setUsernameMessage("");
 
     const timer = setTimeout(async () => {
+      if (!trimmed) {
+        setUsernameStatus("idle");
+        setUsernameMessage("");
+        return;
+      }
+
+      if (trimmed.length < 3) {
+        setUsernameStatus("invalid");
+        setUsernameMessage("Username must be at least 3 characters");
+        return;
+      }
+
+      if (!/^[a-zA-Z0-9_]{3,30}$/.test(trimmed)) {
+        setUsernameStatus("invalid");
+        setUsernameMessage("Alphanumeric and underscores only (max 30)");
+        return;
+      }
+
+      setUsernameStatus("checking");
+      setUsernameMessage("");
+
       try {
         const res = await fetch(`/api/auth/check?username=${encodeURIComponent(trimmed)}`);
         if (!res.ok) {
@@ -116,26 +116,26 @@ export default function RegisterPage() {
   }, [username]);
 
   // Debounced email check
-  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect, react-hooks-js/set-state-in-effect
   useEffect(() => {
     const trimmed = email.trim().toLowerCase();
-    if (!trimmed) {
-      setEmailStatus("idle");
-      setEmailMessage("");
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(trimmed)) {
-      setEmailStatus("idle");
-      setEmailMessage("");
-      return;
-    }
-
-    setEmailStatus("checking");
-    setEmailMessage("");
 
     const timer = setTimeout(async () => {
+      if (!trimmed) {
+        setEmailStatus("idle");
+        setEmailMessage("");
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(trimmed)) {
+        setEmailStatus("idle");
+        setEmailMessage("");
+        return;
+      }
+
+      setEmailStatus("checking");
+      setEmailMessage("");
+
       try {
         const res = await fetch(`/api/auth/check?email=${encodeURIComponent(trimmed)}`);
         if (!res.ok) {
