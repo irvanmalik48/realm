@@ -63,9 +63,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
-    refresh();
+    let ignore = false;
+    const timer = setTimeout(() => {
+      if (!ignore) {
+        void refresh();
+      }
+    }, 0);
+    return () => {
+      ignore = true;
+      clearTimeout(timer);
+    };
   }, [refresh]);
 
   const login = async (credentials: { identifier: string; password: string }) => {
