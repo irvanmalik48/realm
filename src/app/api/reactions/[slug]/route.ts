@@ -21,7 +21,16 @@ export async function GET(
     const client = getReactionClient();
     const metadata = createMetadata({ token, ip: forwardedFor });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { slug: string },
+      {
+        slug?: string;
+        total_count?: number;
+        reactions?: Record<string, number>;
+        user_reaction?: unknown;
+        user_reactions?: unknown[];
+      }
+    >(
       client,
       "GetReactions",
       { slug },
@@ -81,7 +90,18 @@ export async function POST(
     const client = getReactionClient();
     const metadata = createMetadata({ token, ip: forwardedFor });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { slug: string; reaction: string },
+      {
+        slug?: string;
+        reaction?: string;
+        active?: boolean;
+        total_count?: number;
+        reactions?: Record<string, number>;
+        user_reaction?: unknown;
+        user_reactions?: unknown[];
+      }
+    >(
       client,
       "ToggleReaction",
       {
@@ -100,7 +120,7 @@ export async function POST(
       user_reaction: data.user_reaction || null,
       user_reactions: data.user_reactions || [],
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     const { message, status } = formatGrpcError(err);
     return NextResponse.json({ error: message }, { status });
   }
