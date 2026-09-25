@@ -7,8 +7,6 @@ import React, {
   useCallback,
   type PointerEvent,
 } from "react";
-import { ChevronLeft, ChevronRight, ChevronsRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export interface ContributionScrollbarProps {
@@ -137,7 +135,6 @@ export function ContributionScrollbar({
 
   // Click on track to jump directly
   const handleTrackPointerDown = (e: PointerEvent<HTMLDivElement>) => {
-    // If clicking directly on thumb, thumb's handler handles it
     if (e.target !== e.currentTarget && (e.target as HTMLElement).closest("[data-thumb]")) {
       return;
     }
@@ -164,61 +161,22 @@ export function ContributionScrollbar({
     });
   };
 
-  // Nav buttons
-  const scrollStep = (direction: "left" | "right") => {
-    const el = containerRef.current;
-    if (!el) return;
-    const delta = (el.clientWidth * 0.45) * (direction === "left" ? -1 : 1);
-    el.scrollBy({ left: delta, behavior: "smooth" });
-  };
-
-  const scrollToLatest = () => {
-    const el = containerRef.current;
-    if (!el) return;
-    el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
-  };
-
   if (!canScroll) return null;
 
   return (
-    <div
-      className={cn(
-        "w-full flex items-center gap-2 pt-2 pb-1 select-none",
-        className
-      )}
-    >
-      {/* Scroll Left Button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="size-6 shrink-0 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/80 cursor-pointer"
-        onClick={() => scrollStep("left")}
-        title="Scroll earlier"
-      >
-        <ChevronLeft className="size-3.5" />
-        <span className="sr-only">Scroll earlier</span>
-      </Button>
-
-      {/* Track & Draggable Thumb */}
+    <div className={cn("w-full pt-2 pb-1 select-none", className)}>
+      {/* Scrollbar Track & Draggable Thumb */}
       <div
         ref={trackRef}
         onPointerDown={handleTrackPointerDown}
         className={cn(
-          "relative flex-1 h-2 rounded-full cursor-pointer transition-colors",
+          "relative w-full h-1.5 rounded-full cursor-pointer transition-colors",
           "bg-muted/40 hover:bg-muted/60 border border-border/40",
           isDragging && "bg-muted/70"
         )}
-        title="Drag or click to jump"
+        title="Drag or click to scroll timeline"
       >
-        {/* Subtle quarter markers along track */}
-        <div className="absolute inset-0 flex justify-between px-2 items-center pointer-events-none opacity-20">
-          <span className="size-1 rounded-full bg-foreground" />
-          <span className="size-1 rounded-full bg-foreground" />
-          <span className="size-1 rounded-full bg-foreground" />
-          <span className="size-1 rounded-full bg-foreground" />
-        </div>
-
-        {/* Thumb */}
+        {/* Draggable Thumb */}
         <div
           data-thumb
           onPointerDown={handleThumbPointerDown}
@@ -228,101 +186,13 @@ export function ContributionScrollbar({
           }}
           className={cn(
             "absolute top-0 bottom-0 rounded-full touch-none",
-            "bg-muted-foreground/40 hover:bg-muted-foreground/70 active:bg-primary",
+            "bg-muted-foreground/40 hover:bg-muted-foreground/70 active:bg-muted-foreground/90",
             "transition-[background-color,transform] duration-75 ease-out",
             "cursor-grab active:cursor-grabbing",
-            isDragging && "bg-primary shadow-sm shadow-primary/20 cursor-grabbing scale-y-125"
+            isDragging && "bg-muted-foreground/90 shadow-sm cursor-grabbing scale-y-125"
           )}
-        >
-          {/* Center Grip Lines */}
-          <div className="absolute inset-0 flex items-center justify-center gap-0.5 pointer-events-none opacity-40">
-            <span className="w-0.5 h-1.5 bg-background rounded-full" />
-            <span className="w-0.5 h-1.5 bg-background rounded-full" />
-          </div>
-        </div>
+        />
       </div>
-
-      {/* Scroll Right Button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="size-6 shrink-0 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/80 cursor-pointer"
-        onClick={() => scrollStep("right")}
-        title="Scroll later"
-      >
-        <ChevronRight className="size-3.5" />
-        <span className="sr-only">Scroll later</span>
-      </Button>
-
-      {/* Jump to Latest Chip */}
-      {scrollProgress < 0.95 && (
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-6 px-2 text-[10px] font-mono shrink-0 rounded-full text-muted-foreground hover:text-foreground border-border/60 hover:bg-muted/60 gap-1 cursor-pointer transition-all"
-          onClick={scrollToLatest}
-          title="Jump to latest contributions"
-        >
-          <span>Latest</span>
-          <ChevronsRight className="size-2.5" />
-        </Button>
-      )}
     </div>
   );
-}
-
-/**
- * Hook to enable click-and-drag panning on the calendar grid.
- */
-export function useGrabToPan(containerRef: React.RefObject<HTMLDivElement | null>) {
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    let isDown = false;
-    let startX = 0;
-    let scrollLeftStart = 0;
-    let hasMoved = false;
-
-    const onMouseDown = (e: MouseEvent) => {
-      // Only react to left mouse button
-      if (e.button !== 0) return;
-
-      isDown = true;
-      hasMoved = false;
-      startX = e.pageX - el.offsetLeft;
-      scrollLeftStart = el.scrollLeft;
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDown) return;
-
-      const x = e.pageX - el.offsetLeft;
-      const walk = (x - startX) * 1.2; // scroll speed multiplier
-
-      if (Math.abs(walk) > 4) {
-        hasMoved = true;
-        el.style.cursor = "grabbing";
-        el.style.userSelect = "none";
-        el.scrollLeft = scrollLeftStart - walk;
-      }
-    };
-
-    const onMouseUp = () => {
-      if (!isDown) return;
-      isDown = false;
-      el.style.cursor = "";
-      el.style.removeProperty("user-select");
-    };
-
-    el.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
-
-    return () => {
-      el.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-    };
-  }, [containerRef]);
 }
