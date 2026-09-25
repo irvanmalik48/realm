@@ -6,6 +6,12 @@ import { useAtomValue } from "jotai";
 import Lenis from "lenis";
 import { smoothScrollAtom, scrollLerpAtom, scrollDurationAtom } from "@/lib/atoms/scroll";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis | null;
+  }
+}
+
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const isEnabled = useAtomValue(smoothScrollAtom);
   const lerp = useAtomValue(scrollLerpAtom);
@@ -19,7 +25,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         lenisRef.current.destroy();
         lenisRef.current = null;
         if (typeof window !== "undefined") {
-          (window as any).__lenis = null;
+          window.__lenis = null;
         }
       }
       return;
@@ -32,7 +38,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     });
     lenisRef.current = lenis;
     if (typeof window !== "undefined") {
-      (window as any).__lenis = lenis;
+      window.__lenis = lenis;
     }
 
     let rafId: number;
@@ -47,7 +53,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       lenis.destroy();
       lenisRef.current = null;
       if (typeof window !== "undefined") {
-        (window as any).__lenis = null;
+        window.__lenis = null;
       }
     };
   }, [isEnabled, lerp, duration]);
