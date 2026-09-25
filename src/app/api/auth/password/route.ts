@@ -16,7 +16,10 @@ export async function POST(req: NextRequest) {
     const client = getAuthClient();
     const metadata = createMetadata({ token });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { current_password: string; new_password: string },
+      { message?: string }
+    >(
       client,
       "SetPassword",
       {
@@ -30,7 +33,7 @@ export async function POST(req: NextRequest) {
       status: "success",
       message: data.message || "Password updated successfully",
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     const { message, status } = formatGrpcError(error);
     return NextResponse.json({ error: message }, { status });
   }
