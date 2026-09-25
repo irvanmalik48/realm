@@ -153,7 +153,7 @@ export default function About() {
               <span className="text-sm font-mono">USEFUL_CARDS.md</span>
             </h2>
             <div className="w-full p-5 grid grid-cols-2 md:grid-cols-4 gap-5">
-              {infoWidgets.map((item, i) => (
+              {infoWidgets.map((item) => (
                 <div
                   key={item.title}
                   className="md:aspect-square size-full overflow-clip rounded-md border border-border flex flex-col"
