@@ -76,8 +76,8 @@ export function GitHubContributionGraph({
   }, [activeData]);
 
   const stats = activeData?.stats;
-  const isFallback = (data as any)?.isFallback ?? false;
-  const errorMessage = (data as any)?.error ?? null;
+  const isFallback = (data as { isFallback?: boolean } | undefined)?.isFallback ?? false;
+  const errorMessage = (data as { error?: string } | undefined)?.error ?? null;
 
   if (status === "pending" && !initialData) {
     return (
