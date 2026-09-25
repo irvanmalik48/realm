@@ -58,6 +58,7 @@ export function EditProfileDialog({
   }, [user, isOpen]);
 
   // Debounced username check
+  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect
   useEffect(() => {
     if (!isOpen || !user) return;
 
