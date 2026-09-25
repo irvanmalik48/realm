@@ -1,5 +1,39 @@
 export const GET_USER_CONTRIBUTIONS_QUERY = /* GraphQL */ `
   query getUserContributions($username: String!, $from: DateTime, $to: DateTime) {
+    viewer {
+      name
+      login
+      avatarUrl
+      contributionsCollection(from: $from, to: $to) {
+        startedAt
+        endedAt
+        restrictedContributionsCount
+        totalCommitContributions
+        totalIssueContributions
+        totalPullRequestContributions
+        totalPullRequestReviewContributions
+        contributionCalendar {
+          totalContributions
+          colors
+          months {
+            name
+            year
+            firstDay
+            totalWeeks
+          }
+          weeks {
+            firstDay
+            contributionDays {
+              date
+              contributionCount
+              contributionLevel
+              weekday
+              color
+            }
+          }
+        }
+      }
+    }
     user(login: $username) {
       name
       login
@@ -7,6 +41,7 @@ export const GET_USER_CONTRIBUTIONS_QUERY = /* GraphQL */ `
       contributionsCollection(from: $from, to: $to) {
         startedAt
         endedAt
+        restrictedContributionsCount
         totalCommitContributions
         totalIssueContributions
         totalPullRequestContributions
