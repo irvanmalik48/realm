@@ -48,7 +48,7 @@ export function GitHubContributionGraph({
   showRefresh = true,
   initialData,
 }: GitHubContributionGraphProps) {
-  const { data, status, isFetching, refetch } = useGitHubContributions(username, {
+  const { data, status, isFetching, forceRefresh } = useGitHubContributions(username, {
     from,
     to,
     enabled: !initialData,
@@ -143,9 +143,9 @@ export function GitHubContributionGraph({
               variant="ghost"
               size="icon"
               className="size-8 cursor-pointer"
-              onClick={() => refetch()}
+              onClick={() => forceRefresh()}
               disabled={isFetching}
-              title="Refresh GitHub contributions"
+              title="Refresh GitHub contributions (bypasses cache)"
             >
               <RefreshCcw className={cn("size-3.5", isFetching && "animate-spin")} />
               <span className="sr-only">Refresh contributions</span>
