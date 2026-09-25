@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Container from "@/components/container";
+import React, { useState, useEffect, useCallback } from "react";
 import { ImageComponent } from "@/components/image";
 import { Settings, Search, Sliders, PlayCircle, MousePointer, Activity, User, X } from "lucide-react";
 import CuteImage from "@/assets/img/awoocon.jpg";
@@ -93,14 +92,20 @@ export function SettingsClientPage() {
     matchQuery("Trail Orb Size (Delayed)") ||
     matchQuery("custom cursor cursor orb mouse pointer follow-up speed speed latency hover scale cursor hover hover size pointer size leading orb trail size trailing orb");
 
-  const hasMatch = (id: string) => {
+  const hasMatch = useCallback((id: string) => {
     if (id === "profile") return hasProfileMatch;
     if (id === "performance") return hasPerformanceMatch;
     if (id === "behavior") return hasBehaviorMatch;
     if (id === "scrolling") return hasScrollingMatch;
     if (id === "cursor") return hasCursorMatch;
     return true;
-  };
+  }, [
+    hasProfileMatch,
+    hasPerformanceMatch,
+    hasBehaviorMatch,
+    hasScrollingMatch,
+    hasCursorMatch,
+  ]);
 
   const totalMatches =
     (hasProfileMatch ? 1 : 0) +
@@ -136,11 +141,7 @@ export function SettingsClientPage() {
     };
   }, [
     searchQuery,
-    hasProfileMatch,
-    hasPerformanceMatch,
-    hasBehaviorMatch,
-    hasScrollingMatch,
-    hasCursorMatch,
+    hasMatch,
   ]);
 
   const handleCategoryClick = (id: string) => {
