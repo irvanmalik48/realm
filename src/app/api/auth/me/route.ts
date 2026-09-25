@@ -16,7 +16,10 @@ export async function GET(req: NextRequest) {
     const metadata = createMetadata({ token });
 
     try {
-      const data: any = await promisifyUnary(client, "GetProfile", {}, metadata);
+      const data = await promisifyUnary<
+        Record<string, never>,
+        { user?: unknown }
+      >(client, "GetProfile", {}, metadata);
       return NextResponse.json({
         status: "success",
         user: data.user,
@@ -32,7 +35,7 @@ export async function GET(req: NextRequest) {
       });
       return res;
     }
-  } catch (error) {
+  } catch {
     return NextResponse.json({ user: null });
   }
 }
