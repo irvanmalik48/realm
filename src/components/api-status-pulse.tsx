@@ -37,17 +37,19 @@ export function APIStatusPulse() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [history, setHistory] = useState<HeartbeatPoint[]>(initialHistory);
 
-  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
-    const now = Date.now();
-    setHistory(
-      Array.from({ length: TOTAL_BARS }, (_, i) => ({
-        id: i,
-        status: "healthy",
-        latency_ms: 18 + Math.floor(Math.sin(i * 0.5) * 8),
-        timestamp: new Date(now - (TOTAL_BARS - i) * 20000).toISOString(),
-      }))
-    );
+    const timer = setTimeout(() => {
+      const now = Date.now();
+      setHistory(
+        Array.from({ length: TOTAL_BARS }, (_, i) => ({
+          id: i,
+          status: "healthy",
+          latency_ms: 18 + Math.floor(Math.sin(i * 0.5) * 8),
+          timestamp: new Date(now - (TOTAL_BARS - i) * 20000).toISOString(),
+        }))
+      );
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const { data, isFetching, refetch } = useQuery({
@@ -58,9 +60,9 @@ export function APIStatusPulse() {
     staleTime: 10000,
   });
 
-  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
-    if (data?.data) {
+    if (!data?.data) return;
+    const timer = setTimeout(() => {
       const point: HeartbeatPoint = {
         id: Date.now(),
         status: data.data.status,
@@ -68,11 +70,9 @@ export function APIStatusPulse() {
         timestamp: data.data.timestamp || new Date().toISOString(),
       };
 
-      setHistory((prev) => {
-        const next = [...prev.slice(1), point];
-        return next;
-      });
-    }
+      setHistory((prev) => [...prev.slice(1), point]);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [data]);
 
   const health: HealthData = data?.data || {
