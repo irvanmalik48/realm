@@ -27,7 +27,10 @@ export async function PATCH(
     const client = getCommentClient();
     const metadata = createMetadata({ token });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { id: string; content: string },
+      { comment?: unknown }
+    >(
       client,
       "UpdateComment",
       {
@@ -41,7 +44,7 @@ export async function PATCH(
       status: "success",
       comment: data.comment,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     const { message, status } = formatGrpcError(err);
     return NextResponse.json({ error: message }, { status });
   }
@@ -71,7 +74,10 @@ export async function DELETE(
     const client = getCommentClient();
     const metadata = createMetadata({ token });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { id: string },
+      { message?: string }
+    >(
       client,
       "DeleteComment",
       { id },
@@ -82,7 +88,7 @@ export async function DELETE(
       status: "success",
       message: data.message || "Comment deleted",
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     const { message, status } = formatGrpcError(err);
     return NextResponse.json({ error: message }, { status });
   }
