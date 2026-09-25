@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getGitHubContributionsAction,
   getGitHubUserAction,
@@ -26,16 +26,28 @@ export function useGitHubContributions(
   options?: UseGitHubContributionsOptions
 ) {
   const { from, to, enabled = true, refetchInterval = false } = options || {};
+  const queryClient = useQueryClient();
 
-  return useQuery<FetchContributionsResult>({
+  const query = useQuery<FetchContributionsResult>({
     queryKey: ["github-contributions", username, from, to],
-    queryFn: () => getGitHubContributionsAction(username, from, to),
+    queryFn: () => getGitHubContributionsAction(username, from, to, false),
     enabled: enabled && !!username,
     staleTime: 1000 * 60 * 30, // 30 minutes client cache
     gcTime: 1000 * 60 * 60 * 2, // 2 hours
     refetchOnWindowFocus: false,
     refetchInterval,
   });
+
+  const forceRefresh = async () => {
+    const fresh = await getGitHubContributionsAction(username, from, to, true);
+    queryClient.setQueryData(["github-contributions", username, from, to], fresh);
+    return fresh;
+  };
+
+  return {
+    ...query,
+    forceRefresh,
+  };
 }
 
 /**
