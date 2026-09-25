@@ -33,14 +33,22 @@ import { DirectionalTransition } from "@/components/directional-transition";
 import { BlogReactions } from "@/components/blog-reactions";
 import { BlogComments } from "@/components/blog-comments";
 
+interface HastElement {
+  type: string;
+  tagName?: string;
+  value?: string;
+  children?: HastElement[];
+  properties?: Record<string, unknown>;
+}
+
 function rehypeExtractRawCode() {
-  return (tree: any) => {
-    function traverse(node: any) {
+  return (tree: HastElement) => {
+    function traverse(node: HastElement) {
       if (node.type === "element" && node.tagName === "pre") {
-        const codeNode = node.children?.find((c: any) => c.tagName === "code");
+        const codeNode = node.children?.find((c) => c.tagName === "code");
         if (codeNode) {
-          const extractText = (n: any): string => {
-            if (n.type === "text") return n.value;
+          const extractText = (n: HastElement): string => {
+            if (n.type === "text") return n.value || "";
             if (n.children) return n.children.map(extractText).join("");
             return "";
           };
@@ -123,10 +131,10 @@ async function renderMDX(
     options,
     components: {
       pre: ({ children, style, ...props }: ComponentPropsWithoutRef<"pre">) => {
-        const rawCode = (props as any)["data-raw-code"] || "";
+        const rawCode = (props as Record<string, unknown>)["data-raw-code"] as string || "";
         return (
           <div className="relative group">
-            <pre style={style as any} {...props}>
+            <pre style={style} {...props}>
               {children}
             </pre>
             <CopyButton code={rawCode} />
