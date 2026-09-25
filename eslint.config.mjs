@@ -18,22 +18,29 @@ try {
 } catch {}
 
 // 2. Polyfill legacy RuleContext methods removed in ESLint 10 that eslint-plugin-react still expects
+function patchFileContext(fc) {
+  if (fc && !fc.prototype.getFilename) {
+    fc.prototype.getFilename = function () { return this.filename; };
+    fc.prototype.getSourceCode = function () { return this.sourceCode; };
+    fc.prototype.getCwd = function () { return this.cwd; };
+    fc.prototype.getPhysicalFilename = function () { return this.physicalFilename; };
+  }
+}
+
 try {
-  const eslintPkg = require.resolve("eslint/package.json");
-  const { FileContext } = require(join(dirname(eslintPkg), "lib/linter/file-context.js"));
-  if (FileContext && !FileContext.prototype.getFilename) {
-    FileContext.prototype.getFilename = function () {
-      return this.filename;
-    };
-    FileContext.prototype.getSourceCode = function () {
-      return this.sourceCode;
-    };
-    FileContext.prototype.getCwd = function () {
-      return this.cwd;
-    };
-    FileContext.prototype.getPhysicalFilename = function () {
-      return this.physicalFilename;
-    };
+  for (const key of Object.keys(require.cache)) {
+    if (key.includes("file-context.js")) {
+      patchFileContext(require.cache[key]?.exports?.FileContext);
+    }
+  }
+  const candidateDirs = [process.argv[1] ? dirname(process.argv[1]) : null, import.meta.url].filter(Boolean);
+  for (const base of candidateDirs) {
+    try {
+      const req = createRequire(base);
+      const eslintPkg = req.resolve("eslint/package.json");
+      const { FileContext } = req(join(dirname(eslintPkg), "lib/linter/file-context.js"));
+      patchFileContext(FileContext);
+    } catch {}
   }
 } catch {}
 
