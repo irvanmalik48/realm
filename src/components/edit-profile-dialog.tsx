@@ -43,52 +43,54 @@ export function EditProfileDialog({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  // react-doctor-disable-next-line react-doctor/no-adjust-state-on-prop-change, react-hooks-js/set-state-in-effect
   useEffect(() => {
     if (user && isOpen) {
-      setFullName(user.full_name || "");
-      setUsername(user.username || "");
-      setUsernameStatus("idle");
-      setUsernameMessage("");
-      setError(null);
-      setSuccess(false);
+      const timer = setTimeout(() => {
+        setFullName(user.full_name || "");
+        setUsername(user.username || "");
+        setUsernameStatus("idle");
+        setUsernameMessage("");
+        setError(null);
+        setSuccess(false);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [user, isOpen]);
 
   // Debounced username check
-  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect, react-hooks-js/set-state-in-effect
   useEffect(() => {
     if (!isOpen || !user) return;
 
     const candidate = username.trim().toLowerCase();
-    if (!candidate) {
-      setUsernameStatus("idle");
-      setUsernameMessage("");
-      return;
-    }
-
-    if (candidate === user.username.toLowerCase()) {
-      setUsernameStatus("available");
-      setUsernameMessage("Current username");
-      return;
-    }
-
-    if (candidate.length < 3) {
-      setUsernameStatus("invalid");
-      setUsernameMessage("Username must be at least 3 characters");
-      return;
-    }
-
-    if (!/^[a-zA-Z0-9_]{3,30}$/.test(candidate)) {
-      setUsernameStatus("invalid");
-      setUsernameMessage("Alphanumeric and underscores only (max 30)");
-      return;
-    }
-
-    setUsernameStatus("checking");
-    setUsernameMessage("Checking availability...");
 
     const timer = setTimeout(async () => {
+      if (!candidate) {
+        setUsernameStatus("idle");
+        setUsernameMessage("");
+        return;
+      }
+
+      if (candidate === user.username.toLowerCase()) {
+        setUsernameStatus("available");
+        setUsernameMessage("Current username");
+        return;
+      }
+
+      if (candidate.length < 3) {
+        setUsernameStatus("invalid");
+        setUsernameMessage("Username must be at least 3 characters");
+        return;
+      }
+
+      if (!/^[a-zA-Z0-9_]{3,30}$/.test(candidate)) {
+        setUsernameStatus("invalid");
+        setUsernameMessage("Alphanumeric and underscores only (max 30)");
+        return;
+      }
+
+      setUsernameStatus("checking");
+      setUsernameMessage("Checking availability...");
+
       try {
         const res = await fetch(
           `/api/auth/check?username=${encodeURIComponent(candidate)}`
