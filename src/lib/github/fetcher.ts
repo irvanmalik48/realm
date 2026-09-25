@@ -32,19 +32,11 @@ export interface FetchUserProfileResult {
   error?: string | null;
 }
 
-/**
- * Fetches user contributions from GitHub GraphQL API.
- * Uses Next.js 16 "use cache" with hourly revalidation to protect rate limits.
- */
-export async function getGitHubContributions(
+async function fetchContributionsDirectly(
   username: string,
   from?: string,
   to?: string
 ): Promise<FetchContributionsResult> {
-  "use cache";
-  cacheLife("hours");
-  cacheTag(`github-contributions-${username}`);
-
   if (!username || !GITHUB_USERNAME_REGEX.test(username)) {
     const fallback = generateMockContributions("irvanmalik48");
     return {
@@ -112,6 +104,33 @@ export async function getGitHubContributions(
       error: errorMessage,
     };
   }
+}
+
+async function getCachedGitHubContributions(
+  username: string,
+  from?: string,
+  to?: string
+): Promise<FetchContributionsResult> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(`github-contributions-${username}`);
+  return fetchContributionsDirectly(username, from, to);
+}
+
+/**
+ * Fetches user contributions from GitHub GraphQL API.
+ * Uses Next.js 16 "use cache" with hourly revalidation, or direct bypass when forceRefresh is true.
+ */
+export async function getGitHubContributions(
+  username: string,
+  from?: string,
+  to?: string,
+  forceRefresh = false
+): Promise<FetchContributionsResult> {
+  if (forceRefresh) {
+    return fetchContributionsDirectly(username, from, to);
+  }
+  return getCachedGitHubContributions(username, from, to);
 }
 
 /**
