@@ -124,9 +124,17 @@ export function BlogReactions({ slug }: { slug: string }) {
     }
   }, [slug]);
 
-  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
-    fetchReactions();
+    let ignore = false;
+    const timer = setTimeout(() => {
+      if (!ignore) {
+        void fetchReactions();
+      }
+    }, 0);
+    return () => {
+      ignore = true;
+      clearTimeout(timer);
+    };
   }, [fetchReactions, user]);
 
   const handleToggle = async (reactionId: string) => {
