@@ -1,7 +1,6 @@
 "use server";
 
 import { headers } from "next/headers";
-import { env } from "@/env";
 
 export async function getClientIpAction(): Promise<{ ip: string }> {
   try {
@@ -46,8 +45,15 @@ export async function submitContactFormAction(payload: ContactPayload): Promise<
 
     const client = getContactClient();
     const metadata = createMetadata({ ip, userAgent });
-
-    const res: any = await promisifyUnary(
+    const res = await promisifyUnary<{
+      name: string;
+      email: string;
+      subject: string;
+      message: string;
+      gotcha: string;
+      ip_address: string;
+      user_agent: string;
+    }, { message?: string }>(
       client,
       "SendMessage",
       {
@@ -66,10 +72,11 @@ export async function submitContactFormAction(payload: ContactPayload): Promise<
       success: true,
       message: res.message || "Your message has been sent successfully.",
     };
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const error = err as { details?: string; message?: string } | undefined;
     return {
       success: false,
-      message: err.details || err.message || "Failed to send message. Please try again later.",
+      message: error?.details || error?.message || "Failed to send message. Please try again later.",
     };
   }
 }
