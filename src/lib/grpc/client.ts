@@ -35,20 +35,28 @@ function getProtoDir(): string {
   return path.join(process.cwd(), "src", "proto", "realm", "v1");
 }
 
-let cachedClients: {
-  health?: any;
-  auth?: any;
-  contact?: any;
-  lastfm?: any;
-  storage?: any;
-  reaction?: any;
-  comment?: any;
+export type DynamicGrpcClient = grpc.Client & Record<string, unknown>;
+
+const cachedClients: {
+  health?: DynamicGrpcClient;
+  auth?: DynamicGrpcClient;
+  contact?: DynamicGrpcClient;
+  lastfm?: DynamicGrpcClient;
+  storage?: DynamicGrpcClient;
+  reaction?: DynamicGrpcClient;
+  comment?: DynamicGrpcClient;
 } = {};
 
-function createClient(protoFile: string, serviceName: string) {
+interface ProtoPackage {
+  realm: {
+    v1: Record<string, grpc.ServiceClientConstructor>;
+  };
+}
+
+function createClient(protoFile: string, serviceName: string): DynamicGrpcClient {
   const filePath = path.join(/*turbopackIgnore: true*/ getProtoDir(), protoFile);
   const packageDef = protoLoader.loadSync(filePath, protoOptions);
-  const proto = grpc.loadPackageDefinition(packageDef) as any;
+  const proto = grpc.loadPackageDefinition(packageDef) as unknown as ProtoPackage;
   const ServiceConstructor = proto.realm.v1[serviceName];
   if (!ServiceConstructor) {
     throw new Error(`Service ${serviceName} not found in ${protoFile}`);
@@ -149,13 +157,18 @@ export function createMetadata(options?: {
 }
 
 export function promisifyUnary<TReq, TRes>(
-  client: any,
+  client: DynamicGrpcClient,
   methodName: string,
   request: TReq,
   metadata: grpc.Metadata = new grpc.Metadata()
 ): Promise<TRes> {
   return new Promise((resolve, reject) => {
-    client[methodName](request, metadata, (err: grpc.ServiceError | null, response: TRes) => {
+    const fn = client[methodName] as (
+      req: TReq,
+      meta: grpc.Metadata,
+      cb: (err: grpc.ServiceError | null, response: TRes) => void
+    ) => void;
+    fn.call(client, request, metadata, (err: grpc.ServiceError | null, response: TRes) => {
       if (err) {
         return reject(err);
       }
