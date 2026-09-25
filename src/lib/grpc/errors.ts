@@ -30,8 +30,15 @@ export function grpcStatusToHttpStatus(code?: number): number {
   }
 }
 
-export function formatGrpcError(err: any): { message: string; status: number } {
-  const httpStatus = grpcStatusToHttpStatus(err?.code);
-  const message = err?.details || err?.message || "Internal server error";
+export interface GrpcErrorLike {
+  code?: number;
+  details?: string;
+  message?: string;
+}
+
+export function formatGrpcError(err: unknown): { message: string; status: number } {
+  const e = err as GrpcErrorLike | undefined;
+  const httpStatus = grpcStatusToHttpStatus(e?.code);
+  const message = e?.details || e?.message || "Internal server error";
   return { message, status: httpStatus };
 }
