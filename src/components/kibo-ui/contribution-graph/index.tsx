@@ -355,6 +355,7 @@ export type ContributionGraphCalendarProps = Omit<
 > & {
   hideMonthLabels?: boolean;
   className?: string;
+  ref?: React.Ref<HTMLDivElement>;
   children: (props: {
     activity: Activity;
     dayIndex: number;
@@ -366,6 +367,7 @@ export const ContributionGraphCalendar = ({
   hideMonthLabels = false,
   className,
   children,
+  ref,
   ...props
 }: ContributionGraphCalendarProps) => {
   const { weeks, width, height, blockSize, blockMargin, labels } =
@@ -378,7 +380,12 @@ export const ContributionGraphCalendar = ({
 
   return (
     <div
-      className={cn("max-w-full overflow-x-auto overflow-y-hidden", className)}
+      ref={ref}
+      className={cn(
+        "max-w-full overflow-x-auto overflow-y-hidden pb-1 pt-1",
+        "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+        className
+      )}
       {...props}
     >
       <svg
