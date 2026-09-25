@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import {
   ContributionGraph,
   ContributionGraphBlock,
@@ -15,7 +15,8 @@ import { GitHub } from "@/components/logos/github";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Flame, Trophy, RefreshCcw, GitCommit, GitPullRequest, AlertCircle } from "lucide-react";
+import { Flame, Trophy, RefreshCcw, GitCommit, GitPullRequest, AlertCircle, Lock } from "lucide-react";
+import { ContributionScrollbar, useGrabToPan } from "@/components/github/contribution-scrollbar";
 import { cn } from "@/lib/utils";
 
 export interface GitHubContributionGraphProps {
@@ -52,6 +53,9 @@ export function GitHubContributionGraph({
     to,
     enabled: !initialData,
   });
+
+  const calendarRef = useRef<HTMLDivElement>(null);
+  useGrabToPan(calendarRef);
 
   const activeData: TransformedContributionsResult | undefined = initialData || data;
 
@@ -152,7 +156,14 @@ export function GitHubContributionGraph({
 
       {/* Optional Stats Highlights */}
       {showStats && stats && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 px-5 py-3 border-b border-border bg-muted/5 text-xs font-mono">
+        <div
+          className={cn(
+            "grid gap-2 px-5 py-3 border-b border-border bg-muted/5 text-xs font-mono",
+            stats.totalPrivate > 0
+              ? "grid-cols-2 sm:grid-cols-5"
+              : "grid-cols-2 sm:grid-cols-4"
+          )}
+        >
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground">Total:</span>
             <span className="font-semibold">{stats.totalContributions.toLocaleString()}</span>
@@ -162,6 +173,13 @@ export function GitHubContributionGraph({
             <span className="text-muted-foreground">Commits:</span>
             <span className="font-semibold">{stats.totalCommits.toLocaleString()}</span>
           </div>
+          {stats.totalPrivate > 0 && (
+            <div className="flex items-center gap-2" title="Contributions in private repositories">
+              <Lock className="size-3 text-muted-foreground" />
+              <span className="text-muted-foreground">Private:</span>
+              <span className="font-semibold">{stats.totalPrivate.toLocaleString()}</span>
+            </div>
+          )}
           <div className="flex items-center gap-2">
             <GitPullRequest className="size-3.5 text-muted-foreground" />
             <span className="text-muted-foreground">PRs:</span>
@@ -175,7 +193,7 @@ export function GitHubContributionGraph({
       )}
 
       {/* Main Contribution Graph */}
-      <div className="p-5 overflow-x-auto">
+      <div className="p-5 space-y-2">
         {activities.length > 0 ? (
           <ContributionGraph
             blockMargin={blockMargin}
@@ -184,7 +202,10 @@ export function GitHubContributionGraph({
             data={activities}
             labels={{ totalCount: "{{count}} contributions in the past year" }}
           >
-            <ContributionGraphCalendar>
+            <ContributionGraphCalendar
+              ref={calendarRef}
+              className="cursor-grab active:cursor-grabbing"
+            >
               {({ activity, dayIndex, weekIndex }) => (
                 <ContributionGraphBlock
                   activity={activity}
@@ -199,8 +220,11 @@ export function GitHubContributionGraph({
               )}
             </ContributionGraphCalendar>
 
+            {/* Unique Custom Scrollbar / Timeline Scrubber */}
+            <ContributionScrollbar containerRef={calendarRef} />
+
             {showFooter && (
-              <ContributionGraphFooter className="mt-4 pt-3 border-t border-border flex items-center justify-between">
+              <ContributionGraphFooter className="mt-3 pt-3 border-t border-border flex items-center justify-between">
                 <ContributionGraphTotalCount className="text-xs font-mono" />
                 {showLegend && <ContributionGraphLegend className="text-xs" />}
               </ContributionGraphFooter>
