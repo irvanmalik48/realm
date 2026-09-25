@@ -19,7 +19,10 @@ export async function DELETE(
     const client = getAuthClient();
     const metadata = createMetadata({ token });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { provider: string },
+      { message?: string }
+    >(
       client,
       "UnlinkOAuth",
       {
@@ -32,7 +35,7 @@ export async function DELETE(
       status: "success",
       message: data.message || `${provider} account unlinked successfully`,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     const { message, status } = formatGrpcError(error);
     return NextResponse.json({ error: message }, { status });
   }
