@@ -12,7 +12,6 @@ import {
   Heart,
   Keyboard,
   Languages,
-  Music,
 } from "lucide-react";
 import { Metadata } from "next";
 import AwooImage from "@/assets/img/awoo.jpg";
@@ -136,8 +135,8 @@ export default function About() {
 
           {/* Bento Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full">
-            {/* 1. Bio Bento Card */}
-            <div className="bg-background rounded-lg border border-border overflow-hidden flex flex-col md:col-span-2 md:row-span-2 transition-all duration-200 hover:border-foreground/30 group">
+            {/* 1. Bio Bento Card: Full Width */}
+            <div className="col-span-full bg-background rounded-lg border border-border overflow-hidden flex flex-col transition-all duration-200 hover:border-foreground/30 group">
               <div className="w-full flex items-center justify-between px-4 py-2.5 border-b border-border bg-muted/10">
                 <h2 className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors">
                   <Book className="size-4" />
@@ -174,8 +173,8 @@ export default function About() {
               </div>
             </div>
 
-            {/* 2. Top 4 Quick Stats (2x2 beside Bio on desktop) */}
-            {infoWidgets.slice(0, 4).map((item) => (
+            {/* 2. Quick Stats: 8 Bento Metric Cards (2 rows of 4 on md+) */}
+            {infoWidgets.map((item) => (
               <div
                 key={item.title}
                 className="bg-background rounded-lg border border-border overflow-hidden flex flex-col transition-all duration-200 hover:border-foreground/30 hover:bg-muted/5 group col-span-1"
@@ -197,30 +196,7 @@ export default function About() {
               </div>
             ))}
 
-            {/* 3. Bottom 4 Quick Stats (Horizontal row of 4) */}
-            {infoWidgets.slice(4, 8).map((item) => (
-              <div
-                key={item.title}
-                className="bg-background rounded-lg border border-border overflow-hidden flex flex-col transition-all duration-200 hover:border-foreground/30 hover:bg-muted/5 group col-span-1"
-              >
-                <div className="w-full bg-muted/10 px-3.5 py-2 border-b border-border flex items-center justify-between">
-                  <span className="text-xs font-mono text-muted-foreground truncate group-hover:text-foreground transition-colors">
-                    {item.title}
-                  </span>
-                  <item.icon className="size-3.5 text-muted-foreground shrink-0 group-hover:text-foreground transition-colors" />
-                </div>
-                <div className="p-3 w-full grow flex flex-col items-center justify-center min-h-[95px]">
-                  <p className="font-doto font-bold text-3xl sm:text-4xl text-foreground tracking-tight group-hover:scale-105 transition-transform duration-200">
-                    {item.value}
-                  </p>
-                  <p className="text-muted-foreground font-mono text-[11px] mt-0.5 text-center">
-                    {item.unit}
-                  </p>
-                </div>
-              </div>
-            ))}
-
-            {/* 4. GitHub Contributions Bento Card: Full Width */}
+            {/* 3. GitHub Contributions Bento Card: Full Width */}
             <div className="col-span-full bg-background rounded-lg border border-border overflow-hidden transition-all duration-200 hover:border-foreground/30 group">
               <div className="w-full flex items-center justify-between px-4 py-2.5 border-b border-border bg-muted/10">
                 <h2 className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors">
@@ -241,24 +217,11 @@ export default function About() {
               </div>
             </div>
 
-            {/* 5. LastFM Bento Card: Full Width */}
-            <div className="col-span-full bg-background rounded-lg border border-border overflow-hidden transition-all duration-200 hover:border-foreground/30 group">
-              <div className="w-full flex items-center justify-between px-4 py-2.5 border-b border-border bg-muted/10">
-                <h2 className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors">
-                  <Music className="size-4" />
-                  <span className="text-xs font-mono font-medium text-foreground">
-                    LASTFM.md
-                  </span>
-                </h2>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-muted/60 text-muted-foreground border border-border">
-                  audio
-                </span>
-              </div>
-              <div className="p-3 sm:p-5 flex flex-col gap-4">
-                <LastFMUserCard username="irvanmalik48" />
-                <LastFMTrackCard username="irvanmalik48" />
-              </div>
-            </div>
+            {/* 4. LastFM User Profile Bento Card: Full Width */}
+            <LastFMUserCard username="irvanmalik48" className="col-span-full" />
+
+            {/* 5. LastFM Recent Tracks Bento Card: Full Width */}
+            <LastFMTrackCard username="irvanmalik48" className="col-span-full" />
           </div>
         </Container>
         <TextScroll
