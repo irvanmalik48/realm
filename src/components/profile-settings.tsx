@@ -144,8 +144,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
 
     if (!linked && !err) return;
 
-    let cleanupTimer: NodeJS.Timeout | undefined;
-    const actionTimer = setTimeout(() => {
+    const timer = setTimeout(() => {
       if (linked) {
         const providerName = linked === "google" ? "Google" : linked === "github" ? "GitHub" : linked;
         setOauthSuccess(`${providerName} account linked successfully!`);
@@ -156,7 +155,6 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
         });
         refresh();
         window.history.replaceState({}, "", window.location.pathname);
-        cleanupTimer = setTimeout(() => setOauthSuccess(null), 4000);
       } else if (err) {
         const errMsg = err.replace(/\+/g, " ");
         setOauthError(errMsg);
@@ -166,15 +164,23 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
           description: errMsg,
         });
         window.history.replaceState({}, "", window.location.pathname);
-        cleanupTimer = setTimeout(() => setOauthError(null), 5000);
       }
     }, 0);
 
-    return () => {
-      clearTimeout(actionTimer);
-      if (cleanupTimer) clearTimeout(cleanupTimer);
-    };
+    return () => clearTimeout(timer);
   }, [searchParams, refresh]);
+
+  // Auto-dismiss OAuth status banners
+  useEffect(() => {
+    if (!oauthSuccess && !oauthError) return;
+
+    const timer = setTimeout(() => {
+      setOauthSuccess(null);
+      setOauthError(null);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [oauthSuccess, oauthError]);
 
   if (isLoading) {
     return <ProfileSettingsSkeleton />;
