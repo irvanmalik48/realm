@@ -1,8 +1,6 @@
 import Container from "@/components/container";
 import { Metadata } from "next";
 import { Hero } from "@/components/hero";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import type { WebPage, WithContext } from "schema-dts";
 import { DirectionalTransition } from "@/components/directional-transition";
 
