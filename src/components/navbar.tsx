@@ -45,7 +45,7 @@ export function Navbar() {
           </Link>
 
           {segments.length > 0 && (
-            <Breadcrumb className="min-w-0">
+            <Breadcrumb className="min-w-0 hidden sm:block">
               <BreadcrumbList className="flex-nowrap items-center gap-1 sm:gap-1.5 text-xs sm:text-sm font-mono text-muted-foreground">
                 {segments.map((segment, index) => {
                   const href = `/${segments.slice(0, index + 1).join("/")}`;
