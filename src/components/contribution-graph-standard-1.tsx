@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import {
   ContributionGraph,
   ContributionGraphBlock,
@@ -11,6 +12,7 @@ import {
 import { useGitHubContributions } from "@/hooks/use-github";
 import { Button } from "@/components/ui/button";
 import { RefreshCcw } from "lucide-react";
+import { ContributionScrollbar, useGrabToPan } from "@/components/github/contribution-scrollbar";
 import { cn } from "@/lib/utils";
 
 export const title = "Full-year contribution graph";
@@ -86,6 +88,8 @@ export interface ContributionGraphStandardProps {
 
 const Example = ({ username = "irvanmalik48", className }: ContributionGraphStandardProps) => {
   const { data: githubData, isFetching, refetch } = useGitHubContributions(username);
+  const calendarRef = useRef<HTMLDivElement>(null);
+  useGrabToPan(calendarRef);
 
   const activities = githubData?.activities && githubData.activities.length > 0
     ? githubData.activities
@@ -117,7 +121,10 @@ const Example = ({ username = "irvanmalik48", className }: ContributionGraphStan
         data={activities}
         labels={{ totalCount: "{{count}} contributions in the last year" }}
       >
-        <ContributionGraphCalendar>
+        <ContributionGraphCalendar
+          ref={calendarRef}
+          className="cursor-grab active:cursor-grabbing"
+        >
           {({ activity, dayIndex, weekIndex }) => (
             <ContributionGraphBlock
               activity={activity}
@@ -131,7 +138,11 @@ const Example = ({ username = "irvanmalik48", className }: ContributionGraphStan
             </ContributionGraphBlock>
           )}
         </ContributionGraphCalendar>
-        <ContributionGraphFooter className="flex items-center justify-between pt-2">
+
+        {/* Custom Interactive Scrollbar */}
+        <ContributionScrollbar containerRef={calendarRef} />
+
+        <ContributionGraphFooter className="flex items-center justify-between pt-2 border-t border-border">
           <ContributionGraphTotalCount />
           <ContributionGraphLegend />
         </ContributionGraphFooter>
