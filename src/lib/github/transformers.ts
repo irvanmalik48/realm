@@ -115,6 +115,7 @@ export function transformContributionsResponse(
     totalPRs: collection.totalPullRequestContributions ?? 0,
     totalIssues: collection.totalIssueContributions ?? 0,
     totalReviews: collection.totalPullRequestReviewContributions ?? 0,
+    totalPrivate: collection.restrictedContributionsCount ?? 0,
     currentStreak,
     longestStreak,
   };
@@ -208,6 +209,7 @@ export function generateMockContributions(
       totalPRs: Math.round(totalCount * 0.08),
       totalIssues: Math.round(totalCount * 0.05),
       totalReviews: Math.round(totalCount * 0.05),
+      totalPrivate: 0,
       currentStreak,
       longestStreak,
     },
