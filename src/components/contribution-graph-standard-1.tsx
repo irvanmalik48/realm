@@ -133,6 +133,7 @@ const Example = ({ username = "irvanmalik48", className }: ContributionGraphStan
         data={activities}
         labels={{ totalCount: "{{count}} contributions in the last year" }}
       >
+        {/* react-doctor-disable-next-line react-doctor/duplicate-jsx-subtree */}
         <ContributionGraphCalendar ref={calendarRef}>
           {({ activity, dayIndex, weekIndex }) => (
             <Tooltip key={activity.date} delayDuration={50}>
