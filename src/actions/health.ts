@@ -23,13 +23,16 @@ export async function getHealthStatusAction(): Promise<HealthResult> {
   try {
     const client = getHealthClient();
     const metadata = createMetadata();
-    const res: any = await promisifyUnary(client, "GetHealth", {}, metadata);
+    const res = await promisifyUnary<
+      Record<string, never>,
+      Partial<HealthData> & { uptime_seconds?: string | number }
+    >(client, "GetHealth", {}, metadata);
 
     const latency_ms = Date.now() - startTime;
     return {
       ok: true,
       data: {
-        status: (res.status as any) || "healthy",
+        status: (res.status as HealthData["status"]) || "healthy",
         service: res.service || "realm-api",
         version: res.version || "1.0.0",
         uptime_seconds: Number(res.uptime_seconds) || 0,
