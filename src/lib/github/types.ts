@@ -37,6 +37,7 @@ export interface GitHubContributionCalendar {
 export interface GitHubContributionsCollection {
   startedAt?: string;
   endedAt?: string;
+  restrictedContributionsCount?: number;
   totalCommitContributions: number;
   totalIssueContributions: number;
   totalPullRequestContributions: number;
@@ -52,6 +53,7 @@ export interface GitHubUserContributionsData {
 }
 
 export interface GitHubUserContributionsResponse {
+  viewer?: GitHubUserContributionsData | null;
   user: GitHubUserContributionsData | null;
 }
 
@@ -95,6 +97,7 @@ export interface GitHubContributionStats {
   totalPRs: number;
   totalIssues: number;
   totalReviews: number;
+  totalPrivate: number;
   currentStreak: number;
   longestStreak: number;
 }
