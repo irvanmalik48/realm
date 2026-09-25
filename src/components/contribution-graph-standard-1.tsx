@@ -87,7 +87,7 @@ export interface ContributionGraphStandardProps {
 }
 
 const Example = ({ username = "irvanmalik48", className }: ContributionGraphStandardProps) => {
-  const { data: githubData, isFetching, refetch } = useGitHubContributions(username);
+  const { data: githubData, isFetching, forceRefresh } = useGitHubContributions(username);
   const calendarRef = useRef<HTMLDivElement>(null);
   useGrabToPan(calendarRef);
 
@@ -105,9 +105,9 @@ const Example = ({ username = "irvanmalik48", className }: ContributionGraphStan
           variant="ghost"
           size="icon"
           className="size-7 cursor-pointer"
-          onClick={() => refetch()}
+          onClick={() => forceRefresh()}
           disabled={isFetching}
-          title="Refresh contributions"
+          title="Refresh contributions (bypasses cache)"
         >
           <RefreshCcw className={cn("size-3.5", isFetching && "animate-spin")} />
           <span className="sr-only">Refresh contributions</span>
