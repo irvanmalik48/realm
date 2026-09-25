@@ -11,7 +11,10 @@ export async function GET(request: NextRequest) {
     const client = getAuthClient();
     const metadata = createMetadata();
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { username?: string; email?: string },
+      Record<string, unknown>
+    >(
       client,
       "CheckAvailability",
       {
@@ -22,8 +25,9 @@ export async function GET(request: NextRequest) {
     );
 
     return NextResponse.json(data);
-  } catch (error: any) {
-    if (error?.digest === "NEXT_PRERENDER_INTERRUPTED" || error?.message?.includes("bail out of prerendering")) {
+  } catch (error: unknown) {
+    const err = error as { digest?: string; message?: string } | undefined;
+    if (err?.digest === "NEXT_PRERENDER_INTERRUPTED" || err?.message?.includes("bail out of prerendering")) {
       throw error;
     }
     const { message, status } = formatGrpcError(error);
