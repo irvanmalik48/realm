@@ -65,6 +65,7 @@ export default function RegisterPage() {
   }, [user, router]);
 
   // Debounced username check
+  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect
   useEffect(() => {
     const trimmed = username.trim().toLowerCase();
 
@@ -116,6 +117,7 @@ export default function RegisterPage() {
   }, [username]);
 
   // Debounced email check
+  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect
   useEffect(() => {
     const trimmed = email.trim().toLowerCase();
 
