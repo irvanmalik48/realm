@@ -20,8 +20,8 @@ export function TableOfContents({ headings = [] }: TableOfContentsProps) {
   useEffect(() => {
     // Reset scroll to 0 when entering the post page
     if (!window.location.hash) {
-      if ((window as any).__lenis) {
-        (window as any).__lenis.scrollTo(0, { immediate: true });
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { immediate: true });
       }
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
@@ -80,8 +80,8 @@ export function TableOfContents({ headings = [] }: TableOfContentsProps) {
               e.preventDefault();
               const target = document.getElementById(heading.id);
               if (target) {
-                if ((window as any).__lenis) {
-                  (window as any).__lenis.scrollTo(target);
+                if (window.__lenis) {
+                  window.__lenis.scrollTo(target);
                 } else {
                   target.scrollIntoView({
                     behavior: "smooth",
