@@ -13,7 +13,10 @@ export async function getRecentTracksAction(username: string, limit: number = 8)
   const metadata = createMetadata();
 
   try {
-    const res: any = await promisifyUnary(
+    const res = await promisifyUnary<
+      { username: string; limit: number },
+      { raw_json?: string }
+    >(
       client,
       "GetRecentTracks",
       {
@@ -43,7 +46,10 @@ export async function getUserInfoAction(username: string) {
   const metadata = createMetadata();
 
   try {
-    const res: any = await promisifyUnary(
+    const res = await promisifyUnary<
+      { username: string },
+      { raw_json?: string }
+    >(
       client,
       "GetUserInfo",
       {
