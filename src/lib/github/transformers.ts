@@ -42,10 +42,16 @@ export function transformCalendarToActivities(
 
   for (const week of calendar.weeks) {
     for (const day of week.contributionDays) {
+      const mappedLevel = mapContributionLevel(day.contributionLevel);
+      // Guarantee that if there were any contributions on that day,
+      // it is NEVER marked as level 0 (empty).
+      const level =
+        day.contributionCount > 0 && mappedLevel === 0 ? 1 : mappedLevel;
+
       activities.push({
         date: day.date,
         count: day.contributionCount,
-        level: mapContributionLevel(day.contributionLevel),
+        level,
       });
     }
   }
