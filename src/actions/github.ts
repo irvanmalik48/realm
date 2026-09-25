@@ -14,9 +14,10 @@ import {
 export async function getGitHubContributionsAction(
   username: string,
   from?: string,
-  to?: string
+  to?: string,
+  forceRefresh: boolean = false
 ): Promise<FetchContributionsResult> {
-  return getGitHubContributions(username, from, to);
+  return getGitHubContributions(username, from, to, forceRefresh);
 }
 
 /**
