@@ -26,7 +26,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth, type User } from "@/hooks/use-auth";
 import { toast } from "@/hooks/use-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -336,9 +336,17 @@ export function BlogComments({ slug }: { slug: string }) {
     [slug],
   );
 
-  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
-    fetchComments();
+    let ignore = false;
+    const timer = setTimeout(() => {
+      if (!ignore) {
+        void fetchComments();
+      }
+    }, 0);
+    return () => {
+      ignore = true;
+      clearTimeout(timer);
+    };
   }, [fetchComments, user]);
 
   const handlePostComment = async (e?: React.FormEvent) => {
@@ -1001,7 +1009,7 @@ export function BlogComments({ slug }: { slug: string }) {
 
 interface CommentCardProps {
   comment: CommentItem;
-  currentUser: any;
+  currentUser: User | null;
   replyingToId: string | null;
   replyContent: string;
   isSubmittingReply: boolean;
