@@ -115,6 +115,7 @@ export function ProfileSettingsSkeleton() {
 }
 
 export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
+  void searchQuery;
   const { user, isLoading, updateProfile, uploadAvatar, unlinkOAuth, refresh } = useAuth();
   const searchParams = useSearchParams();
 
@@ -137,37 +138,42 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
   const [oauthSuccess, setOauthSuccess] = useState<string | null>(null);
 
   // Handle URL query parameters for OAuth linking feedback
-  // react-doctor-disable-next-line react-hooks-js/set-state-in-effect
   useEffect(() => {
     const linked = searchParams.get("linked");
     const err = searchParams.get("error");
 
-    if (linked) {
-      const providerName = linked === "google" ? "Google" : linked === "github" ? "GitHub" : linked;
-      setOauthSuccess(`${providerName} account linked successfully!`);
-      toast({
-        variant: "success",
-        title: "Account linked",
-        description: `${providerName} account linked successfully!`,
-      });
-      refresh();
-      window.history.replaceState({}, "", window.location.pathname);
-      const timer = setTimeout(() => setOauthSuccess(null), 4000);
-      return () => clearTimeout(timer);
-    }
+    if (!linked && !err) return;
 
-    if (err) {
-      const errMsg = err.replace(/\+/g, " ");
-      setOauthError(errMsg);
-      toast({
-        variant: "destructive",
-        title: "OAuth connection error",
-        description: errMsg,
-      });
-      window.history.replaceState({}, "", window.location.pathname);
-      const timer = setTimeout(() => setOauthError(null), 5000);
-      return () => clearTimeout(timer);
-    }
+    let cleanupTimer: NodeJS.Timeout | undefined;
+    const actionTimer = setTimeout(() => {
+      if (linked) {
+        const providerName = linked === "google" ? "Google" : linked === "github" ? "GitHub" : linked;
+        setOauthSuccess(`${providerName} account linked successfully!`);
+        toast({
+          variant: "success",
+          title: "Account linked",
+          description: `${providerName} account linked successfully!`,
+        });
+        refresh();
+        window.history.replaceState({}, "", window.location.pathname);
+        cleanupTimer = setTimeout(() => setOauthSuccess(null), 4000);
+      } else if (err) {
+        const errMsg = err.replace(/\+/g, " ");
+        setOauthError(errMsg);
+        toast({
+          variant: "destructive",
+          title: "OAuth connection error",
+          description: errMsg,
+        });
+        window.history.replaceState({}, "", window.location.pathname);
+        cleanupTimer = setTimeout(() => setOauthError(null), 5000);
+      }
+    }, 0);
+
+    return () => {
+      clearTimeout(actionTimer);
+      if (cleanupTimer) clearTimeout(cleanupTimer);
+    };
   }, [searchParams, refresh]);
 
   if (isLoading) {
