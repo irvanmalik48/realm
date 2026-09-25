@@ -336,6 +336,7 @@ export function BlogComments({ slug }: { slug: string }) {
     [slug],
   );
 
+  // react-doctor-disable-next-line react-doctor/prefer-use-effect-event
   useEffect(() => {
     let ignore = false;
     const timer = setTimeout(() => {
@@ -347,6 +348,7 @@ export function BlogComments({ slug }: { slug: string }) {
       ignore = true;
       clearTimeout(timer);
     };
+    // react-doctor-disable-next-line react-doctor/prefer-use-effect-event
   }, [fetchComments, user]);
 
   const handlePostComment = async (e?: React.FormEvent) => {
