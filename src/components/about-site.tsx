@@ -8,7 +8,6 @@ import {
   Sparkles,
   GitBranch,
   ExternalLink,
-  ShieldCheck,
   Zap,
   Server,
   Palette,
