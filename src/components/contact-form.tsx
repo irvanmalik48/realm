@@ -53,8 +53,9 @@ export function ContactForm() {
             description: result.message || "Please try again later.",
           });
         }
-      } catch (err: any) {
-        const msg = err.message || "An unexpected error occurred. Please try again.";
+      } catch (err: unknown) {
+        const error = err as { message?: string } | undefined;
+        const msg = error?.message || "An unexpected error occurred. Please try again.";
         setErrorMessage(msg);
         toast({
           variant: "destructive",
