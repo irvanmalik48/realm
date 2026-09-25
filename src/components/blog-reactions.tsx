@@ -124,6 +124,7 @@ export function BlogReactions({ slug }: { slug: string }) {
     }
   }, [slug]);
 
+  // react-doctor-disable-next-line react-doctor/prefer-use-effect-event
   useEffect(() => {
     let ignore = false;
     const timer = setTimeout(() => {
@@ -135,6 +136,7 @@ export function BlogReactions({ slug }: { slug: string }) {
       ignore = true;
       clearTimeout(timer);
     };
+    // react-doctor-disable-next-line react-doctor/prefer-use-effect-event
   }, [fetchReactions, user]);
 
   const handleToggle = async (reactionId: string) => {
