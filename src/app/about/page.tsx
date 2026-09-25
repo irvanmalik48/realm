@@ -1,12 +1,13 @@
 import Container from "@/components/container";
 import { ImageComponent } from "@/components/image";
 import { TextScroll } from "@/components/ui/text-scroll";
-import { Book, Music, ThumbsUp } from "lucide-react";
+import { Book, GitCommit, Music, ThumbsUp } from "lucide-react";
 import { Metadata } from "next";
 import AwooImage from "@/assets/img/awoo.jpg";
 import type { WebPage, WithContext } from "schema-dts";
 import { LastFMTrackCard } from "@/components/lastfm-track-card";
 import { LastFMUserCard } from "@/components/lastfm-user-card";
+import { GitHubContributionGraph } from "@/components/github/github-contribution-graph";
 import { DirectionalTransition } from "@/components/directional-transition";
 import { safeJsonLd } from "@/lib/utils";
 
@@ -126,6 +127,15 @@ export default function About() {
               really into movies and shit but if you wanna talk about anime,
               I&apos;m your man.
             </p>
+          </div>
+          <div className="w-full bg-background rounded-lg border border-border">
+            <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
+              <GitCommit className="size-4" />
+              <span className="text-sm font-mono">CONTRIBUTIONS.md</span>
+            </h2>
+            <div className="w-full p-5">
+              <GitHubContributionGraph username="irvanmalik48" />
+            </div>
           </div>
           <div className="w-full bg-background rounded-lg border border-border">
             <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
