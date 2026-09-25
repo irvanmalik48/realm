@@ -27,7 +27,14 @@ export async function POST(req: NextRequest) {
     const client = getStorageClient();
     const metadata = createMetadata({ token });
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      {
+        filename: string;
+        content_type: string;
+        data: Buffer;
+      },
+      { message?: string; file?: unknown }
+    >(
       client,
       "UploadFile",
       {
@@ -46,7 +53,7 @@ export async function POST(req: NextRequest) {
       },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     const { message, status } = formatGrpcError(error);
     return NextResponse.json({ error: message }, { status });
   }
