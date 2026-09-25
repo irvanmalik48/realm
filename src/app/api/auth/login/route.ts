@@ -9,7 +9,10 @@ export async function POST(req: NextRequest) {
     const client = getAuthClient();
     const metadata = createMetadata();
 
-    const data: any = await promisifyUnary(
+    const data = await promisifyUnary<
+      { identifier: string; password: string },
+      { token?: string; user?: unknown }
+    >(
       client,
       "Login",
       {
@@ -39,7 +42,7 @@ export async function POST(req: NextRequest) {
     }
 
     return res;
-  } catch (error: any) {
+  } catch (error: unknown) {
     const { message, status } = formatGrpcError(error);
     return NextResponse.json({ error: message }, { status });
   }
