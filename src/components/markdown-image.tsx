@@ -45,19 +45,25 @@ const KNOWN_IMAGE_REGISTRY: Record<
   { creator: string; source: string; sourceUrl: string; creatorUrl?: string }
 > = {
   "1523381210434": {
-    creator: "Unsplash Contributor",
+    creator: "Keagan Henman",
     source: "Unsplash",
-    sourceUrl: "https://unsplash.com",
+    sourceUrl:
+      "https://unsplash.com/photos/a-row-of-green-t-shirts-hanging-on-wooden-hangers-against-a-grey-background-8d3cead13475",
+    creatorUrl: "https://unsplash.com/@henmankk",
   },
   "1529720317453": {
-    creator: "Unsplash Contributor",
+    creator: "No Revisions",
     source: "Unsplash",
-    sourceUrl: "https://unsplash.com",
+    sourceUrl:
+      "https://unsplash.com/photos/black-clothes-hanged-in-rack-kWVImL5QxJI",
+    creatorUrl: "https://unsplash.com/@norevisions",
   },
   "1551028719": {
-    creator: "Unsplash Contributor",
+    creator: "Lea Øchel",
     source: "Unsplash",
-    sourceUrl: "https://unsplash.com",
+    sourceUrl:
+      "https://unsplash.com/photos/black-leather-zip-up-jacket-on-white-textile-nsRBbE6-YLs",
+    creatorUrl: "https://unsplash.com/@lealea_leaa",
   },
 };
 
