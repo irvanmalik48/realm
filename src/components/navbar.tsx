@@ -64,6 +64,7 @@ export function Navbar() {
                             <Link
                               href={href}
                               prefetch={true}
+                              transitionTypes={["nav-back"]}
                               className="font-mono text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors truncate max-w-[120px] sm:max-w-[200px] md:max-w-none"
                             >
                               {segment}
