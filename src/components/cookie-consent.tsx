@@ -63,6 +63,8 @@ export function CookieConsent() {
             For more information on how we handle your data, please see our{" "}
             <Link
               href="/privacy"
+              prefetch={true}
+              transitionTypes={["nav-forward"]}
               className="text-foreground underline underline-offset-2 hover:text-primary transition-colors font-medium"
             >
               privacy policy
