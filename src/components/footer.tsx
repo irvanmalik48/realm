@@ -108,6 +108,8 @@ export function Footer() {
         <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-4 gap-y-1 text-xs">
           <Link
             href="/privacy"
+            prefetch={true}
+            transitionTypes={["nav-forward"]}
             className="hover:text-primary transition-colors underline-offset-4 hover:underline"
           >
             Privacy Policy
@@ -117,6 +119,8 @@ export function Footer() {
           </span>
           <Link
             href="/terms"
+            prefetch={true}
+            transitionTypes={["nav-forward"]}
             className="hover:text-primary transition-colors underline-offset-4 hover:underline"
           >
             Terms of Service
@@ -126,6 +130,8 @@ export function Footer() {
           </span>
           <Link
             href="/contribution"
+            prefetch={true}
+            transitionTypes={["nav-forward"]}
             className="hover:text-primary transition-colors underline-offset-4 hover:underline"
           >
             Contribution Notice
