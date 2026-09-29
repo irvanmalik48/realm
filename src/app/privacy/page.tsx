@@ -1,16 +1,10 @@
 import Container from "@/components/container";
 import { DirectionalTransition } from "@/components/directional-transition";
-import { Badge } from "@/components/ui/badge";
-import { safeJsonLd } from "@/lib/utils";
-import {
-  ArrowLeft,
-  CheckCircle2,
-  EyeOff,
-  Lock,
-  Server,
-  ShieldCheck,
-  UserCheck,
-} from "lucide-react";
+import { TableOfContents, type Heading } from "@/components/table-of-contents";
+import { Button } from "@/components/ui/button";
+import { TextScroll } from "@/components/ui/text-scroll";
+import { cn, safeJsonLd } from "@/lib/utils";
+import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { WebPage, WithContext } from "schema-dts";
@@ -56,121 +50,60 @@ export default function PrivacyPolicyPage() {
     },
   };
 
-  const highlights = [
-    {
-      icon: EyeOff,
-      title: "Zero Third-Party Trackers",
-      desc: "No Google Analytics, Meta Pixels, or commercial surveillance SDKs. Your browsing activity belongs solely to you.",
-    },
-    {
-      icon: Lock,
-      title: "PASETO v2 Cryptography",
-      desc: "Session tokens are encrypted using modern symmetric PASETO keys, completely immune to legacy JWT algorithm confusion.",
-    },
-    {
-      icon: Server,
-      title: "Hardened Sandboxing",
-      desc: "Backend microservices run under Linux kernel Landlock LSM sandboxing, strictly constraining access to verified storage paths.",
-    },
-    {
-      icon: UserCheck,
-      title: "Unconditional Erasure",
-      desc: "You can modify your profile or delete your entire account and associated comments at any time with zero friction.",
-    },
+  const headings: Heading[] = [
+    { id: "philosophy", text: "01. Philosophy & Scope", level: 2 },
+    { id: "data-collection", text: "02. Data Collection & Purpose", level: 2 },
+    { id: "cookies-storage", text: "03. Cookies & Local Storage", level: 2 },
+    { id: "third-party", text: "04. Third-Party Integrations & Proxies", level: 2 },
+    { id: "security-sandboxing", text: "05. Security Architecture & Sandboxing", level: 2 },
+    { id: "user-rights", text: "06. Your Rights & Data Erasure", level: 2 },
+    { id: "contact-inquiries", text: "07. Contact & Data Requests", level: 2 },
   ];
 
   return (
     <DirectionalTransition>
-      <Container>
-        {/* Navigation Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="w-full pt-4">
-          <Link
-            href="/"
-            prefetch={true}
-            transitionTypes={["nav-back"]}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+      <div className="relative flex justify-center max-w-7xl mx-auto px-5 gap-10">
+        <div className="hidden xl:block w-64 shrink-0">
+          <div className="sticky top-24">
+            <TableOfContents headings={headings} />
+          </div>
+        </div>
+
+        <Container
+          noPadding={true}
+          className="mx-0 max-w-3xl min-w-0 gap-0 relative z-10 bg-background"
+        >
+          <Button asChild variant="ghost" className="self-start mb-8">
+            <Link
+              href="/"
+              prefetch={true}
+              transitionTypes={["nav-back"]}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="size-4" />
+              Back to realm
+            </Link>
+          </Button>
+
+          <header className="mb-8">
+            <h1 className="text-4xl font-bold mb-4 text-center">
+              Privacy Policy
+            </h1>
+            <p className="text-muted-foreground mb-4 text-center text-lg">
+              Data minimization, cryptographic safeguards, and user sovereignty in realm.
+            </p>
+            <p className="text-sm text-muted-foreground mb-4 text-center font-mono">
+              Effective: September 2026 | Revision 1.2
+            </p>
+          </header>
+
+          <article
+            className={cn(
+              "prose max-w-full dark:prose-invert prose-pre:font-mono prose-code:font-mono prose-headings:scroll-mt-24 pt-2",
+            )}
           >
-            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
-            <span>Return to Realm</span>
-          </Link>
-        </nav>
-
-        {/* Page Header */}
-        <header className="w-full flex flex-col gap-3 pb-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="outline" className="font-mono gap-1.5 py-1">
-              <ShieldCheck className="size-3.5 text-primary" />
-              <span>LEGAL / PRIVACY</span>
-            </Badge>
-            <Badge variant="secondary" className="font-mono text-xs">
-              Effective: September 2026
-            </Badge>
-            <Badge variant="secondary" className="font-mono text-xs">
-              Revision 1.2
-            </Badge>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
-            Privacy Policy
-          </h1>
-          <p className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">
-            Privacy is a fundamental human right. This document details our
-            strict data minimization policies, cryptographic safeguards, and
-            your sovereign rights when interacting with{" "}
-            <span className="font-semibold text-foreground">realm</span>.
-          </p>
-        </header>
-
-        {/* Quick Highlights Grid */}
-        <section aria-labelledby="highlights-heading" className="w-full">
-          <h2 id="highlights-heading" className="sr-only">
-            Privacy Commitments
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            {highlights.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="p-4.5 rounded-xl border border-border bg-card/40 flex flex-col gap-2.5 transition-colors hover:border-primary/40"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                      <Icon className="size-4.5" />
-                    </div>
-                    <h3 className="font-semibold text-sm md:text-base text-foreground">
-                      {item.title}
-                    </h3>
-                  </div>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Comprehensive Policy Card */}
-        <article className="w-full bg-background rounded-xl border border-border overflow-hidden shadow-xs">
-          <div className="w-full flex items-center justify-between px-5 py-3.5 border-b border-border bg-muted/20">
-            <div className="flex items-center gap-2.5 text-muted-foreground">
-              <Lock className="size-4 text-primary" />
-              <span className="text-sm font-mono tracking-tight text-foreground font-medium">
-                PRIVACY_POLICY.md
-              </span>
-            </div>
-            <span className="text-xs font-mono text-muted-foreground hidden sm:inline">
-              ISO/IEC 27001 &amp; GDPR Inspired
-            </span>
-          </div>
-
-          <div className="p-5 md:p-8 flex flex-col gap-8 text-sm md:text-base leading-relaxed text-foreground/90">
-            {/* Section 1 */}
-            <section className="flex flex-col gap-3">
-              <h2 className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
-                <span className="text-primary font-mono text-base">01.</span>
-                Philosophy &amp; Scope
-              </h2>
+            <section id="philosophy">
+              <h2>01. Philosophy &amp; Scope</h2>
               <p>
                 <strong>realm</strong> (available at{" "}
                 <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">
@@ -184,92 +117,84 @@ export default function PrivacyPolicyPage() {
               <p>
                 We do not sell, rent, monetize, or broker personal information to
                 data aggregators or advertisers. There are zero programmatic
-                marketing trackers or cross-site fingerprinting scripts on this
-                platform.
+                marketing trackers, Google Analytics scripts, or cross-site
+                fingerprinting beacons on this platform.
               </p>
             </section>
 
-            {/* Section 2 */}
-            <section className="flex flex-col gap-3">
-              <h2 className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
-                <span className="text-primary font-mono text-base">02.</span>
-                Data Collection &amp; Purpose
-              </h2>
+            <section id="data-collection">
+              <h2>02. Data Collection &amp; Purpose</h2>
               <p>We process information exclusively across four touchpoints:</p>
-              <ul className="list-disc list-inside space-y-2.5 pl-2 text-muted-foreground">
+              <ul>
                 <li>
-                  <strong className="text-foreground">Authentication &amp; User Accounts:</strong>{" "}
-                  When you register directly or authenticate via Google or GitHub
-                  OAuth, we store your chosen username, email address, avatar
-                  URL, and cryptographic password hash (or provider identity ID).
-                  Passwords are salted and hashed using bcrypt/Argon2; plaintext
-                  passwords are never logged or stored.
+                  <strong>Authentication &amp; User Accounts:</strong> When you
+                  register directly or authenticate via Google or GitHub OAuth,
+                  we store your chosen username, email address, avatar URL, and
+                  cryptographic password hash (or provider identity ID). Passwords
+                  are salted and hashed using bcrypt/Argon2; plaintext passwords
+                  are never logged or stored.
                 </li>
                 <li>
-                  <strong className="text-foreground">Interactive Comments &amp; Reactions:</strong>{" "}
-                  When you comment on blog posts or react with emojis, your
-                  submitted content and associated user handle are stored in our
-                  PostgreSQL database to display alongside the discussion.
+                  <strong>Interactive Comments &amp; Reactions:</strong> When you
+                  comment on blog posts or react with emojis, your submitted
+                  content and associated user handle are stored in our PostgreSQL
+                  database to display alongside the discussion.
                 </li>
                 <li>
-                  <strong className="text-foreground">Contact Form Inquiries:</strong>{" "}
-                  When you submit the contact form, your name, email, subject,
-                  and message are transmitted over encrypted webhooks to Irvan&apos;s
-                  private notification channels (Discord, Telegram, or SMTP). A
-                  honeypot field is utilized to drop automated spam bots silently
-                  without processing.
+                  <strong>Contact Form Inquiries:</strong> When you submit the
+                  contact form, your name, email, subject, and message are
+                  transmitted over encrypted webhooks to Irvan&apos;s private
+                  notification channels (Discord, Telegram, or SMTP). A honeypot
+                  field is utilized to drop automated spam bots silently.
                 </li>
                 <li>
-                  <strong className="text-foreground">Media &amp; Avatar Uploads:</strong>{" "}
-                  Images uploaded for user profiles are converted to modern WebP
-                  formats and compressed using Zstandard (zstd) on our private,
-                  self-hosted disk storage.
+                  <strong>Media &amp; Avatar Uploads:</strong> Images uploaded for
+                  user profiles are converted to modern WebP formats and
+                  compressed using Zstandard (zstd) on our private, self-hosted disk
+                  storage.
                 </li>
               </ul>
             </section>
 
-            {/* Section 3 */}
-            <section className="flex flex-col gap-3">
-              <h2 className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
-                <span className="text-primary font-mono text-base">03.</span>
-                Cookies &amp; Local Storage
-              </h2>
+            <section id="cookies-storage">
+              <h2>03. Cookies &amp; Local Storage</h2>
               <p>
-                We do not use advertising, retargeting, or third-party profiling
-                cookies. Our browser storage footprint consists solely of:
+                We do not use advertising or third-party profiling cookies. Our
+                browser storage footprint consists solely of strictly necessary
+                session tokens and user preference stores:
               </p>
-              <div className="overflow-x-auto my-2">
-                <table className="w-full text-left text-xs md:text-sm border border-border rounded-lg overflow-hidden">
-                  <thead className="bg-muted/40 font-mono text-muted-foreground uppercase text-[11px]">
+              <div className="not-prose overflow-x-auto my-4">
+                <table className="w-full text-left text-xs md:text-sm border border-border rounded-xl overflow-hidden bg-card/40">
+                  <thead className="bg-muted/60 font-mono text-muted-foreground uppercase text-[11px]">
                     <tr>
-                      <th className="p-3 border-b border-border">Name</th>
-                      <th className="p-3 border-b border-border">Storage</th>
-                      <th className="p-3 border-b border-border">Lifespan</th>
-                      <th className="p-3 border-b border-border">Purpose</th>
+                      <th className="p-3.5 border-b border-border">Name</th>
+                      <th className="p-3.5 border-b border-border">Storage</th>
+                      <th className="p-3.5 border-b border-border">Lifespan</th>
+                      <th className="p-3.5 border-b border-border">Purpose</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-border font-mono">
+                  <tbody className="divide-y divide-border font-mono text-xs">
                     <tr>
-                      <td className="p-3 font-semibold text-primary">realm_token</td>
-                      <td className="p-3 text-muted-foreground">Cookie / Header</td>
-                      <td className="p-3 text-muted-foreground">Session / 30d</td>
-                      <td className="p-3 text-muted-foreground font-sans">
+                      <td className="p-3.5 font-semibold text-primary">realm_token</td>
+                      <td className="p-3.5 text-muted-foreground">Cookie / Header</td>
+                      <td className="p-3.5 text-muted-foreground">Session / 30d</td>
+                      <td className="p-3.5 text-muted-foreground font-sans">
                         Authenticated session token (PASETO v2)
                       </td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-semibold text-primary">realm_cookie_consent</td>
-                      <td className="p-3 text-muted-foreground">Cookie &amp; LocalStorage</td>
-                      <td className="p-3 text-muted-foreground">1 Year</td>
-                      <td className="p-3 text-muted-foreground font-sans">
+                      <td className="p-3.5 font-semibold text-primary">realm_cookie_consent</td>
+                      <td className="p-3.5 text-muted-foreground">Cookie &amp; LocalStorage</td>
+                      <td className="p-3.5 text-muted-foreground">1 Year</td>
+                      <td className="p-3.5 text-muted-foreground font-sans">
                         Remembers your cookie banner preference
                       </td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-semibold text-primary">theme / cursor_style</td>
-                      <td className="p-3 text-muted-foreground">LocalStorage</td>
-                      <td className="p-3 text-muted-foreground">Persistent</td>
-                      <td className="p-3 text-muted-foreground font-sans">
+                      <td className="p-3.5 font-semibold text-primary">theme / cursor_style</td>
+                      <td className="p-3.5 text-muted-foreground">LocalStorage</td>
+                      <td className="p-3.5 text-muted-foreground">Persistent</td>
+                      <td className="p-3.5 text-muted-foreground font-sans">
                         Stores UI personalization and performance mode choices
                       </td>
                     </tr>
@@ -278,95 +203,86 @@ export default function PrivacyPolicyPage() {
               </div>
             </section>
 
-            {/* Section 4 */}
-            <section className="flex flex-col gap-3">
-              <h2 className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
-                <span className="text-primary font-mono text-base">04.</span>
-                Third-Party Integrations &amp; Proxies
-              </h2>
+            <section id="third-party">
+              <h2>04. Third-Party Integrations &amp; Proxies</h2>
               <p>
-                To provide specific external features without leaking user identities,
-                we utilize strict proxy gateways:
+                To provide specific external features without leaking user
+                identities, we utilize strict server-side proxy gateways:
               </p>
-              <ul className="list-disc list-inside space-y-2 pl-2 text-muted-foreground">
+              <ul>
                 <li>
-                  <strong className="text-foreground">GitHub API:</strong> Used
-                  server-side to query public repository contribution matrices.
-                  Your client IP is never exposed to GitHub during site visits.
+                  <strong>GitHub API:</strong> Used server-side to query public
+                  repository contribution matrices. Your client IP is never exposed
+                  to GitHub during site visits.
                 </li>
                 <li>
-                  <strong className="text-foreground">Google &amp; GitHub OAuth:</strong>{" "}
-                  Used strictly for voluntary single sign-on when you choose to
-                  link an identity provider. We request only minimal public profile scopes.
+                  <strong>Google &amp; GitHub OAuth:</strong> Used strictly for
+                  voluntary single sign-on when you choose to link an identity
+                  provider. We request only minimal public profile scopes.
                 </li>
                 <li>
-                  <strong className="text-foreground">Last.fm Scrobbler API:</strong>{" "}
-                  Cached and proxied by our Go backend with stale-while-revalidate
-                  and circuit-breaker mechanisms. Visitors do not connect directly to Last.fm.
+                  <strong>Last.fm Scrobbler API:</strong> Cached and proxied by
+                  our Go backend with stale-while-revalidate and circuit-breaker
+                  mechanisms. Visitors do not connect directly to Last.fm.
                 </li>
               </ul>
             </section>
 
-            {/* Section 5 */}
-            <section className="flex flex-col gap-3">
-              <h2 className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
-                <span className="text-primary font-mono text-base">05.</span>
-                Security Architecture &amp; Defense in Depth
-              </h2>
+            <section id="security-sandboxing">
+              <h2>05. Security Architecture &amp; Sandboxing</h2>
               <p>
                 Our technological architecture enforces defense-in-depth principles:
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-1">
-                <div className="p-3.5 rounded-lg border border-border bg-card/20 flex flex-col gap-1">
+              <div className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-3.5 my-4">
+                <div className="p-4 rounded-xl border border-border bg-card/40 flex flex-col gap-1.5">
                   <div className="flex items-center gap-2 font-mono text-xs font-semibold text-primary">
-                    <CheckCircle2 className="size-3.5" />
+                    <CheckCircle2 className="size-4" />
                     <span>LANDLOCK LSM</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    File system isolation enforced via Linux kernel security modules.
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Filesystem isolation enforced via Linux kernel security modules.
                   </p>
                 </div>
-                <div className="p-3.5 rounded-lg border border-border bg-card/20 flex flex-col gap-1">
+
+                <div className="p-4 rounded-xl border border-border bg-card/40 flex flex-col gap-1.5">
                   <div className="flex items-center gap-2 font-mono text-xs font-semibold text-primary">
-                    <CheckCircle2 className="size-3.5" />
+                    <CheckCircle2 className="size-4" />
                     <span>AUTOMATIC TLS 1.3</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     All transit is encrypted via modern forward-secret ciphers.
                   </p>
                 </div>
-                <div className="p-3.5 rounded-lg border border-border bg-card/20 flex flex-col gap-1">
+
+                <div className="p-4 rounded-xl border border-border bg-card/40 flex flex-col gap-1.5">
                   <div className="flex items-center gap-2 font-mono text-xs font-semibold text-primary">
-                    <CheckCircle2 className="size-3.5" />
+                    <CheckCircle2 className="size-4" />
                     <span>SSRF &amp; BOT DEFENSE</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     Strict private subnet filtering, honeypots, and token-bucket rate limits.
                   </p>
                 </div>
-                <div className="p-3.5 rounded-lg border border-border bg-card/20 flex flex-col gap-1">
+
+                <div className="p-4 rounded-xl border border-border bg-card/40 flex flex-col gap-1.5">
                   <div className="flex items-center gap-2 font-mono text-xs font-semibold text-primary">
-                    <CheckCircle2 className="size-3.5" />
+                    <CheckCircle2 className="size-4" />
                     <span>STRUCTURED AUDITING</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     Trace-correlated logs sanitize all PII and tokens before emission.
                   </p>
                 </div>
               </div>
             </section>
 
-            {/* Section 6 */}
-            <section className="flex flex-col gap-3">
-              <h2 className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
-                <span className="text-primary font-mono text-base">06.</span>
-                Your Rights &amp; Data Erasure
-              </h2>
+            <section id="user-rights">
+              <h2>06. Your Rights &amp; Data Erasure</h2>
               <p>
                 Regardless of your geographic jurisdiction (GDPR, CCPA, or
                 otherwise), you possess absolute sovereignty over your data:
               </p>
-              <ul className="list-disc list-inside space-y-1.5 pl-2 text-muted-foreground">
+              <ul>
                 <li>
                   <strong>Right to Access:</strong> You can review your profile
                   information directly in your account settings.
@@ -378,18 +294,15 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <strong>Right to Erasure (Forget Me):</strong> You can delete
                   your account permanently via the settings panel. Deletion is
-                  instantaneous and purges your authentication records and session tokens.
+                  instantaneous and purges your authentication records and session
+                  tokens.
                 </li>
               </ul>
             </section>
 
-            {/* Section 7 */}
-            <section className="flex flex-col gap-3 pt-2 border-t border-border">
-              <h2 className="text-lg md:text-xl font-bold text-foreground flex items-center gap-2">
-                <span className="text-primary font-mono text-base">07.</span>
-                Contact &amp; Data Requests
-              </h2>
-              <p className="text-muted-foreground">
+            <section id="contact-inquiries">
+              <h2>07. Contact &amp; Data Requests</h2>
+              <p>
                 If you have inquiries regarding this privacy policy or wish to
                 exercise any data subject rights manually, please contact Irvan
                 via the{" "}
@@ -411,15 +324,22 @@ export default function PrivacyPolicyPage() {
                 .
               </p>
             </section>
-          </div>
-        </article>
+          </article>
+        </Container>
+      </div>
 
-        {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-        />
-      </Container>
+      <TextScroll
+        className="text-5xl md:text-7xl text-muted-foreground/50 dark:font-semibold font-bold py-24 md:space-y-2"
+        textClassName="py-1 md:py-3 font-doto"
+        default_velocity={0.66}
+        text="YOU'VE REACHED THE END, CUH.  "
+      />
+
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />
     </DirectionalTransition>
   );
 }
