@@ -86,6 +86,8 @@ export default function PrivacyPolicyPage() {
         <nav aria-label="Breadcrumb" className="w-full pt-4">
           <Link
             href="/"
+            prefetch={true}
+            transitionTypes={["nav-back"]}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
           >
             <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
@@ -393,6 +395,8 @@ export default function PrivacyPolicyPage() {
                 via the{" "}
                 <Link
                   href="/about"
+                  prefetch={true}
+                  transitionTypes={["nav-forward"]}
                   className="text-primary hover:underline font-medium"
                 >
                   Contact Form
