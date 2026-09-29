@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { Cookie } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -58,7 +59,15 @@ export function CookieConsent() {
           </div>
 
           <p className="text-xs sm:text-[13px] leading-relaxed text-muted-foreground">
-            We use cookies to ensure you get the best experience on our website. For more information on how we use cookies, please see our cookie policy.
+            We use cookies to ensure you get the best experience on our website.
+            For more information on how we handle your data, please see our{" "}
+            <Link
+              href="/privacy"
+              className="text-foreground underline underline-offset-2 hover:text-primary transition-colors font-medium"
+            >
+              privacy policy
+            </Link>
+            .
           </p>
 
           <div className="grid grid-cols-2 gap-3 pt-1">
