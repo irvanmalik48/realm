@@ -261,7 +261,7 @@ export function MarkdownImage({
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
-        <span className="not-prose relative block my-6 w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50 group/img transition-all duration-300 hover:border-border/90 hover:shadow-xl select-none">
+        <span className="not-prose relative block my-6 w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50 group/img transition-[border-color,box-shadow] duration-300 hover:border-border/90 hover:shadow-xl select-none">
           <img
             src={src}
             alt={alt}

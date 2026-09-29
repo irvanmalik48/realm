@@ -30,6 +30,11 @@ import type { TocItem } from "remark-flexible-toc";
 import type { ComponentPropsWithoutRef } from "react";
 import { CopyButton } from "@/components/copy-button";
 import { MarkdownImage } from "@/components/markdown-image";
+import {
+  UniversalChart,
+  PlotChart,
+  FabricWeightChart,
+} from "@/components/universal-chart";
 import { DirectionalTransition } from "@/components/directional-transition";
 import { BlogReactions } from "@/components/blog-reactions";
 import { BlogComments } from "@/components/blog-comments";
@@ -143,6 +148,9 @@ async function renderMDX(
         );
       },
       img: MarkdownImage,
+      UniversalChart,
+      PlotChart,
+      FabricWeightChart,
     },
   });
 
