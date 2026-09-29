@@ -1,4 +1,5 @@
 import { ArrowDownRight, Mail } from "lucide-react";
+import Link from "next/link";
 import { Button } from "./ui/button";
 import { RealmStylized } from "./realm-stylized";
 import { ContactForm } from "./contact-form";
@@ -100,9 +101,37 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <p className="text-primary/75 text-center md:text-start text-sm w-full md:pb-40 lg:pb-55 xl:pb-70">
-        &copy; 2025 Irvan Malik Azantha. Licensed in RCCL.
-      </p>
+      <div className="w-full flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-primary/75 md:pb-40 lg:pb-55 xl:pb-70">
+        <p className="text-center md:text-start">
+          &copy; 2025–2026 Irvan Malik Azantha. Licensed in RCCL.
+        </p>
+        <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-4 gap-y-1 text-xs">
+          <Link
+            href="/privacy"
+            className="hover:text-primary transition-colors underline-offset-4 hover:underline"
+          >
+            Privacy Policy
+          </Link>
+          <span className="text-border" aria-hidden="true">
+            &bull;
+          </span>
+          <Link
+            href="/terms"
+            className="hover:text-primary transition-colors underline-offset-4 hover:underline"
+          >
+            Terms of Service
+          </Link>
+          <span className="text-border" aria-hidden="true">
+            &bull;
+          </span>
+          <Link
+            href="/contribution"
+            className="hover:text-primary transition-colors underline-offset-4 hover:underline"
+          >
+            Contribution Notice
+          </Link>
+        </div>
+      </div>
       <RealmStylized className="hidden md:block w-full absolute inset-x-0 bottom-0" />
     </footer>
   );
