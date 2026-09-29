@@ -1,15 +1,23 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
-import { Camera, ExternalLink, Copy, Check, Globe } from "lucide-react";
 import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-} from "@/components/ui/hover-card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+  Camera,
+  ExternalLink,
+  Copy,
+  Globe,
+  Image as ImageIcon,
+  FileText,
+  Maximize2,
+} from "lucide-react";
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+} from "@/components/ui/context-menu";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -30,14 +38,6 @@ function UnsplashIcon(props: React.SVGProps<SVGSVGElement>) {
       <path d="M7.5 6.75V0h9v6.75h-9zm9 3.75H24V24H0V10.5h7.5v6.75h9V10.5z" />
     </svg>
   );
-}
-
-function getInitials(name: string): string {
-  const parts = name.trim().split(/\s+/);
-  if (parts.length >= 2) {
-    return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
-  }
-  return name.slice(0, 2).toUpperCase() || "IMG";
 }
 
 const KNOWN_IMAGE_REGISTRY: Record<
@@ -117,7 +117,6 @@ export function parseImageAttribution(
   if (title) {
     const trimmed = title.trim();
 
-    // Pattern: "Photo by [Creator] on [Source] | [URL]" or "Photo by [Creator] on [Source]"
     const photoByMatch = trimmed.match(
       /^Photo by ([^|]+?)(?:\s+on\s+([^|]+))?(?:\s*\|\s*(https?:\/\/\S+))?$/i,
     );
@@ -180,15 +179,13 @@ export function MarkdownImage({
   className,
   ...props
 }: MarkdownImageProps) {
-  const [copied, setCopied] = useState(false);
-
   if (!src || typeof src !== "string") {
     return (
-      <span className="relative block my-7 overflow-hidden rounded-xl border border-border/40 bg-muted/20">
+      <span className="not-prose my-6 block w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50">
         <img
           src={src}
           alt={alt}
-          className={cn("w-full h-auto object-cover rounded-xl", className)}
+          className={cn("block max-w-full h-auto m-0 rounded-xl", className)}
           loading="lazy"
           {...props}
         />
@@ -198,35 +195,72 @@ export function MarkdownImage({
 
   const attribution = parseImageAttribution(src, title, alt);
 
-  const handleCopyLink = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleOpenSource = () => {
+    window.open(attribution.sourceUrl, "_blank", "noopener,noreferrer");
+  };
+
+  const handleCopySourceLink = async () => {
     try {
       await navigator.clipboard.writeText(attribution.sourceUrl);
-      setCopied(true);
       toast({
         title: "Link copied",
         description: "Image source link copied to clipboard.",
       });
-      setTimeout(() => setCopied(false), 2000);
     } catch {
       toast({
         variant: "destructive",
         title: "Copy failed",
-        description: "Could not copy image source URL.",
+        description: "Could not copy image source link.",
       });
     }
   };
 
+  const handleCopyImageUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(src);
+      toast({
+        title: "Image URL copied",
+        description: "Direct image URL copied to clipboard.",
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Copy failed",
+        description: "Could not copy image URL.",
+      });
+    }
+  };
+
+  const handleCopyAttribution = async () => {
+    try {
+      const text = `Photo by ${attribution.creator} on ${attribution.source} (${attribution.sourceUrl})`;
+      await navigator.clipboard.writeText(text);
+      toast({
+        title: "Attribution copied",
+        description: `"${text}" copied to clipboard.`,
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Copy failed",
+        description: "Could not copy attribution text.",
+      });
+    }
+  };
+
+  const handleOpenImageDirect = () => {
+    window.open(src, "_blank", "noopener,noreferrer");
+  };
+
   return (
-    <HoverCard openDelay={150} closeDelay={200}>
-      <HoverCardTrigger asChild>
-        <span className="relative block my-7 overflow-hidden rounded-xl border border-border/40 bg-muted/20 group/img cursor-pointer transition-all duration-300 hover:border-border/80 hover:shadow-2xl">
+    <ContextMenu>
+      <ContextMenuTrigger asChild>
+        <span className="not-prose relative block my-6 w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50 group/img transition-all duration-300 hover:border-border/90 hover:shadow-xl select-none">
           <img
             src={src}
             alt={alt}
             className={cn(
-              "w-full h-auto object-cover rounded-xl transition-transform duration-500 ease-out group-hover/img:scale-[1.015]",
+              "block max-w-full h-auto m-0 rounded-xl object-contain transition-transform duration-500 ease-out group-hover/img:scale-[1.012]",
               className,
             )}
             loading="lazy"
@@ -245,102 +279,84 @@ export function MarkdownImage({
             <span className="text-muted-foreground">{attribution.source}</span>
           </span>
         </span>
-      </HoverCardTrigger>
+      </ContextMenuTrigger>
 
-      <HoverCardContent
-        side="top"
-        align="center"
-        sideOffset={10}
-        className="w-80 p-0 overflow-hidden border border-border/80 bg-popover/95 backdrop-blur-md shadow-2xl rounded-xl z-50 animate-in fade-in zoom-in-95 duration-200"
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between px-3.5 py-2.5 bg-muted/40 border-b border-border/40">
-          <div className="flex items-center gap-2">
-            {attribution.isUnsplash ? (
-              <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-foreground">
-                <UnsplashIcon className="size-3.5" />
-                <span>Unsplash</span>
-              </span>
-            ) : (
-              <span className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                <Globe className="size-3.5 text-muted-foreground" />
-                <span>{attribution.source}</span>
-              </span>
-            )}
-          </div>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80 px-1.5 py-0.5 rounded bg-muted/60 border border-border/40">
-            Source Info
+      <ContextMenuContent className="w-64 border border-border/80 bg-popover/95 backdrop-blur-md shadow-2xl rounded-xl p-1 z-50">
+        <ContextMenuLabel className="flex items-center gap-2 text-xs font-semibold text-foreground px-2.5 py-1.5">
+          {attribution.isUnsplash ? (
+            <>
+              <UnsplashIcon className="size-3.5 text-foreground" />
+              <span>Unsplash Photo</span>
+            </>
+          ) : (
+            <>
+              <Globe className="size-3.5 text-muted-foreground" />
+              <span>{attribution.source}</span>
+            </>
+          )}
+        </ContextMenuLabel>
+
+        <div className="px-2.5 py-1 text-xs text-muted-foreground">
+          Photo by{" "}
+          <span className="font-medium text-foreground">
+            {attribution.creator}
           </span>
         </div>
 
-        {/* Body */}
-        <div className="p-3.5 space-y-3">
-          <div className="flex items-center gap-3">
-            <Avatar className="size-9 border border-border/50 shrink-0">
-              <AvatarFallback className="bg-muted text-xs font-medium text-muted-foreground">
-                {attribution.isUnsplash ? (
-                  <Camera className="size-4" />
-                ) : (
-                  getInitials(attribution.creator)
-                )}
-              </AvatarFallback>
-            </Avatar>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-foreground truncate">
-                {attribution.creator}
-              </p>
-              <p className="text-xs text-muted-foreground truncate">
-                {attribution.isUnsplash
-                  ? "Photographer on Unsplash"
-                  : attribution.source}
-              </p>
-            </div>
+        {alt && (
+          <div className="px-2.5 py-1 text-[11px] text-muted-foreground/80 italic line-clamp-2 max-w-xs">
+            &ldquo;{alt}&rdquo;
           </div>
+        )}
 
-          {alt && (
-            <div className="rounded-md bg-muted/30 border border-border/30 px-2.5 py-1.5">
-              <p className="text-[11px] leading-relaxed text-muted-foreground line-clamp-2 italic">
-                &ldquo;{alt}&rdquo;
-              </p>
-            </div>
-          )}
+        <ContextMenuSeparator />
 
-          {/* Actions */}
-          <div className="flex items-center gap-2 pt-1">
-            <Button
-              asChild
-              size="sm"
-              className="flex-1 h-8 text-xs font-medium gap-1.5 shadow-xs"
-            >
-              <a
-                href={attribution.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>
-                  {attribution.isUnsplash ? "View on Unsplash" : "Open Source"}
-                </span>
-                <ExternalLink className="size-3 shrink-0" />
-              </a>
-            </Button>
+        <ContextMenuItem
+          className="cursor-pointer gap-2 text-xs"
+          onClick={handleOpenSource}
+        >
+          <ExternalLink className="size-3.5" />
+          <span>
+            {attribution.isUnsplash
+              ? "Open on Unsplash"
+              : "Open Original Source"}
+          </span>
+        </ContextMenuItem>
 
-            <Button
-              variant="outline"
-              size="icon-sm"
-              className="size-8 shrink-0 text-muted-foreground hover:text-foreground"
-              onClick={handleCopyLink}
-              title="Copy source link"
-              aria-label="Copy image source link"
-            >
-              {copied ? (
-                <Check className="size-3.5 text-emerald-500 animate-in zoom-in" />
-              ) : (
-                <Copy className="size-3.5" />
-              )}
-            </Button>
-          </div>
-        </div>
-      </HoverCardContent>
-    </HoverCard>
+        <ContextMenuItem
+          className="cursor-pointer gap-2 text-xs"
+          onClick={handleCopySourceLink}
+        >
+          <Copy className="size-3.5" />
+          <span>Copy Source Link</span>
+        </ContextMenuItem>
+
+        <ContextMenuItem
+          className="cursor-pointer gap-2 text-xs"
+          onClick={handleCopyImageUrl}
+        >
+          <ImageIcon className="size-3.5" />
+          <span>Copy Image URL</span>
+        </ContextMenuItem>
+
+        <ContextMenuItem
+          className="cursor-pointer gap-2 text-xs"
+          onClick={handleCopyAttribution}
+        >
+          <FileText className="size-3.5" />
+          <span>Copy Attribution</span>
+        </ContextMenuItem>
+
+        <ContextMenuSeparator />
+
+        <ContextMenuItem
+          className="cursor-pointer gap-2 text-xs"
+          onClick={handleOpenImageDirect}
+        >
+          <Maximize2 className="size-3.5" />
+          <span>View Full Size Image</span>
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
   );
 }
