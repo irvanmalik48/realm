@@ -1,7 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getHealthStatusAction, HealthData } from "@/actions/health";
+import type { HealthData } from "@/actions/health";
+import { fetchClientHealthStatus } from "@/lib/client-health";
 import { Activity, ChevronDown, Database, RefreshCw, Server } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
@@ -54,7 +55,7 @@ export function APIStatusPulse() {
 
   const { data, isFetching, refetch } = useQuery({
     queryKey: ["api-health"],
-    queryFn: () => getHealthStatusAction(),
+    queryFn: () => fetchClientHealthStatus(),
     refetchInterval: 20000, // Poll every 20 seconds
     refetchIntervalInBackground: false,
     staleTime: 10000,
