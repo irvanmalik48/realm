@@ -58,6 +58,14 @@ const nextConfig: NextConfig = {
         : "https://api.irvanma.eu.org");
     return [
       {
+        source: "/health",
+        destination: `${backendUrl}/health`,
+      },
+      {
+        source: "/v1/health",
+        destination: `${backendUrl}/v1/health`,
+      },
+      {
         source: "/v1/storage/:path*",
         destination: `${backendUrl}/v1/storage/:path*`,
       },
