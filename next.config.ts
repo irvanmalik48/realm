@@ -41,6 +41,19 @@ const nextConfig: NextConfig = {
     turbopackRustReactCompiler: true,
   },
   productionBrowserSourceMaps: false,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+    ],
+  },
   async headers() {
     return [
       {

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import {
   Camera,
   ExternalLink,
@@ -9,6 +10,8 @@ import {
   Image as ImageIcon,
   FileText,
   Maximize2,
+  Hash,
+  Code2,
 } from "lucide-react";
 import {
   ContextMenu,
@@ -21,7 +24,26 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
-export type MarkdownImageProps = React.ComponentPropsWithoutRef<"img">;
+export interface MarkdownImageProps
+  extends Omit<React.ComponentPropsWithoutRef<"img">, "src" | "placeholder"> {
+  src?: string;
+  blurDataURL?: string;
+  blurhash?: string;
+  aspectRatio?: number;
+  priority?: boolean;
+}
+
+export interface ImageMetaState {
+  width: number;
+  height: number;
+  blurDataURL?: string;
+  blurhash?: string;
+  aspectRatio?: number;
+  format?: string;
+  size?: number;
+}
+
+const metadataCache = new Map<string, ImageMetaState>();
 
 export interface ImageAttribution {
   creator: string;
@@ -183,24 +205,87 @@ export function MarkdownImage({
   alt,
   title,
   className,
+  blurDataURL: initialBlurDataURL,
+  blurhash: initialBlurhash,
+  aspectRatio: initialAspectRatio,
+  priority,
   ...props
 }: MarkdownImageProps) {
+  const initialWidth =
+    typeof props.width === "number"
+      ? props.width
+      : props.width
+        ? parseInt(String(props.width), 10)
+        : undefined;
+  const initialHeight =
+    typeof props.height === "number"
+      ? props.height
+      : props.height
+        ? parseInt(String(props.height), 10)
+        : undefined;
+
+  const cachedMeta = src ? metadataCache.get(src) : undefined;
+  const [fetchedMeta, setFetchedMeta] = React.useState<ImageMetaState | null>(null);
+
+  const meta = cachedMeta ?? fetchedMeta ?? (initialWidth && initialHeight ? {
+    width: initialWidth,
+    height: initialHeight,
+    blurDataURL: initialBlurDataURL,
+    blurhash: initialBlurhash,
+    aspectRatio: initialAspectRatio,
+  } : null);
+
+  React.useEffect(() => {
+    if (!src || metadataCache.has(src)) return;
+
+    let isMounted = true;
+    const controller = new AbortController();
+
+    async function fetchMeta() {
+      try {
+        const res = await fetch(
+          `/api/image-metadata?url=${encodeURIComponent(src!)}`,
+          {
+            signal: controller.signal,
+          },
+        );
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!isMounted) return;
+        const fetched: ImageMetaState = {
+          width: Number(data.width),
+          height: Number(data.height),
+          blurDataURL: data.blurDataURL,
+          blurhash: data.blurhash,
+          aspectRatio: Number(data.aspectRatio),
+          format: data.format,
+          size: Number(data.size),
+        };
+        metadataCache.set(src!, fetched);
+        setFetchedMeta(fetched);
+      } catch {
+        // Fall back gracefully
+      }
+    }
+
+    fetchMeta();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, [src]);
+
   if (!src || typeof src !== "string") {
-    return (
-      <span className="not-prose my-6 block w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt={alt}
-          className={cn("block max-w-full h-auto m-0 rounded-xl", className)}
-          loading="lazy"
-          {...props}
-        />
-      </span>
-    );
+    return null;
   }
 
   const attribution = parseImageAttribution(src, title, alt);
+
+  const width = meta?.width ?? initialWidth ?? 1200;
+  const height = meta?.height ?? initialHeight ?? 800;
+  const blurDataURL = meta?.blurDataURL || initialBlurDataURL;
+  const blurhash = meta?.blurhash || initialBlurhash;
 
   const handleOpenSource = () => {
     window.open(attribution.sourceUrl, "_blank", "noopener,noreferrer");
@@ -255,6 +340,42 @@ export function MarkdownImage({
     }
   };
 
+  const handleCopyBlurhash = async () => {
+    if (!blurhash) return;
+    try {
+      await navigator.clipboard.writeText(blurhash);
+      toast({
+        title: "Blurhash copied",
+        description: `"${blurhash}" copied to clipboard.`,
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Copy failed",
+        description: "Could not copy blurhash.",
+      });
+    }
+  };
+
+  const handleCopyNextImageProps = async () => {
+    try {
+      const snippet = `<Image\n  src="${src}"\n  alt="${alt || ""}"\n  width={${width}}\n  height={${height}}${
+        blurDataURL ? `\n  placeholder="blur"\n  blurDataURL="${blurDataURL}"` : ""
+      }\n/>`;
+      await navigator.clipboard.writeText(snippet);
+      toast({
+        title: "next/image code copied",
+        description: "Standard Next.js <Image /> component snippet copied.",
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Copy failed",
+        description: "Could not copy code snippet.",
+      });
+    }
+  };
+
   const handleOpenImageDirect = () => {
     window.open(src, "_blank", "noopener,noreferrer");
   };
@@ -263,16 +384,25 @@ export function MarkdownImage({
     <ContextMenu>
       <ContextMenuTrigger asChild>
         <span className="not-prose relative block my-6 w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50 group/img transition-colors duration-300 hover:border-border/90 hover:shadow-xl select-none">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={src}
-            alt={alt}
+            alt={alt || ""}
+            width={width}
+            height={height}
+            placeholder={blurDataURL ? "blur" : "empty"}
+            blurDataURL={blurDataURL}
+            priority={priority}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 850px"
             className={cn(
               "block max-w-full h-auto m-0 rounded-xl object-contain transition-transform duration-500 ease-out group-hover/img:scale-105",
               className,
             )}
-            loading="lazy"
-            {...props}
+            style={{
+              width: "100%",
+              height: "auto",
+              aspectRatio: meta?.aspectRatio ? `${meta.aspectRatio}` : undefined,
+              ...props.style,
+            }}
           />
 
           {/* Floating pill badge on image hover */}
@@ -310,6 +440,15 @@ export function MarkdownImage({
             {attribution.creator}
           </span>
         </div>
+
+        {meta?.width && meta?.height && (
+          <div className="px-2.5 py-0.5 text-2xs text-muted-foreground font-mono flex items-center justify-between">
+            <span>
+              {meta.width} &times; {meta.height}
+            </span>
+            {meta.format && <span className="uppercase">{meta.format}</span>}
+          </div>
+        )}
 
         {alt && (
           <div className="px-2.5 py-1 text-2xs text-muted-foreground/80 italic line-clamp-2 max-w-xs">
@@ -353,6 +492,24 @@ export function MarkdownImage({
         >
           <FileText className="size-3.5" />
           <span>Copy Attribution</span>
+        </ContextMenuItem>
+
+        {blurhash && (
+          <ContextMenuItem
+            className="cursor-pointer gap-2 text-xs"
+            onClick={handleCopyBlurhash}
+          >
+            <Hash className="size-3.5" />
+            <span>Copy Blurhash</span>
+          </ContextMenuItem>
+        )}
+
+        <ContextMenuItem
+          className="cursor-pointer gap-2 text-xs"
+          onClick={handleCopyNextImageProps}
+        >
+          <Code2 className="size-3.5" />
+          <span>Copy next/image Code</span>
         </ContextMenuItem>
 
         <ContextMenuSeparator />
