@@ -71,7 +71,7 @@ export interface UniversalChartProps {
   categories?: ChartCategory[];
   data?: ChartDataPoint[];
   showCurve?: boolean;
-  preset?: "fabric-weight" | "custom";
+  preset?: "fabric-weight" | "cost-per-wear" | "custom";
   className?: string;
 }
 
@@ -380,6 +380,241 @@ const PRESET_FABRIC_WEIGHT: {
   ],
 };
 
+// Preset: Cost-Per-Wear vs. Durability Matrix
+const PRESET_COST_PER_WEAR: {
+  title: string;
+  subtitle: string;
+  badge: string;
+  xAxis: ChartAxisConfig;
+  yAxis: ChartAxisConfig;
+  zones: ChartZone[];
+  categories: Array<{ id: string; label: string }>;
+  data: ChartDataPoint[];
+} = {
+  title: "Cost-Per-Wear vs. Durability Matrix",
+  subtitle:
+    "Amortized clothing economics across garment lifespans. Click or hover any item to inspect acquisition price, total wears, and real unit cost.",
+  badge: "Lifecycle Economics",
+  xAxis: {
+    label: "Garment Active Lifespan (Months) →",
+    min: 0,
+    max: 130,
+    unit: "mo",
+    ticks: [12, 36, 60, 84, 108, 120],
+    subTicks: [
+      { value: 12, label: "1 yr" },
+      { value: 36, label: "3 yr" },
+      { value: 60, label: "5 yr" },
+      { value: 84, label: "7 yr" },
+      { value: 120, label: "10 yr" },
+    ],
+  },
+  yAxis: {
+    label: "Cost Per Wear ($ / Wear) →",
+    min: 0,
+    max: 2.5,
+    unit: "$",
+    ticks: [0.25, 0.5, 1.0, 1.5, 2.0, 2.5],
+  },
+  zones: [
+    { name: "Disposable (< 12 mo)", from: 0, to: 12, color: "#f43f5e" },
+    { name: "Standard (12–36 mo)", from: 12, to: 36, color: "#fbbf24" },
+    { name: "Durable Workwear (36–72 mo)", from: 36, to: 72, color: "#10b981" },
+    { name: "Heritage (72–130 mo)", from: 72, to: 130, color: "#6366f1" },
+  ],
+  categories: [
+    { id: "all", label: "All Items" },
+    { id: "fast-fashion", label: "Fast Fashion & Hype" },
+    { id: "standard", label: "Standard Retail" },
+    { id: "heavyweight", label: "Heavyweight Workwear" },
+    { id: "heritage", label: "Heritage Footwear" },
+  ],
+  data: [
+    {
+      id: "poly-fast",
+      name: "Fast Fashion Poly-Blend Tee",
+      category: "fast-fashion",
+      categoryLabel: "Fast Fashion",
+      x: 4,
+      y: 0.9,
+      subLabel: "$18 initial • 20 wears",
+      stats: [
+        { label: "Purchase Price", value: "$18" },
+        { label: "Cost Per Wear", value: "$0.90", highlight: true },
+      ],
+      traits: [
+        {
+          label: "Failure Mode",
+          value: "Collar baconing and warped side seams after 5 wash cycles",
+          icon: "layers",
+        },
+        {
+          label: "Active Lifespan",
+          value: "4 months before thread breakdown",
+          icon: "activity",
+        },
+        {
+          label: "5-Year Churn Cost",
+          value: "$270 for 15 disposable replacements",
+          icon: "gauge",
+        },
+      ],
+    },
+    {
+      id: "mall-cotton",
+      name: "Mall Ring-Spun Cotton Tee",
+      category: "standard",
+      categoryLabel: "Standard Retail",
+      x: 14,
+      y: 0.47,
+      subLabel: "$28 initial • 60 wears",
+      stats: [
+        { label: "Purchase Price", value: "$28" },
+        { label: "Cost Per Wear", value: "$0.47", highlight: true },
+      ],
+      traits: [
+        {
+          label: "Failure Mode",
+          value: "Fabric thinning, underarm fraying, and shape distortion",
+          icon: "layers",
+        },
+        {
+          label: "Active Lifespan",
+          value: "~14 months before demotion to sleepwear",
+          icon: "activity",
+        },
+        {
+          label: "5-Year Replacement Cost",
+          value: "$140 for 5 replacements",
+          icon: "gauge",
+        },
+      ],
+    },
+    {
+      id: "heavy-cotton-tee",
+      name: "300 GSM Boxy Heavy Cotton Tee",
+      category: "heavyweight",
+      categoryLabel: "Heavyweight Workwear",
+      x: 60,
+      y: 0.14,
+      subLabel: "$42 initial • 300 wears",
+      highlight: true,
+      highlightLabel: "★ OPTIMAL ROI",
+      stats: [
+        { label: "Purchase Price", value: "$42" },
+        { label: "Cost Per Wear", value: "$0.14", highlight: true },
+      ],
+      traits: [
+        {
+          label: "Construction",
+          value: "Double-needle ribbed collar, 16s/1 combed yarn, zero skew",
+          icon: "shield",
+        },
+        {
+          label: "Active Lifespan",
+          value: "5+ years without collar breakdown or seam twists",
+          icon: "check",
+        },
+        {
+          label: "5-Year Total Cost",
+          value: "$42 flat (84% cheaper than fast-fashion churn)",
+          icon: "gauge",
+        },
+      ],
+    },
+    {
+      id: "canvas-trousers",
+      name: "15oz Raw Duck Canvas Trousers",
+      category: "heavyweight",
+      categoryLabel: "Heavyweight Workwear",
+      x: 84,
+      y: 0.16,
+      subLabel: "$135 initial • 840 wears",
+      stats: [
+        { label: "Purchase Price", value: "$135" },
+        { label: "Cost Per Wear", value: "$0.16", highlight: true },
+      ],
+      traits: [
+        {
+          label: "Construction",
+          value: "Triple-stitched felled seams, solid brass hardware, bartacks",
+          icon: "shield",
+        },
+        {
+          label: "Active Lifespan",
+          value: "7+ years with field-repairable canvas weave",
+          icon: "check",
+        },
+        {
+          label: "Surface Patina",
+          value: "Slate-grey sulfur fades along stress lines",
+          icon: "sparkles",
+        },
+      ],
+    },
+    {
+      id: "heritage-boots",
+      name: "Goodyear-Welted Leather Lug Boots",
+      category: "heritage",
+      categoryLabel: "Heritage Footwear",
+      x: 120,
+      y: 0.22,
+      subLabel: "$260 initial • 1,200 wears",
+      stats: [
+        { label: "Purchase Price", value: "$260" },
+        { label: "Cost Per Wear", value: "$0.22", highlight: true },
+      ],
+      traits: [
+        {
+          label: "Construction",
+          value: "Full-grain oil-tanned leather, steel shank, Vibram Montagna lug sole",
+          icon: "shield",
+        },
+        {
+          label: "Active Lifespan",
+          value: "10+ years with indefinite recrafting and resoling",
+          icon: "check",
+        },
+        {
+          label: "Sensory Grounding",
+          value: "Firm physical inertia on concrete and asphalt",
+          icon: "activity",
+        },
+      ],
+    },
+    {
+      id: "techwear-cargo",
+      name: "Hype Nylon Techwear Cargo",
+      category: "fast-fashion",
+      categoryLabel: "Fast Fashion & Hype",
+      x: 16,
+      y: 2.15,
+      subLabel: "$280 initial • 130 wears",
+      stats: [
+        { label: "Purchase Price", value: "$280" },
+        { label: "Cost Per Wear", value: "$2.15", highlight: true },
+      ],
+      traits: [
+        {
+          label: "Failure Mode",
+          value: "Delaminating PU seam tape and broken plastic strap buckles",
+          icon: "layers",
+        },
+        {
+          label: "Active Lifespan",
+          value: "16 months before micro-trend obsolescence",
+          icon: "activity",
+        },
+        {
+          label: "Market Premium",
+          value: "400% branding markup over military surplus nylon",
+          icon: "gauge",
+        },
+      ],
+    },
+  ],
+};
+
 const EMPTY_DATA: ChartDataPoint[] = [];
 const EMPTY_ZONES: ChartZone[] = [];
 const EMPTY_CATEGORIES: ChartCategory[] = [];
@@ -393,14 +628,26 @@ export function UniversalChart({
   zones: propZones,
   categories: propCategories,
   data: propData,
-  showCurve = true,
+  showCurve: propShowCurve,
   preset = "fabric-weight",
   className,
 }: UniversalChartProps) {
   const gradientId = useId();
 
   // If using preset and custom props are not provided, fall back to preset
-  const presetConfig = preset === "fabric-weight" ? PRESET_FABRIC_WEIGHT : null;
+  const presetConfig =
+    preset === "cost-per-wear"
+      ? PRESET_COST_PER_WEAR
+      : preset === "fabric-weight"
+        ? PRESET_FABRIC_WEIGHT
+        : null;
+
+  const showCurve =
+    propShowCurve !== undefined
+      ? propShowCurve
+      : preset === "cost-per-wear"
+        ? false
+        : true;
 
   const title = propTitle ?? presetConfig?.title ?? "Data Distribution Matrix";
   const subtitle = propSubtitle ?? presetConfig?.subtitle ?? "";
@@ -553,10 +800,10 @@ export function UniversalChart({
         )}
       </div>
 
-      {/* Mobile Quick-Select Pill Strip: Instant finger-friendly weight inspection */}
+      {/* Mobile Quick-Select Pill Strip: Instant finger-friendly inspection */}
       <div className="md:hidden px-4 py-3 border-b border-border/40 bg-muted/20 flex flex-col gap-2">
         <div className="flex items-center justify-between text-2xs font-mono text-muted-foreground">
-          <span>Tap to inspect weight:</span>
+          <span>Tap to inspect point:</span>
           <span className="text-3xs text-muted-foreground/70">Swipe matrix ↔</span>
         </div>
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
@@ -574,7 +821,15 @@ export function UniversalChart({
                     : "bg-muted/50 text-muted-foreground border-border/40 hover:bg-muted hover:text-foreground",
                 )}
               >
-                <span>{point.x}{xAxis.unit === "GSM" ? "g" : ""}</span>
+                <span>
+                  {xAxis.unit === "GSM"
+                    ? `${point.x}g`
+                    : xAxis.unit === "mo"
+                      ? `${point.x}m`
+                      : xAxis.unit === "$"
+                        ? `$${point.x}`
+                        : `${point.x}${xAxis.unit ? ` ${xAxis.unit}` : ""}`}
+                </span>
                 {point.highlight && (
                   <span className="text-3xs text-emerald-400">★</span>
                 )}
@@ -637,8 +892,9 @@ export function UniversalChart({
                     textAnchor="end"
                     className="fill-muted-foreground text-3xs font-mono"
                   >
-                    {level}
-                    {yAxis.unit ? yAxis.unit : ""}
+                    {yAxis.unit === "$"
+                      ? `$${level < 1 ? level.toFixed(2) : level}`
+                      : `${level}${yAxis.unit ? yAxis.unit : ""}`}
                   </text>
                 </g>
               );

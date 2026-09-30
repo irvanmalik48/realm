@@ -38,6 +38,7 @@ import {
 import { DirectionalTransition } from "@/components/directional-transition";
 import { BlogReactions } from "@/components/blog-reactions";
 import { BlogComments } from "@/components/blog-comments";
+import { Callout, SpecGrid, SpecItem } from "@/components/callout";
 
 interface HastElement {
   type: string;
@@ -200,6 +201,9 @@ async function renderMDX(
       UniversalChart,
       PlotChart,
       FabricWeightChart,
+      Callout,
+      SpecGrid,
+      SpecItem,
     },
   });
 
