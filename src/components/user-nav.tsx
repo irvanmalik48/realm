@@ -8,6 +8,7 @@ import { LogIn, LogOut, Settings } from "lucide-react";
 import { GoogleLogo } from "@/components/logos/google";
 import { GithubLogo } from "@/components/logos/github";
 import { toast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
 
 export function UserNav() {
   const { user, isLoading, logout } = useAuth();
@@ -33,15 +34,20 @@ export function UserNav() {
 
   if (!user) {
     return (
-      <Link
-        href="/login"
-        prefetch={true}
-        transitionTypes={["nav-forward"]}
-        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full border border-border/80 transition-colors cursor-pointer"
+      <Button
+        asChild
+        size="sm"
+        className="rounded-full h-8 px-3.5 text-xs font-medium cursor-pointer shadow-xs"
       >
-        <LogIn className="w-3.5 h-3.5" />
-        <span>Sign in</span>
-      </Link>
+        <Link
+          href="/login"
+          prefetch={true}
+          transitionTypes={["nav-forward"]}
+        >
+          <LogIn className="size-3.5" />
+          <span>Sign in</span>
+        </Link>
+      </Button>
     );
   }
 

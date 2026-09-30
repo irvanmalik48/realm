@@ -10,8 +10,6 @@ import {
   Image as ImageIcon,
   FileText,
   Maximize2,
-  Hash,
-  Code2,
 } from "lucide-react";
 import {
   ContextMenu,
@@ -285,7 +283,6 @@ export function MarkdownImage({
   const width = meta?.width ?? initialWidth ?? 1200;
   const height = meta?.height ?? initialHeight ?? 800;
   const blurDataURL = meta?.blurDataURL || initialBlurDataURL;
-  const blurhash = meta?.blurhash || initialBlurhash;
 
   const handleOpenSource = () => {
     window.open(attribution.sourceUrl, "_blank", "noopener,noreferrer");
@@ -340,41 +337,6 @@ export function MarkdownImage({
     }
   };
 
-  const handleCopyBlurhash = async () => {
-    if (!blurhash) return;
-    try {
-      await navigator.clipboard.writeText(blurhash);
-      toast({
-        title: "Blurhash copied",
-        description: `"${blurhash}" copied to clipboard.`,
-      });
-    } catch {
-      toast({
-        variant: "destructive",
-        title: "Copy failed",
-        description: "Could not copy blurhash.",
-      });
-    }
-  };
-
-  const handleCopyNextImageProps = async () => {
-    try {
-      const snippet = `<Image\n  src="${src}"\n  alt="${alt || ""}"\n  width={${width}}\n  height={${height}}${
-        blurDataURL ? `\n  placeholder="blur"\n  blurDataURL="${blurDataURL}"` : ""
-      }\n/>`;
-      await navigator.clipboard.writeText(snippet);
-      toast({
-        title: "next/image code copied",
-        description: "Standard Next.js <Image /> component snippet copied.",
-      });
-    } catch {
-      toast({
-        variant: "destructive",
-        title: "Copy failed",
-        description: "Could not copy code snippet.",
-      });
-    }
-  };
 
   const handleOpenImageDirect = () => {
     window.open(src, "_blank", "noopener,noreferrer");
@@ -494,23 +456,6 @@ export function MarkdownImage({
           <span>Copy Attribution</span>
         </ContextMenuItem>
 
-        {blurhash && (
-          <ContextMenuItem
-            className="cursor-pointer gap-2 text-xs"
-            onClick={handleCopyBlurhash}
-          >
-            <Hash className="size-3.5" />
-            <span>Copy Blurhash</span>
-          </ContextMenuItem>
-        )}
-
-        <ContextMenuItem
-          className="cursor-pointer gap-2 text-xs"
-          onClick={handleCopyNextImageProps}
-        >
-          <Code2 className="size-3.5" />
-          <span>Copy next/image Code</span>
-        </ContextMenuItem>
 
         <ContextMenuSeparator />
 
