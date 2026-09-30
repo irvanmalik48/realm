@@ -148,6 +148,55 @@ async function renderMDX(
         );
       },
       img: MarkdownImage,
+      table: ({ className, children, ...props }: ComponentPropsWithoutRef<"table">) => (
+        <div className="not-prose my-6 w-full overflow-x-auto rounded-xl border border-border/70 bg-card/40 backdrop-blur-sm shadow-sm scrollbar-thin">
+          <table
+            className={cn(
+              "w-full min-w-[560px] text-left text-xs md:text-sm border-collapse",
+              className,
+            )}
+            {...props}
+          >
+            {children}
+          </table>
+        </div>
+      ),
+      thead: ({ className, ...props }: ComponentPropsWithoutRef<"thead">) => (
+        <thead
+          className={cn(
+            "bg-muted/60 font-mono text-muted-foreground uppercase text-[11px] tracking-wider border-b border-border/70",
+            className,
+          )}
+          {...props}
+        />
+      ),
+      tbody: ({ className, ...props }: ComponentPropsWithoutRef<"tbody">) => (
+        <tbody
+          className={cn("divide-y divide-border/50 font-sans", className)}
+          {...props}
+        />
+      ),
+      tr: ({ className, ...props }: ComponentPropsWithoutRef<"tr">) => (
+        <tr
+          className={cn(
+            "transition-colors hover:bg-muted/30 duration-150",
+            className,
+          )}
+          {...props}
+        />
+      ),
+      th: ({ className, ...props }: ComponentPropsWithoutRef<"th">) => (
+        <th
+          className={cn("p-3.5 font-semibold text-foreground text-left", className)}
+          {...props}
+        />
+      ),
+      td: ({ className, ...props }: ComponentPropsWithoutRef<"td">) => (
+        <td
+          className={cn("p-3.5 text-muted-foreground leading-relaxed", className)}
+          {...props}
+        />
+      ),
       UniversalChart,
       PlotChart,
       FabricWeightChart,

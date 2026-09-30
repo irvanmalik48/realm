@@ -21,6 +21,70 @@ export const metadata: Metadata = {
   },
 };
 
+interface PolicyItem {
+  title: string;
+  description: string;
+}
+
+const DATA_COLLECTION_POINTS: PolicyItem[] = [
+  {
+    title: "Authentication & User Accounts",
+    description:
+      "When you register directly or authenticate via Google or GitHub OAuth, we store your chosen username, email address, avatar URL, and cryptographic password hash (or provider identity ID). Passwords are salted and hashed using bcrypt/Argon2; plaintext passwords are never logged or stored.",
+  },
+  {
+    title: "Interactive Comments & Reactions",
+    description:
+      "When you comment on blog posts or react with emojis, your submitted content and associated user handle are stored in our PostgreSQL database to display alongside the discussion.",
+  },
+  {
+    title: "Contact Form Inquiries",
+    description:
+      "When you submit the contact form, your name, email, subject, and message are transmitted over encrypted webhooks to Irvan's private notification channels (Discord, Telegram, or SMTP). A honeypot field is utilized to drop automated spam bots silently.",
+  },
+  {
+    title: "Media & Avatar Uploads",
+    description:
+      "Images uploaded for user profiles are converted to modern WebP formats and compressed using Zstandard (zstd) on our private, self-hosted disk storage.",
+  },
+];
+
+const THIRD_PARTY_INTEGRATIONS: PolicyItem[] = [
+  {
+    title: "GitHub API",
+    description:
+      "Used server-side to query public repository contribution matrices. Your client IP is never exposed to GitHub during site visits.",
+  },
+  {
+    title: "Google & GitHub OAuth",
+    description:
+      "Used strictly for voluntary single sign-on when you choose to link an identity provider. We request only minimal public profile scopes.",
+  },
+  {
+    title: "Last.fm Scrobbler API",
+    description:
+      "Cached and proxied by our Go backend with stale-while-revalidate and circuit-breaker mechanisms. Visitors do not connect directly to Last.fm.",
+  },
+];
+
+const USER_RIGHTS: PolicyItem[] = [
+  {
+    title: "Right to Access",
+    description:
+      "You can review your profile information directly in your account settings.",
+  },
+  {
+    title: "Right to Rectification",
+    description:
+      "You may edit your username, avatar, and password whenever you choose.",
+  },
+  {
+    title: "Right to Erasure (Forget Me)",
+    description:
+      "You can delete your account permanently via the settings panel. Deletion is instantaneous and purges your authentication records and session tokens.",
+  },
+];
+
 export default function PrivacyPolicyPage() {
   const jsonLd: WithContext<WebPage> = {
     "@context": "https://schema.org",
@@ -126,33 +190,11 @@ export default function PrivacyPolicyPage() {
               <h2>02. Data Collection &amp; Purpose</h2>
               <p>We process information exclusively across four touchpoints:</p>
               <ul>
-                <li>
-                  <strong>Authentication &amp; User Accounts:</strong> When you
-                  register directly or authenticate via Google or GitHub OAuth,
-                  we store your chosen username, email address, avatar URL, and
-                  cryptographic password hash (or provider identity ID). Passwords
-                  are salted and hashed using bcrypt/Argon2; plaintext passwords
-                  are never logged or stored.
-                </li>
-                <li>
-                  <strong>Interactive Comments &amp; Reactions:</strong> When you
-                  comment on blog posts or react with emojis, your submitted
-                  content and associated user handle are stored in our PostgreSQL
-                  database to display alongside the discussion.
-                </li>
-                <li>
-                  <strong>Contact Form Inquiries:</strong> When you submit the
-                  contact form, your name, email, subject, and message are
-                  transmitted over encrypted webhooks to Irvan&apos;s private
-                  notification channels (Discord, Telegram, or SMTP). A honeypot
-                  field is utilized to drop automated spam bots silently.
-                </li>
-                <li>
-                  <strong>Media &amp; Avatar Uploads:</strong> Images uploaded for
-                  user profiles are converted to modern WebP formats and
-                  compressed using Zstandard (zstd) on our private, self-hosted disk
-                  storage.
-                </li>
+                {DATA_COLLECTION_POINTS.map((item) => (
+                  <li key={item.title}>
+                    <strong>{item.title}:</strong> {item.description}
+                  </li>
+                ))}
               </ul>
             </section>
 
@@ -210,21 +252,11 @@ export default function PrivacyPolicyPage() {
                 identities, we utilize strict server-side proxy gateways:
               </p>
               <ul>
-                <li>
-                  <strong>GitHub API:</strong> Used server-side to query public
-                  repository contribution matrices. Your client IP is never exposed
-                  to GitHub during site visits.
-                </li>
-                <li>
-                  <strong>Google &amp; GitHub OAuth:</strong> Used strictly for
-                  voluntary single sign-on when you choose to link an identity
-                  provider. We request only minimal public profile scopes.
-                </li>
-                <li>
-                  <strong>Last.fm Scrobbler API:</strong> Cached and proxied by
-                  our Go backend with stale-while-revalidate and circuit-breaker
-                  mechanisms. Visitors do not connect directly to Last.fm.
-                </li>
+                {THIRD_PARTY_INTEGRATIONS.map((item) => (
+                  <li key={item.title}>
+                    <strong>{item.title}:</strong> {item.description}
+                  </li>
+                ))}
               </ul>
             </section>
 
@@ -283,20 +315,11 @@ export default function PrivacyPolicyPage() {
                 otherwise), you possess absolute sovereignty over your data:
               </p>
               <ul>
-                <li>
-                  <strong>Right to Access:</strong> You can review your profile
-                  information directly in your account settings.
-                </li>
-                <li>
-                  <strong>Right to Rectification:</strong> You may edit your
-                  username, avatar, and password whenever you choose.
-                </li>
-                <li>
-                  <strong>Right to Erasure (Forget Me):</strong> You can delete
-                  your account permanently via the settings panel. Deletion is
-                  instantaneous and purges your authentication records and session
-                  tokens.
-                </li>
+                {USER_RIGHTS.map((item) => (
+                  <li key={item.title}>
+                    <strong>{item.title}:</strong> {item.description}
+                  </li>
+                ))}
               </ul>
             </section>
 

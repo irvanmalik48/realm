@@ -11,7 +11,6 @@ import {
   Activity,
   CheckCircle2,
   Gauge,
-  Info,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -57,6 +56,11 @@ export interface ChartAxisConfig {
   subTicks?: Array<{ value: number; label: string }>;
 }
 
+export interface ChartCategory {
+  id: string;
+  label: string;
+}
+
 export interface UniversalChartProps {
   title?: string;
   subtitle?: string;
@@ -64,7 +68,7 @@ export interface UniversalChartProps {
   xAxis?: ChartAxisConfig;
   yAxis?: ChartAxisConfig;
   zones?: ChartZone[];
-  categories?: Array<{ id: string; label: string }>;
+  categories?: ChartCategory[];
   data?: ChartDataPoint[];
   showCurve?: boolean;
   preset?: "fabric-weight" | "custom";
@@ -376,6 +380,10 @@ const PRESET_FABRIC_WEIGHT: {
   ],
 };
 
+const EMPTY_DATA: ChartDataPoint[] = [];
+const EMPTY_ZONES: ChartZone[] = [];
+const EMPTY_CATEGORIES: ChartCategory[] = [];
+
 export function UniversalChart({
   title: propTitle,
   subtitle: propSubtitle,
@@ -419,8 +427,11 @@ export function UniversalChart({
     };
   }, [propYAxis, presetConfig]);
 
-  const zones = propZones ?? presetConfig?.zones ?? [];
-  const rawData = propData ?? presetConfig?.data ?? [];
+  const zones = propZones ?? presetConfig?.zones ?? EMPTY_ZONES;
+
+  const rawData = useMemo(() => {
+    return propData ?? presetConfig?.data ?? EMPTY_DATA;
+  }, [propData, presetConfig]);
 
   // Derive categories from data if not explicitly provided
   const categories = useMemo(() => {
@@ -429,7 +440,7 @@ export function UniversalChart({
     const uniqueCats = Array.from(
       new Set(rawData.map((d) => d.category).filter(Boolean)),
     ) as string[];
-    if (uniqueCats.length <= 1) return [];
+    if (uniqueCats.length <= 1) return EMPTY_CATEGORIES;
     return [
       { id: "all", label: "All Items" },
       ...uniqueCats.map((c) => ({
@@ -437,7 +448,7 @@ export function UniversalChart({
         label: c.charAt(0).toUpperCase() + c.slice(1),
       })),
     ];
-  }, [propCategories, presetConfig?.categories, rawData]);
+  }, [propCategories, presetConfig, rawData]);
 
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activePoint, setActivePoint] = useState<ChartDataPoint>(() =>
@@ -458,7 +469,7 @@ export function UniversalChart({
   const getX = React.useCallback(
     (val: number) =>
       paddingLeft + ((val - xAxis.min) / (xAxis.max - xAxis.min)) * plotWidth,
-    [xAxis.min, xAxis.max, paddingLeft, plotWidth],
+    [xAxis.min, xAxis.max, plotWidth],
   );
 
   const getY = React.useCallback(
@@ -466,7 +477,7 @@ export function UniversalChart({
       paddingTop +
       plotHeight -
       ((val - yAxis.min) / (yAxis.max - yAxis.min)) * plotHeight,
-    [yAxis.min, yAxis.max, paddingTop, plotHeight],
+    [yAxis.min, yAxis.max, plotHeight],
   );
 
   // Generate smooth cubic bezier curve through data points
@@ -542,250 +553,304 @@ export function UniversalChart({
         )}
       </div>
 
-      {/* SVG Canvas Plot */}
-      <div className="p-3 md:p-6 relative select-none">
-        <svg
-          viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-          className="w-full h-auto overflow-visible"
-        >
-          <defs>
-            <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.85" />
-              <stop offset="28%" stopColor="#fbbf24" stopOpacity="0.85" />
-              <stop offset="58%" stopColor="#10b981" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#6366f1" stopOpacity="0.9" />
-            </linearGradient>
-          </defs>
-
-          {/* Zones Background */}
-          {zones.map((zone) => {
-            const zx = getX(zone.from);
-            const zw = getX(zone.to) - zx;
+      {/* Mobile Quick-Select Pill Strip: Instant finger-friendly weight inspection */}
+      <div className="md:hidden px-4 py-3 border-b border-border/40 bg-muted/20 flex flex-col gap-2">
+        <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground">
+          <span>Tap to inspect weight:</span>
+          <span className="text-[10px] text-muted-foreground/70">Swipe matrix ↔</span>
+        </div>
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          {rawData.map((point) => {
+            const isSelected = activePoint.name === point.name;
             return (
-              <rect
-                key={zone.name}
-                x={zx}
-                y={paddingTop}
-                width={Math.max(0, zw)}
-                height={plotHeight}
-                fill={zone.color || "currentColor"}
-                fillOpacity="0.04"
-              />
-            );
-          })}
-
-          {/* Horizontal Grid lines */}
-          {yAxis.ticks.map((level) => {
-            const y = getY(level);
-            return (
-              <g key={level}>
-                <line
-                  x1={paddingLeft}
-                  y1={y}
-                  x2={paddingLeft + plotWidth}
-                  y2={y}
-                  stroke="currentColor"
-                  strokeOpacity="0.07"
-                  strokeDasharray="4 4"
-                />
-                <text
-                  x={paddingLeft - 10}
-                  y={y + 3.5}
-                  textAnchor="end"
-                  className="fill-muted-foreground text-[10px] font-mono"
-                >
-                  {level}
-                  {yAxis.unit ? yAxis.unit : ""}
-                </text>
-              </g>
-            );
-          })}
-
-          {/* Vertical Grid / Zone Dividers */}
-          {zones.slice(0, -1).map((z) => (
-            <line
-              key={z.name}
-              x1={getX(z.to)}
-              y1={paddingTop}
-              x2={getX(z.to)}
-              y2={paddingTop + plotHeight}
-              stroke="currentColor"
-              strokeOpacity="0.12"
-              strokeDasharray="3 3"
-            />
-          ))}
-
-          {/* X Axis Ticks */}
-          {xAxis.ticks.map((val) => {
-            const x = getX(val);
-            const subTick = xAxis.subTicks.find((st) => st.value === val);
-            return (
-              <g key={val}>
-                <line
-                  x1={x}
-                  y1={paddingTop + plotHeight}
-                  x2={x}
-                  y2={paddingTop + plotHeight + 6}
-                  stroke="currentColor"
-                  strokeOpacity="0.3"
-                />
-                <text
-                  x={x}
-                  y={paddingTop + plotHeight + 20}
-                  textAnchor="middle"
-                  className="fill-foreground text-[11px] font-semibold font-mono"
-                >
-                  {val} {xAxis.unit}
-                </text>
-                {subTick && (
-                  <text
-                    x={x}
-                    y={paddingTop + plotHeight + 33}
-                    textAnchor="middle"
-                    className="fill-muted-foreground text-[9px] font-mono"
-                  >
-                    {subTick.label}
-                  </text>
+              <button
+                key={point.name}
+                type="button"
+                onClick={() => setActivePoint(point)}
+                className={cn(
+                  "shrink-0 px-2.5 py-1 rounded-lg text-xs font-mono transition-[border-color,background-color,color] duration-150 flex items-center gap-1 border",
+                  isSelected
+                    ? "bg-foreground text-background font-bold border-foreground shadow-sm"
+                    : "bg-muted/50 text-muted-foreground border-border/40 hover:bg-muted hover:text-foreground",
                 )}
-              </g>
+              >
+                <span>{point.x}{xAxis.unit === "GSM" ? "g" : ""}</span>
+                {point.highlight && (
+                  <span className="text-[10px] text-emerald-400">★</span>
+                )}
+              </button>
             );
           })}
+        </div>
+      </div>
 
-          {/* Fitted Trend Trajectory Curve */}
-          {pathD && (
-            <path
-              d={pathD}
-              fill="none"
-              stroke={`url(#${gradientId})`}
-              strokeWidth="3"
-              strokeDasharray="6 4"
-              className="opacity-80"
-            />
-          )}
+      {/* SVG Canvas Plot */}
+      <div className="p-2 sm:p-4 md:p-6 relative select-none overflow-x-auto scrollbar-thin">
+        <div className="min-w-[560px] md:min-w-0">
+          <svg
+            viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+            className="w-full h-auto overflow-visible"
+          >
+            <defs>
+              <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.85" />
+                <stop offset="28%" stopColor="#fbbf24" stopOpacity="0.85" />
+                <stop offset="58%" stopColor="#10b981" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#6366f1" stopOpacity="0.9" />
+              </linearGradient>
+            </defs>
 
-          {/* Highlight Badge Callout for designated point */}
-          {rawData
-            .filter((p) => p.highlight && p.highlightLabel)
-            .map((p) => {
-              const hx = getX(p.x);
-              const hy = getY(p.y);
+            {/* Zones Background */}
+            {zones.map((zone) => {
+              const zx = getX(zone.from);
+              const zw = getX(zone.to) - zx;
               return (
-                <g key={`hl-${p.name}`} transform={`translate(${hx}, ${hy - 28})`}>
-                  <rect
-                    x="-48"
-                    y="-18"
-                    width="96"
-                    height="20"
-                    rx="10"
-                    className="fill-background/90 stroke-emerald-500/50 shadow-md"
-                    strokeWidth="1"
+                <rect
+                  key={zone.name}
+                  x={zx}
+                  y={paddingTop}
+                  width={Math.max(0, zw)}
+                  height={plotHeight}
+                  fill={zone.color || "currentColor"}
+                  fillOpacity="0.04"
+                />
+              );
+            })}
+
+            {/* Horizontal Grid lines */}
+            {yAxis.ticks.map((level) => {
+              const y = getY(level);
+              return (
+                <g key={level}>
+                  <line
+                    x1={paddingLeft}
+                    y1={y}
+                    x2={paddingLeft + plotWidth}
+                    y2={y}
+                    stroke="currentColor"
+                    strokeOpacity="0.07"
+                    strokeDasharray="4 4"
                   />
                   <text
-                    x="0"
-                    y="-4"
-                    textAnchor="middle"
-                    className="fill-emerald-400 text-[10px] font-bold tracking-wide"
+                    x={paddingLeft - 10}
+                    y={y + 3.5}
+                    textAnchor="end"
+                    className="fill-muted-foreground text-[10px] font-mono"
                   >
-                    {p.highlightLabel}
+                    {level}
+                    {yAxis.unit ? yAxis.unit : ""}
                   </text>
                 </g>
               );
             })}
 
-          {/* Interactive Data Points */}
-          {rawData.map((point) => {
-            const cx = getX(point.x);
-            const cy = getY(point.y);
-            const isSelected = activePoint.name === point.name;
-            const isDimmed =
-              selectedCategory !== "all" &&
-              point.category &&
-              point.category !== selectedCategory;
+            {/* Vertical Grid / Zone Dividers */}
+            {zones.slice(0, -1).map((z) => (
+              <line
+                key={z.name}
+                x1={getX(z.to)}
+                y1={paddingTop}
+                x2={getX(z.to)}
+                y2={paddingTop + plotHeight}
+                stroke="currentColor"
+                strokeOpacity="0.12"
+                strokeDasharray="3 3"
+              />
+            ))}
 
-            return (
-              <g
-                key={point.name}
-                className={cn(
-                  "cursor-pointer transition-all duration-300",
-                  isDimmed && "opacity-20 pointer-events-none",
-                )}
-                onClick={() => setActivePoint(point)}
-                onMouseEnter={() => setActivePoint(point)}
-              >
-                {/* Ping animation for active point */}
-                {(isSelected || point.highlight) && (
+            {/* X Axis Ticks */}
+            {xAxis.ticks.map((val) => {
+              const x = getX(val);
+              const subTick = xAxis.subTicks.find((st) => st.value === val);
+              return (
+                <g key={val}>
+                  <line
+                    x1={x}
+                    y1={paddingTop + plotHeight}
+                    x2={x}
+                    y2={paddingTop + plotHeight + 6}
+                    stroke="currentColor"
+                    strokeOpacity="0.3"
+                  />
+                  <text
+                    x={x}
+                    y={paddingTop + plotHeight + 20}
+                    textAnchor="middle"
+                    className="fill-foreground text-[11px] font-semibold font-mono"
+                  >
+                    {val} {xAxis.unit}
+                  </text>
+                  {subTick && (
+                    <text
+                      x={x}
+                      y={paddingTop + plotHeight + 33}
+                      textAnchor="middle"
+                      className="fill-muted-foreground text-[9px] font-mono"
+                    >
+                      {subTick.label}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+
+            {/* Fitted Trend Trajectory Curve */}
+            {pathD && (
+              <path
+                d={pathD}
+                fill="none"
+                stroke={`url(#${gradientId})`}
+                strokeWidth="3"
+                strokeDasharray="6 4"
+                className="opacity-80"
+              />
+            )}
+
+            {/* Highlight Badge Callout for designated point */}
+            {rawData
+              .filter((p) => p.highlight && p.highlightLabel)
+              .map((p) => {
+                const hx = getX(p.x);
+                const hy = getY(p.y);
+                return (
+                  <g key={`hl-${p.name}`} transform={`translate(${hx}, ${hy - 28})`}>
+                    <rect
+                      x="-48"
+                      y="-18"
+                      width="96"
+                      height="20"
+                      rx="10"
+                      className="fill-background/90 stroke-emerald-500/50 shadow-md"
+                      strokeWidth="1"
+                    />
+                    <text
+                      x="0"
+                      y="-4"
+                      textAnchor="middle"
+                      className="fill-emerald-400 text-[10px] font-bold tracking-wide"
+                    >
+                      {p.highlightLabel}
+                    </text>
+                  </g>
+                );
+              })}
+
+            {/* Interactive Data Points */}
+            {rawData.map((point) => {
+              const cx = getX(point.x);
+              const cy = getY(point.y);
+              const isSelected = activePoint.name === point.name;
+              const isDimmed =
+                selectedCategory !== "all" &&
+                point.category &&
+                point.category !== selectedCategory;
+
+              return (
+                <g
+                  key={point.name}
+                  className={cn(
+                    "cursor-pointer transition-opacity duration-300",
+                    isDimmed && "opacity-20 pointer-events-none",
+                  )}
+                  onClick={() => setActivePoint(point)}
+                  onMouseEnter={() => setActivePoint(point)}
+                >
+                  {/* Generous touch hitbox for mobile fingertips (48px tap area) */}
                   <circle
                     cx={cx}
                     cy={cy}
-                    r={isSelected ? "18" : "14"}
+                    r="24"
+                    fill="transparent"
+                    className="cursor-pointer"
+                  />
+
+                  {/* Concentric radar pulse for active or highlight point (native SVG animate - no CSS diagonal drift) */}
+                  {(isSelected || point.highlight) && (
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r={isSelected ? 10 : 8}
+                      fill="none"
+                      stroke={point.highlight ? "#34d399" : "currentColor"}
+                      strokeWidth={isSelected ? 2 : 1.5}
+                      pointerEvents="none"
+                    >
+                      <animate
+                        attributeName="r"
+                        values={isSelected ? "10;28" : "8;20"}
+                        dur="1.8s"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="opacity"
+                        values="0.75;0"
+                        dur="1.8s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  )}
+
+                  {/* Outer Glow Halo */}
+                  <circle
+                    cx={cx}
+                    cy={cy}
+                    r={isSelected ? "12" : "8"}
                     className={cn(
-                      "animate-ping opacity-40 fill-none",
-                      point.highlight
-                        ? "stroke-emerald-400 stroke-2"
-                        : "stroke-foreground stroke-1",
+                      "transition-[fill,stroke,r] duration-200 pointer-events-none",
+                      isSelected
+                        ? "fill-emerald-500/20 stroke-emerald-400 stroke-2"
+                        : point.highlight
+                          ? "fill-emerald-500/10 stroke-emerald-500/80 stroke-1.5"
+                          : "fill-background stroke-foreground/40 stroke-1 hover:stroke-foreground",
                     )}
                   />
-                )}
 
-                {/* Outer Glow Halo */}
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={isSelected ? "12" : "8"}
-                  className={cn(
-                    "transition-all duration-200",
-                    isSelected
-                      ? "fill-emerald-500/20 stroke-emerald-400 stroke-2"
-                      : point.highlight
-                        ? "fill-emerald-500/10 stroke-emerald-500/80 stroke-1.5"
-                        : "fill-background stroke-foreground/40 stroke-1 hover:stroke-foreground",
-                  )}
-                />
+                  {/* Core Dot */}
+                  <circle
+                    cx={cx}
+                    cy={cy}
+                    r={isSelected ? "5" : "3.5"}
+                    className={cn(
+                      "transition-[fill,r] duration-200 pointer-events-none",
+                      isSelected
+                        ? "fill-emerald-400"
+                        : point.highlight
+                          ? "fill-emerald-500"
+                          : "fill-foreground",
+                    )}
+                  />
 
-                {/* Core Dot */}
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={isSelected ? "5" : "3.5"}
-                  className={cn(
-                    isSelected
-                      ? "fill-emerald-400"
-                      : point.highlight
-                        ? "fill-emerald-500"
-                        : "fill-foreground",
-                  )}
-                />
+                  {/* Direct Point Label */}
+                  <text
+                    x={cx}
+                    y={cy - 12}
+                    textAnchor="middle"
+                    className={cn(
+                      "text-[10px] font-medium transition-colors duration-200 pointer-events-none",
+                      isSelected
+                        ? "fill-foreground font-bold"
+                        : "fill-muted-foreground/80",
+                    )}
+                  >
+                    {point.x}
+                    {xAxis.unit === "GSM" ? "g" : ""}
+                  </text>
+                </g>
+              );
+            })}
 
-                {/* Direct Point Label */}
-                <text
-                  x={cx}
-                  y={cy - 12}
-                  textAnchor="middle"
-                  className={cn(
-                    "text-[10px] font-medium transition-colors duration-200 pointer-events-none",
-                    isSelected
-                      ? "fill-foreground font-bold"
-                      : "fill-muted-foreground/80",
-                  )}
-                >
-                  {point.x}
-                  {xAxis.unit === "GSM" ? "g" : ""}
-                </text>
-              </g>
-            );
-          })}
-
-          {/* Y Axis Label */}
-          <text
-            x={-180}
-            y={20}
-            transform="rotate(-90)"
-            textAnchor="middle"
-            className="fill-muted-foreground text-[10px] font-mono tracking-widest uppercase"
-          >
-            {yAxis.label}
-          </text>
-        </svg>
+            {/* Y Axis Label */}
+            <text
+              x={-180}
+              y={20}
+              transform="rotate(-90)"
+              textAnchor="middle"
+              className="fill-muted-foreground text-[10px] font-mono tracking-widest uppercase"
+            >
+              {yAxis.label}
+            </text>
+          </svg>
+        </div>
       </div>
 
       {/* Interactive Detail Card Panel (Below Plot) */}
@@ -798,9 +863,9 @@ export function UniversalChart({
           transition={{ duration: 0.15 }}
           className="p-5 md:p-6 bg-muted/30 border-t border-border/50"
         >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-muted text-foreground border border-border/40 font-mono">
                   {activePoint.x} {xAxis.unit}
                   {activePoint.subLabel ? ` / ${activePoint.subLabel}` : ""}
@@ -824,11 +889,11 @@ export function UniversalChart({
 
             {/* Custom Stats / Metrics */}
             {activePoint.stats && activePoint.stats.length > 0 && (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
                 {activePoint.stats.map((stat, i) => (
                   <React.Fragment key={stat.label}>
-                    {i > 0 && <div className="w-px h-8 bg-border/60" />}
-                    <div className="text-right">
+                    {i > 0 && <div className="w-px h-8 bg-border/60 shrink-0" />}
+                    <div className="text-left sm:text-right shrink-0">
                       <div className="text-[11px] text-muted-foreground font-mono">
                         {stat.label}
                       </div>
@@ -851,7 +916,7 @@ export function UniversalChart({
 
           {/* Custom Traits Grid */}
           {activePoint.traits && activePoint.traits.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 pt-3 border-t border-border/40">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-4 pt-3 border-t border-border/40">
               {activePoint.traits.map((trait) => {
                 const IconComponent =
                   (trait.icon && ICON_MAP[trait.icon]) || Sparkles;
