@@ -46,7 +46,7 @@ export function CookieConsent() {
           aria-label="Cookie consent banner"
           className={cn(
             "fixed bottom-4 left-4 right-4 sm:right-auto sm:bottom-6 sm:left-6 z-990",
-            "max-w-none sm:max-w-[380px] w-auto sm:w-full",
+            "max-w-none sm:max-w-95 w-auto sm:w-full",
             "p-5 sm:p-5.5 rounded-2xl border border-border/80 bg-card/95 backdrop-blur-md shadow-2xl",
             "flex flex-col gap-3 text-foreground",
           )}
@@ -58,7 +58,7 @@ export function CookieConsent() {
             <Cookie className="size-4.5 text-foreground/80 shrink-0" aria-hidden="true" />
           </div>
 
-          <p className="text-xs sm:text-[13px] leading-relaxed text-muted-foreground">
+          <p className="text-xs sm:text-sub leading-relaxed text-muted-foreground">
             We use cookies to ensure you get the best experience on our website.
             For more information on how we handle your data, please see our{" "}
             <Link

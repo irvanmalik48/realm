@@ -187,7 +187,7 @@ export function ContributionScrollbar({
           className={cn(
             "absolute top-0 bottom-0 rounded-full touch-none",
             "bg-muted-foreground/40 hover:bg-muted-foreground/70 active:bg-muted-foreground/90",
-            "transition-[background-color,transform] duration-75 ease-out",
+            "transition duration-75 ease-out",
             "cursor-grab active:cursor-grabbing",
             isDragging && "bg-muted-foreground/90 shadow-sm cursor-grabbing scale-y-125"
           )}

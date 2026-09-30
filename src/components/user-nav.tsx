@@ -53,7 +53,7 @@ export function UserNav() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 p-0.5 rounded-full hover:ring-2 hover:ring-primary/40 transition-[box-shadow] focus:outline-hidden cursor-pointer"
+        className="flex items-center gap-2 p-0.5 rounded-full hover:ring-2 hover:ring-primary/40 transition-shadow focus:outline-hidden cursor-pointer"
         aria-label="User navigation menu"
       >
         <Avatar className="w-8 h-8 border border-border">
@@ -85,12 +85,12 @@ export function UserNav() {
               </div>
             </div>
 
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-muted-foreground bg-muted/40 rounded-lg px-2.5 py-1">
+            <div className="mt-2.5 flex items-center justify-between text-2xs text-muted-foreground bg-muted/40 rounded-lg px-2.5 py-1">
               <span className="truncate">{user.email}</span>
               <span className="flex items-center gap-1 shrink-0 ml-1">
                 {user.provider === "google" && <GoogleLogo className="w-3 h-3" />}
                 {user.provider === "github" && <GithubLogo className="w-3 h-3" />}
-                <span className="capitalize text-[10px] font-medium">{user.provider}</span>
+                <span className="capitalize text-3xs font-medium">{user.provider}</span>
               </span>
             </div>
           </div>

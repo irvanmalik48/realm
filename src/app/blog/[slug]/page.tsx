@@ -152,7 +152,7 @@ async function renderMDX(
         <div className="not-prose my-6 w-full overflow-x-auto rounded-xl border border-border/70 bg-card/40 backdrop-blur-sm shadow-sm scrollbar-thin">
           <table
             className={cn(
-              "w-full min-w-[560px] text-left text-xs md:text-sm border-collapse",
+              "w-full min-w-140 text-left text-xs md:text-sm border-collapse",
               className,
             )}
             {...props}
@@ -164,7 +164,7 @@ async function renderMDX(
       thead: ({ className, ...props }: ComponentPropsWithoutRef<"thead">) => (
         <thead
           className={cn(
-            "bg-muted/60 font-mono text-muted-foreground uppercase text-[11px] tracking-wider border-b border-border/70",
+            "bg-muted/60 font-mono text-muted-foreground uppercase text-2xs tracking-wider border-b border-border/70",
             className,
           )}
           {...props}

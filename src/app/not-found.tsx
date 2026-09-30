@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="w-full max-w-3xl mx-auto p-5 gap-3 flex flex-col justify-center items-center min-h-[72vh]">
+    <div className="w-full max-w-3xl mx-auto p-5 gap-3 flex flex-col justify-center items-center min-h-error">
       <h2 className="text-7xl font-bold dark:font-semibold">404</h2>
       <p>There&apos;s literally nothing but homepage</p>
       <Button

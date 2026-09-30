@@ -506,7 +506,7 @@ export function UniversalChart({
   return (
     <div
       className={cn(
-        "not-prose my-10 rounded-2xl border border-border/70 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden transition-[border-color,box-shadow] duration-300",
+        "not-prose my-10 rounded-2xl border border-border/70 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden transition-colors duration-300",
         className,
       )}
     >
@@ -555,9 +555,9 @@ export function UniversalChart({
 
       {/* Mobile Quick-Select Pill Strip: Instant finger-friendly weight inspection */}
       <div className="md:hidden px-4 py-3 border-b border-border/40 bg-muted/20 flex flex-col gap-2">
-        <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground">
+        <div className="flex items-center justify-between text-2xs font-mono text-muted-foreground">
           <span>Tap to inspect weight:</span>
-          <span className="text-[10px] text-muted-foreground/70">Swipe matrix ↔</span>
+          <span className="text-3xs text-muted-foreground/70">Swipe matrix ↔</span>
         </div>
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
           {rawData.map((point) => {
@@ -568,7 +568,7 @@ export function UniversalChart({
                 type="button"
                 onClick={() => setActivePoint(point)}
                 className={cn(
-                  "shrink-0 px-2.5 py-1 rounded-lg text-xs font-mono transition-[border-color,background-color,color] duration-150 flex items-center gap-1 border",
+                  "shrink-0 px-2.5 py-1 rounded-lg text-xs font-mono transition-colors duration-150 flex items-center gap-1 border",
                   isSelected
                     ? "bg-foreground text-background font-bold border-foreground shadow-sm"
                     : "bg-muted/50 text-muted-foreground border-border/40 hover:bg-muted hover:text-foreground",
@@ -576,7 +576,7 @@ export function UniversalChart({
               >
                 <span>{point.x}{xAxis.unit === "GSM" ? "g" : ""}</span>
                 {point.highlight && (
-                  <span className="text-[10px] text-emerald-400">★</span>
+                  <span className="text-3xs text-emerald-400">★</span>
                 )}
               </button>
             );
@@ -586,7 +586,7 @@ export function UniversalChart({
 
       {/* SVG Canvas Plot */}
       <div className="p-2 sm:p-4 md:p-6 relative select-none overflow-x-auto scrollbar-thin">
-        <div className="min-w-[560px] md:min-w-0">
+        <div className="min-w-140 md:min-w-0">
           <svg
             viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
             className="w-full h-auto overflow-visible"
@@ -635,7 +635,7 @@ export function UniversalChart({
                     x={paddingLeft - 10}
                     y={y + 3.5}
                     textAnchor="end"
-                    className="fill-muted-foreground text-[10px] font-mono"
+                    className="fill-muted-foreground text-3xs font-mono"
                   >
                     {level}
                     {yAxis.unit ? yAxis.unit : ""}
@@ -676,7 +676,7 @@ export function UniversalChart({
                     x={x}
                     y={paddingTop + plotHeight + 20}
                     textAnchor="middle"
-                    className="fill-foreground text-[11px] font-semibold font-mono"
+                    className="fill-foreground text-2xs font-semibold font-mono"
                   >
                     {val} {xAxis.unit}
                   </text>
@@ -685,7 +685,7 @@ export function UniversalChart({
                       x={x}
                       y={paddingTop + plotHeight + 33}
                       textAnchor="middle"
-                      className="fill-muted-foreground text-[9px] font-mono"
+                      className="fill-muted-foreground text-3xs font-mono"
                     >
                       {subTick.label}
                     </text>
@@ -727,7 +727,7 @@ export function UniversalChart({
                       x="0"
                       y="-4"
                       textAnchor="middle"
-                      className="fill-emerald-400 text-[10px] font-bold tracking-wide"
+                      className="fill-emerald-400 text-3xs font-bold tracking-wide"
                     >
                       {p.highlightLabel}
                     </text>
@@ -796,7 +796,7 @@ export function UniversalChart({
                     cy={cy}
                     r={isSelected ? "12" : "8"}
                     className={cn(
-                      "transition-[fill,stroke,r] duration-200 pointer-events-none",
+                      "transition-all duration-200 pointer-events-none",
                       isSelected
                         ? "fill-emerald-500/20 stroke-emerald-400 stroke-2"
                         : point.highlight
@@ -811,7 +811,7 @@ export function UniversalChart({
                     cy={cy}
                     r={isSelected ? "5" : "3.5"}
                     className={cn(
-                      "transition-[fill,r] duration-200 pointer-events-none",
+                      "transition-all duration-200 pointer-events-none",
                       isSelected
                         ? "fill-emerald-400"
                         : point.highlight
@@ -826,7 +826,7 @@ export function UniversalChart({
                     y={cy - 12}
                     textAnchor="middle"
                     className={cn(
-                      "text-[10px] font-medium transition-colors duration-200 pointer-events-none",
+                      "text-3xs font-medium transition-colors duration-200 pointer-events-none",
                       isSelected
                         ? "fill-foreground font-bold"
                         : "fill-muted-foreground/80",
@@ -845,7 +845,7 @@ export function UniversalChart({
               y={20}
               transform="rotate(-90)"
               textAnchor="middle"
-              className="fill-muted-foreground text-[10px] font-mono tracking-widest uppercase"
+              className="fill-muted-foreground text-3xs font-mono tracking-widest uppercase"
             >
               {yAxis.label}
             </text>
@@ -894,7 +894,7 @@ export function UniversalChart({
                   <React.Fragment key={stat.label}>
                     {i > 0 && <div className="w-px h-8 bg-border/60 shrink-0" />}
                     <div className="text-left sm:text-right shrink-0">
-                      <div className="text-[11px] text-muted-foreground font-mono">
+                      <div className="text-2xs text-muted-foreground font-mono">
                         {stat.label}
                       </div>
                       <div
@@ -924,7 +924,7 @@ export function UniversalChart({
                   <div key={trait.label} className="flex items-start gap-2.5">
                     <IconComponent className="size-4 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[11px] font-semibold text-foreground uppercase tracking-wider block">
+                      <span className="text-2xs font-semibold text-foreground uppercase tracking-wider block">
                         {trait.label}
                       </span>
                       <span className="text-xs text-muted-foreground leading-snug">

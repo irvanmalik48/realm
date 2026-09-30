@@ -44,7 +44,7 @@ export function Hero({ img, profile }: HeroProps) {
             className={cn(
               isImageLoading && !performanceMode ? "blur" : "remove-blur",
               "transition-all",
-              "ease-[cubic-bezier(0.22,1,0.36,1)]",
+              "ease-smooth",
               "duration-500",
             )}
           />
@@ -60,7 +60,7 @@ export function Hero({ img, profile }: HeroProps) {
               className={cn(
                 isImageLoading && !performanceMode ? "blur" : "remove-blur",
                 "transition-all",
-                "ease-[cubic-bezier(0.22,1,0.36,1)]",
+                "ease-smooth",
                 "duration-500",
               )}
             />
@@ -79,7 +79,7 @@ export function Hero({ img, profile }: HeroProps) {
           className={cn(
             isProfileLoading && !performanceMode ? "blur" : "remove-blur",
             "transition-all",
-            "ease-[cubic-bezier(0.22,1,0.36,1)]",
+            "ease-smooth",
             "duration-500",
           )}
         />

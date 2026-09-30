@@ -46,7 +46,7 @@ export function ImageComponent({
           className={cn(
             isImageLoading && !performanceMode ? "blur" : "remove-blur",
             "transition-all",
-            "ease-[cubic-bezier(0.22,1,0.36,1)]",
+            "ease-smooth",
             "duration-500",
             innerClassName,
           )}
@@ -63,7 +63,7 @@ export function ImageComponent({
             className={cn(
               isImageLoading && !performanceMode ? "blur" : "remove-blur",
               "transition-all",
-              "ease-[cubic-bezier(0.22,1,0.36,1)]",
+              "ease-smooth",
               "duration-500",
               innerClassName,
             )}

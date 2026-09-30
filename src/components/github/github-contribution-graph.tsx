@@ -222,7 +222,7 @@ export function GitHubContributionGraph({
                       activity={activity}
                       dayIndex={dayIndex}
                       weekIndex={weekIndex}
-                      className="transition-colors hover:stroke-foreground hover:stroke-[1.5px]"
+                      className="transition-colors hover:stroke-foreground hover:stroke-1"
                     />
                   </TooltipTrigger>
                   <TooltipContent side="top" sideOffset={6} className="text-xs font-mono py-1.5 px-2.5">

@@ -245,7 +245,7 @@ export default function RegisterPage() {
 
   return (
     <DirectionalTransition>
-      <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
+      <div className="min-h-auth flex items-center justify-center py-12 px-4">
         <Container className="max-w-md" noPadding>
           <div className="w-full mx-auto">
             {/* Card Container */}
@@ -299,7 +299,7 @@ export default function RegisterPage() {
               {/* Divider */}
               <div className="relative flex items-center justify-center mb-6">
                 <div className="w-full border-t border-border" />
-                <span className="absolute px-3 bg-background text-[11px] text-muted-foreground uppercase tracking-wider font-medium">
+                <span className="absolute px-3 bg-background text-2xs text-muted-foreground uppercase tracking-wider font-medium">
                   Or fill your details
                 </span>
               </div>
@@ -389,7 +389,7 @@ export default function RegisterPage() {
                         className="overflow-hidden"
                       >
                         <p
-                          className={`text-[11px] flex items-center gap-1 font-medium mt-0.5 ${
+                          className={`text-2xs flex items-center gap-1 font-medium mt-0.5 ${
                             usernameStatus === "available"
                               ? "text-emerald-500"
                               : "text-destructive"
@@ -455,7 +455,7 @@ export default function RegisterPage() {
                         className="overflow-hidden"
                       >
                         <p
-                          className={`text-[11px] flex items-center gap-1 font-medium mt-0.5 ${
+                          className={`text-2xs flex items-center gap-1 font-medium mt-0.5 ${
                             emailStatus === "available"
                               ? "text-emerald-500"
                               : "text-destructive"
@@ -478,7 +478,7 @@ export default function RegisterPage() {
                       Password
                     </label>
                     {password && (
-                      <span className="text-[11px] font-medium text-muted-foreground">
+                      <span className="text-2xs font-medium text-muted-foreground">
                         {strengthLabels[strength - 1] || "Too short"}
                       </span>
                     )}

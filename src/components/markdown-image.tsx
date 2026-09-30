@@ -21,8 +21,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
-export interface MarkdownImageProps
-  extends React.ComponentPropsWithoutRef<"img"> {}
+export type MarkdownImageProps = React.ComponentPropsWithoutRef<"img">;
 
 export interface ImageAttribution {
   creator: string;
@@ -72,6 +71,7 @@ export function parseImageAttribution(
   title?: string,
   alt?: string,
 ): ImageAttribution {
+  void alt;
   if (!src) {
     return {
       creator: "Unknown",
@@ -188,6 +188,7 @@ export function MarkdownImage({
   if (!src || typeof src !== "string") {
     return (
       <span className="not-prose my-6 block w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={alt}
@@ -261,12 +262,13 @@ export function MarkdownImage({
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
-        <span className="not-prose relative block my-6 w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50 group/img transition-[border-color,box-shadow] duration-300 hover:border-border/90 hover:shadow-xl select-none">
+        <span className="not-prose relative block my-6 w-fit max-w-full mx-auto overflow-hidden rounded-xl border border-border/50 group/img transition-colors duration-300 hover:border-border/90 hover:shadow-xl select-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={src}
             alt={alt}
             className={cn(
-              "block max-w-full h-auto m-0 rounded-xl object-contain transition-transform duration-500 ease-out group-hover/img:scale-[1.012]",
+              "block max-w-full h-auto m-0 rounded-xl object-contain transition-transform duration-500 ease-out group-hover/img:scale-105",
               className,
             )}
             loading="lazy"
@@ -274,7 +276,7 @@ export function MarkdownImage({
           />
 
           {/* Floating pill badge on image hover */}
-          <span className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium rounded-full bg-background/80 hover:bg-background/95 text-foreground/90 backdrop-blur-md border border-border/60 shadow-md opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 pointer-events-none select-none">
+          <span className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1 text-2xs font-medium rounded-full bg-background/80 hover:bg-background/95 text-foreground/90 backdrop-blur-md border border-border/60 shadow-md opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 pointer-events-none select-none">
             {attribution.isUnsplash ? (
               <UnsplashIcon className="size-3 text-muted-foreground" />
             ) : (
@@ -310,7 +312,7 @@ export function MarkdownImage({
         </div>
 
         {alt && (
-          <div className="px-2.5 py-1 text-[11px] text-muted-foreground/80 italic line-clamp-2 max-w-xs">
+          <div className="px-2.5 py-1 text-2xs text-muted-foreground/80 italic line-clamp-2 max-w-xs">
             &ldquo;{alt}&rdquo;
           </div>
         )}

@@ -383,7 +383,7 @@ export const ContributionGraphCalendar = ({
       ref={ref}
       className={cn(
         "max-w-full overflow-x-auto overflow-y-hidden pb-1 pt-1",
-        "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+        "no-scrollbar [&::-webkit-scrollbar]:hidden",
         className
       )}
       {...props}
@@ -486,7 +486,7 @@ export const ContributionGraphLegend = ({
 
   return (
     <div
-      className={cn("ml-auto flex items-center gap-[3px]", className)}
+      className={cn("ml-auto flex items-center gap-0.75", className)}
       {...props}
     >
       <span className="mr-1 text-muted-foreground">
@@ -500,7 +500,7 @@ export const ContributionGraphLegend = ({
             <title>{`${level} contributions`}</title>
             <rect
               className={cn(
-                "stroke-[1px] stroke-border",
+                "stroke-1 stroke-border",
                 'data-[level="0"]:fill-muted/30 dark:data-[level="0"]:fill-muted/20',
                 'data-[level="1"]:fill-muted-foreground/40 dark:data-[level="1"]:fill-muted-foreground/50',
                 'data-[level="2"]:fill-muted-foreground/60 dark:data-[level="2"]:fill-muted-foreground/75',

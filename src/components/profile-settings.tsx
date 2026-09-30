@@ -485,7 +485,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                   <h4 className="text-xs font-semibold text-foreground">
                     Set up your account password
                   </h4>
-                  <p className="text-[11px] text-muted-foreground mt-0.5">
+                  <p className="text-2xs text-muted-foreground mt-0.5">
                     You signed in using social login. Setting a password enables logging in via your email or username.
                   </p>
                 </div>
@@ -521,7 +521,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
             className="absolute inset-0 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 cursor-pointer"
           >
             <Camera className="size-5" />
-            <span className="text-[10px] font-medium">Edit</span>
+            <span className="text-3xs font-medium">Edit</span>
           </button>
         </div>
 
@@ -611,7 +611,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                         <GoogleLogo className="size-3" />
                         Sync Google
                       </p>
-                      <p className="text-[10px] text-muted-foreground truncate">Use Google avatar</p>
+                      <p className="text-3xs text-muted-foreground truncate">Use Google avatar</p>
                     </div>
                   </button>
                 )}
@@ -633,7 +633,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                         <GithubLogo className="size-3" />
                         Sync GitHub
                       </p>
-                      <p className="text-[10px] text-muted-foreground truncate">Use GitHub avatar</p>
+                      <p className="text-3xs text-muted-foreground truncate">Use GitHub avatar</p>
                     </div>
                   </button>
                 )}
@@ -651,7 +651,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-xs font-medium">Remove Picture</p>
-                      <p className="text-[10px] text-muted-foreground">Revert back to initials</p>
+                      <p className="text-3xs text-muted-foreground">Revert back to initials</p>
                     </div>
                   </button>
                 )}
@@ -659,7 +659,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
 
               {/* Custom Image URL Input */}
               <form onSubmit={handleSetCustomUrl} className="pt-2 border-t border-border/40 space-y-2">
-                <label htmlFor="customAvatarUrl" className="text-[11px] font-medium text-muted-foreground flex items-center gap-1">
+                <label htmlFor="customAvatarUrl" className="text-2xs font-medium text-muted-foreground flex items-center gap-1">
                   <Globe className="size-3" />
                   Or enter direct Image URL:
                 </label>
@@ -773,17 +773,17 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
               <div className="flex items-center gap-2">
                 <p className="text-xs font-semibold text-foreground">Account Password</p>
                 {user.has_password ? (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+                  <span className="inline-flex items-center gap-1 text-3xs font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
                     <Check className="size-2.5" />
                     Active
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">
+                  <span className="inline-flex items-center gap-1 text-3xs font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">
                     Not Set
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-muted-foreground mt-0.5">
+              <p className="text-2xs text-muted-foreground mt-0.5">
                 {user.has_password
                   ? "Used to log in directly with your email or username."
                   : "Set a password to enable email & username sign-in alongside social login."}
@@ -851,7 +851,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
               <GoogleLogo className="size-5 shrink-0" />
               <div className="min-w-0">
                 <p className="text-xs font-medium text-foreground">Google</p>
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-2xs text-muted-foreground">
                   {isGoogleConnected ? "Connected" : "Not connected"}
                 </p>
               </div>
@@ -891,7 +891,7 @@ export function ProfileSettings({ searchQuery }: { searchQuery: string }) {
               <GithubLogo className="size-5 shrink-0" />
               <div className="min-w-0">
                 <p className="text-xs font-medium text-foreground">GitHub</p>
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-2xs text-muted-foreground">
                   {isGithubConnected ? "Connected" : "Not connected"}
                 </p>
               </div>

@@ -156,7 +156,7 @@ export function AvatarCropDialog({
                     <h3 className="text-sm font-semibold text-foreground">
                       {imageSrc ? "Crop & Adjust Avatar" : "Upload Profile Picture"}
                     </h3>
-                    <p className="text-[11px] text-muted-foreground">
+                    <p className="text-2xs text-muted-foreground">
                       {imageSrc ? "Drag to reposition and adjust zoom." : "Drag & drop your image or browse files."}
                     </p>
                   </div>
@@ -192,7 +192,7 @@ export function AvatarCropDialog({
                     onClick={() => fileInputRef.current?.click()}
                     className={`relative flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed rounded-xl text-center cursor-pointer transition-all duration-200 ${
                       isDraggingOver
-                        ? "border-primary bg-primary/10 scale-[1.01]"
+                        ? "border-primary bg-primary/10 scale-101"
                         : "border-border/80 bg-muted/20 hover:border-primary/60 hover:bg-muted/40"
                     }`}
                   >
@@ -210,7 +210,7 @@ export function AvatarCropDialog({
                       <p className="text-xs font-semibold text-foreground">
                         Click to browse or drag and drop an image
                       </p>
-                      <p className="text-[11px] text-muted-foreground mt-0.5">
+                      <p className="text-2xs text-muted-foreground mt-0.5">
                         Supports PNG, JPG, WebP, GIF (up to 50MB)
                       </p>
                     </div>

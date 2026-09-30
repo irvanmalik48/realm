@@ -216,11 +216,11 @@ export function CustomCursor() {
           marginLeft: `-${baseSize / 2}px`,
           marginTop: `-${baseSize / 2}px`,
         }}
-        className="hidden md:block custom-cursor-trail fixed top-0 left-0 rounded-full bg-white opacity-0 pointer-events-none z-99999 mix-blend-difference shadow-[0_0_16px_rgba(255,255,255,0.2)]"
+        className="hidden md:block custom-cursor-trail fixed top-0 left-0 rounded-full bg-white opacity-0 pointer-events-none z-99999 mix-blend-difference shadow-glow-cursor"
       />
       <div
         ref={pulseRef}
-        className="hidden md:block fixed top-0 left-0 w-10 h-10 -ml-5 -mt-5 rounded-full border-[1.5px] border-white pointer-events-none z-99997 mix-blend-difference opacity-0"
+        className="hidden md:block fixed top-0 left-0 w-10 h-10 -ml-5 -mt-5 rounded-full border-2 border-white pointer-events-none z-99997 mix-blend-difference opacity-0"
       />
     </>
   );

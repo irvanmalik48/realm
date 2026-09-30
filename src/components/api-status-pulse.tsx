@@ -104,19 +104,19 @@ export function APIStatusPulse() {
             {isHealthy && (
               <>
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
+                <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500 shadow-glow-emerald" />
               </>
             )}
             {isDegraded && (
               <>
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex size-2.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                <span className="relative inline-flex size-2.5 rounded-full bg-amber-500 shadow-glow-amber" />
               </>
             )}
             {isUnhealthy && (
               <>
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-400 opacity-75" />
-                <span className="relative inline-flex size-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]" />
+                <span className="relative inline-flex size-2.5 rounded-full bg-rose-500 shadow-glow-rose" />
               </>
             )}
           </div>
@@ -125,7 +125,7 @@ export function APIStatusPulse() {
             <span className="text-xs sm:text-sm font-semibold tracking-tight whitespace-nowrap">
               {isHealthy ? "API Operational" : isDegraded ? "API Degraded" : "API Offline"}
             </span>
-            <span className="text-[11px] text-muted-foreground font-mono hidden xs:inline">
+            <span className="text-2xs text-muted-foreground font-mono hidden xs:inline">
               99.9% uptime
             </span>
           </div>
@@ -133,7 +133,7 @@ export function APIStatusPulse() {
 
         <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           {health.latency_ms > 0 && (
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-muted/40 text-muted-foreground border border-border">
+            <span className="text-2xs font-mono px-2 py-0.5 rounded bg-muted/40 text-muted-foreground border border-border">
               {health.latency_ms}ms
             </span>
           )}
@@ -176,12 +176,12 @@ export function APIStatusPulse() {
         <div className="px-3.5 pb-4 sm:px-5 sm:pb-5 pt-3 border-t border-border/60 bg-muted/5 flex flex-col gap-4 animate-in fade-in slide-in-from-top-1 duration-200">
           {/* Uptime Kuma Dense Bar Chart */}
           <div className="flex flex-col gap-1.5">
-            <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground px-0.5">
+            <div className="flex items-center justify-between text-2xs font-mono text-muted-foreground px-0.5">
               <span>Heartbeats (20s intervals)</span>
               <span>100.0% (20m window)</span>
             </div>
 
-            <div className="w-full flex items-center gap-[1.5px] sm:gap-[2px] h-7 sm:h-8 p-1 rounded-md bg-background/80 border border-border/60">
+            <div className="w-full flex items-center gap-px sm:gap-0.5 h-7 sm:h-8 p-1 rounded-md bg-background/80 border border-border/60">
               {history.map((item, idx) => {
                 const isPointHealthy = item.status === "healthy";
                 const isPointDegraded = item.status === "degraded";
@@ -194,7 +194,7 @@ export function APIStatusPulse() {
                   >
                     <div
                       className={cn(
-                        "w-full h-full rounded-[1px] transition-all duration-150 group-hover:scale-y-110 group-hover:brightness-125",
+                        "w-full h-full rounded-xs transition-all duration-150 group-hover:scale-y-110 group-hover:brightness-125",
                         isPointHealthy && "bg-emerald-500 hover:bg-emerald-400",
                         isPointDegraded && "bg-amber-500 hover:bg-amber-400",
                         isPointUnhealthy && "bg-rose-500 hover:bg-rose-400",
@@ -211,7 +211,7 @@ export function APIStatusPulse() {
                             : "left-1/2 -translate-x-1/2 items-center",
                       )}
                     >
-                      <div className="bg-popover text-popover-foreground border border-border text-[10px] font-mono px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                      <div className="bg-popover text-popover-foreground border border-border text-3xs font-mono px-2 py-1 rounded shadow-lg whitespace-nowrap">
                         {item.latency_ms}ms · {new Date(item.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
                       </div>
                     </div>
@@ -220,7 +220,7 @@ export function APIStatusPulse() {
               })}
             </div>
 
-            <div className="w-full flex items-center justify-between text-[10px] font-mono text-muted-foreground/70 px-0.5">
+            <div className="w-full flex items-center justify-between text-3xs font-mono text-muted-foreground/70 px-0.5">
               <span>20m ago</span>
               <span>Now</span>
             </div>

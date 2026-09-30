@@ -46,10 +46,24 @@ try {
 
 const { default: nextVitals } = await import("eslint-config-next/core-web-vitals");
 const { default: nextTs } = await import("eslint-config-next/typescript");
+const { default: tsParser } = await import("@typescript-eslint/parser");
+const { default: shadcn } = await import("@shadcn/lint");
 
 const eslintConfig = [
   ...nextVitals,
   ...nextTs,
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    ignores: ["src/components/ui/**"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+    plugins: { shadcn },
+    rules: {
+      "shadcn/no-arbitrary-values": "error",
+    },
+  },
 ];
 
 export default eslintConfig;

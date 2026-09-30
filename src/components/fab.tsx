@@ -143,7 +143,7 @@ export function FAB() {
               onLoad={() => setIsImageLoading(false)}
               className={`${
                 isImageLoading && !performanceMode ? "blur" : "remove-blur"
-              } transition-all ease-[cubic-bezier(0.22,1,0.36,1)] duration-500`}
+              } transition-all ease-smooth duration-500`}
             />
           </div>
 
@@ -181,7 +181,7 @@ export function FAB() {
                   {isActive && (
                     <span className="ml-auto mr-5 size-1.5 rounded-full bg-primary" />
                   )}
-                  <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform]">
+                  <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition">
                     <ArrowRight className="size-4" />
                   </div>
                 </Link>
@@ -204,7 +204,7 @@ export function FAB() {
           >
             <Globe className="size-4 text-muted-foreground group-hover:text-foreground" />
             <span>GNU/Weeb</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform]">
+            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition">
               <ArrowRight className="size-4" />
             </div>
           </a>
@@ -217,7 +217,7 @@ export function FAB() {
           >
             <CircleDotDashed className="size-4 text-muted-foreground group-hover:text-foreground" />
             <span>webri.ng</span>
-            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform]">
+            <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition">
               <ArrowRight className="size-4" />
             </div>
           </a>
@@ -245,7 +245,7 @@ export function FAB() {
                       alt={user.full_name || user.username}
                     />
                   ) : null}
-                  <AvatarFallback className="text-[10px] font-semibold bg-primary/10 text-primary">
+                  <AvatarFallback className="text-3xs font-semibold bg-primary/10 text-primary">
                     {initials}
                   </AvatarFallback>
                 </Avatar>
@@ -253,7 +253,7 @@ export function FAB() {
                   <span className="text-xs font-semibold text-foreground truncate group-hover:text-primary transition-colors">
                     {user.full_name || user.username}
                   </span>
-                  <span className="text-[10px] text-muted-foreground truncate">
+                  <span className="text-3xs text-muted-foreground truncate">
                     @{user.username}
                   </span>
                 </div>
@@ -285,7 +285,7 @@ export function FAB() {
             >
               <LogIn className="size-4 text-muted-foreground group-hover:text-foreground" />
               <span>Sign in</span>
-              <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform]">
+              <div className="absolute opacity-0 translate-x-1/2 right-4 top-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:translate-x-0 transition">
                 <ArrowRight className="size-4" />
               </div>
             </Link>

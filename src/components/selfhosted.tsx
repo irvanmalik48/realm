@@ -31,7 +31,7 @@ export function SelfHostItem(props: {
         <props.icon className="size-5 text-muted-foreground" />
         <span className="font-medium text-sm text-foreground">{props.title}</span>
         {props.badge && (
-          <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-muted text-muted-foreground border border-border">
+          <span className="text-3xs uppercase font-mono px-1.5 py-0.5 rounded bg-muted text-muted-foreground border border-border">
             {props.badge}
           </span>
         )}

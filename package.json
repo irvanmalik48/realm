@@ -1,12 +1,12 @@
 {
   "name": "realm",
-  "version": "9.0.0",
+  "version": "9.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "doctor": "npx react-doctor@latest"
   },
@@ -65,11 +65,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
+    "@shadcn/lint": "^0.2.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^26.1.2",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
+    "@typescript-eslint/parser": "^8.71.0",
     "eslint": "^10.8.0",
     "eslint-config-next": "16.2.9",
     "schema-dts": "^2.0.0",

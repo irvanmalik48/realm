@@ -46,6 +46,49 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --text-2xs: 0.6875rem;
+  --text-3xs: 0.625rem;
+  --text-sub: 0.8125rem;
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility min-h-auth {
+  min-height: 80vh;
+}
+
+@utility min-h-error {
+  min-height: 72vh;
+}
+
+@utility min-h-footer {
+  min-height: 85vh;
+}
+
+@utility shadow-glow-emerald {
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+@utility shadow-glow-amber {
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+@utility shadow-glow-rose {
+  box-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+}
+
+@utility shadow-glow-cursor {
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+}
+
+@utility scale-101 {
+  transform: scale(1.01);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 :root {

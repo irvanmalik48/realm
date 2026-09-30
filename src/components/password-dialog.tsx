@@ -165,7 +165,7 @@ export function PasswordDialog({
                     <h3 className="text-sm font-semibold text-foreground">
                       {hasPassword ? "Change Password" : "Set Up Password"}
                     </h3>
-                    <p className="text-[11px] text-muted-foreground">
+                    <p className="text-2xs text-muted-foreground">
                       {hasPassword
                         ? "Update your existing account password"
                         : "Create a password to enable email & username login"}
@@ -259,7 +259,7 @@ export function PasswordDialog({
                       {hasPassword ? "New Password" : "Password"}
                     </label>
                     {newPassword && (
-                      <span className="text-[11px] font-medium text-muted-foreground">
+                      <span className="text-2xs font-medium text-muted-foreground">
                         {strengthLabels[strength - 1] || "Too short"}
                       </span>
                     )}

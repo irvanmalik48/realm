@@ -253,7 +253,7 @@ export function AboutSite() {
                   <Icon className="size-4 text-primary shrink-0" />
                   <span>{feat.title}</span>
                 </div>
-                <p className="text-[12px] text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {feat.description}
                 </p>
               </div>
@@ -291,12 +291,12 @@ export function AboutSite() {
                             {item.name}
                           </span>
                           {item.badge && (
-                            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-background border border-border text-muted-foreground">
+                            <span className="text-3xs font-mono px-1.5 py-0.2 rounded bg-background border border-border text-muted-foreground">
                               {item.badge}
                             </span>
                           )}
                         </div>
-                        <span className="text-[11px] text-muted-foreground leading-tight truncate">
+                        <span className="text-2xs text-muted-foreground leading-tight truncate">
                           {item.desc}
                         </span>
                       </div>
@@ -315,7 +315,7 @@ export function AboutSite() {
                       </span>
                     </div>
                     {item.version && (
-                      <Badge variant="outline" className="font-mono text-[10px]">
+                      <Badge variant="outline" className="font-mono text-3xs">
                         {item.version}
                       </Badge>
                     )}
@@ -323,7 +323,7 @@ export function AboutSite() {
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     {item.details}
                   </p>
-                  <div className="pt-1.5 flex items-center justify-between text-[11px] text-muted-foreground font-mono border-t border-border/60">
+                  <div className="pt-1.5 flex items-center justify-between text-2xs text-muted-foreground font-mono border-t border-border/60">
                     <span>Category: {item.category}</span>
                     <a
                       href={item.docsUrl || item.url}
@@ -353,7 +353,7 @@ export function AboutSite() {
             <p className="text-xs font-semibold text-foreground">
               Open Source & Community Driven
             </p>
-            <div className="text-[11px] text-muted-foreground">
+            <div className="text-2xs text-muted-foreground">
               Licensed under{" "}
               <HoverCard openDelay={100} closeDelay={150}>
                 <HoverCardTrigger asChild>
@@ -366,7 +366,7 @@ export function AboutSite() {
                     <span className="font-semibold text-xs text-foreground">
                       RCCL Version 1.0
                     </span>
-                    <Badge variant="outline" className="text-[10px] font-mono">
+                    <Badge variant="outline" className="text-3xs font-mono">
                       License
                     </Badge>
                   </div>
@@ -407,7 +407,7 @@ export function AboutSite() {
                 <span className="font-semibold text-xs text-foreground">
                   irvanmalik48/realm-api
                 </span>
-                <Badge variant="outline" className="text-[10px] font-mono">
+                <Badge variant="outline" className="text-3xs font-mono">
                   Go 1.24
                 </Badge>
               </div>
@@ -441,7 +441,7 @@ export function AboutSite() {
                 <span className="font-semibold text-xs text-foreground">
                   irvanmalik48/realm
                 </span>
-                <Badge variant="outline" className="text-[10px] font-mono">
+                <Badge variant="outline" className="text-3xs font-mono">
                   Next.js 16
                 </Badge>
               </div>

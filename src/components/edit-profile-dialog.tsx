@@ -243,7 +243,7 @@ export function EditProfileDialog({
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-                    <p className="text-[11px] text-muted-foreground">
+                    <p className="text-2xs text-muted-foreground">
                       Update your account identity information
                     </p>
                   </div>
@@ -360,7 +360,7 @@ export function EditProfileDialog({
 
                     {usernameMessage && (
                       <p
-                        className={`text-[11px] font-medium ${
+                        className={`text-2xs font-medium ${
                           usernameStatus === "available"
                             ? "text-emerald-500"
                             : usernameStatus === "checking"

@@ -164,7 +164,7 @@ function CommentBody({ content }: { content?: string }) {
   const blocks = safeContent.split(/(```[\s\S]*?```)/g);
 
   return (
-    <div className="text-[13px] leading-relaxed text-foreground/90 flex flex-col gap-2.5 wrap-break-word">
+    <div className="text-sub leading-relaxed text-foreground/90 flex flex-col gap-2.5 wrap-break-word">
       {blocks.map((block, idx) => {
         if (block.startsWith("```") && block.endsWith("```")) {
           const match = block.match(/```(\w*)\n?([\s\S]*?)```/);
@@ -177,7 +177,7 @@ function CommentBody({ content }: { content?: string }) {
               className="relative my-1 rounded-lg bg-muted/60 border border-border/80 p-3 font-mono text-xs overflow-x-auto group"
             >
               {lang && (
-                <div className="absolute top-2 right-2 text-[10px] font-mono uppercase tracking-wider text-muted-foreground/70 bg-background/80 px-1.5 py-0.5 rounded border border-border/40">
+                <div className="absolute top-2 right-2 text-3xs font-mono uppercase tracking-wider text-muted-foreground/70 bg-background/80 px-1.5 py-0.5 rounded border border-border/40">
                   {lang}
                 </div>
               )}
@@ -715,7 +715,7 @@ export function BlogComments({ slug }: { slug: string }) {
                   <span className="text-xs font-semibold text-foreground truncate">
                     {user.full_name || user.username}
                   </span>
-                  <span className="text-[11px] text-muted-foreground truncate">
+                  <span className="text-2xs text-muted-foreground truncate">
                     @{user.username}
                   </span>
                 </div>
@@ -864,7 +864,7 @@ export function BlogComments({ slug }: { slug: string }) {
               <div className="flex items-center gap-2">
                 <span
                   className={cn(
-                    "text-[11px] font-mono",
+                    "text-2xs font-mono",
                     newCommentContent.length > 1800
                       ? "text-amber-500 font-semibold"
                       : "text-muted-foreground",
@@ -872,7 +872,7 @@ export function BlogComments({ slug }: { slug: string }) {
                 >
                   {newCommentContent.length} / 2000
                 </span>
-                <span className="hidden sm:inline-flex items-center text-[10px] text-muted-foreground/60 font-mono bg-muted/60 px-1.5 py-0.5 rounded border border-border/40">
+                <span className="hidden sm:inline-flex items-center text-3xs text-muted-foreground/60 font-mono bg-muted/60 px-1.5 py-0.5 rounded border border-border/40">
                   ⌘ + Enter to post
                 </span>
               </div>
@@ -1111,7 +1111,7 @@ function CommentCard({
                 alt={authorName}
               />
             ) : null}
-            <AvatarFallback className="text-[11px] font-bold bg-primary/10 text-primary">
+            <AvatarFallback className="text-2xs font-bold bg-primary/10 text-primary">
               {initials}
             </AvatarFallback>
           </Avatar>
@@ -1144,7 +1144,7 @@ function CommentCard({
             {comment.is_edited && (
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <span className="text-[11px] text-muted-foreground/60 italic cursor-help">
+                  <span className="text-2xs text-muted-foreground/60 italic cursor-help">
                     (edited)
                   </span>
                 </TooltipTrigger>
@@ -1230,7 +1230,7 @@ function CommentCard({
             className="w-full text-xs sm:text-sm bg-background border-border/80 focus:border-primary resize-y"
           />
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono text-muted-foreground">
+            <span className="text-2xs font-mono text-muted-foreground">
               {editContent.length} / 2000
             </span>
             <div className="flex items-center gap-2">
@@ -1387,7 +1387,7 @@ function CommentCard({
               />
 
               <div className="flex items-center justify-between pt-1">
-                <span className="text-[11px] font-mono text-muted-foreground">
+                <span className="text-2xs font-mono text-muted-foreground">
                   {replyContent.length} / 2000
                 </span>
                 <div className="flex items-center gap-2">
@@ -1423,7 +1423,7 @@ function CommentCard({
 
       {/* Nested Replies with Threading Tree Line */}
       {!isReply && replyCount > 0 && showReplies && (
-        <div className="relative ml-2 sm:ml-4 pl-3.5 sm:pl-5 pt-2 flex flex-col gap-3 before:absolute before:left-0 before:top-0 before:bottom-3 before:w-[2px] before:bg-border/70 before:rounded-full">
+        <div className="relative ml-2 sm:ml-4 pl-3.5 sm:pl-5 pt-2 flex flex-col gap-3 before:absolute before:left-0 before:top-0 before:bottom-3 before:w-0.5 before:bg-border/70 before:rounded-full">
           {(comment.replies || []).map((reply) => (
             <div
               key={reply.id}

@@ -319,7 +319,7 @@ export function ContactForm() {
             )}
           </form.Subscribe>
 
-          <p className="text-[11px] text-muted-foreground text-center">
+          <p className="text-2xs text-muted-foreground text-center">
             Your details are kept private and used only to respond to your inquiry.
           </p>
         </div>

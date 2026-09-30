@@ -207,7 +207,7 @@ export default function PrivacyPolicyPage() {
               </p>
               <div className="not-prose overflow-x-auto my-4">
                 <table className="w-full text-left text-xs md:text-sm border border-border rounded-xl overflow-hidden bg-card/40">
-                  <thead className="bg-muted/60 font-mono text-muted-foreground uppercase text-[11px]">
+                  <thead className="bg-muted/60 font-mono text-muted-foreground uppercase text-2xs">
                     <tr>
                       <th className="p-3.5 border-b border-border">Name</th>
                       <th className="p-3.5 border-b border-border">Storage</th>

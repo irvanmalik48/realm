@@ -76,7 +76,7 @@ export default function LoginPage() {
 
   return (
     <DirectionalTransition>
-      <div className="min-h-[80vh] flex items-center justify-center py-12 px-4">
+      <div className="min-h-auth flex items-center justify-center py-12 px-4">
         <Container className="max-w-md" noPadding>
           <div className="w-full mx-auto">
             {/* Card Container */}
@@ -130,7 +130,7 @@ export default function LoginPage() {
               {/* Divider */}
               <div className="relative flex items-center justify-center mb-6">
                 <div className="w-full border-t border-border" />
-                <span className="absolute px-3 bg-background text-[11px] text-muted-foreground uppercase tracking-wider font-medium">
+                <span className="absolute px-3 bg-background text-2xs text-muted-foreground uppercase tracking-wider font-medium">
                   Or with credentials
                 </span>
               </div>

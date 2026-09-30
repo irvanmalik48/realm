@@ -56,7 +56,7 @@ export function Navbar() {
                       <BreadcrumbSeparator className="text-muted-foreground/40 shrink-0 [&>svg]:size-3 sm:[&>svg]:size-3.5" />
                       <BreadcrumbItem className="min-w-0 shrink">
                         {isLast ? (
-                          <BreadcrumbPage className="font-mono text-xs sm:text-sm text-foreground truncate max-w-[120px] sm:max-w-[200px] md:max-w-none">
+                          <BreadcrumbPage className="font-mono text-xs sm:text-sm text-foreground truncate max-w-30 sm:max-w-50 md:max-w-none">
                             {segment}
                           </BreadcrumbPage>
                         ) : (
@@ -65,7 +65,7 @@ export function Navbar() {
                               href={href}
                               prefetch={true}
                               transitionTypes={["nav-back"]}
-                              className="font-mono text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors truncate max-w-[120px] sm:max-w-[200px] md:max-w-none"
+                              className="font-mono text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors truncate max-w-30 sm:max-w-50 md:max-w-none"
                             >
                               {segment}
                             </Link>
