@@ -64,20 +64,6 @@ const KNOWN_IMAGE_REGISTRY: Record<
       "https://unsplash.com/photos/black-leather-zip-up-jacket-on-white-textile-nsRBbE6-YLs",
     creatorUrl: "https://unsplash.com/@lealea_leaa",
   },
-  "1543163521": {
-    creator: "Irene Kredenets",
-    source: "Unsplash",
-    sourceUrl:
-      "https://unsplash.com/photos/pair-of-black-leather-chelsea-boots-dwKiHoqqxk8",
-    creatorUrl: "https://unsplash.com/@ikredenets",
-  },
-  "1509631179": {
-    creator: "Alex Iby",
-    source: "Unsplash",
-    sourceUrl:
-      "https://unsplash.com/photos/man-wearing-black-coat-2TaU60hygcg",
-    creatorUrl: "https://unsplash.com/@alexiby",
-  },
 };
 
 export function parseImageAttribution(
