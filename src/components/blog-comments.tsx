@@ -1157,16 +1157,18 @@ function CommentCard({
         {/* Options Dropdown Menu */}
         <div className="flex items-center gap-1 shrink-0">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                className="size-7 text-muted-foreground hover:text-foreground opacity-70 group-hover:opacity-100 transition-opacity cursor-pointer rounded-lg"
-              >
-                <MoreHorizontal className="size-4" />
-                <span className="sr-only">More options</span>
-              </Button>
-            </DropdownMenuTrigger>
+            <DropdownMenuTrigger
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  className="size-7 text-muted-foreground hover:text-foreground opacity-70 group-hover:opacity-100 transition-opacity cursor-pointer rounded-lg"
+                >
+                  <MoreHorizontal className="size-4" />
+                  <span className="sr-only">More options</span>
+                </Button>
+              }
+            />
             <DropdownMenuContent align="end" className="w-44">
               <DropdownMenuGroup>
                 <DropdownMenuItem onClick={handleCopyComment} className="cursor-pointer">
