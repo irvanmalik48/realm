@@ -673,14 +673,12 @@ export function BlogComments({ slug }: { slug: string }) {
               </div>
 
               <Button
-                asChild
                 size="sm"
                 className="font-medium text-xs shadow-xs shrink-0 cursor-pointer h-9 px-4"
+                render={<Link href="/login" className="flex items-center gap-2" />}
               >
-                <Link href="/login" className="flex items-center gap-2">
-                  <LogIn data-icon="inline-start" />
-                  <span>Sign in to comment</span>
-                </Link>
+                <LogIn data-icon="inline-start" />
+                <span>Sign in to comment</span>
               </Button>
             </div>
           </div>
@@ -1289,15 +1287,13 @@ function CommentCard({
 
             {!isReply && !currentUser && (
               <Button
-                asChild
                 variant="ghost"
                 size="sm"
                 className="h-7 px-2.5 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/70 cursor-pointer"
+                render={<Link href="/login" />}
               >
-                <Link href="/login">
-                  <CornerDownRight data-icon="inline-start" />
-                  <span>Reply</span>
-                </Link>
+                <CornerDownRight data-icon="inline-start" />
+                <span>Reply</span>
               </Button>
             )}
 

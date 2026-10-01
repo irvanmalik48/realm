@@ -386,20 +386,20 @@ export function AboutSite() {
           <HoverCard openDelay={100} closeDelay={150}>
             <HoverCardTrigger asChild>
               <Button
-                asChild
                 variant="outline"
                 size="sm"
                 className="text-xs h-8 px-3 cursor-pointer shadow-2xs"
+                render={
+                  <a
+                    href="https://github.com/irvanmalik48/realm-api"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5"
+                  />
+                }
               >
-                <a
-                  href="https://github.com/irvanmalik48/realm-api"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5"
-                >
-                  <Server data-icon="inline-start" />
-                  <span>API Repo</span>
-                </a>
+                <Server data-icon="inline-start" />
+                <span>API Repo</span>
               </Button>
             </HoverCardTrigger>
             <HoverCardContent align="end" className="w-72 p-3.5 space-y-2">
@@ -421,19 +421,19 @@ export function AboutSite() {
           <HoverCard openDelay={100} closeDelay={150}>
             <HoverCardTrigger asChild>
               <Button
-                asChild
                 size="sm"
                 className="text-xs h-8 px-3 cursor-pointer shadow-2xs"
+                render={
+                  <a
+                    href="https://github.com/irvanmalik48/realm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5"
+                  />
+                }
               >
-                <a
-                  href="https://github.com/irvanmalik48/realm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5"
-                >
-                  <Code2 data-icon="inline-start" />
-                  <span>View Source</span>
-                </a>
+                <Code2 data-icon="inline-start" />
+                <span>View Source</span>
               </Button>
             </HoverCardTrigger>
             <HoverCardContent align="end" className="w-72 p-3.5 space-y-2">

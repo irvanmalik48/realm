@@ -133,21 +133,21 @@ export function LastFMUserCard(props: LastFMCardProps) {
                   variant="secondary"
                   size="sm"
                   className="text-sm w-fit mt-2 transition"
-                  asChild
+                  render={
+                    <a
+                      href={data.user?.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  }
                 >
-                  <a
-                    href={data.user?.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="flex items-center gap-2">
-                      <LastFM className="size-4" />
-                      View on LastFM
-                      <span className="sr-only">
-                        {data.user?.name} LastFM profile
-                      </span>
+                  <span className="flex items-center gap-2">
+                    <LastFM className="size-4" />
+                    View on LastFM
+                    <span className="sr-only">
+                      {data.user?.name} LastFM profile
                     </span>
-                  </a>
+                  </span>
                 </Button>
               </div>
             </div>
