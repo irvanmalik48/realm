@@ -29,10 +29,6 @@ import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { toast } from "@/hooks/use-toast";
 
-const handleInteractOutside = (e: Event) => {
-  e.preventDefault();
-};
-
 const handleScrollToTop = () => {
   window.scrollTo({
     top: 0,
@@ -104,31 +100,40 @@ export function FAB() {
         <span className="sr-only">Scroll to top</span>
       </button>
 
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <button
-            type="button"
-            className={cn(
-              "fixed bottom-5 md:bottom-10 flex items-center justify-center",
-              "right-5 z-998 md:right-10 p-3 bg-background hover:bg-secondary rounded-lg",
-              "text-foreground hover:text-secondary-foreground cursor-pointer",
-              "border border-border transition-colors outline-0",
-            )}
-            style={{ viewTransitionName: "site-fab" }}
-            aria-label="Open navigation menu"
-            aria-expanded={open}
-          >
-            <X
+      <Popover
+        open={open}
+        onOpenChange={(nextOpen, details) => {
+          if (!nextOpen && details.reason === "outside-press") {
+            return;
+          }
+          setOpen(nextOpen);
+        }}
+      >
+        <PopoverTrigger
+          render={
+            <button
+              type="button"
               className={cn(
-                "size-6 transition-transform duration-200",
-                open ? "rotate-0" : "rotate-45",
+                "fixed bottom-5 md:bottom-10 flex items-center justify-center",
+                "right-5 z-998 md:right-10 p-3 bg-background hover:bg-secondary rounded-lg",
+                "text-foreground hover:text-secondary-foreground cursor-pointer",
+                "border border-border transition-colors outline-0",
               )}
-            />
-            <span className="sr-only">Toggle FAB menu</span>
-          </button>
-        </PopoverTrigger>
+              style={{ viewTransitionName: "site-fab" }}
+              aria-label="Open navigation menu"
+              aria-expanded={open}
+            >
+              <X
+                className={cn(
+                  "size-6 transition-transform duration-200",
+                  open ? "rotate-0" : "rotate-45",
+                )}
+              />
+              <span className="sr-only">Toggle FAB menu</span>
+            </button>
+          }
+        />
         <PopoverContent
-          onInteractOutside={handleInteractOutside}
           className="z-998 max-w-3xs sm:max-w-xs md:max-w-sm w-full p-0 overflow-clip rounded-xl shadow-2xl border-border/80"
           align="end"
           sideOffset={10}
