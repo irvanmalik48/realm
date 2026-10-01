@@ -389,12 +389,14 @@ export function AboutSite() {
                 variant="outline"
                 size="sm"
                 className="text-xs h-8 px-3 cursor-pointer shadow-2xs"
+                nativeButton={false}
                 render={
                   <a
                     href="https://github.com/irvanmalik48/realm-api"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5"
+                    aria-label="API Repo"
                   />
                 }
               >
@@ -423,12 +425,14 @@ export function AboutSite() {
               <Button
                 size="sm"
                 className="text-xs h-8 px-3 cursor-pointer shadow-2xs"
+                nativeButton={false}
                 render={
                   <a
                     href="https://github.com/irvanmalik48/realm"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5"
+                    aria-label="View Source"
                   />
                 }
               >

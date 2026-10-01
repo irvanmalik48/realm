@@ -129,11 +129,13 @@ export function LastFMTrackCard(props: LastFMCardProps) {
                 <div className="px-5 pb-5 grid grid-cols-2 gap-3 w-full">
                   <Button
                     variant="secondary"
+                    nativeButton={false}
                     render={
                       <a
                         href={s.url}
                         className="transition flex items-center justify-between"
                         target="_blank"
+                        aria-label={`View ${s.name} by ${s.artist} on LastFM`}
                       />
                     }
                   >
@@ -145,6 +147,7 @@ export function LastFMTrackCard(props: LastFMCardProps) {
                   </Button>
                   <Button
                     variant="outline"
+                    nativeButton={false}
                     render={
                       <a
                         href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
@@ -152,6 +155,7 @@ export function LastFMTrackCard(props: LastFMCardProps) {
                         )}`}
                         target="_blank"
                         className="transition flex items-center justify-between"
+                        aria-label={`Search ${s.name} by ${s.artist} on YouTube`}
                       />
                     }
                   >

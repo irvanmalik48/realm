@@ -133,11 +133,13 @@ export function LastFMUserCard(props: LastFMCardProps) {
                   variant="secondary"
                   size="sm"
                   className="text-sm w-fit mt-2 transition"
+                  nativeButton={false}
                   render={
                     <a
                       href={data.user?.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="View on LastFM"
                     />
                   }
                 >

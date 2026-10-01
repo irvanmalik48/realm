@@ -92,7 +92,15 @@ export function Hero({ img, profile }: HeroProps) {
           <Button
             variant="ghost"
             size="icon"
-            render={<a href="https://github.com/irvanmalik48" target="_blank" rel="noopener noreferrer" />}
+            nativeButton={false}
+            render={
+              <a
+                href="https://github.com/irvanmalik48"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Account"
+              />
+            }
           >
             <GitHub className="size-6" />
             <span className="sr-only">GitHub Account</span>
@@ -100,7 +108,15 @@ export function Hero({ img, profile }: HeroProps) {
           <Button
             variant="ghost"
             size="icon"
-            render={<a href="https://linkedin.com/in/irvanmalik48" target="_blank" rel="noopener noreferrer" />}
+            nativeButton={false}
+            render={
+              <a
+                href="https://linkedin.com/in/irvanmalik48"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Account"
+              />
+            }
           >
             <LinkedIn className="size-6" />
             <span className="sr-only">LinkedIn Account</span>
@@ -108,7 +124,15 @@ export function Hero({ img, profile }: HeroProps) {
           <Button
             variant="ghost"
             size="icon"
-            render={<a href="https://t.me/irvanmalik48" target="_blank" rel="noopener noreferrer" />}
+            nativeButton={false}
+            render={
+              <a
+                href="https://t.me/irvanmalik48"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram Account"
+              />
+            }
           >
             <Telegram className="size-6" />
             <span className="sr-only">Telegram Account</span>
@@ -116,7 +140,13 @@ export function Hero({ img, profile }: HeroProps) {
           <Button
             variant="ghost"
             size="icon"
-            render={<a href="mailto:irvanmalik48@gmail.com" />}
+            nativeButton={false}
+            render={
+              <a
+                href="mailto:irvanmalik48@gmail.com"
+                aria-label="Send a Mail"
+              />
+            }
           >
             <Gmail className="size-6" />
             <span className="sr-only">Send a Mail</span>
