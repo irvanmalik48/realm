@@ -89,13 +89,13 @@ const TECH_STACK: TechItem[] = [
   {
     name: "shadcn/ui",
     category: "UI System",
-    desc: "Accessible components built on top of Radix UI primitives",
+    desc: "Accessible components built on top of Base UI primitives",
     url: "https://ui.shadcn.com",
     docsUrl: "https://ui.shadcn.com/docs",
-    badge: "New York",
+    badge: "Base Vega",
     details:
       "Composable, accessible primitives styled with Tailwind CSS tokens and full keyboard navigation support.",
-    version: "Radix UI",
+    version: "Base UI",
     icon: ShadcnIcon,
   },
   {
