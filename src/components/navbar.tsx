@@ -60,15 +60,17 @@ export function Navbar() {
                             {segment}
                           </BreadcrumbPage>
                         ) : (
-                          <BreadcrumbLink asChild>
-                            <Link
-                              href={href}
-                              prefetch={true}
-                              transitionTypes={["nav-back"]}
-                              className="font-mono text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors truncate max-w-30 sm:max-w-50 md:max-w-none"
-                            >
-                              {segment}
-                            </Link>
+                          <BreadcrumbLink
+                            render={
+                              <Link
+                                href={href}
+                                prefetch={true}
+                                transitionTypes={["nav-back"]}
+                                className="font-mono text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors truncate max-w-30 sm:max-w-50 md:max-w-none"
+                              />
+                            }
+                          >
+                            {segment}
                           </BreadcrumbLink>
                         )}
                       </BreadcrumbItem>
