@@ -35,18 +35,18 @@ export function UserNav() {
   if (!user) {
     return (
       <Button
-        asChild
         size="sm"
         className="rounded-full h-8 px-3.5 text-xs font-medium cursor-pointer shadow-xs"
+        render={
+          <Link
+            href="/login"
+            prefetch={true}
+            transitionTypes={["nav-forward"]}
+          />
+        }
       >
-        <Link
-          href="/login"
-          prefetch={true}
-          transitionTypes={["nav-forward"]}
-        >
-          <LogIn className="size-3.5" />
-          <span>Sign in</span>
-        </Link>
+        <LogIn className="size-3.5" />
+        <span>Sign in</span>
       </Button>
     );
   }

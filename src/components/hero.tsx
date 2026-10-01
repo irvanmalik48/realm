@@ -89,29 +89,37 @@ export function Hero({ img, profile }: HeroProps) {
           Irvan Malik Azantha
         </p>
         <div className="w-fit flex items-center justify-center gap-3">
-          <Button variant="ghost" size="icon" asChild>
-            <a href="https://github.com/irvanmalik48">
-              <GitHub className="size-6" />
-              <span className="sr-only">GitHub Account</span>
-            </a>
+          <Button
+            variant="ghost"
+            size="icon"
+            render={<a href="https://github.com/irvanmalik48" target="_blank" rel="noopener noreferrer" />}
+          >
+            <GitHub className="size-6" />
+            <span className="sr-only">GitHub Account</span>
           </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <a href="https://linkedin.com/in/irvanmalik48">
-              <LinkedIn className="size-6" />
-              <span className="sr-only">LinkedIn Account</span>
-            </a>
+          <Button
+            variant="ghost"
+            size="icon"
+            render={<a href="https://linkedin.com/in/irvanmalik48" target="_blank" rel="noopener noreferrer" />}
+          >
+            <LinkedIn className="size-6" />
+            <span className="sr-only">LinkedIn Account</span>
           </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <a href="https://t.me/irvanmalik48">
-              <Telegram className="size-6" />
-              <span className="sr-only">Telegram Account</span>
-            </a>
+          <Button
+            variant="ghost"
+            size="icon"
+            render={<a href="https://t.me/irvanmalik48" target="_blank" rel="noopener noreferrer" />}
+          >
+            <Telegram className="size-6" />
+            <span className="sr-only">Telegram Account</span>
           </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <a href="mailto:irvanmalik48@gmail.com">
-              <Gmail className="size-6" />
-              <span className="sr-only">Send a Mail</span>
-            </a>
+          <Button
+            variant="ghost"
+            size="icon"
+            render={<a href="mailto:irvanmalik48@gmail.com" />}
+          >
+            <Gmail className="size-6" />
+            <span className="sr-only">Send a Mail</span>
           </Button>
         </div>
       </div>

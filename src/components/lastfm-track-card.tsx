@@ -127,33 +127,39 @@ export function LastFMTrackCard(props: LastFMCardProps) {
                   </div>
                 </div>
                 <div className="px-5 pb-5 grid grid-cols-2 gap-3 w-full">
-                  <Button variant="secondary" asChild>
-                    <a
-                      href={s.url}
-                      className="transition flex items-center justify-between"
-                      target="_blank"
-                    >
-                      <LastFM className="size-5" />
-                      <span>LastFM</span>
-                      <span className="sr-only">
-                        to view more details about {s.name} - {s.artist}
-                      </span>
-                    </a>
+                  <Button
+                    variant="secondary"
+                    render={
+                      <a
+                        href={s.url}
+                        className="transition flex items-center justify-between"
+                        target="_blank"
+                      />
+                    }
+                  >
+                    <LastFM className="size-5" />
+                    <span>LastFM</span>
+                    <span className="sr-only">
+                      to view more details about {s.name} - {s.artist}
+                    </span>
                   </Button>
-                  <Button variant="outline" asChild>
-                    <a
-                      href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
-                        `${s.name} - ${s.artist}`
-                      )}`}
-                      target="_blank"
-                      className="transition flex items-center justify-between"
-                    >
-                      <YouTube className="size-5" />
-                      <span>YouTube</span>
-                      <span className="sr-only">
-                        to find videos related to {s.name} - {s.artist}
-                      </span>
-                    </a>
+                  <Button
+                    variant="outline"
+                    render={
+                      <a
+                        href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
+                          `${s.name} - ${s.artist}`
+                        )}`}
+                        target="_blank"
+                        className="transition flex items-center justify-between"
+                      />
+                    }
+                  >
+                    <YouTube className="size-5" />
+                    <span>YouTube</span>
+                    <span className="sr-only">
+                      to find videos related to {s.name} - {s.artist}
+                    </span>
                   </Button>
                 </div>
               </div>

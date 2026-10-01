@@ -89,13 +89,13 @@ const TECH_STACK: TechItem[] = [
   {
     name: "shadcn/ui",
     category: "UI System",
-    desc: "Accessible components built on top of Radix UI primitives",
+    desc: "Accessible components built on top of Base UI primitives",
     url: "https://ui.shadcn.com",
     docsUrl: "https://ui.shadcn.com/docs",
-    badge: "New York",
+    badge: "Base Vega",
     details:
       "Composable, accessible primitives styled with Tailwind CSS tokens and full keyboard navigation support.",
-    version: "Radix UI",
+    version: "Base UI",
     icon: ShadcnIcon,
   },
   {
@@ -386,20 +386,20 @@ export function AboutSite() {
           <HoverCard openDelay={100} closeDelay={150}>
             <HoverCardTrigger asChild>
               <Button
-                asChild
                 variant="outline"
                 size="sm"
                 className="text-xs h-8 px-3 cursor-pointer shadow-2xs"
+                render={
+                  <a
+                    href="https://github.com/irvanmalik48/realm-api"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5"
+                  />
+                }
               >
-                <a
-                  href="https://github.com/irvanmalik48/realm-api"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5"
-                >
-                  <Server data-icon="inline-start" />
-                  <span>API Repo</span>
-                </a>
+                <Server data-icon="inline-start" />
+                <span>API Repo</span>
               </Button>
             </HoverCardTrigger>
             <HoverCardContent align="end" className="w-72 p-3.5 space-y-2">
@@ -421,19 +421,19 @@ export function AboutSite() {
           <HoverCard openDelay={100} closeDelay={150}>
             <HoverCardTrigger asChild>
               <Button
-                asChild
                 size="sm"
                 className="text-xs h-8 px-3 cursor-pointer shadow-2xs"
+                render={
+                  <a
+                    href="https://github.com/irvanmalik48/realm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5"
+                  />
+                }
               >
-                <a
-                  href="https://github.com/irvanmalik48/realm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5"
-                >
-                  <Code2 data-icon="inline-start" />
-                  <span>View Source</span>
-                </a>
+                <Code2 data-icon="inline-start" />
+                <span>View Source</span>
               </Button>
             </HoverCardTrigger>
             <HoverCardContent align="end" className="w-72 p-3.5 space-y-2">

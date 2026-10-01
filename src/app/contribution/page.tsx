@@ -72,16 +72,20 @@ export default function ContributionNoticePage() {
           noPadding={true}
           className="mx-0 max-w-3xl min-w-0 gap-0 relative z-10 bg-background"
         >
-          <Button asChild variant="ghost" className="self-start mb-8">
-            <Link
-              href="/"
-              prefetch={true}
-              transitionTypes={["nav-back"]}
-              className="flex items-center gap-2"
-            >
-              <ArrowLeft className="size-4" />
-              Back to realm
-            </Link>
+          <Button
+            variant="ghost"
+            className="self-start mb-8"
+            render={
+              <Link
+                href="/"
+                prefetch={true}
+                transitionTypes={["nav-back"]}
+                className="flex items-center gap-2"
+              />
+            }
+          >
+            <ArrowLeft className="size-4" />
+            Back to realm
           </Button>
 
           <header className="mb-8">

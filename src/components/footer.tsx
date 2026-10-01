@@ -56,12 +56,14 @@ export function Footer() {
               respond as soon as possible.
             </p>
             <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="secondary" className="w-full flex items-center justify-center gap-2 cursor-pointer">
-                  <Mail className="size-4" />
-                  <span>Open Contact Form</span>
-                </Button>
-              </DialogTrigger>
+              <DialogTrigger
+                render={
+                  <Button variant="secondary" className="w-full flex items-center justify-center gap-2 cursor-pointer">
+                    <Mail className="size-4" />
+                    <span>Open Contact Form</span>
+                  </Button>
+                }
+              />
               <DialogContent className="sm:max-w-137.5">
                 <ContactForm />
               </DialogContent>

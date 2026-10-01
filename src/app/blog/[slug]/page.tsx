@@ -245,11 +245,15 @@ export default async function Post({ params }: Props) {
           noPadding={true}
           className="mx-0 max-w-3xl min-w-0 gap-0 relative z-10 bg-background"
         >
-          <Button asChild variant="ghost" className="self-start mb-10">
-            <Link href="/blog" transitionTypes={["nav-back"]} className="flex items-center gap-2">
-              <ArrowLeft className="size-4" />
-              Back to blog
-            </Link>
+          <Button
+            variant="ghost"
+            className="self-start mb-10"
+            render={
+              <Link href="/blog" transitionTypes={["nav-back"]} className="flex items-center gap-2" />
+            }
+          >
+            <ArrowLeft className="size-4" />
+            Back to blog
           </Button>
           <h1 className="text-4xl font-bold mb-4 text-center">
             {frontmatter.title}

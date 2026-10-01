@@ -10,12 +10,10 @@ export default function NotFound() {
       <Button
         variant="outline"
         className="transition-colors flex gap-3 items-center"
-        asChild
+        render={<Link href="/" transitionTypes={["nav-back"]} />}
       >
-        <Link href="/" transitionTypes={["nav-back"]}>
-          <Undo className="size-5" />
-          <span>Return to Homepage</span>
-        </Link>
+        <Undo className="size-5" />
+        <span>Return to Homepage</span>
       </Button>
     </div>
   );

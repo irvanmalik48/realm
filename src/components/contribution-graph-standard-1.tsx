@@ -136,15 +136,17 @@ const Example = ({ username = "irvanmalik48", className }: ContributionGraphStan
         {/* react-doctor-disable-next-line react-doctor/duplicate-jsx-subtree */}
         <ContributionGraphCalendar ref={calendarRef}>
           {({ activity, dayIndex, weekIndex }) => (
-            <Tooltip key={activity.date} delayDuration={50}>
-              <TooltipTrigger asChild>
-                <ContributionGraphBlock
-                  activity={activity}
-                  dayIndex={dayIndex}
-                  weekIndex={weekIndex}
-                  className="transition-colors hover:stroke-foreground hover:stroke-1"
-                />
-              </TooltipTrigger>
+            <Tooltip key={activity.date} delay={50}>
+              <TooltipTrigger
+                render={
+                  <ContributionGraphBlock
+                    activity={activity}
+                    dayIndex={dayIndex}
+                    weekIndex={weekIndex}
+                    className="transition-colors hover:stroke-foreground hover:stroke-1"
+                  />
+                }
+              />
               <TooltipContent side="top" sideOffset={6} className="text-xs font-mono py-1.5 px-2.5">
                 <span className="font-semibold">
                   {activity.count === 0

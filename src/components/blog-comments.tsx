@@ -673,14 +673,12 @@ export function BlogComments({ slug }: { slug: string }) {
               </div>
 
               <Button
-                asChild
                 size="sm"
                 className="font-medium text-xs shadow-xs shrink-0 cursor-pointer h-9 px-4"
+                render={<Link href="/login" className="flex items-center gap-2" />}
               >
-                <Link href="/login" className="flex items-center gap-2">
-                  <LogIn data-icon="inline-start" />
-                  <span>Sign in to comment</span>
-                </Link>
+                <LogIn data-icon="inline-start" />
+                <span>Sign in to comment</span>
               </Button>
             </div>
           </div>
@@ -1159,16 +1157,18 @@ function CommentCard({
         {/* Options Dropdown Menu */}
         <div className="flex items-center gap-1 shrink-0">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                className="size-7 text-muted-foreground hover:text-foreground opacity-70 group-hover:opacity-100 transition-opacity cursor-pointer rounded-lg"
-              >
-                <MoreHorizontal className="size-4" />
-                <span className="sr-only">More options</span>
-              </Button>
-            </DropdownMenuTrigger>
+            <DropdownMenuTrigger
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  className="size-7 text-muted-foreground hover:text-foreground opacity-70 group-hover:opacity-100 transition-opacity cursor-pointer rounded-lg"
+                >
+                  <MoreHorizontal className="size-4" />
+                  <span className="sr-only">More options</span>
+                </Button>
+              }
+            />
             <DropdownMenuContent align="end" className="w-44">
               <DropdownMenuGroup>
                 <DropdownMenuItem onClick={handleCopyComment} className="cursor-pointer">
@@ -1289,15 +1289,13 @@ function CommentCard({
 
             {!isReply && !currentUser && (
               <Button
-                asChild
                 variant="ghost"
                 size="sm"
                 className="h-7 px-2.5 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/70 cursor-pointer"
+                render={<Link href="/login" />}
               >
-                <Link href="/login">
-                  <CornerDownRight data-icon="inline-start" />
-                  <span>Reply</span>
-                </Link>
+                <CornerDownRight data-icon="inline-start" />
+                <span>Reply</span>
               </Button>
             )}
 
