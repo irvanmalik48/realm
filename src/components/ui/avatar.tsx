@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import * as AvatarPrimitive from "@radix-ui/react-avatar"
+import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar"
 
 import { cn } from "@/lib/utils"
 
 function Avatar({
   className,
   ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Root>) {
+}: AvatarPrimitive.Root.Props) {
   return (
     <AvatarPrimitive.Root
       data-slot="avatar"
@@ -46,7 +46,7 @@ function AvatarImage({
   className,
   src,
   ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Image>) {
+}: AvatarPrimitive.Image.Props) {
   const resolvedSrc = typeof src === "string" ? resolveAvatarUrl(src) : src
   return (
     <AvatarPrimitive.Image
@@ -61,7 +61,7 @@ function AvatarImage({
 function AvatarFallback({
   className,
   ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
+}: AvatarPrimitive.Fallback.Props) {
   return (
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
@@ -75,3 +75,4 @@ function AvatarFallback({
 }
 
 export { Avatar, AvatarImage, AvatarFallback }
+
