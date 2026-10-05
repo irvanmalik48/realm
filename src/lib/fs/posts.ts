@@ -70,7 +70,7 @@ export function getFrontmatter<T = Frontmatter>(source: string): { frontmatter: 
     return { frontmatter: {} as T };
   }
   const lines = match[1].split("\n");
-  const fm: Record<string, any> = {};
+  const fm: Record<string, string | string[]> = {};
   let currentKey = "";
   for (const line of lines) {
     const trimmed = line.trim();
