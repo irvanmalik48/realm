@@ -1,5 +1,5 @@
 import "server-only";
-import type { PostWithScope } from "@/lib/types/posts";
+import type { Frontmatter, PostWithScope } from "@/lib/types/posts";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
@@ -64,12 +64,44 @@ export const getMarkdownFiles = async (): Promise<string[]> => {
   return posts.map((p) => `${p.slug}.mdx`);
 };
 
+export function getFrontmatter<T = Frontmatter>(source: string): { frontmatter: T } {
+  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!match) {
+    return { frontmatter: {} as T };
+  }
+  const lines = match[1].split("\n");
+  const fm: Record<string, any> = {};
+  let currentKey = "";
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith("- ") && currentKey) {
+      if (!Array.isArray(fm[currentKey])) fm[currentKey] = [];
+      fm[currentKey].push(trimmed.slice(2).replace(/^["']|["']$/g, ""));
+    } else {
+      const idx = line.indexOf(":");
+      if (idx !== -1) {
+        currentKey = line.slice(0, idx).trim();
+        const val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, "");
+        if (val) {
+          fm[currentKey] = val;
+        } else {
+          fm[currentKey] = [];
+        }
+      }
+    }
+  }
+  return { frontmatter: fm as T };
+}
+
 export const getMarkdownFromSlug = async (
   slug: string
 ): Promise<
   | {
       source: string;
+      content: string;
       format: "md" | "mdx";
+      frontmatter: Frontmatter;
+      post: ApiPostDetail;
     }
   | undefined
 > => {
@@ -82,6 +114,14 @@ export const getMarkdownFromSlug = async (
     );
     if (!res.ok) return undefined;
     const post: ApiPostDetail = await res.json();
+
+    const frontmatter: Frontmatter = {
+      title: post.title,
+      description: post.description || "",
+      createdAt: post.created_at,
+      updatedAt: post.updated_at,
+      tags: post.tags || [],
+    };
 
     const yamlTags = (post.tags || [])
       .map((t) => `  - ${JSON.stringify(t)}`)
@@ -102,7 +142,10 @@ export const getMarkdownFromSlug = async (
 
     return {
       source,
-      format: "mdx",
+      content: post.content || "",
+      format: "md",
+      frontmatter,
+      post,
     };
   } catch (err) {
     console.error(`Error fetching post ${slug} from realm-api:`, err);
