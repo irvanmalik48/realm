@@ -92,17 +92,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function normalizeSelfClosingTags(content: string): string {
+  return content.replace(
+    /<(?!area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr\b)([a-zA-Z0-9_-]+)([^>]*?)\/>/gi,
+    "<$1$2></$1>",
+  );
+}
+
 async function extractHeadings(markdown: string): Promise<Heading[]> {
   "use cache";
 
   const toc: TocItem[] = [];
   try {
+    const normalizedMarkdown = normalizeSelfClosingTags(markdown);
     const processor = unified()
       .use(remarkParse)
       .use(remarkFrontmatter)
       .use(remarkGfm)
       .use(remarkFlexibleToc, { tocRef: toc, maxDepth: 3 });
-    const ast = processor.parse(markdown);
+    const ast = processor.parse(normalizedMarkdown);
     await processor.run(ast);
     return toc.map((item) => ({
       id: item.href.replace(/^#/, ""),
@@ -220,21 +228,22 @@ async function renderMarkdown(source: string): Promise<React.ReactNode> {
           />
         ),
         UniversalChart,
-        universalchart: UniversalChart as any,
+        universalchart: UniversalChart as React.ElementType,
         PlotChart,
-        plotchart: PlotChart as any,
+        plotchart: PlotChart as React.ElementType,
         FabricWeightChart,
-        fabricweightchart: FabricWeightChart as any,
+        fabricweightchart: FabricWeightChart as React.ElementType,
         Callout,
-        callout: Callout as any,
+        callout: Callout as React.ElementType,
         SpecGrid,
-        specgrid: SpecGrid as any,
+        specgrid: SpecGrid as React.ElementType,
         SpecItem,
-        specitem: SpecItem as any,
+        specitem: SpecItem as React.ElementType,
       },
     });
 
-  const file = await processor.process(source);
+  const normalizedSource = normalizeSelfClosingTags(source);
+  const file = await processor.process(normalizedSource);
   return file.result as React.ReactNode;
 }
 
