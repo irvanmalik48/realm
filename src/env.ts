@@ -9,6 +9,7 @@ export const env = createEnv({
     LASTFM_API_KEY: z.string().optional(),
     LASTFM_API_SECRET: z.string().optional(),
     GITHUB_TOKEN: z.string().optional(),
+    REVALIDATION_SECRET: z.string().optional(),
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   },
   client: {
