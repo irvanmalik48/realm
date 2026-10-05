@@ -289,7 +289,7 @@ export default async function Post({ params }: Props) {
 }
 
 export async function generateStaticParams() {
-  const files = getMarkdownFiles();
+  const files = await getMarkdownFiles();
 
   return files.map((filename) => ({
     slug: filename.replace(/\.mdx?$/, ""),
