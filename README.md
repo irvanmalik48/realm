@@ -18,8 +18,8 @@ A modern, high-performance personal portfolio and digital garden built with **Ne
 - **Server Actions & gRPC Integration**: High-performance backend integration via gRPC and Server Actions (`LastFM`, `Contact`, and `Health`) with zero browser CORS overhead and isolated API keys.
 - **Live Heartbeat Status Pulse**: Homepage real-time API status indicator polling backend `/health` with animated radar pulses, round-trip latency metrics, and edge region routing.
 - **Design & Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with custom typography, fluid theme switching via `@wrksz/themes`, and glassmorphic UI elements.
-- **MDX Blog & Digital Garden**:
-  - Powered by `next-mdx-remote-client`.
+- **Markdown Blog & Digital Garden**:
+  - Powered by [React Markdown](https://github.com/remarkjs/react-markdown).
   - Syntax highlighting with [Shiki](https://shiki.style/) and `rehype-pretty-code`.
   - Math formula rendering with [KaTeX](https://katex.org/) (`remark-math`, `rehype-katex`).
   - Automatic Table of Contents (`remark-flexible-toc`) and estimated reading time.
