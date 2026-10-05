@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { evaluate, type EvaluateOptions } from "next-mdx-remote-client/rsc";
-import { readingTime } from "reading-time-estimator";
-
-import remarkGfm from "remark-gfm";
-import remarkFlexibleToc from "remark-flexible-toc";
-import remarkFlexibleCodeTitles from "remark-flexible-code-titles";
+import type { ComponentPropsWithoutRef } from "react";
+import * as prod from "react/jsx-runtime";
+import { unified } from "unified";
 import remarkParse from "remark-parse";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import remarkFlexibleCodeTitles from "remark-flexible-code-titles";
+import remarkFlexibleToc, { type TocItem } from "remark-flexible-toc";
 import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
+import rehypeRaw from "rehype-raw";
+import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrettyCode, { Options } from "rehype-pretty-code";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
+import rehypePrettyCode, { type Options as PrettyCodeOptions } from "rehype-pretty-code";
+import rehypeReact from "rehype-react";
 
 import type { Frontmatter } from "@/lib/types/posts";
-import { getMarkdownFromSlug, getMarkdownFiles } from "@/lib/fs/posts";
-import { getFrontmatter } from "next-mdx-remote-client/utils";
+import { getMarkdownFromSlug, getMarkdownFiles, getFrontmatter } from "@/lib/fs/posts";
 import Container from "@/components/container";
 import { TextScroll } from "@/components/ui/text-scroll";
 import Link from "next/link";
@@ -26,8 +27,6 @@ import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Heading } from "@/components/table-of-contents";
 import { TableOfContents } from "@/components/table-of-contents";
-import type { TocItem } from "remark-flexible-toc";
-import type { ComponentPropsWithoutRef } from "react";
 import { CopyButton } from "@/components/copy-button";
 import { MarkdownImage } from "@/components/markdown-image";
 import {
@@ -39,6 +38,8 @@ import { DirectionalTransition } from "@/components/directional-transition";
 import { BlogReactions } from "@/components/blog-reactions";
 import { BlogComments } from "@/components/blog-comments";
 import { Callout, SpecGrid, SpecItem } from "@/components/callout";
+
+export const instant = false;
 
 interface HastElement {
   type: string;
@@ -91,133 +92,150 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-async function renderMDX(
-  source: string,
-  format: "md" | "mdx",
-): Promise<{
-  content: React.ReactNode;
-  headings: Heading[];
-}> {
+async function extractHeadings(markdown: string): Promise<Heading[]> {
   "use cache";
 
   const toc: TocItem[] = [];
-  const prettyCodeOptions: Options = {
+  try {
+    const processor = unified()
+      .use(remarkParse)
+      .use(remarkFrontmatter)
+      .use(remarkGfm)
+      .use(remarkFlexibleToc, { tocRef: toc, maxDepth: 3 });
+    const ast = processor.parse(markdown);
+    await processor.run(ast);
+    return toc.map((item) => ({
+      id: item.href.replace(/^#/, ""),
+      text: item.value,
+      level: item.depth,
+    }));
+  } catch (err) {
+    console.error("Failed to extract headings:", err);
+    return [];
+  }
+}
+
+async function renderMarkdown(source: string): Promise<React.ReactNode> {
+  "use cache";
+
+  const prettyCodeOptions: PrettyCodeOptions = {
     keepBackground: false,
     theme: "material-theme-darker",
   };
 
-  const options: EvaluateOptions = {
-    disableImports: true,
-    parseFrontmatter: true,
-    scope: {
-      readingTime: readingTime(source, { wordsPerMinute: 100 }).text,
-    },
-    mdxOptions: {
-      format,
-      remarkPlugins: [
-        remarkMath,
-        remarkGfm,
-        [remarkFlexibleToc, { tocRef: toc, maxDepth: 3 }],
-        remarkFlexibleCodeTitles,
-        remarkParse,
-        remarkRehype,
-      ],
-      rehypePlugins: [
-        rehypeKatex,
-        rehypeSlug,
-        rehypeAutolinkHeadings,
-        [rehypePrettyCode, prettyCodeOptions],
-        rehypeExtractRawCode,
-        rehypeStringify,
-      ],
-    },
-  };
-
-  const { content, error } = await evaluate({
-    source,
-    options,
-    components: {
-      pre: ({ children, style, ...props }: ComponentPropsWithoutRef<"pre">) => {
-        const rawCode = (props as Record<string, unknown>)["data-raw-code"] as string || "";
-        return (
-          <div className="relative group">
-            <pre style={style} {...props}>
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkFrontmatter)
+    .use(remarkGfm)
+    .use(remarkMath)
+    .use(remarkFlexibleCodeTitles)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeKatex)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings)
+    .use(rehypePrettyCode, prettyCodeOptions)
+    .use(rehypeExtractRawCode)
+    .use(rehypeReact, {
+      Fragment: prod.Fragment,
+      jsx: prod.jsx,
+      jsxs: prod.jsxs,
+      components: {
+        pre: ({ children, style, ...props }: ComponentPropsWithoutRef<"pre">) => {
+          const rawCode =
+            ((props as Record<string, unknown>)["data-raw-code"] as string) || "";
+          return (
+            <div className="relative group">
+              <pre style={style} {...props}>
+                {children}
+              </pre>
+              <CopyButton code={rawCode} />
+            </div>
+          );
+        },
+        img: MarkdownImage,
+        table: ({
+          className,
+          children,
+          ...props
+        }: ComponentPropsWithoutRef<"table">) => (
+          <div className="not-prose my-6 w-full overflow-x-auto rounded-xl border border-border/70 bg-card/40 backdrop-blur-sm shadow-sm scrollbar-thin">
+            <table
+              className={cn(
+                "w-full min-w-140 text-left text-xs md:text-sm border-collapse",
+                className,
+              )}
+              {...props}
+            >
               {children}
-            </pre>
-            <CopyButton code={rawCode} />
+            </table>
           </div>
-        );
-      },
-      img: MarkdownImage,
-      table: ({ className, children, ...props }: ComponentPropsWithoutRef<"table">) => (
-        <div className="not-prose my-6 w-full overflow-x-auto rounded-xl border border-border/70 bg-card/40 backdrop-blur-sm shadow-sm scrollbar-thin">
-          <table
+        ),
+        thead: ({
+          className,
+          ...props
+        }: ComponentPropsWithoutRef<"thead">) => (
+          <thead
             className={cn(
-              "w-full min-w-140 text-left text-xs md:text-sm border-collapse",
+              "bg-muted/60 font-mono text-muted-foreground uppercase text-2xs tracking-wider border-b border-border/70",
               className,
             )}
             {...props}
-          >
-            {children}
-          </table>
-        </div>
-      ),
-      thead: ({ className, ...props }: ComponentPropsWithoutRef<"thead">) => (
-        <thead
-          className={cn(
-            "bg-muted/60 font-mono text-muted-foreground uppercase text-2xs tracking-wider border-b border-border/70",
-            className,
-          )}
-          {...props}
-        />
-      ),
-      tbody: ({ className, ...props }: ComponentPropsWithoutRef<"tbody">) => (
-        <tbody
-          className={cn("divide-y divide-border/50 font-sans", className)}
-          {...props}
-        />
-      ),
-      tr: ({ className, ...props }: ComponentPropsWithoutRef<"tr">) => (
-        <tr
-          className={cn(
-            "transition-colors hover:bg-muted/30 duration-150",
-            className,
-          )}
-          {...props}
-        />
-      ),
-      th: ({ className, ...props }: ComponentPropsWithoutRef<"th">) => (
-        <th
-          className={cn("p-3.5 font-semibold text-foreground text-left", className)}
-          {...props}
-        />
-      ),
-      td: ({ className, ...props }: ComponentPropsWithoutRef<"td">) => (
-        <td
-          className={cn("p-3.5 text-muted-foreground leading-relaxed", className)}
-          {...props}
-        />
-      ),
-      UniversalChart,
-      PlotChart,
-      FabricWeightChart,
-      Callout,
-      SpecGrid,
-      SpecItem,
-    },
-  });
+          />
+        ),
+        tbody: ({
+          className,
+          ...props
+        }: ComponentPropsWithoutRef<"tbody">) => (
+          <tbody
+            className={cn("divide-y divide-border/50 font-sans", className)}
+            {...props}
+          />
+        ),
+        tr: ({ className, ...props }: ComponentPropsWithoutRef<"tr">) => (
+          <tr
+            className={cn(
+              "transition-colors hover:bg-muted/30 duration-150",
+              className,
+            )}
+            {...props}
+          />
+        ),
+        th: ({ className, ...props }: ComponentPropsWithoutRef<"th">) => (
+          <th
+            className={cn(
+              "p-3.5 font-semibold text-foreground text-left",
+              className,
+            )}
+            {...props}
+          />
+        ),
+        td: ({ className, ...props }: ComponentPropsWithoutRef<"td">) => (
+          <td
+            className={cn(
+              "p-3.5 text-muted-foreground leading-relaxed",
+              className,
+            )}
+            {...props}
+          />
+        ),
+        UniversalChart,
+        universalchart: UniversalChart as any,
+        PlotChart,
+        plotchart: PlotChart as any,
+        FabricWeightChart,
+        fabricweightchart: FabricWeightChart as any,
+        Callout,
+        callout: Callout as any,
+        SpecGrid,
+        specgrid: SpecGrid as any,
+        SpecItem,
+        specitem: SpecItem as any,
+      },
+    });
 
-  if (error) {
-    throw error;
-  }
-
-  const headings: Heading[] = toc.map((item) => ({
-    id: item.href.replace(/^#/, ""),
-    text: item.value,
-    level: item.depth,
-  }));
-
-  return { content, headings };
+  const file = await processor.process(source);
+  return file.result as React.ReactNode;
 }
 
 export default async function Post({ params }: Props) {
@@ -229,9 +247,11 @@ export default async function Post({ params }: Props) {
     notFound();
   }
 
-  const { source, format } = result;
-  const { frontmatter } = getFrontmatter<Frontmatter>(source);
-  const { content, headings } = await renderMDX(source, format);
+  const { source, frontmatter } = result;
+  const [content, headings] = await Promise.all([
+    renderMarkdown(source),
+    extractHeadings(source),
+  ]);
 
   return (
     <DirectionalTransition>
@@ -249,7 +269,11 @@ export default async function Post({ params }: Props) {
             variant="ghost"
             className="self-start mb-10"
             render={
-              <Link href="/blog" transitionTypes={["nav-back"]} className="flex items-center gap-2" />
+              <Link
+                href="/blog"
+                transitionTypes={["nav-back"]}
+                className="flex items-center gap-2"
+              />
             }
           >
             <ArrowLeft className="size-4" />
