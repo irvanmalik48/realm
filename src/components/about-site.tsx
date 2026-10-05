@@ -121,14 +121,14 @@ const TECH_STACK: TechItem[] = [
     icon: LenisIcon,
   },
   {
-    name: "MDX Remote",
+    name: "React Markdown",
     category: "Content",
-    desc: "Interactive Markdown engine with Rehype Pretty Code & KaTeX",
-    url: "https://github.com/lucashogberg/next-mdx-remote-client",
-    docsUrl: "https://github.com/lucashogberg/next-mdx-remote-client#readme",
+    desc: "Fast, robust Markdown engine with Rehype Pretty Code & KaTeX",
+    url: "https://github.com/remarkjs/react-markdown",
+    docsUrl: "https://github.com/remarkjs/react-markdown#readme",
     details:
-      "High-performance MDX renderer compiling Markdown with syntax highlighting, auto-linked headings, and LaTeX math equations.",
-    version: "Client v2",
+      "High-performance Markdown renderer compiling Markdown with syntax highlighting, auto-linked headings, and LaTeX math equations.",
+    version: "v10",
     icon: MdxIcon,
   },
   {
