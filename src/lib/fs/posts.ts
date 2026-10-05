@@ -1,50 +1,67 @@
 import "server-only";
-import fs from "fs";
-import path from "path";
-import { getFrontmatter } from "next-mdx-remote-client/utils";
-import { readingTime } from "reading-time-estimator";
+import type { PostWithScope } from "@/lib/types/posts";
 
-import type { Frontmatter, PostWithScope } from "@/lib/types/posts";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 export function getMarkdownExtension(
   fileName: `${string}.md` | `${string}.mdx` | string
 ): "md" | "mdx" {
   const match = fileName.match(/\.mdx?$/);
-
   return (match ? match[0].substring(1) : "mdx") as "md" | "mdx";
 }
 
 export const RE = /\.mdx?$/;
 
-const isPathInsideDir = (parentDir: string, targetPath: string): boolean => {
-  const rel = path.relative(parentDir, targetPath);
-  return !rel.startsWith("..") && !path.isAbsolute(rel);
+interface ApiPostSummary {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  reading_time: string;
+  is_published: boolean;
+  published_at?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface ApiPostDetail extends ApiPostSummary {
+  content: string;
+  cover_image?: string;
+}
+
+export const getPosts = async (): Promise<PostWithScope[]> => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/v1/posts?limit=100`, {
+      next: { revalidate: 60, tags: ["posts"] },
+    });
+    if (!res.ok) {
+      console.error("Failed to fetch posts from API:", res.statusText);
+      return [];
+    }
+    const data = await res.json();
+    const posts: ApiPostSummary[] = data.posts || [];
+    return posts
+      .filter((p) => p.is_published)
+      .map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        description: p.description,
+        createdAt: p.created_at,
+        updatedAt: p.updated_at,
+        tags: p.tags || [],
+        readingTime: p.reading_time || "1 min read",
+      }));
+  } catch (err) {
+    console.error("Error connecting to realm-api:", err);
+    return [];
+  }
 };
 
-export const getSource = async (
-  filename: string
-): Promise<string | undefined> => {
-  const postsDir = path.join(process.cwd(), "posts");
-  const sourcePath = path.resolve(postsDir, filename);
-
-  if (!isPathInsideDir(postsDir, sourcePath)) return;
-  if (!fs.existsSync(sourcePath)) return;
-  return await fs.promises.readFile(sourcePath, "utf8");
-};
-
-export const getSourceSync = (filename: string): string | undefined => {
-  const postsDir = path.join(process.cwd(), "posts");
-  const sourcePath = path.resolve(postsDir, filename);
-
-  if (!isPathInsideDir(postsDir, sourcePath)) return;
-  if (!fs.existsSync(sourcePath)) return;
-  return fs.readFileSync(sourcePath, "utf8");
-};
-
-export const getMarkdownFiles = (): string[] => {
-  return fs
-    .readdirSync(path.join(process.cwd(), "posts"))
-    .filter((filePath: string) => RE.test(filePath));
+export const getMarkdownFiles = async (): Promise<string[]> => {
+  const posts = await getPosts();
+  return posts.map((p) => `${p.slug}.mdx`);
 };
 
 export const getMarkdownFromSlug = async (
@@ -56,52 +73,39 @@ export const getMarkdownFromSlug = async (
     }
   | undefined
 > => {
-  "use cache";
-  const sanitizedSlug = path.basename(slug);
-  const postsDir = path.join(process.cwd(), "posts");
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/v1/posts/${encodeURIComponent(slug)}`,
+      {
+        next: { revalidate: 60, tags: [`post-${slug}`] },
+      }
+    );
+    if (!res.ok) return undefined;
+    const post: ApiPostDetail = await res.json();
 
-  for (const ext of ["mdx", "md"] as const) {
-    const filename = `${sanitizedSlug}.${ext}`;
-    const fullPath = path.resolve(postsDir, filename);
+    const yamlTags = (post.tags || [])
+      .map((t) => `  - ${JSON.stringify(t)}`)
+      .join("\n");
+    const frontmatterLines = [
+      "---",
+      `title: ${JSON.stringify(post.title)}`,
+      `description: ${JSON.stringify(post.description || "")}`,
+      `createdAt: ${JSON.stringify(post.created_at)}`,
+      `updatedAt: ${JSON.stringify(post.updated_at)}`,
+      "tags:",
+      yamlTags,
+      "---",
+      "",
+      post.content || "",
+    ];
+    const source = frontmatterLines.join("\n");
 
-    if (isPathInsideDir(postsDir, fullPath) && fs.existsSync(fullPath)) {
-      const source = await getSource(filename);
-
-      if (!source) return;
-
-      return {
-        source,
-        format: ext,
-      };
-    }
+    return {
+      source,
+      format: "mdx",
+    };
+  } catch (err) {
+    console.error(`Error fetching post ${slug} from realm-api:`, err);
+    return undefined;
   }
-};
-
-export const getPostInformation = (
-  filename: string
-): PostWithScope | undefined => {
-  const source = getSourceSync(filename);
-
-  if (!source) return;
-
-  const req = getFrontmatter(source);
-
-  const frontmatter = req.frontmatter as Frontmatter;
-  const content = req.strippedSource;
-
-  const post: PostWithScope = {
-    ...frontmatter,
-    slug: filename.replace(/\.mdx?$/, ""),
-    readingTime: readingTime(content).text,
-  };
-
-  return post;
-};
-
-export const getPosts = (): PostWithScope[] => {
-  const files = getMarkdownFiles();
-
-  return files
-    .map((file) => getPostInformation(file))
-    .filter((post): post is PostWithScope => post !== undefined);
 };
