@@ -75,8 +75,10 @@ export function getFrontmatter<T = Frontmatter>(source: string): { frontmatter: 
   for (const line of lines) {
     const trimmed = line.trim();
     if (trimmed.startsWith("- ") && currentKey) {
-      if (!Array.isArray(fm[currentKey])) fm[currentKey] = [];
-      fm[currentKey].push(trimmed.slice(2).replace(/^["']|["']$/g, ""));
+      const existing = fm[currentKey];
+      const list: string[] = Array.isArray(existing) ? existing : [];
+      list.push(trimmed.slice(2).replace(/^["']|["']$/g, ""));
+      fm[currentKey] = list;
     } else {
       const idx = line.indexOf(":");
       if (idx !== -1) {
