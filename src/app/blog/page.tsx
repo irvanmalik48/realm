@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Blog() {
-  const posts = getPosts();
+export default async function Blog() {
+  const posts = await getPosts();
 
   const jsonLd: WithContext<WebPage> = {
     "@context": "https://schema.org",
