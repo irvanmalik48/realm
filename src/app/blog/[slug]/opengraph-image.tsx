@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getMarkdownFromSlug } from "@/lib/fs/posts";
-import { getFrontmatter } from "next-mdx-remote-client/utils";
+import { getMarkdownFromSlug, getFrontmatter } from "@/lib/fs/posts";
 import type { Frontmatter } from "@/lib/types/posts";
 import { readingTime } from "reading-time-estimator";
 
