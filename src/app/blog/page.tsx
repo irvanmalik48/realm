@@ -92,20 +92,20 @@ export default async function Blog() {
 
         <BlogContextWrapper initialPosts={posts}>
           <div className="w-full bg-background rounded-lg border border-border flex flex-col overflow-hidden">
-            <div className="w-full flex flex-col gap-3 text-muted-foreground px-3.5 sm:px-5 py-3 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-30">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-                <div className="flex items-center justify-between sm:justify-start gap-2.5 sm:gap-3">
-                  <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-                    <Newspaper className="size-4 shrink-0" />
-                    <span className="text-sm font-mono">ALL_POSTS.md</span>
-                  </div>
-                  <BlogCountBadge />
+            <div className="w-full flex flex-col gap-3 text-muted-foreground px-4 sm:px-5 py-3.5 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-30">
+              <div className="flex items-center justify-between gap-3 w-full">
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <Newspaper className="size-4 shrink-0" />
+                  <span className="text-sm font-mono font-medium text-foreground">
+                    ALL_POSTS.md
+                  </span>
                 </div>
+                <BlogCountBadge />
+              </div>
 
-                <div className="flex items-center gap-2 w-full md:w-auto">
-                  <SearchBar />
-                  <BlogSortDropdown />
-                </div>
+              <div className="flex items-center gap-2.5 w-full">
+                <SearchBar />
+                <BlogSortDropdown />
               </div>
 
               <BlogTagFilters />
