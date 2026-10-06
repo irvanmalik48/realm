@@ -94,12 +94,14 @@ export function BlogSortDropdown() {
         <Button
           variant="outline"
           size="sm"
-          className="h-9 px-3 gap-2 text-xs font-mono border-border bg-secondary/30 hover:bg-secondary/60 transition-colors shrink-0"
+          className="h-9 px-2.5 sm:px-3 gap-1.5 sm:gap-2 text-xs font-mono border-border bg-secondary/30 hover:bg-secondary/60 transition-colors shrink-0"
         >
-          <ActiveIcon className="size-3.5 text-muted-foreground" />
-          <span className="hidden sm:inline">{currentOption.label}</span>
+          <ActiveIcon className="size-3.5 text-muted-foreground shrink-0" />
+          <span className="hidden sm:inline truncate max-w-36 md:max-w-none">
+            {currentOption.label}
+          </span>
           <span className="inline sm:hidden">{currentOption.shortLabel}</span>
-          <ChevronDown className="size-3.5 opacity-50 ml-1" />
+          <ChevronDown className="size-3.5 opacity-50 ml-0.5 sm:ml-1 shrink-0" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 p-1 bg-popover border border-border shadow-lg">
@@ -138,8 +140,8 @@ export function BlogCountBadge() {
   const { filteredPosts, totalPosts, hasActiveFilters, resetFilters } = useBlogContext();
 
   return (
-    <div className="flex items-center gap-2">
-      <span className="text-2xs font-mono px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground border border-border/50">
+    <div className="flex items-center gap-2 shrink-0">
+      <span className="text-2xs font-mono px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground border border-border/50 shrink-0">
         {filteredPosts.length} {filteredPosts.length === 1 ? "post" : "posts"}
         {hasActiveFilters && filteredPosts.length !== totalPosts && (
           <span className="text-muted-foreground ml-1">of {totalPosts}</span>
@@ -151,9 +153,9 @@ export function BlogCountBadge() {
           type="button"
           onClick={resetFilters}
           title="Reset all filters and sorting"
-          className="text-2xs font-mono flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer px-1.5 py-0.5 rounded hover:bg-secondary/60"
+          className="text-2xs font-mono flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer px-1.5 py-0.5 rounded hover:bg-secondary/60 shrink-0"
         >
-          <RotateCcw className="size-3" />
+          <RotateCcw className="size-3 shrink-0" />
           <span>Reset</span>
         </button>
       )}
@@ -167,7 +169,7 @@ export function BlogTagFilters() {
   if (allTags.length === 0) return null;
 
   return (
-    <div className="w-full flex items-center gap-1.5 overflow-x-auto py-1 scrollbar-none text-xs">
+    <div className="w-full flex flex-wrap items-center gap-1.5 py-1 text-xs">
       <div className="flex items-center gap-1 text-muted-foreground shrink-0 mr-1 text-2xs font-mono uppercase tracking-wider">
         <Tag className="size-3" />
         <span>Tags:</span>
