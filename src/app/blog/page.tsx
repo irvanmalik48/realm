@@ -14,6 +14,7 @@ import {
   BlogSortDropdown,
   BlogTagFilters,
 } from "@/components/blog-filter";
+import { BlogPagination } from "@/components/blog-pagination";
 import { DirectionalTransition } from "@/components/directional-transition";
 import { safeJsonLd } from "@/lib/utils";
 
@@ -73,16 +74,16 @@ export default async function Blog() {
             innerClassName="md:-translate-y-8"
             height={720}
           />
-          <p className="z-20 md:w-fit w-3/4 text-center font-bold absolute bottom-3 left-1/2 rounded-full -translate-x-1/2 px-7 py-3 font-doto bg-background/80 text-foreground md:text-xl backdrop-blur-lg">
+          <p className="z-20 md:w-fit w-3/4 text-center font-bold absolute bottom-3 left-1/2 rounded-full -translate-x-1/2 px-5 sm:px-7 py-2 sm:py-3 font-doto bg-background/80 text-foreground text-sm sm:text-base md:text-xl backdrop-blur-lg">
             ALL POSTS
           </p>
         </div>
         <div className="w-full bg-background rounded-lg border border-border">
-          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-5 py-3 border-b border-border">
-            <Book className="size-4" />
+          <h2 className="w-full flex items-center gap-3 text-muted-foreground px-4 sm:px-5 py-3 border-b border-border">
+            <Book className="size-4 shrink-0" />
             <span className="text-sm font-mono">DETAILS.md</span>
           </h2>
-          <p className="px-5 py-3">
+          <p className="px-4 sm:px-5 py-3 text-xs sm:text-sm leading-relaxed">
             In case you are wondering, yes, I write things. Mainly for some
             stuffs that I find interesting, or just to get my thoughts out of my
             head. You might also find rambles, rants, and some random stuffs,
@@ -91,7 +92,10 @@ export default async function Blog() {
         </div>
 
         <BlogContextWrapper initialPosts={posts}>
-          <div className="w-full bg-background rounded-lg border border-border flex flex-col overflow-hidden">
+          <div
+            id="blog-posts-card"
+            className="w-full bg-background rounded-lg border border-border flex flex-col overflow-hidden"
+          >
             <div className="w-full flex flex-col gap-3 text-muted-foreground px-4 sm:px-5 py-3.5 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-30">
               <div className="flex items-center justify-between gap-3 w-full">
                 <div className="flex items-center gap-2.5 shrink-0">
@@ -112,6 +116,7 @@ export default async function Blog() {
             </div>
 
             <PostList />
+            <BlogPagination />
           </div>
         </BlogContextWrapper>
       </Container>
