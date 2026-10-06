@@ -165,13 +165,26 @@ export function BlogCountBadge() {
 
 export function BlogTagFilters() {
   const { allTags, selectedTag, setSelectedTag } = useBlogContext();
+  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   if (allTags.length === 0) return null;
 
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (scrollRef.current && e.deltaY !== 0) {
+      if (scrollRef.current.scrollWidth > scrollRef.current.clientWidth) {
+        scrollRef.current.scrollLeft += e.deltaY;
+      }
+    }
+  };
+
   return (
-    <div className="w-full flex flex-wrap items-center gap-1.5 py-1 text-xs">
+    <div
+      ref={scrollRef}
+      onWheel={handleWheel}
+      className="w-full flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth py-1 text-xs"
+    >
       <div className="flex items-center gap-1 text-muted-foreground shrink-0 mr-1 text-2xs font-mono uppercase tracking-wider">
-        <Tag className="size-3" />
+        <Tag className="size-3 shrink-0" />
         <span>Tags:</span>
       </div>
 
@@ -179,7 +192,7 @@ export function BlogTagFilters() {
         type="button"
         onClick={() => setSelectedTag(null)}
         className={cn(
-          "px-2.5 py-1 rounded-full text-xs font-mono transition-all shrink-0 cursor-pointer border",
+          "px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-xs font-mono transition-all shrink-0 cursor-pointer border",
           selectedTag === null
             ? "bg-foreground text-background font-semibold border-foreground"
             : "bg-secondary/40 text-muted-foreground border-transparent hover:bg-secondary hover:text-foreground"
@@ -196,7 +209,7 @@ export function BlogTagFilters() {
             type="button"
             onClick={() => setSelectedTag(isSelected ? null : tag)}
             className={cn(
-              "px-2.5 py-1 rounded-full text-xs font-mono transition-all shrink-0 cursor-pointer border",
+              "px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-xs font-mono transition-all shrink-0 cursor-pointer border",
               isSelected
                 ? "bg-primary text-primary-foreground font-semibold border-primary shadow-xs"
                 : "bg-secondary/40 text-muted-foreground border-transparent hover:bg-secondary hover:text-foreground"
