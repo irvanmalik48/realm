@@ -6,13 +6,13 @@ import { PostCard } from "@/components/post-card";
 import { useBlogContext } from "@/components/blog-context";
 
 export function PostList() {
-  const { filteredPosts, searchQuery } = useBlogContext();
+  const { paginatedPosts, searchQuery } = useBlogContext();
 
   return (
-    <div className="w-full p-5 flex flex-col gap-5">
+    <div className="w-full p-3.5 sm:p-5 flex flex-col gap-3.5 sm:gap-5">
       <AnimatePresence mode="popLayout">
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
+        {paginatedPosts.length > 0 ? (
+          paginatedPosts.map((post) => (
             <PostCard
               {...post}
               key={post.slug}
