@@ -39,9 +39,6 @@ function AnalyticsTrackerInner() {
     }
     lastTrackedPathRef.current = fullPath;
 
-    const hqBaseUrl =
-      process.env.NEXT_PUBLIC_HQ_URL || "http://localhost:3000";
-
     // Extract post_slug if this is an article page under /blog/
     let postSlug: string | undefined;
     if (pathname.startsWith("/blog/")) {
@@ -64,13 +61,12 @@ function AnalyticsTrackerInner() {
     };
 
     try {
-      fetch(`${hqBaseUrl}/api/analytics`, {
+      fetch("/api/analytics", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
-        mode: "cors",
         keepalive: true,
       }).catch(() => {
         // Silently swallow network anomalies so UX is unaffected
