@@ -98,9 +98,9 @@ export default async function Blog() {
           >
             <div className="w-full flex flex-col gap-3 text-muted-foreground px-4 sm:px-5 py-3.5 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-30">
               <div className="flex items-center justify-between gap-3 w-full">
-                <div className="flex items-center gap-2.5 shrink-0">
+                <div className="flex items-center gap-3 shrink-0">
                   <Newspaper className="size-4 shrink-0" />
-                  <span className="text-sm font-mono font-medium text-foreground">
+                  <span className="text-sm font-mono">
                     ALL_POSTS.md
                   </span>
                 </div>
