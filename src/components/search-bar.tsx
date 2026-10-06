@@ -8,7 +8,7 @@ export function SearchBar() {
   const { searchQuery, setSearchQuery } = useBlogContext();
 
   return (
-    <div className="relative w-full sm:w-64 md:w-72">
+    <div className="relative flex-1 min-w-0 md:w-60 lg:w-72 md:flex-initial">
       <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
       <Input
         placeholder="Search posts..."
