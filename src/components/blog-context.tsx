@@ -22,9 +22,15 @@ export interface BlogContextType {
   setSelectedTag: (tag: string | null) => void;
   allTags: string[];
   filteredPosts: PostWithScope[];
+  paginatedPosts: PostWithScope[];
   totalPosts: number;
   resetFilters: () => void;
   hasActiveFilters: boolean;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  pageSize: number;
+  setPageSize: (size: number) => void;
+  totalPages: number;
 }
 
 const BlogContext = createContext<BlogContextType | null>(null);
@@ -140,6 +146,25 @@ export function BlogContextWrapper({
     return [...pool].sort((a, b) => comparePosts(a, b, sortOption));
   }, [debouncedQuery, selectedTag, sortOption, fuse, initialPosts]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
+  const [prevFilterKey, setPrevFilterKey] = useState("");
+
+  const filterKey = `${debouncedQuery}_${selectedTag}_${sortOption}_${pageSize}`;
+  if (filterKey !== prevFilterKey) {
+    setPrevFilterKey(filterKey);
+    setCurrentPage(1);
+  }
+
+  // Compute pagination bounds
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / pageSize));
+  const safePage = Math.min(Math.max(1, currentPage), totalPages);
+
+  const paginatedPosts = useMemo(() => {
+    const start = (safePage - 1) * pageSize;
+    return filteredPosts.slice(start, start + pageSize);
+  }, [filteredPosts, safePage, pageSize]);
+
   const hasActiveFilters = Boolean(
     searchQuery.trim() || selectedTag || sortOption !== "most-recent"
   );
@@ -148,6 +173,7 @@ export function BlogContextWrapper({
     setSearchQuery("");
     setSelectedTag(null);
     setSortOption("most-recent");
+    setCurrentPage(1);
   };
 
   return (
@@ -161,9 +187,15 @@ export function BlogContextWrapper({
         setSelectedTag,
         allTags,
         filteredPosts,
+        paginatedPosts,
         totalPosts: initialPosts.length,
         resetFilters,
         hasActiveFilters,
+        currentPage: safePage,
+        setCurrentPage,
+        pageSize,
+        setPageSize,
+        totalPages,
       }}
     >
       {children}
