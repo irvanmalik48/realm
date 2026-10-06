@@ -2,11 +2,13 @@ import { type NextRequest, NextResponse } from "next/server";
 import { env } from "@/env";
 
 function getBackendUrl(): string {
-  if (env.API_URL) return env.API_URL;
-  if (env.NEXT_PUBLIC_API_URL) return env.NEXT_PUBLIC_API_URL;
-  return env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : "https://api.irvanma.eu.org";
+  return (
+    env.API_URL ||
+    env.NEXT_PUBLIC_API_URL ||
+    process.env.API_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:8080"
+  );
 }
 
 export async function POST(req: NextRequest) {
