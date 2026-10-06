@@ -26,9 +26,9 @@ export function PostCard(props: MotionPostCardProps) {
       className={`flex flex-col w-full bg-secondary/20 rounded-md border border-border ${className}`}
       {...motionProps}
     >
-      <div className="w-full flex flex-col px-5 pt-3 gap-1">
-        <h3 className="w-full font-semibold">{title}</h3>
-        <p className="text-sm text-muted-foreground">
+      <div className="w-full flex flex-col px-4 sm:px-5 pt-3 gap-1">
+        <h3 className="w-full text-base sm:text-lg font-semibold leading-snug">{title}</h3>
+        <p className="text-xs sm:text-sm text-muted-foreground">
           {createdAt === updatedAt && (
             <span>
               Published on {new Date(createdAt).toLocaleDateString()} &bull;{" "}
@@ -45,7 +45,7 @@ export function PostCard(props: MotionPostCardProps) {
         </p>
       </div>
       <p
-        className="w-full px-5 py-3 text-sm line-clamp-2 overflow-hidden"
+        className="w-full px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm text-muted-foreground/90 line-clamp-2 overflow-hidden"
         style={{
           display: "-webkit-box",
           WebkitLineClamp: 2,
@@ -55,11 +55,11 @@ export function PostCard(props: MotionPostCardProps) {
       >
         {description}
       </p>
-      <div className="w-full px-5 pb-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
+      <div className="w-full px-4 sm:px-5 pb-3 flex flex-wrap gap-1.5 sm:gap-2 text-2xs sm:text-xs text-muted-foreground">
         {tags.map((tag) => (
           <span
             key={tag}
-            className="bg-primary text-primary-foreground px-3 py-1 rounded-full"
+            className="bg-primary text-primary-foreground px-2.5 py-0.5 rounded-full text-2xs sm:text-xs font-medium"
           >
             {tag}
           </span>
