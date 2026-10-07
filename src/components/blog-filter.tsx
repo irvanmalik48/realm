@@ -42,7 +42,7 @@ const SORT_OPTIONS: SortItemConfig[] = [
     label: "Most Recent",
     shortLabel: "Recent",
     icon: Clock,
-    description: "Newest publications first",
+    description: "Most recently edited or published first",
   },
   {
     value: "oldest",
