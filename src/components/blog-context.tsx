@@ -53,6 +53,12 @@ function parseReadingMinutes(readingTime: string): number {
   return match ? parseInt(match[1], 10) : 0;
 }
 
+function getPostLastEditedTime(post: PostWithScope): number {
+  const updated = post.updatedAt ? new Date(post.updatedAt).getTime() : 0;
+  const created = post.createdAt ? new Date(post.createdAt).getTime() : 0;
+  return Math.max(updated, created);
+}
+
 function comparePosts(
   a: PostWithScope,
   b: PostWithScope,
@@ -60,9 +66,7 @@ function comparePosts(
 ): number {
   switch (sort) {
     case "most-recent": {
-      const timeA = new Date(a.createdAt || a.updatedAt).getTime();
-      const timeB = new Date(b.createdAt || b.updatedAt).getTime();
-      return timeB - timeA;
+      return getPostLastEditedTime(b) - getPostLastEditedTime(a);
     }
     case "oldest": {
       const timeA = new Date(a.createdAt || a.updatedAt).getTime();
@@ -79,19 +83,13 @@ function comparePosts(
       const readA = parseReadingMinutes(a.readingTime);
       const readB = parseReadingMinutes(b.readingTime);
       if (readB !== readA) return readB - readA;
-      return (
-        new Date(b.createdAt || b.updatedAt).getTime() -
-        new Date(a.createdAt || a.updatedAt).getTime()
-      );
+      return getPostLastEditedTime(b) - getPostLastEditedTime(a);
     }
     case "shortest-read": {
       const readA = parseReadingMinutes(a.readingTime);
       const readB = parseReadingMinutes(b.readingTime);
       if (readA !== readB) return readA - readB;
-      return (
-        new Date(b.createdAt || b.updatedAt).getTime() -
-        new Date(a.createdAt || a.updatedAt).getTime()
-      );
+      return getPostLastEditedTime(b) - getPostLastEditedTime(a);
     }
     default:
       return 0;
