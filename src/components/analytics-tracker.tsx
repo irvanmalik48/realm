@@ -2,6 +2,7 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef } from "react";
+import { dispatchAnalyticsEvent } from "@/lib/analytics";
 
 const SESSION_STORAGE_KEY = "realm_session_id";
 
@@ -60,20 +61,7 @@ function AnalyticsTrackerInner() {
       session_id: getOrCreateSessionId(),
     };
 
-    try {
-      fetch("/api/analytics", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-        keepalive: true,
-      }).catch(() => {
-        // Silently swallow network anomalies so UX is unaffected
-      });
-    } catch {
-      // Ignore background analytics dispatch failure
-    }
+    dispatchAnalyticsEvent(payload);
   }, [pathname, searchParams]);
 
   return null;
