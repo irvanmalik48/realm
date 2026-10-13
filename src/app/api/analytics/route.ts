@@ -29,6 +29,13 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(body),
     });
 
+    if (!forwardRes.ok) {
+      return NextResponse.json(
+        { error: "Failed to forward analytics event" },
+        { status: forwardRes.status },
+      );
+    }
+
     const data = await forwardRes.json().catch(() => ({ status: "recorded" }));
     return NextResponse.json(data, {
       status: forwardRes.status,
