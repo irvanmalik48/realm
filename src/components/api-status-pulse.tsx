@@ -92,13 +92,14 @@ export function APIStatusPulse() {
 
   return (
     <div className="w-full bg-background rounded-lg border border-border overflow-hidden transition-colors duration-300">
-      {/* Clickable Top Header */}
-      {/* react-doctor-disable-next-line react-doctor/no-static-element-interactions */}
-      <div
-        className="w-full px-3.5 py-2.5 sm:px-5 sm:py-3 flex items-center justify-between cursor-pointer select-none hover:bg-muted/10 transition-colors gap-2"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+      {/* Top Header */}
+      <div className="w-full px-3.5 py-2.5 sm:px-5 sm:py-3 flex items-center justify-between hover:bg-muted/10 transition-colors gap-2">
+        <button
+          type="button"
+          aria-expanded={isExpanded}
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1 text-left cursor-pointer select-none bg-transparent border-0 p-0 focus:outline-none"
+        >
           {/* Radar Pulse Indicator */}
           <div className="relative flex items-center justify-center size-3 shrink-0">
             {isHealthy && (
@@ -129,7 +130,7 @@ export function APIStatusPulse() {
               99.9% uptime
             </span>
           </div>
-        </div>
+        </button>
 
         <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           {health.latency_ms > 0 && (
@@ -162,12 +163,20 @@ export function APIStatusPulse() {
           >
             <RefreshCw className={cn("size-3.5", isFetching && "animate-spin text-primary")} />
           </button>
-          <ChevronDown
-            className={cn(
-              "size-4 text-muted-foreground transition-transform duration-300",
-              isExpanded && "rotate-180",
-            )}
-          />
+          <button
+            type="button"
+            aria-label={isExpanded ? "Collapse status details" : "Expand status details"}
+            aria-expanded={isExpanded}
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded hover:bg-muted/30 flex items-center justify-center cursor-pointer"
+          >
+            <ChevronDown
+              className={cn(
+                "size-4 text-muted-foreground transition-transform duration-300",
+                isExpanded && "rotate-180",
+              )}
+            />
+          </button>
         </div>
       </div>
 
