@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Lint, Typecheck & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Oxlint check
+        run: pnpm lint:oxlint
+
+      - name: ESLint check
+        run: pnpm lint
+
+      - name: Knip dead code check
+        run: pnpm run knip
+
+      - name: Type check
+        run: pnpm exec tsc --noEmit
+
+      - name: Production build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_APP_URL: "https://irvanma.eu.org"
+          NODE_ENV: "production"
+
+  security:
+    name: Semgrep OSS Security Scan
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Run Semgrep
+        run: semgrep scan --config="p/javascript" --config="p/typescript" --config="p/react" --config="p/nextjs" --config="p/security-audit" --error
