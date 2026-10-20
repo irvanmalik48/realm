@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function normalizeSelfClosingTags(content: string): string {
   return content.replace(
-    /<(?!area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr\b)([a-zA-Z0-9_-]+)([^>]*?)\/>/gi,
+    /<(?!area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr\b)([\w-]+)(\s[^>]*?)?\/>/gi,
     "<$1$2></$1>",
   );
 }
