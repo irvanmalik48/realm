@@ -1,0 +1,34 @@
+{
+  "$schema": "https://unpkg.com/knip@5/overview/config-schema.json",
+  "next": {
+    "entry": [
+      "next.config.{js,ts,cjs,mjs}",
+      "src/app/**/{page,layout,loading,error,not-found,route,default,robots,sitemap}.{js,jsx,ts,tsx}"
+    ]
+  },
+  "project": ["src/**/*.{ts,tsx}"],
+  "ignore": [
+    "src/components/ui/**",
+    "src/components/contribution-graph-standard-1.tsx",
+    "src/components/fabric-weight-chart.tsx",
+    "src/hooks/use-mobile.ts",
+    "src/lib/github/index.ts"
+  ],
+  "ignoreDependencies": [
+    "tailwindcss",
+    "@tailwindcss/typography",
+    "tailwindcss-animate",
+    "katex",
+    "react-markdown",
+    "rehype-stringify",
+    "@eslint/eslintrc"
+  ],
+  "ignoreBinaries": [
+    "wrangler"
+  ],
+  "rules": {
+    "exports": "warn",
+    "types": "warn",
+    "duplicates": "warn"
+  }
+}
