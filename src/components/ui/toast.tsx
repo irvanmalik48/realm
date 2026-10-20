@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Toast as ToastPrimitives } from "@base-ui/react/toast"
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -49,7 +49,7 @@ const toastVariants = cva(
 
 interface ToastCustomProps {
   variant?: "default" | "destructive" | "success"
-  toast: ToastPrimitives.Root.ToastObject<any>
+  toast: ToastPrimitives.Root.ToastObject<Record<string, unknown>>
 }
 
 const Toast = React.forwardRef<
