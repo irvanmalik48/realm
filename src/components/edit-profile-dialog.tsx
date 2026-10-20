@@ -83,7 +83,7 @@ export function EditProfileDialog({
         return;
       }
 
-      if (!/^[a-zA-Z0-9_]{3,30}$/.test(candidate)) {
+      if (!/^\w{3,30}$/.test(candidate)) {
         setUsernameStatus("invalid");
         setUsernameMessage("Alphanumeric and underscores only (max 30)");
         return;
