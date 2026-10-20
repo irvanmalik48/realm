@@ -15,6 +15,17 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const backendUrl = getBackendUrl();
+    const country =
+      req.headers.get("cf-ipcountry") ||
+      req.headers.get("x-country-code") ||
+      "";
+
+    const payload = {
+      ...body,
+      site: body.site || "irvanma.eu.org",
+      country_code:
+        body.country_code || (country && country !== "XX" ? country : undefined),
+    };
 
     const forwardRes = await fetch(`${backendUrl}/v1/analytics/events`, {
       method: "POST",
@@ -25,8 +36,11 @@ export async function POST(req: NextRequest) {
           req.headers.get("x-forwarded-for") ||
           req.headers.get("x-real-ip") ||
           "",
+        "CF-IPCountry": country,
+        "X-Country-Code": country,
+        "X-Site": "irvanma.eu.org",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(payload),
     });
 
     if (!forwardRes.ok) {
