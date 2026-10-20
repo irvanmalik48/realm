@@ -143,13 +143,19 @@ export function parseImageAttribution(
   if (title) {
     const trimmed = title.trim();
 
-    const photoByMatch = trimmed.match(
-      /^Photo by ([^|]+?)(?:\s+on\s+([^|]+))?(?:\s*\|\s*(https?:\/\/\S+))?$/i,
-    );
-    if (photoByMatch) {
-      if (photoByMatch[1]) creator = photoByMatch[1].trim();
-      if (photoByMatch[2]) source = photoByMatch[2].trim();
-      if (photoByMatch[3]) sourceUrl = photoByMatch[3].trim();
+    if (/^Photo by /i.test(trimmed)) {
+      const [metaPart, urlPart] = trimmed.split(/\s*\|\s*/);
+      if (urlPart && /^https?:\/\/\S+$/i.test(urlPart)) {
+        sourceUrl = urlPart.trim();
+      }
+      const rest = metaPart.replace(/^Photo by /i, "").trim();
+      const onIdx = rest.lastIndexOf(" on ");
+      if (onIdx !== -1) {
+        creator = rest.slice(0, onIdx).trim();
+        source = rest.slice(onIdx + 4).trim();
+      } else {
+        creator = rest;
+      }
     } else if (trimmed.includes("|")) {
       const parts = trimmed.split("|").map((p) => p.trim());
       if (parts.length >= 3) {
