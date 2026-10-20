@@ -20,9 +20,17 @@ export async function POST(req: NextRequest) {
       req.headers.get("x-country-code") ||
       "";
 
+    const host =
+      req.headers.get("x-forwarded-host") ||
+      req.headers.get("host") ||
+      req.nextUrl.hostname ||
+      "";
+    const siteDomain =
+      body.site || (host ? host.split(",")[0].trim().split(":")[0] : "");
+
     const payload = {
       ...body,
-      site: body.site || "irvanma.eu.org",
+      site: siteDomain,
       country_code:
         body.country_code || (country && country !== "XX" ? country : undefined),
     };
@@ -38,7 +46,7 @@ export async function POST(req: NextRequest) {
           "",
         "CF-IPCountry": country,
         "X-Country-Code": country,
-        "X-Site": "irvanma.eu.org",
+        "X-Site": siteDomain,
       },
       body: JSON.stringify(payload),
     });
