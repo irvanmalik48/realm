@@ -125,7 +125,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // ignore network errors on logout
     }
     setUser(null);
-    window.location.href = "/";
+    window.location.replace("/");
   };
 
   const updateProfile = async (data: { full_name?: string; username?: string; avatar_url?: string }) => {
