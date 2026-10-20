@@ -159,19 +159,17 @@ const groupByWeeks = (
       : subWeeks(nextDay(firstDate, weekStart), 1);
 
   const paddedActivities = [
-    ...(new Array(differenceInCalendarDays(firstDate, firstCalendarDate)).fill(
-      undefined
-    ) as Activity[]),
+    ...(Array.from({
+      length: differenceInCalendarDays(firstDate, firstCalendarDate),
+    }) as Activity[]),
     ...normalizedActivities,
   ];
 
   const numberOfWeeks = Math.ceil(paddedActivities.length / 7);
 
-  return new Array(numberOfWeeks)
-    .fill(undefined)
-    .map((_, weekIndex) =>
-      paddedActivities.slice(weekIndex * 7, weekIndex * 7 + 7)
-    );
+  return Array.from({ length: numberOfWeeks }).map((_, weekIndex) =>
+    paddedActivities.slice(weekIndex * 7, weekIndex * 7 + 7)
+  );
 };
 
 const getMonthLabels = (
@@ -492,7 +490,7 @@ export const ContributionGraphLegend = ({
       <span className="mr-1 text-muted-foreground">
         {labels.legend?.less || "Less"}
       </span>
-      {new Array(maxLevel + 1).fill(undefined).map((_, level) =>
+      {Array.from({ length: maxLevel + 1 }).map((_, level) =>
         children ? (
           <Fragment key={level}>{children({ level })}</Fragment>
         ) : (
