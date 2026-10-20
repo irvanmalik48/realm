@@ -20,10 +20,18 @@ try {
 // 2. Polyfill legacy RuleContext methods removed in ESLint 10 that eslint-plugin-react still expects
 function patchFileContext(fc) {
   if (fc && !fc.prototype.getFilename) {
-    fc.prototype.getFilename = function () { return this.filename; };
-    fc.prototype.getSourceCode = function () { return this.sourceCode; };
-    fc.prototype.getCwd = function () { return this.cwd; };
-    fc.prototype.getPhysicalFilename = function () { return this.physicalFilename; };
+    fc.prototype.getFilename = function () {
+      return this.filename;
+    };
+    fc.prototype.getSourceCode = function () {
+      return this.sourceCode;
+    };
+    fc.prototype.getCwd = function () {
+      return this.cwd;
+    };
+    fc.prototype.getPhysicalFilename = function () {
+      return this.physicalFilename;
+    };
   }
 }
 
@@ -33,25 +41,35 @@ try {
       patchFileContext(require.cache[key]?.exports?.FileContext);
     }
   }
-  const candidateDirs = [process.argv[1] ? dirname(process.argv[1]) : null, import.meta.url].filter(Boolean);
+  const candidateDirs = [
+    process.argv[1] ? dirname(process.argv[1]) : null,
+    import.meta.url,
+  ].filter(Boolean);
   for (const base of candidateDirs) {
     try {
       const req = createRequire(base);
       const eslintPkg = req.resolve("eslint/package.json");
-      const { FileContext } = req(join(dirname(eslintPkg), "lib/linter/file-context.js"));
+      const { FileContext } = req(
+        join(dirname(eslintPkg), "lib/linter/file-context.js"),
+      );
       patchFileContext(FileContext);
     } catch {}
   }
 } catch {}
 
-const { default: nextVitals } = await import("eslint-config-next/core-web-vitals");
+const { default: nextVitals } = await import(
+  "eslint-config-next/core-web-vitals"
+);
 const { default: nextTs } = await import("eslint-config-next/typescript");
 const { default: tsParser } = await import("@typescript-eslint/parser");
 const { default: shadcn } = await import("@shadcn/lint");
+const { default: reactCompiler } = await import("eslint-plugin-react-compiler");
+const { default: regexp } = await import("eslint-plugin-regexp");
 
 const eslintConfig = [
   ...nextVitals,
   ...nextTs,
+  regexp.configs["flat/recommended"],
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
     ignores: ["src/components/ui/**"],
@@ -59,9 +77,13 @@ const eslintConfig = [
       parser: tsParser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
-    plugins: { shadcn },
+    plugins: {
+      shadcn,
+      "react-compiler": reactCompiler,
+    },
     rules: {
       "shadcn/no-arbitrary-values": "error",
+      "react-compiler/react-compiler": "error",
     },
   },
 ];
