@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { toastManager, useToastManager } from "@/components/ui/toast"
-import type { ToastActionElement, ToastProps } from "@/components/ui/toast"
+import type { ToastActionElement } from "@/components/ui/toast"
 
 export type ToastVariant = "default" | "destructive" | "success"
 
@@ -12,7 +12,7 @@ export interface ToastOptions {
   variant?: ToastVariant
   action?: ToastActionElement
   duration?: number
-  [key: string]: any
+  [key: string]: unknown
 }
 
 function toast({
