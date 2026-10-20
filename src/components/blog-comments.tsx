@@ -167,9 +167,10 @@ function CommentBody({ content }: { content?: string }) {
     <div className="text-sub leading-relaxed text-foreground/90 flex flex-col gap-2.5 wrap-break-word">
       {blocks.map((block, idx) => {
         if (block.startsWith("```") && block.endsWith("```")) {
-          const match = block.match(/```(\w*)\n?([\s\S]*?)```/);
-          const lang = match ? match[1] : "";
-          const code = match ? match[2].replace(/\n$/, "") : block.slice(3, -3);
+          const inner = block.slice(3, -3);
+          const newlineIdx = inner.indexOf("\n");
+          const lang = newlineIdx !== -1 ? inner.slice(0, newlineIdx).trim() : "";
+          const code = (newlineIdx !== -1 ? inner.slice(newlineIdx + 1) : inner).replace(/\n$/, "");
 
           return (
             <div
