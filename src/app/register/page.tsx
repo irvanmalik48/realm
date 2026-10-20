@@ -82,7 +82,7 @@ export default function RegisterPage() {
         return;
       }
 
-      if (!/^[a-zA-Z0-9_]{3,30}$/.test(trimmed)) {
+      if (!/^\w{3,30}$/.test(trimmed)) {
         setUsernameStatus("invalid");
         setUsernameMessage("Alphanumeric and underscores only (max 30)");
         return;
@@ -128,7 +128,7 @@ export default function RegisterPage() {
         return;
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/;
       if (!emailRegex.test(trimmed)) {
         setEmailStatus("idle");
         setEmailMessage("");
@@ -169,8 +169,8 @@ export default function RegisterPage() {
     let score = 0;
     if (pwd.length >= 8) score++;
     if (/[A-Z]/.test(pwd)) score++;
-    if (/[0-9]/.test(pwd)) score++;
-    if (/[^A-Za-z0-9]/.test(pwd)) score++;
+    if (/\d/.test(pwd)) score++;
+    if (/[^A-Z0-9]/i.test(pwd)) score++;
     return score;
   };
 
