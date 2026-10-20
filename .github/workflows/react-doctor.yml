@@ -1,4 +1,4 @@
-# React Doctor — finds security, performance, correctness, accessibility,
+# React Doctor: finds security, performance, correctness, accessibility,
 # bundle-size, and architecture issues in React codebases.
 #
 # Docs: https://www.react.doctor/ci
@@ -35,9 +35,9 @@ jobs:
           fetch-depth: 0
 
       - uses: millionco/react-doctor@v2
-        # Advisory by default: React Doctor reports findings on every PR — a
+        # Advisory by default: React Doctor reports findings on every PR: a
         # sticky summary comment, inline review comments, and a commit status
-        # with the health score — but never fails the check, so it won't red-X
+        # with the health score, but never fails the check, so it won't red-X
         # a teammate's PR on day one. When your team trusts the signal, graduate
         # the gate: uncomment the block below and set blocking to "error" (fail
         # on new error-severity findings) or "warning" (fail on any finding).
