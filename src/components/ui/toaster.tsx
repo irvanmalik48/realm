@@ -28,7 +28,11 @@ function ToasterList() {
         <Toast
           key={t.id}
           toast={t}
-          variant={(t.data?.variant as any) || (t.type as any) || "default"}
+          variant={
+            (t.data?.variant as "default" | "destructive" | "success" | undefined) ||
+            (t.type as "default" | "destructive" | "success" | undefined) ||
+            "default"
+          }
         >
           <div className="grid gap-1">
             {t.title && <ToastTitle>{t.title}</ToastTitle>}
