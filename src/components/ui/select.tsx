@@ -6,7 +6,7 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-function Select<Value = any, Multiple extends boolean | undefined = false>({
+function Select<Value = unknown, Multiple extends boolean | undefined = false>({
   ...props
 }: SelectPrimitive.Root.Props<Value, Multiple>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />
