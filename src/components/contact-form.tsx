@@ -185,7 +185,7 @@ export function ContactForm() {
             validators={{
               onChange: ({ value }) => {
                 if (!value.trim()) return "Email is required";
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const emailRegex = /^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/;
                 if (!emailRegex.test(value)) return "Invalid email address";
                 return undefined;
               },
