@@ -50,6 +50,7 @@ function AnalyticsTrackerInner() {
     }
 
     const payload = {
+      site: "irvanma.eu.org",
       path: fullPath,
       title: typeof document !== "undefined" ? document.title : "",
       post_slug: postSlug || undefined,
