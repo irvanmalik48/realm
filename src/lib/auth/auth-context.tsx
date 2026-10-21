@@ -148,19 +148,56 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const uploadAvatar = async (file: File) => {
     try {
+      // Obtain direct backend upload URL and session token (bypassing Vercel 4.5 MB serverless limit)
+      let uploadUrl = "/api/auth/storage/upload";
+      let token = "";
+
+      try {
+        const tokenRes = await fetch("/api/auth/storage/token", {
+          cache: "no-store",
+        });
+        if (tokenRes.ok) {
+          const authData = await tokenRes.json();
+          if (authData.uploadUrl) uploadUrl = authData.uploadUrl;
+          if (authData.token) token = authData.token;
+        }
+      } catch {
+        // Fallback to local route if token fetch fails
+      }
+
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("/api/auth/storage/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      const resData = await res.json();
-      if (!res.ok) {
-        return { success: false, error: resData.error || "Avatar upload failed" };
+      const headers: Record<string, string> = {};
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
       }
 
+      const res = await fetch(uploadUrl, {
+        method: "POST",
+        headers,
+        body: formData,
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        let errorMsg = "Avatar upload failed";
+        try {
+          const resData = await res.json();
+          if (resData.error) errorMsg = resData.error;
+          else if (resData.message) errorMsg = resData.message;
+        } catch {
+          const text = await res.text();
+          if (text.includes("FUNCTION_PAYLOAD_TOO_LARGE")) {
+            errorMsg = "File exceeds the serverless payload limit.";
+          } else if (text) {
+            errorMsg = text.slice(0, 100);
+          }
+        }
+        return { success: false, error: errorMsg };
+      }
+
+      const resData = await res.json();
       const fileUrl = resData.file?.url;
       if (!fileUrl) {
         return { success: false, error: "Missing avatar URL from response" };
