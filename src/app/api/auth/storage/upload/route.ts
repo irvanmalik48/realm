@@ -12,17 +12,66 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const formData = await req.formData();
-    const file = formData.get("file") as File | null;
-    if (!file) {
+    const contentType = req.headers.get("content-type") || "";
+    const lowerContentType = contentType.toLowerCase();
+    if (
+      lowerContentType.startsWith("application/json") ||
+      lowerContentType.includes("json")
+    ) {
       return NextResponse.json(
-        { error: "No file provided. Please attach an image file." },
+        { error: "Upload requests must be binary. JSON payloads are not allowed." },
         { status: 400 }
       );
     }
 
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    let filename = "upload.bin";
+    let mimeType = contentType || "application/octet-stream";
+    let buffer: Buffer;
+
+    if (lowerContentType.includes("multipart/form-data")) {
+      const formData = await req.formData();
+      const file = formData.get("file") as File | null;
+      if (!file) {
+        return NextResponse.json(
+          { error: "No file provided. Please attach an image file." },
+          { status: 400 }
+        );
+      }
+
+      filename = file.name || "upload.bin";
+      mimeType = file.type || "application/octet-stream";
+      const arrayBuffer = await file.arrayBuffer();
+      buffer = Buffer.from(arrayBuffer);
+    } else {
+      const arrayBuffer = await req.arrayBuffer();
+      if (!arrayBuffer || arrayBuffer.byteLength === 0) {
+        return NextResponse.json(
+          { error: "No file provided or request body is empty." },
+          { status: 400 }
+        );
+      }
+
+      const { searchParams } = new URL(req.url);
+      const disposition = req.headers.get("content-disposition");
+      if (disposition) {
+        const match = disposition.match(
+          /filename\*?=(?:UTF-8'')?["']?([^"';]+)["']?/i
+        );
+        if (match?.[1]) {
+          filename = decodeURIComponent(match[1]);
+        }
+      }
+      if (filename === "upload.bin") {
+        const xFilename = req.headers.get("x-filename");
+        if (xFilename) filename = xFilename;
+      }
+      if (filename === "upload.bin") {
+        const queryFilename = searchParams.get("filename");
+        if (queryFilename) filename = queryFilename;
+      }
+
+      buffer = Buffer.from(arrayBuffer);
+    }
 
     const client = getStorageClient();
     const metadata = createMetadata({ token });
@@ -38,8 +87,8 @@ export async function POST(req: NextRequest) {
       client,
       "UploadFile",
       {
-        filename: file.name || "upload.bin",
-        content_type: file.type || "application/octet-stream",
+        filename,
+        content_type: mimeType,
         data: buffer,
       },
       metadata
