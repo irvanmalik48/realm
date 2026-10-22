@@ -7,7 +7,7 @@ The personal website, digital garden, and publishing platform for Realm. Built w
 ## Features
 
 - Portfolio & Work Experience: Highlights personal background, featured projects, open-source repositories, and self-hosted infrastructure.
-- Markdown & MDX Articles: Long-form technical articles with syntax highlighting, KaTeX mathematical formulas, estimated reading times, tag taxonomy, and on-demand cache revalidation.
+- Markdown & MDX Articles: Long-form technical articles with Shiki syntax highlighting, KaTeX mathematical formulas, estimated reading times, tag taxonomy, and on-demand cache revalidation.
 - User Accounts & Profile Management: Account registration and sign-in with email/password or Google and GitHub OAuth2, profile customization, and direct client-to-backend avatar uploads.
 - Privacy-Preserving Analytics: Client-side telemetry tracker that forwards site domains and geo headers to `realm-api` without third-party tracking scripts.
 - Contact Form: Clean contact interface with honeypot spam protection.
