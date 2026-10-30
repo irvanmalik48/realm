@@ -76,7 +76,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, [refresh]);
 
-  const login = async (credentials: { identifier: string; password: string }) => {
+  const login = useCallback(async (credentials: { identifier: string; password: string }) => {
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -92,9 +92,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       return { success: false, error: "Network error during login" };
     }
-  };
+  }, []);
 
-  const register = async (data: {
+  const register = useCallback(async (data: {
     email: string;
     username: string;
     password: string;
@@ -116,9 +116,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       return { success: false, error: "Network error during registration" };
     }
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
     } catch {
@@ -126,9 +126,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     setUser(null);
     window.location.replace("/");
-  };
+  }, []);
 
-  const updateProfile = async (data: { full_name?: string; username?: string; avatar_url?: string }) => {
+  const updateProfile = useCallback(async (data: { full_name?: string; username?: string; avatar_url?: string }) => {
     try {
       const res = await fetch("/api/auth/profile", {
         method: "PATCH",
@@ -144,9 +144,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       return { success: false, error: "Network error during profile update" };
     }
-  };
+  }, []);
 
-  const uploadAvatar = async (file: File) => {
+  const uploadAvatar = useCallback(async (file: File) => {
     try {
       // Obtain direct backend upload URL and session token (bypassing Vercel 4.5 MB serverless limit)
       let uploadUrl = "/api/auth/storage/upload";
@@ -213,9 +213,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       return { success: false, error: "Network error during avatar upload" };
     }
-  };
+  }, [updateProfile]);
 
-  const setPassword = async (data: { current_password?: string; new_password: string }) => {
+  const setPassword = useCallback(async (data: { current_password?: string; new_password: string }) => {
     try {
       const res = await fetch("/api/auth/password", {
         method: "POST",
@@ -232,9 +232,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       return { success: false, error: "Network error during password update" };
     }
-  };
+  }, [refresh]);
 
-  const unlinkOAuth = async (provider: string) => {
+  const unlinkOAuth = useCallback(async (provider: string) => {
     try {
       const res = await fetch(`/api/auth/oauth/${provider}`, {
         method: "DELETE",
@@ -249,7 +249,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       return { success: false, error: `Network error disconnecting ${provider}` };
     }
-  };
+  }, [refresh]);
 
   const authContextValue = React.useMemo(
     () => ({
@@ -264,7 +264,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       unlinkOAuth,
       refresh,
     }),
-    [user, isLoading, refresh]
+    [
+      user,
+      isLoading,
+      login,
+      register,
+      logout,
+      updateProfile,
+      uploadAvatar,
+      setPassword,
+      unlinkOAuth,
+      refresh,
+    ]
   );
 
   return (
